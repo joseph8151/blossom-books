@@ -1,16 +1,11 @@
 export const siteConfig = {
   brandNameEn: "Blossom Books",
   brandNameKo: "블러섬북스",
-  kakaoChannelUrl: "[카카오 비즈니스 채널 URL 입력]",
-  email: "[이메일 주소 입력]",
+  kakaoChannelUrl: "https://pf.kakao.com/_lbMqX",
+  email: "blossomprep@naver.com",
   businessName: "[사업자명 입력]",
   businessRegistrationNumber: "[사업자등록번호 입력]",
   representativeName: "[대표자명 입력]",
-  bank: {
-    bankName: "[은행명 입력]",
-    accountNumber: "[계좌번호 입력]",
-    accountHolder: "[예금주 입력]",
-  },
 };
 
 export const primaryNav = [
