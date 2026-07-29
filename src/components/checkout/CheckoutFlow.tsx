@@ -89,7 +89,7 @@ export default function CheckoutFlow() {
 
       <div className="mt-12 border-t border-navy-800/12 pt-8 text-center">
         <p className="text-[13px] text-charcoal-600">결제 전 교재 구성이나 이용 범위가 궁금하신가요?</p>
-        <a
+        
           href={siteConfig.kakaoChannelUrl}
           target="_blank"
           rel="noreferrer"
@@ -120,18 +120,20 @@ function DomesticFlow({
         <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">주문 상태: 입금 대기</p>
         <h2 className="mt-2 font-display text-[22px] font-semibold text-navy-950">주문이 접수되었습니다.</h2>
         <p className="mt-3 text-[13.5px] leading-relaxed text-charcoal-600">
-          국내 결제는 계좌이체로 진행됩니다. 아래 계좌로 입금해주시면 관리자 확인 후
-          상태가 &apos;입금 확인 중&apos;으로 변경되며, 결제 확인 후 PDF 교재를 이메일로
-          보내드립니다.
+          국내 결제는 계좌이체로 진행됩니다. 입금 계좌 정보는 카카오톡 채널로
+          바로 안내드리며, 입금 확인 후 PDF 교재를 이메일로 보내드립니다.
         </p>
-        <div className="mt-6 space-y-1.5 border-t border-navy-800/12 pt-5 text-[14px] text-navy-950">
-          <p>은행명 &nbsp;{siteConfig.bank.bankName}</p>
-          <p>계좌번호 &nbsp;{siteConfig.bank.accountNumber}</p>
-          <p>예금주 &nbsp;{siteConfig.bank.accountHolder}</p>
-        </div>
+        
+          href={siteConfig.kakaoChannelUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-6 inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
+        >
+          <MessageCircle size={15} />
+          카카오톡에서 입금 계좌 안내받기
+        </a>
         <p className="mt-4 text-[12.5px] text-charcoal-600">
-          입금자명은 주문 시 입력하신 이름과 동일하게 해주세요. 확인이 지연될 경우
-          카카오톡으로 문의해주세요.
+          입금자명은 주문 시 입력하신 이름과 동일하게 해주세요.
         </p>
       </div>
     );
