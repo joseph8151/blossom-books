@@ -2,6 +2,12 @@ import Link from "next/link";
 import { MessageCircle, Check } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
+export const metadata = {
+  title: "학원·기관 전용 교재 제작",
+  description:
+    "학원, 프랩학원, 교육기관을 위한 레벨별 문제집, 반별 숙제, 단원 테스트, 실전 모의고사 등 기관 전용 교육 콘텐츠를 제작합니다.",
+};
+
 const offerings = [
   "레벨별 문제집",
   "반별 숙제 자료",
@@ -32,7 +38,7 @@ export default function InstitutionsPage() {
             방식을 반영하여 교재를 구성합니다.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            <a
+            
               href={siteConfig.kakaoChannelUrl}
               target="_blank"
               rel="noreferrer"
@@ -72,7 +78,7 @@ export default function InstitutionsPage() {
             기관명, 커리큘럼, 레벨 체계를 알려주시면 전용 문제집과 평가 자료 제작 가능
             여부를 안내해드립니다.
           </p>
-          <a
+          
             href={siteConfig.kakaoChannelUrl}
             target="_blank"
             rel="noreferrer"
