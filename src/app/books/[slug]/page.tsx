@@ -109,7 +109,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <ShoppingBag size={16} />
               구매·주문 상담
             </Link>
-            <SamplePreviewButton available={product.sampleAvailable} />
+            <SamplePreviewButton product={product} />
           </div>
 
           {/* 교재 구성 */}

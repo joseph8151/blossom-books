@@ -15,14 +15,14 @@ export default function Testimonials() {
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {reviews.map((r, i) => (
             <figure
               key={i}
               className="lift flex flex-col border border-navy-800/12 bg-ivory-100 p-7 shadow-card"
             >
               <Quote size={22} className="text-brass-500" />
-              <blockquote className="mt-4 flex-1 text-[14.5px] leading-relaxed text-charcoal-900">
+              <blockquote className="mt-4 flex-1 text-[14px] leading-relaxed text-charcoal-900">
                 {r.quote}
               </blockquote>
               <figcaption className="mt-6 border-t border-navy-800/10 pt-4">

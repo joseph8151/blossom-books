@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle, ArrowRight, Check } from "lucide-react";
+import { MessageCircle, ArrowRight, Check, GraduationCap } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { BookCoverMockup } from "./BookCoverMockup";
 
@@ -45,8 +45,14 @@ export default function HeroSection() {
             </a>
           </div>
 
+          {/* 제작진 신뢰 배지 */}
+          <p className="mt-6 inline-flex items-center gap-2 border border-burgundy-700/25 bg-burgundy-700/[0.04] px-3.5 py-2 text-[13px] font-medium text-burgundy-700">
+            <GraduationCap size={16} strokeWidth={1.9} />
+            미국 명문대·프랩 출신 선생님들이 만든 교재
+          </p>
+
           {/* 신뢰 마이크로카피 */}
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-charcoal-600">
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-charcoal-600">
             {["구매 전 무료 샘플 확인", "결제 후 PDF 즉시 발송", "전 문항 정답·상세 해설"].map((t) => (
               <span key={t} className="inline-flex items-center gap-1.5">
                 <Check size={14} className="text-brass-500" strokeWidth={2.5} />

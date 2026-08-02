@@ -38,15 +38,15 @@ export default function TrustSignals() {
     <section className="border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-2xl">
-          <span className="eyebrow">Why trust us</span>
+          <span className="eyebrow">Made by experts</span>
           <h2 className="mt-4 font-display text-[32px] font-semibold leading-tight text-navy-950 sm:text-[38px]">
-            후기가 아니라,
+            미국 명문대·프랩 출신
             <br />
-            <span className="italic text-burgundy-700">기준</span>으로 증명합니다.
+            <span className="italic text-burgundy-700">선생님들이 직접</span> 만듭니다.
           </h2>
           <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">
-            블러섬북스는 아직 화려한 후기 대신, 교재를 만드는 원칙과 구매 전후의
-            약속으로 신뢰를 드립니다. 아래 여섯 가지는 모든 교재에 예외 없이 적용됩니다.
+            미국 명문대 출신과 프랩 전문 선생님들이 실제 시험과 교육과정을 분석해 교재를
+            제작합니다. 아래 여섯 가지는 모든 교재에 예외 없이 적용됩니다.
           </p>
         </div>
 
