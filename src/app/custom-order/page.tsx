@@ -51,7 +51,7 @@ export default function CustomOrderPage() {
 
     // 1) 폼서비스(Web3Forms)로 직접 접수 — 수신 메일 주소는 Web3Forms에만 저장되고 화면엔 노출되지 않습니다.
     //    (정적 배포 환경이라 서버 없이 클라이언트에서 전송합니다. access_key는 공개용 키입니다.)
-    const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+    const web3Key = siteConfig.web3formsAccessKey;
     if (web3Key) {
       try {
         const res = await fetch("https://api.web3forms.com/submit", {
