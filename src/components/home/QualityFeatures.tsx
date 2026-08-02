@@ -25,8 +25,8 @@ export default function QualityFeatures() {
     <section className="border-b border-navy-800/12 bg-navy-950 py-20 text-ivory-100 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-xl">
-          <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-400">What&apos;s included</p>
-          <h2 className="mt-3 font-display text-[32px] font-semibold sm:text-[38px]">
+          <span className="eyebrow eyebrow--light">What&apos;s included</span>
+          <h2 className="mt-4 font-display text-[32px] font-semibold sm:text-[38px]">
             문제를 푸는 시간뿐 아니라,
             <br />틀린 이유를 이해하는 시간까지 설계합니다.
           </h2>

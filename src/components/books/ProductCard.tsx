@@ -1,24 +1,22 @@
 import Link from "next/link";
-import { FileCheck2, FileText, Sparkles } from "lucide-react";
+import { FileCheck2, FileText, Sparkles, MessageCircle } from "lucide-react";
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
+import { siteConfig } from "@/data/site";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
-
-function formatPrice(product: Product) {
-  if (product.priceKRW) return `${product.priceKRW.toLocaleString("ko-KR")}원`;
-  return "상담 문의";
-}
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="group flex flex-col border border-navy-800/12 bg-ivory-100 transition-shadow hover:shadow-[0_16px_40px_-20px_rgba(13,22,38,0.35)]">
-      <div className="flex items-center justify-center bg-ivory-200/70 py-8">
+    <div className="lift group relative flex flex-col overflow-hidden border border-navy-800/12 bg-ivory-100 shadow-card">
+      {/* 호버 시 상단 브래스 하이라이트 */}
+      <span className="absolute inset-x-0 top-0 z-10 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-brass-500 to-brass-400 transition-transform duration-300 group-hover:scale-x-100" />
+      <div className="flex items-center justify-center bg-gradient-to-b from-ivory-200/80 to-ivory-200/30 py-9">
         <BookCoverMockup
           eyebrow={product.materialType === "existing" ? "Student Workbook" : "Custom Order"}
           title={product.title.split(" — ")[0]}
           subtitle={product.examOrCurriculum}
           tone={product.coverAccent === "navy" ? "navy" : "ivory"}
-          className="max-w-[150px] scale-90"
+          className="max-w-[150px] transition-transform duration-500 group-hover:scale-[0.96]"
         />
       </div>
 
@@ -54,16 +52,22 @@ export default function ProductCard({ product }: { product: Product }) {
           </span>
         </div>
 
-        <div className="mt-6 flex items-center justify-between border-t border-navy-800/10 pt-4">
-          <span className="font-display text-[17px] font-semibold text-navy-950">
-            {formatPrice(product)}
-          </span>
+        <div className="mt-6 flex items-center justify-between gap-2 border-t border-navy-800/10 pt-4">
           <Link
             href={`/books/${product.id}`}
             className="text-[13px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4"
           >
             상세 보기
           </Link>
+          <a
+            href={siteConfig.kakaoChannelUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full bg-navy-900 px-3.5 py-1.5 text-[12px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+          >
+            <MessageCircle size={13} />
+            상담
+          </a>
         </div>
       </div>
     </div>

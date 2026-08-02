@@ -11,8 +11,10 @@ export function generateStaticParams() {
   return products.map((p) => ({ slug: p.id }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const product = products.find((p) => p.id === params.slug);
+// Next.js 16: params는 Promise이므로 await 후 사용해야 합니다.
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = products.find((p) => p.id === slug);
   if (!product) return {};
   return {
     title: product.titleKo,
@@ -20,13 +22,9 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-function formatPrice(priceKRW?: number) {
-  if (priceKRW) return `${priceKRW.toLocaleString("ko-KR")}원`;
-  return "상담 문의";
-}
-
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
-  const product = products.find((p) => p.id === params.slug);
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = products.find((p) => p.id === slug);
   if (!product) notFound();
 
   const related = products.filter((p) => p.track === product.track && p.id !== product.id).slice(0, 3);
@@ -81,32 +79,31 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             {product.pageCount && <span>{product.pageCount}페이지</span>}
           </div>
 
-          <div className="mt-8 flex items-center gap-6 border-y border-navy-800/12 py-6">
-            <span className="font-display text-[26px] font-semibold text-navy-950">
-              {formatPrice(product.priceKRW)}
-            </span>
-            {product.priceUSD && (
-              <span className="text-[13px] text-charcoal-600">해외 결제 USD ${product.priceUSD}</span>
-            )}
+          <div className="mt-8 border-y border-navy-800/12 py-6">
+            <p className="font-display text-[20px] font-semibold text-navy-950">가격·구성 상담 안내</p>
+            <p className="mt-1.5 text-[13.5px] leading-relaxed text-charcoal-600">
+              교재 구성과 이용 목적(개인·수업·기관)에 맞춰 카카오톡으로 편하게 안내해 드립니다.
+              구매 전 무료 샘플도 확인하실 수 있습니다.
+            </p>
           </div>
 
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link
-              href={`/checkout?product=${product.id}`}
-              className="inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
-            >
-              <ShoppingBag size={16} />
-              구매하기
-            </Link>
             <a
               href={siteConfig.kakaoChannelUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 border border-navy-800/25 px-7 py-3.5 text-[14px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+              className="inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
             >
               <MessageCircle size={16} />
-              상담 문의
+              카카오톡 상담하기
             </a>
+            <Link
+              href="/consultation"
+              className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-7 py-3.5 text-[14px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50 hover:shadow-soft"
+            >
+              <ShoppingBag size={16} />
+              구매·주문 상담
+            </Link>
             <SamplePreviewButton available={product.sampleAvailable} />
           </div>
 

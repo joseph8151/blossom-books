@@ -24,8 +24,8 @@ export default function ExistingVsCustomSection() {
     <section className="border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-2xl">
-          <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Two ways to start</p>
-          <h2 className="mt-3 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
+          <span className="eyebrow">Two ways to start</span>
+          <h2 className="mt-4 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
             기존 교재, 또는 나에게 맞춘 주문 제작
           </h2>
           <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
@@ -34,7 +34,7 @@ export default function ExistingVsCustomSection() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden border border-navy-800/15 bg-navy-800/15 lg:grid-cols-2">
+        <div className="mt-12 grid gap-px overflow-hidden border border-navy-800/15 bg-navy-800/15 shadow-card lg:grid-cols-2">
           <div className="bg-ivory-100 p-9">
             <span className="font-label text-[11px] uppercase tracking-[0.14em] text-navy-800/70">Option 01</span>
             <h3 className="mt-2 font-display text-[24px] font-semibold text-navy-950">기존 교재</h3>
@@ -48,7 +48,7 @@ export default function ExistingVsCustomSection() {
             </ul>
             <Link
               href="/books"
-              className="mt-8 inline-block bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
+              className="mt-8 inline-block bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
             >
               교재 둘러보기
             </Link>

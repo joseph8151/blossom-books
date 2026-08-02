@@ -41,16 +41,22 @@ export default function AudienceCards() {
     <section className="border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-xl">
-          <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Who it&apos;s for</p>
-          <h2 className="mt-3 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
+          <span className="eyebrow">Who it&apos;s for</span>
+          <h2 className="mt-4 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
             네 종류의 고객, 각자 다른 방식으로
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-px overflow-hidden border border-navy-800/12 bg-navy-800/12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-px overflow-hidden border border-navy-800/12 bg-navy-800/12 shadow-card sm:grid-cols-2 lg:grid-cols-4">
           {audiences.map(({ icon: Icon, tag, title, body, href, cta }) => (
-            <div key={tag} className="group flex flex-col bg-ivory-100 p-7 transition-colors hover:bg-ivory-200">
-              <Icon size={22} strokeWidth={1.5} className="text-burgundy-700" />
+            <div
+              key={tag}
+              className="group relative flex flex-col bg-ivory-100 p-7 transition-colors hover:bg-ivory-200/70"
+            >
+              <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-brass-500 to-brass-400 transition-transform duration-300 group-hover:scale-x-100" />
+              <div className="flex h-11 w-11 items-center justify-center border border-burgundy-700/25 bg-ivory-200/50 text-burgundy-700 transition-colors group-hover:border-burgundy-700/50">
+                <Icon size={20} strokeWidth={1.6} />
+              </div>
               <p className="mt-5 font-label text-[11px] uppercase tracking-[0.14em] text-navy-800/70">{tag}</p>
               <h3 className="mt-2.5 font-display text-[19px] font-semibold leading-snug text-navy-950">
                 {title}

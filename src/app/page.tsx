@@ -5,6 +5,7 @@ import ExistingVsCustomSection from "@/components/home/ExistingVsCustomSection";
 import ResearchProcess from "@/components/home/ResearchProcess";
 import QualityFeatures from "@/components/home/QualityFeatures";
 import UseCaseSection from "@/components/home/UseCaseSection";
+import TrustSignals from "@/components/home/TrustSignals";
 import ConsultationCTA from "@/components/home/ConsultationCTA";
 import FAQSection from "@/components/home/FAQSection";
 import FinalCTA from "@/components/home/FinalCTA";
@@ -19,6 +20,7 @@ export default function HomePage() {
       <ResearchProcess />
       <QualityFeatures />
       <UseCaseSection />
+      <TrustSignals />
       <ConsultationCTA />
       <FAQSection />
       <FinalCTA />

@@ -57,6 +57,12 @@
   --font-display: var(--font-display);
   --font-body: var(--font-body);
   --font-label: var(--font-label);
+
+  /* Soft, low-opacity navy elevation — gives surfaces depth without feeling heavy */
+  --shadow-soft: 0 2px 6px -2px rgba(13, 22, 38, 0.08), 0 14px 34px -18px rgba(13, 22, 38, 0.16);
+  --shadow-card: 0 1px 2px rgba(13, 22, 38, 0.05), 0 18px 44px -26px rgba(13, 22, 38, 0.3);
+  --shadow-lift: 0 22px 50px -22px rgba(13, 22, 38, 0.4);
+  --shadow-gold: 0 12px 30px -14px rgba(173, 138, 78, 0.5);
 }
 
 * {
@@ -72,6 +78,75 @@ body {
   color: var(--foreground);
   font-family: var(--font-body);
   font-feature-settings: "ss01" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* 한글이 어절(語節) 중간에서 끊기지 않도록 — 예: "수업의"가 "수업 / 의"로 깨지는 것 방지 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Consistent, on-brand focus ring for keyboard users */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brass-500);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+::selection {
+  background: var(--color-navy-900);
+  color: var(--color-ivory-100);
+}
+
+/* ── Reusable elevation / interaction helpers ─────────────────── */
+
+/* Hover lift for cards and buttons — subtle rise + deeper shadow */
+.lift {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
+  will-change: transform;
+}
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+}
+.lift-sm {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lift-sm:hover {
+  transform: translateY(-2px);
+}
+
+/* Thin brass hairline used as a decorative divider under eyebrow labels */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-brass-500), rgba(173, 138, 78, 0));
+}
+
+/* Small eyebrow label with a leading brass tick — an editorial signature */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-label);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brass-500);
+}
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--color-brass-500);
+  opacity: 0.9;
+}
+.eyebrow--center {
+  justify-content: center;
+}
+.eyebrow--light {
+  color: var(--color-brass-400);
+}
+.eyebrow--light::before {
+  background: var(--color-brass-400);
 }
 
 /* Signature motif: faint ruled "notebook" texture used sparingly on paper-colored sections */

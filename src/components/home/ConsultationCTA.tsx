@@ -18,8 +18,8 @@ export default function ConsultationCTA() {
     <section className="border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-28">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[1fr_0.9fr] lg:px-8">
         <div>
-          <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Consultation</p>
-          <h2 className="mt-3 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
+          <span className="eyebrow">Consultation</span>
+          <h2 className="mt-4 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
             상담 전 이런 정보를 준비해주세요
           </h2>
           <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">
@@ -32,14 +32,14 @@ export default function ConsultationCTA() {
             href={siteConfig.kakaoChannelUrl}
             target="_blank"
             rel="noreferrer"
-            className="mt-8 inline-flex items-center gap-2.5 bg-navy-900 px-8 py-4 text-[15px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
+            className="mt-8 inline-flex items-center gap-2.5 bg-navy-900 px-8 py-4 text-[15px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
           >
             <MessageCircle size={18} />
             카카오톡으로 교재 상담하기
           </a>
         </div>
 
-        <div className="border border-navy-800/15 bg-ivory-200/60 p-8">
+        <div className="border border-navy-800/15 bg-ivory-200/60 p-8 shadow-card">
           <p className="font-label text-[11px] uppercase tracking-[0.14em] text-navy-800/70">Checklist</p>
           <ul className="mt-5 space-y-3">
             {checklist.map((item, i) => (

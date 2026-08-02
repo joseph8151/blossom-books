@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle, ArrowRight } from "lucide-react";
+import { MessageCircle, ArrowRight, Check } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { BookCoverMockup } from "./BookCoverMockup";
 
@@ -29,7 +29,7 @@ export default function HeroSection() {
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <Link
               href="/books"
-              className="group inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
+              className="group inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
             >
               교재 둘러보기
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
@@ -38,11 +38,21 @@ export default function HeroSection() {
               href={siteConfig.kakaoChannelUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 border border-navy-800/25 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+              className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50 hover:shadow-soft"
             >
               <MessageCircle size={16} />
               카카오톡으로 상담하기
             </a>
+          </div>
+
+          {/* 신뢰 마이크로카피 */}
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-charcoal-600">
+            {["구매 전 무료 샘플 확인", "결제 후 PDF 즉시 발송", "전 문항 정답·상세 해설"].map((t) => (
+              <span key={t} className="inline-flex items-center gap-1.5">
+                <Check size={14} className="text-brass-500" strokeWidth={2.5} />
+                {t}
+              </span>
+            ))}
           </div>
 
           <dl className="mt-14 grid max-w-md grid-cols-3 gap-4 border-t border-navy-800/12 pt-7 sm:gap-6">
@@ -61,6 +71,8 @@ export default function HeroSection() {
 
         {/* 우측 교재 목업 */}
         <div className="relative mx-auto flex h-[420px] w-full max-w-md items-center justify-center lg:h-[480px]">
+          {/* 표지 뒤 은은한 브래스 광채 */}
+          <div className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(circle_at_50%_46%,rgba(173,138,78,0.18),transparent_62%)]" />
           <BookCoverMockup
             eyebrow="Practice Test Series"
             title="Mock Exam"

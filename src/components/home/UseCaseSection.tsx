@@ -26,15 +26,15 @@ export default function UseCaseSection() {
     <section className="border-b border-navy-800/12 bg-ivory-200/50 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-xl">
-          <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Use cases</p>
-          <h2 className="mt-3 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
+          <span className="eyebrow">Use cases</span>
+          <h2 className="mt-4 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
             제작 사례 유형
           </h2>
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {cases.map((item) => (
-            <div key={item.title} className="border border-navy-800/12 bg-ivory-100 p-8">
+            <div key={item.title} className="lift border border-navy-800/12 bg-ivory-100 p-8 shadow-card">
               <span className="font-label text-[10.5px] uppercase tracking-[0.14em] text-burgundy-700">
                 {item.tag}
               </span>

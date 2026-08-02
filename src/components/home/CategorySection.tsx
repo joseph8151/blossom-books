@@ -25,8 +25,8 @@ export default function CategorySection() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-xl">
-            <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Catalogue</p>
-            <h2 className="mt-3 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
+            <span className="eyebrow">Catalogue</span>
+            <h2 className="mt-4 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
               교육과정과 시험별로 정리된 교재
             </h2>
             <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
@@ -49,10 +49,10 @@ export default function CategorySection() {
             <button
               key={track}
               onClick={() => setActive(track)}
-              className={`px-4 py-2 text-[13px] font-medium transition-colors ${
+              className={`px-4 py-2 text-[13px] font-medium transition-all ${
                 active === track
-                  ? "bg-navy-900 text-ivory-100"
-                  : "bg-transparent text-charcoal-600 hover:bg-ivory-100"
+                  ? "bg-navy-900 text-ivory-100 shadow-soft"
+                  : "bg-transparent text-charcoal-600 hover:bg-ivory-100 hover:shadow-soft"
               }`}
             >
               {track === "all" ? "전체" : trackLabels[track]}
@@ -60,10 +60,20 @@ export default function CategorySection() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {filtered.slice(0, 8).map((product) => (
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.slice(0, 6).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Link
+            href="/books"
+            className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-7 py-3.5 text-[14px] font-medium text-navy-900 shadow-soft transition-all hover:-translate-y-0.5 hover:border-navy-800/50 hover:shadow-lift"
+          >
+            전체 교재 보기
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </section>

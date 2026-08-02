@@ -2,12 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { primaryNav, siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 
-// 영문(/en) 페이지에서 노출할 네비게이션 — 현재는 한 장짜리 랜딩이므로 페이지 내 앵커로 이동합니다.
+// 데스크톱 상단 바에 노출할 핵심 메뉴 (과밀 방지를 위해 엄선). 전체 메뉴는 모바일 패널에 유지됩니다.
+const koDesktopNav = [
+  { label: "교재 찾기", href: "/books" },
+  { label: "모의고사", href: "/mock-exams" },
+  { label: "주문 제작", href: "/custom-order" },
+  { label: "기관·학원", href: "/institutions" },
+  { label: "블러섬북스 소개", href: "/about" },
+  { label: "자주 묻는 질문", href: "/faq" },
+];
+
+// 영문(/en) 페이지 네비게이션 — 한 장짜리 랜딩이므로 페이지 내 앵커로 이동합니다.
 const enNav = [
   { label: "Home", href: "/en" },
   { label: "Why Blossom Books", href: "/en#why" },
@@ -19,7 +29,7 @@ const enNav = [
 /** KO / EN 언어 스위처 */
 function LanguageSwitcher({ isEn }: { isEn: boolean }) {
   return (
-    <div className="flex items-center overflow-hidden rounded-full border border-navy-800/20 text-[12px] font-medium">
+    <div className="flex items-center overflow-hidden rounded-full border border-navy-800/20 text-[12px] font-medium shadow-soft">
       <Link
         href="/"
         aria-current={!isEn ? "page" : undefined}
@@ -46,15 +56,40 @@ function LanguageSwitcher({ isEn }: { isEn: boolean }) {
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isEn = pathname?.startsWith("/en") ?? false;
 
-  const nav = isEn ? enNav : primaryNav;
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const desktopNav = isEn ? enNav : koDesktopNav;
+  const mobileNav = isEn ? enNav : primaryNav;
   const kakaoLabel = isEn ? "Chat on KakaoTalk" : "카카오톡 상담";
 
+  const isActive = (href: string) => {
+    const base = href.split("#")[0].split("?")[0];
+    if (base === "/" || base === "/en") return pathname === base;
+    return pathname?.startsWith(base) ?? false;
+  };
+
   return (
-    <header className="sticky top-0 z-50 border-b border-navy-800/15 bg-ivory-100/95 backdrop-blur">
-      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 lg:px-8">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b backdrop-blur transition-[background-color,box-shadow,border-color] duration-300",
+        scrolled
+          ? "border-navy-800/15 bg-ivory-100/90 shadow-soft"
+          : "border-navy-800/10 bg-ivory-100/80"
+      )}
+    >
+      {/* 상단 브래스 액센트 라인 — 브랜드 시그니처 */}
+      <div className="h-[3px] w-full bg-gradient-to-r from-brass-500/0 via-brass-500 to-brass-500/0" />
+
+      <div className="mx-auto flex h-[74px] max-w-[1440px] items-center justify-between gap-4 px-5 lg:px-10">
         {/* 로고 */}
         <Link
           href={isEn ? "/en" : "/"}
@@ -70,27 +105,38 @@ export default function Header() {
         </Link>
 
         {/* 데스크톱 내비게이션 */}
-        <nav className="hidden items-center gap-7 lg:flex">
-          {(isEn ? nav : nav.slice(0, -1)).map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="group relative py-2 text-[14.5px] text-charcoal-900/85 transition-colors hover:text-navy-900"
-            >
-              {item.label}
-              <span className="absolute inset-x-0 -bottom-0.5 h-px scale-x-0 bg-brass-500 transition-transform duration-300 group-hover:scale-x-100" />
-            </Link>
-          ))}
+        <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
+          {desktopNav.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "group relative whitespace-nowrap py-2 text-[14px] transition-colors",
+                  active ? "text-navy-900" : "text-charcoal-900/80 hover:text-navy-900"
+                )}
+              >
+                {item.label}
+                <span
+                  className={cn(
+                    "absolute inset-x-0 -bottom-0.5 h-px bg-brass-500 transition-transform duration-300",
+                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  )}
+                />
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <LanguageSwitcher isEn={isEn} />
 
           <a
             href={siteConfig.kakaoChannelUrl}
             target="_blank"
             rel="noreferrer"
-            className="hidden items-center gap-1.5 rounded-full bg-navy-900 px-5 py-2.5 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800 lg:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full bg-navy-900 px-5 py-2.5 text-[13.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift lg:inline-flex"
           >
             <MessageCircle size={15} strokeWidth={2} />
             {kakaoLabel}
@@ -100,7 +146,7 @@ export default function Header() {
           <button
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-navy-900 lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-navy-900 transition-colors hover:bg-navy-900/5 lg:hidden"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -115,17 +161,30 @@ export default function Header() {
         )}
       >
         <div className="overflow-hidden">
-          <nav className="flex flex-col px-5 py-3">
-            {nav.map((item) => (
+          <nav className="flex flex-col px-5 py-2">
+            {mobileNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="border-b border-navy-800/8 py-3.5 text-[15px] text-charcoal-900"
+                className={cn(
+                  "flex items-center justify-between border-b border-navy-800/8 py-3.5 text-[15px] transition-colors",
+                  isActive(item.href) ? "text-navy-900" : "text-charcoal-900 hover:text-navy-900"
+                )}
               >
                 {item.label}
+                {isActive(item.href) && <span className="h-1.5 w-1.5 rounded-full bg-brass-500" />}
               </Link>
             ))}
+            <a
+              href={siteConfig.kakaoChannelUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 mb-3 inline-flex items-center justify-center gap-2 rounded-full bg-navy-900 py-3.5 text-[14px] font-medium text-ivory-100"
+            >
+              <MessageCircle size={16} />
+              {kakaoLabel}
+            </a>
           </nav>
         </div>
       </div>
