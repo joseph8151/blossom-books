@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { MessageCircle, Landmark, CreditCard } from "lucide-react";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
+import { Product } from "@/lib/types";
+import PayPalCheckout from "@/components/checkout/PayPalCheckout";
 
 type Region = "domestic" | "international";
 
@@ -13,7 +15,10 @@ export default function CheckoutFlow() {
   const productId = searchParams.get("product");
   const product = useMemo(() => products.find((p) => p.id === productId), [productId]);
 
-  const [region, setRegion] = useState<Region>("domestic");
+  // 영문(/en) 페이지 등에서 ?region=international 로 진입하면 해외 결제(PayPal) 탭을 기본 선택합니다.
+  const initialRegion: Region =
+    searchParams.get("region") === "international" ? "international" : "domestic";
+  const [region, setRegion] = useState<Region>(initialRegion);
   const [orderSubmitted, setOrderSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", contact: "", email: "" });
 
@@ -84,12 +89,12 @@ export default function CheckoutFlow() {
       {region === "domestic" ? (
         <DomesticFlow submitted={orderSubmitted} form={form} setForm={setForm} onSubmit={handleDomesticSubmit} />
       ) : (
-        <InternationalFlow />
+        <InternationalFlow product={product} />
       )}
 
       <div className="mt-12 border-t border-navy-800/12 pt-8 text-center">
         <p className="text-[13px] text-charcoal-600">결제 전 교재 구성이나 이용 범위가 궁금하신가요?</p>
-        
+        <a
           href={siteConfig.kakaoChannelUrl}
           target="_blank"
           rel="noreferrer"
@@ -123,7 +128,7 @@ function DomesticFlow({
           국내 결제는 계좌이체로 진행됩니다. 입금 계좌 정보는 카카오톡 채널로
           바로 안내드리며, 입금 확인 후 PDF 교재를 이메일로 보내드립니다.
         </p>
-        
+        <a
           href={siteConfig.kakaoChannelUrl}
           target="_blank"
           rel="noreferrer"
@@ -184,30 +189,38 @@ function DomesticFlow({
   );
 }
 
-function InternationalFlow() {
+function InternationalFlow({ product }: { product?: Product }) {
   return (
     <div className="mt-10 space-y-5">
       <p className="text-[13.5px] leading-relaxed text-charcoal-600">
         International customers can complete payment securely through PayPal. Digital
-        materials will be delivered to the email address provided after payment verification.
+        materials will be delivered to the email address linked to your PayPal account
+        after payment verification.
       </p>
 
       <div className="border border-navy-800/15 bg-ivory-200/40 p-6">
         <p className="font-label text-[11px] uppercase tracking-[0.14em] text-navy-800/70">PayPal Checkout</p>
-        <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600">
-          {/* TODO: 실제 배포 시 공식 PayPal Checkout(@paypal/react-paypal-js 등)을 연결하세요.
-              NEXT_PUBLIC_PAYPAL_CLIENT_ID / PAYPAL_CLIENT_SECRET / PAYPAL_ENVIRONMENT 환경변수를 사용하고,
-              결제 승인 후 서버에서 금액·상품·구매자 이메일을 재검증한 뒤 주문을 완료 처리하세요.
-              Sandbox와 Live 환경을 분리해서 운영해야 합니다. */}
-          PayPal 결제 버튼이 이 영역에 표시됩니다. (Sandbox / Live 환경 분리, 서버 측
-          결제 검증 필요 — 코드 주석 참고)
-        </p>
-        <button
-          disabled
-          className="mt-5 inline-flex cursor-not-allowed items-center gap-2 bg-navy-900/40 px-7 py-3.5 text-[14px] font-medium text-ivory-100"
-        >
-          Pay with PayPal
-        </button>
+
+        {!product ? (
+          <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600">
+            No item selected. Please open a book&apos;s detail page and start checkout from there.
+          </p>
+        ) : product.priceUSD ? (
+          <div className="mt-4">
+            <div className="mb-4 flex items-center justify-between border-b border-navy-800/12 pb-4">
+              <span className="text-[13.5px] text-charcoal-600">{product.title}</span>
+              <span className="font-display text-[18px] font-semibold text-navy-950">
+                USD ${product.priceUSD.toFixed(2)}
+              </span>
+            </div>
+            <PayPalCheckout amountUSD={product.priceUSD} productTitle={product.title} />
+          </div>
+        ) : (
+          <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600">
+            Pricing for this title is provided on request. Please contact us via KakaoTalk
+            or at {siteConfig.email} for an international quote and PayPal invoice.
+          </p>
+        )}
       </div>
     </div>
   );

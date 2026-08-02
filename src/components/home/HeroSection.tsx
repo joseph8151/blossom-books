@@ -13,7 +13,8 @@ export default function HeroSection() {
             Educational Content Studio
           </span>
 
-          <h1 className="mt-7 font-display text-[42px] font-semibold leading-[1.18] text-navy-950 text-balance sm:text-[52px] lg:text-[58px]">
+          {/* 좁은 화면(≤375px)에서 제목이 넘치지 않도록 기본값을 낮추고 단계적으로 키웁니다. */}
+          <h1 className="mt-7 font-display text-[32px] font-semibold leading-[1.18] text-navy-950 text-balance min-[400px]:text-[40px] sm:text-[52px] lg:text-[58px]">
             시험과 수업의 목적에 맞춘
             <br />
             <span className="italic text-burgundy-700">프리미엄 교육 콘텐츠</span>
@@ -44,7 +45,7 @@ export default function HeroSection() {
             </a>
           </div>
 
-          <dl className="mt-14 grid max-w-md grid-cols-3 gap-6 border-t border-navy-800/12 pt-7">
+          <dl className="mt-14 grid max-w-md grid-cols-3 gap-4 border-t border-navy-800/12 pt-7 sm:gap-6">
             {[
               ["12+", "교육과정·시험 트랙"],
               ["문제집 + 해설집", "모든 교재 기본 구성"],

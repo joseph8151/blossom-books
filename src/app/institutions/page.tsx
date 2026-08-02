@@ -38,7 +38,7 @@ export default function InstitutionsPage() {
             방식을 반영하여 교재를 구성합니다.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            
+            <a
               href={siteConfig.kakaoChannelUrl}
               target="_blank"
               rel="noreferrer"
@@ -78,7 +78,7 @@ export default function InstitutionsPage() {
             기관명, 커리큘럼, 레벨 체계를 알려주시면 전용 문제집과 평가 자료 제작 가능
             여부를 안내해드립니다.
           </p>
-          
+          <a
             href={siteConfig.kakaoChannelUrl}
             target="_blank"
             rel="noreferrer"

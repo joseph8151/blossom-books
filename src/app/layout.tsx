@@ -51,7 +51,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-ivory-100 text-charcoal-900">
+      {/*
+        pb-[calc(...)]: 모바일에서 하단 고정 바(MobileBottomBar)가 페이지 콘텐츠(특히
+        푸터)를 가리지 않도록 바 높이 + iOS 안전영역만큼 여백을 확보합니다.
+        lg 이상에서는 바가 숨겨지므로(lg:hidden) 여백을 제거합니다.
+      */}
+      <body className="min-h-full flex flex-col bg-ivory-100 text-charcoal-900 pb-[calc(3.5rem+env(safe-area-inset-bottom))] lg:pb-0">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
