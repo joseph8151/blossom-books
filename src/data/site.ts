@@ -3,9 +3,10 @@ export const siteConfig = {
   brandNameKo: "블러섬북스",
   kakaoChannelUrl: "https://pf.kakao.com/_lbMqX",
   email: "blossomprep@naver.com",
-  businessName: "[사업자명 입력]",
-  businessRegistrationNumber: "[사업자등록번호 입력]",
-  representativeName: "[대표자명 입력]",
+  // 사업자 정보 (상호·대표자명은 표기하지 않음)
+  businessRegistrationNumber: "654-60-00645",
+  addressKo: "서울특별시 서초구 강남대로8길 39-26, 2층 A9호",
+  addressShort: "서울 서초구 강남대로8길 39-26",
 };
 
 export const primaryNav = [

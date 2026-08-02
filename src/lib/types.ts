@@ -31,6 +31,7 @@ export interface Product {
   materialType: MaterialType;
   includesAnswerKey: boolean;
   includesDetailedExplanations: boolean;
+  includesAudio?: boolean; // 리스닝 오디오(MP3) 파일 제공 여부
   fileFormat: "PDF";
   pageCount?: number;
   components: ProductComponent[];

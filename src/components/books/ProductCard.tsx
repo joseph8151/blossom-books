@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileCheck2, FileText, Sparkles, MessageCircle } from "lucide-react";
+import { FileCheck2, FileText, Sparkles, MessageCircle, Headphones } from "lucide-react";
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
 import { siteConfig } from "@/data/site";
@@ -10,7 +10,12 @@ export default function ProductCard({ product }: { product: Product }) {
     <div className="lift group relative flex flex-col overflow-hidden border border-navy-800/12 bg-ivory-100 shadow-card">
       {/* 호버 시 상단 브래스 하이라이트 */}
       <span className="absolute inset-x-0 top-0 z-10 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-brass-500 to-brass-400 transition-transform duration-300 group-hover:scale-x-100" />
-      <div className="flex items-center justify-center bg-gradient-to-b from-ivory-200/80 to-ivory-200/30 py-9">
+      <div className="relative flex items-center justify-center bg-gradient-to-b from-ivory-200/80 to-ivory-200/30 py-9">
+        {product.sampleAvailable && (
+          <span className="absolute left-3.5 top-3.5 z-10 border border-brass-500/40 bg-ivory-100/90 px-2 py-1 font-label text-[9px] uppercase tracking-[0.14em] text-brass-500">
+            무료 샘플
+          </span>
+        )}
         <BookCoverMockup
           eyebrow={product.materialType === "existing" ? "Student Workbook" : "Custom Order"}
           title={product.title.split(" — ")[0]}
@@ -50,6 +55,11 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="inline-flex items-center gap-1">
             <FileText size={13} className="text-navy-800" /> PDF 제공
           </span>
+          {product.includesAudio && (
+            <span className="inline-flex items-center gap-1">
+              <Headphones size={13} className="text-navy-800" /> 리스닝 파일
+            </span>
+          )}
         </div>
 
         <div className="mt-6 flex items-center justify-between gap-2 border-t border-navy-800/10 pt-4">

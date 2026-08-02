@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MapPin } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
 const linkGroups = [
@@ -49,6 +50,10 @@ export default function Footer() {
               <span>· 안전 결제 (계좌이체 · PayPal)</span>
               <span>· 결제 후 PDF 즉시 발송</span>
             </div>
+            <div className="mt-5 flex items-start gap-2 text-[12.5px] leading-relaxed text-ivory-200/65">
+              <MapPin size={15} className="mt-0.5 shrink-0 text-brass-400" />
+              <span>{siteConfig.addressKo}</span>
+            </div>
           </div>
 
           {linkGroups.map((group) => (
@@ -74,8 +79,8 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col gap-4 border-t border-ivory-100/10 pt-8 text-[12px] leading-relaxed text-ivory-200/55 lg:flex-row lg:items-center lg:justify-between">
           <p>
-            {siteConfig.businessName} · 사업자등록번호 {siteConfig.businessRegistrationNumber} · 대표{" "}
-            {siteConfig.representativeName} · {siteConfig.email}
+            사업자등록번호 {siteConfig.businessRegistrationNumber} · {siteConfig.addressShort} ·{" "}
+            {siteConfig.email}
           </p>
           <p>© {new Date().getFullYear()} Blossom Books. All rights reserved.</p>
         </div>

@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { products, trackLabels } from "@/data/products";
 import { CurriculumTrack } from "@/lib/types";
 import ProductCard from "@/components/books/ProductCard";
+import MissingBookCTA from "@/components/common/MissingBookCTA";
 
 const tracks: (CurriculumTrack | "all")[] = [
   "all",
@@ -74,6 +75,10 @@ export default function CategorySection() {
             전체 교재 보기
             <ArrowRight size={16} />
           </Link>
+        </div>
+
+        <div className="mt-16">
+          <MissingBookCTA />
         </div>
       </div>
     </section>

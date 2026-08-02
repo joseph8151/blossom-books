@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { FileCheck2, FileText, MessageCircle, ShoppingBag } from "lucide-react";
+import { FileCheck2, FileText, MessageCircle, ShoppingBag, Headphones } from "lucide-react";
 import { products, trackLabels } from "@/data/products";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import ProductCard from "@/components/books/ProductCard";
@@ -76,6 +76,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <span className="inline-flex items-center gap-1.5">
               <FileText size={15} className="text-navy-800" /> {product.fileFormat} 파일 제공
             </span>
+            {product.includesAudio && (
+              <span className="inline-flex items-center gap-1.5">
+                <Headphones size={15} className="text-navy-800" /> 리스닝 오디오(MP3) 제공
+              </span>
+            )}
             {product.pageCount && <span>{product.pageCount}페이지</span>}
           </div>
 

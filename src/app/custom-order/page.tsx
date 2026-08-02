@@ -24,9 +24,34 @@ export default function CustomOrderPage() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // TODO: 실제 서버/이메일 연동 API 연결 필요.
-    // 현재는 프런트엔드에서만 제출 완료 화면을 보여줍니다.
-    // 예: await fetch("/api/custom-order", { method: "POST", body: new FormData(e.currentTarget) })
+    // 백엔드가 없어 이메일 클라이언트로 접수 내용을 전달합니다(수신: 공개용 브랜드 이메일).
+    // 개인 수신 메일은 노출하지 않습니다. 추후 서버 라우트 연동 시 fetch("/api/inquiry")로 교체하세요.
+    const fd = new FormData(e.currentTarget);
+    const val = (k: string) => ((fd.get(k) as string) || "").trim() || "-";
+    const typeLabel = customerTypes.find((c) => c.value === customerType)?.label ?? customerType;
+    const body = [
+      "■ 주문 제작 상담 신청",
+      "",
+      `· 고객 유형: ${typeLabel}`,
+      `· 과목: ${val("subject")}`,
+      `· 시험/교육과정: ${val("examOrCurriculum")}`,
+      `· 학생 학년: ${val("grade")}`,
+      `· 현재 레벨: ${val("currentLevel")}`,
+      `· 필요한 교재 종류: ${val("materialType")}`,
+      `· 예상 분량: ${val("expectedPageCount")}`,
+      `· 문제 유형: ${val("questionTypes")}`,
+      `· 사용 목적: ${val("purpose")}`,
+      `· 희망 완료 시기: ${val("desiredCompletion")}`,
+      `· 추가 요청: ${val("additionalNotes")}`,
+      "",
+      `· 이름: ${val("name")}`,
+      `· 연락처: ${val("contact")}`,
+      `· 이메일: ${val("email")}`,
+    ].join("\n");
+    const mailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
+      "[블러섬북스] 주문 제작 상담 신청"
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
     setSubmitted(true);
   }
 
@@ -35,10 +60,12 @@ export default function CustomOrderPage() {
       <div className="mx-auto max-w-xl px-5 py-28 text-center lg:px-8">
         <p className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">Submitted</p>
         <h1 className="mt-3 font-display text-[30px] font-semibold text-navy-950">
-          문의가 접수되었습니다.
+          신청 내용이 준비되었습니다.
         </h1>
         <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">
-          전달해주신 내용을 확인한 후 제작 가능 범위와 상담 방법을 안내드립니다.
+          이메일 작성 창이 열립니다. 내용을 확인하고 그대로 보내주시면 접수됩니다.
+          창이 열리지 않으면 카카오톡으로 편하게 문의해 주세요. 확인 후 제작 가능 범위와
+          상담 방법을 안내드립니다.
         </p>
         <a
           href={siteConfig.kakaoChannelUrl}

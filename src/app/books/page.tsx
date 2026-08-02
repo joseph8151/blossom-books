@@ -5,6 +5,7 @@ import { Search } from "lucide-react";
 import { products, trackLabels } from "@/data/products";
 import { CurriculumTrack, MaterialType } from "@/lib/types";
 import ProductCard from "@/components/books/ProductCard";
+import MissingBookCTA from "@/components/common/MissingBookCTA";
 
 const tracks: (CurriculumTrack | "all")[] = [
   "all",
@@ -114,6 +115,10 @@ export default function BooksPage() {
           </p>
         </div>
       )}
+
+      <div className="mt-16">
+        <MissingBookCTA />
+      </div>
     </div>
   );
 }
