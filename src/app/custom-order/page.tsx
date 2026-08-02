@@ -49,21 +49,30 @@ export default function CustomOrderPage() {
 
     setSubmitting(true);
 
-    // 1) 서버 접수(Web3Forms) 시도 — 수신 메일 주소는 서버/서비스에만 있고 화면엔 노출되지 않습니다.
-    try {
-      const res = await fetch("/api/inquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(fields),
-      });
-      const json = (await res.json().catch(() => ({ ok: false }))) as { ok?: boolean };
-      if (json.ok) {
-        setSubmitting(false);
-        setSubmitted(true);
-        return;
+    // 1) 폼서비스(Web3Forms)로 직접 접수 — 수신 메일 주소는 Web3Forms에만 저장되고 화면엔 노출되지 않습니다.
+    //    (정적 배포 환경이라 서버 없이 클라이언트에서 전송합니다. access_key는 공개용 키입니다.)
+    const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+    if (web3Key) {
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            access_key: web3Key,
+            subject: "[블러섬북스] 주문 제작 상담 신청",
+            from_name: "블러섬북스 웹사이트",
+            ...fields,
+          }),
+        });
+        const json = (await res.json().catch(() => ({ success: false }))) as { success?: boolean };
+        if (json.success) {
+          setSubmitting(false);
+          setSubmitted(true);
+          return;
+        }
+      } catch {
+        /* 아래 메일 앱 방식으로 대체 */
       }
-    } catch {
-      /* 아래 메일 앱 방식으로 대체 */
     }
 
     // 2) 대체: 이메일 앱(mailto)으로 접수 내용을 전달(수신: 공개용 브랜드 이메일)
