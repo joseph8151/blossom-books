@@ -1,0 +1,11 @@
+{
+  // Cloudflare에 정적 사이트(out/ 폴더)를 그대로 배포합니다.
+  // 이 설정이 있으면 wrangler가 Next.js 서버(OpenNext) 빌드를 시도하지 않고
+  // 정적 자산만 업로드합니다.
+  "name": "blossom-books",
+  "compatibility_date": "2026-08-03",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}
