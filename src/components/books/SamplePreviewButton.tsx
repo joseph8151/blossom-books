@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, FileSearch, MessageCircle, Lock } from "lucide-react";
+import { X, FileSearch, MessageCircle } from "lucide-react";
 import { Product } from "@/lib/types";
 import { siteConfig } from "@/data/site";
 
@@ -226,8 +226,9 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
               {/* 안내 + 상담 */}
               <div className="flex flex-col items-start gap-3 border-t border-navy-800/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
                 <p className="flex items-start gap-2 text-[12.5px] leading-relaxed text-charcoal-600">
-                  <Lock size={14} className="mt-0.5 shrink-0 text-brass-500" />
-                  실제 교재의 구성과 난이도를 보여주는 대표 예시입니다. 전체 구성·분량은 상담 시 안내해 드립니다.
+                  <FileSearch size={14} className="mt-0.5 shrink-0 text-brass-500" />
+                  샘플은 실제 교재의 구성과 난이도를 보여주는 예시입니다. 최신 업데이트에 따라 디자인과
+                  구조(structure)가 실제 교재와 다소 다를 수 있으며, 전체 구성·분량은 상담 시 안내해 드립니다.
                 </p>
                 <a
                   href={siteConfig.kakaoChannelUrl}
