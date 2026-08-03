@@ -10,6 +10,8 @@ import MobileBottomBar from "@/components/layout/MobileBottomBar";
 // 실제 배포 환경에서는 next/font/google로 교체해 자체 호스팅 및 성능을 최적화하는 것을 권장합니다.
 
 export const metadata: Metadata = {
+  // og:image 등 메타 이미지의 절대 URL 생성을 위한 기준 도메인
+  metadataBase: new URL("https://blossombooks.org"),
   title: {
     default: "블러섬북스 | Blossom Books — 시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠",
     template: "%s | 블러섬북스 Blossom Books",
@@ -39,8 +41,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "블러섬북스 | Blossom Books",
     description: "시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠 — 문제집, 정답·해설집, 실전 모의고사, 맞춤 교재 제작",
+    url: "https://blossombooks.org",
+    siteName: "블러섬북스 Blossom Books",
     locale: "ko_KR",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "블러섬북스 | Blossom Books",
+    description: "시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠 — 문제집·해설집·모의고사",
   },
 };
 
