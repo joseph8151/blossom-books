@@ -149,7 +149,7 @@ function MissingClientIdNotice() {
           href={`mailto:${siteConfig.email}`}
           className="inline-flex items-center justify-center gap-2 border border-navy-800/25 px-5 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
         >
-          <Mail size={15} /> {siteConfig.email}
+          <Mail size={15} /> Email us
         </a>
       </div>
       {/* 개발자 참고: 실제 결제를 활성화하려면 NEXT_PUBLIC_PAYPAL_CLIENT_ID를 설정하세요. */}
@@ -178,7 +178,7 @@ function SuccessNotice({ orderRef }: { orderRef: string | null }) {
         ) : null}
       </p>
       <p className="mt-3 text-[12.5px] leading-relaxed text-charcoal-600">
-        Questions about delivery? Contact us via KakaoTalk or at {siteConfig.email}.
+        Questions about delivery? Contact us via KakaoTalk or email.
       </p>
     </div>
   );

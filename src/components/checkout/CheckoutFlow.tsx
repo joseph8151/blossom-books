@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { MessageCircle, Landmark, CreditCard } from "lucide-react";
+import { MessageCircle, Landmark, CreditCard, Mail } from "lucide-react";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
 import { Product } from "@/lib/types";
@@ -94,15 +94,24 @@ export default function CheckoutFlow() {
 
       <div className="mt-12 border-t border-navy-800/12 pt-8 text-center">
         <p className="text-[13px] text-charcoal-600">결제 전 교재 구성이나 이용 범위가 궁금하신가요?</p>
-        <a
-          href={siteConfig.kakaoChannelUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-3 inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
-        >
-          <MessageCircle size={15} />
-          카카오톡 상담
-        </a>
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href={siteConfig.kakaoChannelUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+          >
+            <MessageCircle size={15} />
+            카카오톡 상담
+          </a>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-6 py-3 text-[13.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50"
+          >
+            <Mail size={15} />
+            이메일 문의
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -218,7 +227,7 @@ function InternationalFlow({ product }: { product?: Product }) {
         ) : (
           <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600">
             Pricing for this title is provided on request. Please contact us via KakaoTalk
-            or at {siteConfig.email} for an international quote and PayPal invoice.
+            or email for an international quote and PayPal invoice.
           </p>
         )}
       </div>

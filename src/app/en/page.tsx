@@ -60,8 +60,7 @@ const whyItems = [
 ];
 
 export default function EnHomePage() {
-  const featured = products.filter((p) => p.priceUSD).slice(0, 6);
-  const catalog = featured.length > 0 ? featured : products.slice(0, 6);
+  const catalog = products.slice(0, 6);
 
   return (
     // html lang은 루트에서 "ko"이므로, 영문 콘텐츠에는 lang="en"을 명시해 접근성/번역 힌트를 제공합니다.
@@ -180,8 +179,8 @@ export default function EnHomePage() {
             A few of our ready-to-buy titles
           </h2>
           <p className="mt-3 max-w-2xl text-[14.5px] leading-relaxed text-charcoal-600">
-            Prices are shown in USD for international customers. Each title includes the
-            student workbook and a detailed answer key, delivered as PDF.
+            Each title includes the student workbook and a detailed answer key, delivered
+            as PDF. Pricing and grade-level options are shared on request.
           </p>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -220,14 +219,12 @@ export default function EnHomePage() {
                   </div>
 
                   <div className="mt-6 flex items-center justify-between border-t border-navy-800/10 pt-4">
-                    <span className="font-display text-[17px] font-semibold text-navy-950">
-                      {product.priceUSD ? `USD $${product.priceUSD}` : "On request"}
-                    </span>
+                    <span className="text-[12.5px] font-medium text-charcoal-600">Price on request</span>
                     <Link
-                      href={`/checkout?product=${product.id}&region=international`}
+                      href="/en#contact"
                       className="inline-flex items-center gap-1 text-[13px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4"
                     >
-                      Order <ArrowRight size={13} />
+                      Inquire <ArrowRight size={13} />
                     </Link>
                   </div>
                 </div>
@@ -252,8 +249,8 @@ export default function EnHomePage() {
             </p>
             <ul className="mt-6 space-y-3 text-[14px] text-charcoal-600">
               {[
-                "Prices shown in USD, based on each title's listed price",
-                "Card or PayPal balance accepted through PayPal's secure checkout",
+                "Pricing shared on request — tailored to grade, level and length",
+                "Secure USD payment via PayPal (card or PayPal balance)",
                 "Digital delivery — no shipping fees, no waiting",
               ].map((line) => (
                 <li key={line} className="flex items-start gap-2">
@@ -263,10 +260,10 @@ export default function EnHomePage() {
               ))}
             </ul>
             <Link
-              href="/checkout?region=international"
+              href="/en#contact"
               className="mt-8 inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
             >
-              Go to checkout
+              Request a quote
               <ArrowRight size={16} />
             </Link>
           </div>
