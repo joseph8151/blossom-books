@@ -311,7 +311,7 @@ export default function EnHomePage() {
               href={`mailto:${siteConfig.email}`}
               className="inline-flex items-center justify-center gap-2 border border-navy-800/25 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
             >
-              <Mail size={16} /> {siteConfig.email}
+              <Mail size={16} /> Email us
             </a>
           </div>
         </div>
