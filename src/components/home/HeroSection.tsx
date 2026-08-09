@@ -14,10 +14,10 @@ export default function HeroSection() {
           </span>
 
           {/* 좁은 화면(≤375px)에서 제목이 넘치지 않도록 기본값을 낮추고 단계적으로 키웁니다. */}
-          <h1 className="mt-7 font-display text-[26px] font-semibold leading-[1.18] text-navy-950 text-balance min-[400px]:text-[33px] sm:text-[39px] lg:text-[44px]">
+          <h1 className="mt-7 font-body text-[21px] font-bold leading-[1.32] tracking-[-0.02em] text-navy-950 text-balance min-[400px]:text-[25px] sm:text-[29px] lg:text-[32px]">
             시험과 수업의 목적에 맞춘
             <br />
-            <span className="italic text-burgundy-700">프리미엄 교육 콘텐츠</span>
+            <span className="text-brass-500">프리미엄 교육 콘텐츠</span>
           </h1>
 
           <p className="mt-7 max-w-xl text-[16.5px] leading-relaxed text-charcoal-600">
