@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { FileCheck2, FileText, MessageCircle, ShoppingBag, Headphones } from "lucide-react";
 import { products, trackLabels } from "@/data/products";
+import { coverToneFor } from "@/lib/utils";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import ProductCard from "@/components/books/ProductCard";
 import SamplePreviewButton from "@/components/books/SamplePreviewButton";
@@ -44,7 +45,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             eyebrow={product.materialType === "existing" ? "Student Workbook" : "Custom Order"}
             title={product.title.split(" — ")[0]}
             subtitle={product.examOrCurriculum}
-            tone={product.coverAccent === "navy" ? "navy" : "ivory"}
+            tone={coverToneFor(product.id)}
             tabLabel="01"
             className="max-w-[260px]"
           />

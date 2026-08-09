@@ -3,6 +3,7 @@ import { FileCheck2, FileText, Sparkles, MessageCircle, Headphones } from "lucid
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
 import { siteConfig } from "@/data/site";
+import { coverToneFor } from "@/lib/utils";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -20,7 +21,7 @@ export default function ProductCard({ product }: { product: Product }) {
           eyebrow={product.materialType === "existing" ? "Student Workbook" : "Custom Order"}
           title={product.title.split(" — ")[0]}
           subtitle={product.examOrCurriculum}
-          tone={product.coverAccent === "navy" ? "navy" : "ivory"}
+          tone={coverToneFor(product.id)}
           className="max-w-[150px] transition-transform duration-500 group-hover:scale-[0.96]"
         />
       </div>
