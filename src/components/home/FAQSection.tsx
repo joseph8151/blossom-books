@@ -74,7 +74,7 @@ export default function FAQSection() {
     <section className="border-b border-navy-800/12 bg-ivory-200/50 py-20 lg:py-28">
       <div className="mx-auto max-w-4xl px-5 lg:px-8">
         <p className="text-center font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">FAQ</p>
-        <h2 className="mt-3 text-center font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
+        <h2 className="mt-3 text-center font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
           자주 묻는 질문
         </h2>
 

@@ -16,7 +16,7 @@ export default function AboutPage() {
       <section className="paper-rule border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-5 lg:px-8">
           <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">About</p>
-          <h1 className="mt-3 font-display text-[36px] font-semibold leading-tight text-navy-950 sm:text-[42px]">
+          <h1 className="mt-3 font-display text-[36px] font-semibold leading-tight text-navy-950 sm:text-[35px]">
             블러섬북스 소개
           </h1>
           <p className="mt-8 text-[16px] leading-[1.85] text-charcoal-600">

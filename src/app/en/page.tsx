@@ -73,7 +73,7 @@ export default function EnHomePage() {
               Educational Content Studio
             </span>
 
-            <h1 className="mt-7 font-display text-[32px] font-semibold leading-[1.18] text-navy-950 text-balance min-[400px]:text-[40px] sm:text-[52px] lg:text-[58px]">
+            <h1 className="mt-7 font-display text-[26px] font-semibold leading-[1.18] text-navy-950 text-balance min-[400px]:text-[33px] sm:text-[39px] lg:text-[44px]">
               Premium study materials,
               <br />
               <span className="italic text-burgundy-700">purpose-built for the exam</span>
@@ -153,7 +153,7 @@ export default function EnHomePage() {
           <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">
             Why Blossom Books
           </p>
-          <h2 className="mt-3 max-w-2xl font-display text-[30px] font-semibold leading-tight text-navy-950 sm:text-[38px]">
+          <h2 className="mt-3 max-w-2xl font-display text-[30px] font-semibold leading-tight text-navy-950 sm:text-[30px]">
             Materials that match the test — and the student
           </h2>
 
@@ -175,7 +175,7 @@ export default function EnHomePage() {
           <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">
             Sample catalog
           </p>
-          <h2 className="mt-3 font-display text-[30px] font-semibold leading-tight text-navy-950 sm:text-[38px]">
+          <h2 className="mt-3 font-display text-[30px] font-semibold leading-tight text-navy-950 sm:text-[30px]">
             A few of our ready-to-buy titles
           </h2>
           <p className="mt-3 max-w-2xl text-[14.5px] leading-relaxed text-charcoal-600">
@@ -239,7 +239,7 @@ export default function EnHomePage() {
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-2 lg:px-8 lg:py-24">
           <div>
             <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Payment</p>
-            <h2 className="mt-3 font-display text-[30px] font-semibold leading-tight text-navy-950 sm:text-[38px]">
+            <h2 className="mt-3 font-display text-[30px] font-semibold leading-tight text-navy-950 sm:text-[30px]">
               Pay securely with PayPal
             </h2>
             <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">
@@ -287,7 +287,7 @@ export default function EnHomePage() {
       <section id="contact" className="scroll-mt-24 bg-ivory-100">
         <div className="mx-auto max-w-7xl px-5 py-20 text-center lg:px-8 lg:py-24">
           <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Contact</p>
-          <h2 className="mt-3 font-display text-[30px] font-semibold leading-tight text-navy-950 sm:text-[38px]">
+          <h2 className="mt-3 font-display text-[30px] font-semibold leading-tight text-navy-950 sm:text-[30px]">
             Questions? We&apos;re happy to help.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">

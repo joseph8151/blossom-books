@@ -62,7 +62,7 @@ export default function MockExamsPage() {
     <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-20">
       <div className="max-w-2xl">
         <span className="eyebrow">Mock exams</span>
-        <h1 className="mt-4 font-display text-[34px] font-semibold text-navy-950 sm:text-[40px]">
+        <h1 className="mt-4 font-display text-[28px] font-semibold text-navy-950 sm:text-[33px]">
           실전 모의고사
         </h1>
         <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">

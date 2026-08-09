@@ -55,7 +55,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <span className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">
             {trackLabels[product.track]}
           </span>
-          <h1 className="mt-3 font-display text-[34px] font-semibold leading-tight text-navy-950 sm:text-[40px]">
+          <h1 className="mt-3 font-display text-[28px] font-semibold leading-tight text-navy-950 sm:text-[33px]">
             {product.titleKo}
           </h1>
           <p className="mt-2 text-[14px] text-charcoal-600">

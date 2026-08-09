@@ -4,7 +4,7 @@ export default function CopyrightPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 lg:px-8 lg:py-20">
       <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Policy</p>
-      <h1 className="mt-3 font-display text-[32px] font-semibold text-navy-950">교재 이용 및 저작권 안내</h1>
+      <h1 className="mt-3 font-display text-[26px] font-semibold text-navy-950">교재 이용 및 저작권 안내</h1>
 
       <div className="mt-10 space-y-6 text-[14.5px] leading-relaxed text-charcoal-600">
         <p>

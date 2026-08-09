@@ -802,6 +802,37 @@ export const products: Product[] = [
     coverAccent: "burgundy",
     sampleAvailable: true,
   },
+  {
+    id: "teps-speaking-workbook",
+    title: "TEPS Speaking — Practice Workbook",
+    titleKo: "TEPS Speaking 실전 문제집",
+    track: "certified-exam",
+    subject: "English",
+    examOrCurriculum: "TEPS Speaking",
+    gradeRange: "중·고등 / 성인",
+    levelLabel: "Part 1–6 전 유형",
+    difficulty: 4,
+    materialType: "existing",
+    includesAnswerKey: true,
+    includesDetailedExplanations: true,
+    fileFormat: "PDF",
+    includesAudio: true,
+    pageCount: 100,
+    components: [
+      { label: "Student Workbook", descriptionKo: "Part 1–6 유형별 실전 문제 100페이지" },
+      { label: "Model Answers & Explanations", descriptionKo: "파트별 모범 답안 및 해설" },
+      { label: "Audio", descriptionKo: "발음·억양 참고용 모범 답안 오디오 제공" },
+    ],
+    units: ["Part 1", "Part 2", "Part 3", "Part 4", "Part 5", "Part 6"],
+    summaryKo: "TEPS Speaking Part 1–6 전 유형 실전 문제집 100페이지. 모범 답안·오디오 포함.",
+    descriptionKo:
+      "TEPS 말하기 시험의 Part 1부터 Part 6까지 전 유형을 실전 형식으로 구성한 100페이지 문제집입니다. 파트별 모범 답안과 발음·억양 참고용 오디오를 함께 제공합니다.",
+    recommendedForKo: "TEPS Speaking을 준비하는 학생 및 응시자",
+    domesticPayment: "bank-transfer",
+    internationalPayment: "paypal",
+    coverAccent: "navy",
+    sampleAvailable: true,
+  },
 ];
 
 export const trackLabels: Record<Product["track"], string> = {

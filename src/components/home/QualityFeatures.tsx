@@ -26,7 +26,7 @@ export default function QualityFeatures() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-xl">
           <span className="eyebrow eyebrow--light">What&apos;s included</span>
-          <h2 className="mt-4 font-display text-[32px] font-semibold sm:text-[38px]">
+          <h2 className="mt-4 font-display text-[26px] font-semibold sm:text-[30px]">
             문제를 푸는 시간뿐 아니라,
             <br />틀린 이유를 이해하는 시간까지 설계합니다.
           </h2>

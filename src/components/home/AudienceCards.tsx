@@ -42,7 +42,7 @@ export default function AudienceCards() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-xl">
           <span className="eyebrow">Who it&apos;s for</span>
-          <h2 className="mt-4 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
+          <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
             네 종류의 고객, 각자 다른 방식으로
           </h2>
         </div>

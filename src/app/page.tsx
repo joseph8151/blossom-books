@@ -1,5 +1,6 @@
 import HeroSection from "@/components/home/HeroSection";
 import AudienceCards from "@/components/home/AudienceCards";
+import CollectionShowcase from "@/components/home/CollectionShowcase";
 import CategorySection from "@/components/home/CategorySection";
 import ExistingVsCustomSection from "@/components/home/ExistingVsCustomSection";
 import ResearchProcess from "@/components/home/ResearchProcess";
@@ -16,6 +17,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <AudienceCards />
+      <CollectionShowcase />
       <CategorySection />
       <ExistingVsCustomSection />
       <ResearchProcess />

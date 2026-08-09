@@ -44,7 +44,7 @@ export default function BooksPage() {
     <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-20">
       <div className="max-w-2xl">
         <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Catalogue</p>
-        <h1 className="mt-3 font-display text-[36px] font-semibold text-navy-950 sm:text-[42px]">교재 찾기</h1>
+        <h1 className="mt-3 font-display text-[36px] font-semibold text-navy-950 sm:text-[35px]">교재 찾기</h1>
         <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
           교육과정, 시험, 학년, 난이도별로 교재를 확인하실 수 있습니다. 원하시는 교재가 없다면
           주문 제작을 상담해보세요.

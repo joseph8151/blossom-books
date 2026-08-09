@@ -27,7 +27,7 @@ export default function UseCaseSection() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-xl">
           <span className="eyebrow">Use cases</span>
-          <h2 className="mt-4 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
+          <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
             제작 사례 유형
           </h2>
         </div>

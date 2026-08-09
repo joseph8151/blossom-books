@@ -6,7 +6,7 @@ export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 lg:px-8 lg:py-20">
       <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Policy</p>
-      <h1 className="mt-3 font-display text-[32px] font-semibold text-navy-950">개인정보처리방침</h1>
+      <h1 className="mt-3 font-display text-[26px] font-semibold text-navy-950">개인정보처리방침</h1>
       <p className="mt-4 text-[12.5px] text-charcoal-600">
         본 방침은 초안이며, 실제 서비스 적용 전 법률 전문가의 검토를 받는 것을 권장합니다.
       </p>

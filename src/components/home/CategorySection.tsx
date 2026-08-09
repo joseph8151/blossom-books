@@ -27,7 +27,7 @@ export default function CategorySection() {
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-xl">
             <span className="eyebrow">Catalogue</span>
-            <h2 className="mt-4 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
+            <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
               교육과정과 시험별로 정리된 교재
             </h2>
             <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">

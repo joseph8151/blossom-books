@@ -39,7 +39,7 @@ export default function TrustSignals() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-2xl">
           <span className="eyebrow">Made by experts</span>
-          <h2 className="mt-4 font-display text-[32px] font-semibold leading-tight text-navy-950 sm:text-[38px]">
+          <h2 className="mt-4 font-display text-[26px] font-semibold leading-tight text-navy-950 sm:text-[30px]">
             미국 명문대·프랩 출신
             <br />
             <span className="italic text-burgundy-700">선생님들이 직접</span> 만듭니다.

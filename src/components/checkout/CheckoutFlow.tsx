@@ -32,7 +32,7 @@ export default function CheckoutFlow() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 lg:px-8 lg:py-20">
       <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Checkout</p>
-      <h1 className="mt-3 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">주문 / 결제</h1>
+      <h1 className="mt-3 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">주문 / 결제</h1>
 
       {product ? (
         <div className="mt-6 flex items-center justify-between border border-navy-800/15 bg-ivory-200/40 p-5">

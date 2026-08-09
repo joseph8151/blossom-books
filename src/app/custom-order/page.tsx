@@ -113,7 +113,7 @@ export default function CustomOrderPage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-16 lg:px-8 lg:py-20">
       <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Custom order</p>
-      <h1 className="mt-3 font-display text-[34px] font-semibold text-navy-950 sm:text-[40px]">
+      <h1 className="mt-3 font-display text-[28px] font-semibold text-navy-950 sm:text-[33px]">
         주문 제작 상담
       </h1>
       <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">

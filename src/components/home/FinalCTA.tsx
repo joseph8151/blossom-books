@@ -9,7 +9,7 @@ export default function FinalCTA() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(173,138,78,0.2),transparent_55%)]" />
       <div className="relative mx-auto max-w-3xl px-5 text-center lg:px-8">
         <span className="eyebrow eyebrow--center eyebrow--light">Get started</span>
-        <h2 className="mt-5 font-display text-[34px] font-semibold leading-tight sm:text-[42px]">
+        <h2 className="mt-5 font-display text-[28px] font-semibold leading-tight sm:text-[35px]">
           필요한 교재를 찾고 계신가요?
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-[14.5px] leading-relaxed text-ivory-200/80">

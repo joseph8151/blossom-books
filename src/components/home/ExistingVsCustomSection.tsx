@@ -25,7 +25,7 @@ export default function ExistingVsCustomSection() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-2xl">
           <span className="eyebrow">Two ways to start</span>
-          <h2 className="mt-4 font-display text-[32px] font-semibold text-navy-950 sm:text-[38px]">
+          <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
             기존 교재, 또는 나에게 맞춘 주문 제작
           </h2>
           <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
