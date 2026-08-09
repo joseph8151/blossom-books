@@ -29,7 +29,7 @@ const enNav = [
 /** KO / EN 언어 스위처 */
 function LanguageSwitcher({ isEn }: { isEn: boolean }) {
   return (
-    <div className="flex items-center overflow-hidden rounded-full border border-navy-800/20 text-[12px] font-medium shadow-soft">
+    <div className="flex items-center overflow-hidden border border-navy-800/20 text-[12px] font-medium shadow-soft">
       <Link
         href="/"
         aria-current={!isEn ? "page" : undefined}
@@ -136,7 +136,7 @@ export default function Header() {
             href={siteConfig.kakaoChannelUrl}
             target="_blank"
             rel="noreferrer"
-            className="hidden items-center gap-1.5 rounded-full bg-navy-900 px-5 py-2.5 text-[13.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift lg:inline-flex"
+            className="hidden items-center gap-1.5 bg-navy-900 px-5 py-2.5 text-[13.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift lg:inline-flex"
           >
             <MessageCircle size={15} strokeWidth={2} />
             {kakaoLabel}
@@ -180,7 +180,7 @@ export default function Header() {
               href={siteConfig.kakaoChannelUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 mb-3 inline-flex items-center justify-center gap-2 rounded-full bg-navy-900 py-3.5 text-[14px] font-medium text-ivory-100"
+              className="mt-4 mb-3 inline-flex items-center justify-center gap-2 bg-navy-900 py-3.5 text-[14px] font-medium text-ivory-100"
             >
               <MessageCircle size={16} />
               {kakaoLabel}

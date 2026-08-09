@@ -61,18 +61,24 @@ export default function HeroSection() {
             ))}
           </div>
 
-          <dl className="mt-14 grid max-w-md grid-cols-3 gap-4 border-t border-navy-800/12 pt-7 sm:gap-6">
-            {[
-              ["12+", "교육과정·시험 트랙"],
-              ["문제집 + 해설집", "모든 교재 기본 구성"],
-              ["기존 교재 · 주문 제작", "두 가지 이용 방식"],
-            ].map(([value, label]) => (
-              <div key={label}>
-                <dt className="font-display text-[19px] font-semibold text-navy-900">{value}</dt>
-                <dd className="mt-1 text-[12px] leading-snug text-charcoal-600">{label}</dd>
-              </div>
-            ))}
-          </dl>
+          {/* 다루는 시험 배지 */}
+          <div className="mt-12 border-t border-navy-800/12 pt-7">
+            <p className="font-label text-[11px] uppercase tracking-[0.16em] text-navy-800/55">
+              이런 시험을 다룹니다
+            </p>
+            <div className="mt-3.5 flex flex-wrap gap-2">
+              {["SAT", "AP", "TOEFL", "IELTS", "MET", "MAP", "CAT4", "ISEE", "WIDA", "OET", "TEPS"].map(
+                (x) => (
+                  <span
+                    key={x}
+                    className="border border-navy-800/20 bg-ivory-100 px-3 py-1.5 font-label text-[12px] tracking-wide text-navy-800 transition-colors hover:border-brass-500/60 hover:text-navy-900"
+                  >
+                    {x}
+                  </span>
+                )
+              )}
+            </div>
+          </div>
         </div>
 
         {/* 우측 교재 목업 */}

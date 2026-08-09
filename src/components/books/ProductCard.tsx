@@ -73,7 +73,7 @@ export default function ProductCard({ product }: { product: Product }) {
             href={siteConfig.kakaoChannelUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full bg-navy-900 px-3.5 py-1.5 text-[12px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+            className="inline-flex items-center gap-1.5 bg-navy-900 px-3.5 py-1.5 text-[12px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
           >
             <MessageCircle size={13} />
             상담
