@@ -78,7 +78,11 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
         </div>
       </div>
 
-      <p className="mt-6 text-[12.5px] leading-relaxed text-charcoal-600">{pricingReassurance}</p>
+      <p className="mt-7 text-center font-display text-[17px] font-medium text-navy-950 sm:text-[19px]">
+        More pages are not always better.{" "}
+        <span className="text-brass-500">Choose what the student actually needs.</span>
+      </p>
+      <p className="mt-4 text-[12.5px] leading-relaxed text-charcoal-600">{pricingReassurance}</p>
       <p className="mt-1.5 text-[12px] text-charcoal-600/70">* {priceDisclaimer}</p>
     </div>
   );
