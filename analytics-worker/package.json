@@ -1,0 +1,14 @@
+{
+  "name": "blossom-visitor-report",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Daily visitor-count email report for Blossom Books (Cloudflare Worker).",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}

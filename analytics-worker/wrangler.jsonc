@@ -1,0 +1,24 @@
+{
+  // Blossom Books 방문자 이메일 리포트 Worker (메인 사이트와 별개로 배포됩니다)
+  "name": "blossom-visitor-report",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-08-03",
+
+  // 매일 KST 08:00 (= UTC 23:00) 자동 실행
+  "triggers": {
+    "crons": ["0 23 * * *"]
+  },
+
+  // 아래 두 값은 본인 것으로 채워주세요. (민감하지 않은 값)
+  "vars": {
+    "CF_ACCOUNT_ID": "여기에_Cloudflare_계정ID",
+    "CF_SITE_TAG": "여기에_WebAnalytics_사이트태그",
+    "REPORT_FROM": "report@blossombooks.org"
+  }
+
+  // 비밀값(CF_API_TOKEN, RESEND_API_KEY, REPORT_TO)은 코드/설정에 넣지 않고
+  // 아래 명령으로 안전하게 저장합니다 (README 참고):
+  //   wrangler secret put CF_API_TOKEN
+  //   wrangler secret put RESEND_API_KEY
+  //   wrangler secret put REPORT_TO
+}
