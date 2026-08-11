@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { MessageCircle, Check, FileSearch, ShieldCheck, Copy } from "lucide-react";
 import { Product } from "@/lib/types";
-import { volumeOptions, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
+import { flexibleVolumes, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
 import { offersVolumes } from "@/lib/productMeta";
 import { siteConfig } from "@/data/site";
 
@@ -22,7 +22,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
   const fixedVol = !flexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
   const [pages, setPages] = useState(flexible ? 60 : fixedVol?.pages ?? 60);
   const [copied, setCopied] = useState(false);
-  const selected = volumeOptions.find((v) => v.pages === pages) ?? fixedVol ?? volumeOptions[1];
+  const selected = flexibleVolumes.find((v) => v.pages === pages) ?? fixedVol ?? flexibleVolumes[2];
 
   const includes = [
     "Student Workbook",
@@ -74,8 +74,8 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
                 <p className="mt-5 font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
                   Choose Your Volume
                 </p>
-                <div className="mt-3 grid grid-cols-3 gap-2">
-                  {volumeOptions.map((v) => {
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  {flexibleVolumes.map((v) => {
                     const on = v.pages === pages;
                     return (
                       <button

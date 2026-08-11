@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Check, ArrowRight, MessageCircle } from "lucide-react";
-import { volumeOptions, extendedOption, formatKRW, priceDisclaimer, pricingReassurance } from "@/data/pricing";
+import { flexibleVolumes, extendedOption, formatKRW, priceDisclaimer, pricingReassurance } from "@/data/pricing";
 import { siteConfig } from "@/data/site";
 
 // buyProductId가 있으면 각 분량을 바로 결제로 연결합니다(상품 상세용).
@@ -8,8 +8,8 @@ import { siteConfig } from "@/data/site";
 export default function PrepVolumePricing({ buyProductId }: { buyProductId?: string }) {
   return (
     <div>
-      <div className="grid gap-4 lg:grid-cols-4">
-        {volumeOptions.map((v) => {
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {flexibleVolumes.map((v) => {
           const highlight = !!v.badge;
           return (
             <div
