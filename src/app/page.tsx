@@ -4,6 +4,7 @@ import BrandNumbers from "@/components/home/BrandNumbers";
 import WhyBlossom from "@/components/home/WhyBlossom";
 import PrepPricing from "@/components/home/PrepPricing";
 import WhyCost from "@/components/home/WhyCost";
+import HowToOrder from "@/components/home/HowToOrder";
 import TestAlignment from "@/components/home/TestAlignment";
 import LevelAssessment from "@/components/home/LevelAssessment";
 import LevelTestStatement from "@/components/home/LevelTestStatement";
@@ -33,6 +34,7 @@ export default function HomePage() {
       <WhyBlossom />
       <PrepPricing />
       <WhyCost />
+      <HowToOrder />
       <TestAlignment />
       <LevelAssessment />
       <LevelTestStatement />

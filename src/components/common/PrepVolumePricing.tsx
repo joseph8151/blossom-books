@@ -36,14 +36,14 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
               </ul>
               {buyProductId && (
                 <Link
-                  href={`/checkout?product=${buyProductId}&volume=${v.pages}`}
+                  href={`/books/${buyProductId}#sample`}
                   className={`mt-5 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-[13px] font-medium transition-all hover:-translate-y-0.5 ${
                     highlight
                       ? "bg-navy-900 text-ivory-100 shadow-soft hover:bg-navy-800"
                       : "border border-navy-800/25 text-navy-900 hover:border-navy-800/50"
                   }`}
                 >
-                  이 구성으로 구매
+                  이 구성 자세히 보기
                   <ArrowRight size={14} />
                 </Link>
               )}

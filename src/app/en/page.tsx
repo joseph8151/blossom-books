@@ -18,12 +18,12 @@ import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 export const metadata: Metadata = {
   title: "Blossom Books — Premium Study Materials for International Students",
   description:
-    "English-language study workbooks and answer keys for US curriculum, AP, SAT, international school admissions and certified exams. Pay securely from anywhere with PayPal.",
+    "English-language study workbooks and answer keys for US curriculum, AP, SAT, international school admissions and certified exams. Published pricing by volume; order through our official channel.",
   alternates: { canonical: "/en" },
   openGraph: {
     title: "Blossom Books — Premium Study Materials",
     description:
-      "Workbooks and detailed answer keys for US curriculum, AP, SAT and international exams. Secure PayPal checkout for international customers.",
+      "Workbooks and detailed answer keys for US curriculum, AP, SAT and international exams. Published pricing; order through our official channel.",
     locale: "en_US",
     type: "website",
   },
@@ -109,7 +109,7 @@ export default function EnHomePage() {
               {[
                 ["12+", "Curriculum & exam tracks"],
                 ["Workbook + Key", "In every title"],
-                ["PayPal", "Secure global checkout"],
+                ["Published", "Pricing by volume"],
               ].map(([value, label]) => (
                 <div key={label}>
                   <dt className="font-display text-[19px] font-semibold text-navy-900">{value}</dt>
@@ -241,18 +241,19 @@ export default function EnHomePage() {
           <div>
             <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Payment</p>
             <h2 className="mt-3 font-display text-[30px] font-semibold leading-tight text-navy-950 sm:text-[30px]">
-              Pay securely with PayPal
+              How to order
             </h2>
             <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">
-              International customers check out with PayPal in USD — no bank transfer
-              required. After your payment is verified, your PDF materials are sent to the
-              email linked to your PayPal account.
+              Blossom Books does not take direct online payment on the site. Base prices are
+              published — 40P $95 · 60P $110 · 100P $140 (100P+ on request). Confirm your title
+              and volume with our team; after your order is confirmed, we arrange payment
+              (PayPal for international customers) and send your PDF after confirmation.
             </p>
             <ul className="mt-6 space-y-3 text-[14px] text-charcoal-600">
               {[
-                "Pricing shared on request — tailored to grade, level and length",
-                "Secure USD payment via PayPal (card or PayPal balance)",
-                "Digital delivery — no shipping fees, no waiting",
+                "Published pricing by volume — no need to ask just to see the price",
+                "A quick fit check before you order — the right option, not the biggest",
+                "Digital PDF delivery after payment confirmation — non-refundable after delivery",
               ].map((line) => (
                 <li key={line} className="flex items-start gap-2">
                   <CreditCard size={16} className="mt-0.5 shrink-0 text-navy-800" />
@@ -264,7 +265,7 @@ export default function EnHomePage() {
               href="/en#contact"
               className="mt-8 inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
             >
-              Request a quote
+              Contact to order
               <ArrowRight size={16} />
             </Link>
           </div>
@@ -274,7 +275,7 @@ export default function EnHomePage() {
               <BookCoverMockup
                 eyebrow="Digital SAT"
                 title="SAT Math"
-                subtitle="Full practice · USD checkout"
+                subtitle="Full practice workbook"
                 tone="navy"
                 tabLabel="$"
                 className="mx-auto"

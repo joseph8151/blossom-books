@@ -2,24 +2,26 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ShoppingBag, MessageCircle, Check, FileSearch, ShieldCheck } from "lucide-react";
+import { MessageCircle, Check, FileSearch, ShieldCheck, Copy } from "lucide-react";
 import { Product } from "@/lib/types";
 import { volumeOptions, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
 import { offersVolumes } from "@/lib/productMeta";
 import { siteConfig } from "@/data/site";
 
 const trustItems = [
-  "구매 전 Sample 확인 가능",
-  "상세 정답 및 해설 포함",
+  "가격 확인 후 문의 가능",
+  "무료 Sample 제공",
+  "학생 수준 간단 확인",
+  "정답 및 상세 해설 포함",
   "Digital PDF 제공",
-  "학년·레벨 기반 구성",
-  "문의 후 적합한 구성 확인 가능",
+  "카카오톡 상담원 안내",
 ];
 
 export default function PurchasePanel({ product, isDirect }: { product: Product; isDirect: boolean }) {
   const flexible = offersVolumes(product); // 40/60/100 분량 선택 가능 여부
   const fixedVol = !flexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
-  const [pages, setPages] = useState(flexible ? 60 : fixedVol?.pages ?? 60); // 기본값: BEST VALUE
+  const [pages, setPages] = useState(flexible ? 60 : fixedVol?.pages ?? 60);
+  const [copied, setCopied] = useState(false);
   const selected = volumeOptions.find((v) => v.pages === pages) ?? fixedVol ?? volumeOptions[1];
 
   const includes = [
@@ -30,8 +32,34 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
     product.includesAudio ? "Listening Audio (MP3)" : null,
   ].filter(Boolean) as string[];
 
-  const buyHref = `/checkout?product=${product.id}&volume=${pages}`;
   const subjectLine = product.units.slice(0, 4).join(" · ");
+
+  // 카카오톡 구매 문의 시 자동으로 복사되는 메시지 (고객이 다시 타이핑할 필요 없이 붙여넣기)
+  function purchaseMessage(): string {
+    const lines = [
+      "안녕하세요. Blossom Books 홈페이지에서 보고 문의드립니다.",
+      `상품: ${product.titleKo}`,
+    ];
+    if (isDirect) {
+      lines.push(`선택: ${selected.label} (${selected.tier})`);
+      lines.push(`가격: ${formatKRW(selected.priceKRW)}`);
+    } else {
+      lines.push("구성: 별도 구성 (가격 문의)");
+    }
+    lines.push(`학생 학년(참고): ${product.gradeRange}`);
+    lines.push("구매를 원합니다.");
+    return lines.join("\n");
+  }
+
+  function goKakao() {
+    try {
+      navigator.clipboard?.writeText(purchaseMessage());
+      setCopied(true);
+    } catch {
+      /* 클립보드 미지원 환경은 무시 */
+    }
+    window.open(siteConfig.kakaoChannelUrl, "_blank", "noopener,noreferrer");
+  }
 
   return (
     <>
@@ -44,7 +72,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
             {flexible ? (
               <>
                 <p className="mt-5 font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
-                  Choose Your Prep Volume
+                  Choose Your Volume
                 </p>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                   {volumeOptions.map((v) => {
@@ -69,10 +97,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
                   })}
                 </div>
                 <p className="mt-2 text-[11.5px] text-charcoal-600/80">
-                  {extendedOption.label} 이상 · 추가 영역은{" "}
-                  <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="underline">
-                    가격 문의
-                  </a>
+                  {extendedOption.label} 이상 · 추가 영역은 가격 문의
                 </p>
               </>
             ) : (
@@ -82,22 +107,19 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
             )}
 
             <div className="mt-5 flex items-baseline justify-between border-t border-navy-800/12 pt-4">
-              <span className="text-[13px] text-charcoal-600">{selected.tier} · {selected.label}</span>
+              <span className="text-[13px] text-charcoal-600">선택: {selected.label}</span>
               <span className="font-display text-[24px] font-semibold text-navy-950">
                 {formatKRW(selected.priceKRW)}
               </span>
             </div>
 
-            <Link
-              href={buyHref}
-              className="mt-4 flex items-center justify-center gap-2 bg-navy-900 px-6 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
+            <button
+              onClick={goKakao}
+              className="mt-4 flex w-full items-center justify-center gap-2 bg-navy-900 px-6 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
             >
-              <ShoppingBag size={16} />
-              지금 구매하기
-            </Link>
-            <p className="mt-2 text-center text-[11px] text-charcoal-600/80">
-              PDF 발송 완료 후 환불이 불가합니다.
-            </p>
+              <MessageCircle size={16} />
+              카카오톡으로 구매하기
+            </button>
           </>
         ) : (
           <>
@@ -105,16 +127,20 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
             <p className="mt-1.5 text-[12.5px] leading-relaxed text-charcoal-600">
               시험 유형과 구성에 따라 별도 안내됩니다. 구성을 알려주시면 빠르게 견적을 드립니다.
             </p>
-            <a
-              href={siteConfig.kakaoChannelUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 flex items-center justify-center gap-2 bg-navy-900 px-6 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+            <button
+              onClick={goKakao}
+              className="mt-4 flex w-full items-center justify-center gap-2 bg-navy-900 px-6 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
             >
               <MessageCircle size={16} />
-              구성·가격 문의
-            </a>
+              카카오톡으로 구매 문의
+            </button>
           </>
+        )}
+
+        {copied && (
+          <p className="mt-2 flex items-center justify-center gap-1.5 text-[11.5px] text-brass-500">
+            <Copy size={12} /> 구매 정보가 복사되었습니다. 카카오톡 채팅창에 붙여넣어 주세요.
+          </p>
         )}
 
         <a
@@ -125,10 +151,11 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
           무료 샘플 먼저 보기
         </a>
 
-        <p className="mt-3 text-center text-[12px] text-charcoal-600">
-          학생에게 맞는 구성인지 모르시나요?{" "}
+        <p className="mt-3 text-[11.5px] leading-relaxed text-charcoal-600">
+          결제는 카카오톡 상담을 통해 진행됩니다. 선택하신 교재와 학생 수준을 상담원이 간단히 확인한 후
+          결제 방법을 안내해 드립니다.{" "}
           <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
-            구매 전 상담
+            구성 상담
           </Link>
         </p>
 
@@ -196,26 +223,24 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
               </p>
               <p className="text-[10.5px] text-charcoal-600">{selected.tier}</p>
             </div>
-            <Link
-              href={buyHref}
+            <button
+              onClick={goKakao}
               className="inline-flex items-center gap-1.5 bg-navy-900 px-5 py-2.5 text-[13.5px] font-medium text-ivory-100"
             >
-              <ShoppingBag size={15} />
-              지금 구매
-            </Link>
+              <MessageCircle size={15} />
+              카카오톡 구매
+            </button>
           </>
         ) : (
           <>
             <p className="font-display text-[15px] font-semibold text-navy-950">Price on Request</p>
-            <a
-              href={siteConfig.kakaoChannelUrl}
-              target="_blank"
-              rel="noreferrer"
+            <button
+              onClick={goKakao}
               className="inline-flex items-center gap-1.5 bg-navy-900 px-5 py-2.5 text-[13.5px] font-medium text-ivory-100"
             >
               <MessageCircle size={15} />
-              구성 문의
-            </a>
+              구매 문의
+            </button>
           </>
         )}
       </div>
