@@ -1,12 +1,39 @@
 import Link from "next/link";
-import { MessageCircle, Check } from "lucide-react";
+import { MessageCircle, Check, PencilRuler, Boxes, NotebookPen, Stamp } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
 export const metadata = {
   title: "학원·기관 전용 교재 제작",
   description:
-    "학원, 프랩학원, 교육기관을 위한 레벨별 문제집, 반별 숙제, 단원 테스트, 실전 모의고사 등 기관 전용 교육 콘텐츠를 제작합니다.",
+    "학원, 프랩학원, 교육기관을 위한 맞춤 교재 개발, 대량 구매, 수업 자료, 기관 전용 표지 제작 등 기관 전용 교육 콘텐츠를 제작합니다.",
 };
+
+const pillars = [
+  {
+    icon: PencilRuler,
+    en: "Custom Workbook Development",
+    ko: "맞춤 교재 개발",
+    body: "기관 커리큘럼과 수업 흐름에 맞춰 문제집·평가 자료를 처음부터 설계·제작합니다.",
+  },
+  {
+    icon: Boxes,
+    en: "Bulk Orders",
+    ko: "대량 구매",
+    body: "반·학년 단위 대량 공급을 위한 구성과 조건을 상담해 드립니다.",
+  },
+  {
+    icon: NotebookPen,
+    en: "Class Materials",
+    ko: "수업 자료",
+    body: "반별 숙제, 단원 테스트, 월말 평가, 방학 특강 교재 등 수업용 자료를 제작합니다.",
+  },
+  {
+    icon: Stamp,
+    en: "Branded Materials",
+    ko: "기관 전용 표지",
+    body: "기관 전용 표지와 브랜딩을 반영하여 자체 교재처럼 사용할 수 있도록 제작합니다.",
+  },
+];
 
 const offerings = [
   "레벨별 문제집",
@@ -53,6 +80,30 @@ export default function InstitutionsPage() {
             >
               제작 문의 폼 작성
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 핵심 서비스 4개 */}
+      <section className="border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-24">
+        <div className="mx-auto max-w-6xl px-5 lg:px-8">
+          <div className="max-w-2xl">
+            <span className="eyebrow">For schools &amp; academies</span>
+            <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
+              기관을 위한 핵심 서비스
+            </h2>
+          </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {pillars.map(({ icon: Icon, en, ko, body }) => (
+              <div key={en} className="flex flex-col border border-navy-800/12 bg-ivory-100 p-6 shadow-card">
+                <div className="flex h-11 w-11 items-center justify-center border border-brass-500/30 bg-brass-500/[0.07] text-brass-500">
+                  <Icon size={20} strokeWidth={1.7} />
+                </div>
+                <p className="mt-4 font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">{en}</p>
+                <p className="mt-1 font-display text-[18px] font-semibold text-navy-950">{ko}</p>
+                <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600">{body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

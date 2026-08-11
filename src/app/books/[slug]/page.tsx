@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { FileCheck2, FileText, MessageCircle, ShoppingBag, Headphones } from "lucide-react";
 import { products, trackLabels } from "@/data/products";
-import { coverToneFor, difficultyLabel } from "@/lib/utils";
+import { coverToneFor, difficultyLabel, blossomLevel, BLOSSOM_LEVEL_KO } from "@/lib/utils";
+import { offersVolumes as productOffersVolumes } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import ProductCard from "@/components/books/ProductCard";
@@ -32,10 +33,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   const related = products.filter((p) => p.track === product.track && p.id !== product.id).slice(0, 3);
 
-  // 40·60·100·200p 분량 선택이 가능한 교재인지 판별합니다.
-  const offersVolumes =
-    (product.levelLabel?.includes("40") ?? false) ||
-    product.components.some((c) => c.descriptionKo.includes("40·60·100·200p"));
+  const offersVolumes = productOffersVolumes(product);
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-14 lg:px-8 lg:py-20">
@@ -70,6 +68,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             >
               {seriesInfo[seriesFor(product)].name}
             </Link>
+            <span className="inline-flex items-center gap-1.5 border border-navy-800/20 bg-ivory-200/50 px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-navy-800/80">
+              {blossomLevel(product.difficulty)} · {BLOSSOM_LEVEL_KO[blossomLevel(product.difficulty)]}
+            </span>
           </div>
           <h1 className="mt-3 font-display text-[28px] font-semibold leading-tight text-navy-950 sm:text-[33px]">
             {product.titleKo}

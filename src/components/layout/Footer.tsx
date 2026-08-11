@@ -43,7 +43,7 @@ export default function Footer() {
           <div>
             <span className="font-display text-2xl font-semibold text-ivory-100">Blossom Books</span>
             <span className="ml-2 font-label text-[9px] uppercase tracking-[0.18em] text-brass-400">
-              Edu Publishing
+              Educational Workbook Publisher
             </span>
             <p className="mt-4 max-w-xs text-[13.5px] leading-relaxed text-ivory-200/70">
               시험과 교육과정을 연구하여 학생용 문제집과 정답·상세 해설집을 제작하는

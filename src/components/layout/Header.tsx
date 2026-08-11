@@ -100,7 +100,7 @@ export default function Header() {
             Blossom Books
           </span>
           <span className="hidden font-label text-[10px] uppercase tracking-[0.18em] text-brass-500 sm:inline">
-            Est. Edu Publishing
+            Educational Workbook Publisher
           </span>
         </Link>
 

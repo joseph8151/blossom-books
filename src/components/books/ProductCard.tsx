@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { FileCheck2, FileText, Sparkles, MessageCircle, Headphones } from "lucide-react";
+import { Sparkles, MessageCircle, Headphones } from "lucide-react";
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
 import { siteConfig } from "@/data/site";
-import { coverToneFor, difficultyLabel } from "@/lib/utils";
+import { coverToneFor } from "@/lib/utils";
+import { productBadges } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 
@@ -42,12 +43,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <h3 className="mt-3 font-display text-[20px] font-semibold leading-snug text-navy-950">
           {product.titleKo}
         </h3>
-        <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-charcoal-600">
-          <span>{product.gradeRange}</span>
-          <span className="text-navy-800/20">·</span>
-          <span>난이도 {difficultyLabel(product.difficulty)}</span>
-        </div>
-        <span className="mt-2.5 inline-flex w-fit items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2 py-0.5 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">
+        <span className="mt-2 inline-flex w-fit items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2 py-0.5 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">
           {seriesInfo[seriesFor(product)].name}
         </span>
 
@@ -55,18 +51,19 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.summaryKo}
         </p>
 
-        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 text-[12px] text-charcoal-600">
-          {product.includesAnswerKey && (
-            <span className="inline-flex items-center gap-1">
-              <FileCheck2 size={13} className="text-navy-800" /> 정답·해설집 포함
+        {/* 통일 정보 배지 — 모든 카드 동일 포맷 (Grade · Level · Pages · Skills · Answer Guide) */}
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {productBadges(product).map((b) => (
+            <span
+              key={b}
+              className="border border-navy-800/15 bg-ivory-200/50 px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-navy-800/80"
+            >
+              {b}
             </span>
-          )}
-          <span className="inline-flex items-center gap-1">
-            <FileText size={13} className="text-navy-800" /> PDF 제공
-          </span>
+          ))}
           {product.includesAudio && (
-            <span className="inline-flex items-center gap-1">
-              <Headphones size={13} className="text-navy-800" /> 리스닝 파일
+            <span className="inline-flex items-center gap-1 border border-navy-800/15 bg-ivory-200/50 px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-navy-800/80">
+              <Headphones size={11} /> Audio
             </span>
           )}
         </div>

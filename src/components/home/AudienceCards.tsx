@@ -41,10 +41,22 @@ export default function AudienceCards() {
     <section className="border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="max-w-xl">
-          <span className="eyebrow">Who it&apos;s for</span>
+          <span className="eyebrow">Who we create for</span>
           <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
-            네 종류의 고객, 각자 다른 방식으로
+            누구를 위해 만드나요
           </h2>
+        </div>
+
+        {/* 고객군 — 브랜드 규모감 */}
+        <div className="mt-6 flex flex-wrap gap-2">
+          {["Students", "Parents", "Tutors", "Academies", "Schools", "Education Organizations"].map((a) => (
+            <span
+              key={a}
+              className="border border-navy-800/20 bg-ivory-100 px-3 py-1.5 font-label text-[11.5px] tracking-wide text-navy-800"
+            >
+              {a}
+            </span>
+          ))}
         </div>
 
         <div className="mt-12 grid gap-px overflow-hidden border border-navy-800/12 bg-navy-800/12 shadow-card sm:grid-cols-2 lg:grid-cols-4">

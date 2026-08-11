@@ -26,3 +26,21 @@ export const DIFFICULTY_LABELS: Record<number, string> = {
 export function difficultyLabel(level: number): string {
   return DIFFICULTY_LABELS[level] ?? "표준";
 }
+
+// Blossom Level System — 자체 난이도 체계. 상품 난이도(1~5)를 4단계 브랜드 레벨로 매핑합니다.
+export const BLOSSOM_LEVELS = ["Foundation", "Standard", "Advanced", "Challenge"] as const;
+export type BlossomLevel = (typeof BLOSSOM_LEVELS)[number];
+
+export const BLOSSOM_LEVEL_KO: Record<BlossomLevel, string> = {
+  Foundation: "기초",
+  Standard: "표준",
+  Advanced: "상급",
+  Challenge: "심화",
+};
+
+export function blossomLevel(difficulty: number): BlossomLevel {
+  if (difficulty <= 2) return "Foundation";
+  if (difficulty === 3) return "Standard";
+  if (difficulty === 4) return "Advanced";
+  return "Challenge";
+}
