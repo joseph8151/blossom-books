@@ -16,11 +16,11 @@ export const siteConfig = {
 export const primaryNav = [
   { label: "홈", href: "/" },
   { label: "교재 찾기", href: "/books" },
-  { label: "문제집", href: "/books?type=workbook" },
+  { label: "교재 시리즈", href: "/series" },
   { label: "모의고사", href: "/mock-exams" },
+  { label: "분량 선택 가이드", href: "/guide" },
   { label: "주문 제작", href: "/custom-order" },
   { label: "기관·학원", href: "/institutions" },
-  { label: "제작 과정", href: "/process" },
   { label: "블러섬북스 소개", href: "/about" },
   { label: "자주 묻는 질문", href: "/faq" },
   { label: "상담하기", href: "/consultation" },

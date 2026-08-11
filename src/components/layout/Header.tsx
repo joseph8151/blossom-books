@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils";
 // 데스크톱 상단 바에 노출할 핵심 메뉴 (과밀 방지를 위해 엄선). 전체 메뉴는 모바일 패널에 유지됩니다.
 const koDesktopNav = [
   { label: "교재 찾기", href: "/books" },
+  { label: "교재 시리즈", href: "/series" },
   { label: "모의고사", href: "/mock-exams" },
   { label: "주문 제작", href: "/custom-order" },
   { label: "기관·학원", href: "/institutions" },
   { label: "블러섬북스 소개", href: "/about" },
-  { label: "자주 묻는 질문", href: "/faq" },
 ];
 
 // 영문(/en) 페이지 네비게이션 — 한 장짜리 랜딩이므로 페이지 내 앵커로 이동합니다.

@@ -13,3 +13,16 @@ export function coverToneFor(id: string): CoverTone {
   const sum = [...id].reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
   return COVER_TONES[sum % COVER_TONES.length];
 }
+
+// 난이도(1~5) → 한글 라벨. 필터·카드·상세 페이지에서 공통으로 사용합니다.
+export const DIFFICULTY_LABELS: Record<number, string> = {
+  1: "입문",
+  2: "기초",
+  3: "표준",
+  4: "상급",
+  5: "심화",
+};
+
+export function difficultyLabel(level: number): string {
+  return DIFFICULTY_LABELS[level] ?? "표준";
+}

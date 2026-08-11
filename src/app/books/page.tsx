@@ -1,9 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, SlidersHorizontal, X } from "lucide-react";
 import { products, trackLabels } from "@/data/products";
 import { CurriculumTrack, MaterialType } from "@/lib/types";
+import { difficultyLabel } from "@/lib/utils";
+import { BlossomSeries, seriesFor, seriesInfo, seriesOrder } from "@/data/series";
 import ProductCard from "@/components/books/ProductCard";
 import MissingBookCTA from "@/components/common/MissingBookCTA";
 
@@ -22,15 +24,25 @@ const materialFilters: { value: MaterialType | "all"; label: string }[] = [
   { value: "custom", label: "주문 제작 가능" },
 ];
 
+// 과목 필터 — 데이터에서 실제 등장하는 과목만 추출합니다.
+const subjects = ["all", ...Array.from(new Set(products.map((p) => p.subject)))];
+const difficulties: (number | "all")[] = ["all", 1, 2, 3, 4, 5];
+
 export default function BooksPage() {
   const [query, setQuery] = useState("");
   const [track, setTrack] = useState<CurriculumTrack | "all">("all");
   const [material, setMaterial] = useState<MaterialType | "all">("all");
+  const [subject, setSubject] = useState<string>("all");
+  const [difficulty, setDifficulty] = useState<number | "all">("all");
+  const [series, setSeries] = useState<BlossomSeries | "all">("all");
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
       if (track !== "all" && p.track !== track) return false;
       if (material !== "all" && p.materialType !== material) return false;
+      if (subject !== "all" && p.subject !== subject) return false;
+      if (difficulty !== "all" && p.difficulty !== difficulty) return false;
+      if (series !== "all" && seriesFor(p) !== series) return false;
       if (query.trim()) {
         const q = query.trim().toLowerCase();
         const haystack = `${p.titleKo} ${p.title} ${p.examOrCurriculum} ${p.subject}`.toLowerCase();
@@ -38,7 +50,17 @@ export default function BooksPage() {
       }
       return true;
     });
-  }, [query, track, material]);
+  }, [query, track, material, subject, difficulty, series]);
+
+  const hasRefine = subject !== "all" || difficulty !== "all" || series !== "all";
+  const resetRefine = () => {
+    setSubject("all");
+    setDifficulty("all");
+    setSeries("all");
+  };
+
+  const selectClass =
+    "border border-navy-800/20 bg-ivory-100 py-2 pl-3 pr-8 text-[13px] text-charcoal-900 outline-none focus:border-navy-800/50";
 
   return (
     <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-20">
@@ -46,7 +68,7 @@ export default function BooksPage() {
         <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Catalogue</p>
         <h1 className="mt-3 font-display text-[36px] font-semibold text-navy-950 sm:text-[35px]">교재 찾기</h1>
         <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
-          교육과정, 시험, 학년, 난이도별로 교재를 확인하실 수 있습니다. 원하시는 교재가 없다면
+          교육과정, 과목, 학년, 난이도, 시리즈별로 교재를 확인하실 수 있습니다. 원하시는 교재가 없다면
           주문 제작을 상담해보세요.
         </p>
       </div>
@@ -76,6 +98,56 @@ export default function BooksPage() {
             {t === "all" ? "전체 교육과정" : trackLabels[t]}
           </button>
         ))}
+      </div>
+
+      {/* 세부 필터 — 과목 · 난이도 · 시리즈 */}
+      <div className="mt-5 flex flex-wrap items-center gap-3">
+        <span className="inline-flex items-center gap-1.5 font-label text-[11px] uppercase tracking-[0.12em] text-navy-800/55">
+          <SlidersHorizontal size={13} /> 세부 필터
+        </span>
+
+        <label className="sr-only" htmlFor="subject">과목</label>
+        <select id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} className={selectClass}>
+          {subjects.map((s) => (
+            <option key={s} value={s}>{s === "all" ? "과목 전체" : s}</option>
+          ))}
+        </select>
+
+        <label className="sr-only" htmlFor="difficulty">난이도</label>
+        <select
+          id="difficulty"
+          value={String(difficulty)}
+          onChange={(e) => setDifficulty(e.target.value === "all" ? "all" : Number(e.target.value))}
+          className={selectClass}
+        >
+          {difficulties.map((d) => (
+            <option key={d} value={String(d)}>
+              {d === "all" ? "난이도 전체" : `난이도 ${d} · ${difficultyLabel(d as number)}`}
+            </option>
+          ))}
+        </select>
+
+        <label className="sr-only" htmlFor="series">시리즈</label>
+        <select
+          id="series"
+          value={series}
+          onChange={(e) => setSeries(e.target.value as BlossomSeries | "all")}
+          className={selectClass}
+        >
+          <option value="all">시리즈 전체</option>
+          {seriesOrder.map((k) => (
+            <option key={k} value={k}>{seriesInfo[k].name} · {seriesInfo[k].ko}</option>
+          ))}
+        </select>
+
+        {hasRefine && (
+          <button
+            onClick={resetRefine}
+            className="inline-flex items-center gap-1 text-[12.5px] text-burgundy-700 hover:underline"
+          >
+            <X size={13} /> 세부 필터 해제
+          </button>
+        )}
       </div>
 
       {/* 구매 방식 필터 */}

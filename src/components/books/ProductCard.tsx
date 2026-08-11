@@ -3,7 +3,8 @@ import { FileCheck2, FileText, Sparkles, MessageCircle, Headphones } from "lucid
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
 import { siteConfig } from "@/data/site";
-import { coverToneFor } from "@/lib/utils";
+import { coverToneFor, difficultyLabel } from "@/lib/utils";
+import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -41,7 +42,14 @@ export default function ProductCard({ product }: { product: Product }) {
         <h3 className="mt-3 font-display text-[20px] font-semibold leading-snug text-navy-950">
           {product.titleKo}
         </h3>
-        <p className="mt-1 text-[12.5px] text-charcoal-600">{product.gradeRange}</p>
+        <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-charcoal-600">
+          <span>{product.gradeRange}</span>
+          <span className="text-navy-800/20">·</span>
+          <span>난이도 {difficultyLabel(product.difficulty)}</span>
+        </div>
+        <span className="mt-2.5 inline-flex w-fit items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2 py-0.5 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">
+          {seriesInfo[seriesFor(product)].name}
+        </span>
 
         <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600 line-clamp-2">
           {product.summaryKo}

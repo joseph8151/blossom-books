@@ -2,10 +2,12 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { FileCheck2, FileText, MessageCircle, ShoppingBag, Headphones } from "lucide-react";
 import { products, trackLabels } from "@/data/products";
-import { coverToneFor } from "@/lib/utils";
+import { coverToneFor, difficultyLabel } from "@/lib/utils";
+import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import ProductCard from "@/components/books/ProductCard";
 import SamplePreviewButton from "@/components/books/SamplePreviewButton";
+import VolumeGuide from "@/components/common/VolumeGuide";
 import { siteConfig } from "@/data/site";
 
 export function generateStaticParams() {
@@ -30,6 +32,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   const related = products.filter((p) => p.track === product.track && p.id !== product.id).slice(0, 3);
 
+  // 40·60·100·200p 분량 선택이 가능한 교재인지 판별합니다.
+  const offersVolumes =
+    (product.levelLabel?.includes("40") ?? false) ||
+    product.components.some((c) => c.descriptionKo.includes("40·60·100·200p"));
+
   return (
     <div className="mx-auto max-w-6xl px-5 py-14 lg:px-8 lg:py-20">
       <nav className="text-[12.5px] text-charcoal-600">
@@ -53,14 +60,22 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
         {/* 정보 */}
         <div>
-          <span className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">
-            {trackLabels[product.track]}
-          </span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">
+              {trackLabels[product.track]}
+            </span>
+            <Link
+              href={`/series#${seriesFor(product)}`}
+              className="inline-flex items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-brass-500 transition-colors hover:border-brass-500/70"
+            >
+              {seriesInfo[seriesFor(product)].name}
+            </Link>
+          </div>
           <h1 className="mt-3 font-display text-[28px] font-semibold leading-tight text-navy-950 sm:text-[33px]">
             {product.titleKo}
           </h1>
           <p className="mt-2 text-[14px] text-charcoal-600">
-            {product.examOrCurriculum} · {product.gradeRange}
+            {product.examOrCurriculum} · {product.gradeRange} · 난이도 {difficultyLabel(product.difficulty)}
             {product.levelLabel ? ` · ${product.levelLabel}` : ""}
           </p>
 
@@ -112,6 +127,27 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </Link>
             <SamplePreviewButton product={product} />
           </div>
+
+          {/* 분량 선택 가이드 (40·60·100·200p 교재) */}
+          {offersVolumes && (
+            <div className="mt-12">
+              <div className="flex items-baseline justify-between gap-3">
+                <h2 className="font-display text-[19px] font-semibold text-navy-950">분량 선택 (40·60·100·200P)</h2>
+                <Link
+                  href="/guide"
+                  className="shrink-0 text-[12.5px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4"
+                >
+                  선택 가이드 전체 보기
+                </Link>
+              </div>
+              <p className="mt-2 text-[13px] text-charcoal-600">
+                학습 목적과 기간에 맞춰 분량을 선택하실 수 있습니다. 정확한 구성은 상담으로 안내해 드립니다.
+              </p>
+              <div className="mt-5">
+                <VolumeGuide compact />
+              </div>
+            </div>
+          )}
 
           {/* 교재 구성 */}
           <div className="mt-12">
