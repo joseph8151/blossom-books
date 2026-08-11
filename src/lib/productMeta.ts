@@ -1,5 +1,8 @@
 import { Product } from "@/lib/types";
 import { blossomLevel } from "@/lib/utils";
+import { fromPriceKRW, formatKRW, volumeByPages } from "@/data/pricing";
+
+const DIRECT_PAGES = [40, 60, 100];
 
 // 40·60·100·200p 분량 선택이 가능한 교재인지 판별합니다.
 export function offersVolumes(p: Product): boolean {
@@ -9,9 +12,25 @@ export function offersVolumes(p: Product): boolean {
   );
 }
 
-// 상담 없이 40·60·100P를 바로 구매할 수 있는 상품인지 판별합니다.
+// 고정 분량(40/60/100P)으로 바로 구매 가능한 교재인지.
+export function isFixedDirect(p: Product): boolean {
+  return !offersVolumes(p) && p.pageCount != null && DIRECT_PAGES.includes(p.pageCount);
+}
+
+// 상담 없이 바로 구매할 수 있는 상품인지 판별합니다.
+// (분량 선택형이거나, 40/60/100P 고정 분량인 경우)
 export function isDirectPurchase(p: Product): boolean {
-  return offersVolumes(p);
+  return offersVolumes(p) || isFixedDirect(p);
+}
+
+// 상품 카드/목록에 표시할 가격 라벨.
+export function priceDisplay(p: Product): string {
+  if (offersVolumes(p)) return `${formatKRW(fromPriceKRW)}부터`;
+  if (isFixedDirect(p)) {
+    const v = volumeByPages(p.pageCount as number);
+    return v ? formatKRW(v.priceKRW) : "Price on Request";
+  }
+  return "Price on Request";
 }
 
 // Reading·Vocabulary·Grammar·Writing 4개 영역 통합 교재인지 판별합니다.

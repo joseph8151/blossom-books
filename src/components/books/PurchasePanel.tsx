@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { ShoppingBag, MessageCircle, Check, FileSearch, ShieldCheck } from "lucide-react";
 import { Product } from "@/lib/types";
-import { volumeOptions, extendedOption, formatKRW } from "@/data/pricing";
+import { volumeOptions, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
+import { offersVolumes } from "@/lib/productMeta";
 import { siteConfig } from "@/data/site";
 
 const trustItems = [
@@ -16,8 +17,10 @@ const trustItems = [
 ];
 
 export default function PurchasePanel({ product, isDirect }: { product: Product; isDirect: boolean }) {
-  const [pages, setPages] = useState(60); // 기본값: BEST VALUE
-  const selected = volumeOptions.find((v) => v.pages === pages) ?? volumeOptions[1];
+  const flexible = offersVolumes(product); // 40/60/100 분량 선택 가능 여부
+  const fixedVol = !flexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
+  const [pages, setPages] = useState(flexible ? 60 : fixedVol?.pages ?? 60); // 기본값: BEST VALUE
+  const selected = volumeOptions.find((v) => v.pages === pages) ?? fixedVol ?? volumeOptions[1];
 
   const includes = [
     "Student Workbook",
@@ -38,37 +41,45 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
 
         {isDirect ? (
           <>
-            <p className="mt-5 font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
-              Choose Your Prep Volume
-            </p>
-            <div className="mt-3 grid grid-cols-3 gap-2">
-              {volumeOptions.map((v) => {
-                const on = v.pages === pages;
-                return (
-                  <button
-                    key={v.pages}
-                    onClick={() => setPages(v.pages)}
-                    className={`relative flex flex-col items-center border px-2 py-3 transition-colors ${
-                      on ? "border-navy-900 bg-ivory-200/60" : "border-navy-800/20 hover:border-navy-800/40"
-                    }`}
-                  >
-                    {v.badge && (
-                      <span className="absolute -top-2 bg-brass-500 px-1.5 py-0.5 font-label text-[8px] uppercase tracking-[0.08em] text-navy-950">
-                        {v.badge}
-                      </span>
-                    )}
-                    <span className="font-display text-[17px] font-semibold text-navy-950">{v.label}</span>
-                    <span className="mt-0.5 text-[11px] text-charcoal-600">{formatKRW(v.priceKRW)}</span>
-                  </button>
-                );
-              })}
-            </div>
-            <p className="mt-2 text-[11.5px] text-charcoal-600/80">
-              {extendedOption.label} 이상 · 추가 영역은{" "}
-              <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="underline">
-                가격 문의
-              </a>
-            </p>
+            {flexible ? (
+              <>
+                <p className="mt-5 font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
+                  Choose Your Prep Volume
+                </p>
+                <div className="mt-3 grid grid-cols-3 gap-2">
+                  {volumeOptions.map((v) => {
+                    const on = v.pages === pages;
+                    return (
+                      <button
+                        key={v.pages}
+                        onClick={() => setPages(v.pages)}
+                        className={`relative flex flex-col items-center border px-2 py-3 transition-colors ${
+                          on ? "border-navy-900 bg-ivory-200/60" : "border-navy-800/20 hover:border-navy-800/40"
+                        }`}
+                      >
+                        {v.badge && (
+                          <span className="absolute -top-2 bg-brass-500 px-1.5 py-0.5 font-label text-[8px] uppercase tracking-[0.08em] text-navy-950">
+                            {v.badge}
+                          </span>
+                        )}
+                        <span className="font-display text-[17px] font-semibold text-navy-950">{v.label}</span>
+                        <span className="mt-0.5 text-[11px] text-charcoal-600">{formatKRW(v.priceKRW)}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <p className="mt-2 text-[11.5px] text-charcoal-600/80">
+                  {extendedOption.label} 이상 · 추가 영역은{" "}
+                  <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="underline">
+                    가격 문의
+                  </a>
+                </p>
+              </>
+            ) : (
+              <p className="mt-5 font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
+                {selected.tier} · {selected.label}
+              </p>
+            )}
 
             <div className="mt-5 flex items-baseline justify-between border-t border-navy-800/12 pt-4">
               <span className="text-[13px] text-charcoal-600">{selected.tier} · {selected.label}</span>
@@ -84,6 +95,9 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
               <ShoppingBag size={16} />
               지금 구매하기
             </Link>
+            <p className="mt-2 text-center text-[11px] text-charcoal-600/80">
+              PDF 발송 완료 후 환불이 불가합니다.
+            </p>
           </>
         ) : (
           <>
@@ -140,6 +154,31 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
             </li>
           ))}
         </ul>
+
+        {/* Digital Product Notice */}
+        <div className="mt-4 border-t border-navy-800/12 pt-4">
+          <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">Digital Product Notice</p>
+          <ul className="mt-2 space-y-1">
+            {[
+              "Digital PDF 상품",
+              "구매 전 Sample 확인 가능",
+              "발송 완료 후 환불 불가",
+              "Blossom Books 측 오류 확인 시 최대 2회 수정",
+              "추가 제작·구성 변경은 별도 문의",
+            ].map((t) => (
+              <li key={t} className="flex items-start gap-1.5 text-[11.5px] text-charcoal-600">
+                <Check size={11} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} />
+                {t}
+              </li>
+            ))}
+          </ul>
+          <Link
+            href="/policy"
+            className="mt-2.5 inline-block text-[12px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2"
+          >
+            구매 및 환불 정책 자세히 보기
+          </Link>
+        </div>
 
         <div className="mt-4 flex items-center gap-2 border-t border-navy-800/12 pt-4 text-[11px] text-navy-800/70">
           <ShieldCheck size={14} className="text-brass-500" />

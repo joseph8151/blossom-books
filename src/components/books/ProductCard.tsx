@@ -3,8 +3,7 @@ import { Sparkles, Headphones, FileSearch } from "lucide-react";
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
 import { coverToneFor } from "@/lib/utils";
-import { productBadges, isDirectPurchase } from "@/lib/productMeta";
-import { fromPriceKRW, formatKRW } from "@/data/pricing";
+import { productBadges, isDirectPurchase, priceDisplay } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 
@@ -73,10 +72,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <div className="flex items-center justify-between">
             <p className="font-display text-[17px] font-semibold text-navy-950">
               {isDirectPurchase(product) ? (
-                <>
-                  {formatKRW(fromPriceKRW)}
-                  <span className="ml-0.5 text-[12px] font-normal text-charcoal-600">부터</span>
-                </>
+                priceDisplay(product)
               ) : (
                 <span className="text-[15px]">Price on Request</span>
               )}

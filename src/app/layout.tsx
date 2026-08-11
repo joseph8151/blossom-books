@@ -71,6 +71,22 @@ export default function RootLayout({
         <Footer />
         <KakaoFloatingButton />
         <MobileBottomBar />
+
+        {/*
+          Cloudflare Web Analytics — 하루 방문자 수 확인용 (개인정보·쿠키 없이 집계).
+          Cloudflare 대시보드 > Web Analytics 에서 사이트를 추가하고 발급받은 토큰을
+          환경변수 NEXT_PUBLIC_CF_BEACON_TOKEN 에 넣으면 이 비콘이 활성화됩니다.
+          (또는 Cloudflare Pages 프로젝트 설정에서 Web Analytics를 켜면 자동 삽입됩니다.)
+          방문자 통계는 Cloudflare 대시보드의 Web Analytics 화면에서 일자별로 확인합니다.
+        */}
+        {process.env.NEXT_PUBLIC_CF_BEACON_TOKEN && (
+          // eslint-disable-next-line @next/next/no-sync-scripts
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CF_BEACON_TOKEN}"}`}
+          />
+        )}
       </body>
     </html>
   );
