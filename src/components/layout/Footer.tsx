@@ -24,8 +24,10 @@ const linkGroups = [
     ],
   },
   {
-    title: "정책",
+    title: "정책·투명성",
     links: [
+      { label: "품질·투명성 안내", href: "/transparency" },
+      { label: "구매·환불·수정 정책", href: "/policy" },
       { label: "이용약관", href: "/terms" },
       { label: "개인정보처리방침", href: "/privacy" },
       { label: "교재 이용 및 저작권 안내", href: "/copyright" },
