@@ -88,11 +88,12 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {product.track === "level-test" && (
             <div className="mt-7 grid gap-px overflow-hidden rounded-[3px] border border-navy-800/12 bg-navy-800/10 sm:grid-cols-2">
               {[
-                { k: "Recommended Level", v: `${product.gradeRange}${product.levelLabel && /SR/i.test(product.levelLabel) ? ` / ${product.levelLabel}` : ""}` },
+                { k: "Recommended Level", v: `${product.gradeRange}${product.readingLevel ? ` / ${product.readingLevel}` : ""}` },
                 { k: "Includes", v: product.units.join(" · ") },
                 { k: "Difficulty", v: `${difficultyLabel(product.difficulty)} 수준` },
                 { k: "Pages", v: offersVolumes ? "40 / 60 / 100 / 200 Pages" : product.pageCount ? `${product.pageCount} Pages` : "상담 안내" },
                 { k: "Detailed Answer Guide", v: product.includesAnswerKey ? "포함 (Included)" : "상담 안내" },
+                { k: "Format & Delivery", v: "PDF · 결제 후 즉시 발송" },
               ].map((o) => (
                 <div key={o.k} className="bg-ivory-100 p-4">
                   <p className="font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">{o.k}</p>

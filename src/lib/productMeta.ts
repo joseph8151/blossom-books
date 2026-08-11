@@ -22,9 +22,11 @@ export function pagesLabel(p: Product): string {
 }
 
 // 모든 상품 카드에 동일한 포맷으로 노출할 통일 정보 배지 목록.
-// 예: Grade 4 · Advanced · 100P · 4 Skills · Answer Guide
+// 예: Grade 3–4 · SR 3.0–4.0 · Standard · 100P · 4 Skills · Answer Guide
 export function productBadges(p: Product): string[] {
-  const badges: string[] = [p.gradeRange, blossomLevel(p.difficulty), pagesLabel(p)];
+  const badges: string[] = [p.gradeRange];
+  if (p.readingLevel) badges.push(p.readingLevel);
+  badges.push(blossomLevel(p.difficulty), pagesLabel(p));
   if (isFourSkill(p)) badges.push("4 Skills");
   if (p.includesAnswerKey) badges.push("Answer Guide");
   return badges;

@@ -1,57 +1,56 @@
-const intro = [
+import Link from "next/link";
+import { ArrowRight, ShieldCheck, Layers3, ClipboardCheck, SearchCheck, Target } from "lucide-react";
+import { differentiators } from "@/data/levelAssessment";
+import { BLOSSOM_LEVELS, BLOSSOM_LEVEL_KO } from "@/lib/utils";
+
+export const metadata = { title: "블러섬북스 소개" };
+
+const philosophy = [
   "블러섬북스는 학생이 실제로 풀고, 이해하고, 실력을 향상시킬 수 있는 교육 콘텐츠를 연구합니다.",
   "같은 시험을 준비하더라도 학생의 학년, 배경지식, 현재 실력, 학습 기간에 따라 필요한 문제와 학습 방법은 달라집니다. 블러섬북스는 이러한 차이를 고려하여 학생의 학습 목적과 수준에 적합한 교재를 안내하고, 필요한 경우 목적에 맞는 학습 콘텐츠를 별도로 설계합니다.",
   "단순히 많은 문제를 제공하는 것보다 중요한 것은 지금 학생에게 필요한 문제를 정확하게 제공하는 것이라고 생각합니다. 시험의 유형과 출제 구조를 분석하고, 개념 이해부터 문제 적용, 실전 연습까지 자연스럽게 이어질 수 있도록 교재를 구성합니다.",
-  "국제학교 입학시험, 학업성취도 평가, 영어·수학 시험, 해외 표준화 시험 등 다양한 시험을 준비하는 학생들이 자신의 수준에 맞게 학습할 수 있도록 문제 유형과 난이도를 세분화하고 있습니다.",
-  "또한 문제를 푸는 것에서 끝나지 않고, 왜 해당 답이 나오는지 이해할 수 있도록 해설과 학습 자료의 완성도를 중요하게 생각합니다. 학생이 혼자 공부하거나 학부모와 함께 학습할 때에도 충분히 활용할 수 있는 콘텐츠를 만드는 것이 블러섬북스의 목표입니다.",
 ];
 
-const sections = [
-  {
-    title: "학생마다 다른 학습을 생각합니다",
-    body: [
-      "같은 학년이라도 학생마다 강점과 부족한 부분은 다릅니다. 어떤 학생에게는 기본 개념을 반복하는 과정이 필요하고, 어떤 학생에게는 실제 시험과 유사한 문제를 집중적으로 연습하는 과정이 필요합니다.",
-      "블러섬북스는 획일적인 학습보다 학생의 현재 위치와 목표를 기준으로 필요한 학습 방향을 제안합니다.",
-    ],
-  },
-  {
-    title: "시험을 분석하고 문제를 설계합니다",
-    body: [
-      "시험 준비에서 가장 중요한 것은 해당 시험이 무엇을 평가하는지 정확하게 이해하는 것입니다.",
-      "블러섬북스는 시험의 영역, 문제 유형, 난이도, 출제 목적을 분석하여 학습자가 실제 시험에서 요구되는 사고방식과 문제 해결 과정을 충분히 연습할 수 있도록 콘텐츠를 구성합니다.",
-      "단순 암기형 문제보다는 개념을 이해하고 적용하는 문제, 지문을 분석하는 문제, 사고력과 추론 능력을 요구하는 문제까지 단계적으로 접할 수 있도록 설계하는 것을 중요하게 생각합니다.",
-    ],
-  },
-  {
-    title: "필요한 만큼, 목적에 맞게",
-    body: [
-      "이미 준비된 교재가 학생의 목표와 적합하다면 해당 교재를 안내합니다. 기존 교재만으로 준비하기 어려운 경우에는 학년, 시험, 영역, 난이도, 학습 기간 등을 고려하여 필요한 콘텐츠를 별도로 구성할 수 있습니다.",
-      "리딩, 라이팅, 문법, 어휘, 수학 등 특정 영역을 집중적으로 보완하거나 실제 시험 유형에 맞춘 연습이 필요한 경우에도 목적에 맞는 학습 구성이 가능합니다.",
-    ],
-  },
-  {
-    title: "블러섬북스가 지향하는 교육 콘텐츠",
-    body: [
-      "좋은 문제집은 문제의 수가 많은 책이 아니라 학생이 한 문제를 통해 하나의 개념을 이해하고, 다음 문제에서는 그 개념을 스스로 적용할 수 있도록 만들어진 책이라고 생각합니다.",
-      "블러섬북스는 학생에게 필요한 학습이 무엇인지 고민하고, 실제 학습 과정에서 도움이 되는 문제와 설명을 지속적으로 연구합니다.",
-      "학생이 시험을 단순히 대비하는 것을 넘어 자신의 실력을 한 단계씩 높여갈 수 있도록 돕는 것. 그것이 블러섬북스가 교육 콘텐츠를 만드는 이유입니다.",
-    ],
-  },
+const process = [
+  { en: "Research", ko: "학습 목표와 필요한 스킬 분석" },
+  { en: "Curriculum Design", ko: "학년과 수준에 맞는 콘텐츠 구조 설계" },
+  { en: "Question Development", ko: "단계별 문제 및 학습 활동 제작" },
+  { en: "Review & Editing", ko: "문항·난이도·표현·해설 검토" },
+  { en: "Final Workbook", ko: "완성형 교재 제작" },
 ];
 
-export const metadata = { title: "블러섬북스 소개" };
+const audiences = [
+  { en: "Students", ko: "학생" },
+  { en: "Parents", ko: "학부모" },
+  { en: "Tutors", ko: "과외 선생님" },
+  { en: "Academies", ko: "학원" },
+  { en: "Schools", ko: "학교" },
+  { en: "Education Organizations", ko: "교육기관" },
+];
+
+const standards = [
+  { icon: ShieldCheck, title: "학년 적합성 검토", body: "학년과 학습 단계에 맞는 개념·지문·어휘 수준인지 확인합니다." },
+  { icon: Layers3, title: "난이도 단계화", body: "기초 문제에서 응용까지 난이도가 자연스럽게 이어지도록 배치합니다." },
+  { icon: ClipboardCheck, title: "문제·해설 검수", body: "문항과 정답, 해설의 일치 여부와 정확성을 검토합니다." },
+  { icon: SearchCheck, title: "반복 표현 및 오류 점검", body: "중복 문항, 표현 오류, 오타 등을 점검하여 완성도를 높입니다." },
+  { icon: Target, title: "실제 학습 목적에 맞춘 구성", body: "문제 수보다 학생이 연습해야 할 능력을 기준으로 구성합니다." },
+];
 
 export default function AboutPage() {
   return (
     <div>
+      {/* Our Philosophy */}
       <section className="paper-rule border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-28">
         <div className="mx-auto max-w-3xl px-5 lg:px-8">
-          <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">About</p>
-          <h1 className="mt-3 font-display text-[36px] font-semibold leading-tight text-navy-950 sm:text-[35px]">
-            블러섬북스 소개
+          <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">
+            Blossom Books · Educational Workbook Publisher
+          </p>
+          <h1 className="mt-3 font-display text-[34px] font-semibold leading-tight text-navy-950 sm:text-[40px]">
+            Our Philosophy
           </h1>
+          <p className="mt-2 font-display text-[18px] text-burgundy-700">학생을 기준으로 만드는 교재</p>
           <div className="mt-8 space-y-5">
-            {intro.map((p, i) => (
+            {philosophy.map((p, i) => (
               <p
                 key={i}
                 className={
@@ -64,28 +63,130 @@ export default function AboutPage() {
               </p>
             ))}
           </div>
+          <p className="mt-8 border-l-2 border-brass-500 pl-5 font-display text-[19px] font-medium italic text-navy-900">
+            “One grade doesn’t mean one level. 학년이 아니라 학생을 기준으로.”
+          </p>
         </div>
       </section>
 
-      <section className="bg-ivory-200/50 py-20 lg:py-28">
-        <div className="mx-auto max-w-3xl px-5 lg:px-8">
-          <div className="space-y-14">
-            {sections.map((s, i) => (
-              <div key={s.title} className="border-l-2 border-brass-500 pl-6 lg:pl-8">
-                <span className="font-label text-[11px] text-brass-500">{String(i + 1).padStart(2, "0")}</span>
-                <h2 className="mt-2 font-display text-[24px] font-semibold leading-snug text-navy-950 sm:text-[26px]">
-                  {s.title}
-                </h2>
-                <div className="mt-5 space-y-4">
-                  {s.body.map((b, j) => (
-                    <p key={j} className="text-[15px] leading-[1.9] text-charcoal-600">
-                      {b}
-                    </p>
-                  ))}
+      {/* Our Editorial Approach */}
+      <section className="border-b border-navy-800/12 bg-ivory-200/50 py-20 lg:py-24">
+        <div className="mx-auto max-w-4xl px-5 lg:px-8">
+          <span className="eyebrow">Our editorial approach</span>
+          <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
+            제작 과정
+          </h2>
+          <p className="mt-3 max-w-2xl text-[14.5px] leading-relaxed text-charcoal-600">
+            블러섬북스는 단순히 문제 수를 늘리는 방식으로 교재를 만들지 않습니다. 학생의 학년, 현재 수준,
+            학습 목표를 먼저 고려하고, 그에 맞는 난이도와 문제 유형을 설계합니다.
+          </p>
+          <ol className="mt-10 space-y-4">
+            {process.map((s, i) => (
+              <li key={s.en} className="flex items-start gap-5 border-t border-navy-800/12 pt-4">
+                <span className="font-label text-[13px] text-brass-500">{String(i + 1).padStart(2, "0")}</span>
+                <div>
+                  <p className="font-display text-[18px] font-semibold text-navy-950">{s.en}</p>
+                  <p className="mt-0.5 text-[13.5px] text-charcoal-600">{s.ko}</p>
                 </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* How We Design */}
+      <section className="border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-24">
+        <div className="mx-auto max-w-5xl px-5 lg:px-8">
+          <span className="eyebrow">How we design</span>
+          <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
+            교재 설계 원칙
+          </h2>
+          <div className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
+            {differentiators.map((d) => (
+              <div key={d.n} className="border-t border-navy-800/15 pt-5">
+                <span className="font-label text-[12px] tracking-[0.1em] text-brass-500">{d.n}</span>
+                <p className="mt-2 font-display text-[19px] font-semibold text-navy-950">{d.en}</p>
+                <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">{d.ko}</p>
               </div>
             ))}
           </div>
+
+          {/* Blossom Level System */}
+          <div className="mt-12 border border-navy-800/12 bg-ivory-200/50 p-7 lg:p-8">
+            <p className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">
+              Blossom Level System
+            </p>
+            <p className="mt-2 font-display text-[19px] font-semibold text-navy-950">자체 난이도 체계</p>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {BLOSSOM_LEVELS.map((lv, i) => (
+                <div key={lv} className="border border-navy-800/12 bg-ivory-100 p-4">
+                  <span className="font-label text-[10px] text-brass-500">{String(i + 1).padStart(2, "0")}</span>
+                  <p className="mt-1 font-display text-[17px] font-semibold text-navy-950">{lv}</p>
+                  <p className="mt-0.5 text-[12.5px] text-charcoal-600">{BLOSSOM_LEVEL_KO[lv]}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Who We Serve */}
+      <section className="border-b border-navy-800/12 bg-ivory-200/50 py-20 lg:py-24">
+        <div className="mx-auto max-w-5xl px-5 lg:px-8">
+          <span className="eyebrow">Who we serve</span>
+          <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
+            누구를 위해 만드나요
+          </h2>
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {audiences.map((a) => (
+              <div key={a.en} className="border border-navy-800/12 bg-ivory-100 p-5">
+                <p className="font-display text-[17px] font-semibold text-navy-950">{a.en}</p>
+                <p className="mt-1 text-[13px] text-charcoal-600">{a.ko}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Quality Standards */}
+      <section className="border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-24">
+        <div className="mx-auto max-w-5xl px-5 lg:px-8">
+          <span className="eyebrow">Quality standards</span>
+          <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
+            제작 기준
+          </h2>
+          <p className="mt-3 max-w-2xl text-[14.5px] leading-relaxed text-charcoal-600">
+            모든 교재는 아래 기준을 거쳐 완성됩니다. 정답만 제공하는 것이 아니라, 왜 그 답인지·오답은 왜
+            틀렸는지·어떤 개념을 확인해야 하는지까지 담은 상세 해설을 제공합니다.
+          </p>
+          <div className="mt-10 grid gap-px overflow-hidden border border-navy-800/12 bg-navy-800/12 shadow-card sm:grid-cols-2 lg:grid-cols-5">
+            {standards.map(({ icon: Icon, title, body }) => (
+              <div key={title} className="flex flex-col bg-ivory-100 p-6">
+                <div className="flex h-10 w-10 items-center justify-center border border-brass-500/30 bg-brass-500/[0.07] text-brass-500">
+                  <Icon size={18} strokeWidth={1.8} />
+                </div>
+                <p className="mt-4 font-display text-[16px] font-semibold leading-snug text-navy-950">{title}</p>
+                <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-navy-950 py-16 text-ivory-100 lg:py-20">
+        <div className="mx-auto flex max-w-3xl flex-col items-center px-5 text-center lg:px-8">
+          <h2 className="font-display text-[26px] font-semibold sm:text-[30px]">학생에게 맞는 교재를 찾아보세요</h2>
+          <p className="mt-4 max-w-lg text-[14.5px] leading-relaxed text-ivory-200/80">
+            학년, 현재 수준, 학습 목적을 알려주시면 알맞은 교재를 안내해 드립니다.
+          </p>
+          <Link
+            href="/books"
+            className="mt-8 inline-flex items-center gap-2 bg-brass-500 px-7 py-3.5 text-[14px] font-medium text-navy-950 transition-colors hover:bg-brass-400"
+          >
+            교재 둘러보기
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </section>
     </div>

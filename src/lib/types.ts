@@ -26,6 +26,7 @@ export interface Product {
   subject: string; // 과목
   examOrCurriculum: string; // 시험명 또는 교육과정명 (예: "Algebra 1", "CAT4 Level E")
   gradeRange: string; // 대상 학년/연령
+  readingLevel?: string; // 권장 Reading Level / SR 범위 (예: "SR 3.0–4.0")
   levelLabel?: string; // 권장 레벨 (예: "중상~상")
   difficulty: 1 | 2 | 3 | 4 | 5;
   materialType: MaterialType;
