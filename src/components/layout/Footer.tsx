@@ -63,7 +63,7 @@ export default function Footer() {
               교육 콘텐츠 브랜드입니다.
             </p>
             <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1.5 text-[11.5px] text-ivory-200/55">
-              <span>· 안전 결제 (계좌이체 · PayPal)</span>
+              <span>· 공식 카카오톡 구매 안내</span>
               <span>· 결제 후 PDF 즉시 발송</span>
             </div>
             <div className="mt-5 flex items-start gap-2 text-[12.5px] leading-relaxed text-ivory-200/65">
