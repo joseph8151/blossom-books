@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { products, trackLabels } from "@/data/products";
 import { CurriculumTrack, MaterialType } from "@/lib/types";
@@ -35,6 +35,17 @@ export default function BooksPage() {
   const [subject, setSubject] = useState<string>("all");
   const [difficulty, setDifficulty] = useState<number | "all">("all");
   const [series, setSeries] = useState<BlossomSeries | "all">("all");
+
+  // 다른 페이지에서 ?track=... / ?q=... 로 진입하면 해당 필터를 미리 적용합니다.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get("track");
+    if (t && (tracks as string[]).includes(t)) setTrack(t as CurriculumTrack);
+    const q = params.get("q");
+    if (q) setQuery(q);
+    const s = params.get("series");
+    if (s && seriesOrder.includes(s as BlossomSeries)) setSeries(s as BlossomSeries);
+  }, []);
 
   const filtered = useMemo(() => {
     return products.filter((p) => {

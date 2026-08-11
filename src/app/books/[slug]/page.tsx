@@ -83,6 +83,24 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             {product.descriptionKo}
           </p>
 
+          {/* 레벨 진단 교재 한눈에 (level-test 트랙) */}
+          {product.track === "level-test" && (
+            <div className="mt-7 grid gap-px overflow-hidden rounded-[3px] border border-navy-800/12 bg-navy-800/10 sm:grid-cols-2">
+              {[
+                { k: "Recommended Level", v: `${product.gradeRange}${product.levelLabel && /SR/i.test(product.levelLabel) ? ` / ${product.levelLabel}` : ""}` },
+                { k: "Includes", v: product.units.join(" · ") },
+                { k: "Difficulty", v: `${difficultyLabel(product.difficulty)} 수준` },
+                { k: "Pages", v: offersVolumes ? "40 / 60 / 100 / 200 Pages" : product.pageCount ? `${product.pageCount} Pages` : "상담 안내" },
+                { k: "Detailed Answer Guide", v: product.includesAnswerKey ? "포함 (Included)" : "상담 안내" },
+              ].map((o) => (
+                <div key={o.k} className="bg-ivory-100 p-4">
+                  <p className="font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">{o.k}</p>
+                  <p className="mt-1.5 text-[13px] leading-snug text-charcoal-900">{o.v}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-charcoal-600">
             {product.includesAnswerKey && (
               <span className="inline-flex items-center gap-1.5">

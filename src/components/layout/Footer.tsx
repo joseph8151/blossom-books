@@ -8,6 +8,7 @@ const linkGroups = [
     links: [
       { label: "블러섬북스 소개", href: "/about" },
       { label: "교재 찾기", href: "/books" },
+      { label: "레벨 진단 교재", href: "/level-assessment" },
       { label: "교재 시리즈", href: "/series" },
       { label: "분량 선택 가이드", href: "/guide" },
       { label: "주문 제작", href: "/custom-order" },

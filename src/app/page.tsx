@@ -1,5 +1,6 @@
 import HeroSection from "@/components/home/HeroSection";
 import AudienceCards from "@/components/home/AudienceCards";
+import LevelAssessment from "@/components/home/LevelAssessment";
 import CollectionShowcase from "@/components/home/CollectionShowcase";
 import SeriesShowcase from "@/components/home/SeriesShowcase";
 import CategorySection from "@/components/home/CategorySection";
@@ -18,6 +19,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <AudienceCards />
+      <LevelAssessment />
       <CollectionShowcase />
       <SeriesShowcase />
       <CategorySection />
