@@ -39,6 +39,23 @@ export function isFourSkill(p: Product): boolean {
   return /Reading/.test(u) && /Writing/.test(u) && /(Grammar|Vocabulary)/.test(u);
 }
 
+const TRACK_CODE: Record<string, string> = {
+  "us-curriculum": "US",
+  ap: "AP",
+  admissions: "AD",
+  "level-test": "LT",
+  "certified-exam": "CE",
+};
+
+// 자체 상품 코드 (ISBN 아님) — 예: BB-SR-G4-150
+export function productCode(p: Product): string {
+  const track = /SR/i.test(p.examOrCurriculum) ? "SR" : TRACK_CODE[p.track] ?? "BK";
+  const g = (p.gradeRange.match(/\d+/) || [])[0];
+  const grade = g ? `G${g}` : "GX";
+  const pages = p.pageCount ? String(p.pageCount).padStart(3, "0") : "VAR";
+  return `BB-${track}-${grade}-${pages}`;
+}
+
 // "Inside the Workbook" — 상품에 실제 포함되는 연습 영역.
 // 4개 영역(RVGW) 통합 교재는 영역별 세부 유형을, 그 외에는 해당 교재의 단원을 그대로 노출합니다.
 export function insideTheWorkbook(p: Product): { area: string; items: string[] }[] {

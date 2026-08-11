@@ -14,7 +14,7 @@ import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import ProductCard from "@/components/books/ProductCard";
 import SamplePreviewButton from "@/components/books/SamplePreviewButton";
 import PurchasePanel from "@/components/books/PurchasePanel";
-import EditorialStandardSeal from "@/components/books/EditorialStandardSeal";
+import WorkbookSpecification from "@/components/books/WorkbookSpecification";
 import VolumeGuide from "@/components/common/VolumeGuide";
 import { siteConfig } from "@/data/site";
 
@@ -58,14 +58,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     product.includesAudio ? "Listening Audio (MP3)" : null,
   ].filter(Boolean) as string[];
 
-  const metadata = [
-    { k: "Publisher", v: "Blossom Books Edu Publishing" },
-    { k: "Edition", v: "2026 Edition" },
-    { k: "Format", v: "Digital Workbook (PDF)" },
-    { k: "Material", v: product.includesAnswerKey ? "Student Workbook + Answer Guide" : "Student Workbook" },
-    { k: "Delivery", v: "Digital PDF" },
-  ];
-
   const whoFor = [
     `${product.gradeRange} 학생`,
     product.readingLevel ? `Reading Level 약 ${product.readingLevel.replace("SR ", "")}` : null,
@@ -102,6 +94,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             }`}
           >
             {direct ? "Direct Purchase" : "Custom / Extended"}
+          </span>
+          <span className="inline-flex items-center border border-navy-800/15 bg-ivory-200/50 px-2 py-0.5 font-label text-[9px] uppercase tracking-[0.1em] text-navy-800/65">
+            Reviewed 2026
           </span>
         </div>
         <h1 className="mt-3 font-display text-[28px] font-semibold leading-tight text-navy-950 sm:text-[34px]">
@@ -257,22 +252,25 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </ul>
           </div>
 
-          {/* 출판 메타데이터 */}
+          {/* Workbook Specification · Product Code · Test Alignment · Difficulty · Quality Checklist */}
           <div className="mt-10">
-            <h2 className="font-display text-[20px] font-semibold text-navy-950">Publication Details</h2>
-            <dl className="mt-4 grid gap-px overflow-hidden border border-navy-800/12 bg-navy-800/10 sm:grid-cols-2">
-              {metadata.map((m) => (
-                <div key={m.k} className="flex items-baseline gap-3 bg-ivory-100 p-3.5">
-                  <dt className="w-24 shrink-0 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">{m.k}</dt>
-                  <dd className="text-[13px] text-charcoal-900">{m.v}</dd>
-                </div>
-              ))}
-            </dl>
+            <WorkbookSpecification product={product} />
           </div>
 
-          {/* Editorial Standard */}
-          <div className="mt-10">
-            <EditorialStandardSeal />
+          {/* 독립 제작 고지 (Test Format Transparency) */}
+          <div className="mt-8 border border-navy-800/12 bg-ivory-200/40 p-5">
+            <p className="font-label text-[10.5px] uppercase tracking-[0.1em] text-navy-800/60">Important Notice</p>
+            <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
+              Blossom Books is an independent educational publisher. Our preparation materials are
+              independently developed for educational and practice purposes, and are not affiliated with,
+              endorsed by, or officially sponsored by the organizations that administer the referenced
+              examinations, unless explicitly stated otherwise.
+            </p>
+            <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
+              Blossom Books는 독립 교육 출판사이며, 모든 교재는 학습·연습을 목적으로 독립적으로 제작됩니다.
+              언급된 시험을 주관하는 기관과 제휴·보증·공식 후원 관계가 없으며, 실제 기출문제나 유출문제를
+              제공하지 않습니다.
+            </p>
           </div>
 
           {/* 결제 직전 FAQ */}
