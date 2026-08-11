@@ -1,13 +1,20 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { FileCheck2, FileText, MessageCircle, ShoppingBag, Headphones } from "lucide-react";
+import { FileCheck2, FileText, Headphones, Check, ArrowRight, HelpCircle, MessageCircle } from "lucide-react";
 import { products, trackLabels } from "@/data/products";
 import { coverToneFor, difficultyLabel, blossomLevel, BLOSSOM_LEVEL_KO } from "@/lib/utils";
-import { offersVolumes as productOffersVolumes } from "@/lib/productMeta";
+import {
+  offersVolumes as productOffersVolumes,
+  isDirectPurchase,
+  insideTheWorkbook,
+} from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
+import { formatKRW, fromPriceKRW } from "@/data/pricing";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import ProductCard from "@/components/books/ProductCard";
 import SamplePreviewButton from "@/components/books/SamplePreviewButton";
+import PurchasePanel from "@/components/books/PurchasePanel";
+import EditorialStandardSeal from "@/components/books/EditorialStandardSeal";
 import VolumeGuide from "@/components/common/VolumeGuide";
 import { siteConfig } from "@/data/site";
 
@@ -20,11 +27,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = products.find((p) => p.id === slug);
   if (!product) return {};
-  return {
-    title: product.titleKo,
-    description: product.summaryKo,
-  };
+  return { title: product.titleKo, description: product.summaryKo };
 }
+
+const purchaseFaq = [
+  { q: "PDF인가요?", a: "네. 모든 교재는 Digital PDF 형태로 제공됩니다. 인쇄하여 사용하실 수 있습니다." },
+  { q: "구매 후 언제 받을 수 있나요?", a: "결제가 확인되면 카카오톡 또는 이메일로 PDF 파일을 보내드립니다." },
+  { q: "정답과 해설이 포함되나요?", a: "네. 정답과 함께 풀이 과정·오답 포인트를 설명하는 상세 해설집이 포함됩니다." },
+  { q: "40P와 60P 차이는 무엇인가요?", a: "40P는 핵심 유형을 빠르게 점검하는 Quick Prep, 60P는 여러 유형을 균형 있게 연습하는 Standard Prep입니다." },
+  { q: "어떤 수준을 선택해야 하나요?", a: "시험까지 남은 기간과 현재 실력에 따라 다릅니다. 확실하지 않으시면 구매 전 상담으로 편하게 안내받으실 수 있습니다." },
+  { q: "100P 이상도 가능한가요?", a: "네. 150P 이상, 추가 영역, 특수 구성은 별도 문의(Price on Request)로 안내해 드립니다." },
+  { q: "해외에서도 구매할 수 있나요?", a: "네. 해외 고객은 PayPal로 결제하실 수 있습니다." },
+  { q: "환불 정책은 어떻게 되나요?", a: "디지털 상품 특성상 파일 발송 후에는 환불이 제한될 수 있습니다. 구매 전 무료 샘플로 내용을 확인하시길 권장하며, 자세한 정책은 상담으로 안내해 드립니다." },
+];
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -32,146 +47,158 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   if (!product) notFound();
 
   const related = products.filter((p) => p.track === product.track && p.id !== product.id).slice(0, 3);
-
   const offersVolumes = productOffersVolumes(product);
+  const direct = isDirectPurchase(product);
+  const inside = insideTheWorkbook(product);
+
+  const receive = [
+    "Student Workbook",
+    product.includesAnswerKey ? "Answer & Explanation Guide" : null,
+    "Digital PDF Delivery",
+    product.includesAudio ? "Listening Audio (MP3)" : null,
+  ].filter(Boolean) as string[];
+
+  const metadata = [
+    { k: "Publisher", v: "Blossom Books Edu Publishing" },
+    { k: "Edition", v: "2026 Edition" },
+    { k: "Format", v: "Digital Workbook (PDF)" },
+    { k: "Material", v: product.includesAnswerKey ? "Student Workbook + Answer Guide" : "Student Workbook" },
+    { k: "Delivery", v: "Digital PDF" },
+  ];
+
+  const whoFor = [
+    `${product.gradeRange} 학생`,
+    product.readingLevel ? `Reading Level 약 ${product.readingLevel.replace("SR ", "")}` : null,
+    product.recommendedForKo,
+    inside.length > 1 ? "Reading · Vocabulary · Grammar · Writing를 함께 준비해야 하는 학생" : null,
+  ].filter(Boolean) as string[];
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-14 lg:px-8 lg:py-20">
+    <div className="mx-auto max-w-6xl px-5 py-12 pb-24 lg:px-8 lg:py-16 lg:pb-16">
       <nav className="text-[12.5px] text-charcoal-600">
         <Link href="/books" className="hover:text-navy-900">교재 찾기</Link>
         <span className="mx-2">/</span>
         <span>{trackLabels[product.track]}</span>
       </nav>
 
-      <div className="mt-8 grid gap-14 lg:grid-cols-[0.85fr_1.15fr]">
-        {/* 표지 목업 */}
-        <div className="flex items-start justify-center bg-ivory-200/50 py-16">
-          <BookCoverMockup
-            eyebrow={product.materialType === "existing" ? "Student Workbook" : "Custom Order"}
-            title={product.title.split(" — ")[0]}
-            subtitle={product.examOrCurriculum}
-            tone={coverToneFor(product.id)}
-            tabLabel="01"
-            className="max-w-[260px]"
-          />
+      {/* 헤더 */}
+      <div className="mt-6">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <span className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">
+            {trackLabels[product.track]}
+          </span>
+          <Link
+            href={`/series#${seriesFor(product)}`}
+            className="inline-flex items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-brass-500 transition-colors hover:border-brass-500/70"
+          >
+            {seriesInfo[seriesFor(product)].name}
+          </Link>
+          <span className="inline-flex items-center gap-1.5 border border-navy-800/20 bg-ivory-200/50 px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-navy-800/80">
+            {blossomLevel(product.difficulty)} · {BLOSSOM_LEVEL_KO[blossomLevel(product.difficulty)]}
+          </span>
+          <span
+            className={`font-label text-[9.5px] uppercase tracking-[0.1em] ${
+              direct ? "text-brass-500" : "text-burgundy-700"
+            }`}
+          >
+            {direct ? "Direct Purchase" : "Custom / Extended"}
+          </span>
         </div>
+        <h1 className="mt-3 font-display text-[28px] font-semibold leading-tight text-navy-950 sm:text-[34px]">
+          {product.titleKo}
+        </h1>
+        <p className="mt-2 text-[14px] text-charcoal-600">
+          {product.examOrCurriculum} · {product.gradeRange} · 난이도 {difficultyLabel(product.difficulty)}
+          {product.readingLevel ? ` · ${product.readingLevel}` : ""}
+        </p>
+      </div>
 
-        {/* 정보 */}
-        <div>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <span className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">
-              {trackLabels[product.track]}
-            </span>
-            <Link
-              href={`/series#${seriesFor(product)}`}
-              className="inline-flex items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-brass-500 transition-colors hover:border-brass-500/70"
-            >
-              {seriesInfo[seriesFor(product)].name}
-            </Link>
-            <span className="inline-flex items-center gap-1.5 border border-navy-800/20 bg-ivory-200/50 px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-navy-800/80">
-              {blossomLevel(product.difficulty)} · {BLOSSOM_LEVEL_KO[blossomLevel(product.difficulty)]}
-            </span>
+      {/* 본문 2단: 좌 콘텐츠 / 우 구매 박스(sticky) */}
+      <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px]">
+        {/* 좌측 */}
+        <div className="min-w-0">
+          <div className="flex items-start justify-center bg-ivory-200/50 py-14">
+            <BookCoverMockup
+              eyebrow={product.materialType === "existing" ? "Student Workbook" : "Custom Order"}
+              title={product.title.split(" — ")[0]}
+              subtitle={product.examOrCurriculum}
+              tone={coverToneFor(product.id)}
+              tabLabel="01"
+              className="max-w-[240px]"
+            />
           </div>
-          <h1 className="mt-3 font-display text-[28px] font-semibold leading-tight text-navy-950 sm:text-[33px]">
-            {product.titleKo}
-          </h1>
-          <p className="mt-2 text-[14px] text-charcoal-600">
-            {product.examOrCurriculum} · {product.gradeRange} · 난이도 {difficultyLabel(product.difficulty)}
-            {product.levelLabel ? ` · ${product.levelLabel}` : ""}
-          </p>
 
-          <p className="mt-6 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">
-            {product.descriptionKo}
-          </p>
+          <p className="mt-8 text-[14.5px] leading-relaxed text-charcoal-600">{product.descriptionKo}</p>
 
-          {/* 레벨 진단 교재 한눈에 (level-test 트랙) */}
-          {product.track === "level-test" && (
-            <div className="mt-7 grid gap-px overflow-hidden rounded-[3px] border border-navy-800/12 bg-navy-800/10 sm:grid-cols-2">
-              {[
-                { k: "Recommended Level", v: `${product.gradeRange}${product.readingLevel ? ` / ${product.readingLevel}` : ""}` },
-                { k: "Includes", v: product.units.join(" · ") },
-                { k: "Difficulty", v: `${difficultyLabel(product.difficulty)} 수준` },
-                { k: "Pages", v: offersVolumes ? "40 / 60 / 100 / 200 Pages" : product.pageCount ? `${product.pageCount} Pages` : "상담 안내" },
-                { k: "Detailed Answer Guide", v: product.includesAnswerKey ? "포함 (Included)" : "상담 안내" },
-                { k: "Format & Delivery", v: "PDF · 결제 후 즉시 발송" },
-              ].map((o) => (
-                <div key={o.k} className="bg-ivory-100 p-4">
-                  <p className="font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">{o.k}</p>
-                  <p className="mt-1.5 text-[13px] leading-snug text-charcoal-900">{o.v}</p>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-charcoal-600">
+          <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-charcoal-600">
             {product.includesAnswerKey && (
               <span className="inline-flex items-center gap-1.5">
                 <FileCheck2 size={15} className="text-navy-800" /> 정답·상세 해설집 포함
               </span>
             )}
             <span className="inline-flex items-center gap-1.5">
-              <FileText size={15} className="text-navy-800" /> {product.fileFormat} 파일 제공
+              <FileText size={15} className="text-navy-800" /> Digital PDF 제공
             </span>
             {product.includesAudio && (
               <span className="inline-flex items-center gap-1.5">
-                <Headphones size={15} className="text-navy-800" /> 리스닝 오디오(MP3) 제공
+                <Headphones size={15} className="text-navy-800" /> 리스닝 오디오(MP3)
               </span>
             )}
-            {product.pageCount && <span>{product.pageCount}페이지</span>}
           </div>
 
-          <div className="mt-8 border-y border-navy-800/12 py-6">
-            <p className="font-display text-[20px] font-semibold text-navy-950">가격·구성 상담 안내</p>
-            <p className="mt-1.5 text-[13.5px] leading-relaxed text-charcoal-600">
-              교재 구성과 이용 목적(개인·수업·기관)에 맞춰 카카오톡으로 편하게 안내해 드립니다.
-              구매 전 무료 샘플도 확인하실 수 있습니다.
+          {/* See Before You Buy — 샘플 */}
+          <div id="sample" className="mt-10 scroll-mt-24 border border-navy-800/12 bg-ivory-100 p-6 shadow-card lg:p-7">
+            <span className="eyebrow">See before you buy</span>
+            <h2 className="mt-3 font-display text-[20px] font-semibold text-navy-950">표지만 보고 구매하지 마세요.</h2>
+            <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
+              실제 문제의 난이도, 지문 구성, 문제 유형, 해설 방식을 확인한 뒤 결정하세요.
+            </p>
+            <div className="mt-4">
+              <SamplePreviewButton product={product} />
+            </div>
+          </div>
+
+          {/* Inside the Workbook */}
+          <div className="mt-10">
+            <h2 className="font-display text-[20px] font-semibold text-navy-950">Inside the Workbook</h2>
+            <p className="mt-1.5 text-[13px] text-charcoal-600">이 교재에서 연습하는 영역입니다.</p>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              {inside.map((g) => (
+                <div key={g.area} className="border border-navy-800/12 bg-ivory-200/40 p-5">
+                  <p className="font-label text-[11px] uppercase tracking-[0.1em] text-brass-500">{g.area}</p>
+                  <div className="mt-2.5 flex flex-wrap gap-1.5">
+                    {g.items.map((it) => (
+                      <span key={it} className="border border-navy-800/12 bg-ivory-100 px-2 py-1 text-[12px] text-charcoal-900">
+                        {it}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* What You Receive */}
+          <div className="mt-10">
+            <h2 className="font-display text-[20px] font-semibold text-navy-950">What You Receive</h2>
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              {receive.map((r, i) => (
+                <span key={r} className="inline-flex items-center gap-2">
+                  {i > 0 && <span className="text-navy-800/25">+</span>}
+                  <span className="inline-flex items-center gap-1.5 border border-navy-800/15 bg-ivory-200/50 px-3 py-2 text-[13px] font-medium text-navy-900">
+                    <Check size={14} className="text-brass-500" strokeWidth={2.4} /> {r}
+                  </span>
+                </span>
+              ))}
+            </div>
+            <p className="mt-3 text-[12.5px] text-charcoal-600">
+              완성된 Prep Package로 제공됩니다 · <span className="font-label uppercase tracking-[0.08em]">Digital PDF Format</span>
             </p>
           </div>
 
-          <div className="mt-7 flex flex-wrap gap-3">
-            <a
-              href={siteConfig.kakaoChannelUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
-            >
-              <MessageCircle size={16} />
-              카카오톡 상담하기
-            </a>
-            <Link
-              href="/consultation"
-              className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-7 py-3.5 text-[14px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50 hover:shadow-soft"
-            >
-              <ShoppingBag size={16} />
-              구매·주문 상담
-            </Link>
-            <SamplePreviewButton product={product} />
-          </div>
-
-          {/* 분량 선택 가이드 (40·60·100·200p 교재) */}
-          {offersVolumes && (
-            <div className="mt-12">
-              <div className="flex items-baseline justify-between gap-3">
-                <h2 className="font-display text-[19px] font-semibold text-navy-950">분량 선택 (40·60·100·200P)</h2>
-                <Link
-                  href="/guide"
-                  className="shrink-0 text-[12.5px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4"
-                >
-                  선택 가이드 전체 보기
-                </Link>
-              </div>
-              <p className="mt-2 text-[13px] text-charcoal-600">
-                학습 목적과 기간에 맞춰 분량을 선택하실 수 있습니다. 정확한 구성은 상담으로 안내해 드립니다.
-              </p>
-              <div className="mt-5">
-                <VolumeGuide compact />
-              </div>
-            </div>
-          )}
-
           {/* 교재 구성 */}
-          <div className="mt-12">
-            <h2 className="font-display text-[19px] font-semibold text-navy-950">교재 구성</h2>
+          <div className="mt-10">
+            <h2 className="font-display text-[20px] font-semibold text-navy-950">교재 구성</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {product.components.map((c) => (
                 <div key={c.label} className="border border-navy-800/12 bg-ivory-200/40 p-4">
@@ -182,30 +209,112 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </div>
           </div>
 
-          {/* 주요 단원 */}
-          <div className="mt-10">
-            <h2 className="font-display text-[19px] font-semibold text-navy-950">주요 단원</h2>
-            <ol className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 text-[13.5px] text-charcoal-600">
-              {product.units.map((u, i) => (
-                <li key={u} className="flex gap-2">
-                  <span className="font-label text-[11px] text-brass-500">{String(i + 1).padStart(2, "0")}</span>
-                  {u}
+          {/* 분량 선택 가이드 */}
+          {offersVolumes && (
+            <div className="mt-10">
+              <div className="flex items-baseline justify-between gap-3">
+                <h2 className="font-display text-[20px] font-semibold text-navy-950">분량 선택 (40·60·100·200P)</h2>
+                <Link href="/guide" className="shrink-0 text-[12.5px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4">
+                  선택 가이드
+                </Link>
+              </div>
+              <div className="mt-5">
+                <VolumeGuide compact />
+              </div>
+            </div>
+          )}
+
+          {/* Who Is This For */}
+          <div className="mt-10 border-l-2 border-brass-500 pl-5">
+            <p className="font-label text-[11px] uppercase tracking-[0.14em] text-navy-800/70">This workbook is for</p>
+            <ul className="mt-3 space-y-2">
+              {whoFor.map((w) => (
+                <li key={w} className="flex items-start gap-2 text-[13.5px] leading-relaxed text-charcoal-900">
+                  <Check size={15} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} />
+                  {w}
                 </li>
               ))}
-            </ol>
+            </ul>
+            <p className="mt-4 text-[12.5px] text-charcoal-600">
+              학생에게 적합한지 모르시나요?{" "}
+              <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
+                카카오톡으로 확인하기
+              </a>
+            </p>
           </div>
 
-          {/* 추천 대상 */}
-          <div className="mt-10 border-l-2 border-brass-500 pl-5">
-            <p className="font-label text-[11px] uppercase tracking-[0.14em] text-navy-800/70">추천 대상</p>
-            <p className="mt-1.5 text-[13.5px] leading-relaxed text-charcoal-600">{product.recommendedForKo}</p>
+          {/* A Different Option May Be Better If */}
+          <div className="mt-8 border border-navy-800/12 bg-ivory-200/40 p-6">
+            <h3 className="font-display text-[16px] font-semibold text-navy-950">
+              A Different Option May Be Better If…
+            </h3>
+            <ul className="mt-3 space-y-1.5 text-[13px] text-charcoal-600">
+              <li>· 시험이 매우 가까운 경우 → <span className="font-medium text-navy-900">40P</span></li>
+              <li>· 기본적인 Prep을 원하는 경우 → <span className="font-medium text-navy-900">60P</span></li>
+              <li>· 충분한 반복이 필요한 경우 → <span className="font-medium text-navy-900">100P</span></li>
+              <li>· 100P 이상 / 추가 영역이 필요한 경우 → <span className="font-medium text-navy-900">별도 문의</span></li>
+              <li>· 현재 수준을 모르겠다면 → <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">구매 전 상담</Link></li>
+            </ul>
+          </div>
+
+          {/* 출판 메타데이터 */}
+          <div className="mt-10">
+            <h2 className="font-display text-[20px] font-semibold text-navy-950">Publication Details</h2>
+            <dl className="mt-4 grid gap-px overflow-hidden border border-navy-800/12 bg-navy-800/10 sm:grid-cols-2">
+              {metadata.map((m) => (
+                <div key={m.k} className="flex items-baseline gap-3 bg-ivory-100 p-3.5">
+                  <dt className="w-24 shrink-0 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">{m.k}</dt>
+                  <dd className="text-[13px] text-charcoal-900">{m.v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* Editorial Standard */}
+          <div className="mt-10">
+            <EditorialStandardSeal />
+          </div>
+
+          {/* 결제 직전 FAQ */}
+          <div className="mt-10">
+            <h2 className="font-display text-[20px] font-semibold text-navy-950">구매 전 자주 묻는 질문</h2>
+            <div className="mt-4 divide-y divide-navy-800/10 border-y border-navy-800/10">
+              {purchaseFaq.map((f) => (
+                <div key={f.q} className="py-4">
+                  <p className="flex items-start gap-2 text-[14px] font-medium text-navy-950">
+                    <HelpCircle size={16} className="mt-0.5 shrink-0 text-brass-500" />
+                    {f.q}
+                  </p>
+                  <p className="mt-1.5 pl-6 text-[13px] leading-relaxed text-charcoal-600">{f.a}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-[12.5px] text-charcoal-600">
+              <Link href="/terms" className="underline decoration-brass-500 decoration-2 underline-offset-2">구매 및 이용약관</Link>
+              {" · "}
+              <Link href="/privacy" className="underline decoration-brass-500 decoration-2 underline-offset-2">개인정보처리방침</Link>
+              {" · "}
+              <Link href="/copyright" className="underline decoration-brass-500 decoration-2 underline-offset-2">교재 이용·저작권 안내</Link>
+            </p>
+          </div>
+        </div>
+
+        {/* 우측 sticky 구매 박스 */}
+        <div>
+          <div className="lg:sticky lg:top-24">
+            <PurchasePanel product={product} isDirect={direct} />
+            {direct && (
+              <p className="mt-3 text-center text-[12px] text-charcoal-600">
+                {formatKRW(fromPriceKRW)}부터 · 40 / 60 / 100P 바로 구매
+              </p>
+            )}
           </div>
         </div>
       </div>
 
       {/* 관련 교재 */}
       {related.length > 0 && (
-        <div className="mt-24 border-t border-navy-800/12 pt-14">
+        <div className="mt-20 border-t border-navy-800/12 pt-14">
           <h2 className="font-display text-[24px] font-semibold text-navy-950">관련 교재</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((p) => (
@@ -214,6 +323,27 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
       )}
+
+      {/* 하단 고정 상담 (관련 교재 아래) */}
+      <div className="mt-16 flex flex-col items-center gap-3 border-t border-navy-800/12 pt-10 text-center">
+        <p className="text-[13.5px] text-charcoal-600">어떤 구성을 선택해야 할지 모르시나요?</p>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <a
+            href={siteConfig.kakaoChannelUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
+          >
+            <MessageCircle size={15} /> 공식 카카오톡 구매 상담
+          </a>
+          <Link
+            href="/consultation"
+            className="inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+          >
+            구매 전 상담 <ArrowRight size={15} />
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

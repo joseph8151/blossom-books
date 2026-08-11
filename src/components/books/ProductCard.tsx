@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Sparkles, MessageCircle, Headphones } from "lucide-react";
+import { Sparkles, Headphones, FileSearch } from "lucide-react";
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
-import { siteConfig } from "@/data/site";
 import { coverToneFor } from "@/lib/utils";
-import { productBadges } from "@/lib/productMeta";
+import { productBadges, isDirectPurchase } from "@/lib/productMeta";
+import { fromPriceKRW, formatKRW } from "@/data/pricing";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 
@@ -68,22 +68,43 @@ export default function ProductCard({ product }: { product: Product }) {
           )}
         </div>
 
-        <div className="mt-6 flex items-center justify-between gap-2 border-t border-navy-800/10 pt-4">
-          <Link
-            href={`/books/${product.id}`}
-            className="text-[13px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4"
-          >
-            상세 보기
-          </Link>
-          <a
-            href={siteConfig.kakaoChannelUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 bg-navy-900 px-3.5 py-1.5 text-[12px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
-          >
-            <MessageCircle size={13} />
-            상담
-          </a>
+        <div className="mt-6 border-t border-navy-800/10 pt-4">
+          {/* 가격 · 구매 가능 여부 */}
+          <div className="flex items-center justify-between">
+            <p className="font-display text-[17px] font-semibold text-navy-950">
+              {isDirectPurchase(product) ? (
+                <>
+                  {formatKRW(fromPriceKRW)}
+                  <span className="ml-0.5 text-[12px] font-normal text-charcoal-600">부터</span>
+                </>
+              ) : (
+                <span className="text-[15px]">Price on Request</span>
+              )}
+            </p>
+            <span
+              className={`font-label text-[9.5px] uppercase tracking-[0.1em] ${
+                isDirectPurchase(product) ? "text-brass-500" : "text-burgundy-700"
+              }`}
+            >
+              {isDirectPurchase(product) ? "Direct Purchase" : "Custom / Extended"}
+            </span>
+          </div>
+
+          <div className="mt-3.5 flex gap-2">
+            <Link
+              href={`/books/${product.id}`}
+              className="flex-1 inline-flex items-center justify-center gap-1.5 bg-navy-900 px-3.5 py-2 text-[12.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+            >
+              상세 보기
+            </Link>
+            <Link
+              href={`/books/${product.id}#sample`}
+              className="inline-flex items-center justify-center gap-1.5 border border-navy-800/25 px-3.5 py-2 text-[12.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50"
+            >
+              <FileSearch size={13} />
+              무료 샘플
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -9,10 +9,29 @@ export function offersVolumes(p: Product): boolean {
   );
 }
 
+// 상담 없이 40·60·100P를 바로 구매할 수 있는 상품인지 판별합니다.
+export function isDirectPurchase(p: Product): boolean {
+  return offersVolumes(p);
+}
+
 // Reading·Vocabulary·Grammar·Writing 4개 영역 통합 교재인지 판별합니다.
 export function isFourSkill(p: Product): boolean {
   const u = p.units.join(" ");
   return /Reading/.test(u) && /Writing/.test(u) && /(Grammar|Vocabulary)/.test(u);
+}
+
+// "Inside the Workbook" — 상품에 실제 포함되는 연습 영역.
+// 4개 영역(RVGW) 통합 교재는 영역별 세부 유형을, 그 외에는 해당 교재의 단원을 그대로 노출합니다.
+export function insideTheWorkbook(p: Product): { area: string; items: string[] }[] {
+  if (isFourSkill(p)) {
+    return [
+      { area: "Reading", items: ["Main Idea", "Supporting Details", "Inference", "Author's Purpose", "Vocabulary in Context", "Text Structure", "Cause & Effect"] },
+      { area: "Vocabulary", items: ["Context Clues", "Academic Vocabulary", "Word Meaning", "Synonyms", "Application"] },
+      { area: "Grammar", items: ["Sentence Structure", "Usage", "Tenses", "Error Correction"] },
+      { area: "Writing", items: ["Sentence Writing", "Paragraph Writing", "Reading Response", "Organization"] },
+    ];
+  }
+  return [{ area: "Key Units", items: p.units }];
 }
 
 export function pagesLabel(p: Product): string {

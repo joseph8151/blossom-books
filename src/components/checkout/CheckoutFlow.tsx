@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { MessageCircle, Landmark, CreditCard, Mail } from "lucide-react";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
-import { Product } from "@/lib/types";
+import { volumeByPages, formatKRW } from "@/data/pricing";
 import PayPalCheckout from "@/components/checkout/PayPalCheckout";
 
 type Region = "domestic" | "international";
@@ -14,6 +14,12 @@ export default function CheckoutFlow() {
   const searchParams = useSearchParams();
   const productId = searchParams.get("product");
   const product = useMemo(() => products.find((p) => p.id === productId), [productId]);
+
+  // 분량(40/60/100P) 선택에 따른 가격 — 상품 상세의 "지금 구매하기"에서 ?volume=으로 전달됩니다.
+  const volumeParam = searchParams.get("volume");
+  const volume = volumeParam ? volumeByPages(Number(volumeParam)) : undefined;
+  const priceKRW = volume?.priceKRW ?? product?.priceKRW;
+  const priceUSD = volume?.priceUSD ?? product?.priceUSD;
 
   // 영문(/en) 페이지 등에서 ?region=international 로 진입하면 해외 결제(PayPal) 탭을 기본 선택합니다.
   const initialRegion: Region =
@@ -35,23 +41,55 @@ export default function CheckoutFlow() {
       <h1 className="mt-3 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">주문 / 결제</h1>
 
       {product ? (
-        <div className="mt-6 flex items-center justify-between border border-navy-800/15 bg-ivory-200/40 p-5">
-          <div>
-            <p className="font-display text-[18px] font-semibold text-navy-950">{product.titleKo}</p>
-            <p className="mt-1 text-[12.5px] text-charcoal-600">
-              {product.examOrCurriculum} · {product.gradeRange}
+        <>
+          <div className="mt-6 flex items-center justify-between border border-navy-800/15 bg-ivory-200/40 p-5">
+            <div>
+              <p className="font-display text-[18px] font-semibold text-navy-950">{product.titleKo}</p>
+              <p className="mt-1 text-[12.5px] text-charcoal-600">
+                {product.examOrCurriculum} · {product.gradeRange}
+                {volume ? ` · ${volume.label} ${volume.tier}` : ""}
+              </p>
+            </div>
+            <p className="font-display text-[18px] font-semibold text-navy-950">
+              {region === "domestic"
+                ? priceKRW
+                  ? formatKRW(priceKRW)
+                  : "가격 문의"
+                : priceUSD
+                  ? `USD $${priceUSD}`
+                  : "Price on Request"}
             </p>
           </div>
-          <p className="font-display text-[18px] font-semibold text-navy-950">
-            {region === "domestic"
-              ? product.priceKRW
-                ? `${product.priceKRW.toLocaleString("ko-KR")}원`
-                : "상담 문의"
-              : product.priceUSD
-                ? `USD $${product.priceUSD}`
-                : "상담 문의"}
-          </p>
-        </div>
+
+          {/* 구매 전 최종 확인 + 디지털 상품 안내 */}
+          <div className="mt-4 border border-brass-500/40 bg-brass-500/[0.05] p-5">
+            <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
+              구매 전 확인해주세요
+            </p>
+            <dl className="mt-3 grid gap-x-6 gap-y-1.5 text-[13px] sm:grid-cols-2">
+              <div className="flex justify-between gap-3 border-b border-navy-800/8 pb-1.5">
+                <dt className="text-charcoal-600">선택 상품</dt>
+                <dd className="text-right font-medium text-navy-950">{product.titleKo}</dd>
+              </div>
+              <div className="flex justify-between gap-3 border-b border-navy-800/8 pb-1.5">
+                <dt className="text-charcoal-600">구성</dt>
+                <dd className="font-medium text-navy-950">{volume ? volume.label : product.pageCount ? `${product.pageCount}P` : "상담 확인"}</dd>
+              </div>
+              <div className="flex justify-between gap-3 border-b border-navy-800/8 pb-1.5">
+                <dt className="text-charcoal-600">가격</dt>
+                <dd className="font-medium text-navy-950">{priceKRW ? formatKRW(priceKRW) : "가격 문의"}</dd>
+              </div>
+              <div className="flex justify-between gap-3 border-b border-navy-800/8 pb-1.5">
+                <dt className="text-charcoal-600">제공 방식</dt>
+                <dd className="font-medium text-navy-950">Digital PDF</dd>
+              </div>
+            </dl>
+            <p className="mt-3 text-[12.5px] leading-relaxed text-burgundy-700">
+              PDF 파일 발송 완료 이후에는 디지털 콘텐츠 특성상 환불이 불가합니다. 위 내용을 확인하신 후
+              결제를 진행해주세요.
+            </p>
+          </div>
+        </>
       ) : (
         <p className="mt-6 text-[13.5px] text-charcoal-600">
           선택된 교재가 없습니다. 교재 상세 페이지에서 구매하기 버튼을 통해 진입해주세요.
@@ -89,7 +127,7 @@ export default function CheckoutFlow() {
       {region === "domestic" ? (
         <DomesticFlow submitted={orderSubmitted} form={form} setForm={setForm} onSubmit={handleDomesticSubmit} />
       ) : (
-        <InternationalFlow product={product} />
+        <InternationalFlow title={product?.title} amountUSD={priceUSD} />
       )}
 
       <div className="mt-12 border-t border-navy-800/12 pt-8 text-center">
@@ -198,31 +236,31 @@ function DomesticFlow({
   );
 }
 
-function InternationalFlow({ product }: { product?: Product }) {
+function InternationalFlow({ title, amountUSD }: { title?: string; amountUSD?: number }) {
   return (
     <div className="mt-10 space-y-5">
       <p className="text-[13.5px] leading-relaxed text-charcoal-600">
         International customers can complete payment securely through PayPal. Digital
         materials will be delivered to the email address linked to your PayPal account
-        after payment verification.
+        after payment verification. Digital PDF files are non-refundable after delivery.
       </p>
 
       <div className="border border-navy-800/15 bg-ivory-200/40 p-6">
         <p className="font-label text-[11px] uppercase tracking-[0.14em] text-navy-800/70">PayPal Checkout</p>
 
-        {!product ? (
+        {!title ? (
           <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600">
             No item selected. Please open a book&apos;s detail page and start checkout from there.
           </p>
-        ) : product.priceUSD ? (
+        ) : amountUSD ? (
           <div className="mt-4">
             <div className="mb-4 flex items-center justify-between border-b border-navy-800/12 pb-4">
-              <span className="text-[13.5px] text-charcoal-600">{product.title}</span>
+              <span className="text-[13.5px] text-charcoal-600">{title}</span>
               <span className="font-display text-[18px] font-semibold text-navy-950">
-                USD ${product.priceUSD.toFixed(2)}
+                USD ${amountUSD.toFixed(2)}
               </span>
             </div>
-            <PayPalCheckout amountUSD={product.priceUSD} productTitle={product.title} />
+            <PayPalCheckout amountUSD={amountUSD} productTitle={title} />
           </div>
         ) : (
           <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600">

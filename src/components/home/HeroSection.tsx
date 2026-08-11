@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MessageCircle, ArrowRight, Check, GraduationCap } from "lucide-react";
+import { ArrowRight, Check, GraduationCap, FileSearch } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { BookCoverMockup } from "./BookCoverMockup";
 
@@ -10,19 +10,19 @@ export default function HeroSection() {
         {/* 좌측 텍스트 */}
         <div>
           <span className="inline-flex items-center gap-2 border border-navy-800/20 px-3.5 py-1.5 font-label text-[11px] uppercase tracking-[0.16em] text-navy-800">
-            Educational Workbook Publisher
+            Premium Test Prep Workbooks
           </span>
 
           {/* 좁은 화면(≤375px)에서 제목이 넘치지 않도록 기본값을 낮추고 단계적으로 키웁니다. */}
-          <h1 className="mt-7 font-body text-[24px] font-bold leading-[1.3] tracking-[-0.02em] text-navy-950 text-balance min-[400px]:text-[28px] sm:text-[33px] lg:text-[37px]">
-            학생의 수준과 목표에 맞는
+          <h1 className="mt-7 font-body text-[23px] font-bold leading-[1.32] tracking-[-0.02em] text-navy-950 text-balance min-[400px]:text-[26px] sm:text-[31px] lg:text-[35px]">
+            학생의 학년만 보지 않습니다.
             <br />
-            <span className="text-brass-500">전문 학습 문제집</span>
+            <span className="text-brass-500">현재 수준과 목표 시험을 함께 봅니다.</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-[15.5px] leading-[1.85] text-charcoal-600">
-            입학·레벨테스트부터 국제학교 과정, 미국 교육과정 및 학년별 학습까지. Blossom Books는 학생의
-            학년, 현재 수준, Reading Level과 학습 목적을 고려하여 다양한 교육 콘텐츠와 문제집을 제공합니다.
+            국제학교 · 미국 교육과정 · SAT · AP · 학원 및 학교 입학 레벨테스트까지. 학생의 목표와 현재
+            수준에 맞춰 설계된 전문 Prep 콘텐츠를 만나보세요.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -34,10 +34,11 @@ export default function HeroSection() {
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link
-              href="/books?track=level-test"
+              href="/books"
               className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50 hover:shadow-soft"
             >
-              레벨테스트 교재 보기
+              <FileSearch size={16} />
+              무료 샘플 보기
             </Link>
           </div>
 

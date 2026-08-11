@@ -1,6 +1,9 @@
 import HeroSection from "@/components/home/HeroSection";
 import CoreCategories from "@/components/home/CoreCategories";
 import BrandNumbers from "@/components/home/BrandNumbers";
+import WhyBlossom from "@/components/home/WhyBlossom";
+import PrepPricing from "@/components/home/PrepPricing";
+import WhyCost from "@/components/home/WhyCost";
 import LevelAssessment from "@/components/home/LevelAssessment";
 import LevelTestStatement from "@/components/home/LevelTestStatement";
 import QuickEntry from "@/components/home/QuickEntry";
@@ -26,6 +29,9 @@ export default function HomePage() {
       <HeroSection />
       <CoreCategories />
       <BrandNumbers />
+      <WhyBlossom />
+      <PrepPricing />
+      <WhyCost />
       <LevelAssessment />
       <LevelTestStatement />
       <QuickEntry />
