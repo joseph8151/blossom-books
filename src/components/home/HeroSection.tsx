@@ -10,20 +10,19 @@ export default function HeroSection() {
         {/* 좌측 텍스트 */}
         <div>
           <span className="inline-flex items-center gap-2 border border-navy-800/20 px-3.5 py-1.5 font-label text-[11px] uppercase tracking-[0.16em] text-navy-800">
-            Educational Content Studio
+            Educational Workbook Publisher
           </span>
 
           {/* 좁은 화면(≤375px)에서 제목이 넘치지 않도록 기본값을 낮추고 단계적으로 키웁니다. */}
-          <h1 className="mt-7 font-body text-[21px] font-bold leading-[1.32] tracking-[-0.02em] text-navy-950 text-balance min-[400px]:text-[25px] sm:text-[29px] lg:text-[32px]">
-            시험과 수업의 목적에 맞춘
+          <h1 className="mt-7 font-body text-[24px] font-bold leading-[1.3] tracking-[-0.02em] text-navy-950 text-balance min-[400px]:text-[28px] sm:text-[33px] lg:text-[37px]">
+            학생의 수준과 목표에 맞는
             <br />
-            <span className="text-brass-500">프리미엄 교육 콘텐츠</span>
+            <span className="text-brass-500">전문 학습 문제집</span>
           </h1>
 
-          <p className="mt-7 max-w-xl text-[16.5px] leading-relaxed text-charcoal-600">
-            미국 교과과정, 국제학교 입학시험, 공인시험, 실전 모의고사를 분석하여
-            학생용 문제집과 정답·상세 해설집을 제작합니다. 기존 교재는 바로
-            구매할 수 있으며, 필요한 교재가 없는 경우 별도 제작도 가능합니다.
+          <p className="mt-6 max-w-xl text-[15.5px] leading-[1.85] text-charcoal-600">
+            입학·레벨테스트부터 국제학교 과정, 미국 교육과정 및 학년별 학습까지. Blossom Books는 학생의
+            학년, 현재 수준, Reading Level과 학습 목적을 고려하여 다양한 교육 콘텐츠와 문제집을 제공합니다.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -31,18 +30,15 @@ export default function HeroSection() {
               href="/books"
               className="group inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
             >
-              교재 둘러보기
+              교재 찾기
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
-            <a
-              href={siteConfig.kakaoChannelUrl}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              href="/books?track=level-test"
               className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50 hover:shadow-soft"
             >
-              <MessageCircle size={16} />
-              카카오톡으로 상담하기
-            </a>
+              레벨테스트 교재 보기
+            </Link>
           </div>
 
           {/* 제작진 신뢰 배지 */}
@@ -61,22 +57,26 @@ export default function HeroSection() {
             ))}
           </div>
 
-          {/* 다루는 시험 배지 */}
+          {/* 핵심 분야 — 브랜드 포지셔닝 */}
           <div className="mt-12 border-t border-navy-800/12 pt-7">
             <p className="font-label text-[11px] uppercase tracking-[0.16em] text-navy-800/55">
-              이런 시험을 다룹니다
+              핵심 분야
             </p>
             <div className="mt-3.5 flex flex-wrap gap-2">
-              {["SAT", "AP", "TOEFL", "IELTS", "MET", "MAP", "CAT4", "ISEE", "WIDA", "OET", "TEPS"].map(
-                (x) => (
-                  <span
-                    key={x}
-                    className="border border-navy-800/20 bg-ivory-100 px-3 py-1.5 font-label text-[12px] tracking-wide text-navy-800 transition-colors hover:border-brass-500/60 hover:text-navy-900"
-                  >
-                    {x}
-                  </span>
-                )
-              )}
+              {[
+                "Level Tests",
+                "International Education",
+                "U.S. Curriculum",
+                "Academic Workbooks",
+                "Custom Materials",
+              ].map((x) => (
+                <span
+                  key={x}
+                  className="border border-navy-800/20 bg-ivory-100 px-3 py-1.5 font-label text-[12px] tracking-wide text-navy-800 transition-colors hover:border-brass-500/60 hover:text-navy-900"
+                >
+                  {x}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -86,27 +86,27 @@ export default function HeroSection() {
           {/* 표지 뒤 은은한 브래스 광채 */}
           <div className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(circle_at_50%_46%,rgba(173,138,78,0.18),transparent_62%)]" />
           <BookCoverMockup
-            eyebrow="Practice Test Series"
-            title="Mock Exam"
-            subtitle="실전 모의고사 2회분"
-            tone="ivory"
-            tabLabel="03"
+            eyebrow="Level Test Workbook"
+            title="Level Test"
+            subtitle="Reading · Vocabulary · Grammar · Writing"
+            tone="pink"
+            tabLabel="LT"
             className="absolute left-2 top-2 -rotate-[9deg]"
           />
           <BookCoverMockup
-            eyebrow="Answer Key"
-            title="Explanations"
-            subtitle="정답 및 상세 해설집"
+            eyebrow="U.S. Curriculum"
+            title="Reading"
+            subtitle="Grade별 학습 문제집"
             tone="ivory"
-            tabLabel="02"
+            tabLabel="US"
             className="absolute right-0 top-6 rotate-[7deg]"
           />
           <BookCoverMockup
-            eyebrow="Student Workbook"
-            title="Algebra 1"
-            subtitle="미국 교과과정 · 12개 단원"
+            eyebrow="International School"
+            title="Math & English"
+            subtitle="국제학교 학습 콘텐츠"
             tone="navy"
-            tabLabel="01"
+            tabLabel="IS"
             className="relative z-10 -rotate-[2deg]"
           />
         </div>

@@ -18,28 +18,28 @@ export const coreSkills: {
     name: "Reading",
     ko: "리딩",
     body: "다양한 길이와 난이도의 지문을 통해 독해력, 핵심 내용 파악, 세부 정보 이해, 추론 능력을 단계적으로 연습합니다.",
-    tags: "Main Idea · Detail · Inference · Context",
+    tags: "독해 · Main Idea · Detail · Inference",
   },
   {
     key: "vocabulary",
     name: "Vocabulary",
     ko: "보카",
     body: "학생의 학년과 Reading Level에 맞는 어휘를 중심으로 문맥 속 의미 이해와 실제 활용 능력을 연습합니다.",
-    tags: "Academic Vocabulary · Context Clues · Word Meaning",
+    tags: "어휘 · Context Clues · Academic Vocabulary",
   },
   {
     key: "grammar",
     name: "Grammar",
     ko: "문법",
     body: "문장 구조와 문법 개념을 단순 암기보다 실제 문장 안에서 이해하고 적용할 수 있도록 구성합니다.",
-    tags: "Sentence Structure · Usage · Editing · Grammar",
+    tags: "문법 · Sentence Structure · Usage",
   },
   {
     key: "writing",
     name: "Writing",
     ko: "라이팅",
     body: "학생 수준에 맞는 문장 작성부터 Paragraph Writing, Reading Response까지 단계별 Writing 연습을 제공합니다.",
-    tags: "Sentence · Paragraph · Response · Composition",
+    tags: "문장 · Paragraph · Written Response",
   },
 ];
 

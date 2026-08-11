@@ -1,6 +1,9 @@
 import HeroSection from "@/components/home/HeroSection";
-import AudienceCards from "@/components/home/AudienceCards";
+import CoreCategories from "@/components/home/CoreCategories";
 import LevelAssessment from "@/components/home/LevelAssessment";
+import LevelTestStatement from "@/components/home/LevelTestStatement";
+import QuickEntry from "@/components/home/QuickEntry";
+import AudienceCards from "@/components/home/AudienceCards";
 import CollectionShowcase from "@/components/home/CollectionShowcase";
 import SeriesShowcase from "@/components/home/SeriesShowcase";
 import CategorySection from "@/components/home/CategorySection";
@@ -18,8 +21,11 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <AudienceCards />
+      <CoreCategories />
       <LevelAssessment />
+      <LevelTestStatement />
+      <QuickEntry />
+      <AudienceCards />
       <CollectionShowcase />
       <SeriesShowcase />
       <CategorySection />
