@@ -7,6 +7,7 @@ import {
   offersVolumes as productOffersVolumes,
   isDirectPurchase,
   insideTheWorkbook,
+  productCode,
 } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { formatKRW, fromPriceKRW } from "@/data/pricing";
@@ -15,6 +16,7 @@ import ProductCard from "@/components/books/ProductCard";
 import SamplePreviewButton from "@/components/books/SamplePreviewButton";
 import PurchasePanel from "@/components/books/PurchasePanel";
 import WorkbookSpecification from "@/components/books/WorkbookSpecification";
+import ErrorReport from "@/components/books/ErrorReport";
 import VolumeGuide from "@/components/common/VolumeGuide";
 import { siteConfig } from "@/data/site";
 
@@ -288,6 +290,23 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               언급된 시험을 주관하는 기관과 제휴·보증·공식 후원 관계가 없으며, 실제 기출문제나 유출문제를
               제공하지 않습니다.
             </p>
+          </div>
+
+          {/* Revision History + 오류 신고 */}
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <div className="border border-navy-800/12 bg-ivory-100 p-6">
+              <h2 className="font-display text-[18px] font-semibold text-navy-950">Revision History</h2>
+              <ul className="mt-4 space-y-2.5 text-[13px] text-charcoal-600">
+                <li className="flex gap-2">
+                  <span className="font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">2026 Edition</span>
+                  <span>현행 버전</span>
+                </li>
+                <li className="border-t border-navy-800/8 pt-2.5">Reviewed · 문항 및 정답·해설 검토</li>
+                <li className="border-t border-navy-800/8 pt-2.5">Checked · 오탈자·중복·레이아웃 최종 점검</li>
+                <li className="border-t border-navy-800/8 pt-2.5">Format · 현행 학습 구성 기준 반영</li>
+              </ul>
+            </div>
+            <ErrorReport code={productCode(product)} />
           </div>
 
           {/* 결제 직전 FAQ */}

@@ -6,6 +6,7 @@ import PrepPricing from "@/components/home/PrepPricing";
 import WhyCost from "@/components/home/WhyCost";
 import HowToOrder from "@/components/home/HowToOrder";
 import TestAlignment from "@/components/home/TestAlignment";
+import QuestionToUnderstanding from "@/components/home/QuestionToUnderstanding";
 import LevelAssessment from "@/components/home/LevelAssessment";
 import LevelTestStatement from "@/components/home/LevelTestStatement";
 import QuickEntry from "@/components/home/QuickEntry";
@@ -36,6 +37,7 @@ export default function HomePage() {
       <WhyCost />
       <HowToOrder />
       <TestAlignment />
+      <QuestionToUnderstanding />
       <LevelAssessment />
       <LevelTestStatement />
       <QuickEntry />

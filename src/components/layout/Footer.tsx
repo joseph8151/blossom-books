@@ -16,6 +16,17 @@ const linkGroups = [
     ],
   },
   {
+    title: "찾기·시험별",
+    links: [
+      { label: "교재 추천받기", href: "/find" },
+      { label: "교재 비교", href: "/compare" },
+      { label: "학부모 가이드", href: "/learn" },
+      { label: "SR 대비", href: "/prep/sr" },
+      { label: "MAP 대비", href: "/prep/map" },
+      { label: "SAT · AP 대비", href: "/prep/sat" },
+    ],
+  },
+  {
     title: "고객 지원",
     links: [
       { label: "자주 묻는 질문", href: "/faq" },
@@ -41,7 +52,7 @@ export default function Footer() {
       {/* 상단 브래스 액센트 라인 */}
       <div className="h-[3px] w-full bg-gradient-to-r from-brass-500/0 via-brass-500 to-brass-500/0" />
       <div className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
+        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
           <div>
             <span className="font-display text-2xl font-semibold text-ivory-100">Blossom Books</span>
             <span className="ml-2 font-label text-[9px] uppercase tracking-[0.18em] text-brass-400">
