@@ -20,6 +20,7 @@ export interface SampleItem {
   wrong?: string;
   wrongKo?: string;
   steps?: string[];
+  figure?: string; // SVG 도형 키 (CAT4 등 시각 문항)
 }
 
 // ── Reading ─────────────────────────────────────────────
@@ -301,28 +302,90 @@ export const reasoningBank: SampleItem[] = [
     whyKo: "새의 서식 공간이 하늘이듯, 물고기의 서식 공간은 물입니다. (서식지 관계)",
   },
   {
-    area: "Quantitative Reasoning", type: "Number Sequence", skill: "Find number patterns", difficulty: "Standard",
-    question: "What comes next? 2, 4, 8, 16, ___",
-    choices: ["18", "24", "32", "20"],
-    answer: "32",
-    why: "Each term doubles (×2), so 16 × 2 = 32.",
-    whyKo: "각 항이 앞 항의 2배(×2)이므로 16 × 2 = 32.",
+    area: "Quantitative Reasoning", type: "Number Pattern", skill: "Find quantitative patterns", difficulty: "Standard",
+    figure: "square-seq",
+    question: "The figures below are made of small squares (1, 4, 9, 16, …). How many small squares are in Figure 5?",
+    choices: ["20", "24", "25", "30"],
+    answer: "25",
+    why: "1, 4, 9, 16 are 1², 2², 3², 4². The next is 5² = 25.",
+    whyKo: "1, 4, 9, 16 은 각각 1², 2², 3², 4² 입니다. 따라서 다음 도형은 5² = 25개.",
   },
   {
     area: "Non-Verbal Reasoning", type: "Figure Pattern", skill: "Recognize figure patterns", difficulty: "Advanced",
-    question: "A square rotates 90° clockwise each step with one shaded corner. After the shaded corner moves top-right → bottom-right, where is it next?",
-    choices: ["Top-left", "Bottom-left", "Top-right", "Center"],
+    figure: "rotate-seq",
+    question: "The shaded corner rotates 90° clockwise each step. Which position comes next (the “?” box)?",
+    choices: ["Top-left", "Bottom-left", "Top-right", "Bottom-right"],
     answer: "Bottom-left",
-    why: "Continuing the 90° clockwise rotation, the next position is bottom-left.",
-    whyKo: "시계 방향으로 90°씩 회전을 이어가면 색칠된 꼭짓점의 다음 위치는 좌하단(bottom-left)입니다.",
+    why: "Continuing the 90° clockwise rotation (TL → TR → BR → …), the next position is bottom-left.",
+    whyKo: "시계 방향으로 90°씩 회전하면 좌상 → 우상 → 우하 → 좌하 순서이므로, 다음은 좌하단(bottom-left)입니다.",
+  },
+  {
+    area: "Non-Verbal Reasoning", type: "Matrix", skill: "Complete the matrix", difficulty: "Advanced",
+    figure: "matrix",
+    question: "In each row the number of dots increases by one. How many dots complete the bottom-right cell (“?”)?",
+    choices: ["3", "4", "5", "6"],
+    answer: "5",
+    why: "Each row increases by one dot, so the bottom row is 3, 4, 5.",
+    whyKo: "각 행에서 점이 1개씩 늘어납니다. 마지막 행이 3, 4, 5 이므로 빈 칸은 5개입니다.",
   },
   {
     area: "Spatial Reasoning", type: "Net & Shape", skill: "Work with nets and space", difficulty: "Advanced",
-    question: "A cube net has 6 squares. How many faces meet at each corner of the folded cube?",
+    figure: "cube-net",
+    question: "The net below folds into a cube. How many faces meet at each corner of the cube?",
     choices: ["2", "3", "4", "6"],
     answer: "3",
     why: "Three faces always meet at each corner of a cube.",
     whyKo: "정육면체의 한 꼭짓점에서는 항상 세 면이 만납니다.",
+  },
+];
+
+// ── OET (의료 영어 · 성인 전문시험) ─────────────────────
+export const oetBank: SampleItem[] = [
+  {
+    area: "Reading", type: "Detail (Part A)", skill: "Skim clinical texts for specific detail", difficulty: "Standard",
+    passage: "Guideline: For adult patients with a fever above 38.5°C lasting more than three days, record temperature every four hours and notify the physician.",
+    question: "How often should the temperature be recorded?",
+    choices: ["Every hour", "Every four hours", "Once a day", "Every three days"],
+    answer: "Every four hours",
+    why: "The guideline states 'record temperature every four hours.'",
+    whyKo: "지침에 ‘record temperature every four hours(4시간마다 기록)’이라고 명시되어 있습니다. OET Reading은 임상 자료에서 필요한 정보를 빠르게 찾는 능력을 평가합니다.",
+  },
+  {
+    area: "Listening", type: "Consultation (Part A)", skill: "Note-taking from a consultation (audio)", difficulty: "Standard",
+    passage: "[Audio transcript] Nurse: “The patient reports a sharp pain in the lower right abdomen that started last night and worsens when walking.”",
+    question: "Where is the patient's pain located?",
+    choices: ["Upper left abdomen", "Lower right abdomen", "Lower back", "Chest"],
+    answer: "Lower right abdomen",
+    why: "The speaker states 'a sharp pain in the lower right abdomen.'",
+    whyKo: "화자가 ‘lower right abdomen(우하복부)’의 통증이라고 말합니다. 실제 교재는 청취용 MP3 오디오를 제공하며, 상담 내용을 메모하는 유형입니다.",
+  },
+  {
+    area: "Writing", type: "Referral Letter", skill: "Plan a referral / discharge letter", difficulty: "Advanced",
+    question: "Which sentence is the most appropriate opening for a referral letter about a patient being transferred for further care?",
+    choices: [
+      "Hi, please take my patient, thanks.",
+      "I am writing to refer Mr. Lee, a 68-year-old patient, for further assessment and management.",
+      "This guy needs help now.",
+      "Refer patient. See notes.",
+    ],
+    answer: "I am writing to refer Mr. Lee, a 68-year-old patient, for further assessment and management.",
+    why: "A referral letter opens formally, stating the purpose, the patient, and the reason for referral.",
+    whyKo: "레퍼럴(의뢰) 편지는 목적·환자·의뢰 이유를 격식 있게 밝히며 시작해야 합니다. OET Writing 채점 기준(목적 명확성·전문적 어조·정보 정확성)에 부합하는 문장입니다.",
+    wrong: "The other options are too casual or omit required information.",
+    wrongKo: "나머지 보기는 지나치게 캐주얼하거나 필요한 정보(환자·목적)를 빠뜨려 OET Writing 기준에 맞지 않습니다.",
+  },
+  {
+    area: "Speaking", type: "Role-play", skill: "Explain and reassure a patient", difficulty: "Advanced",
+    question: "A patient is anxious about a minor procedure. Which response best shows empathy while giving clear information?",
+    choices: [
+      "Don't worry about it.",
+      "I understand this feels stressful. The procedure is short, and I'll explain each step as we go.",
+      "It's nothing. Let's start.",
+      "You'll be fine, next patient please.",
+    ],
+    answer: "I understand this feels stressful. The procedure is short, and I'll explain each step as we go.",
+    why: "It acknowledges the patient's feelings (empathy) and gives clear, reassuring information.",
+    whyKo: "환자의 감정을 먼저 인정(공감)하고, 절차에 대해 명확하고 안심되는 정보를 제공합니다. OET Speaking은 공감·정보 전달·환자 중심 소통을 평가합니다.",
   },
 ];
 

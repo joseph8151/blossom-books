@@ -6,6 +6,7 @@ import { Product } from "@/lib/types";
 import { siteConfig } from "@/data/site";
 import { isFourSkill, productCode } from "@/lib/productMeta";
 import { blossomLevel } from "@/lib/utils";
+import SampleFigure from "./SampleFigure";
 import {
   SampleItem,
   Difficulty,
@@ -18,6 +19,7 @@ import {
   scienceBank,
   reasoningBank,
   certifiedEnglishBank,
+  oetBank,
 } from "@/data/sampleBank";
 
 const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challenge"];
@@ -42,7 +44,8 @@ function buildWorkbookItems(product: Product): SampleItem[] {
     ];
   }
   if (/reasoning|cat4|verbal|non-verbal|spatial|general ability/.test(key)) return reasoningBank;
-  if (product.track === "certified-exam" && /english|toefl|ielts|met|spa|oet|teps/.test(key)) return certifiedEnglishBank;
+  if (/oet/.test(key)) return oetBank;
+  if (product.track === "certified-exam" && /english|toefl|ielts|met|spa|teps/.test(key)) return certifiedEnglishBank;
   if (/algebra/.test(key)) return cap(algebraBank);
   if (/geometry|calc|precalc|statistic|math|사고력|수학/.test(key) && !/reading|english/.test(key)) return cap(mathBank);
   if (/biolog|chemi|physic|science|과학|생물|화학|물리/.test(key)) return cap(scienceBank);
@@ -111,7 +114,8 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
   const code = productCode(product);
   // 해설 언어: SAT·AP·성인 공인시험은 영어 해설 중심, 그 외(유아~초등/SR/MAP/레벨테스트 등)는 한글 상세해설 중심
   const advancedExam = product.track === "ap" || /SAT/i.test(product.examOrCurriculum) || product.track === "certified-exam";
-  const useKo = !advancedExam;
+  // OET는 한글 해설 중심으로 노출합니다.
+  const useKo = !advancedExam || /OET/i.test(product.examOrCurriculum);
 
   function switchTab(t: "workbook" | "answer") {
     setTab(t);
@@ -206,6 +210,7 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                     <span className="font-display text-[16px] font-semibold text-navy-900">{page + 1}.</span>
                     <div className="flex-1">
                       <p className="text-[14.5px] leading-relaxed text-charcoal-900">{item.question}</p>
+                      {item.figure && <SampleFigure name={item.figure} />}
                       {item.choices ? (
                         <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-1.5 text-[13.5px] text-charcoal-600 sm:grid-cols-2">
                           {item.choices.map((c, ci) => (

@@ -8,7 +8,7 @@ import { siteConfig } from "@/data/site";
 export default function PrepVolumePricing({ buyProductId }: { buyProductId?: string }) {
   return (
     <div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {flexibleVolumes.map((v) => {
           const highlight = !!v.badge;
           return (

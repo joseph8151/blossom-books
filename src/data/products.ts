@@ -200,7 +200,7 @@ export const products: Product[] = [
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
     coverAccent: "navy",
-    sampleAvailable: false,
+    sampleAvailable: true,
   },
   {
     id: "sat-math-workbook",

@@ -22,7 +22,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
   const fixedVol = !flexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
   const [pages, setPages] = useState(flexible ? 60 : fixedVol?.pages ?? 60);
   const [copied, setCopied] = useState(false);
-  const selected = flexibleVolumes.find((v) => v.pages === pages) ?? fixedVol ?? flexibleVolumes[2];
+  const selected = flexibleVolumes.find((v) => v.pages === pages) ?? fixedVol ?? flexibleVolumes[1];
 
   const includes = [
     "Student Workbook",
@@ -74,7 +74,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
                 <p className="mt-5 font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
                   Choose Your Volume
                 </p>
-                <div className="mt-3 grid grid-cols-2 gap-2">
+                <div className="mt-3 grid grid-cols-3 gap-2">
                   {flexibleVolumes.map((v) => {
                     const on = v.pages === pages;
                     return (
