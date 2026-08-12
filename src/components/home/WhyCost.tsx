@@ -19,7 +19,7 @@ export default function WhyCost() {
         <div className="max-w-2xl">
           <span className="eyebrow">Why does it cost more?</span>
           <h2 className="mt-4 font-display text-[26px] font-semibold leading-tight text-navy-950 sm:text-[31px]">
-            13만원짜리 문제집, 무엇이 다른가요?
+            일반 문제집과 Blossom Books는 무엇이 다른가요?
           </h2>
           <p className="mt-5 text-[14.5px] leading-[1.85] text-charcoal-600">
             Blossom Books의 가격은 단순히 PDF 페이지 수를 기준으로 책정되지 않습니다. 학생의 목표 시험과
