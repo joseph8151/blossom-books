@@ -20,8 +20,9 @@ export default function CheckoutPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-[14.5px] leading-[1.85] text-charcoal-600">
             Blossom Books는 홈페이지에서 직접 결제하지 않습니다. 교재와 가격(40P ₩130,000 · 60P ₩150,000 ·
-            100P ₩190,000)을 확인하신 뒤, 공식 카카오톡으로 선택한 상품을 보내주시면 상담원이 학생에게
-            적합한지 간단히 확인하고 결제 방법을 안내해 드립니다.
+            100P ₩190,000)을 확인하신 뒤, 공식 카카오톡으로 선택한 상품을 보내주세요. 상담원이 학생에게
+            적합한지 간단히 확인한 후 계좌이체 또는 카드 결제를 안내해 드리고, 결제 확인 후 교재(PDF)를
+            이메일로 보내드립니다.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link

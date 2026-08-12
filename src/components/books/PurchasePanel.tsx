@@ -154,8 +154,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
         </a>
 
         <p className="mt-3 text-[11.5px] leading-relaxed text-charcoal-600">
-          결제는 카카오톡 상담을 통해 진행됩니다. 선택하신 교재와 학생 수준을 상담원이 간단히 확인한 후
-          결제 방법을 안내해 드립니다.{" "}
+          카카오톡 상담 후 계좌이체 또는 카드로 결제하시면, 결제 확인 후 교재(PDF)를 이메일로 보내드립니다.{" "}
           <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
             구성 상담
           </Link>

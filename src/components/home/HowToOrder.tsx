@@ -6,8 +6,8 @@ const steps = [
   { n: "03", icon: ListChecks, en: "Choose", ko: "40P / 60P / 100P 중 원하는 구성을 선택합니다." },
   { n: "04", icon: MessageCircle, en: "Kakao", ko: "카카오톡으로 선택한 상품을 보내주세요." },
   { n: "05", icon: BadgeCheck, en: "Confirm", ko: "상담원이 학년·시험 목적·학생 수준을 간단히 확인합니다." },
-  { n: "06", icon: Receipt, en: "Payment", ko: "결제 방법을 안내받습니다." },
-  { n: "07", icon: FileDown, en: "Receive", ko: "결제 확인 후 교재(PDF)를 제공합니다." },
+  { n: "06", icon: Receipt, en: "Payment", ko: "계좌이체 또는 카드 결제 방법을 안내받습니다." },
+  { n: "07", icon: FileDown, en: "Receive", ko: "결제 확인 후 교재(PDF)를 이메일로 보내드립니다." },
 ];
 
 export default function HowToOrder() {
@@ -21,7 +21,8 @@ export default function HowToOrder() {
           </h2>
           <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">
             홈페이지에서 교재와 가격을 충분히 확인하신 뒤, 공식 카카오톡으로 연결됩니다. 상담원이 학생에게
-            적합한지 간단히 확인한 후 결제를 안내해 드립니다.
+            적합한지 간단히 확인한 후, 계좌이체 또는 카드 결제를 안내해 드리고, 결제 확인 후 교재(PDF)를
+            이메일로 보내드립니다.
           </p>
         </div>
 

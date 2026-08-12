@@ -20,6 +20,7 @@ import {
   reasoningBank,
   certifiedEnglishBank,
   oetBank,
+  scatBank,
 } from "@/data/sampleBank";
 
 const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challenge"];
@@ -43,6 +44,7 @@ function buildWorkbookItems(product: Product): SampleItem[] {
       writingBank[0], writingBank[1],
     ];
   }
+  if (/scat/.test(key)) return scatBank;
   if (/reasoning|cat4|verbal|non-verbal|spatial|general ability/.test(key)) return reasoningBank;
   if (/oet/.test(key)) return oetBank;
   if (product.track === "certified-exam" && /english|toefl|ielts|met|spa|teps/.test(key)) return certifiedEnglishBank;

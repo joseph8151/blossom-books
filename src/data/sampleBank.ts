@@ -389,6 +389,53 @@ export const oetBank: SampleItem[] = [
   },
 ];
 
+// ── SCAT (Verbal Analogy · Quantitative Comparison) ─────
+export const scatBank: SampleItem[] = [
+  {
+    area: "Verbal", type: "Analogy", skill: "Verbal analogy (word relationship)", difficulty: "Standard",
+    question: "Kitten is to cat as puppy is to ___.",
+    choices: ["dog", "bark", "tail", "bone"],
+    answer: "dog",
+    why: "A kitten is a young cat, so a puppy is a young dog (young-to-adult relationship).",
+    whyKo: "새끼 고양이(kitten)와 고양이(cat)의 관계처럼, 새끼 개(puppy)에 대응하는 것은 개(dog)입니다. (새끼–성체 관계)",
+  },
+  {
+    area: "Verbal", type: "Analogy", skill: "Verbal analogy (creator–work)", difficulty: "Advanced",
+    question: "Author is to book as composer is to ___.",
+    choices: ["song", "orchestra", "stage", "audience"],
+    answer: "song",
+    why: "An author creates a book; a composer creates a song/piece of music (creator-to-work).",
+    whyKo: "작가가 책을 쓰듯, 작곡가는 곡(song·음악)을 만듭니다. (창작자–창작물 관계) 나머지 보기는 관계가 맞지 않습니다.",
+  },
+  {
+    area: "Quantitative", type: "Quantitative Comparison", skill: "Compare two quantities", difficulty: "Standard",
+    question: "Column A: 3 × 4    Column B: 5 + 6.  Which statement is true?",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "A is greater",
+    why: "A = 12 and B = 11, so A is greater.",
+    whyKo: "A = 3 × 4 = 12, B = 5 + 6 = 11. 따라서 A가 더 큽니다.",
+    steps: ["A = 3 × 4 = 12", "B = 5 + 6 = 11", "12 > 11 → A is greater"],
+  },
+  {
+    area: "Quantitative", type: "Quantitative Comparison", skill: "Compare two quantities", difficulty: "Standard",
+    question: "Column A: 1/2 of 20    Column B: 25% of 40.  Which statement is true?",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "The two are equal",
+    why: "A = 10 and B = 10, so the two are equal.",
+    whyKo: "A = 20의 1/2 = 10, B = 40의 25% = 10. 두 값이 같습니다.",
+    steps: ["A = 20 × 1/2 = 10", "B = 40 × 0.25 = 10", "10 = 10 → equal"],
+  },
+  {
+    area: "Quantitative", type: "Quantitative Comparison", skill: "Reason about variables", difficulty: "Challenge",
+    question: "n is a positive integer greater than 1. Column A: n²    Column B: 2n.  Which statement is true?",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "Cannot be determined",
+    why: "If n = 2, n² = 4 = 2n (equal); if n = 3, n² = 9 > 6 = 2n. The relationship changes with n.",
+    whyKo: "n = 2이면 n² = 4, 2n = 4로 같고, n = 3이면 9 > 6으로 A가 큽니다. n값에 따라 달라지므로 하나로 결정할 수 없습니다. (변수 비교 함정 유형)",
+    steps: ["n = 2 → A = 4, B = 4 (equal)", "n = 3 → A = 9, B = 6 (A greater)", "값에 따라 달라짐 → Cannot be determined"],
+  },
+];
+
 // ── Certified English (TOEFL/IELTS/OET 등) ───────────────
 export const certifiedEnglishBank: SampleItem[] = [
   {
