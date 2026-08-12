@@ -116,7 +116,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
       {/* 본문 2단: 좌 콘텐츠 / 우 구매 박스(sticky) */}
       <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_360px]">
-        {/* 좌측 */}
+        {/* 좌측 — 상세 구조 통일: Who → Practice → Alignment → Difficulty → Sample → Included → Pages → Price → Which → FAQ */}
         <div className="min-w-0">
           <div className="flex items-start justify-center bg-ivory-200/50 py-14">
             <BookCoverMockup
@@ -147,21 +147,28 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             )}
           </div>
 
-          {/* See Before You Buy — 샘플 */}
-          <div id="sample" className="mt-10 scroll-mt-24 border border-navy-800/12 bg-ivory-100 p-6 shadow-card lg:p-7">
-            <span className="eyebrow">See before you buy</span>
-            <h2 className="mt-3 font-display text-[20px] font-semibold text-navy-950">표지만 보고 구매하지 마세요.</h2>
-            <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
-              실제 문제의 난이도, 지문 구성, 문제 유형, 해설 방식을 확인한 뒤 결정하세요.
+          {/* 03 · Who This Is For */}
+          <div className="mt-10 border-l-2 border-brass-500 pl-5">
+            <p className="font-label text-[11px] uppercase tracking-[0.14em] text-navy-800/70">Who this is for</p>
+            <ul className="mt-3 space-y-2">
+              {whoFor.map((w) => (
+                <li key={w} className="flex items-start gap-2 text-[13.5px] leading-relaxed text-charcoal-900">
+                  <Check size={15} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} />
+                  {w}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-[12.5px] text-charcoal-600">
+              학생에게 적합한지 모르시나요?{" "}
+              <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
+                카카오톡으로 확인하기
+              </a>
             </p>
-            <div className="mt-4">
-              <SamplePreviewButton product={product} />
-            </div>
           </div>
 
-          {/* Inside the Workbook */}
+          {/* 04 · What You'll Practice */}
           <div className="mt-10">
-            <h2 className="font-display text-[20px] font-semibold text-navy-950">Inside the Workbook</h2>
+            <h2 className="font-display text-[20px] font-semibold text-navy-950">What You&apos;ll Practice</h2>
             <p className="mt-1.5 text-[13px] text-charcoal-600">이 교재에서 연습하는 영역입니다.</p>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
               {inside.map((g) => (
@@ -179,9 +186,46 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </div>
           </div>
 
-          {/* What You Receive */}
+          {/* 05 · How closely does it reflect the actual test? (실제 시험과의 유사성 — 눈에 띄게) */}
+          <div className="mt-10 border border-navy-800/15 bg-navy-950 p-6 text-ivory-100 lg:p-7">
+            <p className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-400">
+              How closely does it reflect the actual test?
+            </p>
+            <h2 className="mt-3 font-display text-[20px] font-semibold text-ivory-100 sm:text-[22px]">
+              실제 시험과 얼마나 비슷한가요?
+            </h2>
+            <p className="mt-3 text-[13.5px] leading-[1.85] text-ivory-200/85">
+              Blossom Books 교재는 공개된 시험 구조, 평가 영역, 문항 유형, 학년별 학습 범위를 참고하여 시험
+              대비에 필요한 유형을 충분히 연습할 수 있도록 설계됩니다. 학생이 시험에서 마주하는 문제 형식과
+              사고 과정에 익숙해지는 것을 목표로 합니다.
+            </p>
+            <p className="mt-3 border-t border-ivory-100/12 pt-3 text-[12px] leading-relaxed text-ivory-200/60">
+              단, 실제 기출문제나 유출문제를 제공하지 않으며 “시험에 그대로 출제” “100% 동일”과 같은 표현은
+              사용하지 않습니다. Blossom Books는 언급된 시험을 주관하는 기관과 공식 제휴·보증·후원 관계가
+              없습니다.
+            </p>
+          </div>
+
+          {/* 06 · Difficulty / Structure — Specification · Test Alignment · Difficulty · Quality */}
           <div className="mt-10">
-            <h2 className="font-display text-[20px] font-semibold text-navy-950">What You Receive</h2>
+            <WorkbookSpecification product={product} />
+          </div>
+
+          {/* 07 · Sample Preview — 반드시 가격보다 먼저 */}
+          <div id="sample" className="mt-10 scroll-mt-24 border border-navy-800/12 bg-ivory-100 p-6 shadow-card lg:p-7">
+            <span className="eyebrow">See before you buy</span>
+            <h2 className="mt-3 font-display text-[20px] font-semibold text-navy-950">표지만 보고 구매하지 마세요.</h2>
+            <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
+              실제 문제의 난이도, 지문 구성, 문제 유형, 해설 방식을 확인한 뒤 결정하세요.
+            </p>
+            <div className="mt-4">
+              <SamplePreviewButton product={product} />
+            </div>
+          </div>
+
+          {/* 08 · What's Included */}
+          <div className="mt-10">
+            <h2 className="font-display text-[20px] font-semibold text-navy-950">What&apos;s Included</h2>
             <div className="mt-4 flex flex-wrap items-center gap-2">
               {receive.map((r, i) => (
                 <span key={r} className="inline-flex items-center gap-2">
@@ -210,15 +254,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 {koExplain ? " 부모님이 채점·설명해 주기에도" : " 스스로 학습하기에도"}좋습니다.
               </p>
             </div>
-          </div>
 
-          {/* 스마트 가격 노출 (영어 레벨테스트 상품) */}
-          {hasStarter(product) && <SmartPricing />}
-
-          {/* 교재 구성 */}
-          <div className="mt-10">
-            <h2 className="font-display text-[20px] font-semibold text-navy-950">교재 구성</h2>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {/* 교재 구성 */}
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {product.components.map((c) => (
                 <div key={c.label} className="border border-navy-800/12 bg-ivory-200/40 p-4">
                   <p className="font-label text-[11px] uppercase tracking-[0.1em] text-brass-500">{c.label}</p>
@@ -228,11 +266,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </div>
           </div>
 
-          {/* 분량 선택 가이드 */}
+          {/* 09 · 페이지 옵션 */}
           {offersVolumes && (
             <div className="mt-10">
               <div className="flex items-baseline justify-between gap-3">
-                <h2 className="font-display text-[20px] font-semibold text-navy-950">분량 선택 (40·60·100·200P)</h2>
+                <h2 className="font-display text-[20px] font-semibold text-navy-950">페이지 옵션 (40·60·100·200P)</h2>
                 <Link href="/guide" className="shrink-0 text-[12.5px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4">
                   선택 가이드
                 </Link>
@@ -243,78 +281,43 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </div>
           )}
 
-          {/* Who Is This For */}
-          <div className="mt-10 border-l-2 border-brass-500 pl-5">
-            <p className="font-label text-[11px] uppercase tracking-[0.14em] text-navy-800/70">This workbook is for</p>
-            <ul className="mt-3 space-y-2">
-              {whoFor.map((w) => (
-                <li key={w} className="flex items-start gap-2 text-[13.5px] leading-relaxed text-charcoal-900">
-                  <Check size={15} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} />
-                  {w}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 text-[12.5px] text-charcoal-600">
-              학생에게 적합한지 모르시나요?{" "}
-              <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
-                카카오톡으로 확인하기
-              </a>
-            </p>
-          </div>
+          {/* 10 · Smart Pricing (영어 레벨테스트 상품) */}
+          {hasStarter(product) && <SmartPricing />}
 
-          {/* A Different Option May Be Better If */}
-          <div className="mt-8 border border-navy-800/12 bg-ivory-200/40 p-6">
-            <h3 className="font-display text-[16px] font-semibold text-navy-950">
-              A Different Option May Be Better If…
-            </h3>
+          {/* 11 · Which Option Should I Choose? */}
+          <div className="mt-10 border border-navy-800/12 bg-ivory-200/40 p-6">
+            <h2 className="font-display text-[18px] font-semibold text-navy-950">
+              Which Option Should I Choose?
+            </h2>
+            <p className="mt-1.5 text-[13px] text-charcoal-600">어떤 구성이 맞는지 아래를 참고하세요.</p>
             <ul className="mt-3 space-y-1.5 text-[13px] text-charcoal-600">
               <li>· 시험이 매우 가까운 경우 → <span className="font-medium text-navy-900">40P</span></li>
               <li>· 기본적인 Prep을 원하는 경우 → <span className="font-medium text-navy-900">60P</span></li>
               <li>· 충분한 반복이 필요한 경우 → <span className="font-medium text-navy-900">100P</span></li>
               <li>· 100P 이상 / 추가 영역이 필요한 경우 → <span className="font-medium text-navy-900">별도 문의</span></li>
-              <li>· 현재 수준을 모르겠다면 → <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">구매 전 상담</Link></li>
+              <li>· 현재 수준을 모르겠다면 → <Link href="/find" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">교재 추천받기</Link> 또는 <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">구매 전 상담</Link></li>
             </ul>
           </div>
 
-          {/* Workbook Specification · Product Code · Test Alignment · Difficulty · Quality Checklist */}
-          <div className="mt-10">
-            <WorkbookSpecification product={product} />
-          </div>
-
-          {/* 독립 제작 고지 (Test Format Transparency) */}
-          <div className="mt-8 border border-navy-800/12 bg-ivory-200/40 p-5">
-            <p className="font-label text-[10.5px] uppercase tracking-[0.1em] text-navy-800/60">Important Notice</p>
-            <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
-              Blossom Books is an independent educational publisher. Our preparation materials are
-              independently developed for educational and practice purposes, and are not affiliated with,
-              endorsed by, or officially sponsored by the organizations that administer the referenced
-              examinations, unless explicitly stated otherwise.
+          {/* Before You Decide — 가격 이탈 방지 */}
+          <div className="mt-6 border-l-2 border-brass-500 bg-ivory-200/40 p-6">
+            <p className="font-display text-[16px] font-semibold text-navy-950">Before You Decide</p>
+            <p className="mt-2 text-[13px] leading-relaxed text-charcoal-600">
+              페이지 수가 많다고 항상 더 좋은 선택은 아닙니다. 짧게 준비하는 학생은 작은 구성으로도 충분할 수
+              있고, 시험까지 시간이 충분하거나 반복 연습이 필요한 학생은 더 큰 구성이 적합할 수 있습니다. 어떤
+              구성이 적합한지 모르겠다면 구매 전에 먼저 문의하세요.
             </p>
-            <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
-              Blossom Books는 독립 교육 출판사이며, 모든 교재는 학습·연습을 목적으로 독립적으로 제작됩니다.
-              언급된 시험을 주관하는 기관과 제휴·보증·공식 후원 관계가 없으며, 실제 기출문제나 유출문제를
-              제공하지 않습니다.
-            </p>
+            <a
+              href={siteConfig.kakaoChannelUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-5 py-2.5 text-[13px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+            >
+              <MessageCircle size={14} /> 내게 맞는 구성 문의하기
+            </a>
           </div>
 
-          {/* Revision History + 오류 신고 */}
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            <div className="border border-navy-800/12 bg-ivory-100 p-6">
-              <h2 className="font-display text-[18px] font-semibold text-navy-950">Revision History</h2>
-              <ul className="mt-4 space-y-2.5 text-[13px] text-charcoal-600">
-                <li className="flex gap-2">
-                  <span className="font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">2026 Edition</span>
-                  <span>현행 버전</span>
-                </li>
-                <li className="border-t border-navy-800/8 pt-2.5">Reviewed · 문항 및 정답·해설 검토</li>
-                <li className="border-t border-navy-800/8 pt-2.5">Checked · 오탈자·중복·레이아웃 최종 점검</li>
-                <li className="border-t border-navy-800/8 pt-2.5">Format · 현행 학습 구성 기준 반영</li>
-              </ul>
-            </div>
-            <ErrorReport code={productCode(product)} />
-          </div>
-
-          {/* 결제 직전 FAQ */}
+          {/* 12 · FAQ */}
           <div className="mt-10">
             <h2 className="font-display text-[20px] font-semibold text-navy-950">구매 전 자주 묻는 질문</h2>
             <div className="mt-4 divide-y divide-navy-800/10 border-y border-navy-800/10">
@@ -335,6 +338,39 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               {" · "}
               <Link href="/copyright" className="underline decoration-brass-500 decoration-2 underline-offset-2">교재 이용·저작권 안내</Link>
             </p>
+          </div>
+
+          {/* 독립 제작 고지 (Test Format Transparency) */}
+          <div className="mt-10 border border-navy-800/12 bg-ivory-200/40 p-5">
+            <p className="font-label text-[10.5px] uppercase tracking-[0.1em] text-navy-800/60">Important Notice</p>
+            <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
+              Blossom Books is an independent educational publisher. Our preparation materials are
+              independently developed for educational and practice purposes, and are not affiliated with,
+              endorsed by, or officially sponsored by the organizations that administer the referenced
+              examinations, unless explicitly stated otherwise.
+            </p>
+            <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
+              Blossom Books는 독립 교육 출판사이며, 모든 교재는 학습·연습을 목적으로 독립적으로 제작됩니다.
+              언급된 시험을 주관하는 기관과 제휴·보증·공식 후원 관계가 없으며, 실제 기출문제나 유출문제를
+              제공하지 않습니다.
+            </p>
+          </div>
+
+          {/* Revision History + 오류 신고 */}
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            <div className="border border-navy-800/12 bg-ivory-100 p-6">
+              <h2 className="font-display text-[18px] font-semibold text-navy-950">Revision History</h2>
+              <ul className="mt-4 space-y-2.5 text-[13px] text-charcoal-600">
+                <li className="flex gap-2">
+                  <span className="font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">2026 Edition</span>
+                  <span>현행 버전</span>
+                </li>
+                <li className="border-t border-navy-800/8 pt-2.5">Reviewed · 문항 및 정답·해설 검토</li>
+                <li className="border-t border-navy-800/8 pt-2.5">Checked · 오탈자·중복·레이아웃 최종 점검</li>
+                <li className="border-t border-navy-800/8 pt-2.5">Format · 현행 학습 구성 기준 반영</li>
+              </ul>
+            </div>
+            <ErrorReport code={productCode(product)} />
           </div>
         </div>
 
