@@ -83,6 +83,68 @@ export function pagesLabel(p: Product): string {
   return "구성 상담";
 }
 
+// 해설 언어 — SAT·AP·성인 공인시험은 영어 해설 중심, 그 외는 한글 상세해설 중심.
+export function usesKoreanExplanation(p: Product): boolean {
+  return !(p.track === "ap" || /SAT/i.test(p.examOrCurriculum) || p.track === "certified-exam");
+}
+
+export interface ExplanationLanguage {
+  labelEn: string;
+  labelKo: string;
+  note: string;
+}
+
+export function explanationLanguage(p: Product): ExplanationLanguage {
+  if (usesKoreanExplanation(p)) {
+    return {
+      labelEn: "Korean Explanation",
+      labelKo: "한글 상세해설",
+      note: "정답의 이유와 핵심 개념을 한국어로 설명해, 학생이 혼자 복습하고 부모님이 채점·설명해 주기에도 좋습니다.",
+    };
+  }
+  return {
+    labelEn: "English Explanation",
+    labelKo: "영문 해설 (핵심 한국어)",
+    note: "실제 시험 언어에 맞춰 영어로 해설하며, 핵심 포인트는 한국어로 보완해 이해를 돕습니다.",
+  };
+}
+
+// 권장 학습 방식 — 학부모가 "아이가 혼자 풀 수 있는지"를 판단하도록 돕습니다.
+export type StudyMode = "Self Study" | "Parent Guided" | "Tutor Guided";
+
+export interface StudyModeInfo {
+  mode: StudyMode;
+  ko: string;
+  recommended: boolean;
+  note: string;
+}
+
+export function studyModes(p: Product): StudyModeInfo[] {
+  const ko = usesKoreanExplanation(p);
+  const advanced = !ko; // SAT·AP·공인시험
+  const high = p.difficulty >= 4;
+  return [
+    {
+      mode: "Self Study",
+      ko: "자기주도 학습",
+      recommended: !!p.includesDetailedExplanations && !high,
+      note: "정답·상세 해설이 포함되어 학생이 스스로 채점하고 복습할 수 있습니다.",
+    },
+    {
+      mode: "Parent Guided",
+      ko: "부모 지도 학습",
+      recommended: ko,
+      note: "한글 해설로 부모님이 채점·설명을 도와주기에 적합합니다.",
+    },
+    {
+      mode: "Tutor Guided",
+      ko: "지도 학습 권장",
+      recommended: advanced || high,
+      note: "고난도·시험 특화 구성은 튜터·교사의 지도와 함께할 때 더 효과적입니다.",
+    },
+  ];
+}
+
 // 모든 상품 카드에 동일한 포맷으로 노출할 통일 정보 배지 목록.
 // 예: Grade 3–4 · SR 3.0–4.0 · Standard · 100P · 4 Skills · Answer Guide
 export function productBadges(p: Product): string[] {

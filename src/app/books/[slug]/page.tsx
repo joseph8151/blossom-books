@@ -16,10 +16,12 @@ import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import ProductCard from "@/components/books/ProductCard";
 import SamplePreviewButton from "@/components/books/SamplePreviewButton";
 import PurchasePanel from "@/components/books/PurchasePanel";
+import StudyGuidance from "@/components/books/StudyGuidance";
 import WorkbookSpecification from "@/components/books/WorkbookSpecification";
 import ErrorReport from "@/components/books/ErrorReport";
 import SmartPricing from "@/components/books/SmartPricing";
 import VolumeGuide from "@/components/common/VolumeGuide";
+import PrepComparison from "@/components/common/PrepComparison";
 import { siteConfig } from "@/data/site";
 
 export function generateStaticParams() {
@@ -54,8 +56,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const offersVolumes = productOffersVolumes(product);
   const direct = isDirectPurchase(product);
   const inside = insideTheWorkbook(product);
-  // SAT·AP·성인 공인시험은 영어 해설 중심, 그 외는 한글 상세해설 중심
-  const koExplain = !(product.track === "ap" || /SAT/i.test(product.examOrCurriculum) || product.track === "certified-exam");
 
   const receive = [
     "Student Workbook",
@@ -240,20 +240,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               완성된 Prep Package로 제공됩니다 · <span className="font-label uppercase tracking-[0.08em]">Digital PDF Format</span>
             </p>
 
-            {/* 해설 언어 강점 */}
-            <div className="mt-5 border border-brass-500/40 bg-brass-500/[0.05] p-5">
-              <p className="font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">
-                {koExplain ? "Detailed Korean Explanation Guide Included" : "Detailed Explanation Guide Included"}
-              </p>
-              <p className="mt-1.5 text-[13.5px] font-medium text-navy-950">
-                문제집(영어) + {koExplain ? "한글 상세해설집" : "영문 상세해설집"} 세트로 구성됩니다.
-              </p>
-              <p className="mt-1.5 text-[13px] leading-relaxed text-charcoal-600">
-                정답만 제공하지 않습니다. 왜 정답인지, 왜 다른 선택지가 오답인지
-                {koExplain ? " 한국어로" : " 영어로(핵심은 한국어로)"} 자세히 설명해, 학생이 혼자 풀고
-                {koExplain ? " 부모님이 채점·설명해 주기에도" : " 스스로 학습하기에도"}좋습니다.
-              </p>
-            </div>
+            {/* 해설 언어(Value) + 권장 학습 방식 */}
+            <StudyGuidance product={product} />
 
             {/* 교재 구성 */}
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -266,7 +254,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </div>
           </div>
 
-          {/* 09 · 페이지 옵션 */}
+          {/* 09 · 페이지 옵션 + 구성 비교 */}
           {offersVolumes && (
             <div className="mt-10">
               <div className="flex items-baseline justify-between gap-3">
@@ -277,6 +265,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </div>
               <div className="mt-5">
                 <VolumeGuide compact />
+              </div>
+              <div className="mt-6">
+                <PrepComparison />
               </div>
             </div>
           )}

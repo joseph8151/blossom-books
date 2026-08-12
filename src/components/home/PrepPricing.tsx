@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, FileSearch, Check, Compass } from "lucide-react";
 import PrepVolumePricing from "@/components/common/PrepVolumePricing";
+import PrepComparison from "@/components/common/PrepComparison";
 
 // 60P 기준, 가격 옆에 함께 보여주는 "받는 가치"
 const included = [
@@ -78,7 +79,18 @@ export default function PrepPricing() {
           </div>
         </div>
 
+        {/* 구성 비교 — 페이지 수를 "학습량 선택"으로 이해시키기 (가격 직전) */}
         <div className="mt-8">
+          <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Compare the options</p>
+          <p className="mt-1.5 text-[14px] text-charcoal-600">
+            페이지 수의 차이가 아니라, 각 구성이 어떤 학습을 담고 있는지 비교해보세요.
+          </p>
+          <div className="mt-4">
+            <PrepComparison />
+          </div>
+        </div>
+
+        <div className="mt-10">
           <PrepVolumePricing />
         </div>
 

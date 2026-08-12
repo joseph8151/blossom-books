@@ -13,6 +13,7 @@ export interface VolumeOption {
   tierKo: string;
   badge?: string; // "BEST VALUE"
   forWhom: string[]; // 추천 대상
+  duration?: string; // 추천 준비 기간
 }
 
 export const volumeOptions: VolumeOption[] = [
@@ -23,6 +24,7 @@ export const volumeOptions: VolumeOption[] = [
     priceUSD: 95,
     tier: "Quick Prep",
     tierKo: "핵심 유형 빠르게",
+    duration: "시험 임박 · 단기",
     forWhom: [
       "시험까지 시간이 많지 않은 학생",
       "주요 유형을 빠르게 확인하고 싶은 학생",
@@ -37,6 +39,7 @@ export const volumeOptions: VolumeOption[] = [
     tier: "Standard Prep",
     tierKo: "기본 실전 대비",
     badge: "BEST VALUE",
+    duration: "약 2–4주 표준 준비",
     forWhom: [
       "시험 유형을 충분히 연습하고 싶은 학생",
       "기본적인 실전 대비가 필요한 학생",
@@ -50,6 +53,7 @@ export const volumeOptions: VolumeOption[] = [
     priceUSD: 140,
     tier: "Intensive Prep",
     tierKo: "집중 반복·심화",
+    duration: "4주 이상 · 심화 준비",
     forWhom: [
       "시험 전 충분한 문제량이 필요한 학생",
       "여러 영역의 반복 학습이 필요한 학생",

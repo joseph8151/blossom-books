@@ -1,13 +1,19 @@
 import Link from "next/link";
-import { Sparkles, Headphones, FileSearch } from "lucide-react";
+import { Sparkles, Headphones, FileSearch, ArrowRight } from "lucide-react";
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
 import { coverToneFor } from "@/lib/utils";
-import { productBadges, isDirectPurchase, priceDisplay } from "@/lib/productMeta";
+import { productBadges, isDirectPurchase, explanationLanguage } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 
+// 가치 중심 카드 — 가격 숫자를 전면에 두지 않고, 시험·과목·핵심 영역과 샘플을 먼저 보여줍니다.
+// 정확한 가격은 상세페이지에서 구성을 충분히 확인한 뒤 노출합니다. (Smart Pricing)
 export default function ProductCard({ product }: { product: Product }) {
+  const lang = explanationLanguage(product);
+  const coreAreas = product.units.slice(0, 3).join(" · ");
+  const direct = isDirectPurchase(product);
+
   return (
     <div className="lift group relative flex flex-col overflow-hidden border border-navy-800/12 bg-ivory-100 shadow-card">
       {/* 호버 시 상단 브래스 하이라이트 */}
@@ -42,6 +48,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <h3 className="mt-3 font-display text-[20px] font-semibold leading-snug text-navy-950">
           {product.titleKo}
         </h3>
+        <p className="mt-1 text-[12px] text-charcoal-600">{product.subject}</p>
         <span className="mt-2 inline-flex w-fit items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2 py-0.5 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">
           {seriesInfo[seriesFor(product)].name}
         </span>
@@ -50,8 +57,15 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.summaryKo}
         </p>
 
-        {/* 통일 정보 배지 — 모든 카드 동일 포맷 (Grade · Level · Pages · Skills · Answer Guide) */}
-        <div className="mt-4 flex flex-wrap gap-1.5">
+        {/* 핵심 영역 */}
+        {coreAreas && (
+          <p className="mt-3 font-label text-[10.5px] uppercase tracking-[0.05em] text-navy-800/55 line-clamp-1">
+            {coreAreas}
+          </p>
+        )}
+
+        {/* 통일 정보 배지 — Grade · Level · Pages · Skills · Answer Guide (가격 아님) */}
+        <div className="mt-3.5 flex flex-wrap gap-1.5">
           {productBadges(product).map((b) => (
             <span
               key={b}
@@ -65,40 +79,33 @@ export default function ProductCard({ product }: { product: Product }) {
               <Headphones size={11} /> Audio
             </span>
           )}
+          {product.includesAnswerKey && (
+            <span className="border border-brass-500/30 bg-brass-500/[0.05] px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-brass-500">
+              {lang.labelEn}
+            </span>
+          )}
         </div>
 
         <div className="mt-6 border-t border-navy-800/10 pt-4">
-          {/* 가격 · 구매 가능 여부 */}
-          <div className="flex items-center justify-between">
-            <p className="font-display text-[17px] font-semibold text-navy-950">
-              {isDirectPurchase(product) ? (
-                priceDisplay(product)
-              ) : (
-                <span className="text-[15px]">Price on Request</span>
-              )}
-            </p>
-            <span
-              className={`font-label text-[9.5px] uppercase tracking-[0.1em] ${
-                isDirectPurchase(product) ? "text-brass-500" : "text-burgundy-700"
-              }`}
-            >
-              {isDirectPurchase(product) ? "Direct Purchase" : "Custom / Extended"}
-            </span>
-          </div>
+          {/* 가격 대신 안내 라벨 — 정확한 가격은 상세에서 */}
+          <p className="text-[12px] text-charcoal-600">
+            {direct ? "구성 선택 · 가격은 상세에서 확인" : "구성에 따라 맞춤 견적"}
+          </p>
 
-          <div className="mt-3.5 flex gap-2">
-            <Link
-              href={`/books/${product.id}`}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 bg-navy-900 px-3.5 py-2 text-[12.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
-            >
-              상세 보기
-            </Link>
+          <div className="mt-3 flex gap-2">
             <Link
               href={`/books/${product.id}#sample`}
               className="inline-flex items-center justify-center gap-1.5 border border-navy-800/25 px-3.5 py-2 text-[12.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50"
             >
               <FileSearch size={13} />
-              무료 샘플
+              샘플 보기
+            </Link>
+            <Link
+              href={`/books/${product.id}`}
+              className="flex-1 inline-flex items-center justify-center gap-1.5 bg-navy-900 px-3.5 py-2 text-[12.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+            >
+              구성·가격 확인
+              <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
