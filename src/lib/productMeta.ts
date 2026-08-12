@@ -1,6 +1,6 @@
 import { Product } from "@/lib/types";
 import { blossomLevel } from "@/lib/utils";
-import { fromPriceKRW, formatKRW, volumeByPages } from "@/data/pricing";
+import { fromPriceKRW, formatKRW, volumeByPages, starterOption } from "@/data/pricing";
 
 const DIRECT_PAGES = [40, 60, 100];
 
@@ -23,9 +23,16 @@ export function isDirectPurchase(p: Product): boolean {
   return offersVolumes(p) || isFixedDirect(p);
 }
 
+// 진입(Starter, 25P) 구성을 제공하는 상품인지 — 영어 레벨테스트 상품에만 적용합니다.
+export function hasStarter(p: Product): boolean {
+  return offersVolumes(p) && p.track === "level-test" && /English/i.test(p.subject);
+}
+
 // 상품 카드/목록에 표시할 가격 라벨.
 export function priceDisplay(p: Product): string {
-  if (offersVolumes(p)) return `${formatKRW(fromPriceKRW)}부터`;
+  if (offersVolumes(p)) {
+    return hasStarter(p) ? `${formatKRW(starterOption.priceKRW)}부터` : `${formatKRW(fromPriceKRW)}부터`;
+  }
   if (isFixedDirect(p)) {
     const v = volumeByPages(p.pageCount as number);
     return v ? formatKRW(v.priceKRW) : "Price on Request";

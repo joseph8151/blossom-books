@@ -4,8 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { MessageCircle, Check, FileSearch, ShieldCheck, Copy } from "lucide-react";
 import { Product } from "@/lib/types";
-import { flexibleVolumes, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
-import { offersVolumes } from "@/lib/productMeta";
+import { flexibleVolumes, starterOption, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
+import { offersVolumes, hasStarter } from "@/lib/productMeta";
 import { siteConfig } from "@/data/site";
 
 const trustItems = [
@@ -19,10 +19,12 @@ const trustItems = [
 
 export default function PurchasePanel({ product, isDirect }: { product: Product; isDirect: boolean }) {
   const flexible = offersVolumes(product); // 40/60/100 분량 선택 가능 여부
+  // 영어 레벨테스트 상품에는 Starter(25P) 진입 구성을 함께 제공합니다.
+  const vols = hasStarter(product) ? [starterOption, ...flexibleVolumes] : flexibleVolumes;
   const fixedVol = !flexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
   const [pages, setPages] = useState(flexible ? 60 : fixedVol?.pages ?? 60);
   const [copied, setCopied] = useState(false);
-  const selected = flexibleVolumes.find((v) => v.pages === pages) ?? fixedVol ?? flexibleVolumes[1];
+  const selected = vols.find((v) => v.pages === pages) ?? fixedVol ?? vols.find((v) => v.pages === 60) ?? vols[0];
 
   const includes = [
     "Student Workbook",
@@ -74,8 +76,8 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
                 <p className="mt-5 font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
                   Choose Your Volume
                 </p>
-                <div className="mt-3 grid grid-cols-3 gap-2">
-                  {flexibleVolumes.map((v) => {
+                <div className={`mt-3 grid gap-2 ${vols.length >= 4 ? "grid-cols-2" : "grid-cols-3"}`}>
+                  {vols.map((v) => {
                     const on = v.pages === pages;
                     return (
                       <button

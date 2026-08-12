@@ -8,6 +8,7 @@ import {
   isDirectPurchase,
   insideTheWorkbook,
   productCode,
+  hasStarter,
 } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { formatKRW, fromPriceKRW } from "@/data/pricing";
@@ -17,6 +18,7 @@ import SamplePreviewButton from "@/components/books/SamplePreviewButton";
 import PurchasePanel from "@/components/books/PurchasePanel";
 import WorkbookSpecification from "@/components/books/WorkbookSpecification";
 import ErrorReport from "@/components/books/ErrorReport";
+import SmartPricing from "@/components/books/SmartPricing";
 import VolumeGuide from "@/components/common/VolumeGuide";
 import { siteConfig } from "@/data/site";
 
@@ -209,6 +211,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               </p>
             </div>
           </div>
+
+          {/* 스마트 가격 노출 (영어 레벨테스트 상품) */}
+          {hasStarter(product) && <SmartPricing />}
 
           {/* 교재 구성 */}
           <div className="mt-10">

@@ -61,6 +61,21 @@ export const volumeOptions: VolumeOption[] = [
 // 분량 선택형 상품의 전체 옵션 (40 → 60 → 100)
 export const flexibleVolumes: VolumeOption[] = [...volumeOptions];
 
+// 진입(Starter) 상품 — 영어 레벨테스트 상품에만 제공하는 소분량 진입 구성
+export const starterOption: VolumeOption = {
+  pages: 25,
+  label: "25P",
+  priceKRW: 89000,
+  priceUSD: 65,
+  tier: "Starter Prep",
+  tierKo: "부담 없이 시작",
+  forWhom: [
+    "처음이라 교재 품질을 먼저 확인하고 싶은 경우",
+    "핵심 유형만 아주 짧게 점검하고 싶은 학생",
+    "본 교재 전 맛보기로 시작하고 싶은 경우",
+  ],
+};
+
 // 100P 초과 — 가격 문의
 export const extendedOption = {
   label: "150P+",
