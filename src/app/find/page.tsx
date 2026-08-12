@@ -8,14 +8,26 @@ import { siteConfig } from "@/data/site";
 const grades = ["Preschool / K", "Grade 1–2", "Grade 3–4", "Grade 5–6", "Grade 7–8", "Grade 9–12"];
 const levels = ["기초 (쉬운 편)", "보통 (학년 수준)", "상위 (앞서가는 편)", "잘 모르겠어요"];
 const exams = [
-  { v: "영어학원 레벨테스트", track: "level-test" },
-  { v: "국제학교 입학/편입", track: "admissions" },
-  { v: "SR / Reading Level", track: "level-test" },
-  { v: "MAP", track: "admissions" },
+  { v: "영어학원 / 학교 레벨테스트", track: "level-test" },
+  { v: "국제학교 입학/편입 시험", track: "admissions" },
+  { v: "SR / STAR Reading", track: "level-test" },
+  { v: "MAP Growth", track: "admissions" },
   { v: "CAT4", track: "admissions" },
-  { v: "미국 교과과정 (학교 보충/선행)", track: "us-curriculum" },
-  { v: "SAT", track: "certified-exam" },
+  { v: "ISEE", track: "admissions" },
+  { v: "SSAT", track: "admissions" },
+  { v: "WIDA", track: "certified-exam" },
+  { v: "TOEFL Junior", track: "certified-exam" },
+  { v: "UKiset", track: "admissions" },
+  { v: "ISEB Common Pre-Test", track: "admissions" },
+  { v: "Digital SAT", track: "certified-exam" },
   { v: "AP", track: "ap" },
+  { v: "IGCSE", track: "us-curriculum" },
+  { v: "GRE", track: "certified-exam" },
+  { v: "LSAT", track: "certified-exam" },
+  { v: "PTE", track: "certified-exam" },
+  { v: "IELTS", track: "certified-exam" },
+  { v: "OET", track: "certified-exam" },
+  { v: "미국 교과과정 (보충/선행)", track: "us-curriculum" },
   { v: "기타 / 잘 모르겠어요", track: "" },
 ];
 const periods = [
