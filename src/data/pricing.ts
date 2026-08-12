@@ -22,7 +22,7 @@ export const volumeOptions: VolumeOption[] = [
     label: "40P",
     priceKRW: 130000,
     priceUSD: 95,
-    tier: "Quick Prep",
+    tier: "Essential Prep",
     tierKo: "핵심 유형 빠르게",
     duration: "시험 임박 · 단기",
     forWhom: [
@@ -36,9 +36,9 @@ export const volumeOptions: VolumeOption[] = [
     label: "60P",
     priceKRW: 150000,
     priceUSD: 110,
-    tier: "Standard Prep",
-    tierKo: "기본 실전 대비",
-    badge: "BEST VALUE",
+    tier: "Complete Prep",
+    tierKo: "충분한 실전 대비",
+    badge: "RECOMMENDED",
     duration: "약 2–4주 표준 준비",
     forWhom: [
       "시험 유형을 충분히 연습하고 싶은 학생",
