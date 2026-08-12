@@ -24,7 +24,17 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
   const fixedVol = !flexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
   const [pages, setPages] = useState(flexible ? 60 : fixedVol?.pages ?? 60);
   const [copied, setCopied] = useState(false);
+  const [addOns, setAddOns] = useState<string[]>([]);
   const selected = vols.find((v) => v.pages === pages) ?? fixedVol ?? vols.find((v) => v.pages === 60) ?? vols[0];
+
+  // 함께 준비하면 좋은 영역 — 현재 교재 과목과 겹치지 않는 항목만 제안 (Smart Upsell)
+  const addOnPool = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
+  const subj = product.subject.toLowerCase();
+  const addOnOptions = addOnPool.filter((a) => !subj.includes(a.toLowerCase()));
+
+  function toggleAddOn(a: string) {
+    setAddOns((prev) => (prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a]));
+  }
 
   const includes = [
     "Student Workbook",
@@ -49,6 +59,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
       lines.push("구성: 별도 구성 (가격 문의)");
     }
     lines.push(`학생 학년(참고): ${product.gradeRange}`);
+    if (addOns.length) lines.push(`함께 준비 희망 영역: ${addOns.join(", ")} (별도 구성 안내)`);
     lines.push("구매를 원합니다.");
     return lines.join("\n");
   }
@@ -159,6 +170,33 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
             구성 상담
           </Link>
         </p>
+
+        {/* Smart Upsell — 함께 준비하면 좋은 영역 (별도 구성 문의) */}
+        {isDirect && addOnOptions.length > 0 && (
+          <div className="mt-4 border-t border-navy-800/12 pt-4">
+            <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">Add focused practice</p>
+            <p className="mt-1 text-[11.5px] leading-relaxed text-charcoal-600">
+              필요한 영역을 함께 준비하시나요? 선택하면 문의에 포함됩니다. (구성·가격은 상담 시 안내)
+            </p>
+            <div className="mt-2.5 flex flex-wrap gap-1.5">
+              {addOnOptions.map((a) => {
+                const on = addOns.includes(a);
+                return (
+                  <button
+                    key={a}
+                    type="button"
+                    onClick={() => toggleAddOn(a)}
+                    className={`inline-flex items-center gap-1 border px-2.5 py-1.5 text-[12px] font-medium transition-colors ${
+                      on ? "border-navy-900 bg-navy-900 text-ivory-100" : "border-navy-800/20 text-charcoal-600 hover:border-navy-800/40"
+                    }`}
+                  >
+                    {on ? "✓" : "+"} {a}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* 포함 구성 */}
         <div className="mt-5 border-t border-navy-800/12 pt-4">
