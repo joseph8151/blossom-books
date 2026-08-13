@@ -9,6 +9,7 @@ import {
   insideTheWorkbook,
   productCode,
   hasStarter,
+  nextWorkbooks,
 } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { formatKRW, fromPriceKRW } from "@/data/pricing";
@@ -53,6 +54,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   if (!product) notFound();
 
   const related = products.filter((p) => p.track === product.track && p.id !== product.id).slice(0, 3);
+  const nextUp = nextWorkbooks(product, products);
   const offersVolumes = productOffersVolumes(product);
   const direct = isDirectPurchase(product);
   const inside = insideTheWorkbook(product);
@@ -377,6 +379,45 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
       </div>
+
+      {/* After This Workbook — 다음 단계(재구매 연결) */}
+      {nextUp.length > 0 && (
+        <div className="mt-20 border-t border-navy-800/12 pt-14">
+          <span className="eyebrow">After this workbook</span>
+          <h2 className="mt-3 font-display text-[24px] font-semibold text-navy-950">이 교재 다음 단계는?</h2>
+          <p className="mt-2 text-[14px] leading-relaxed text-charcoal-600">
+            교재 하나로 끝나지 않습니다. 현재 수준에서 이어가기 좋은 다음 구성을 안내합니다.
+          </p>
+          <div className="mt-7 flex flex-col gap-3 lg:flex-row lg:items-stretch">
+            <div className="flex-1 border border-navy-800/12 bg-ivory-200/40 p-5">
+              <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">현재</p>
+              <p className="mt-1.5 font-display text-[16px] font-semibold text-navy-950">{product.titleKo}</p>
+              <span className="mt-2 inline-flex items-center border border-navy-800/15 bg-ivory-100 px-2 py-0.5 font-label text-[9.5px] uppercase tracking-[0.1em] text-navy-800/70">
+                {blossomLevel(product.difficulty)}
+              </span>
+            </div>
+            {nextUp.map((n, i) => (
+              <div key={n.id} className="flex items-center gap-3 lg:contents">
+                <ArrowRight size={18} className="hidden shrink-0 self-center text-brass-500 lg:block" />
+                <Link
+                  href={`/books/${n.id}`}
+                  className="lift group flex-1 border border-brass-500/40 bg-brass-500/[0.04] p-5 transition-colors hover:border-brass-500/70"
+                >
+                  <p className="font-label text-[10px] uppercase tracking-[0.12em] text-brass-500">
+                    {i === 0 ? "다음 단계" : "그 다음"}
+                  </p>
+                  <p className="mt-1.5 font-display text-[16px] font-semibold text-navy-950">{n.titleKo}</p>
+                  <p className="mt-1 text-[12px] text-charcoal-600">{trackLabels[n.track]} · {blossomLevel(n.difficulty)}</p>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-[12.5px] font-medium text-navy-900">
+                    이어서 보기
+                    <ArrowRight size={13} className="text-brass-500 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* 관련 교재 */}
       {related.length > 0 && (

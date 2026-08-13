@@ -6,6 +6,7 @@ import TestAlignment from "@/components/home/TestAlignment";
 import QuestionToUnderstanding from "@/components/home/QuestionToUnderstanding";
 import LevelAssessment from "@/components/home/LevelAssessment";
 import LevelTestStatement from "@/components/home/LevelTestStatement";
+import CurriculumMap from "@/components/home/CurriculumMap";
 import CollectionShowcase from "@/components/home/CollectionShowcase";
 import EditorialStandards from "@/components/home/EditorialStandards";
 import ResearchProcess from "@/components/home/ResearchProcess";
@@ -45,6 +46,7 @@ export default function HomePage() {
 
       {/* Placement / Level Test — 별도 핵심 진입 강화 */}
       <LevelAssessment />
+      <CurriculumMap />
       <LevelTestStatement />
 
       {/* Trust — 검증 가능한 구조적 신뢰 */}
