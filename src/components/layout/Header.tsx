@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, Heart } from "lucide-react";
 import { primaryNav, siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
+import { useWishlistIds } from "@/components/books/WishlistButton";
 
 // 데스크톱 상단 바에 노출할 핵심 메뉴 (과밀 방지를 위해 엄선). 전체 메뉴는 모바일 패널에 유지됩니다.
 const koDesktopNav = [
@@ -59,6 +60,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isEn = pathname?.startsWith("/en") ?? false;
+  const wishCount = useWishlistIds().length;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -90,17 +92,20 @@ export default function Header() {
       <div className="h-[3px] w-full bg-gradient-to-r from-brass-500/0 via-brass-500 to-brass-500/0" />
 
       <div className="mx-auto flex h-[74px] max-w-[1440px] items-center justify-between gap-4 px-5 lg:px-10">
-        {/* 로고 */}
+        {/* 로고 — 모노그램 + 워드마크 */}
         <Link
           href={isEn ? "/en" : "/"}
-          className="flex items-baseline gap-2 shrink-0"
+          className="group flex items-center gap-2.5 shrink-0"
           onClick={() => setOpen(false)}
         >
-          <span className="font-display text-[26px] font-semibold tracking-tight text-navy-900">
-            Blossom Books
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-brass-500/55 bg-brass-500/[0.06] transition-colors group-hover:border-brass-500">
+            <span className="font-display text-[19px] font-semibold italic leading-none text-brass-500">B</span>
           </span>
-          <span className="hidden font-label text-[10px] uppercase tracking-[0.18em] text-brass-500 sm:inline">
-            Educational Workbook Publisher
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-[23px] font-semibold tracking-[-0.01em] text-navy-900">Blossom Books</span>
+            <span className="mt-1 hidden font-label text-[8.5px] uppercase tracking-[0.22em] text-brass-500 sm:inline">
+              Educational Workbook Publisher
+            </span>
           </span>
         </Link>
 
@@ -130,6 +135,21 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2.5 sm:gap-3">
+          {!isEn && (
+            <Link
+              href="/wishlist"
+              aria-label="관심 교재"
+              className="relative hidden h-10 w-10 items-center justify-center rounded-full text-navy-900 transition-colors hover:bg-navy-900/5 lg:flex"
+            >
+              <Heart size={18} className={wishCount > 0 ? "fill-burgundy-700 text-burgundy-700" : ""} />
+              {wishCount > 0 && (
+                <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-burgundy-700 px-1 font-label text-[9px] font-semibold text-ivory-100">
+                  {wishCount}
+                </span>
+              )}
+            </Link>
+          )}
+
           <LanguageSwitcher isEn={isEn} />
 
           <a
@@ -176,6 +196,18 @@ export default function Header() {
                 {isActive(item.href) && <span className="h-1.5 w-1.5 rounded-full bg-brass-500" />}
               </Link>
             ))}
+            {!isEn && (
+              <Link
+                href="/wishlist"
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-between border-b border-navy-800/8 py-3.5 text-[15px] text-charcoal-900 hover:text-navy-900"
+              >
+                <span className="inline-flex items-center gap-2">
+                  <Heart size={16} className={wishCount > 0 ? "fill-burgundy-700 text-burgundy-700" : ""} /> 관심 교재
+                </span>
+                {wishCount > 0 && <span className="font-label text-[12px] text-burgundy-700">{wishCount}</span>}
+              </Link>
+            )}
             <a
               href={siteConfig.kakaoChannelUrl}
               target="_blank"
