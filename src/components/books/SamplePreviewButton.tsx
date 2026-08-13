@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { X, FileSearch, MessageCircle, ChevronLeft, ChevronRight, BookOpen, KeyRound } from "lucide-react";
+import { X, FileSearch, MessageCircle, ChevronLeft, ChevronRight, BookOpen, KeyRound, Check, PenLine } from "lucide-react";
 import { Product } from "@/lib/types";
 import { siteConfig } from "@/data/site";
 import { isFourSkill, productCode } from "@/lib/productMeta";
@@ -52,6 +52,22 @@ const BANK_BY_ID: Record<string, SampleItem[]> = {
 };
 
 const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challenge"];
+const DIFF_COLOR: Record<Difficulty, string> = {
+  Foundation: "#7d8a6a",
+  Standard: "#ad8a4e",
+  Advanced: "#b06a3c",
+  Challenge: "#8a4b52",
+};
+const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
+
+// 지문 첫 줄이 제목 형태면 분리해 표지처럼 강조합니다.
+function splitPassage(passage: string): { title?: string; body: string } {
+  const parts = passage.split("\n\n");
+  if (parts.length >= 2 && parts[0].length <= 60 && !/[.!?"']$/.test(parts[0].trim())) {
+    return { title: parts[0].trim(), body: parts.slice(1).join("\n\n") };
+  }
+  return { body: passage };
+}
 
 // 상품 특성에 맞는 샘플 문항 세트를 구성합니다 (과목별 유형·난이도 다양).
 function buildWorkbookItems(product: Product): SampleItem[] {
@@ -213,26 +229,39 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
             <div className="px-5 py-6 lg:px-7">
               {/* 콘텐츠 목차 */}
               <div className="mb-5">
-                <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">This sample includes</p>
-                <div className="mt-2 flex flex-wrap gap-1.5">
+                <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">
+                  This sample includes · {items.length} pages
+                </p>
+                <div className="mt-2.5 flex flex-wrap gap-1.5">
                   {items.map((it, i) => (
                     <button
                       key={i}
                       onClick={() => setPage(i)}
-                      className={`border px-2 py-1 text-[11px] transition-colors ${
-                        i === page ? "border-brass-500 bg-brass-500/10 text-navy-900" : "border-navy-800/15 text-charcoal-600 hover:border-navy-800/35"
+                      className={`inline-flex items-center gap-1.5 border px-2.5 py-1.5 text-[11px] transition-all ${
+                        i === page
+                          ? "border-navy-900 bg-navy-900 text-ivory-100 shadow-soft"
+                          : "border-navy-800/15 text-charcoal-600 hover:-translate-y-0.5 hover:border-navy-800/35"
                       }`}
                     >
-                      {String(i + 1).padStart(2, "0")} {it.type}
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: DIFF_COLOR[it.difficulty] }} />
+                      <span className="font-label tracking-[0.06em] opacity-60">{String(i + 1).padStart(2, "0")}</span>
+                      {it.type}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* 페이지 뷰 */}
+              {/* 페이지 뷰 — 실제 출판 교재 페이지처럼 */}
               {item && tab === "workbook" && (
-                <article className="paper-rule border border-navy-800/15 bg-ivory-100 p-6 shadow-soft sm:p-8">
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-navy-800/15 pb-3">
+                <article className="relative overflow-hidden border border-navy-800/15 bg-ivory-100 shadow-[0_18px_50px_-28px_rgba(13,22,38,0.5)]">
+                  <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brass-500 via-brass-400 to-brass-500" />
+                  {/* SAMPLE 워터마크 */}
+                  <span className="pointer-events-none absolute -right-2 top-1/2 -translate-y-1/2 select-none font-display text-[92px] font-bold leading-none tracking-tight text-navy-900/[0.035] rotate-90">
+                    SAMPLE
+                  </span>
+
+                  {/* 러닝 헤더 */}
+                  <div className="flex items-center justify-between gap-2 border-b border-navy-800/12 bg-ivory-200/40 px-6 py-3">
                     <div className="flex items-center gap-2">
                       <span className="font-label text-[10px] uppercase tracking-[0.14em] text-brass-500">{item.area}</span>
                       <span className="text-navy-800/25">·</span>
@@ -240,44 +269,85 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                     </div>
                     <DifficultyTag d={item.difficulty} />
                   </div>
-                  <p className="mt-2 text-[11.5px] text-charcoal-600">{item.skill}</p>
 
-                  {item.passage && (
-                    <div className="mt-4 max-h-72 overflow-y-auto border-l-2 border-brass-500 pl-4">
-                      <p className="whitespace-pre-line text-[13.5px] leading-[1.75] text-charcoal-900">{item.passage}</p>
-                    </div>
-                  )}
+                  <div className="relative px-6 py-6 sm:px-9 sm:py-8">
+                    <p className="font-label text-[10.5px] uppercase tracking-[0.08em] text-charcoal-600/70">{item.skill}</p>
 
-                  <div className="mt-5 flex gap-3">
-                    <span className="font-display text-[16px] font-semibold text-navy-900">{page + 1}.</span>
-                    <div className="flex-1">
-                      <p className="text-[14.5px] leading-relaxed text-charcoal-900">{item.question}</p>
-                      {item.figure && <SampleFigure name={item.figure} />}
-                      {item.choices ? (
-                        <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-1.5 text-[13.5px] text-charcoal-600 sm:grid-cols-2">
-                          {item.choices.map((c, ci) => (
-                            <span key={ci}>{["①", "②", "③", "④"][ci]} {c}</span>
-                          ))}
+                    {/* 지문 */}
+                    {item.passage && (() => {
+                      const { title, body } = splitPassage(item.passage!);
+                      return (
+                        <div className="mt-4 border border-navy-800/12 bg-ivory-200/25">
+                          <div className="flex items-center gap-1.5 border-b border-navy-800/10 px-4 py-2">
+                            <BookOpen size={12} className="text-brass-500" />
+                            <span className="font-label text-[9.5px] uppercase tracking-[0.14em] text-navy-800/60">Reading Passage</span>
+                          </div>
+                          <div className="max-h-72 overflow-y-auto px-5 py-4">
+                            {title && <p className="mb-2 font-display text-[15px] font-semibold text-navy-950">{title}</p>}
+                            <p className="whitespace-pre-line text-[13.5px] leading-[1.8] text-charcoal-900">{body}</p>
+                          </div>
                         </div>
-                      ) : (
-                        <div className="mt-3 space-y-2">
-                          <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">Written Response</p>
-                          <div className="h-px w-full bg-navy-800/12" />
-                          <div className="h-px w-full bg-navy-800/12" />
-                        </div>
-                      )}
+                      );
+                    })()}
+
+                    {/* 문항 */}
+                    <div className="mt-6 flex gap-3.5">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy-900 font-display text-[14px] font-semibold text-ivory-100">
+                        {page + 1}
+                      </span>
+                      <div className="flex-1">
+                        <p className="pt-1 text-[15px] font-medium leading-relaxed text-navy-950">{item.question}</p>
+                        {item.figure && (
+                          <div className="mt-3 flex justify-center border border-navy-800/10 bg-ivory-200/30 px-3 py-4">
+                            <SampleFigure name={item.figure} />
+                          </div>
+                        )}
+                        {item.choices ? (
+                          <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                            {item.choices.map((c, ci) => (
+                              <div
+                                key={ci}
+                                className="flex items-center gap-2.5 border border-navy-800/15 bg-ivory-100 px-3 py-2.5 text-[13.5px] text-charcoal-900 transition-colors hover:border-brass-500/50"
+                              >
+                                <span className="flex h-6 w-6 shrink-0 items-center justify-center border border-navy-800/25 font-label text-[11px] font-semibold text-navy-800">
+                                  {OPTION_LETTERS[ci]}
+                                </span>
+                                {c}
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="mt-4 border border-navy-800/12 bg-ivory-200/25 p-4">
+                            <p className="flex items-center gap-1.5 font-label text-[9.5px] uppercase tracking-[0.12em] text-charcoal-600/60">
+                              <PenLine size={12} className="text-brass-500" /> Written Response
+                            </p>
+                            <div className="mt-3 space-y-3">
+                              <div className="h-px w-full bg-navy-800/12" />
+                              <div className="h-px w-full bg-navy-800/12" />
+                              <div className="h-px w-3/4 bg-navy-800/12" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="mt-6 flex items-center justify-between border-t border-navy-800/12 pt-3 font-label text-[9px] uppercase tracking-[0.16em] text-charcoal-600/60">
-                    <span>Blossom Books · {code}</span>
-                    <span>Sample · Workbook {String(page + 1).padStart(2, "0")}</span>
+                  {/* 러닝 푸터 */}
+                  <div className="flex items-center justify-between border-t border-navy-800/12 bg-ivory-200/40 px-6 py-2.5">
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="flex h-4 w-4 items-center justify-center bg-navy-900 font-display text-[7px] font-bold text-ivory-100">BB</span>
+                      <span className="font-label text-[9px] uppercase tracking-[0.14em] text-charcoal-600/60">{code}</span>
+                    </span>
+                    <span className="font-label text-[9px] uppercase tracking-[0.16em] text-charcoal-600/60">
+                      Workbook · p.{String(page + 1).padStart(2, "0")}
+                    </span>
                   </div>
                 </article>
               )}
 
               {item && tab === "answer" && (
-                <article className="border border-navy-800/15 bg-navy-950 p-6 text-ivory-100 shadow-soft sm:p-8">
+                <article className="relative overflow-hidden border border-navy-800/15 bg-navy-950 p-6 text-ivory-100 shadow-[0_18px_50px_-28px_rgba(13,22,38,0.6)] sm:p-8">
+                  <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brass-500 via-brass-400 to-brass-500" />
                   <div className="flex items-center justify-between border-b border-ivory-100/15 pb-3">
                     <span className="font-label text-[10px] uppercase tracking-[0.14em] text-brass-400">
                       Answer &amp; Explanation · {item.type}
@@ -286,11 +356,13 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                       {useKo ? "한글 상세해설" : "English + 한글 핵심"}
                     </span>
                   </div>
-                  <p className="mt-4 text-[13px] text-ivory-200/70">{item.question}</p>
-                  <div className="mt-4 space-y-3">
+                  <p className="mt-4 text-[13px] leading-relaxed text-ivory-200/70">{item.question}</p>
+                  <div className="mt-4 space-y-4">
                     <div>
                       <p className="font-label text-[10px] uppercase tracking-[0.1em] text-brass-400">Correct Answer</p>
-                      <p className="mt-1 text-[14px] font-medium text-ivory-100">{item.answer}</p>
+                      <span className="mt-1.5 inline-flex items-center gap-2 border border-brass-400/40 bg-brass-400/10 px-3 py-1.5 text-[14px] font-medium text-ivory-100">
+                        <Check size={15} className="text-brass-300" strokeWidth={2.5} /> {item.answer}
+                      </span>
                     </div>
                     <div>
                       <p className="font-label text-[10px] uppercase tracking-[0.1em] text-brass-400">
@@ -320,9 +392,14 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                       </div>
                     )}
                   </div>
-                  <div className="mt-6 flex items-center justify-between border-t border-ivory-100/12 pt-3 font-label text-[9px] uppercase tracking-[0.16em] text-ivory-200/45">
-                    <span>Blossom Books · {code}</span>
-                    <span>Answer Guide {String(page + 1).padStart(2, "0")}</span>
+                  <div className="mt-6 flex items-center justify-between border-t border-ivory-100/12 pt-3">
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="flex h-4 w-4 items-center justify-center border border-brass-400/50 font-display text-[7px] font-bold text-brass-300">BB</span>
+                      <span className="font-label text-[9px] uppercase tracking-[0.14em] text-ivory-200/45">{code}</span>
+                    </span>
+                    <span className="font-label text-[9px] uppercase tracking-[0.16em] text-ivory-200/45">
+                      Answer Guide · p.{String(page + 1).padStart(2, "0")}
+                    </span>
                   </div>
                 </article>
               )}
