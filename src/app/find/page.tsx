@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { MessageCircle, Sparkles, ArrowRight, Copy, Check } from "lucide-react";
+import { MessageCircle, Sparkles, ArrowRight, Copy, Check, Mail, FileSearch } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { products, trackLabels } from "@/data/products";
 import { isFourSkill } from "@/lib/productMeta";
@@ -96,28 +96,88 @@ export default function FindPage() {
   const [f, setF] = useState({ grade: "", level: "", sr: "", exam: "", period: "", areas: [] as string[] });
   const [done, setDone] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [emailOpen, setEmailOpen] = useState(false);
+  const [parentEmail, setParentEmail] = useState("");
+  const [emailSent, setEmailSent] = useState(false);
+  const teamSent = useRef(false);
 
   const recVolume = periods.find((p) => p.v === f.period)?.vol ?? "60P";
   const recTrack = exams.find((e) => e.v === f.exam)?.track ?? "";
-  const catalogHref = recTrack ? `/books?track=${recTrack}` : "/books";
   const rec = done ? recommendProduct(f, recTrack) : null;
+  const suggestCustom = done && (!rec || rec.score < 68);
+  const volumeReason =
+    recVolume === "40P"
+      ? "시험이 가까워 핵심 유형을 빠르게 점검하기 좋은 분량입니다."
+      : recVolume === "100P"
+      ? "준비 기간이 넉넉해 충분한 반복·심화까지 담기 좋은 분량입니다."
+      : "여러 유형을 균형 있게 연습하기 좋은 표준 분량입니다.";
 
   function toggleArea(a: string) {
     setF((prev) => ({ ...prev, areas: prev.areas.includes(a) ? prev.areas.filter((x) => x !== a) : [...prev.areas, a] }));
   }
 
-  function message() {
+  // 팀에게 자동 전송할 추천 요약
+  function recSummary(): string {
     return [
-      "안녕하세요. Blossom Books 교재 추천을 문의드립니다.",
+      "새로운 교재 추천이 생성되었습니다.",
+      "",
+      "■ 기본 정보",
+      `- 학년: ${f.grade || "-"}`,
+      `- 현재 수준: ${f.level || "-"}`,
+      `- SR / Reading Level: ${f.sr || "모름"}`,
+      `- 준비 시험: ${f.exam || "-"}`,
+      `- 남은 기간: ${f.period || "-"}`,
+      `- 집중 영역: ${f.areas.join(", ") || "-"}`,
+      "",
+      "■ 추천 결과",
+      `- 교재: ${rec ? rec.product.titleKo : "커스텀 제작 제안"}`,
+      `- 분량: ${recVolume}`,
+      `- Fit: ${rec ? rec.score + "%" : "-"}`,
+      "",
+      "■ 추천 이유",
+      ...(rec ? rec.reasons.map((r) => `- ${r}`) : ["- 기존 교재로 커버가 어려워 맞춤 제작을 제안합니다."]),
+      "",
+      "이 추천은 자동 생성되었습니다. 상담 시 학생 상황을 한 번 더 확인해 주세요.",
+    ].join("\n");
+  }
+
+  // 카카오 상담 시 자동 복사되는 메시지
+  function kakaoRecMessage(): string {
+    return [
+      "안녕하세요.",
+      "추천 결과를 보고 상담 요청드립니다.",
+      "",
       `학년: ${f.grade || "-"}`,
-      `현재 수준: ${f.level || "-"}`,
-      f.sr ? `SR / Reading Level: ${f.sr}` : null,
-      `준비 시험: ${f.exam || "-"}`,
-      `시험일까지: ${f.period || "-"}`,
-      f.areas.length ? `집중 영역: ${f.areas.join(", ")}` : null,
-      `추천 분량(참고): ${recVolume}`,
-      "적합한 교재와 구성을 안내 부탁드립니다.",
-    ].filter(Boolean).join("\n");
+      `시험: ${f.exam || "-"}`,
+      `추천 분량: ${recVolume}`,
+      `집중 영역: ${f.areas.join(", ") || "-"}`,
+      "",
+      "이 구성으로 진행해도 될지 상담 부탁드립니다.",
+    ].join("\n");
+  }
+
+  async function sendTeam(subjectSuffix: string, extra?: Record<string, string>): Promise<boolean> {
+    const key = siteConfig.web3formsAccessKey;
+    if (!key) return false;
+    const path = typeof window !== "undefined" ? window.location.pathname : "";
+    const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: key,
+          from_name: "Blossom 추천 시스템",
+          subject: `[Blossom 추천] ${f.grade || "-"} · ${f.exam || "-"} · ${recVolume}${subjectSuffix}`,
+          message: recSummary() + `\n\n기기/경로: ${ua} · ${path}`,
+          ...extra,
+        }),
+      });
+      const json = (await res.json().catch(() => ({ success: false }))) as { success?: boolean };
+      return !!json.success;
+    } catch {
+      return false;
+    }
   }
 
   function submit(e: React.FormEvent) {
@@ -125,12 +185,27 @@ export default function FindPage() {
     setDone(true);
   }
 
+  // 추천 생성 시 팀 이메일로 1회 자동 전송
+  useEffect(() => {
+    if (!done || teamSent.current) return;
+    teamSent.current = true;
+    void sendTeam("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done]);
+
   function goKakao() {
     try {
-      navigator.clipboard?.writeText(message());
+      navigator.clipboard?.writeText(kakaoRecMessage());
       setCopied(true);
     } catch {}
+    void sendTeam(" · 카카오 클릭", { 이벤트: "카카오 상담 클릭됨" });
     window.open(siteConfig.kakaoChannelUrl, "_blank", "noopener,noreferrer");
+  }
+
+  async function sendToParent() {
+    if (!parentEmail.trim()) return;
+    await sendTeam(" · 이메일 요청", { 학부모_이메일: parentEmail.trim(), 이벤트: "이메일로 추천 받기" });
+    setEmailSent(true);
   }
 
   const selectCls = "w-full border border-navy-800/20 bg-ivory-100 px-3 py-2.5 text-[13.5px] text-charcoal-900 outline-none focus:border-navy-800/50";
@@ -254,22 +329,86 @@ export default function FindPage() {
             </div>
           )}
 
+          {/* 추천 분량 + 이유 */}
+          <div className="mt-3 flex items-center gap-3 border border-navy-800/12 bg-ivory-100 p-4">
+            <span className="font-display text-[20px] font-semibold text-navy-950">{recVolume}</span>
+            <span className="text-[12.5px] leading-snug text-charcoal-600">{volumeReason}</span>
+          </div>
+
+          {/* 커스텀 제안 (매칭이 약하거나 특이 조합) */}
+          {suggestCustom && (
+            <div className="mt-3 border border-burgundy-700/25 bg-burgundy-700/[0.04] p-4">
+              <p className="text-[13px] font-medium text-burgundy-700">기존 교재로 딱 맞추기 어려운 조합일 수 있어요.</p>
+              <p className="mt-1 text-[12.5px] leading-relaxed text-charcoal-600">
+                학생의 목적과 수준에 맞춰 <Link href="/custom-order" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">맞춤 제작</Link>으로
+                구성해 드릴 수 있습니다. 상담에서 더 정확하게 맞춰 드립니다.
+              </p>
+            </div>
+          )}
+
           <p className="mt-4 text-[13px] leading-relaxed text-charcoal-600">
-            준비 기간과 목적을 고려한 참고 추천입니다. 정확한 교재와 Level은 상담원이 학생 상황을 확인한 뒤
-            안내해 드립니다. (더 많은 페이지가 항상 더 좋은 선택은 아닙니다.)
+            정보가 부족하면 상담을 통해 더 정확하게 맞출 수 있습니다. 가장 비싼 구성이 아니라, 학생에게
+            필요한 적정 분량을 우선 추천합니다.
           </p>
+
+          {/* 다음 행동 */}
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            <button onClick={goKakao} className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
+            <Link
+              href={rec ? `/books/${rec.product.id}#sample` : "/books"}
+              className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-5 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+            >
+              <FileSearch size={15} /> 무료 샘플 보기
+            </Link>
+            <button onClick={goKakao} className="inline-flex items-center gap-2 bg-navy-900 px-5 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
               <MessageCircle size={15} /> 카카오톡으로 추천받기
             </button>
-            <Link href={catalogHref} className="inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">
-              관련 교재 보기 <ArrowRight size={15} />
-            </Link>
+            <button
+              onClick={() => setEmailOpen((v) => !v)}
+              className="inline-flex items-center gap-2 border border-navy-800/25 px-5 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+            >
+              <Mail size={15} /> 이메일로 추천 받기
+            </button>
           </div>
+
           {copied && (
             <p className="mt-3 flex items-center gap-1.5 text-[12px] text-brass-500">
-              <Copy size={12} /> 입력 내용이 복사되었습니다. 카카오톡 채팅창에 붙여넣어 주세요.
+              <Copy size={12} /> 추천 요약이 복사되었습니다. 카카오톡 채팅창에 붙여넣어 주세요.
             </p>
+          )}
+
+          {/* 이메일로 받기 (선택) */}
+          {emailOpen && (
+            <div className="mt-4 border border-navy-800/12 bg-ivory-100 p-5">
+              {emailSent ? (
+                <p className="flex items-center gap-2 text-[13px] text-navy-900">
+                  <Check size={15} className="text-brass-500" strokeWidth={2.4} />
+                  접수되었습니다. 입력하신 이메일로 추천 내용을 안내해 드리겠습니다.
+                </p>
+              ) : (
+                <>
+                  <p className="text-[13px] font-medium text-navy-950">추천 내용을 이메일로도 받아보시겠어요? <span className="font-normal text-charcoal-600">(선택사항)</span></p>
+                  <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+                    <input
+                      type="email"
+                      value={parentEmail}
+                      onChange={(e) => setParentEmail(e.target.value)}
+                      placeholder="이메일 주소"
+                      className="flex-1 border border-navy-800/20 bg-ivory-100 px-3 py-2.5 text-[13.5px] text-charcoal-900 outline-none focus:border-navy-800/50"
+                    />
+                    <button
+                      onClick={sendToParent}
+                      disabled={!parentEmail.trim()}
+                      className="inline-flex items-center justify-center gap-1.5 bg-navy-900 px-5 py-2.5 text-[13px] font-medium text-ivory-100 transition-colors hover:bg-navy-800 disabled:opacity-40"
+                    >
+                      추천 내용 보내기
+                    </button>
+                  </div>
+                  <p className="mt-2 text-[11.5px] text-charcoal-600/80">
+                    개인정보는 추천 안내 목적에만 사용됩니다.
+                  </p>
+                </>
+              )}
+            </div>
           )}
         </div>
       )}

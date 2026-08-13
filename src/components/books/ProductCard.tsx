@@ -7,6 +7,7 @@ import { productBadges, isDirectPurchase, explanationLanguage } from "@/lib/prod
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import { BlossomSeal } from "@/components/books/BlossomSeal";
+import WishlistButton from "@/components/books/WishlistButton";
 
 // 가치 중심 카드 — 가격 숫자를 전면에 두지 않고, 시험·과목·핵심 영역과 샘플을 먼저 보여줍니다.
 // 정확한 가격은 상세페이지에서 구성을 충분히 확인한 뒤 노출합니다. (Smart Pricing)
@@ -25,6 +26,7 @@ export default function ProductCard({ product }: { product: Product }) {
             무료 샘플
           </span>
         )}
+        <WishlistButton productId={product.id} className="absolute right-3 top-3 z-30" />
         <BookCoverMockup
           eyebrow={product.materialType === "existing" ? "Student Workbook" : "Custom Order"}
           title={product.title.split(" — ")[0]}
