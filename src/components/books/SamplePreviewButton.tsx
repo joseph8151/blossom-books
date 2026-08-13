@@ -33,6 +33,7 @@ import {
   apHistoryBank,
   mapBank,
   satMathBank,
+  apExtraByProduct,
   placementReadingByProduct,
   srReadingByProduct,
 } from "@/data/sampleBank";
@@ -126,7 +127,7 @@ function buildWorkbookItems(product: Product): SampleItem[] {
   if (product.id === "algebra-1-workbook") return algebraBank.filter((i) => ["Foundation", "Standard"].includes(i.difficulty));
   if (product.id === "algebra-2-workbook") return algebraBank.filter((i) => ["Advanced", "Challenge"].includes(i.difficulty));
   // 제품 id 전용 세트 (AP 과목별 · MAP · SAT Math) — 복합 문제 + 도형/그래프
-  if (BANK_BY_ID[product.id]) return BANK_BY_ID[product.id];
+  if (BANK_BY_ID[product.id]) return [...BANK_BY_ID[product.id], ...(apExtraByProduct[product.id] ?? [])];
   if (/scat/.test(key)) return scatBank;
   if (/reasoning|cat4|verbal|non-verbal|spatial|general ability/.test(key)) return reasoningBank;
   if (/oet/.test(key)) return oetBank;
