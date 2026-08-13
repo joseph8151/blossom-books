@@ -21,8 +21,9 @@ const koDesktopNav = [
 // 영문(/en) 페이지 네비게이션 — 한 장짜리 랜딩이므로 페이지 내 앵커로 이동합니다.
 const enNav = [
   { label: "Home", href: "/en" },
-  { label: "Why Blossom Books", href: "/en#why" },
-  { label: "Sample Books", href: "/en#samples" },
+  { label: "Browse Books", href: "/en/books" },
+  { label: "Find My Workbook", href: "/en/find" },
+  { label: "Why Blossom", href: "/en#why" },
   { label: "Payment", href: "/en#payment" },
   { label: "Contact", href: "/en#contact" },
 ];
