@@ -155,6 +155,22 @@ export const vocabularyBank: SampleItem[] = [
     why: "'analyze' is a verb meaning to examine closely; it takes an object such as 'data.'",
     whyKo: "analyze는 ‘분석하다’라는 동사로 목적어(data)와 함께 씁니다. 나머지 문장은 동사 자리가 아니거나 문법적으로 맞지 않습니다.",
   },
+  {
+    area: "Vocabulary", type: "Context Clues", skill: "Use context clues", difficulty: "Foundation",
+    question: "The puppy was so timid that it hid under the bed. “Timid” means ___.",
+    choices: ["shy", "hungry", "loud", "fast"],
+    answer: "shy",
+    why: "Hiding under the bed is a clue that 'timid' means shy or easily frightened.",
+    whyKo: "침대 밑에 숨는다는 단서로 timid = ‘겁 많은/수줍은(shy)’임을 알 수 있습니다.",
+  },
+  {
+    area: "Vocabulary", type: "Word Meaning", skill: "Choose the precise word form", difficulty: "Standard",
+    question: "Choose the word that best completes the sentence: The scientist made a careful ___ of the results.",
+    choices: ["summary", "summarize", "summarily", "summed"],
+    answer: "summary",
+    why: "A noun is needed after 'a careful,' and 'summary' is the noun form.",
+    whyKo: "‘a careful ___’ 자리에는 명사가 필요하므로 명사형 summary가 알맞습니다. (동사·부사형은 부적절)",
+  },
 ];
 
 // ── Grammar ──────────────────────────────────────────────
@@ -193,6 +209,29 @@ export const grammarBank: SampleItem[] = [
     why: "'It's = it is,' 'we're = we are,' and a comma precedes the conjunction 'but.'",
     whyKo: "It’s = it is, we’re = we are로 축약이 맞아야 하고, 접속사 but 앞에는 쉼표가 옵니다.",
   },
+  {
+    area: "Grammar", type: "Plural Nouns", skill: "Form irregular plurals", difficulty: "Foundation",
+    question: "Choose the correct plural: There are three ___ on the farm.",
+    choices: ["gooses", "geese", "goosen", "goose"],
+    answer: "geese",
+    why: "'Goose' has an irregular plural: 'geese.'",
+    whyKo: "goose는 불규칙 복수형으로 geese가 됩니다. (예: foot→feet, tooth→teeth)",
+  },
+  {
+    area: "Grammar", type: "Misplaced Modifiers", skill: "Fix misplaced/dangling modifiers", difficulty: "Advanced",
+    question: "Which sentence is written correctly?",
+    choices: [
+      "Walking to school, the rain soaked Mia.",
+      "Walking to school, Mia was soaked by the rain.",
+      "The rain, walking to school, soaked Mia.",
+      "Soaked by walking to school, the rain hit Mia.",
+    ],
+    answer: "Walking to school, Mia was soaked by the rain.",
+    why: "The introductory phrase 'Walking to school' must describe the one doing the walking — Mia, not the rain.",
+    whyKo: "도입 분사구 ‘Walking to school’은 걷는 주체(Mia)를 수식해야 합니다. 나머지는 비(rain)가 걷는 꼴이 되는 수식어 오류입니다.",
+    wrong: "The other options attach the phrase to 'the rain,' which cannot walk.",
+    wrongKo: "나머지 보기는 분사구가 ‘비(rain)’를 수식하게 되어 비가 걷는 어색한 문장이 됩니다.",
+  },
 ];
 
 // ── Writing ──────────────────────────────────────────────
@@ -218,6 +257,27 @@ export const writingBank: SampleItem[] = [
     answer: "e.g., It shows she is kind and welcoming, because she notices the new student is alone and chooses to share.",
     why: "Scoring: a claim + textual evidence + a clear explanation.",
     whyKo: "채점 기준: 주장(친절하다) + 지문 근거(혼자인 학생을 알아채고 나눔) + 명확한 설명을 모두 포함했는지.",
+  },
+  {
+    area: "Writing", type: "Sentence Writing", skill: "Write a complete sentence", difficulty: "Foundation",
+    question: "Write one complete sentence about your favorite season. (Use a subject and a verb.)",
+    answer: "e.g., I love summer because I can swim every day.",
+    why: "Scoring: a complete sentence with a clear subject and verb, on topic.",
+    whyKo: "채점 기준: 주어와 동사를 갖춘 완전한 한 문장이며 주제(좋아하는 계절)에 맞는지.",
+  },
+  {
+    area: "Writing", type: "Supporting Details", skill: "Add supporting details", difficulty: "Standard",
+    question: "Add two supporting details to this topic sentence: “Recess is important for students.”",
+    answer: "e.g., It gives them a break to rest their minds, and it lets them exercise and make friends.",
+    why: "Scoring: two clear, relevant details that support the topic sentence.",
+    whyKo: "채점 기준: 주제문을 뒷받침하는 구체적이고 관련 있는 근거 두 가지를 제시했는지.",
+  },
+  {
+    area: "Writing", type: "Opinion & Evidence", skill: "State and support an opinion", difficulty: "Advanced",
+    question: "In 3–4 sentences, state whether schools should have longer lunch breaks and give two reasons.",
+    answer: "e.g., Schools should have longer lunch breaks. First, students need enough time to eat well, which helps them focus. Second, a longer break lets them relax and return to class ready to learn.",
+    why: "Scoring: a clear opinion (claim) + at least two supporting reasons + organized sentences.",
+    whyKo: "채점 기준: 분명한 의견(주장) + 뒷받침 이유 두 가지 이상 + 짜임새 있는 문장 구성.",
   },
 ];
 
@@ -318,6 +378,24 @@ export const algebraBank: SampleItem[] = [
     why: "Slope = (5 − 1) / (3 − 1) = 4 / 2 = 2.",
     whyKo: "기울기 = (y의 변화)/(x의 변화) = (5−1)/(3−1) = 4/2 = 2 입니다.",
     steps: ["Δy = 5 − 1 = 4", "Δx = 3 − 1 = 2", "slope = 4 ÷ 2 = 2"],
+  },
+  {
+    area: "Algebra", type: "Systems of Equations", skill: "Solve a linear system", difficulty: "Standard",
+    question: "Solve the system:  y = x + 1  and  y = 2x − 3.",
+    choices: ["x = 4, y = 5", "x = 2, y = 3", "x = 3, y = 4", "x = 1, y = 2"],
+    answer: "x = 4, y = 5",
+    why: "Set the two expressions equal: x + 1 = 2x − 3 → x = 4, then y = 4 + 1 = 5.",
+    whyKo: "두 식을 같다고 놓습니다: x + 1 = 2x − 3 → x = 4. 대입하면 y = 4 + 1 = 5.",
+    steps: ["x + 1 = 2x − 3", "4 = x", "y = 4 + 1 = 5"],
+  },
+  {
+    area: "Algebra", type: "Exponent Rules", skill: "Apply laws of exponents", difficulty: "Advanced",
+    question: "Simplify: (2x³)² · x⁴.",
+    choices: ["2x¹⁰", "4x¹⁰", "4x²⁴", "2x²⁴"],
+    answer: "4x¹⁰",
+    why: "(2x³)² = 4x⁶; then 4x⁶ · x⁴ = 4x¹⁰ (add exponents when multiplying like bases).",
+    whyKo: "(2x³)² = 4x⁶. 이후 4x⁶ · x⁴ = 4x¹⁰. 같은 밑끼리 곱할 때는 지수를 더합니다.",
+    steps: ["(2x³)² = 4x⁶", "4x⁶ · x⁴ = 4x^(6+4)", "= 4x¹⁰"],
   },
 ];
 

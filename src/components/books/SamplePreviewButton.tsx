@@ -52,6 +52,21 @@ const BANK_BY_ID: Record<string, SampleItem[]> = {
 };
 
 const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challenge"];
+
+// 학년대별 난이도 티어 — 같은 4영역 레벨테스트라도 학년에 따라 다른 문항을 노출합니다.
+const LT_TIER: Record<string, Difficulty> = {
+  "english-level-test-g1-2": "Foundation",
+  "english-level-test-g3-4": "Standard",
+  "english-level-test-g5-6": "Advanced",
+};
+
+// 목표 난이도에 가까운 순으로 정렬해 n개를 뽑습니다. (티어 문항이 먼저 오도록)
+function pickTier(bank: SampleItem[], tier: Difficulty, n: number): SampleItem[] {
+  const target = DIFF_ORDER.indexOf(tier);
+  return [...bank]
+    .sort((a, b) => Math.abs(DIFF_ORDER.indexOf(a.difficulty) - target) - Math.abs(DIFF_ORDER.indexOf(b.difficulty) - target))
+    .slice(0, n);
+}
 const DIFF_COLOR: Record<Difficulty, string> = {
   Foundation: "#7d8a6a",
   Standard: "#ad8a4e",
@@ -81,17 +96,21 @@ function buildWorkbookItems(product: Product): SampleItem[] {
   };
 
   if (isFourSkill(product)) {
-    // 학년별 긴 리딩 지문이 있으면 사용, 없으면 기본 리딩 스킬 문항
+    // 학년별 긴 리딩 지문 + 학년대 난이도에 맞춘 Vocabulary·Grammar·Writing (교재별 차별화)
     const reading = placementReadingByProduct[product.id] ?? [readingBank[0], readingBank[2], readingBank[3]];
+    const tier = LT_TIER[product.id] ?? blossomLevel(product.difficulty);
     return [
       ...reading,
-      vocabularyBank[0], vocabularyBank[1],
-      grammarBank[0], grammarBank[2],
-      writingBank[0], writingBank[1],
+      ...pickTier(vocabularyBank, tier, 2),
+      ...pickTier(grammarBank, tier, 2),
+      ...pickTier(writingBank, tier, 2),
     ];
   }
   // SR Reading 전용 제품 — 긴 지문 + 유형 확장
   if (srReadingByProduct[product.id]) return srReadingByProduct[product.id];
+  // Algebra 1 / 2 — 난이도로 서로 다른 문항 세트 노출
+  if (product.id === "algebra-1-workbook") return algebraBank.filter((i) => ["Foundation", "Standard"].includes(i.difficulty));
+  if (product.id === "algebra-2-workbook") return algebraBank.filter((i) => ["Advanced", "Challenge"].includes(i.difficulty));
   // 제품 id 전용 세트 (AP 과목별 · MAP · SAT Math) — 복합 문제 + 도형/그래프
   if (BANK_BY_ID[product.id]) return BANK_BY_ID[product.id];
   if (/scat/.test(key)) return scatBank;
