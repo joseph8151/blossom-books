@@ -353,5 +353,153 @@ export default function SampleFigure({ name }: { name: string }) {
     );
   }
 
+  // ── AP / 심화 (그래프·도형·다이어그램) ─────────────────
+  if (name === "vt-graph") {
+    // 속도–시간 그래프: (0,0)→(4,8), 아래 넓이 = 이동 거리
+    const ox = 32, oy = 108;
+    const px = (t: number) => ox + t * 34;
+    const py = (v: number) => oy - v * 9.5;
+    return (
+      <svg viewBox="0 0 210 132" className={`${svgCls} max-w-[320px]`} role="img" aria-label="Velocity-time graph">
+        <polygon points={`${px(0)},${py(0)} ${px(4)},${py(8)} ${px(4)},${py(0)}`} fill={FILL} />
+        <line x1={ox} y1="14" x2={ox} y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox} y1={oy} x2="200" y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={px(0)} y1={py(0)} x2={px(4.7)} y2={py(9.4)} stroke={ACCENT} strokeWidth="1.9" />
+        {[0, 4, 8].map((v) => (
+          <text key={v} x={ox - 6} y={py(v) + 3} textAnchor="end" fontSize="8" fill={FAINT}>{v}</text>
+        ))}
+        {[0, 1, 2, 3, 4].map((t) => (
+          <text key={t} x={px(t)} y={oy + 11} textAnchor="middle" fontSize="8" fill={FAINT}>{t}</text>
+        ))}
+        <text x="4" y="12" fontSize="8" fill={FAINT}>v(m/s)</text>
+        <text x="150" y={oy + 11} fontSize="8" fill={FAINT}>t (s)</text>
+      </svg>
+    );
+  }
+  if (name === "force-diagram") {
+    const arrow = (x1: number, y1: number, x2: number, y2: number) => {
+      const a = Math.atan2(y2 - y1, x2 - x1);
+      const p = (ang: number) => `${x2 - 6 * Math.cos(a - ang)},${y2 - 6 * Math.sin(a - ang)}`;
+      return (
+        <g>
+          <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={INK} strokeWidth="1.6" />
+          <polygon points={`${x2},${y2} ${p(0.4)} ${p(-0.4)}`} fill={INK} />
+        </g>
+      );
+    };
+    return (
+      <svg viewBox="0 0 200 150" className={`${svgCls} max-w-[260px]`} role="img" aria-label="Free-body force diagram">
+        <rect x="82" y="62" width="36" height="36" fill={FILL} stroke={INK} strokeWidth="1.3" />
+        {arrow(100, 62, 100, 22)}
+        {arrow(100, 98, 100, 138)}
+        {arrow(118, 80, 178, 80)}
+        {arrow(82, 80, 22, 80)}
+        <text x="106" y="20" fontSize="9" fill={INK}>N</text>
+        <text x="104" y="146" fontSize="9" fill={INK}>W</text>
+        <text x="150" y="74" fontSize="9" fill={ACCENT}>F = 10 N</text>
+        <text x="24" y="74" fontSize="9" fill={INK}>f = 4 N</text>
+      </svg>
+    );
+  }
+  if (name === "scatter-plot") {
+    const pts: [number, number][] = [[1, 2], [2, 2.5], [2.5, 4], [3, 3.5], [4, 5], [4.5, 6], [5, 6.5], [6, 7.5]];
+    const ox = 26, oy = 108, u = 26;
+    const px = (x: number) => ox + x * u;
+    const py = (y: number) => oy - y * 12;
+    return (
+      <svg viewBox="0 0 200 130" className={`${svgCls} max-w-[300px]`} role="img" aria-label="Scatter plot with positive correlation">
+        <line x1={ox} y1="12" x2={ox} y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox} y1={oy} x2="190" y2={oy} stroke={INK} strokeWidth="1.2" />
+        {pts.map(([x, y], i) => <circle key={i} cx={px(x)} cy={py(y)} r="3" fill={ACCENT} />)}
+        <text x="6" y="12" fontSize="8" fill={FAINT}>y</text>
+        <text x="184" y={oy + 11} fontSize="8" fill={FAINT}>x</text>
+      </svg>
+    );
+  }
+  if (name === "normal-curve") {
+    return (
+      <svg viewBox="0 0 220 120" className={`${svgCls} max-w-[320px]`} role="img" aria-label="Normal distribution curve">
+        <path d="M10 100 C60 100 70 20 110 20 C150 20 160 100 210 100" fill={FILL} stroke={INK} strokeWidth="1.4" />
+        <line x1="110" y1="24" x2="110" y2="100" stroke={INK} strokeWidth="1" strokeDasharray="3 3" />
+        <line x1="76" y1="60" x2="76" y2="100" stroke={FAINT} strokeWidth="0.9" strokeDasharray="2 2" />
+        <line x1="144" y1="60" x2="144" y2="100" stroke={FAINT} strokeWidth="0.9" strokeDasharray="2 2" />
+        <line x1="10" y1="100" x2="210" y2="100" stroke={INK} strokeWidth="1.2" />
+        <text x="110" y="114" textAnchor="middle" fontSize="8.5" fill={INK}>μ</text>
+        <text x="76" y="114" textAnchor="middle" fontSize="8" fill={FAINT}>−1σ</text>
+        <text x="144" y="114" textAnchor="middle" fontSize="8" fill={FAINT}>+1σ</text>
+        <text x="110" y="55" textAnchor="middle" fontSize="9" fill={ACCENT}>≈68%</text>
+      </svg>
+    );
+  }
+  if (name === "supply-demand") {
+    const ox = 28, oy = 108;
+    return (
+      <svg viewBox="0 0 210 130" className={`${svgCls} max-w-[300px]`} role="img" aria-label="Supply and demand graph">
+        <line x1={ox} y1="12" x2={ox} y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox} y1={oy} x2="196" y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox + 6} y1={oy - 8} x2="188" y2="24" stroke={INK} strokeWidth="1.6" />
+        <line x1={ox + 6} y1="24" x2="188" y2={oy - 8} stroke={ACCENT} strokeWidth="1.6" />
+        <circle cx="108" cy="66" r="3.2" fill={INK} />
+        <text x="150" y="26" fontSize="9" fill={INK}>S</text>
+        <text x="150" y={oy - 6} fontSize="9" fill={ACCENT}>D</text>
+        <text x="112" y="60" fontSize="8.5" fill={INK}>E</text>
+        <text x="6" y="12" fontSize="8" fill={FAINT}>P</text>
+        <text x="190" y={oy + 11} fontSize="8" fill={FAINT}>Q</text>
+      </svg>
+    );
+  }
+  if (name === "energy-diagram") {
+    // 반응 좌표: 반응물(높음보다 낮게) → 활성화 에너지 언덕 → 생성물(더 낮음) = 발열
+    return (
+      <svg viewBox="0 0 220 120" className={`${svgCls} max-w-[320px]`} role="img" aria-label="Reaction energy diagram">
+        <line x1="24" y1="106" x2="210" y2="106" stroke={INK} strokeWidth="1.2" />
+        <line x1="24" y1="10" x2="24" y2="106" stroke={INK} strokeWidth="1.2" />
+        <path d="M30 66 C70 66 78 22 110 22 C142 22 150 88 200 88" fill="none" stroke={ACCENT} strokeWidth="1.9" />
+        <line x1="30" y1="66" x2="14" y2="66" stroke={FAINT} strokeWidth="0.9" />
+        <line x1="200" y1="88" x2="14" y2="88" stroke={FAINT} strokeWidth="0.9" strokeDasharray="2 2" />
+        <text x="34" y="60" fontSize="8.5" fill={INK}>reactants</text>
+        <text x="160" y="100" fontSize="8.5" fill={INK}>products</text>
+        <text x="96" y="16" fontSize="8" fill={FAINT}>Eₐ</text>
+        <text x="4" y="58" fontSize="8" fill={FAINT}>E</text>
+      </svg>
+    );
+  }
+  if (name === "punnett") {
+    const cells = [["AA", "Aa"], ["Aa", "aa"]];
+    return (
+      <svg viewBox="0 0 150 150" className={`${svgCls} max-w-[170px]`} role="img" aria-label="Punnett square for Aa by Aa cross">
+        <text x="52" y="16" textAnchor="middle" fontSize="12" fontWeight="600" fill={INK}>A</text>
+        <text x="100" y="16" textAnchor="middle" fontSize="12" fontWeight="600" fill={INK}>a</text>
+        <text x="14" y="56" textAnchor="middle" fontSize="12" fontWeight="600" fill={INK}>A</text>
+        <text x="14" y="104" textAnchor="middle" fontSize="12" fontWeight="600" fill={INK}>a</text>
+        {cells.map((row, r) => row.map((v, c) => (
+          <g key={`${r}-${c}`}>
+            <rect x={28 + c * 48} y={24 + r * 48} width="48" height="48" fill={v === "aa" ? FILL : "none"} stroke={INK} strokeWidth="1.1" />
+            <text x={52 + c * 48} y={54 + r * 48} textAnchor="middle" fontSize="15" fill={v === "aa" ? ACCENT : INK}>{v}</text>
+          </g>
+        )))}
+      </svg>
+    );
+  }
+  if (name === "curve-tangent") {
+    // y = x² 위 점 (1,1)에서의 접선 (기울기 = 2)
+    const ox = 26, oy = 116, u = 15;
+    const px = (x: number) => ox + x * u;
+    const py = (y: number) => oy - y * 11;
+    const curve = [];
+    for (let x = 0; x <= 3.2; x += 0.2) curve.push(`${px(x)},${py(x * x)}`);
+    return (
+      <svg viewBox="0 0 150 140" className={`${svgCls} max-w-[220px]`} role="img" aria-label="Parabola with tangent line at x=1">
+        <line x1={ox} y1="10" x2={ox} y2={oy} stroke={INK} strokeWidth="1.1" />
+        <line x1={ox} y1={oy} x2="142" y2={oy} stroke={INK} strokeWidth="1.1" />
+        <polyline points={curve.join(" ")} fill="none" stroke={INK} strokeWidth="1.7" />
+        <line x1={px(0)} y1={py(-1)} x2={px(3)} y2={py(5)} stroke={ACCENT} strokeWidth="1.6" />
+        <circle cx={px(1)} cy={py(1)} r="3" fill={ACCENT} />
+        <text x={px(1) + 5} y={py(1) - 4} fontSize="8.5" fill={INK}>(1, 1)</text>
+        <text x="120" y={oy - 6} fontSize="8.5" fill={INK}>y = x²</text>
+      </svg>
+    );
+  }
+
   return null;
 }

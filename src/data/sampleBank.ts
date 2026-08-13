@@ -981,3 +981,261 @@ export const mathLevelBank: SampleItem[] = [
     whyKo: "24 ÷ 6 = 4봉지입니다.",
   },
 ];
+
+// ── AP · 심화 과목별 (복합 문제 + 도형/그래프 SVG, 영어 본문·해설 + 한글 핵심) ──
+export const apCalcBank: SampleItem[] = [
+  {
+    area: "Calculus", type: "Derivative (Tangent)", skill: "Interpret the derivative as a slope", difficulty: "Advanced",
+    question: "The graph shows y = x². What is the slope of the tangent line at the point (1, 1)?",
+    figure: "curve-tangent",
+    choices: ["1", "2", "2x", "1/2"],
+    answer: "2",
+    why: "f(x) = x² gives f′(x) = 2x, so the slope of the tangent at x = 1 is f′(1) = 2.",
+    whyKo: "f(x)=x²의 도함수는 f′(x)=2x. 접선의 기울기 = f′(1) = 2. 접선은 곡선 위 한 점에서의 순간 변화율을 나타냅니다.",
+  },
+  {
+    area: "Calculus", type: "Definite Integral (Area)", skill: "Interpret area under a curve", difficulty: "Advanced",
+    question: "A particle's velocity (m/s) is shown on the v–t graph. What is the total distance traveled in the first 4 seconds?",
+    figure: "vt-graph",
+    choices: ["8 m", "12 m", "16 m", "32 m"],
+    answer: "16 m",
+    why: "Distance = ∫v dt = area under the v–t line = ½ × base × height = ½ × 4 × 8 = 16 m.",
+    whyKo: "이동 거리 = ∫v dt = v–t 그래프 아래 삼각형의 넓이 = ½ × 4 × 8 = 16 m. 정적분은 그래프 아래 넓이로 해석합니다.",
+    steps: ["Distance = area under v–t graph", "= ½ × 4 × 8", "= 16 m"],
+  },
+  {
+    area: "Calculus", type: "Limits", skill: "Evaluate a limit by factoring", difficulty: "Standard",
+    question: "Evaluate: lim (x→2) (x² − 4)/(x − 2).",
+    choices: ["0", "2", "4", "undefined"],
+    answer: "4",
+    why: "Factor the numerator: (x−2)(x+2)/(x−2) = x + 2. As x → 2, the limit is 4.",
+    whyKo: "분자 인수분해: (x−2)(x+2)/(x−2) = x+2. x→2이면 4. (0/0 꼴은 인수분해로 약분해 계산)",
+    steps: ["(x² − 4) = (x − 2)(x + 2)", "cancel (x − 2) → x + 2", "x → 2 gives 4"],
+  },
+];
+
+export const apPhysicsBank: SampleItem[] = [
+  {
+    area: "Physics", type: "Free-Body Diagram", skill: "Compute net force", difficulty: "Standard",
+    question: "The free-body diagram shows a box with an applied force of 10 N and friction of 4 N. What is the net horizontal force?",
+    figure: "force-diagram",
+    choices: ["4 N", "6 N", "10 N", "14 N"],
+    answer: "6 N",
+    why: "Net horizontal force = applied − friction = 10 − 4 = 6 N (in the direction of the applied force).",
+    whyKo: "수평 알짜힘 = 가한 힘 − 마찰력 = 10 − 4 = 6 N. 수직 방향의 N과 W는 서로 상쇄됩니다.",
+  },
+  {
+    area: "Physics", type: "Newton's Second Law", skill: "Apply F = ma", difficulty: "Standard",
+    question: "From the same diagram, the box has a mass of 2 kg and a net force of 6 N. What is its acceleration?",
+    figure: "force-diagram",
+    choices: ["2 m/s²", "3 m/s²", "6 m/s²", "12 m/s²"],
+    answer: "3 m/s²",
+    why: "By Newton's second law, a = F / m = 6 N / 2 kg = 3 m/s².",
+    whyKo: "뉴턴 제2법칙: a = F/m = 6 ÷ 2 = 3 m/s².",
+    steps: ["a = F / m", "= 6 / 2", "= 3 m/s²"],
+  },
+  {
+    area: "Physics", type: "Kinematics (Graph)", skill: "Read acceleration from a v–t graph", difficulty: "Standard",
+    question: "The velocity–time graph is a straight line rising from 0 to 8 m/s over 4 s. What is the acceleration?",
+    figure: "vt-graph",
+    choices: ["1 m/s²", "2 m/s²", "4 m/s²", "8 m/s²"],
+    answer: "2 m/s²",
+    why: "Acceleration = slope of the v–t graph = Δv / Δt = 8 / 4 = 2 m/s².",
+    whyKo: "가속도 = v–t 그래프의 기울기 = Δv/Δt = 8 ÷ 4 = 2 m/s².",
+  },
+];
+
+export const apStatsBank: SampleItem[] = [
+  {
+    area: "Statistics", type: "Scatter & Correlation", skill: "Describe correlation from a scatter plot", difficulty: "Standard",
+    question: "The scatter plot shows the relationship between two variables. Which best describes the correlation?",
+    figure: "scatter-plot",
+    choices: ["Strong negative", "No correlation", "Positive", "Exactly y = x"],
+    answer: "Positive",
+    why: "As x increases, y tends to increase, and the points rise from lower-left to upper-right — a positive correlation.",
+    whyKo: "x가 커질수록 y도 커지는 경향(왼쪽 아래 → 오른쪽 위)이므로 양의 상관관계입니다.",
+  },
+  {
+    area: "Statistics", type: "Normal Distribution", skill: "Apply the empirical rule", difficulty: "Standard",
+    question: "For an approximately normal distribution, about what percent of the data lies within 1 standard deviation of the mean?",
+    figure: "normal-curve",
+    choices: ["34%", "50%", "68%", "95%"],
+    answer: "68%",
+    why: "By the empirical (68–95–99.7) rule, about 68% of data falls within ±1σ of the mean.",
+    whyKo: "경험적 규칙(68–95–99.7): 평균 ±1σ 안에 약 68%의 자료가 들어갑니다.",
+  },
+  {
+    area: "Statistics", type: "Probability", skill: "Compute a binomial probability", difficulty: "Advanced",
+    question: "A fair coin is flipped 3 times. What is the probability of getting exactly 2 heads?",
+    choices: ["1/8", "1/4", "3/8", "1/2"],
+    answer: "3/8",
+    why: "There are C(3,2) = 3 favorable outcomes out of 2³ = 8 total, so 3/8.",
+    whyKo: "경우의 수 = C(3,2) = 3, 전체 = 2³ = 8. 따라서 3/8.",
+    steps: ["Favorable = C(3,2) = 3", "Total = 2³ = 8", "P = 3/8"],
+  },
+];
+
+export const apBiologyBank: SampleItem[] = [
+  {
+    area: "Biology", type: "Genetics (Punnett)", skill: "Predict genotype ratios", difficulty: "Standard",
+    question: "Two heterozygous parents (Aa × Aa) are crossed. From the Punnett square, what is the probability that an offspring is homozygous recessive (aa)?",
+    figure: "punnett",
+    choices: ["1/4", "1/2", "3/4", "1"],
+    answer: "1/4",
+    why: "Only one of the four boxes is aa, so the probability is 1/4.",
+    whyKo: "퍼넷 사각형의 네 칸 중 aa는 한 칸이므로 확률은 1/4입니다.",
+  },
+  {
+    area: "Biology", type: "Genetics (Phenotype)", skill: "Predict phenotype ratios", difficulty: "Standard",
+    question: "For the same Aa × Aa cross, what is the expected phenotypic ratio (dominant : recessive)?",
+    figure: "punnett",
+    choices: ["1 : 1", "2 : 1", "3 : 1", "4 : 0"],
+    answer: "3 : 1",
+    why: "Three offspring show the dominant trait (AA, Aa, Aa) and one is recessive (aa): a 3 : 1 ratio.",
+    whyKo: "우성 표현형 3(AA, Aa, Aa) : 열성 표현형 1(aa) = 3 : 1.",
+  },
+  {
+    area: "Biology", type: "Cellular Respiration", skill: "Explain the role of oxygen", difficulty: "Advanced",
+    question: "In aerobic cellular respiration, what is the primary role of oxygen?",
+    choices: [
+      "It is broken down to release sugar",
+      "It acts as the final electron acceptor in the electron transport chain",
+      "It is produced as a waste product",
+      "It provides carbon for glucose",
+    ],
+    answer: "It acts as the final electron acceptor in the electron transport chain",
+    why: "Oxygen accepts electrons at the end of the electron transport chain, forming water and allowing ATP production to continue.",
+    whyKo: "산소는 전자전달계 마지막에서 최종 전자 수용체로 작용해 물을 만들고, ATP 생성이 계속되게 합니다.",
+  },
+];
+
+export const apChemistryBank: SampleItem[] = [
+  {
+    area: "Chemistry", type: "Reaction Energy Diagram", skill: "Classify a reaction from an energy diagram", difficulty: "Standard",
+    question: "The reaction energy diagram shows the products at a lower energy than the reactants. This reaction is —",
+    figure: "energy-diagram",
+    choices: ["Endothermic", "Exothermic", "At equilibrium", "Impossible"],
+    answer: "Exothermic",
+    why: "When products are lower in energy than reactants, energy is released, so ΔH < 0 and the reaction is exothermic.",
+    whyKo: "생성물의 에너지가 반응물보다 낮으면 에너지가 방출됩니다(ΔH < 0) → 발열 반응.",
+  },
+  {
+    area: "Chemistry", type: "Activation Energy", skill: "Interpret the diagram peak", difficulty: "Standard",
+    question: "On the same diagram, what does the height of the peak above the reactants (Eₐ) represent?",
+    figure: "energy-diagram",
+    choices: ["The enthalpy change", "The activation energy", "The product energy", "The reaction temperature"],
+    answer: "The activation energy",
+    why: "The peak measured from the reactant level is the activation energy — the minimum energy needed for the reaction to proceed.",
+    whyKo: "반응물 높이에서 봉우리까지의 높이가 활성화 에너지(Eₐ)입니다. 반응이 일어나는 데 필요한 최소 에너지입니다.",
+  },
+  {
+    area: "Chemistry", type: "Stoichiometry", skill: "Use mole ratios", difficulty: "Standard",
+    question: "For 2H₂ + O₂ → 2H₂O, how many moles of O₂ are needed to react completely with 2 mol of H₂?",
+    choices: ["0.5 mol", "1 mol", "2 mol", "4 mol"],
+    answer: "1 mol",
+    why: "The mole ratio of H₂ to O₂ is 2 : 1, so 2 mol H₂ reacts with 1 mol O₂.",
+    whyKo: "H₂ : O₂ 몰비 = 2 : 1이므로, H₂ 2몰에는 O₂ 1몰이 필요합니다.",
+    steps: ["Ratio H₂ : O₂ = 2 : 1", "2 mol H₂ → 1 mol O₂"],
+  },
+];
+
+export const apEconomicsBank: SampleItem[] = [
+  {
+    area: "Economics", type: "Supply & Demand", skill: "Identify market equilibrium", difficulty: "Standard",
+    question: "In the graph, point E is where the supply (S) and demand (D) curves intersect. Point E represents —",
+    figure: "supply-demand",
+    choices: ["A surplus", "A shortage", "Market equilibrium", "A price ceiling"],
+    answer: "Market equilibrium",
+    why: "The intersection of supply and demand gives the equilibrium price and quantity, where quantity supplied equals quantity demanded.",
+    whyKo: "공급 곡선과 수요 곡선이 만나는 점 E는 공급량 = 수요량이 되는 시장 균형(균형가격·균형수량)입니다.",
+  },
+  {
+    area: "Economics", type: "Demand Shift", skill: "Predict the effect of a shift", difficulty: "Advanced",
+    question: "If consumer demand increases (the demand curve shifts right) while supply is unchanged, what happens to the equilibrium price?",
+    figure: "supply-demand",
+    choices: ["It falls", "It rises", "It stays the same", "It becomes zero"],
+    answer: "It rises",
+    why: "A rightward shift in demand raises both the equilibrium price and the equilibrium quantity.",
+    whyKo: "수요 증가(수요 곡선 오른쪽 이동)는 균형가격과 균형수량을 모두 상승시킵니다.",
+  },
+  {
+    area: "Economics", type: "Core Concept", skill: "Define opportunity cost", difficulty: "Standard",
+    question: "What does the term 'opportunity cost' mean?",
+    choices: [
+      "The money paid for a good",
+      "The value of the next-best alternative given up",
+      "The total cost of production",
+      "A tax charged by the government",
+    ],
+    answer: "The value of the next-best alternative given up",
+    why: "Opportunity cost is what you sacrifice — the value of the best alternative you did not choose.",
+    whyKo: "기회비용은 어떤 선택을 위해 포기한 대안 중 가장 가치 있는 것의 가치입니다.",
+  },
+];
+
+export const apEnglishBank: SampleItem[] = [
+  {
+    area: "Rhetoric", type: "Rhetorical Strategy", skill: "Analyze figurative language and argument", difficulty: "Advanced",
+    passage: `Adapted excerpt:
+
+We are told that progress is inevitable — that the march of technology will carry us forward whether we choose it or not. But progress is not a river that flows on its own; it is a road we build, stone by stone, with every decision we make. To hand that choice to machines is not to advance. It is to abdicate.`,
+    question: "The author's metaphor comparing progress to \"a road we build, stone by stone\" primarily serves to —",
+    choices: [
+      "argue that technology always improves society",
+      "emphasize that progress results from deliberate human choices, not inevitability",
+      "describe the history of road construction",
+      "suggest that progress is slow and painful",
+    ],
+    answer: "emphasize that progress results from deliberate human choices, not inevitability",
+    why: "By replacing the passive 'river' with a 'road we build,' the author reframes progress as something people actively create through choices, countering the claim that it is inevitable.",
+    whyKo: "저자는 스스로 흐르는 ‘강’ 대신 ‘우리가 쌓아 만드는 길’이라는 은유로, 진보가 필연이 아니라 인간의 능동적 ‘선택’으로 만들어진다는 점을 강조합니다.",
+    wrong: "The other options miss the metaphor's purpose or misread the author's stance.",
+    wrongKo: "나머지 보기는 은유의 목적을 놓쳤거나 저자의 입장을 잘못 읽은 것입니다.",
+  },
+  {
+    area: "Rhetoric", type: "Tone", skill: "Identify tone", difficulty: "Advanced",
+    passage: `Adapted excerpt:
+
+We are told that progress is inevitable — that the march of technology will carry us forward whether we choose it or not. But progress is not a river that flows on its own; it is a road we build, stone by stone, with every decision we make. To hand that choice to machines is not to advance. It is to abdicate.`,
+    question: "The tone of the final two sentences is best described as —",
+    choices: ["nostalgic", "cautionary", "cheerful", "indifferent"],
+    answer: "cautionary",
+    why: "The blunt warning — that surrendering choice is to 'abdicate' — creates a cautionary, warning tone.",
+    whyKo: "‘선택을 넘기는 것은 곧 (책임을) 포기하는 것’이라는 단호한 경고에서 경계·주의(cautionary)의 어조가 드러납니다.",
+  },
+];
+
+export const apHistoryBank: SampleItem[] = [
+  {
+    area: "History", type: "Source Analysis", skill: "Connect a source to its historical context", difficulty: "Advanced",
+    passage: `Adapted from a late-18th-century political document:
+
+"Governments are instituted among people, deriving their just powers from the consent of the governed; and whenever any form of government becomes destructive of these ends, it is the right of the people to alter or abolish it."`,
+    question: "The idea that a government's power comes from 'the consent of the governed' most directly provided justification for —",
+    choices: [
+      "the divine right of kings",
+      "the American Revolution and independence from Britain",
+      "the expansion of the slave trade",
+      "the establishment of a state religion",
+    ],
+    answer: "the American Revolution and independence from Britain",
+    why: "Enlightenment social-contract ideas — government by consent and the right to alter unjust rule — were used to justify the colonists' break from Britain.",
+    whyKo: "‘피통치자의 동의’와 ‘부당한 정부를 바꿀 권리’라는 계몽사상(사회계약론)은 식민지인들이 영국으로부터 독립을 정당화하는 근거가 되었습니다.",
+  },
+  {
+    area: "History", type: "Point of View", skill: "Analyze the author's argument", difficulty: "Advanced",
+    passage: `Adapted from a late-18th-century political document:
+
+"Governments are instituted among people, deriving their just powers from the consent of the governed; and whenever any form of government becomes destructive of these ends, it is the right of the people to alter or abolish it."`,
+    question: "According to the excerpt, under what condition do the people have the right to change their government?",
+    choices: [
+      "Whenever taxes are raised",
+      "When the government becomes destructive of the people's rights and consent",
+      "Only during a foreign war",
+      "Never, once a government is formed",
+    ],
+    answer: "When the government becomes destructive of the people's rights and consent",
+    why: "The text states the people may alter or abolish a government that 'becomes destructive of these ends' — that is, one that no longer protects rights or rules by consent.",
+    whyKo: "지문은 정부가 그 목적(권리 보호·동의에 의한 통치)을 해칠 때 국민이 정부를 바꾸거나 폐지할 권리가 있다고 밝힙니다.",
+  },
+];
