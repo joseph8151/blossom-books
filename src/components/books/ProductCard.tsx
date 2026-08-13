@@ -33,6 +33,30 @@ export default function ProductCard({ product }: { product: Product }) {
           size="sm"
           className="max-w-[150px] transition-transform duration-500 group-hover:scale-[0.96]"
         />
+
+        {/* 호버 시 샘플 페이지 썸네일 + CTA */}
+        {product.sampleAvailable && (
+          <Link
+            href={`/books/${product.id}#sample`}
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-2.5 bg-navy-950/0 opacity-0 transition-all duration-300 group-hover:bg-navy-950/75 group-hover:opacity-100"
+          >
+            <div className="flex gap-1.5">
+              {product.units.slice(0, 3).map((u, i) => (
+                <span
+                  key={i}
+                  className="flex h-16 w-11 translate-y-2 flex-col items-center justify-center border border-ivory-100/35 bg-ivory-100/10 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+                  style={{ transitionDelay: `${80 + i * 70}ms` }}
+                >
+                  <FileSearch size={12} className="text-ivory-100/50" />
+                  <span className="mt-1 px-1 text-center font-label text-[7px] uppercase leading-tight tracking-wide text-ivory-100/85 line-clamp-2">{u}</span>
+                </span>
+              ))}
+            </div>
+            <span className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-ivory-100">
+              <FileSearch size={14} /> 실제 문제 확인하기
+            </span>
+          </Link>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-6">

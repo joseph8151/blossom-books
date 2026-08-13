@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { X, FileSearch, MessageCircle, ChevronLeft, ChevronRight, BookOpen, KeyRound, Check, PenLine } from "lucide-react";
+import { X, FileSearch, MessageCircle, ChevronLeft, ChevronRight, BookOpen, KeyRound, Check, PenLine, Maximize2, Minimize2 } from "lucide-react";
 import { Product } from "@/lib/types";
 import { siteConfig } from "@/data/site";
 import { isFourSkill, productCode } from "@/lib/productMeta";
@@ -184,6 +184,7 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState<"workbook" | "answer">("workbook");
   const [page, setPage] = useState(0);
+  const [zoom, setZoom] = useState(false);
 
   const workbook = useMemo(() => leadWithVisual(buildWorkbookItems(product)), [product]);
   const answers = useMemo(
@@ -278,7 +279,7 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
 
       {open && (
         <div className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-navy-950/70 p-3 backdrop-blur-sm sm:p-6" onClick={() => setOpen(false)}>
-          <div onClick={(e) => e.stopPropagation()} className="relative my-4 w-full max-w-4xl border border-navy-800/15 bg-ivory-100 shadow-[0_40px_90px_-30px_rgba(13,22,38,0.7)]">
+          <div onClick={(e) => e.stopPropagation()} className={`relative my-4 w-full border border-navy-800/15 bg-ivory-100 shadow-[0_40px_90px_-30px_rgba(13,22,38,0.7)] transition-[max-width] ${zoom ? "max-w-6xl" : "max-w-4xl"}`}>
             {/* 헤더 */}
             <div className="sticky top-0 z-10 border-b border-navy-800/12 bg-ivory-100/95 px-5 py-4 backdrop-blur lg:px-7">
               <div className="flex items-start justify-between gap-3">
@@ -324,31 +325,41 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                 </p>
               </div>
 
-              {/* 콘텐츠 목차 */}
+              {/* 썸네일 레일 — 페이지를 미리 훑고 바로 이동 */}
               <div className="mb-5">
-                <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">
-                  This sample includes · {items.length} pages
-                </p>
-                <div className="mt-2.5 flex flex-wrap gap-1.5">
+                <div className="flex items-center justify-between">
+                  <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">Pages · {items.length}</p>
+                  <button
+                    onClick={() => setZoom((z) => !z)}
+                    className="inline-flex items-center gap-1 font-label text-[10px] uppercase tracking-[0.1em] text-navy-800/55 transition-colors hover:text-navy-900"
+                  >
+                    {zoom ? <Minimize2 size={12} /> : <Maximize2 size={12} />} {zoom ? "축소" : "확대 보기"}
+                  </button>
+                </div>
+                <div className="mt-2.5 flex gap-2 overflow-x-auto pb-1.5">
                   {items.map((it, i) => (
                     <button
                       key={i}
                       onClick={() => setPage(i)}
-                      className={`inline-flex items-center gap-1.5 border px-2.5 py-1.5 text-[11px] transition-all ${
-                        i === page
-                          ? "border-navy-900 bg-navy-900 text-ivory-100 shadow-soft"
-                          : "border-navy-800/15 text-charcoal-600 hover:-translate-y-0.5 hover:border-navy-800/35"
+                      className={`group flex w-[92px] shrink-0 flex-col overflow-hidden border text-left transition-all ${
+                        i === page ? "border-navy-900 shadow-soft" : "border-navy-800/15 hover:-translate-y-0.5 hover:border-navy-800/40"
                       }`}
                     >
-                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: DIFF_COLOR[it.difficulty] }} />
-                      <span className="font-label tracking-[0.06em] opacity-60">{String(i + 1).padStart(2, "0")}</span>
-                      {it.type}
+                      <span className="h-1 w-full" style={{ background: areaColor(it.area) }} />
+                      <span className="px-2 py-1.5">
+                        <span className="flex items-center justify-between">
+                          <span className="font-label text-[9px] uppercase tracking-[0.08em] text-navy-800/50">{String(i + 1).padStart(2, "0")}</span>
+                          <span className="h-1.5 w-1.5 rounded-full" style={{ background: DIFF_COLOR[it.difficulty] }} />
+                        </span>
+                        <span className="mt-0.5 block text-[10.5px] font-medium leading-tight text-navy-950 line-clamp-2">{it.type}</span>
+                      </span>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* 페이지 뷰 — 실제 출판 교재 페이지처럼 */}
+              {/* 페이지 뷰 — 실제 출판 교재 페이지처럼 (넘김 애니메이션 + 확대) */}
+              <div key={`${tab}-${page}`} className="sample-page-in" style={{ zoom: zoom ? 1.12 : undefined } as React.CSSProperties}>
               {item && tab === "workbook" && (
                 <article className="relative overflow-hidden border border-navy-800/15 bg-ivory-100 shadow-[0_18px_50px_-28px_rgba(13,22,38,0.5)]">
                   <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brass-500 via-brass-400 to-brass-500" />
@@ -518,6 +529,8 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                   </div>
                 </article>
               )}
+
+              </div>
 
               {/* Prev / Next */}
               <div className="mt-5 flex items-center justify-between">

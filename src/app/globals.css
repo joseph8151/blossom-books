@@ -164,6 +164,21 @@ body {
   text-wrap: balance;
 }
 
+/* 샘플 뷰어 페이지 넘김 애니메이션 */
+@keyframes samplePageIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.sample-page-in {
+  animation: samplePageIn 0.26s ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

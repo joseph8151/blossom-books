@@ -17,6 +17,7 @@ import HowToOrder from "@/components/home/HowToOrder";
 import PrepPricing from "@/components/home/PrepPricing";
 import WhyCost from "@/components/home/WhyCost";
 import CompareLevels from "@/components/home/CompareLevels";
+import QuoteCalculator from "@/components/home/QuoteCalculator";
 import ExistingVsCustomSection from "@/components/home/ExistingVsCustomSection";
 import UseCaseSection from "@/components/home/UseCaseSection";
 import AudienceCards from "@/components/home/AudienceCards";
@@ -62,6 +63,7 @@ export default function HomePage() {
       {/* How it works → Price (가치 이해 후 가격) */}
       <HowToOrder />
       <PrepPricing />
+      <QuoteCalculator />
       <WhyCost />
 
       {/* Custom / Audience */}
