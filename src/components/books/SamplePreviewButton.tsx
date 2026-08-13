@@ -31,12 +31,14 @@ import {
   apEconomicsBank,
   apEnglishBank,
   apHistoryBank,
+  mapBank,
+  satMathBank,
   placementReadingByProduct,
   srReadingByProduct,
 } from "@/data/sampleBank";
 
-// AP 심화 과목별 전용 샘플 세트 (복합 문제 + 도형/그래프)
-const AP_BANK_BY_ID: Record<string, SampleItem[]> = {
+// 제품 id 기반 전용 샘플 세트 (복합 문제 + 도형/그래프)
+const BANK_BY_ID: Record<string, SampleItem[]> = {
   "ap-calculus-workbook": apCalcBank,
   "ap-physics-workbook": apPhysicsBank,
   "ap-statistics-workbook": apStatsBank,
@@ -45,6 +47,8 @@ const AP_BANK_BY_ID: Record<string, SampleItem[]> = {
   "ap-economics-workbook": apEconomicsBank,
   "ap-english-lang-workbook": apEnglishBank,
   "ap-us-history-workbook": apHistoryBank,
+  "map-growth-workbook": mapBank,
+  "sat-math-workbook": satMathBank,
 };
 
 const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challenge"];
@@ -72,8 +76,8 @@ function buildWorkbookItems(product: Product): SampleItem[] {
   }
   // SR Reading 전용 제품 — 긴 지문 + 유형 확장
   if (srReadingByProduct[product.id]) return srReadingByProduct[product.id];
-  // AP 심화 과목 — 과목별 복합 문제 + 도형/그래프
-  if (AP_BANK_BY_ID[product.id]) return AP_BANK_BY_ID[product.id];
+  // 제품 id 전용 세트 (AP 과목별 · MAP · SAT Math) — 복합 문제 + 도형/그래프
+  if (BANK_BY_ID[product.id]) return BANK_BY_ID[product.id];
   if (/scat/.test(key)) return scatBank;
   if (/reasoning|cat4|verbal|non-verbal|spatial|general ability/.test(key)) return reasoningBank;
   if (/oet/.test(key)) return oetBank;

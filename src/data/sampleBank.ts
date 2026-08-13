@@ -1239,3 +1239,69 @@ export const apHistoryBank: SampleItem[] = [
     whyKo: "지문은 정부가 그 목적(권리 보호·동의에 의한 통치)을 해칠 때 국민이 정부를 바꾸거나 폐지할 권리가 있다고 밝힙니다.",
   },
 ];
+
+// ── MAP Growth (Math · Reading · Language 혼합) ──────────
+export const mapBank: SampleItem[] = [
+  readingBank[2], // Reading · Inference (짧은 지문)
+  readingBank[6], // Reading · 긴 지문(Ant Teamwork) 주제 파악
+  {
+    area: "Mathematics", type: "Data & Graphs", skill: "Read a bar graph", difficulty: "Standard",
+    question: "The bar graph shows how many books were read each day. How many more were read on the busiest day than the slowest day?",
+    figure: "bar-graph",
+    choices: ["3", "4", "5", "6"],
+    answer: "5",
+    why: "Tallest bar (Thu) is 8, shortest (Mon) is 3: 8 − 3 = 5.",
+    whyKo: "가장 높은 막대(목 8권)와 가장 낮은 막대(월 3권)의 차이: 8 − 3 = 5권.",
+  },
+  {
+    area: "Mathematics", type: "Algebraic Thinking", skill: "Find slope from a graph", difficulty: "Standard",
+    question: "A line passes through (1, 1) and (3, 5). What is its slope?",
+    figure: "coord-line",
+    choices: ["1", "2", "3", "1/2"],
+    answer: "2",
+    why: "Slope = (5 − 1)/(3 − 1) = 4/2 = 2.",
+    whyKo: "기울기 = (5−1)/(3−1) = 4/2 = 2.",
+  },
+  grammarBank[0], // Language Usage · 주어–동사 일치
+  vocabularyBank[1], // Language Usage · 유의어
+];
+
+// ── Digital SAT · Math (도형·그래프 포함) ────────────────
+export const satMathBank: SampleItem[] = [
+  {
+    area: "Algebra", type: "Linear Functions", skill: "Find slope from a graph", difficulty: "Standard",
+    question: "The line shown passes through (1, 1) and (3, 5). What is the slope of the line?",
+    figure: "coord-line",
+    choices: ["1", "2", "3", "1/2"],
+    answer: "2",
+    why: "Slope = (5 − 1) / (3 − 1) = 4 / 2 = 2.",
+    whyKo: "기울기 = (5−1)/(3−1) = 4/2 = 2.",
+  },
+  {
+    area: "Advanced Math", type: "Quadratic Functions", skill: "Find the vertex / minimum", difficulty: "Advanced",
+    question: "The function f(x) = x² − 4x + 1 has a minimum value. What is it?",
+    choices: ["−3", "1", "−1", "2"],
+    answer: "−3",
+    why: "Complete the square: f(x) = (x − 2)² − 3, so the minimum is −3 at x = 2.",
+    whyKo: "완전제곱: f(x) = (x−2)² − 3. 따라서 x=2에서 최솟값 −3.",
+    steps: ["x² − 4x + 1 = (x − 2)² − 4 + 1", "= (x − 2)² − 3", "min = −3 at x = 2"],
+  },
+  {
+    area: "Problem-Solving & Data Analysis", type: "Graph Interpretation", skill: "Interpret a bar graph", difficulty: "Standard",
+    question: "Using the bar graph, what is the difference between the greatest and least value?",
+    figure: "bar-graph",
+    choices: ["3", "4", "5", "6"],
+    answer: "5",
+    why: "Greatest is 8 and least is 3: 8 − 3 = 5.",
+    whyKo: "최댓값 8, 최솟값 3의 차이: 8 − 3 = 5.",
+  },
+  {
+    area: "Geometry & Trigonometry", type: "Pythagorean Theorem", skill: "Apply the Pythagorean theorem", difficulty: "Standard",
+    question: "A right triangle has legs of length 3 and 4. Find the length of the hypotenuse.",
+    figure: "right-triangle",
+    choices: ["5", "6", "7", "12"],
+    answer: "5",
+    why: "3² + 4² = 9 + 16 = 25, so the hypotenuse = √25 = 5.",
+    whyKo: "3² + 4² = 25, 빗변 = √25 = 5.",
+  },
+];
