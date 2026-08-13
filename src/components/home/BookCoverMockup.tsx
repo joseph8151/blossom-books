@@ -42,7 +42,7 @@ export function BookCoverMockup({
         rotate,
         className
       )}
-      style={{ background: t.bg, color: t.ink }}
+      style={{ background: t.bg, color: t.ink, containerType: "inline-size" }}
     >
       {/* 얇은 그래픽 레이어 — 프레임과 코너만. 텍스트 뒤는 비웁니다. */}
       <svg
@@ -74,31 +74,42 @@ export function BookCoverMockup({
         </div>
       )}
 
-      {/* 텍스트 레이어 — 배경 그래픽 없이 또렷하게 */}
-      <div className="relative z-10 flex h-full flex-col px-7 pt-11">
-        <div className="h-px w-10" style={{ background: t.accent }} />
-        <p className="mt-4 font-label text-[9.5px] font-medium uppercase tracking-[0.24em]" style={{ opacity: 0.9 }}>
+      {/* 텍스트 레이어 — 카드 너비에 맞춰 글자 크기가 조정됩니다(컨테이너 쿼리). */}
+      <div className="relative z-10 flex h-full flex-col" style={{ padding: "13cqw 11cqw" }}>
+        <div style={{ height: "2px", width: "20%", background: t.accent }} />
+        <p
+          className="font-label font-medium uppercase"
+          style={{ fontSize: "clamp(6.5px, 4.2cqw, 9.5px)", letterSpacing: "0.22em", opacity: 0.9, marginTop: "6%" }}
+        >
           {eyebrow}
         </p>
-        <p className="mt-3 font-display text-[25px] font-semibold leading-[1.1]">{title}</p>
-        <p className="mt-2.5 text-[11.5px] font-medium leading-snug" style={{ opacity: 0.82 }}>
+        <p
+          className="font-display font-semibold [hyphens:none] [overflow-wrap:normal] [word-break:keep-all]"
+          style={{ fontSize: "clamp(15px, 12.5cqw, 26px)", lineHeight: 1.12, marginTop: "5%" }}
+        >
+          {title}
+        </p>
+        <p
+          className="font-medium [word-break:keep-all]"
+          style={{ fontSize: "clamp(8.5px, 5cqw, 11.5px)", lineHeight: 1.3, marginTop: "4%", opacity: 0.82 }}
+        >
           {subtitle}
         </p>
 
         {/* 하단 — 모노그램 + 발행처 */}
-        <div className="mt-auto pb-6">
+        <div className="mt-auto">
           <div
-            className="flex h-9 w-9 items-center justify-center rounded-full border"
-            style={{ borderColor: t.accent }}
+            className="flex items-center justify-center rounded-full border"
+            style={{ width: "clamp(22px, 15cqw, 36px)", height: "clamp(22px, 15cqw, 36px)", borderColor: t.accent }}
           >
-            <span className="font-display text-[15px] font-semibold italic" style={{ color: t.accent }}>
+            <span className="font-display font-semibold italic" style={{ fontSize: "clamp(11px, 7cqw, 15px)", color: t.accent }}>
               B
             </span>
           </div>
-          <div className="mt-3 h-px w-full" style={{ background: t.faint }} />
+          <div className="mt-[6%] h-px w-full" style={{ background: t.faint }} />
           <div
-            className="mt-2 flex items-center justify-between font-label text-[7.5px] font-medium uppercase tracking-[0.16em]"
-            style={{ opacity: 0.72 }}
+            className="mt-[3%] flex items-center justify-between font-label font-medium uppercase"
+            style={{ fontSize: "clamp(5px, 3.1cqw, 7.5px)", letterSpacing: "0.14em", opacity: 0.72 }}
           >
             <span>Blossom Books</span>
             <span>Edu Publishing</span>

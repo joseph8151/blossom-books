@@ -21,8 +21,8 @@ export default function CollectionShowcase() {
           </h2>
           <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">
             미국 교과과정·AP·SAT·국제학교 입학시험·공인 영어시험까지, 여러 시험과 과목의
-            교재를 같은 원칙으로 제작합니다. 미국 명문대·프랩 출신 선생님들이 실제 출제
-            경향을 분석해 만들며, 구매 전 무료 샘플로 직접 확인하실 수 있습니다.
+            교재를 같은 원칙으로 제작합니다. 미국 현지 학업 경험과 프렙 티칭 데이터를 바탕으로
+            실제 출제 경향을 분석해 설계하며, 구매 전 무료 샘플로 직접 확인하실 수 있습니다.
           </p>
 
           <ul className="mt-7 grid gap-3 sm:grid-cols-2">

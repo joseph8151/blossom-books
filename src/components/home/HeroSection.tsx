@@ -63,11 +63,15 @@ export default function HeroSection() {
             </Link>
           </div>
 
-          {/* 제작진 신뢰 배지 */}
-          <p className="mt-6 inline-flex items-center gap-2 border border-burgundy-700/25 bg-burgundy-700/[0.04] px-3.5 py-2 text-[13px] font-medium text-burgundy-700">
+          {/* 제작진 신뢰 배지 — 클릭 시 제작 방식 페이지로 */}
+          <Link
+            href="/our-approach"
+            className="group mt-6 inline-flex items-center gap-2 border border-burgundy-700/25 bg-burgundy-700/[0.04] px-3.5 py-2 text-[13px] font-medium text-burgundy-700 transition-colors hover:border-burgundy-700/55 hover:bg-burgundy-700/[0.08]"
+          >
             <GraduationCap size={16} strokeWidth={1.9} />
-            미국 명문대·프랩 출신 선생님들이 만든 교재
-          </p>
+            미국 현지 학업 경험과 프렙 티칭 데이터를 바탕으로 설계한 교재
+            <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+          </Link>
 
           {/* 신뢰 마이크로카피 */}
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-charcoal-600">

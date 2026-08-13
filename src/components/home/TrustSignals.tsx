@@ -40,13 +40,14 @@ export default function TrustSignals() {
         <div className="max-w-2xl">
           <span className="eyebrow">Made by experts</span>
           <h2 className="mt-4 font-display text-[26px] font-semibold leading-tight text-navy-950 sm:text-[30px]">
-            미국 명문대·프랩 출신
+            미국 명문대 출신 · 프렙 티칭 경험
             <br />
-            <span className="italic text-burgundy-700">선생님들이 직접</span> 만듭니다.
+            <span className="italic text-burgundy-700">선생님들이 직접</span> 설계합니다.
           </h2>
           <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">
-            미국 명문대 출신과 프랩 전문 선생님들이 실제 시험과 교육과정을 분석해 교재를
-            제작합니다. 아래 여섯 가지는 모든 교재에 예외 없이 적용됩니다.
+            미국 현지 학업 경험과 프렙 티칭 데이터를 바탕으로, 실제 시험과 교육과정을 분석해 교재를
+            설계합니다. 아래 여섯 가지는 모든 교재에 예외 없이 적용됩니다.{" "}
+            <a href="/our-approach" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">제작 방식 보기</a>
           </p>
         </div>
 
