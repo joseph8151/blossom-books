@@ -67,6 +67,20 @@ function pickTier(bank: SampleItem[], tier: Difficulty, n: number): SampleItem[]
     .sort((a, b) => Math.abs(DIFF_ORDER.indexOf(a.difficulty) - target) - Math.abs(DIFF_ORDER.indexOf(b.difficulty) - target))
     .slice(0, n);
 }
+
+// 첫 페이지에 가장 인상적인 문항(도형/그래프 또는 실전 지문)이 오도록 정렬합니다.
+function leadWithVisual(items: SampleItem[]): SampleItem[] {
+  if (items.length < 2) return items;
+  if (items[0].figure || (items[0].passage?.length ?? 0) > 150) return items;
+  const idx = items.findIndex((i) => i.figure || (i.passage?.length ?? 0) > 150);
+  if (idx > 0) {
+    const c = [...items];
+    const [x] = c.splice(idx, 1);
+    c.unshift(x);
+    return c;
+  }
+  return items;
+}
 const DIFF_COLOR: Record<Difficulty, string> = {
   Foundation: "#7d8a6a",
   Standard: "#ad8a4e",
@@ -154,7 +168,7 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
   const [tab, setTab] = useState<"workbook" | "answer">("workbook");
   const [page, setPage] = useState(0);
 
-  const workbook = useMemo(() => buildWorkbookItems(product), [product]);
+  const workbook = useMemo(() => leadWithVisual(buildWorkbookItems(product)), [product]);
   const answers = useMemo(
     () => [...workbook].sort((a, b) => (b.wrong || b.steps ? 1 : 0) - (a.wrong || a.steps ? 1 : 0)).slice(0, 3),
     [workbook]
@@ -187,6 +201,15 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
 
   const level = blossomLevel(product.difficulty);
   const code = productCode(product);
+  const total = workbook.length + answers.length;
+  const hasFigure = workbook.some((i) => i.figure);
+  const hasLongPassage = workbook.some((i) => (i.passage?.length ?? 0) > 200);
+  const diffsCovered = DIFF_ORDER.filter((d) => workbook.some((i) => i.difficulty === d));
+  const strengths = [
+    hasFigure ? "도형·그래프" : null,
+    hasLongPassage ? "실전 지문" : null,
+    "정답·상세 해설",
+  ].filter(Boolean) as string[];
   // 해설 언어: SAT·AP·성인 공인시험은 영어 해설 중심, 그 외(유아~초등/SR/MAP/레벨테스트 등)는 한글 상세해설 중심
   const advancedExam = product.track === "ap" || /SAT/i.test(product.examOrCurriculum) || product.track === "certified-exam";
   // OET는 한글 해설 중심으로 노출합니다.
@@ -199,12 +222,42 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-6 py-3 text-[13.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50 hover:shadow-soft"
-      >
-        <FileSearch size={16} /> 무료 샘플 보기 ({workbook.length + answers.length}p)
-      </button>
+      <div>
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            onClick={() => { setTab("workbook"); setPage(0); setOpen(true); }}
+            className="group inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+          >
+            <FileSearch size={16} /> 무료 샘플 {total}p 보기
+          </button>
+          <div className="flex flex-wrap gap-1.5">
+            {strengths.map((s) => (
+              <span key={s} className="border border-brass-500/35 bg-brass-500/[0.06] px-2 py-1 font-label text-[9.5px] uppercase tracking-[0.08em] text-brass-500">
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* 미리보기 스트립 — 클릭 전에도 내용을 살짝 보여줍니다 */}
+        <div className="mt-3 grid gap-2 sm:grid-cols-3">
+          {workbook.slice(0, 3).map((it, i) => (
+            <button
+              key={i}
+              onClick={() => { setTab("workbook"); setPage(i); setOpen(true); }}
+              className="group flex flex-col border border-navy-800/12 bg-ivory-100 p-3 text-left transition-all hover:-translate-y-0.5 hover:border-brass-500/45 hover:shadow-soft"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-label text-[9px] uppercase tracking-[0.1em] text-brass-500">{it.area}</span>
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: DIFF_COLOR[it.difficulty] }} />
+              </div>
+              <span className="mt-1.5 text-[12px] font-medium text-navy-950 line-clamp-1">{it.type}</span>
+              <span className="mt-1 text-[11px] leading-snug text-charcoal-600 line-clamp-2">{it.question}</span>
+              <span className="mt-2 font-label text-[8.5px] uppercase tracking-[0.12em] text-navy-800/50">Preview {String(i + 1).padStart(2, "0")}</span>
+            </button>
+          ))}
+        </div>
+      </div>
 
       {open && (
         <div className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-navy-950/70 p-3 backdrop-blur-sm sm:p-6" onClick={() => setOpen(false)}>
@@ -246,6 +299,11 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
             </div>
 
             <div className="px-5 py-6 lg:px-7">
+              {/* 설득 한 줄 */}
+              <p className="mb-5 border-l-2 border-brass-500 pl-3 text-[12.5px] leading-relaxed text-charcoal-900">
+                실제 교재 발췌본입니다. <span className="font-medium">표지가 아니라 문제로 판단하세요.</span>
+              </p>
+
               {/* 콘텐츠 목차 */}
               <div className="mb-5">
                 <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">
@@ -442,6 +500,28 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                 >
                   다음 <ChevronRight size={15} />
                 </button>
+              </div>
+
+              {/* 난이도 지도 — 이 교재가 다루는 난이도 범위 */}
+              <div className="mt-6 border-t border-navy-800/12 pt-5">
+                <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">이 교재가 다루는 난이도</p>
+                <div className="mt-2.5 flex gap-1.5">
+                  {DIFF_ORDER.map((d) => {
+                    const on = diffsCovered.includes(d);
+                    return (
+                      <span
+                        key={d}
+                        className={`flex-1 border px-2 py-1.5 text-center font-label text-[9.5px] uppercase tracking-[0.06em] ${on ? "text-ivory-100" : "border-navy-800/15 text-navy-800/30"}`}
+                        style={on ? { background: DIFF_COLOR[d], borderColor: DIFF_COLOR[d] } : undefined}
+                      >
+                        {d}
+                      </span>
+                    );
+                  })}
+                </div>
+                <p className="mt-2 text-[11.5px] text-charcoal-600">
+                  기초 → 표준 → 응용/심화까지, 이 샘플만 봐도 교재의 난이도 스펙트럼을 확인하실 수 있습니다.
+                </p>
               </div>
 
               {/* 안내 + 상담 */}
