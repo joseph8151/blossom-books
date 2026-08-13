@@ -29,6 +29,7 @@ export default function ProductCard({ product }: { product: Product }) {
           title={product.title.split(" — ")[0]}
           subtitle={product.examOrCurriculum}
           tone={coverToneFor(product.id)}
+          size="sm"
           className="max-w-[150px] transition-transform duration-500 group-hover:scale-[0.96]"
         />
       </div>

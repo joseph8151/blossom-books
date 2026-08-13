@@ -3,20 +3,21 @@ import { ArrowRight, Check, GraduationCap } from "lucide-react";
 import { BookCoverMockup } from "./BookCoverMockup";
 
 // 첫 화면은 가격을 노출하지 않습니다. 목적은 "여기서 내 아이에게 맞는 교재를 찾을 수 있겠다"는 확신.
-const assessments = [
-  "MAP Growth",
-  "CAT4",
-  "NGRT",
-  "WIDA",
-  "SSAT",
-  "ISEE",
-  "UKiset",
-  "ISEB",
-  "SAT",
-  "AP",
-  "GRE",
-  "LSAT",
-  "International School Placement",
+// 각 시험 칩 → /books 검색으로 연결 (해당 교재가 없으면 주문제작 안내로 이어집니다)
+const assessments: { label: string; href: string }[] = [
+  { label: "MAP Growth", href: "/books?q=MAP" },
+  { label: "CAT4", href: "/books?q=CAT4" },
+  { label: "NGRT", href: "/books?q=NGRT" },
+  { label: "WIDA", href: "/books?q=WIDA" },
+  { label: "SSAT", href: "/books?q=SSAT" },
+  { label: "ISEE", href: "/books?q=ISEE" },
+  { label: "UKiset", href: "/books?q=UKiset" },
+  { label: "ISEB", href: "/books?q=ISEB" },
+  { label: "SAT", href: "/books?q=SAT" },
+  { label: "AP", href: "/books?track=ap" },
+  { label: "GRE", href: "/books?q=GRE" },
+  { label: "LSAT", href: "/books?q=LSAT" },
+  { label: "International School Placement", href: "/books?track=admissions" },
 ];
 
 const subjects = ["English", "Reading", "Writing", "Vocabulary", "Grammar", "Math", "Science"];
@@ -123,12 +124,13 @@ export default function HeroSection() {
           </p>
           <div className="mt-3 flex flex-wrap gap-x-2 gap-y-2">
             {assessments.map((x) => (
-              <span
-                key={x}
-                className="border border-navy-800/15 bg-ivory-100 px-2.5 py-1 font-label text-[11.5px] tracking-wide text-navy-800"
+              <Link
+                key={x.label}
+                href={x.href}
+                className="border border-navy-800/15 bg-ivory-100 px-2.5 py-1 font-label text-[11.5px] tracking-wide text-navy-800 transition-colors hover:border-brass-500/60 hover:text-navy-900"
               >
-                {x}
-              </span>
+                {x.label}
+              </Link>
             ))}
           </div>
           <div className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-[12.5px] text-charcoal-600">
@@ -136,7 +138,9 @@ export default function HeroSection() {
             {subjects.map((s, i) => (
               <span key={s} className="inline-flex items-center gap-2.5">
                 {i > 0 && <span className="text-navy-800/25">·</span>}
-                {s}
+                <Link href={`/books?q=${encodeURIComponent(s)}`} className="transition-colors hover:text-navy-900 hover:underline">
+                  {s}
+                </Link>
               </span>
             ))}
           </div>

@@ -133,7 +133,7 @@ function buildWorkbookItems(product: Product): SampleItem[] {
   if (/oet/.test(key)) return oetBank;
   if (product.track === "certified-exam" && /english|toefl|ielts|met|spa|teps/.test(key)) return certifiedEnglishBank;
   // 수학 레벨테스트(사고력) — 한글 + SVG (큐레이션된 세트, 전부 노출)
-  if (product.id === "level-test-math" || /수학 레벨|사고력/.test(key)) return mathLevelBank;
+  if (product.id === "math-reasoning-level-test" || /수학 레벨|사고력/.test(key)) return mathLevelBank;
   // Geometry — 그래프·도형·복합문제 (SVG)
   if (/geometry|지오메트리/.test(key)) return geometryBank;
   if (/algebra/.test(key)) return cap(algebraBank);
