@@ -489,6 +489,26 @@ export const reasoningBank: SampleItem[] = [
     why: "Three faces always meet at each corner of a cube.",
     whyKo: "정육면체의 한 꼭짓점에서는 항상 세 면이 만납니다.",
   },
+  {
+    area: "Spatial Reasoning", type: "Paper Folding", skill: "Predict holes after unfolding", difficulty: "Standard",
+    figure: "paper-fold",
+    question: "A square sheet is folded in half and one hole is punched through both layers. When the paper is unfolded, how many holes are there?",
+    choices: ["1", "2", "3", "4"],
+    answer: "2",
+    why: "Folding creates a mirror line. One punch passes through both layers, so the unfolded paper shows 2 holes, symmetric about the fold.",
+    whyKo: "접으면 접힌 선이 대칭축이 됩니다. 한 번 뚫으면 두 겹을 함께 관통하므로, 펼치면 접힌 선을 기준으로 대칭인 구멍 2개가 생깁니다.",
+    wrong: "Choosing 1 ignores the second (mirrored) layer.",
+    wrongKo: "1개로 고르면 반대쪽(대칭으로 겹쳐진) 겹에 생기는 구멍을 빠뜨린 것입니다.",
+  },
+  {
+    area: "Spatial Reasoning", type: "Rotation", skill: "Rotate a figure mentally", difficulty: "Foundation",
+    figure: "arrow-rotate",
+    question: "The arrow points to the right. If it is rotated 90° clockwise, which direction will it point?",
+    choices: ["Up", "Down", "Left", "Right"],
+    answer: "Down",
+    why: "Rotating a right-pointing arrow 90° clockwise turns it to point downward.",
+    whyKo: "오른쪽(→)을 가리키는 화살표를 시계 방향으로 90° 돌리면 아래쪽(↓)을 가리키게 됩니다. (오른→아래→왼→위 순서)",
+  },
 ];
 
 // ── OET (의료 영어 · 성인 전문시험) ─────────────────────

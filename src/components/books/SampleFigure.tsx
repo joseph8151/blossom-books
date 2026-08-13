@@ -481,6 +481,41 @@ export default function SampleFigure({ name }: { name: string }) {
       </svg>
     );
   }
+  if (name === "paper-fold") {
+    return (
+      <svg viewBox="0 0 250 96" className={`${svgCls} max-w-[340px]`} role="img" aria-label="Paper folding and hole punch">
+        {/* 접은 종이 (오른쪽 절반) */}
+        <rect x="14" y="20" width="46" height="58" fill={FILL} stroke={INK} strokeWidth="1.2" />
+        <line x1="14" y1="20" x2="14" y2="78" stroke={INK} strokeWidth="1.4" strokeDasharray="4 3" />
+        <circle cx="44" cy="42" r="5" fill="#fff" stroke={INK} strokeWidth="1.1" />
+        <text x="37" y="92" fontSize="8" fill={FAINT}>접은 종이</text>
+        {/* 화살표 */}
+        <text x="86" y="52" fontSize="16" fill={FAINT}>→</text>
+        {/* 펼친 종이 */}
+        <rect x="120" y="20" width="92" height="58" fill={FILL} stroke={INK} strokeWidth="1.2" />
+        <line x1="166" y1="20" x2="166" y2="78" stroke={INK} strokeWidth="1" strokeDasharray="4 3" />
+        <circle cx="150" cy="42" r="5" fill="#fff" stroke={INK} strokeWidth="1.1" />
+        <circle cx="182" cy="42" r="5" fill="none" stroke={ACCENT} strokeWidth="1.2" strokeDasharray="2 2" />
+        <text x="180" y="40" fontSize="10" fontWeight="600" fill={ACCENT} textAnchor="middle">?</text>
+        <text x="150" y="92" fontSize="8" fill={FAINT}>펼친 종이</text>
+      </svg>
+    );
+  }
+  if (name === "arrow-rotate") {
+    return (
+      <svg viewBox="0 0 130 100" className={`${svgCls} max-w-[190px]`} role="img" aria-label="Arrow rotated 90 degrees clockwise">
+        {/* 오른쪽을 가리키는 화살표 */}
+        <g transform="translate(30,50)">
+          <rect x="-22" y="-6" width="30" height="12" fill={FILL} stroke={INK} strokeWidth="1.2" />
+          <polygon points="8,-13 26,0 8,13" fill={FILL} stroke={INK} strokeWidth="1.2" />
+        </g>
+        {/* 시계방향 회전 표시 */}
+        <path d="M96 34 A26 26 0 1 1 70 22" fill="none" stroke={ACCENT} strokeWidth="1.6" />
+        <polygon points="70,22 76,18 77,27" fill={ACCENT} />
+        <text x="96" y="86" fontSize="9" fill={FAINT} textAnchor="middle">90° 시계방향</text>
+      </svg>
+    );
+  }
   if (name === "curve-tangent") {
     // y = x² 위 점 (1,1)에서의 접선 (기울기 = 2)
     const ox = 26, oy = 116, u = 15;
