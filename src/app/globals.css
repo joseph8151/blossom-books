@@ -1,34 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap");
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css");
 @import "tailwindcss";
 
 :root {
-  /* Brand palette — deliberately restrained: navy + ivory carry the page, burgundy/brass are used sparingly */
-  --color-navy-950: #0d1626;
-  --color-navy-900: #131f38;
-  --color-navy-800: #1c2c4c;
-  --color-navy-700: #2a3e63;
-  --color-navy-500: #4c5f8a;
+  /* JOHN EDUCATION GROUP brand palette — Deep Navy (trust/franchise HQ) + Coral (CTA, 10-15% only) on Warm Ivory */
+  --color-navy-950: #0e2338;
+  --color-navy-900: #16324f;
+  --color-navy-800: #1e4266;
+  --color-navy-700: #2b5580;
+  --color-navy-500: #5c7d9c;
 
-  --color-ivory-100: #faf7f0;
-  --color-ivory-200: #f5efe2;
-  --color-ivory-300: #ede3cd;
+  --color-ivory-100: #f8f5ef;
+  --color-ivory-200: #f1efea;
+  --color-ivory-300: #e9e4d8;
 
-  --color-burgundy-700: #6d2432;
-  --color-burgundy-600: #7f2c3b;
+  --color-paleblue-100: #eaf3f7;
+  --color-paleblue-200: #dcebf2;
 
-  --color-brass-500: #ad8a4e;
-  --color-brass-400: #c4a568;
+  --color-coral-600: #db6836;
+  --color-coral-500: #f47b45;
+  --color-coral-400: #f79a6e;
 
-  --color-charcoal-900: #26241f;
-  --color-charcoal-600: #524f45;
+  --color-charcoal-900: #20252a;
+  --color-charcoal-600: #56616b;
 
   --background: var(--color-ivory-100);
   --foreground: var(--color-charcoal-900);
 
-  --font-display: "Fraunces", "Nanum Myeongjo", serif;
+  --font-display: "Manrope", "Pretendard Variable", sans-serif;
   --font-body: "Pretendard Variable", "Pretendard", "Noto Sans KR", sans-serif;
-  --font-label: "Space Grotesk", "IBM Plex Mono", "Pretendard Variable", monospace;
+  --font-label: "Manrope", "IBM Plex Mono", "Pretendard Variable", monospace;
 }
 
 @theme inline {
@@ -45,11 +46,12 @@
   --color-ivory-200: var(--color-ivory-200);
   --color-ivory-300: var(--color-ivory-300);
 
-  --color-burgundy-700: var(--color-burgundy-700);
-  --color-burgundy-600: var(--color-burgundy-600);
+  --color-paleblue-100: var(--color-paleblue-100);
+  --color-paleblue-200: var(--color-paleblue-200);
 
-  --color-brass-500: var(--color-brass-500);
-  --color-brass-400: var(--color-brass-400);
+  --color-coral-600: var(--color-coral-600);
+  --color-coral-500: var(--color-coral-500);
+  --color-coral-400: var(--color-coral-400);
 
   --color-charcoal-900: var(--color-charcoal-900);
   --color-charcoal-600: var(--color-charcoal-600);
@@ -59,10 +61,10 @@
   --font-label: var(--font-label);
 
   /* Soft, low-opacity navy elevation — gives surfaces depth without feeling heavy */
-  --shadow-soft: 0 2px 6px -2px rgba(13, 22, 38, 0.08), 0 14px 34px -18px rgba(13, 22, 38, 0.16);
-  --shadow-card: 0 1px 2px rgba(13, 22, 38, 0.05), 0 18px 44px -26px rgba(13, 22, 38, 0.3);
-  --shadow-lift: 0 22px 50px -22px rgba(13, 22, 38, 0.4);
-  --shadow-gold: 0 12px 30px -14px rgba(173, 138, 78, 0.5);
+  --shadow-soft: 0 2px 6px -2px rgba(14, 35, 56, 0.08), 0 14px 34px -18px rgba(14, 35, 56, 0.16);
+  --shadow-card: 0 1px 2px rgba(14, 35, 56, 0.05), 0 18px 44px -26px rgba(14, 35, 56, 0.3);
+  --shadow-lift: 0 22px 50px -22px rgba(14, 35, 56, 0.4);
+  --shadow-coral: 0 12px 30px -14px rgba(244, 123, 69, 0.45);
 }
 
 * {
@@ -87,9 +89,9 @@ body {
 
 /* Consistent, on-brand focus ring for keyboard users */
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-brass-500);
+  outline: 2px solid var(--color-coral-500);
   outline-offset: 2px;
-  border-radius: 1px;
+  border-radius: 6px;
 }
 
 ::selection {
@@ -115,68 +117,44 @@ body {
   transform: translateY(-2px);
 }
 
-/* Thin brass hairline used as a decorative divider under eyebrow labels */
-.gold-rule {
-  height: 1px;
-  background: linear-gradient(90deg, var(--color-brass-500), rgba(173, 138, 78, 0));
-}
-
-/* Small eyebrow label with a leading brass tick — an editorial signature */
+/* Solid coral pill badge — JOHN's label signature (deliberately not a hairline/tick,
+   to read as a distinct shape language from thin editorial rule marks) */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 0.32rem 0.85rem;
+  background: color-mix(in srgb, var(--color-coral-500) 14%, transparent);
   font-family: var(--font-label);
   font-size: 11px;
-  letter-spacing: 0.18em;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-brass-500);
-}
-.eyebrow::before {
-  content: "";
-  width: 26px;
-  height: 1px;
-  background: var(--color-brass-500);
-  opacity: 0.9;
+  color: var(--color-coral-600);
 }
 .eyebrow--center {
   justify-content: center;
 }
 .eyebrow--light {
-  color: var(--color-brass-400);
-}
-.eyebrow--light::before {
-  background: var(--color-brass-400);
+  background: color-mix(in srgb, var(--color-ivory-100) 16%, transparent);
+  color: var(--color-coral-400);
 }
 
-/* Signature motif: faint ruled "notebook" texture used sparingly on paper-colored sections */
-.paper-rule {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 35px,
-    rgba(38, 36, 31, 0.045) 35px,
-    rgba(38, 36, 31, 0.045) 36px
-  );
+/* Filled circular index badge — replaces bare "01/02" numerals with a solid mark */
+.num-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--color-navy-900);
+  color: var(--color-ivory-100);
+  font-family: var(--font-label);
+  font-weight: 800;
 }
 
 .text-balance {
   text-wrap: balance;
-}
-
-/* 샘플 뷰어 페이지 넘김 애니메이션 */
-@keyframes samplePageIn {
-  from {
-    opacity: 0;
-    transform: translateX(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-.sample-page-in {
-  animation: samplePageIn 0.26s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {

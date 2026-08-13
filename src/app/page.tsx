@@ -1,85 +1,46 @@
 import HeroSection from "@/components/home/HeroSection";
-import CoreCategories from "@/components/home/CoreCategories";
-import FindPrepPromo from "@/components/home/FindPrepPromo";
-import WhyBlossom from "@/components/home/WhyBlossom";
-import FromClassroomToWorkbook from "@/components/home/FromClassroomToWorkbook";
-import MeetTheEducators from "@/components/home/MeetTheEducators";
-import TestAlignment from "@/components/home/TestAlignment";
-import QuestionToUnderstanding from "@/components/home/QuestionToUnderstanding";
-import LevelAssessment from "@/components/home/LevelAssessment";
-import LevelTestStatement from "@/components/home/LevelTestStatement";
-import CurriculumMap from "@/components/home/CurriculumMap";
-import CollectionShowcase from "@/components/home/CollectionShowcase";
-import EditorialStandards from "@/components/home/EditorialStandards";
-import ResearchProcess from "@/components/home/ResearchProcess";
-import QualityFeatures from "@/components/home/QualityFeatures";
-import HowToOrder from "@/components/home/HowToOrder";
-import PrepPricing from "@/components/home/PrepPricing";
-import WhyCost from "@/components/home/WhyCost";
-import CompareLevels from "@/components/home/CompareLevels";
-import QuoteCalculator from "@/components/home/QuoteCalculator";
-import ExistingVsCustomSection from "@/components/home/ExistingVsCustomSection";
-import UseCaseSection from "@/components/home/UseCaseSection";
-import AudienceCards from "@/components/home/AudienceCards";
-import SelectionExamples from "@/components/home/SelectionExamples";
-import TrustSignals from "@/components/home/TrustSignals";
-import BrandNumbers from "@/components/home/BrandNumbers";
-import Testimonials from "@/components/home/Testimonials";
-import ConsultationCTA from "@/components/home/ConsultationCTA";
-import FAQSection from "@/components/home/FAQSection";
+import IntroStrip from "@/components/home/IntroStrip";
+import BusinessModelsOverview from "@/components/home/BusinessModelsOverview";
+import ModelFinder from "@/components/home/ModelFinder";
+import StartSmall from "@/components/home/StartSmall";
+import TeacherToOwner from "@/components/home/TeacherToOwner";
+import WhyJohn from "@/components/home/WhyJohn";
+import OperatingSystem from "@/components/home/OperatingSystem";
+import CurriculumEcosystem from "@/components/home/CurriculumEcosystem";
+import ExistingAcademyOwners from "@/components/home/ExistingAcademyOwners";
+import OwnerSupport from "@/components/home/OwnerSupport";
+import WhoIsJohnFor from "@/components/home/WhoIsJohnFor";
+import FranchiseProcess from "@/components/home/FranchiseProcess";
+import FranchiseEconomics from "@/components/home/FranchiseEconomics";
+import FAQPreview from "@/components/home/FAQPreview";
 import FinalCTA from "@/components/home/FinalCTA";
 
-// 홈페이지는 VALUE-FIRST → PRICE 퍼널로 구성합니다.
-// Discover → Understand → Preview → (Trust) → How it works → Price → Ask/Purchase.
+// 홈페이지 흐름: JOHN이 무엇인가 → 어떤 사업을 할 수 있나 → 나한테 맞는 모델은 →
+// 본사가 무엇을 지원하나 → 작게 시작할 수 있나 → 기존 학원도 가능한가 → 어떻게 시작하나 → 상담 신청
 export default function HomePage() {
   return (
     <>
-      {/* Discover — 무엇을 파는지 즉시 이해 (가격 미노출) */}
       <HeroSection />
-      <CoreCategories />
-      <FindPrepPromo />
+      <IntroStrip />
 
-      {/* Understand — 왜 우리 아이에게 필요한지 */}
-      <WhyBlossom />
-      <FromClassroomToWorkbook />
-      <MeetTheEducators />
-      <TestAlignment />
+      <BusinessModelsOverview />
+      <ModelFinder />
 
-      {/* Preview — 문제 수준과 유형을 가격보다 먼저 */}
-      <QuestionToUnderstanding />
-      <CompareLevels />
+      <StartSmall />
+      <TeacherToOwner />
 
-      {/* Placement / Level Test — 별도 핵심 진입 강화 */}
-      <LevelAssessment />
-      <CurriculumMap />
-      <LevelTestStatement />
+      <WhyJohn />
+      <OperatingSystem />
+      <CurriculumEcosystem />
 
-      {/* Trust — 검증 가능한 구조적 신뢰 */}
-      <CollectionShowcase />
-      <EditorialStandards />
-      <ResearchProcess />
-      <QualityFeatures />
+      <ExistingAcademyOwners />
+      <OwnerSupport />
+      <WhoIsJohnFor />
 
-      {/* How it works → Price (가치 이해 후 가격) */}
-      <HowToOrder />
-      <PrepPricing />
-      <QuoteCalculator />
-      <WhyCost />
+      <FranchiseProcess />
+      <FranchiseEconomics />
 
-      {/* Custom / Audience */}
-      <ExistingVsCustomSection />
-      <UseCaseSection />
-      <AudienceCards />
-
-      {/* Proof */}
-      <SelectionExamples />
-      <TrustSignals />
-      <BrandNumbers />
-      <Testimonials />
-
-      {/* Ask or Purchase */}
-      <ConsultationCTA />
-      <FAQSection />
+      <FAQPreview />
       <FinalCTA />
     </>
   );
