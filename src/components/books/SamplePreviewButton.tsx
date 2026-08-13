@@ -575,17 +575,29 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                 </p>
               </div>
 
-              {/* 안내 + 상담 */}
-              <div className="mt-7 flex flex-col items-start gap-3 border-t border-navy-800/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                <p className="flex items-start gap-2 text-[12px] leading-relaxed text-charcoal-600">
-                  <FileSearch size={14} className="mt-0.5 shrink-0 text-brass-500" />
-                  실제 시험의 평가 Skill과 유형을 참고해 독립 제작한 예시이며, 기출·유출문제가 아닙니다. 최신
-                  업데이트에 따라 디자인·구성이 실제 교재와 다소 다를 수 있습니다.
-                </p>
-                <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex shrink-0 items-center gap-2 bg-navy-900 px-6 py-3 text-[13px] font-medium text-ivory-100 transition-all hover:-translate-y-0.5 hover:bg-navy-800">
-                  <MessageCircle size={15} /> 카카오톡으로 교재 확인
+              {/* 샘플 열람 후 상담 유도 */}
+              <div className="mt-7 flex flex-col items-start gap-4 border-t border-navy-800/12 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-display text-[16px] font-semibold text-navy-950 sm:text-[18px]">이 샘플, 아이 수준에 맞을까요?</p>
+                  <p className="mt-1 text-[13px] leading-relaxed text-charcoal-600">
+                    궁금한 점이 있으시면 바로 물어보세요. 학년과 현재 수준을 알려주시면 더 정확하게 안내해
+                    드립니다.
+                  </p>
+                </div>
+                <a
+                  href={siteConfig.kakaoChannelUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex shrink-0 items-center gap-2 bg-brass-500 px-7 py-3.5 text-[14px] font-medium text-navy-950 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-brass-400"
+                >
+                  <MessageCircle size={16} /> 카카오톡으로 상담하기
                 </a>
               </div>
+              <p className="mt-3 flex items-start gap-2 text-[11.5px] leading-relaxed text-charcoal-600/80">
+                <FileSearch size={13} className="mt-0.5 shrink-0 text-brass-500" />
+                실제 시험의 평가 Skill과 유형을 참고해 독립 제작한 예시이며, 기출·유출문제가 아닙니다. 최신
+                업데이트에 따라 디자인·구성이 실제 교재와 다소 다를 수 있습니다.
+              </p>
             </div>
           </div>
         </div>
