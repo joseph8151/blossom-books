@@ -21,6 +21,8 @@ import {
   certifiedEnglishBank,
   oetBank,
   scatBank,
+  geometryBank,
+  mathLevelBank,
   placementReadingByProduct,
   srReadingByProduct,
 } from "@/data/sampleBank";
@@ -54,8 +56,12 @@ function buildWorkbookItems(product: Product): SampleItem[] {
   if (/reasoning|cat4|verbal|non-verbal|spatial|general ability/.test(key)) return reasoningBank;
   if (/oet/.test(key)) return oetBank;
   if (product.track === "certified-exam" && /english|toefl|ielts|met|spa|teps/.test(key)) return certifiedEnglishBank;
+  // 수학 레벨테스트(사고력) — 한글 + SVG (큐레이션된 세트, 전부 노출)
+  if (product.id === "level-test-math" || /수학 레벨|사고력/.test(key)) return mathLevelBank;
+  // Geometry — 그래프·도형·복합문제 (SVG)
+  if (/geometry|지오메트리/.test(key)) return geometryBank;
   if (/algebra/.test(key)) return cap(algebraBank);
-  if (/geometry|calc|precalc|statistic|math|사고력|수학/.test(key) && !/reading|english/.test(key)) return cap(mathBank);
+  if (/calc|precalc|statistic|math|수학/.test(key) && !/reading|english/.test(key)) return cap(mathBank);
   if (/biolog|chemi|physic|science|과학|생물|화학|물리/.test(key)) return cap(scienceBank);
   if (/grammar|문법/.test(key)) return cap(grammarBank);
   if (/writing|라이팅/.test(key)) return writingBank;
