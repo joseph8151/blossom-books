@@ -21,6 +21,7 @@ export interface SampleItem {
   wrongKo?: string;
   steps?: string[];
   figure?: string; // SVG 도형 키 (CAT4 등 시각 문항)
+  essay?: { intro: string; body: string[]; conclusion: string }; // Writing 모범답안(서론·본론·결론)
 }
 
 // ── Reading ─────────────────────────────────────────────
@@ -278,6 +279,24 @@ export const writingBank: SampleItem[] = [
     answer: "e.g., Schools should have longer lunch breaks. First, students need enough time to eat well, which helps them focus. Second, a longer break lets them relax and return to class ready to learn.",
     why: "Scoring: a clear opinion (claim) + at least two supporting reasons + organized sentences.",
     whyKo: "채점 기준: 분명한 의견(주장) + 뒷받침 이유 두 가지 이상 + 짜임새 있는 문장 구성.",
+  },
+  {
+    area: "Writing", type: "Opinion Essay", skill: "Write a structured essay (Introduction · Body · Conclusion, 약 250 words)", difficulty: "Advanced",
+    passage: "Prompt: Do you think students should be allowed to use smartphones at school? Write about 250 words using an Introduction – Body – Conclusion structure.",
+    question: "Plan and write your essay. (Introduction · Body · Conclusion)",
+    answer: "모범답안: 아래 서론–본론–결론 구조를 참고하세요.",
+    essay: {
+      intro:
+        "Smartphones are a big part of our lives today. Some people think students should be allowed to use them at school, while others disagree. In my opinion, students should not use smartphones during class, because they cause distraction and reduce real communication.",
+      body: [
+        "First, smartphones make it hard to focus. When a phone buzzes, students want to check it right away, and they miss what the teacher is saying. In my class, students who keep their phones in their bags usually finish their work faster and make fewer mistakes.",
+        "Second, using phones too much reduces face-to-face communication. During break time, many students stare at their screens instead of talking or playing together. Talking with friends in person helps us build better relationships and stronger social skills.",
+      ],
+      conclusion:
+        "In conclusion, although smartphones are useful, they should not be used during school hours. Keeping phones away helps students concentrate and connect with each other. Schools could still allow phone use for emergencies or for special lessons.",
+    },
+    why: "A strong essay states a clear opinion in the introduction, supports it with reasons and examples in the body, and restates the position in the conclusion.",
+    whyKo: "좋은 에세이는 서론에서 분명한 입장을 밝히고, 본론에서 이유와 예시로 뒷받침하며, 결론에서 입장을 다시 정리합니다. 서론 → 본론 → 결론 구조로 쓰면 점수가 안정적으로 나옵니다.",
   },
 ];
 

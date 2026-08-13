@@ -188,7 +188,7 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
 
   const workbook = useMemo(() => leadWithVisual(buildWorkbookItems(product)), [product]);
   const answers = useMemo(
-    () => [...workbook].sort((a, b) => (b.wrong || b.steps ? 1 : 0) - (a.wrong || a.steps ? 1 : 0)).slice(0, 3),
+    () => [...workbook].sort((a, b) => (b.wrong || b.steps || b.essay ? 1 : 0) - (a.wrong || a.steps || a.essay ? 1 : 0)).slice(0, 3),
     [workbook]
   );
   const items = tab === "workbook" ? workbook : answers;
@@ -499,6 +499,30 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                         <p className="mt-1.5 text-[12px] leading-relaxed text-ivory-200/60">핵심(한글): {item.whyKo}</p>
                       )}
                     </div>
+                    {item.essay && (
+                      <div>
+                        <p className="font-label text-[10px] uppercase tracking-[0.1em] text-brass-400">Model Answer · 모범답안</p>
+                        <div className="mt-2 space-y-2">
+                          <div className="border-l-2 p-3" style={{ borderColor: "#5f92c9", background: "rgba(63,110,165,0.16)" }}>
+                            <p className="font-label text-[9px] uppercase tracking-[0.1em]" style={{ color: "#9cc2e8" }}>Introduction · 서론</p>
+                            <p className="mt-1 text-[12.5px] leading-relaxed text-ivory-100/90">{item.essay.intro}</p>
+                          </div>
+                          {item.essay.body.map((b, bi) => (
+                            <div key={bi} className="border-l-2 p-3" style={{ borderColor: "#7ea981", background: "rgba(91,127,94,0.18)" }}>
+                              <p className="font-label text-[9px] uppercase tracking-[0.1em]" style={{ color: "#b6d4b8" }}>Body · 본론 {bi + 1}</p>
+                              <p className="mt-1 text-[12.5px] leading-relaxed text-ivory-100/90">{b}</p>
+                            </div>
+                          ))}
+                          <div className="border-l-2 p-3" style={{ borderColor: "#cf9264", background: "rgba(176,106,60,0.18)" }}>
+                            <p className="font-label text-[9px] uppercase tracking-[0.1em]" style={{ color: "#e6b98f" }}>Conclusion · 결론</p>
+                            <p className="mt-1 text-[12.5px] leading-relaxed text-ivory-100/90">{item.essay.conclusion}</p>
+                          </div>
+                        </div>
+                        <p className="mt-2.5 text-[12px] leading-relaxed text-brass-300">
+                          서론 → 본론 → 결론 구조로 쓰면 점수가 안정적으로 나옵니다.
+                        </p>
+                      </div>
+                    )}
                     {item.steps && (
                       <div>
                         <p className="font-label text-[10px] uppercase tracking-[0.1em] text-brass-400">Solution steps</p>
