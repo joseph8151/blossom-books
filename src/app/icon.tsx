@@ -15,14 +15,14 @@ export default function Icon() {
           alignItems: "flex-end",
           justifyContent: "center",
           gap: 3,
-          backgroundColor: "#F8F5EF",
+          backgroundColor: "#F7FBF8",
           borderRadius: 8,
           padding: 6,
         }}
       >
-        <div style={{ width: 5, height: 10, borderRadius: 3, backgroundColor: "#5C7D9C", display: "flex" }} />
-        <div style={{ width: 5, height: 16, borderRadius: 3, backgroundColor: "#16324F", display: "flex" }} />
-        <div style={{ width: 5, height: 22, borderRadius: 3, backgroundColor: "#F47B45", display: "flex" }} />
+        <div style={{ width: 5, height: 10, borderRadius: 3, backgroundColor: "#56B78D", display: "flex" }} />
+        <div style={{ width: 5, height: 16, borderRadius: 3, backgroundColor: "#0F5C41", display: "flex" }} />
+        <div style={{ width: 5, height: 22, borderRadius: 3, backgroundColor: "#F5B914", display: "flex" }} />
       </div>
     ),
     size

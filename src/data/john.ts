@@ -27,6 +27,8 @@ export interface BusinessModel {
   spaceType: string;
   expansionPotential: string;
   operationStyle: string;
+  spaceLevel: 1 | 2 | 3; // 공간 규모 — 1: 소형, 2: 중소형, 3: 중대형
+  teamLevel: 1 | 2 | 3; // 운영 인력 규모 — 1: 원장 단독, 2: 원장+소수, 3: 강사진 팀
 }
 
 export const businessModels: BusinessModel[] = [
@@ -46,6 +48,8 @@ export const businessModels: BusinessModel[] = [
     spaceType: "중소형 학습 공간",
     expansionPotential: "JOHN PREP · JOHN HYBRID로 확장 가능",
     operationStyle: "원장 운영 또는 강사 채용",
+    spaceLevel: 2,
+    teamLevel: 2,
   },
   {
     id: "prep",
@@ -70,6 +74,8 @@ export const businessModels: BusinessModel[] = [
     spaceType: "중형 학습 공간",
     expansionPotential: "JOHN HYBRID로 프로그램 확장",
     operationStyle: "전문 강사진 운영",
+    spaceLevel: 2,
+    teamLevel: 3,
   },
   {
     id: "study",
@@ -87,6 +93,8 @@ export const businessModels: BusinessModel[] = [
     spaceType: "소형 공간 · 주거지 인근",
     expansionPotential: "JOHN KIDS · JOHN HYBRID로 성장 가능",
     operationStyle: "원장 단독 운영",
+    spaceLevel: 1,
+    teamLevel: 1,
   },
   {
     id: "private",
@@ -111,6 +119,8 @@ export const businessModels: BusinessModel[] = [
     spaceType: "소형 스튜디오",
     expansionPotential: "JOHN LANGUAGE로 그룹 수업 확장",
     operationStyle: "원장 단독 또는 소수 강사",
+    spaceLevel: 1,
+    teamLevel: 1,
   },
   {
     id: "language",
@@ -128,6 +138,8 @@ export const businessModels: BusinessModel[] = [
     spaceType: "중소형 학습 공간",
     expansionPotential: "기업 출강 · 다지점으로 확장",
     operationStyle: "원장 운영 또는 소규모 팀",
+    spaceLevel: 2,
+    teamLevel: 2,
   },
   {
     id: "hybrid",
@@ -145,6 +157,8 @@ export const businessModels: BusinessModel[] = [
     spaceType: "중대형 학습 공간",
     expansionPotential: "다지점 확장의 기준 모델",
     operationStyle: "원장 + 강사진 팀 운영",
+    spaceLevel: 3,
+    teamLevel: 3,
   },
 ];
 

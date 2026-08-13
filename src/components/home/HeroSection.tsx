@@ -46,12 +46,12 @@ export default function HeroSection() {
         {/* 오른쪽 — Editorial Composition (교육 공간을 표현하는 타이포그래피 구성) */}
         <div className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[28px] border border-navy-900/12 bg-navy-900 sm:aspect-[5/5.5]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_15%,rgba(244,123,69,0.18),transparent_45%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_15%,rgba(245,185,20,0.2),transparent_45%)]" />
             <div
               className="absolute inset-0 opacity-[0.15]"
               style={{
                 backgroundImage:
-                  "linear-gradient(rgba(248,245,239,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(248,245,239,0.5) 1px, transparent 1px)",
+                  "linear-gradient(rgba(247,251,248,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(247,251,248,0.5) 1px, transparent 1px)",
                 backgroundSize: "36px 36px",
               }}
             />
