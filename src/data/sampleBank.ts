@@ -416,6 +416,52 @@ export const reasoningBank: SampleItem[] = [
 // ── OET (의료 영어 · 성인 전문시험) ─────────────────────
 export const oetBank: SampleItem[] = [
   {
+    area: "Reading", type: "Comprehension (Part B/C)", skill: "Read a longer clinical text for meaning", difficulty: "Advanced",
+    passage: `Hand Hygiene in Clinical Practice
+
+Hand hygiene remains the single most effective way to prevent the spread of infection in healthcare settings. Despite widespread awareness, studies consistently show that compliance among busy staff can fall below recommended levels, particularly during periods of high workload. Healthcare workers are therefore encouraged to follow the "Five Moments for Hand Hygiene" identified by the World Health Organization.
+
+These five moments are: before touching a patient, before a clean or aseptic procedure, after exposure to body fluids, after touching a patient, and after contact with the patient's surroundings. Cleaning the hands at each of these points interrupts the transfer of microorganisms that can cause healthcare-associated infections.
+
+Alcohol-based hand rub is suitable for most clinical situations because it acts quickly and is gentle on the skin when used correctly. However, when the hands are visibly soiled, or after caring for a patient with certain infections such as those causing diarrhoea, washing with soap and water is required, as alcohol rub may be less effective against some organisms.
+
+Facilities can support good practice by placing hand-rub dispensers at the point of care, providing regular training, and displaying clear reminders. Ultimately, protecting patients depends not only on individual effort but on a workplace culture that treats hand hygiene as a shared responsibility.`,
+    question: "According to the text, when is washing with soap and water required INSTEAD of alcohol-based hand rub?",
+    choices: [
+      "Before every patient consultation",
+      "When the hands are visibly soiled or after certain infections such as diarrhoea",
+      "Only at the start of a shift",
+      "Whenever alcohol rub is unavailable",
+    ],
+    answer: "When the hands are visibly soiled or after certain infections such as diarrhoea",
+    why: "The third paragraph states soap and water is required when hands are visibly soiled or after caring for a patient with infections such as those causing diarrhoea.",
+    whyKo: "세 번째 문단에 근거가 있습니다: 손이 눈에 띄게 오염되었거나(visibly soiled), 설사를 유발하는 감염 등 특정 감염 환자를 돌본 뒤에는 비누와 물로 씻어야 한다고 명시합니다. OET Reading Part B/C는 긴 임상 지문의 의미를 정확히 파악하는 유형입니다.",
+    wrong: "Alcohol rub is described as suitable for most situations, so the other options are too broad or not stated.",
+    wrongKo: "알코올 손소독제는 대부분의 상황에 적합하다고 했으므로, 나머지 보기는 지나치게 포괄적이거나 지문에 없는 내용입니다.",
+  },
+  {
+    area: "Reading", type: "Inference (Part B/C)", skill: "Infer the writer's overall point", difficulty: "Advanced",
+    passage: `Hand Hygiene in Clinical Practice
+
+Hand hygiene remains the single most effective way to prevent the spread of infection in healthcare settings. Despite widespread awareness, studies consistently show that compliance among busy staff can fall below recommended levels, particularly during periods of high workload. Healthcare workers are therefore encouraged to follow the "Five Moments for Hand Hygiene" identified by the World Health Organization.
+
+These five moments are: before touching a patient, before a clean or aseptic procedure, after exposure to body fluids, after touching a patient, and after contact with the patient's surroundings. Cleaning the hands at each of these points interrupts the transfer of microorganisms that can cause healthcare-associated infections.
+
+Alcohol-based hand rub is suitable for most clinical situations because it acts quickly and is gentle on the skin when used correctly. However, when the hands are visibly soiled, or after caring for a patient with certain infections such as those causing diarrhoea, washing with soap and water is required, as alcohol rub may be less effective against some organisms.
+
+Facilities can support good practice by placing hand-rub dispensers at the point of care, providing regular training, and displaying clear reminders. Ultimately, protecting patients depends not only on individual effort but on a workplace culture that treats hand hygiene as a shared responsibility.`,
+    question: "The passage suggests that improving hand hygiene depends MAINLY on —",
+    choices: [
+      "buying more expensive hand rub",
+      "both individual effort and a supportive workplace culture",
+      "reducing the number of patients each nurse sees",
+      "replacing soap and water with alcohol rub entirely",
+    ],
+    answer: "both individual effort and a supportive workplace culture",
+    why: "The final sentence states protecting patients depends 'not only on individual effort but on a workplace culture that treats hand hygiene as a shared responsibility.'",
+    whyKo: "마지막 문장이 핵심입니다: 환자 보호는 ‘개인의 노력뿐 아니라, 손위생을 공동 책임으로 여기는 조직 문화’에 달려 있다고 밝힙니다. 따라서 개인+조직 문화 모두가 중요하다는 것이 글의 결론입니다.",
+  },
+  {
     area: "Reading", type: "Detail (Part A)", skill: "Skim clinical texts for specific detail", difficulty: "Standard",
     passage: "Guideline: For adult patients with a fever above 38.5°C lasting more than three days, record temperature every four hours and notify the physician.",
     question: "How often should the temperature be recorded?",
@@ -460,6 +506,34 @@ export const oetBank: SampleItem[] = [
     answer: "I understand this feels stressful. The procedure is short, and I'll explain each step as we go.",
     why: "It acknowledges the patient's feelings (empathy) and gives clear, reassuring information.",
     whyKo: "환자의 감정을 먼저 인정(공감)하고, 절차에 대해 명확하고 안심되는 정보를 제공합니다. OET Speaking은 공감·정보 전달·환자 중심 소통을 평가합니다.",
+  },
+  {
+    area: "Speaking", type: "Role-play (Opening)", skill: "Open a consultation and build rapport", difficulty: "Standard",
+    question: "At the start of a consultation with a worried patient, which opening BEST builds rapport?",
+    choices: [
+      "So, what's wrong with you today?",
+      "Hello, I'm the nurse looking after you today. Thank you for coming in — can you tell me what's been troubling you?",
+      "Take a seat. I don't have much time.",
+      "You again? What is it this time?",
+    ],
+    answer: "Hello, I'm the nurse looking after you today. Thank you for coming in — can you tell me what's been troubling you?",
+    why: "A good opening introduces the clinician, thanks the patient, and invites them to share their concern in an open, respectful way.",
+    whyKo: "좋은 도입부는 의료진을 소개하고, 환자에게 감사를 전하며, 열린 질문으로 걱정을 이야기하도록 이끕니다. OET Speaking은 라포(신뢰 관계) 형성과 환자 중심 소통을 평가합니다.",
+  },
+  {
+    area: "Writing", type: "Case Notes → Relevance", skill: "Select relevant information for a letter", difficulty: "Standard",
+    question: "A referral letter should include only relevant information. For a referral about ongoing wound care, which detail is LEAST likely to be relevant?",
+    choices: [
+      "The current size and appearance of the wound",
+      "The dressing type and how often it is changed",
+      "The patient's favourite hobby",
+      "Relevant current medication",
+    ],
+    answer: "The patient's favourite hobby",
+    why: "A referral should carry clinically relevant details; a personal hobby does not affect wound management and should be left out.",
+    whyKo: "레퍼럴 편지에는 임상적으로 관련된 정보만 담아야 합니다. 상처 관리와 무관한 개인 취미는 제외하는 것이 맞습니다. OET Writing은 ‘관련 정보 선별’ 능력을 평가합니다.",
+    wrong: "Wound size, dressing routine, and current medication all directly affect ongoing wound care.",
+    wrongKo: "상처 크기·드레싱 방법·현재 복용 약은 모두 지속적인 상처 관리에 직접 영향을 주므로 반드시 포함해야 합니다.",
   },
 ];
 
