@@ -13,6 +13,7 @@ import QualityFeatures from "@/components/home/QualityFeatures";
 import HowToOrder from "@/components/home/HowToOrder";
 import PrepPricing from "@/components/home/PrepPricing";
 import WhyCost from "@/components/home/WhyCost";
+import CompareLevels from "@/components/home/CompareLevels";
 import ExistingVsCustomSection from "@/components/home/ExistingVsCustomSection";
 import UseCaseSection from "@/components/home/UseCaseSection";
 import AudienceCards from "@/components/home/AudienceCards";
@@ -40,6 +41,7 @@ export default function HomePage() {
 
       {/* Preview — 문제 수준과 유형을 가격보다 먼저 */}
       <QuestionToUnderstanding />
+      <CompareLevels />
 
       {/* Placement / Level Test — 별도 핵심 진입 강화 */}
       <LevelAssessment />

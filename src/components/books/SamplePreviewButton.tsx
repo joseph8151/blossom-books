@@ -90,6 +90,22 @@ const DIFF_COLOR: Record<Difficulty, string> = {
 };
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 
+// 영역별 컬러 포인트 — 시각적 구분 (Reading 초록 / Vocabulary 파랑 / Writing 주황 / Speaking 보라 …)
+function areaColor(area: string): string {
+  const a = area.toLowerCase();
+  if (a.includes("reading")) return "#5b7f5e";
+  if (a.includes("vocab")) return "#3f6ea5";
+  if (a.includes("writing") || a.includes("rhetoric")) return "#b5713a";
+  if (a.includes("speaking")) return "#7a5aa0";
+  if (a.includes("grammar")) return "#3f8f8a";
+  if (a.includes("listening")) return "#8a6a3a";
+  return "#ad8a4e"; // Math·Science·Reasoning 등 → 브래스
+}
+
+function wordCount(text: string): number {
+  return text.trim().split(/\s+/).length;
+}
+
 // 지문 첫 줄이 제목 형태면 분리해 표지처럼 강조합니다.
 function splitPassage(passage: string): { title?: string; body: string } {
   const parts = passage.split("\n\n");
@@ -301,9 +317,12 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
 
             <div className="px-5 py-6 lg:px-7">
               {/* 설득 한 줄 */}
-              <p className="mb-5 border-l-2 border-brass-500 pl-3 text-[12.5px] leading-relaxed text-charcoal-900">
-                실제 교재 발췌본입니다. <span className="font-medium">표지가 아니라 문제로 판단하세요.</span>
-              </p>
+              <div className="mb-5 border-l-2 border-brass-500 pl-3">
+                <p className="font-label text-[9px] uppercase tracking-[0.12em] text-brass-500">Sample · Actual difficulty &amp; explanation</p>
+                <p className="mt-1 text-[12.5px] leading-relaxed text-charcoal-900">
+                  이 샘플은 실제 문제집과 <span className="font-medium">동일한 난이도·해설 방식</span>입니다. 표지가 아니라 문제로 판단하세요.
+                </p>
+              </div>
 
               {/* 콘텐츠 목차 */}
               <div className="mb-5">
@@ -338,10 +357,11 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                     SAMPLE
                   </span>
 
-                  {/* 러닝 헤더 */}
+                  {/* 러닝 헤더 — 영역별 컬러 포인트 */}
                   <div className="flex items-center justify-between gap-2 border-b border-navy-800/12 bg-ivory-200/40 px-6 py-3">
                     <div className="flex items-center gap-2">
-                      <span className="font-label text-[10px] uppercase tracking-[0.14em] text-brass-500">{item.area}</span>
+                      <span className="h-3.5 w-1 rounded-full" style={{ background: areaColor(item.area) }} />
+                      <span className="font-label text-[10px] uppercase tracking-[0.14em]" style={{ color: areaColor(item.area) }}>{item.area}</span>
                       <span className="text-navy-800/25">·</span>
                       <span className="font-label text-[10px] uppercase tracking-[0.1em] text-navy-900">{item.type}</span>
                     </div>
@@ -354,15 +374,25 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                     {/* 지문 */}
                     {item.passage && (() => {
                       const { title, body } = splitPassage(item.passage!);
+                      const wc = wordCount(item.passage!);
+                      const approx = wc >= 60 ? `약 ${Math.round(wc / 10) * 10} words` : `${wc} words`;
                       return (
                         <div className="mt-4 border border-navy-800/12 bg-ivory-200/25">
-                          <div className="flex items-center gap-1.5 border-b border-navy-800/10 px-4 py-2">
-                            <BookOpen size={12} className="text-brass-500" />
-                            <span className="font-label text-[9.5px] uppercase tracking-[0.14em] text-navy-800/60">Reading Passage</span>
+                          <div className="flex items-center justify-between gap-1.5 border-b border-navy-800/10 px-4 py-2">
+                            <span className="inline-flex items-center gap-1.5">
+                              <BookOpen size={12} className="text-brass-500" />
+                              <span className="font-label text-[9.5px] uppercase tracking-[0.14em] text-navy-800/60">Passage</span>
+                            </span>
+                            <span className="font-label text-[9px] uppercase tracking-[0.1em] text-navy-800/45">{approx}</span>
                           </div>
                           <div className="max-h-72 overflow-y-auto px-5 py-4">
-                            {title && <p className="mb-2 font-display text-[15px] font-semibold text-navy-950">{title}</p>}
-                            <p className="whitespace-pre-line text-[13.5px] leading-[1.8] text-charcoal-900">{body}</p>
+                            {title && <p className="mb-2 font-display text-[16px] font-semibold text-navy-950">{title}</p>}
+                            <p
+                              className="whitespace-pre-line text-[13.5px] leading-[1.85] text-charcoal-900"
+                              style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
+                            >
+                              {body}
+                            </p>
                           </div>
                         </div>
                       );
@@ -374,7 +404,12 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                         {page + 1}
                       </span>
                       <div className="flex-1">
-                        <p className="pt-1 text-[15px] font-medium leading-relaxed text-navy-950">{item.question}</p>
+                        {(item.difficulty === "Advanced" || item.difficulty === "Challenge") && (
+                          <span className="mb-1.5 inline-flex items-center gap-1 border border-burgundy-700/30 bg-burgundy-700/[0.06] px-1.5 py-0.5 font-label text-[8.5px] uppercase tracking-[0.1em] text-burgundy-700">
+                            Challenge
+                          </span>
+                        )}
+                        <p className="pt-0.5 text-[15px] font-medium leading-relaxed text-navy-950">{item.question}</p>
                         {item.figure && (
                           <div className="mt-3 flex justify-center border border-navy-800/10 bg-ivory-200/30 px-3 py-4">
                             <SampleFigure name={item.figure} />
@@ -397,12 +432,14 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                         ) : (
                           <div className="mt-4 border border-navy-800/12 bg-ivory-200/25 p-4">
                             <p className="flex items-center gap-1.5 font-label text-[9.5px] uppercase tracking-[0.12em] text-charcoal-600/60">
-                              <PenLine size={12} className="text-brass-500" /> Written Response
+                              <PenLine size={12} className="text-brass-500" /> Write your response
                             </p>
-                            <div className="mt-3 space-y-3">
+                            <div className="mt-4 space-y-4">
                               <div className="h-px w-full bg-navy-800/12" />
                               <div className="h-px w-full bg-navy-800/12" />
-                              <div className="h-px w-3/4 bg-navy-800/12" />
+                              <div className="h-px w-full bg-navy-800/12" />
+                              <div className="h-px w-full bg-navy-800/12" />
+                              <div className="h-px w-2/3 bg-navy-800/12" />
                             </div>
                           </div>
                         )}
