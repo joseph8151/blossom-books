@@ -16,7 +16,7 @@ export default function MobileBottomBar() {
       </Link>
       <Link
         href="/consultation"
-        className="flex flex-1 items-center justify-center gap-2 bg-coral-500 py-3.5 text-[14px] font-semibold text-navy-950"
+        className="flex flex-1 items-center justify-center gap-2 bg-gradient-to-b from-coral-400 to-coral-500 py-3.5 text-[14px] font-semibold text-navy-950"
       >
         <MessageSquareText size={17} strokeWidth={2} />
         가맹 상담

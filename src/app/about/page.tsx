@@ -118,7 +118,7 @@ export default function AboutPage() {
           </p>
           <Link
             href="/consultation"
-            className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-coral-500 px-7 py-3.5 text-[14px] font-semibold text-navy-950 shadow-coral transition-all hover:-translate-y-0.5 hover:bg-coral-400"
+            className="btn-primary group mt-8 px-7 py-3.5 text-[14px]"
           >
             가맹 상담 신청
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />

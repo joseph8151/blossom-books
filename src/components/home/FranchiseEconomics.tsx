@@ -25,7 +25,7 @@ export default function FranchiseEconomics() {
 
         <Link
           href="/consultation"
-          className="group mt-10 inline-flex items-center gap-2.5 rounded-full bg-navy-900 px-7 py-3.5 text-[14px] font-semibold text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+          className="btn-secondary group mt-10 px-7 py-3.5 text-[14px]"
         >
           내 조건으로 상담 받아보기
           <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />

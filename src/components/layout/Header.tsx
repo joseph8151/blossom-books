@@ -20,8 +20,12 @@ export default function Header() {
   }, []);
 
   const isActive = (href: string) => {
-    const base = href.split("#")[0].split("?")[0];
-    if (base === "" || base === "/") return pathname === "/";
+    // 앵커 링크(/#section)는 같은 페이지 내 이동이라 라우트만으로는 "현재 위치"를
+    // 알 수 없으므로 활성 표시 대상에서 제외합니다 — 홈의 모든 앵커가 동시에
+    // 활성화되는 것을 방지합니다.
+    if (href.includes("#")) return false;
+    const base = href.split("?")[0];
+    if (base === "/") return pathname === "/";
     return pathname?.startsWith(base) ?? false;
   };
 
@@ -81,7 +85,7 @@ export default function Header() {
 
           <Link
             href="/consultation"
-            className="hidden items-center gap-1.5 rounded-full bg-coral-500 px-5 py-2.5 text-[13.5px] font-semibold text-navy-950 shadow-coral transition-all hover:-translate-y-0.5 hover:bg-coral-400 lg:inline-flex"
+            className="btn-primary hidden px-5 py-2.5 text-[13.5px] lg:inline-flex"
           >
             가맹 상담 신청
             <ArrowRight size={14} strokeWidth={2.5} />
@@ -124,7 +128,7 @@ export default function Header() {
             <Link
               href="/consultation"
               onClick={() => setOpen(false)}
-              className="mt-4 mb-3 inline-flex items-center justify-center gap-2 rounded-full bg-coral-500 py-3.5 text-[14px] font-semibold text-navy-950"
+              className="btn-primary mt-4 mb-3 justify-center py-3.5 text-[14px]"
             >
               가맹 상담 신청
             </Link>

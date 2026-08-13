@@ -1,4 +1,29 @@
+import {
+  Sparkles,
+  BookOpen,
+  FileText,
+  ClipboardCheck,
+  Megaphone,
+  Rocket,
+  GraduationCap,
+  Settings2,
+  Library,
+  TrendingUp,
+} from "lucide-react";
 import { ownerSupportItems } from "@/data/john";
+
+const icons: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number }>> = {
+  Brand: Sparkles,
+  Curriculum: BookOpen,
+  "Teaching Resources": FileText,
+  "Student Assessment": ClipboardCheck,
+  Marketing: Megaphone,
+  "Opening Support": Rocket,
+  "Owner Training": GraduationCap,
+  "Operations Guide": Settings2,
+  "Learning Materials": Library,
+  "Business Growth": TrendingUp,
+};
 
 export default function OwnerSupport() {
   return (
@@ -14,13 +39,19 @@ export default function OwnerSupport() {
         </div>
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {ownerSupportItems.map((item) => (
-            <div key={item.title} className="rounded-2xl bg-ivory-100 p-6">
-              <h3 className="font-display text-[15.5px] font-extrabold text-navy-950">{item.title}</h3>
-              <p className="text-[11.5px] text-charcoal-600/70">{item.titleKo}</p>
-              <p className="mt-3 text-[12.5px] leading-relaxed text-charcoal-600">{item.description}</p>
-            </div>
-          ))}
+          {ownerSupportItems.map((item) => {
+            const Icon = icons[item.title];
+            return (
+              <div key={item.title} className="card-premium p-6">
+                <span className="num-badge h-9 w-9">
+                  <Icon size={15} strokeWidth={2.2} />
+                </span>
+                <h3 className="mt-4 font-display text-[15.5px] font-extrabold text-navy-950">{item.title}</h3>
+                <p className="text-[11.5px] text-charcoal-600/70">{item.titleKo}</p>
+                <p className="mt-3 text-[12.5px] leading-relaxed text-charcoal-600">{item.description}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -68,6 +68,7 @@
   --shadow-card: 0 1px 2px rgba(10, 61, 44, 0.05), 0 18px 44px -26px rgba(10, 61, 44, 0.22);
   --shadow-lift: 0 22px 50px -22px rgba(10, 61, 44, 0.32);
   --shadow-coral: 0 12px 30px -14px rgba(245, 185, 20, 0.5);
+  --shadow-glow: 0 30px 70px -30px rgba(10, 61, 44, 0.45), 0 0 0 1px rgba(10, 61, 44, 0.04);
 }
 
 * {
@@ -143,17 +144,75 @@ body {
   color: var(--color-coral-400);
 }
 
-/* Filled circular index badge — replaces bare "01/02" numerals with a solid mark */
+/* Filled circular index badge — replaces bare "01/02" numerals with a solid mark.
+   Subtle gradient fill (not flat) reads more crafted than a plain color chip. */
 .num-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   border-radius: 999px;
-  background: var(--color-navy-900);
+  background: linear-gradient(155deg, var(--color-navy-700), var(--color-navy-900) 65%);
   color: var(--color-ivory-100);
   font-family: var(--font-label);
   font-weight: 800;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 4px 10px -4px rgba(10, 61, 44, 0.5);
+}
+
+/* Primary gold CTA — gradient + inner highlight for a glossy, premium button feel */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--color-coral-400), var(--color-coral-500) 60%);
+  color: var(--color-navy-950);
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), var(--shadow-coral);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, filter 0.3s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+/* Secondary deep-green CTA — same glossy treatment, quieter */
+.btn-secondary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--color-navy-700), var(--color-navy-900) 65%);
+  color: var(--color-ivory-100);
+  font-weight: 600;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), var(--shadow-soft);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, filter 0.3s ease;
+}
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+/* Premium card — soft gradient wash + hairline highlight + glow-on-hover.
+   Meant to replace flat white boxes where a section wants extra polish. */
+.card-premium {
+  position: relative;
+  border-radius: 1.25rem;
+  background: linear-gradient(165deg, #ffffff, var(--color-ivory-100) 130%);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+.card-premium:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Faint dot-grid used on dark sections for texture without photography */
+.dot-grid {
+  background-image: radial-gradient(rgba(247, 251, 248, 0.16) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
 .text-balance {

@@ -1,4 +1,16 @@
+import { BookOpen, ClipboardCheck, FileText, Sparkles, GraduationCap, Megaphone, Settings2, TrendingUp } from "lucide-react";
 import { whyJohnItems } from "@/data/john";
+
+const icons: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number }>> = {
+  Curriculum: BookOpen,
+  Assessment: ClipboardCheck,
+  "Teaching Resources": FileText,
+  Branding: Sparkles,
+  "Owner Training": GraduationCap,
+  Marketing: Megaphone,
+  "Operating System": Settings2,
+  "Business Growth": TrendingUp,
+};
 
 export default function WhyJohn() {
   return (
@@ -17,16 +29,21 @@ export default function WhyJohn() {
         </div>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {whyJohnItems.map((item, i) => (
-            <div key={item.title} className="rounded-2xl bg-ivory-100 p-6">
-              <span className="num-badge h-8 w-8 text-[12px]">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-4 font-display text-[17px] font-extrabold text-navy-950">
-                {item.title}
-                <span className="ml-2 text-[12.5px] font-normal text-charcoal-600/60">{item.titleKo}</span>
-              </h3>
-              <p className="mt-2.5 text-[13.5px] leading-relaxed text-charcoal-600">{item.description}</p>
-            </div>
-          ))}
+          {whyJohnItems.map((item) => {
+            const Icon = icons[item.title];
+            return (
+              <div key={item.title} className="card-premium p-6">
+                <span className="num-badge h-10 w-10">
+                  <Icon size={17} strokeWidth={2.2} />
+                </span>
+                <h3 className="mt-4 font-display text-[17px] font-extrabold text-navy-950">
+                  {item.title}
+                  <span className="ml-2 text-[12.5px] font-normal text-charcoal-600/60">{item.titleKo}</span>
+                </h3>
+                <p className="mt-2.5 text-[13.5px] leading-relaxed text-charcoal-600">{item.description}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

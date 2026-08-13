@@ -34,7 +34,7 @@ export default function BusinessModelsOverview() {
             <Link
               key={model.id}
               href={`/business-models#${model.id}`}
-              className="group flex flex-col justify-between gap-6 rounded-2xl border border-navy-900/10 bg-white p-8 shadow-card transition-all hover:-translate-y-1 hover:border-coral-500/40"
+              className="card-premium group flex flex-col justify-between gap-6 border border-navy-900/8 p-8 hover:border-coral-500/30"
             >
               <div>
                 <div className="flex items-start justify-between gap-4">
@@ -64,9 +64,14 @@ export default function BusinessModelsOverview() {
         {/* Featured — JOHN HYBRID은 여러 모델을 한 공간에 결합하는 기준 모델이라 별도로 강조합니다 */}
         <Link
           href={`/business-models#${featured.id}`}
-          className="group mt-5 flex flex-col gap-6 rounded-2xl bg-navy-900 p-8 transition-all hover:-translate-y-1 sm:flex-row sm:items-center sm:justify-between lg:p-10"
+          className="group relative mt-5 flex flex-col gap-6 overflow-hidden rounded-2xl p-8 transition-all hover:-translate-y-1 sm:flex-row sm:items-center sm:justify-between lg:p-10"
+          style={{
+            background: "linear-gradient(155deg, var(--color-navy-700), var(--color-navy-950) 80%)",
+            boxShadow: "var(--shadow-glow)",
+          }}
         >
-          <div>
+          <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
+          <div className="relative z-10">
             <span className="inline-flex items-center rounded-full bg-coral-500 px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.1em] text-navy-950">
               Combine Everything
             </span>
@@ -75,7 +80,7 @@ export default function BusinessModelsOverview() {
             </h3>
             <p className="mt-1 text-[13.5px] text-ivory-200/70">{featured.tagline}</p>
           </div>
-          <div className="flex items-center gap-8">
+          <div className="relative z-10 flex items-center gap-8">
             <div className="flex gap-6">
               <LevelMeterLight label="Space" level={featured.spaceLevel} />
               <LevelMeterLight label="Team" level={featured.teamLevel} />

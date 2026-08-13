@@ -59,7 +59,7 @@ export default function FAQPage() {
             </p>
             <Link
               href="/consultation"
-              className="group inline-flex items-center gap-2 rounded-full bg-coral-500 px-7 py-3.5 text-[13.5px] font-semibold text-navy-950 shadow-coral transition-all hover:-translate-y-0.5 hover:bg-coral-400"
+              className="btn-primary group px-7 py-3.5 text-[13.5px]"
             >
               가맹 상담 신청
               <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />

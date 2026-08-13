@@ -57,7 +57,7 @@ export default function BusinessModelsPage() {
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
                   href="/consultation"
-                  className="group inline-flex items-center gap-2 rounded-full bg-navy-900 px-6 py-3.5 text-[13.5px] font-semibold text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+                  className="btn-secondary group px-6 py-3.5 text-[13.5px]"
                 >
                   {model.code} 상담 신청
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
@@ -161,7 +161,7 @@ export default function BusinessModelsPage() {
           </p>
           <Link
             href="/consultation"
-            className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-coral-500 px-8 py-4 text-[15px] font-semibold text-navy-950 shadow-coral transition-all hover:-translate-y-0.5 hover:bg-coral-400"
+            className="btn-primary group mt-8 px-8 py-4 text-[15px]"
           >
             가맹 상담 신청
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />

@@ -17,7 +17,7 @@ export default function FinalCTA() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/consultation"
-            className="group inline-flex items-center gap-2.5 rounded-full bg-coral-500 px-8 py-4 text-[15px] font-semibold text-navy-950 shadow-coral transition-all hover:-translate-y-0.5 hover:bg-coral-400"
+            className="btn-primary group px-8 py-4 text-[15px]"
           >
             가맹 상담 신청
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />

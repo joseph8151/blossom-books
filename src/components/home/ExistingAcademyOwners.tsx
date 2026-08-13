@@ -18,7 +18,7 @@ export default function ExistingAcademyOwners() {
           </p>
           <Link
             href="/consultation"
-            className="group mt-8 inline-flex w-fit items-center gap-2.5 rounded-full bg-navy-900 px-7 py-3.5 text-[14px] font-semibold text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+            className="btn-secondary group mt-8 w-fit px-7 py-3.5 text-[14px]"
           >
             기존 학원 전환 상담
             <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />

@@ -152,7 +152,7 @@ export default function ModelFinder() {
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <Link
                   href="/consultation"
-                  className="inline-flex items-center gap-2 rounded-full bg-coral-500 px-7 py-3.5 text-[14px] font-semibold text-navy-950 shadow-coral transition-all hover:-translate-y-0.5 hover:bg-coral-400"
+                  className="btn-primary px-7 py-3.5 text-[14px]"
                 >
                   상담 받아보기
                   <ArrowRight size={15} />

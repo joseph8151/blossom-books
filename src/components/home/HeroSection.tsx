@@ -1,12 +1,20 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, GraduationCap, BookOpen, MessagesSquare } from "lucide-react";
 
-const floatingLabels = ["JOHN KIDS", "JOHN PREP", "JOHN 1:1"];
+const floatingLabels = [
+  { label: "JOHN KIDS", icon: GraduationCap },
+  { label: "JOHN PREP", icon: BookOpen },
+  { label: "JOHN 1:1", icon: MessagesSquare },
+];
 
 export default function HeroSection() {
   return (
-    <section className="border-b border-navy-900/10 bg-ivory-100 pt-14 pb-16 lg:pt-20 lg:pb-24">
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:px-8">
+    <section className="relative overflow-hidden border-b border-navy-900/10 bg-ivory-100 pt-14 pb-16 lg:pt-20 lg:pb-24">
+      {/* 은은한 배경 글로우 — 프리미엄한 깊이감을 더합니다 */}
+      <div className="pointer-events-none absolute -top-40 right-[-10%] h-[520px] w-[520px] rounded-full bg-coral-400/15 blur-[120px]" />
+      <div className="pointer-events-none absolute -bottom-40 left-[-10%] h-[420px] w-[420px] rounded-full bg-navy-500/10 blur-[120px]" />
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:px-8">
         {/* 왼쪽 — 헤드라인 + 카피 + CTA */}
         <div>
           <span className="eyebrow">Education Franchise Company</span>
@@ -23,10 +31,7 @@ export default function HeroSection() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
-            <Link
-              href="/business-models"
-              className="group inline-flex items-center gap-2.5 rounded-full bg-navy-900 px-7 py-4 text-[14.5px] font-semibold text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
-            >
+            <Link href="/business-models" className="btn-secondary group px-7 py-4 text-[14.5px]">
               나에게 맞는 사업 모델 찾기
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
@@ -45,22 +50,21 @@ export default function HeroSection() {
 
         {/* 오른쪽 — Editorial Composition (교육 공간을 표현하는 타이포그래피 구성) */}
         <div className="relative">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[28px] border border-navy-900/12 bg-navy-900 sm:aspect-[5/5.5]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_15%,rgba(245,185,20,0.2),transparent_45%)]" />
-            <div
-              className="absolute inset-0 opacity-[0.15]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(247,251,248,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(247,251,248,0.5) 1px, transparent 1px)",
-                backgroundSize: "36px 36px",
-              }}
-            />
+          <div
+            className="relative aspect-[4/5] w-full overflow-hidden rounded-[28px] sm:aspect-[5/5.5]"
+            style={{
+              background: "linear-gradient(155deg, var(--color-navy-700), var(--color-navy-950) 78%)",
+              boxShadow: "var(--shadow-glow)",
+            }}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_15%,rgba(245,185,20,0.22),transparent_45%)]" />
+            <div className="absolute inset-0 dot-grid opacity-40" />
             <div className="relative flex h-full flex-col justify-between p-8 sm:p-10">
               <div className="flex items-start justify-between">
                 <span className="font-label text-[11px] uppercase tracking-[0.2em] text-ivory-100/60">
                   Est. Education System
                 </span>
-                <span className="h-2 w-2 rounded-full bg-coral-500" />
+                <span className="h-2 w-2 rounded-full bg-coral-500 shadow-[0_0_0_5px_rgba(245,185,20,0.18)]" />
               </div>
               <div>
                 <p className="font-display text-[15px] leading-snug text-ivory-100/85 sm:text-[17px]">
@@ -80,14 +84,15 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Floating program labels */}
-          <div className="pointer-events-none absolute -left-4 top-8 hidden flex-col gap-2.5 sm:flex">
-            {floatingLabels.map((label, i) => (
+          {/* Floating glass program labels — 글래스모피즘으로 입체감을 더합니다 (패널 상단 텍스트와 겹치지 않도록 top-24부터 시작) */}
+          <div className="pointer-events-none absolute -left-4 top-24 hidden flex-col gap-2.5 sm:flex">
+            {floatingLabels.map(({ label, icon: Icon }, i) => (
               <span
                 key={label}
-                className="rounded-full border border-navy-900/15 bg-ivory-100 px-4 py-2 font-label text-[11px] font-semibold uppercase tracking-[0.1em] text-navy-900 shadow-card"
+                className="flex items-center gap-2 rounded-full border border-white/60 bg-white/70 px-4 py-2 font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-navy-900 shadow-card backdrop-blur-md"
                 style={{ marginLeft: `${i * 14}px` }}
               >
+                <Icon size={13} strokeWidth={2.3} className="text-coral-600" />
                 {label}
               </span>
             ))}
