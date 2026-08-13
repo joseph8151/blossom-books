@@ -65,7 +65,7 @@ const whyItems = [
 ];
 
 export default function EnHomePage() {
-  const catalog = products.slice(0, 6);
+  const catalog = products.filter((p) => p.sampleAvailable).slice(0, 6);
 
   return (
     // html lang은 루트에서 "ko"이므로, 영문 콘텐츠에는 lang="en"을 명시해 접근성/번역 힌트를 제공합니다.
@@ -286,12 +286,18 @@ export default function EnHomePage() {
                 key={product.id}
                 className="group flex flex-col border border-navy-800/12 bg-ivory-100 transition-shadow hover:shadow-[0_16px_40px_-20px_rgba(13,22,38,0.35)]"
               >
-                <div className="flex items-center justify-center bg-ivory-200/70 py-8">
+                <div className="relative flex items-center justify-center bg-ivory-200/70 py-8">
+                  {product.sampleAvailable && (
+                    <span className="absolute left-3.5 top-3.5 z-10 border border-brass-500/40 bg-ivory-100/90 px-2 py-1 font-label text-[9px] uppercase tracking-[0.14em] text-brass-500">
+                      Free sample
+                    </span>
+                  )}
                   <BookCoverMockup
                     eyebrow={product.materialType === "existing" ? "Student Workbook" : "Custom Order"}
                     title={product.title.split(" — ")[0]}
                     subtitle={product.examOrCurriculum}
                     tone={coverToneFor(product.id)}
+                    size="sm"
                     className="max-w-[150px] scale-90"
                   />
                 </div>
@@ -315,13 +321,19 @@ export default function EnHomePage() {
                     )}
                   </div>
 
-                  <div className="mt-6 flex items-center justify-between border-t border-navy-800/10 pt-4">
-                    <span className="text-[12.5px] font-medium text-charcoal-600">Price on request</span>
+                  <div className="mt-6 flex gap-2 border-t border-navy-800/10 pt-4">
                     <Link
-                      href="/en#contact"
-                      className="inline-flex items-center gap-1 text-[13px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4"
+                      href={`/books/${product.id}#sample`}
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 bg-navy-900 px-3.5 py-2 text-[12.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
                     >
-                      Inquire <ArrowRight size={13} />
+                      View free sample
+                      <ArrowRight size={13} />
+                    </Link>
+                    <Link
+                      href={`/books/${product.id}`}
+                      className="inline-flex items-center justify-center border border-navy-800/25 px-3.5 py-2 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+                    >
+                      Details
                     </Link>
                   </div>
                 </div>
