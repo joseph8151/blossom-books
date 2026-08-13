@@ -2,6 +2,8 @@ import HeroSection from "@/components/home/HeroSection";
 import CoreCategories from "@/components/home/CoreCategories";
 import FindPrepPromo from "@/components/home/FindPrepPromo";
 import WhyBlossom from "@/components/home/WhyBlossom";
+import FromClassroomToWorkbook from "@/components/home/FromClassroomToWorkbook";
+import MeetTheEducators from "@/components/home/MeetTheEducators";
 import TestAlignment from "@/components/home/TestAlignment";
 import QuestionToUnderstanding from "@/components/home/QuestionToUnderstanding";
 import LevelAssessment from "@/components/home/LevelAssessment";
@@ -38,6 +40,8 @@ export default function HomePage() {
 
       {/* Understand — 왜 우리 아이에게 필요한지 */}
       <WhyBlossom />
+      <FromClassroomToWorkbook />
+      <MeetTheEducators />
       <TestAlignment />
 
       {/* Preview — 문제 수준과 유형을 가격보다 먼저 */}

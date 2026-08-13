@@ -2,8 +2,62 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { MessageCircle, Sparkles, ArrowRight, Copy } from "lucide-react";
+import { MessageCircle, Sparkles, ArrowRight, Copy, Check } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { products, trackLabels } from "@/data/products";
+import { isFourSkill } from "@/lib/productMeta";
+import { blossomLevel } from "@/lib/utils";
+import { Product } from "@/lib/types";
+
+// 입력값을 실제 교재와 매칭해 적합도와 이유를 계산합니다.
+function gradeRange(str: string): [number, number] {
+  const n = (str.match(/\d+/g) || []).map(Number);
+  if (/K|Preschool|유아/i.test(str) && !n.length) return [0, 0];
+  if (!n.length) return [0, 12];
+  return [Math.min(...n), Math.max(...n)];
+}
+function overlaps(a: [number, number], b: [number, number]): boolean {
+  return Math.max(a[0], b[0]) <= Math.min(a[1], b[1]);
+}
+function recommendProduct(
+  f: { grade: string; level: string; areas: string[] },
+  track: string
+): { product: Product; score: number; reasons: string[] } | null {
+  const pool = products.filter((p) => p.materialType === "existing" && p.sampleAvailable);
+  const want = f.level.includes("상위") ? 4 : f.level.includes("기초") ? 2 : 3;
+  const g = gradeRange(f.grade);
+  let best: Product | null = null;
+  let bestScore = -1;
+  let bestReasons: string[] = [];
+  for (const p of pool) {
+    let s = 50;
+    const reasons: string[] = [];
+    if (track && p.track === track) {
+      s += 20;
+      reasons.push(`준비 시험에 맞는 ${trackLabels[p.track]} 구성`);
+    }
+    if (overlaps(g, gradeRange(p.gradeRange))) {
+      s += 15;
+      reasons.push(`학년 범위 ${p.gradeRange} 에 적합`);
+    }
+    if (f.areas.length) {
+      const u = p.units.join(" ");
+      if (isFourSkill(p) || f.areas.some((a) => u.includes(a))) {
+        s += 10;
+        reasons.push(`집중 영역(${f.areas.join(" · ")}) 연습 포함`);
+      }
+    }
+    s += 5 - Math.min(5, Math.abs(p.difficulty - want));
+    reasons.push(`난이도 ${blossomLevel(p.difficulty)} 수준`);
+    if (s > bestScore) {
+      bestScore = s;
+      best = p;
+      bestReasons = reasons;
+    }
+  }
+  if (!best) return null;
+  return { product: best, score: Math.max(62, Math.min(95, bestScore)), reasons: bestReasons };
+}
 
 const grades = ["Preschool / K", "Grade 1–2", "Grade 3–4", "Grade 5–6", "Grade 7–8", "Grade 9–12"];
 const levels = ["기초 (쉬운 편)", "보통 (학년 수준)", "상위 (앞서가는 편)", "잘 모르겠어요"];
@@ -46,6 +100,7 @@ export default function FindPage() {
   const recVolume = periods.find((p) => p.v === f.period)?.vol ?? "60P";
   const recTrack = exams.find((e) => e.v === f.exam)?.track ?? "";
   const catalogHref = recTrack ? `/books?track=${recTrack}` : "/books";
+  const rec = done ? recommendProduct(f, recTrack) : null;
 
   function toggleArea(a: string) {
     setF((prev) => ({ ...prev, areas: prev.areas.includes(a) ? prev.areas.filter((x) => x !== a) : [...prev.areas, a] }));
@@ -153,11 +208,53 @@ export default function FindPage() {
       {done && (
         <div className="mt-8 border border-brass-500/40 bg-brass-500/[0.05] p-6 lg:p-8">
           <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Recommended for you</p>
-          <p className="mt-2 font-display text-[20px] font-semibold text-navy-950">
-            추천 분량: {recVolume}
-            {f.areas.length > 0 && <span className="text-charcoal-600"> · {f.areas.join(" · ")} 집중</span>}
-          </p>
-          <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
+
+          {/* 매칭된 추천 교재 */}
+          {rec && (
+            <div className="mt-3 border border-navy-800/15 bg-ivory-100 p-5 shadow-card">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="font-display text-[18px] font-semibold leading-snug text-navy-950">{rec.product.titleKo}</p>
+                  <p className="mt-1 text-[12.5px] text-charcoal-600">
+                    {trackLabels[rec.product.track]} · {rec.product.gradeRange}
+                    {rec.product.readingLevel ? ` · ${rec.product.readingLevel}` : ""} · 추천 분량 {recVolume}
+                  </p>
+                </div>
+                <div className="shrink-0 text-right">
+                  <p className="font-display text-[24px] font-semibold leading-none text-brass-500">{rec.score}%</p>
+                  <p className="font-label text-[8.5px] uppercase tracking-[0.1em] text-navy-800/55">Fit</p>
+                </div>
+              </div>
+              <div className="mt-4 border-t border-navy-800/10 pt-3">
+                <p className="font-label text-[10px] uppercase tracking-[0.1em] text-navy-800/55">왜 이 교재를 추천했나요?</p>
+                <ul className="mt-2 space-y-1.5">
+                  {rec.reasons.map((r) => (
+                    <li key={r} className="flex items-start gap-2 text-[12.5px] leading-snug text-charcoal-900">
+                      <Check size={13} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} />
+                      {r}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Link
+                  href={`/books/${rec.product.id}`}
+                  className="group inline-flex items-center gap-1.5 bg-navy-900 px-5 py-2.5 text-[13px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
+                >
+                  교재 보기 · 무료 샘플
+                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+                </Link>
+                <Link
+                  href={`/books/${rec.product.id}#sample`}
+                  className="inline-flex items-center gap-1.5 border border-navy-800/25 px-5 py-2.5 text-[13px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+                >
+                  샘플 먼저 보기
+                </Link>
+              </div>
+            </div>
+          )}
+
+          <p className="mt-4 text-[13px] leading-relaxed text-charcoal-600">
             준비 기간과 목적을 고려한 참고 추천입니다. 정확한 교재와 Level은 상담원이 학생 상황을 확인한 뒤
             안내해 드립니다. (더 많은 페이지가 항상 더 좋은 선택은 아닙니다.)
           </p>
