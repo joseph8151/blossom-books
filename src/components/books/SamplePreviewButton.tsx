@@ -21,6 +21,8 @@ import {
   certifiedEnglishBank,
   oetBank,
   scatBank,
+  placementReadingByProduct,
+  srReadingByProduct,
 } from "@/data/sampleBank";
 
 const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challenge"];
@@ -37,13 +39,17 @@ function buildWorkbookItems(product: Product): SampleItem[] {
   };
 
   if (isFourSkill(product)) {
+    // 학년별 긴 리딩 지문이 있으면 사용, 없으면 기본 리딩 스킬 문항
+    const reading = placementReadingByProduct[product.id] ?? [readingBank[0], readingBank[2], readingBank[3]];
     return [
-      readingBank[0], readingBank[2], readingBank[3],
+      ...reading,
       vocabularyBank[0], vocabularyBank[1],
       grammarBank[0], grammarBank[2],
       writingBank[0], writingBank[1],
     ];
   }
+  // SR Reading 전용 제품 — 긴 지문 + 유형 확장
+  if (srReadingByProduct[product.id]) return srReadingByProduct[product.id];
   if (/scat/.test(key)) return scatBank;
   if (/reasoning|cat4|verbal|non-verbal|spatial|general ability/.test(key)) return reasoningBank;
   if (/oet/.test(key)) return oetBank;
@@ -205,7 +211,9 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                   <p className="mt-2 text-[11.5px] text-charcoal-600">{item.skill}</p>
 
                   {item.passage && (
-                    <p className="mt-4 border-l-2 border-brass-500 pl-4 text-[13.5px] leading-relaxed text-charcoal-900">{item.passage}</p>
+                    <div className="mt-4 max-h-72 overflow-y-auto border-l-2 border-brass-500 pl-4">
+                      <p className="whitespace-pre-line text-[13.5px] leading-[1.75] text-charcoal-900">{item.passage}</p>
+                    </div>
                   )}
 
                   <div className="mt-5 flex gap-3">

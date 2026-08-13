@@ -464,3 +464,232 @@ export const certifiedEnglishBank: SampleItem[] = [
     whyKo: "채점 기준: 전체 추세(상승) + 구체적 비교(2~3월 사이 가장 큰 증가) 표현을 포함했는지.",
   },
 ];
+
+// ── 영어 레벨테스트 학년별 리딩 지문 (긴 지문 + 다문항) ──────────────
+// 문제집 본문은 영어, 해설은 한글. 각 학년대의 목표 Reading Level에 맞춰 길이·어휘·문장 구조를 조정합니다.
+
+// G1–2 · 약 300 단어 · SR 3.0 수준
+const passageG1_2 = `Penguins: Birds That Cannot Fly
+
+Penguins are birds, but they cannot fly. Instead, they are great swimmers. Their wings are shaped like flippers. The flippers help them push through the cold water very fast. In the water, penguins almost look like they are flying.
+
+Most penguins live where it is cold and snowy. They have thick feathers that keep their bodies warm and dry. Under their feathers is a layer of fat. The fat works like a warm coat. It helps the penguins stay warm even in icy wind.
+
+Penguins eat fish, squid, and tiny sea animals. They dive deep into the ocean to catch their food. A penguin can hold its breath for a long time while it hunts. When it is full, it swims back to land to rest.
+
+Penguins live together in big groups. A large group of penguins is called a colony. Living in a colony helps keep the penguins safe. When the weather is very cold, the penguins stand close together. They take turns standing in the middle, where it is warmest. This way, every penguin gets a chance to stay warm.
+
+Mother and father penguins work as a team. One parent keeps the egg warm while the other goes to find food. When the chick hatches, it is small and gray. The parents feed the chick until it is big enough to swim and hunt on its own.
+
+Penguins are special birds. They cannot fly in the sky, but they can swim, dive, and live in some of the coldest places on Earth.`;
+
+// G3–4 · 약 350 단어 · SR 5.0 수준
+const passageG3_4 = `The Octopus: A Master of Disguise
+
+The octopus is one of the most remarkable creatures in the ocean. It has a soft, boneless body, eight flexible arms, and a surprising set of survival skills. Because it has no bones, an octopus can squeeze its entire body through openings no wider than a coin. This ability alone helps it escape predators that could never follow.
+
+Perhaps the octopus's most astonishing talent is its power to change color. In less than a second, it can shift the shade and even the texture of its skin. Resting against a rock, an octopus may turn gray and bumpy; gliding over sand, it becomes a pale, speckled brown. Scientists call this trick camouflage. By blending into its surroundings, the octopus hides from hungry enemies and sneaks up on the crabs and fish it hunts.
+
+Each of the octopus's arms is lined with rows of round suckers. These suckers grip rocks, hold prey, and, remarkably, allow the octopus to taste whatever it touches. If an arm brushes against a crab buried in the sand, the octopus instantly knows a meal is within reach.
+
+Octopuses are also considered among the most intelligent animals without a backbone. In laboratory tests, they have learned to unscrew jars to reach the food inside. In the wild, some gather shells and stones to build small shelters that protect them while they rest.
+
+When danger is unavoidable, the octopus has a final defense. It releases a thick cloud of dark ink that clouds the water and confuses its attacker. In the seconds the enemy spends blinded, the octopus jets away to safety.
+
+Every feature of the octopus serves a clear purpose. Its shapeless body, color-changing skin, sensitive arms, and inky escape all work together, allowing this strange and clever animal to survive in a vast and dangerous sea.`;
+
+// G5–6 · 약 450 단어 · SR 6.0–6.5 수준
+const passageG5_6 = `The Secret Language of Honeybees
+
+When a honeybee discovers a patch of flowers rich with nectar, it faces an unusual problem: how can it tell the thousands of bees back in the hive exactly where to find the food? Bees cannot speak, draw maps, or point the way. Yet somehow, within minutes, dozens of workers fly straight to a blossoming field that may be more than a kilometer away. For many years this mystery puzzled scientists, until researchers discovered that honeybees communicate through an elaborate series of movements known as the "waggle dance."
+
+The waggle dance takes place in the darkness of the hive, on the vertical surface of the honeycomb. A returning bee runs forward in a straight line while rapidly shaking, or "waggling," its body. Then it circles back to the starting point and repeats the pattern, tracing a shape similar to a figure eight. Although the dance may look random, every detail carries meaning. The direction of the straight run tells the other bees which way to fly in relation to the sun. The length of the run reveals how far away the flowers are: a longer waggle signals a greater distance.
+
+Remarkably, the dancing bee adjusts its message as conditions change. Because the sun moves across the sky throughout the day, the angle of the dance shifts to match it. Bees that watch the performance crowd close and touch the dancer with their antennae to sense the vibrations, since they cannot see in the pitch-black hive. In this way information passes from one insect to many, and the colony can direct its energy toward the richest sources of food.
+
+The discovery of the waggle dance changed the way scientists think about animals. It showed that creatures with tiny brains are capable of sharing precise, detailed information—a skill once believed to belong only to humans. Researchers now understand that communication in the animal world can be far more complex than it appears.
+
+Understanding the language of bees is more than a fascinating puzzle. Honeybees pollinate a large share of the crops that people depend on, from apples to almonds. When bees guide one another efficiently to flowers, they pollinate more plants and strengthen the food supply for humans and wildlife alike. By studying a dance performed in complete darkness, scientists have uncovered lessons about cooperation, survival, and the surprising intelligence hidden within the natural world.`;
+
+export const placementReadingByProduct: Record<string, SampleItem[]> = {
+  "english-level-test-g1-2": [
+    {
+      area: "Reading", type: "Main Idea", skill: "Identify the central idea", difficulty: "Foundation",
+      passage: passageG1_2,
+      question: "What is the passage MAINLY about?",
+      choices: ["How penguins build their nests", "How penguins live and stay alive", "Why the ocean is cold", "How birds learn to fly"],
+      answer: "How penguins live and stay alive",
+      why: "The passage describes how penguins swim, stay warm, find food, and care for their chicks.",
+      whyKo: "지문은 펭귄이 헤엄치고, 몸을 따뜻하게 유지하고, 먹이를 찾고, 새끼를 돌보는 방법을 설명합니다. 즉 ‘펭귄이 어떻게 살아가는가’가 글 전체의 중심 내용입니다.",
+      wrong: "The other choices are small details or ideas the passage never states.",
+      wrongKo: "나머지 보기는 지문에 나오지 않거나 아주 작은 세부일 뿐, 글 전체의 주제가 아닙니다.",
+    },
+    {
+      area: "Reading", type: "Supporting Details", skill: "Locate key details", difficulty: "Foundation",
+      passage: passageG1_2,
+      question: "How do penguins stay warm in icy wind?",
+      choices: ["They fly to a warm place", "They have thick feathers and a layer of fat", "They stop eating fish", "They sleep all winter"],
+      answer: "They have thick feathers and a layer of fat",
+      why: "The second paragraph states penguins have thick feathers and a layer of fat that works like a warm coat.",
+      whyKo: "두 번째 문단에 근거가 직접 나옵니다: 두꺼운 깃털(thick feathers)과 지방층(a layer of fat)이 따뜻한 외투처럼 몸을 데워 줍니다.",
+    },
+    {
+      area: "Reading", type: "Vocabulary in Context", skill: "Determine word meaning in context", difficulty: "Standard",
+      passage: passageG1_2,
+      question: "In this passage, the word colony means —",
+      choices: ["a kind of fish", "a large group of penguins living together", "a warm coat", "a place to hide food"],
+      answer: "a large group of penguins living together",
+      why: "The text says, 'A large group of penguins is called a colony.'",
+      whyKo: "지문에 정의가 그대로 나옵니다: ‘A large group of penguins is called a colony.’ 앞뒤 문맥으로 뜻을 확인하는 어휘 유형입니다.",
+    },
+  ],
+  "english-level-test-g3-4": [
+    {
+      area: "Reading", type: "Main Idea", skill: "Identify the central idea", difficulty: "Standard",
+      passage: passageG3_4,
+      question: "Which sentence BEST states the main idea of the passage?",
+      choices: [
+        "Octopuses are the largest animals in the ocean.",
+        "Every part of the octopus's body helps it survive.",
+        "Octopuses are difficult for scientists to study.",
+        "The octopus is the only animal that can change color.",
+      ],
+      answer: "Every part of the octopus's body helps it survive.",
+      why: "The final paragraph states that every feature serves a purpose and works together for survival.",
+      whyKo: "마지막 문단이 핵심을 요약합니다: 각 특징(몸·피부·팔·먹물)이 저마다 ‘분명한 목적’을 가지고 함께 작동해 생존을 돕는다는 것이 주제입니다.",
+      wrong: "The other choices are either not stated or are only one small detail.",
+      wrongKo: "나머지는 지문에 없거나 하나의 작은 세부일 뿐이라 글 전체의 중심 생각이 될 수 없습니다.",
+    },
+    {
+      area: "Reading", type: "Inference", skill: "Draw a conclusion from evidence", difficulty: "Advanced",
+      passage: passageG3_4,
+      question: "The passage suggests that the octopus's ink is most useful when it needs to —",
+      choices: ["find food", "build a shelter", "escape from an enemy", "taste its surroundings"],
+      answer: "escape from an enemy",
+      why: "The ink clouds the water and confuses an attacker, giving the octopus time to jet away to safety.",
+      whyKo: "먹물은 물을 흐리게 해 공격자를 혼란시키고, 그 사이 문어가 안전하게 도망치도록 돕습니다. 따라서 ‘적에게서 달아날 때’ 가장 유용하다고 추론할 수 있습니다.",
+      wrong: "Finding food and tasting use the arms/suckers; shelters use shells and stones — not the ink.",
+      wrongKo: "먹이 찾기·맛보기는 팔과 빨판이, 은신처는 조개·돌이 하는 일입니다. 먹물의 기능과는 다릅니다.",
+    },
+    {
+      area: "Reading", type: "Vocabulary in Context", skill: "Determine word meaning in context", difficulty: "Standard",
+      passage: passageG3_4,
+      question: "In this passage, camouflage most nearly means —",
+      choices: ["swimming very quickly", "blending in to hide from view", "growing a new arm", "squeezing through a small hole"],
+      answer: "blending in to hide from view",
+      why: "The sentences before the word describe the octopus changing color to match rocks and sand.",
+      whyKo: "‘camouflage’ 앞 문장에서 문어가 바위·모래에 맞춰 색을 바꿔 ‘주변에 섞여 숨는다’고 설명합니다. 문맥으로 ‘위장(주변에 섞여 숨기)’ 뜻을 확인합니다.",
+    },
+  ],
+  "english-level-test-g5-6": [
+    {
+      area: "Reading", type: "Main Idea", skill: "Identify the central idea", difficulty: "Standard",
+      passage: passageG5_6,
+      question: "This passage is MAINLY about —",
+      choices: [
+        "why honeybees cannot see in the dark",
+        "how honeybees use a special dance to share the location of food",
+        "how scientists raise honeybees in laboratories",
+        "why apples and almonds need sunlight to grow",
+      ],
+      answer: "how honeybees use a special dance to share the location of food",
+      why: "The whole passage explains the waggle dance and how it communicates direction and distance to food.",
+      whyKo: "글 전체가 ‘와글 댄스(waggle dance)’를 통해 먹이의 방향과 거리를 알려 주는 방법을 설명합니다. 이것이 중심 내용입니다.",
+      wrong: "The other choices touch on details but miss the overall topic.",
+      wrongKo: "나머지 보기는 세부 정보를 건드리지만 글 전체의 주제를 담지 못합니다.",
+    },
+    {
+      area: "Reading", type: "Inference", skill: "Draw a conclusion from evidence", difficulty: "Advanced",
+      passage: passageG5_6,
+      question: "Why do watching bees touch the dancer with their antennae?",
+      choices: [
+        "to copy the dancer's colors",
+        "to sense the movements because they cannot see in the dark hive",
+        "to share nectar with the dancer",
+        "to warn the dancer about a predator",
+      ],
+      answer: "to sense the movements because they cannot see in the dark hive",
+      why: "The passage says bees touch the dancer to sense the vibrations 'since they cannot see in the pitch-black hive.'",
+      whyKo: "지문에 근거가 있습니다: 벌집 안은 완전히 어두워(pitch-black) 볼 수 없기 때문에, 더듬이로 진동을 느껴 정보를 받아들입니다.",
+      wrong: "The other choices are not supported anywhere in the text.",
+      wrongKo: "나머지 보기는 지문 어디에서도 근거를 찾을 수 없습니다.",
+    },
+    {
+      area: "Reading", type: "Vocabulary in Context", skill: "Determine word meaning in context", difficulty: "Challenge",
+      passage: passageG5_6,
+      question: "In this passage, the word elaborate most nearly means —",
+      choices: ["quick and simple", "detailed and complex", "loud and noisy", "old and forgotten"],
+      answer: "detailed and complex",
+      why: "The dance is described as a precise, multi-part series of movements that carries specific meaning, so 'elaborate' means detailed and complex.",
+      whyKo: "‘elaborate series of movements’는 방향·거리 같은 구체적 정보를 담은 정교하고 복잡한 동작을 뜻합니다. 문맥상 ‘정교한/복잡한’이 알맞습니다.",
+    },
+  ],
+};
+
+// ── SR Reading 학년별 (긴 지문 + 유형 확장) ──────────────
+// SR 제품은 Reading 전용이므로 지문 하나에 다양한 유형(주제·세부·추론·어휘·의도·구조)을 담아 풍성하게 구성합니다.
+export const srReadingByProduct: Record<string, SampleItem[]> = {
+  "sr-reading-prep-g2-3": [
+    ...placementReadingByProduct["english-level-test-g1-2"],
+    {
+      area: "Reading", type: "Author's Purpose", skill: "Identify the author's purpose", difficulty: "Standard",
+      passage: passageG1_2,
+      question: "Why did the author most likely write this passage?",
+      choices: ["To tell a make-believe story about a penguin", "To give readers facts about how penguins live", "To teach readers how to swim", "To sell penguin toys"],
+      answer: "To give readers facts about how penguins live",
+      why: "The passage gives true information about penguins, so its purpose is to inform.",
+      whyKo: "지문은 펭귄에 대한 사실 정보를 전달합니다. 따라서 글쓴이의 목적은 ‘정보를 알려 주기(inform)’입니다. 지어낸 이야기(허구)나 설득·판매가 아닙니다.",
+    },
+    {
+      area: "Reading", type: "Sequence", skill: "Understand order of events", difficulty: "Standard",
+      passage: passageG1_2,
+      question: "According to the passage, what happens right after a penguin chick hatches?",
+      choices: ["It flies away", "It is small and gray, and its parents feed it", "It builds a nest by itself", "It dives into the ocean alone"],
+      answer: "It is small and gray, and its parents feed it",
+      why: "The last body paragraph states the chick hatches small and gray and the parents feed it until it can swim and hunt.",
+      whyKo: "마지막 문단에 순서가 나옵니다: 새끼는 작고 회색으로 태어나며(small and gray), 스스로 헤엄치고 사냥할 수 있을 때까지 부모가 먹여 줍니다.",
+    },
+  ],
+  "sr-reading-prep-g4-5": [
+    ...placementReadingByProduct["english-level-test-g3-4"],
+    {
+      area: "Reading", type: "Author's Purpose", skill: "Identify the author's purpose", difficulty: "Advanced",
+      passage: passageG3_4,
+      question: "The author wrote this passage mainly to —",
+      choices: ["describe how the octopus's body helps it survive", "warn people to stay away from octopuses", "compare octopuses with fish", "explain how to catch an octopus"],
+      answer: "describe how the octopus's body helps it survive",
+      why: "Each paragraph explains a body feature and how it aids survival, so the purpose is to describe/inform.",
+      whyKo: "각 문단이 문어의 신체 특징과 생존에 어떻게 도움이 되는지를 설명합니다. 따라서 목적은 ‘문어의 몸이 생존을 어떻게 돕는지 설명하기’입니다.",
+    },
+    {
+      area: "Reading", type: "Text Structure", skill: "Analyze how a text is organized", difficulty: "Advanced",
+      passage: passageG3_4,
+      question: "How is the information in this passage mostly organized?",
+      choices: ["by telling events in the order they happened", "by describing different body parts and what each one does", "by comparing two different animals", "by listing steps to follow"],
+      answer: "by describing different body parts and what each one does",
+      why: "The passage moves feature by feature — boneless body, color-changing skin, suckers, intelligence, ink.",
+      whyKo: "지문은 ‘뼈 없는 몸 → 색을 바꾸는 피부 → 빨판 → 지능 → 먹물’처럼 신체 특징을 하나씩 소개하며 그 기능을 설명하는 구조입니다.",
+    },
+  ],
+  "sr-reading-prep-g6-8": [
+    ...placementReadingByProduct["english-level-test-g5-6"],
+    {
+      area: "Reading", type: "Author's Purpose", skill: "Identify the author's purpose", difficulty: "Advanced",
+      passage: passageG5_6,
+      question: "The author most likely wrote this passage to —",
+      choices: ["persuade readers to keep bees as pets", "explain how bees communicate and why it matters", "describe one day in the life of a single bee", "argue that bees are dangerous"],
+      answer: "explain how bees communicate and why it matters",
+      why: "The passage explains the waggle dance and ends by noting why bee communication matters for food supply.",
+      whyKo: "지문은 와글 댄스로 벌이 소통하는 방법을 설명하고, 마지막에 그 소통이 작물 수분·식량 공급에 왜 중요한지까지 밝힙니다. 따라서 목적은 ‘벌의 소통 방식과 그 중요성 설명’입니다.",
+    },
+    {
+      area: "Reading", type: "Cause & Effect", skill: "Identify cause-and-effect relationships", difficulty: "Challenge",
+      passage: passageG5_6,
+      question: "According to the passage, what happens when bees guide one another efficiently to flowers?",
+      choices: ["They pollinate more plants and strengthen the food supply", "They stop making honey", "They leave the hive forever", "The sun changes position in the sky"],
+      answer: "They pollinate more plants and strengthen the food supply",
+      why: "The final paragraph states efficient guidance lets bees pollinate more plants, strengthening the food supply.",
+      whyKo: "마지막 문단에 인과가 나옵니다: 벌이 서로를 효율적으로 안내하면(원인) 더 많은 식물을 수분시키고 식량 공급을 강화한다(결과)는 내용입니다.",
+    },
+  ],
+};
