@@ -305,5 +305,53 @@ export default function SampleFigure({ name }: { name: string }) {
     );
   }
 
+  // ── 과학 · 데이터 ───────────────────────────────────
+  if (name === "line-graph") {
+    // 시간에 따라 온도가 오르는 선그래프 (0,10)(1,14)(2,20)(3,24)(4,32)
+    const pts: [number, number][] = [[0, 10], [1, 14], [2, 20], [3, 24], [4, 32]];
+    const ox = 30, oy = 108, ux = 40, uy = 2.7;
+    const px = (x: number) => ox + x * ux;
+    const py = (v: number) => oy - v * uy;
+    return (
+      <svg viewBox="0 0 210 132" className={`${svgCls} max-w-[320px]`} role="img" aria-label="Line graph of temperature over time">
+        <line x1={ox} y1="14" x2={ox} y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox} y1={oy} x2="200" y2={oy} stroke={INK} strokeWidth="1.2" />
+        {[0, 10, 20, 30].map((v) => (
+          <g key={v}>
+            <line x1={ox - 3} y1={py(v)} x2={ox} y2={py(v)} stroke={INK} strokeWidth="1" />
+            <text x={ox - 6} y={py(v) + 3} textAnchor="end" fontSize="8" fill={FAINT}>{v}</text>
+          </g>
+        ))}
+        <polyline points={pts.map(([x, v]) => `${px(x)},${py(v)}`).join(" ")} fill="none" stroke={ACCENT} strokeWidth="1.8" />
+        {pts.map(([x, v], i) => (
+          <g key={i}>
+            <circle cx={px(x)} cy={py(v)} r="2.8" fill={INK} />
+            <text x={px(x)} y={oy + 12} textAnchor="middle" fontSize="8" fill={FAINT}>{x}h</text>
+          </g>
+        ))}
+        <text x="6" y="12" fontSize="8" fill={FAINT}>°C</text>
+      </svg>
+    );
+  }
+  if (name === "food-chain") {
+    const nodes = ["Grass", "Rabbit", "Fox"];
+    return (
+      <svg viewBox="0 0 260 60" className={`${svgCls} max-w-[340px]`} role="img" aria-label="Food chain diagram">
+        {nodes.map((n, i) => (
+          <g key={n}>
+            <rect x={10 + i * 90} y="18" width="66" height="26" rx="2" fill={FILL} stroke={INK} strokeWidth="1.1" />
+            <text x={43 + i * 90} y="35" textAnchor="middle" fontSize="11" fill={INK}>{n}</text>
+            {i < nodes.length - 1 && (
+              <>
+                <line x1={76 + i * 90} y1="31" x2={98 + i * 90} y2="31" stroke={ACCENT} strokeWidth="1.6" />
+                <polygon points={`${100 + i * 90},31 ${94 + i * 90},28 ${94 + i * 90},34`} fill={ACCENT} />
+              </>
+            )}
+          </g>
+        ))}
+      </svg>
+    );
+  }
+
   return null;
 }

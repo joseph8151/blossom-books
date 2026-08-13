@@ -83,6 +83,42 @@ export const readingBank: SampleItem[] = [
     why: "'Because the river flooded' is stated as the direct cause of moving the market.",
     whyKo: "‘Because the river flooded(강이 범람했기 때문에)’가 시장을 실내로 옮긴 직접적인 원인입니다. because, so, as a result 같은 표현이 인과 단서입니다.",
   },
+  {
+    area: "Reading", type: "Main Idea", skill: "Identify the central idea of a longer passage", difficulty: "Standard",
+    passage: `Ant Teamwork
+
+Ants are small, but together they can do surprising things. A single ant is not very strong, yet a whole colony can build tunnels, carry food many times its own weight, and even cross water. They do this by working as a team.
+
+When ants find food, they leave a trail of scent on the ground as they carry pieces back to the nest. Other ants follow the trail and add their own scent, making the path stronger. Soon a steady line of ants moves back and forth, sharing the work.
+
+If the path is blocked by water, some ants link their bodies together to form a living bridge. Others walk safely across the top. No single ant is in charge, yet the whole colony solves the problem quickly.
+
+Scientists study ants to learn how simple actions, repeated by many, can solve hard problems. The secret is not the strength of one ant, but the teamwork of the whole colony.`,
+    question: "What is the passage MAINLY about?",
+    choices: ["How ants build one straight tunnel", "How ants solve problems by working together", "Why ants are afraid of water", "How scientists catch ants"],
+    answer: "How ants solve problems by working together",
+    why: "Every paragraph gives an example of ants cooperating, and the last sentence states the main point: teamwork.",
+    whyKo: "각 문단이 개미가 협력하는 예시(먹이 나르기·냄새 길·다리 만들기)를 들고, 마지막 문장이 핵심을 요약합니다: 힘이 아니라 ‘협동(teamwork)’이 비결이라는 것이 주제입니다.",
+    wrong: "The other choices are small details or ideas the passage never states.",
+    wrongKo: "나머지 보기는 지문에 없거나 아주 작은 세부일 뿐, 글 전체의 주제가 아닙니다.",
+  },
+  {
+    area: "Reading", type: "Inference", skill: "Draw a conclusion from a longer passage", difficulty: "Standard",
+    passage: `Ant Teamwork
+
+Ants are small, but together they can do surprising things. A single ant is not very strong, yet a whole colony can build tunnels, carry food many times its own weight, and even cross water. They do this by working as a team.
+
+When ants find food, they leave a trail of scent on the ground as they carry pieces back to the nest. Other ants follow the trail and add their own scent, making the path stronger. Soon a steady line of ants moves back and forth, sharing the work.
+
+If the path is blocked by water, some ants link their bodies together to form a living bridge. Others walk safely across the top. No single ant is in charge, yet the whole colony solves the problem quickly.
+
+Scientists study ants to learn how simple actions, repeated by many, can solve hard problems. The secret is not the strength of one ant, but the teamwork of the whole colony.`,
+    question: "The passage suggests that a colony of ants is successful MAINLY because —",
+    choices: ["each ant is very strong", "one ant leads all the others", "the ants cooperate and share the work", "the ants avoid difficult tasks"],
+    answer: "the ants cooperate and share the work",
+    why: "The passage repeatedly shows ants sharing work and states 'No single ant is in charge,' so success comes from cooperation, not individual strength.",
+    whyKo: "지문은 개미들이 일을 나누어 하는 모습을 반복해서 보여 주고 ‘어느 한 마리가 지휘하지 않는다(No single ant is in charge)’고 밝힙니다. 따라서 성공의 비결은 개별 힘이 아니라 ‘협동’이라고 추론할 수 있습니다.",
+  },
 ];
 
 // ── Vocabulary ───────────────────────────────────────────
@@ -296,12 +332,22 @@ export const scienceBank: SampleItem[] = [
     whyKo: "광합성의 핵심 반응물은 빛(에너지), 이산화탄소, 물입니다. 산소와 포도당은 생성물입니다.",
   },
   {
-    area: "Science", type: "Graph Analysis", skill: "Interpret graphs", difficulty: "Standard",
-    question: "On a temperature-vs-time graph, the steepest upward section shows ___.",
-    choices: ["no change", "the fastest temperature increase", "cooling", "a constant temperature"],
-    answer: "the fastest temperature increase",
-    why: "A steeper slope (change per unit time) means a faster temperature rise.",
-    whyKo: "기울기(단위 시간당 변화량)가 가장 큰 구간이 온도가 가장 빠르게 상승하는 구간입니다.",
+    area: "Science", type: "Graph Analysis", skill: "Interpret a line graph", difficulty: "Standard",
+    question: "The line graph shows temperature over time. Between which hours does the temperature rise the FASTEST?",
+    figure: "line-graph",
+    choices: ["0h–1h", "1h–2h", "2h–3h", "3h–4h"],
+    answer: "3h–4h",
+    why: "The steepest segment shows the fastest rise: from 3h to 4h the temperature climbs from 24° to 32° (+8), more than any other hour.",
+    whyKo: "선그래프에서 기울기가 가장 가파른 구간이 온도가 가장 빠르게 오르는 구간입니다. 3h→4h에서 24°→32°로 +8°C 올라, 다른 어느 구간보다 큽니다.",
+  },
+  {
+    area: "Science", type: "Ecosystems", skill: "Interpret a food chain", difficulty: "Foundation",
+    question: "The diagram shows a food chain. What would MOST likely happen to the foxes if all the rabbits disappeared?",
+    figure: "food-chain",
+    choices: ["Their number would increase", "Their number would decrease", "Nothing would change", "Foxes would start eating grass"],
+    answer: "Their number would decrease",
+    why: "Foxes depend on rabbits for food. Removing their main food source would reduce the fox population.",
+    whyKo: "먹이 사슬에서 여우는 토끼를 먹이로 삼습니다(Grass → Rabbit → Fox). 토끼가 사라지면 먹이가 줄어 여우의 수도 감소합니다.",
   },
   {
     area: "Science", type: "Experiment / Variables", skill: "Design and control variables", difficulty: "Advanced",
@@ -434,6 +480,25 @@ export const scatBank: SampleItem[] = [
     answer: "song",
     why: "An author creates a book; a composer creates a song/piece of music (creator-to-work).",
     whyKo: "작가가 책을 쓰듯, 작곡가는 곡(song·음악)을 만듭니다. (창작자–창작물 관계) 나머지 보기는 관계가 맞지 않습니다.",
+  },
+  {
+    area: "Quantitative", type: "Figure Comparison", skill: "Compare a figure's measure with a value", difficulty: "Standard",
+    question: "The triangle has base 8 and height 5.  Column A: the area of the triangle.  Column B: 18.  Which statement is true?",
+    figure: "triangle-bh",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "A is greater",
+    why: "Area = 1/2 × base × height = 1/2 × 8 × 5 = 20, which is greater than 18.",
+    whyKo: "삼각형의 넓이 = 1/2 × 밑변 × 높이 = 1/2 × 8 × 5 = 20. 20 > 18 이므로 A(삼각형의 넓이)가 더 큽니다.",
+    steps: ["Area = 1/2 × 8 × 5 = 20", "Compare 20 and 18", "20 > 18 → A is greater"],
+  },
+  {
+    area: "Quantitative", type: "Figure Pattern", skill: "Find the next term in a visual pattern", difficulty: "Standard",
+    question: "The groups of dots follow a rule (1, 3, 5, …). How many dots belong in the 4th group?",
+    figure: "dots-pattern",
+    choices: ["6", "7", "8", "9"],
+    answer: "7",
+    why: "The number of dots increases by 2 each time: 1, 3, 5, 7.",
+    whyKo: "점의 개수가 1, 3, 5로 2개씩 늘어나는 규칙입니다. 따라서 4번째 묶음은 7개입니다.",
   },
   {
     area: "Quantitative", type: "Quantitative Comparison", skill: "Compare two quantities", difficulty: "Standard",
