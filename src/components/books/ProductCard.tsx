@@ -6,6 +6,7 @@ import { coverToneFor } from "@/lib/utils";
 import { productBadges, isDirectPurchase, explanationLanguage } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
+import { BlossomSeal } from "@/components/books/BlossomSeal";
 
 // 가치 중심 카드 — 가격 숫자를 전면에 두지 않고, 시험·과목·핵심 영역과 샘플을 먼저 보여줍니다.
 // 정확한 가격은 상세페이지에서 구성을 충분히 확인한 뒤 노출합니다. (Smart Pricing)
@@ -88,10 +89,13 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         <div className="mt-6 border-t border-navy-800/10 pt-4">
-          {/* 가격 대신 안내 라벨 — 정확한 가격은 상세에서 */}
-          <p className="text-[12px] text-charcoal-600">
-            {direct ? "구성 선택 · 가격은 상세에서 확인" : "구성에 따라 맞춤 견적"}
-          </p>
+          {/* 가격 대신 안내 라벨 + 품질 마크 */}
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[12px] text-charcoal-600">
+              {direct ? "구성 선택 · 가격은 상세에서 확인" : "구성에 따라 맞춤 견적"}
+            </p>
+            <BlossomSeal />
+          </div>
 
           <div className="mt-3 flex gap-2">
             <Link

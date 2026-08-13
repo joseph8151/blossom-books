@@ -19,8 +19,10 @@ import SamplePreviewButton from "@/components/books/SamplePreviewButton";
 import PurchasePanel from "@/components/books/PurchasePanel";
 import StudyGuidance from "@/components/books/StudyGuidance";
 import WorkbookSpecification from "@/components/books/WorkbookSpecification";
+import WorkbookAnatomy from "@/components/books/WorkbookAnatomy";
 import ErrorReport from "@/components/books/ErrorReport";
 import SmartPricing from "@/components/books/SmartPricing";
+import { BlossomSeal } from "@/components/books/BlossomSeal";
 import VolumeGuide from "@/components/common/VolumeGuide";
 import PrepComparison from "@/components/common/PrepComparison";
 import { siteConfig } from "@/data/site";
@@ -106,6 +108,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <span className="inline-flex items-center border border-navy-800/15 bg-ivory-200/50 px-2 py-0.5 font-label text-[9px] uppercase tracking-[0.1em] text-navy-800/65">
             Reviewed 2026
           </span>
+          <BlossomSeal />
         </div>
         <h1 className="mt-3 font-display text-[28px] font-semibold leading-tight text-navy-950 sm:text-[34px]">
           {product.titleKo}
@@ -255,6 +258,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               ))}
             </div>
           </div>
+
+          {/* Workbook Anatomy — 구성 비율 + 스킬 인덱스 */}
+          <WorkbookAnatomy product={product} />
 
           {/* 09 · 페이지 옵션 + 구성 비교 */}
           {offersVolumes && (
