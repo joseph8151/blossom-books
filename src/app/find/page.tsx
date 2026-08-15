@@ -94,6 +94,7 @@ const areas = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
 
 export default function FindPage() {
   const [f, setF] = useState({ grade: "", level: "", sr: "", exam: "", period: "", areas: [] as string[], phone: "" });
+  const [consent, setConsent] = useState(false);
   const [done, setDone] = useState(false);
   const [copied, setCopied] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
@@ -184,6 +185,7 @@ export default function FindPage() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (f.phone.trim() && !consent) return;
     setDone(true);
   }
 
@@ -280,10 +282,9 @@ export default function FindPage() {
         <div className="border border-brass-500/40 bg-brass-500/[0.05] p-4">
           <label className="block">
             <span className="mb-1.5 block text-[13px] font-medium text-navy-950">
-              연락처 <span className="font-normal text-charcoal-600">(추천 결과 · 상담 안내용, 필수)</span>
+              연락처 <span className="font-normal text-charcoal-600">(상담을 원하시면 입력, 선택)</span>
             </span>
             <input
-              required
               type="tel"
               inputMode="tel"
               value={f.phone}
@@ -293,9 +294,27 @@ export default function FindPage() {
             />
           </label>
           <p className="mt-1.5 text-[11.5px] text-charcoal-600/80">
-            추천 결과 확인과 상담 안내 목적으로만 사용하며, 광고 목적으로 사용하지 않습니다. 입력하신 번호로
-            상담 연락이 갈 수 있습니다.
+            상담을 원하지 않으시면 입력하지 않으셔도 추천 결과를 보실 수 있습니다. 입력하신 번호로 상담
+            연락이 갈 수 있습니다.
           </p>
+          {f.phone.trim() && (
+            <label className="mt-3 flex items-start gap-2.5 text-[12px] leading-snug text-charcoal-600">
+              <input
+                type="checkbox"
+                required
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                className="mt-0.5"
+              />
+              <span>
+                (필수) 상담 연락을 위한 개인정보(연락처) 수집·이용에 동의합니다. 수집 목적: 추천 결과 안내 및
+                상담 연결 · 보유기간: 상담 완료 후 즉시 파기.{" "}
+                <Link href="/privacy" className="underline decoration-brass-500 decoration-2 underline-offset-2">
+                  자세히 보기
+                </Link>
+              </span>
+            </label>
+          )}
         </div>
 
         <button type="submit" className="inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
