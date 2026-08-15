@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { MessageCircle, Sparkles, ArrowRight, Check, Copy, FileSearch } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { makeInquiryCode, copyText } from "@/lib/consultation";
+import { copyText } from "@/lib/consultation";
 import { products } from "@/data/products";
 import { isFourSkill } from "@/lib/productMeta";
 import { blossomLevel } from "@/lib/utils";
@@ -79,7 +79,6 @@ function recommend(f: { grade: string; level: string; areas: string[] }, track: 
 export default function EnFindPage() {
   const [f, setF] = useState({ grade: "", level: "", sr: "", exam: "", period: "", areas: [] as string[] });
   const [done, setDone] = useState(false);
-  const [code, setCode] = useState("");
   const [copyState, setCopyState] = useState<"idle" | "copied" | "manual">("idle");
   const teamSent = useRef(false);
 
@@ -99,9 +98,6 @@ export default function EnFindPage() {
     return [
       "A new workbook recommendation was generated (EN).",
       "",
-      `■ Inquiry code: ${code}`,
-      "Match the incoming KakaoTalk chat against this code.",
-      "",
       `- Grade: ${f.grade || "-"}`,
       `- Level: ${f.level || "-"}`,
       `- SR / Reading Level: ${f.sr || "unknown"}`,
@@ -119,7 +115,6 @@ export default function EnFindPage() {
   const kakaoMsg = [
     "Hello. I'd like to consult about a recommendation.",
     "",
-    `Inquiry code: ${code}`,
     `Recommended: ${rec ? `${rec.product.title.split(" — ")[0]} (Fit ${rec.score}%)` : "custom proposal"}`,
     `Recommended volume: ${recVolume}`,
     "",
@@ -136,7 +131,7 @@ export default function EnFindPage() {
       await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ access_key: key, from_name: "Blossom Recommender (EN)", subject: `[Blossom Rec ${code}] ${f.grade || "-"} · ${f.exam || "-"} · ${recVolume}${suffix}`, message: summary(), ...extra }),
+        body: JSON.stringify({ access_key: key, from_name: "Blossom Recommender (EN)", subject: `[Blossom Rec] ${f.grade || "-"} · ${f.exam || "-"} · ${recVolume}${suffix}`, message: summary(), ...extra }),
       });
     } catch {}
   }
@@ -145,23 +140,22 @@ export default function EnFindPage() {
     e.preventDefault();
     teamSent.current = false;
     setCopyState("idle");
-    setCode(makeInquiryCode());
     setDone(true);
   }
 
   useEffect(() => {
-    if (!done || !code || teamSent.current) return;
+    if (!done || teamSent.current) return;
     teamSent.current = true;
     void sendTeam("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [done, code]);
+  }, [done]);
 
   function goKakao() {
     // Start the copy inside the click gesture and open the window before any await,
     // otherwise Safari blocks the popup.
     const copying = copyText(kakaoMsg);
     window.open(siteConfig.kakaoChatUrl, "_blank", "noopener,noreferrer");
-    void sendTeam(" · kakao click", { inquiry_code: code, event: "kakao clicked" });
+    void sendTeam(" · kakao click", { event: "kakao clicked" });
     void copying.then((ok) => setCopyState(ok ? "copied" : "manual"));
   }
 
@@ -227,12 +221,7 @@ export default function EnFindPage() {
 
       {done && (
         <div className="mt-8 border border-brass-500/40 bg-brass-500/[0.05] p-6 lg:p-8">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Recommended for you</p>
-            <p className="font-label text-[10.5px] tracking-[0.08em] text-navy-800/60">
-              Inquiry code <span className="font-medium text-navy-900">{code}</span>
-            </p>
-          </div>
+          <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Recommended for you</p>
 
           {rec && (
             <div className="mt-3 border border-navy-800/15 bg-ivory-100 p-5 shadow-card">
@@ -304,7 +293,6 @@ export default function EnFindPage() {
                 <a href={siteConfig.kakaoChatUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 border border-navy-800/25 px-4 py-2 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">
                   <MessageCircle size={13} /> Reopen the chat
                 </a>
-                <span className="text-[11.5px] text-charcoal-600/80">Inquiry code {code} is already in the message.</span>
               </div>
             </div>
           )}
