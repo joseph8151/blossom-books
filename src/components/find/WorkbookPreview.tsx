@@ -15,10 +15,16 @@ import { coverToneFor, blossomLevel } from "@/lib/utils";
 
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 
-export default function WorkbookPreview({ product }: { product: Product }) {
+const COPY = {
+  ko: { contents: "목차", answer: "정답", more: "전체 샘플 더 보기", booksBase: "/books" },
+  en: { contents: "Contents", answer: "Answer", more: "See the full sample", booksBase: "/en/books" },
+};
+
+export default function WorkbookPreview({ product, locale = "ko" }: { product: Product; locale?: "ko" | "en" }) {
+  const t = COPY[locale];
   const item = previewItem(product);
   const contents = insideTheWorkbook(product);
-  const explainKo = usesKoreanExplanation(product);
+  const explainKo = locale === "ko" && usesKoreanExplanation(product);
   const explanation = explainKo ? item?.whyKo : item?.why;
 
   return (
@@ -47,7 +53,7 @@ export default function WorkbookPreview({ product }: { product: Product }) {
         {/* 목차 */}
         <div>
           <p className="flex items-center gap-1.5 font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">
-            <BookOpen size={12} /> Contents
+            <BookOpen size={12} /> {t.contents}
           </p>
           <div className="mt-2.5 space-y-2.5">
             {contents.map((c) => (
@@ -99,7 +105,7 @@ export default function WorkbookPreview({ product }: { product: Product }) {
             <p className="flex items-center gap-1.5 font-label text-[10px] uppercase tracking-[0.12em] text-brass-500">
               <KeyRound size={12} /> Answer & Explanation
             </p>
-            <p className="mt-2 text-[12.5px] font-medium text-navy-950">정답 · {item.answer}</p>
+            <p className="mt-2 text-[12.5px] font-medium text-navy-950">{t.answer} · {item.answer}</p>
             {explanation && <p className="mt-1.5 text-[12.5px] leading-relaxed text-charcoal-900">{explanation}</p>}
             {explainKo && item.wrongKo && (
               <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600">{item.wrongKo}</p>
@@ -108,10 +114,10 @@ export default function WorkbookPreview({ product }: { product: Product }) {
 
           <div className="mt-4 flex flex-wrap gap-2">
             <Link
-              href={`/books/${product.id}#sample`}
+              href={`${t.booksBase}/${product.id}#sample`}
               className="group inline-flex items-center gap-1.5 border border-navy-800/25 px-5 py-2.5 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
             >
-              전체 샘플 더 보기
+              {t.more}
               <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>

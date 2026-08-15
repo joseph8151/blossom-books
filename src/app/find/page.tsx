@@ -16,10 +16,13 @@ import {
   focusAreas,
   extraOptions,
   emptyExtra,
+  displayLevel,
+  displayPeriod,
   type ExtraDiagnosis,
   type FindInput,
   type FitTone,
-} from "@/lib/recommendation";
+} from "@/lib/recommendation/ko";
+import type { LevelKey, PeriodKey, AbroadKey, SchoolKey, WeakKey } from "@/lib/recommendation/core";
 
 const FIT_TONE: Record<FitTone, string> = {
   good: "border-brass-500/45 bg-brass-500/[0.07] text-brass-500",
@@ -28,7 +31,7 @@ const FIT_TONE: Record<FitTone, string> = {
 };
 
 export default function FindPage() {
-  const [f, setF] = useState({ grade: "", level: "", sr: "", exam: "", period: "", areas: [] as string[] });
+  const [f, setF] = useState({ grade: "", level: "" as LevelKey | "", sr: "", exam: "", period: "" as PeriodKey | "", areas: [] as string[] });
   const [extra, setExtra] = useState<ExtraDiagnosis>(emptyExtra);
   const [extraOpen, setExtraOpen] = useState(false);
   const [applied, setApplied] = useState<ExtraDiagnosis | undefined>(undefined);
@@ -40,7 +43,13 @@ export default function FindPage() {
   const teamSent = useRef(false);
   const resultRef = useRef<HTMLDivElement>(null);
 
-  const input: FindInput = { ...f, extra: applied };
+  const input: FindInput = {
+    ...f,
+    level: (f.level || "unknown") as LevelKey,
+    period: (f.period || "undecided") as PeriodKey,
+    track: exams.find((e) => e.v === f.exam)?.track ?? "",
+    extra: applied,
+  };
   const a = done ? analyze(input) : null;
 
   function toggleArea(area: string) {
@@ -55,10 +64,10 @@ export default function FindPage() {
       "",
       "■ 기본 정보",
       `- 학년: ${f.grade || "-"}`,
-      `- 현재 수준: ${f.level || "-"}`,
+      `- 현재 수준: ${displayLevel(f.level) || "-"}`,
       `- SR / Reading Level: ${f.sr || "모름"}`,
       `- 준비 시험: ${f.exam || "-"}`,
-      `- 남은 기간: ${f.period || "-"}`,
+      `- 남은 기간: ${displayPeriod(f.period) || "-"}`,
       `- 집중 영역: ${f.areas.join(", ") || "-"}`,
       "",
       ...(a.refined && applied
@@ -66,8 +75,8 @@ export default function FindPage() {
             "■ 추가 진단",
             `- 최근 시험 결과: ${applied.recentScore || "-"}`,
             `- 해외 거주: ${applied.abroad || "-"}`,
-            `- 영어유치원/국제학교: ${applied.englishSchool || "-"}`,
-            `- Reading 취약점: ${applied.readingWeak || "-"}`,
+            `- 영어유치원/국제학교: ${applied.school || "-"}`,
+            `- Reading 취약점: ${applied.weak || "-"}`,
             "",
           ]
         : []),
@@ -75,7 +84,7 @@ export default function FindPage() {
       `- 교재: ${a.product ? a.product.titleKo : "커스텀 제작 제안"}`,
       `- 분량: ${a.volume}`,
       `- 학습 계획: 약 ${a.plan.weeksMin}~${a.plan.weeksMax}주 · 주 ${a.plan.sessionsPerWeek}회 · 1회 ${a.plan.pagesPerSessionMin}~${a.plan.pagesPerSessionMax}P`,
-      `- 기간 전략: ${a.strategy.headline}`,
+      `- 기간 전략: ${a.strategyHeadline}`,
       ...(a.plan.tight ? ["- ⚠ 남은 기간 대비 분량이 빠듯합니다. 상담에서 조정 필요."] : []),
       "",
       "■ 적합도",
@@ -103,9 +112,9 @@ export default function FindPage() {
         `학습 계획: 약 ${a.plan.weeksMin}~${a.plan.weeksMax}주 · 주 ${a.plan.sessionsPerWeek}회 · 1회 ${a.plan.pagesPerSessionMin}~${a.plan.pagesPerSessionMax}P`,
         "",
         `학년: ${f.grade || "-"}`,
-        `현재 수준: ${f.level || "-"}`,
+        `현재 수준: ${displayLevel(f.level) || "-"}`,
         `시험: ${f.exam || "-"}`,
-        `남은 기간: ${f.period || "-"}`,
+        `남은 기간: ${displayPeriod(f.period) || "-"}`,
         `집중 영역: ${f.areas.join(", ") || "-"}`,
         ...(a.companions.length ? ["", `함께 준비 제안: ${a.companions.map((c) => c.area).join(", ")}`] : []),
         "",
@@ -199,9 +208,9 @@ export default function FindPage() {
           </label>
           <label className="block">
             <span className="mb-1.5 block text-[13px] font-medium text-navy-950">현재 영어 수준</span>
-            <select required value={f.level} onChange={(e) => setF({ ...f, level: e.target.value })} className={selectCls}>
+            <select required value={f.level} onChange={(e) => setF({ ...f, level: e.target.value as LevelKey })} className={selectCls}>
               <option value="">선택</option>
-              {levels.map((l) => <option key={l} value={l}>{l}</option>)}
+              {levels.map((l) => <option key={l.key} value={l.key}>{l.v}</option>)}
             </select>
           </label>
           <label className="block">
@@ -217,9 +226,9 @@ export default function FindPage() {
           </label>
           <label className="block">
             <span className="mb-1.5 block text-[13px] font-medium text-navy-950">시험일까지 남은 기간</span>
-            <select required value={f.period} onChange={(e) => setF({ ...f, period: e.target.value })} className={selectCls}>
+            <select required value={f.period} onChange={(e) => setF({ ...f, period: e.target.value as PeriodKey })} className={selectCls}>
               <option value="">선택</option>
-              {periods.map((p) => <option key={p} value={p}>{p}</option>)}
+              {periods.map((p) => <option key={p.key} value={p.key}>{p.v}</option>)}
             </select>
           </label>
         </div>
@@ -265,8 +274,8 @@ export default function FindPage() {
               {[
                 ["학년", f.grade],
                 ["준비 시험", f.exam],
-                ["현재 수준", f.level],
-                ["남은 기간", f.period],
+                ["현재 수준", displayLevel(f.level)],
+                ["남은 기간", displayPeriod(f.period)],
               ].map(([k, v]) => (
                 <div key={k}>
                   <p className="font-label text-[9px] uppercase tracking-[0.1em] text-ivory-100/50">{k}</p>
@@ -368,23 +377,23 @@ export default function FindPage() {
                   </label>
                   <label className="block">
                     <span className="mb-1.5 block text-[12.5px] font-medium text-navy-950">해외 거주 경험</span>
-                    <select value={extra.abroad} onChange={(e) => setExtra({ ...extra, abroad: e.target.value })} className={selectCls}>
+                    <select value={extra.abroad} onChange={(e) => setExtra({ ...extra, abroad: e.target.value as AbroadKey })} className={selectCls}>
                       <option value="">선택</option>
-                      {extraOptions.abroad.map((o) => <option key={o} value={o}>{o}</option>)}
+                      {extraOptions.abroad.map((o) => <option key={o.key} value={o.key}>{o.v}</option>)}
                     </select>
                   </label>
                   <label className="block">
                     <span className="mb-1.5 block text-[12.5px] font-medium text-navy-950">영어유치원 / 국제학교 경험</span>
-                    <select value={extra.englishSchool} onChange={(e) => setExtra({ ...extra, englishSchool: e.target.value })} className={selectCls}>
+                    <select value={extra.school} onChange={(e) => setExtra({ ...extra, school: e.target.value as SchoolKey })} className={selectCls}>
                       <option value="">선택</option>
-                      {extraOptions.englishSchool.map((o) => <option key={o} value={o}>{o}</option>)}
+                      {extraOptions.school.map((o) => <option key={o.key} value={o.key}>{o.v}</option>)}
                     </select>
                   </label>
                   <label className="block">
                     <span className="mb-1.5 block text-[12.5px] font-medium text-navy-950">Reading 에서 어려운 부분</span>
-                    <select value={extra.readingWeak} onChange={(e) => setExtra({ ...extra, readingWeak: e.target.value })} className={selectCls}>
+                    <select value={extra.weak} onChange={(e) => setExtra({ ...extra, weak: e.target.value as WeakKey })} className={selectCls}>
                       <option value="">선택</option>
-                      {extraOptions.readingWeak.map((o) => <option key={o} value={o}>{o}</option>)}
+                      {extraOptions.weak.map((o) => <option key={o.key} value={o.key}>{o.v}</option>)}
                     </select>
                   </label>
                   <div className="sm:col-span-2">
@@ -418,8 +427,8 @@ export default function FindPage() {
                 <div className="flex items-start gap-2.5 px-4 py-3.5">
                   <CalendarClock size={15} className="mt-0.5 shrink-0 text-brass-500" />
                   <div>
-                    <p className="text-[12.5px] font-medium text-navy-950">{a.volume} · {a.strategy.headline}</p>
-                    <p className="mt-1 text-[12.5px] leading-relaxed text-charcoal-600">{a.strategy.detail}</p>
+                    <p className="text-[12.5px] font-medium text-navy-950">{a.volume} · {a.strategyHeadline}</p>
+                    <p className="mt-1 text-[12.5px] leading-relaxed text-charcoal-600">{a.strategyDetail}</p>
                   </div>
                 </div>
                 {a.plan.tight && (
