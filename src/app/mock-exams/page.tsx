@@ -108,7 +108,7 @@ export default function MockExamsPage() {
               </div>
               <div className="mt-6 flex items-center gap-4 border-t border-navy-800/10 pt-4">
                 <a
-                  href={siteConfig.kakaoChannelUrl}
+                  href={siteConfig.kakaoChatUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 bg-navy-900 px-4 py-2 text-[12.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"

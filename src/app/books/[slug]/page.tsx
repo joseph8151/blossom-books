@@ -165,7 +165,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </ul>
             <p className="mt-4 text-[12.5px] text-charcoal-600">
               학생에게 적합한지 모르시나요?{" "}
-              <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
+              <a href={siteConfig.kakaoChatUrl} target="_blank" rel="noreferrer" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
                 카카오톡으로 확인하기
               </a>
             </p>
@@ -307,7 +307,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               구성이 적합한지 모르겠다면 구매 전에 먼저 문의하세요.
             </p>
             <a
-              href={siteConfig.kakaoChannelUrl}
+              href={siteConfig.kakaoChatUrl}
               target="_blank"
               rel="noreferrer"
               className="mt-4 inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-5 py-2.5 text-[13px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
@@ -442,7 +442,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         <p className="text-[13.5px] text-charcoal-600">어떤 구성을 선택해야 할지 모르시나요?</p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <a
-            href={siteConfig.kakaoChannelUrl}
+            href={siteConfig.kakaoChatUrl}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"

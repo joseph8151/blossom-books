@@ -153,7 +153,7 @@ export default function PolicyPage() {
               안내해 드립니다.
             </p>
             <a
-              href={siteConfig.kakaoChannelUrl}
+              href={siteConfig.kakaoChatUrl}
               target="_blank"
               rel="noreferrer"
               className="mt-4 inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"

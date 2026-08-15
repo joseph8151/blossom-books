@@ -461,7 +461,7 @@ export default function EnHomePage() {
 
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
-              href={siteConfig.kakaoChannelUrl}
+              href={siteConfig.kakaoChatUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"

@@ -66,7 +66,7 @@ export default function InstitutionsPage() {
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <a
-              href={siteConfig.kakaoChannelUrl}
+              href={siteConfig.kakaoChatUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
@@ -130,7 +130,7 @@ export default function InstitutionsPage() {
             여부를 안내해드립니다.
           </p>
           <a
-            href={siteConfig.kakaoChannelUrl}
+            href={siteConfig.kakaoChatUrl}
             target="_blank"
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2 bg-brass-500 px-7 py-3.5 text-[14px] font-medium text-navy-950 transition-colors hover:bg-brass-400"

@@ -30,7 +30,7 @@ const linkGroups = [
     title: "고객 지원",
     links: [
       { label: "자주 묻는 질문", href: "/faq" },
-      { label: "카카오톡 상담", href: siteConfig.kakaoChannelUrl },
+      { label: "카카오톡 상담", href: siteConfig.kakaoChatUrl },
       { label: "이메일 문의", href: `mailto:${siteConfig.email}` },
     ],
   },

@@ -29,7 +29,7 @@ export default function ConsultationCTA() {
           </p>
 
           <a
-            href={siteConfig.kakaoChannelUrl}
+            href={siteConfig.kakaoChatUrl}
             target="_blank"
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2.5 bg-navy-900 px-8 py-4 text-[15px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"

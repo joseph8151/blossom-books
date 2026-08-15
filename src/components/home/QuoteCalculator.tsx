@@ -87,7 +87,7 @@ export default function QuoteCalculator() {
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
               <a
-                href={siteConfig.kakaoChannelUrl}
+                href={siteConfig.kakaoChatUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 bg-brass-500 px-5 py-2.5 text-[13px] font-medium text-navy-950 transition-colors hover:bg-brass-400"

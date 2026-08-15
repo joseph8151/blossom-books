@@ -154,7 +154,7 @@ export default function Header() {
           <LanguageSwitcher isEn={isEn} />
 
           <a
-            href={siteConfig.kakaoChannelUrl}
+            href={siteConfig.kakaoChatUrl}
             target="_blank"
             rel="noreferrer"
             className="hidden items-center gap-1.5 bg-navy-900 px-5 py-2.5 text-[13.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift lg:inline-flex"
@@ -210,7 +210,7 @@ export default function Header() {
               </Link>
             )}
             <a
-              href={siteConfig.kakaoChannelUrl}
+              href={siteConfig.kakaoChatUrl}
               target="_blank"
               rel="noreferrer"
               className="mt-4 mb-3 inline-flex items-center justify-center gap-2 bg-navy-900 py-3.5 text-[14px] font-medium text-ivory-100"

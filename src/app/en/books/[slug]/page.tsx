@@ -213,7 +213,7 @@ export default async function EnProductDetail({ params }: { params: Promise<{ sl
             )}
 
             <a
-              href={siteConfig.kakaoChannelUrl}
+              href={siteConfig.kakaoChatUrl}
               target="_blank"
               rel="noreferrer"
               className="mt-5 flex w-full items-center justify-center gap-2 bg-navy-900 px-6 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
@@ -237,7 +237,7 @@ export default async function EnProductDetail({ params }: { params: Promise<{ sl
       <div className="mt-16 flex flex-col items-center gap-3 border-t border-navy-800/12 pt-10 text-center">
         <p className="text-[13.5px] text-charcoal-600">Not sure which option fits your child?</p>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
+          <a href={siteConfig.kakaoChatUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
             <MessageCircle size={15} /> Chat on KakaoTalk
           </a>
           <Link href="/en/books" className="inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">

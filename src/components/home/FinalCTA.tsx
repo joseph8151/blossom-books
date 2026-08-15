@@ -51,7 +51,7 @@ export default function FinalCTA() {
               무료 Sample 보기
             </Link>
             <a
-              href={siteConfig.kakaoChannelUrl}
+              href={siteConfig.kakaoChatUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 bg-brass-500 px-7 py-3.5 text-[14px] font-medium text-navy-950 shadow-gold transition-all hover:-translate-y-0.5 hover:bg-brass-400"

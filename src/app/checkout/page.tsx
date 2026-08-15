@@ -32,7 +32,7 @@ export default function CheckoutPage() {
               교재 찾기 <ArrowRight size={16} />
             </Link>
             <a
-              href={siteConfig.kakaoChannelUrl}
+              href={siteConfig.kakaoChatUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"

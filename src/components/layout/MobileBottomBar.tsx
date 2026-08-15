@@ -29,7 +29,7 @@ export default function MobileBottomBar() {
           {labels.sample}
         </Link>
         <a
-          href={siteConfig.kakaoChannelUrl}
+          href={siteConfig.kakaoChatUrl}
           target="_blank"
           rel="noreferrer"
           className="flex flex-1 items-center justify-center gap-2 bg-brass-500 py-3.5 text-[14px] font-semibold text-navy-950"
@@ -49,7 +49,7 @@ export default function MobileBottomBar() {
           {labels.sample}
         </Link>
         <a
-          href={siteConfig.kakaoChannelUrl}
+          href={siteConfig.kakaoChatUrl}
           target="_blank"
           rel="noreferrer"
           aria-label={labels.kakao}

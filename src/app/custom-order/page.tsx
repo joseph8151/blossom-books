@@ -98,7 +98,7 @@ export default function CustomOrderPage() {
             : "전달해주신 내용을 확인한 후 제작 가능 범위와 상담 방법을 안내드립니다. 더 빠른 상담은 카카오톡을 이용해 주세요."}
         </p>
         <a
-          href={siteConfig.kakaoChannelUrl}
+          href={siteConfig.kakaoChatUrl}
           target="_blank"
           rel="noreferrer"
           className="mt-8 inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
@@ -229,7 +229,7 @@ export default function CustomOrderPage() {
             {submitting ? "접수 중…" : "제작 상담 신청하기"}
           </button>
           <a
-            href={siteConfig.kakaoChannelUrl}
+            href={siteConfig.kakaoChatUrl}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 border border-navy-800/25 px-8 py-3.5 text-[14px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"

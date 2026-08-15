@@ -27,7 +27,7 @@ export default function MissingBookCTA() {
 
         <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col">
           <a
-            href={siteConfig.kakaoChannelUrl}
+            href={siteConfig.kakaoChatUrl}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center justify-center gap-2 whitespace-nowrap bg-brass-500 px-6 py-3.5 text-[14px] font-medium text-navy-950 shadow-gold transition-all hover:-translate-y-0.5 hover:bg-brass-400"

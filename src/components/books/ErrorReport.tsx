@@ -22,7 +22,7 @@ export default function ErrorReport({ code }: { code: string }) {
       navigator.clipboard?.writeText(msg);
       setCopied(true);
     } catch {}
-    window.open(siteConfig.kakaoChannelUrl, "_blank", "noopener,noreferrer");
+    window.open(siteConfig.kakaoChatUrl, "_blank", "noopener,noreferrer");
   }
 
   return (

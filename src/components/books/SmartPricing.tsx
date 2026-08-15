@@ -61,7 +61,7 @@ export default function SmartPricing() {
           <FileSearch size={15} /> 무료 샘플 보기
         </a>
         <a
-          href={siteConfig.kakaoChannelUrl}
+          href={siteConfig.kakaoChatUrl}
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-all hover:-translate-y-0.5 hover:bg-navy-800"

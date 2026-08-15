@@ -71,7 +71,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
     } catch {
       /* 클립보드 미지원 환경은 무시 */
     }
-    window.open(siteConfig.kakaoChannelUrl, "_blank", "noopener,noreferrer");
+    window.open(siteConfig.kakaoChatUrl, "_blank", "noopener,noreferrer");
   }
 
   return (

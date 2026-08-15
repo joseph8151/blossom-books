@@ -52,7 +52,7 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
           <Link href="/find" className="inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">
             교재 추천받기
           </Link>
-          <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[13px] text-charcoal-600 hover:text-navy-900">
+          <a href={siteConfig.kakaoChatUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[13px] text-charcoal-600 hover:text-navy-900">
             <MessageCircle size={15} /> 카카오톡 문의
           </a>
         </div>

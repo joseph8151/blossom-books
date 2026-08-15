@@ -46,7 +46,7 @@ export default function WishlistPage() {
             <p className="text-[13.5px] text-charcoal-600">담아 둔 교재 중 어떤 구성이 맞을지 함께 골라 드립니다.</p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <a
-                href={siteConfig.kakaoChannelUrl}
+                href={siteConfig.kakaoChatUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"

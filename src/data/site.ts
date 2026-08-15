@@ -1,9 +1,12 @@
+// 채널 홈 주소. 화면의 상담 CTA 는 여기가 아니라 아래 kakaoChatUrl 을 씁니다.
+const kakaoChannelUrl = "https://pf.kakao.com/_lbMqX";
+
 export const siteConfig = {
   brandNameEn: "Blossom Books",
   brandNameKo: "블러섬북스",
-  kakaoChannelUrl: "https://pf.kakao.com/_lbMqX",
-  // 채널 홈이 아니라 1:1 채팅창으로 바로 진입 (상담 전환용)
-  kakaoChatUrl: "https://pf.kakao.com/_lbMqX/chat",
+  kakaoChannelUrl,
+  // 채널 홈을 한 번 더 거치지 않고 1:1 채팅창으로 바로 진입 (상담 전환용)
+  kakaoChatUrl: `${kakaoChannelUrl}/chat`,
   email: "blossomprep@naver.com",
   // 사업자 정보 (상호·대표자명은 표기하지 않음)
   businessRegistrationNumber: "654-60-00645",

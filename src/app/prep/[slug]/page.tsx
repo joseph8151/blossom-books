@@ -42,7 +42,7 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
                 교재 보기 <ArrowRight size={16} />
               </Link>
             )}
-            <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3.5 text-[14px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">
+            <a href={siteConfig.kakaoChatUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3.5 text-[14px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">
               <MessageCircle size={16} /> 카카오톡 문의
             </a>
           </div>
@@ -138,7 +138,7 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
             <Link href="/find" className="inline-flex items-center gap-2 bg-brass-500 px-6 py-3.5 text-[14px] font-medium text-navy-950 transition-colors hover:bg-brass-400">
               교재 추천받기 <ArrowRight size={16} />
             </Link>
-            <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-ivory-100/30 px-6 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:border-ivory-100/60">
+            <a href={siteConfig.kakaoChatUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-ivory-100/30 px-6 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:border-ivory-100/60">
               <MessageCircle size={16} /> 카카오톡으로 구매
             </a>
           </div>

@@ -67,7 +67,7 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
             ))}
           </ul>
           <a
-            href={siteConfig.kakaoChannelUrl}
+            href={siteConfig.kakaoChatUrl}
             target="_blank"
             rel="noreferrer"
             className="mt-5 inline-flex items-center justify-center gap-1.5 border border-navy-800/25 px-4 py-2.5 text-[13px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50"

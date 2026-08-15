@@ -609,7 +609,7 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                   </p>
                 </div>
                 <a
-                  href={siteConfig.kakaoChannelUrl}
+                  href={siteConfig.kakaoChatUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex shrink-0 items-center gap-2 bg-brass-500 px-7 py-3.5 text-[14px] font-medium text-navy-950 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-brass-400"

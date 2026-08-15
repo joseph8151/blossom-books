@@ -90,7 +90,7 @@ export default function GuidePage() {
             학년과 현재 수준, 학습 목적을 알려주시면 알맞은 분량과 교재를 안내해 드립니다.
           </p>
           <a
-            href={siteConfig.kakaoChannelUrl}
+            href={siteConfig.kakaoChatUrl}
             target="_blank"
             rel="noreferrer"
             className="mt-8 inline-flex items-center gap-2 bg-brass-500 px-7 py-3.5 text-[14px] font-medium text-navy-950 transition-colors hover:bg-brass-400"
