@@ -7,6 +7,7 @@ import { CurriculumTrack, MaterialType } from "@/lib/types";
 import { difficultyLabel } from "@/lib/utils";
 import { BlossomSeries, seriesFor, seriesInfo, seriesOrder } from "@/data/series";
 import ProductCard from "@/components/books/ProductCard";
+import { premiumEligible } from "@/lib/productMeta";
 import MissingBookCTA from "@/components/common/MissingBookCTA";
 
 const tracks: (CurriculumTrack | "all")[] = [
@@ -35,6 +36,7 @@ export default function BooksPage() {
   const [subject, setSubject] = useState<string>("all");
   const [difficulty, setDifficulty] = useState<number | "all">("all");
   const [series, setSeries] = useState<BlossomSeries | "all">("all");
+  const [premiumOnly, setPremiumOnly] = useState(false);
 
   // 다른 페이지에서 ?track=... / ?q=... 로 진입하면 해당 필터를 미리 적용합니다.
   useEffect(() => {
@@ -45,6 +47,8 @@ export default function BooksPage() {
     if (q) setQuery(q);
     const s = params.get("series");
     if (s && seriesOrder.includes(s as BlossomSeries)) setSeries(s as BlossomSeries);
+    // 메인 Premium 섹션에서 ?premium=1 로 진입하면 200P+ 대상 교재만 보여줍니다.
+    if (params.get("premium") === "1") setPremiumOnly(true);
   }, []);
 
   const filtered = useMemo(() => {
@@ -54,6 +58,7 @@ export default function BooksPage() {
       if (subject !== "all" && p.subject !== subject) return false;
       if (difficulty !== "all" && p.difficulty !== difficulty) return false;
       if (series !== "all" && seriesFor(p) !== series) return false;
+      if (premiumOnly && !premiumEligible(p)) return false;
       if (query.trim()) {
         const q = query.trim().toLowerCase();
         const haystack = `${p.titleKo} ${p.title} ${p.examOrCurriculum} ${p.subject}`.toLowerCase();
@@ -61,13 +66,14 @@ export default function BooksPage() {
       }
       return true;
     });
-  }, [query, track, material, subject, difficulty, series]);
+  }, [query, track, material, subject, difficulty, series, premiumOnly]);
 
-  const hasRefine = subject !== "all" || difficulty !== "all" || series !== "all";
+  const hasRefine = subject !== "all" || difficulty !== "all" || series !== "all" || premiumOnly;
   const resetRefine = () => {
     setSubject("all");
     setDifficulty("all");
     setSeries("all");
+    setPremiumOnly(false);
   };
 
   const selectClass =
@@ -116,6 +122,18 @@ export default function BooksPage() {
         <span className="inline-flex items-center gap-1.5 font-label text-[11px] uppercase tracking-[0.12em] text-navy-800/55">
           <SlidersHorizontal size={13} /> 세부 필터
         </span>
+
+        {/* 200P+ Premium 대상만 보기 */}
+        <button
+          onClick={() => setPremiumOnly((v) => !v)}
+          className={`inline-flex items-center gap-1.5 border px-3 py-2 font-label text-[10.5px] uppercase tracking-[0.12em] transition-colors ${
+            premiumOnly
+              ? "border-brass-500 bg-brass-500 text-navy-950"
+              : "border-brass-500/45 text-brass-500 hover:border-brass-500"
+          }`}
+        >
+          200P+ Premium
+        </button>
 
         <label className="sr-only" htmlFor="subject">과목</label>
         <select id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} className={selectClass}>

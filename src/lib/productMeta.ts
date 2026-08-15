@@ -25,10 +25,12 @@ export function isDirectPurchase(p: Product): boolean {
 }
 
 // 200P+ Premium Edition을 선택할 수 있는 상품인지.
-// 분량 선택형(40·60·100·200P)이거나, 고정 분량이 200P 이상인 경우에만 해당하며
-// 이 상품에서만 Premium Bonus Package 영역이 노출됩니다.
+// 200P+ 는 같은 교재의 상위 분량 구성이므로, 바로 구매 가능한 기성 교재라면
+// 분량 선택형·고정 분량을 가리지 않고 업그레이드 구성으로 제공합니다.
+// (구성 자체를 상담으로 정하는 Price on Request 상품은 제외 — 분량이 확정되지 않음)
 export function premiumEligible(p: Product): boolean {
-  return offersVolumes(p) || (p.pageCount ?? 0) >= PREMIUM_MIN_PAGES;
+  if (p.materialType !== "existing") return false;
+  return offersVolumes(p) || isFixedDirect(p) || (p.pageCount ?? 0) >= PREMIUM_MIN_PAGES;
 }
 
 // 진입(Starter, 25P) 구성을 제공하는 상품인지 — 영어 레벨테스트 상품에만 적용합니다.

@@ -30,6 +30,7 @@ import { siteConfig } from "@/data/site";
 import PremiumBenefits from "@/components/premium/PremiumBenefits";
 import PremiumBadge from "@/components/premium/PremiumBadge";
 import { premiumFaq } from "@/data/premiumBonus";
+import WhatsIncluded from "@/components/premium/WhatsIncluded";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.id }));
@@ -290,7 +291,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {hasStarter(product) && <SmartPricing />}
 
           {/* 10-b · 200P+ Premium Benefits (200P 선택 가능 상품에만 노출) */}
-          {premium && <PremiumBenefits />}
+          {premium && <PremiumBenefits product={product} />}
+          {premium && <WhatsIncluded product={product} />}
 
           {/* 11 · Which Option Should I Choose? */}
           <div className="mt-10 border border-navy-800/12 bg-ivory-200/40 p-6">

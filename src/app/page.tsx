@@ -15,7 +15,10 @@ import ResearchProcess from "@/components/home/ResearchProcess";
 import QualityFeatures from "@/components/home/QualityFeatures";
 import HowToOrder from "@/components/home/HowToOrder";
 import PrepPricing from "@/components/home/PrepPricing";
+import PremiumHero from "@/components/premium/PremiumHero";
 import PremiumBonusSection from "@/components/premium/PremiumBonusSection";
+import PremiumCollection from "@/components/premium/PremiumCollection";
+import PremiumFinalCTA from "@/components/premium/PremiumFinalCTA";
 import WhyCost from "@/components/home/WhyCost";
 import CompareLevels from "@/components/home/CompareLevels";
 import QuoteCalculator from "@/components/home/QuoteCalculator";
@@ -39,6 +42,7 @@ export default function HomePage() {
       <HeroSection />
       <CoreCategories />
       <FindPrepPromo />
+      <PremiumHero />
 
       {/* Understand — 왜 우리 아이에게 필요한지 */}
       <WhyBlossom />
@@ -65,6 +69,7 @@ export default function HomePage() {
       <HowToOrder />
       <PrepPricing />
       <PremiumBonusSection />
+      <PremiumCollection />
       <QuoteCalculator />
       <WhyCost />
 
@@ -82,6 +87,7 @@ export default function HomePage() {
       {/* Ask or Purchase */}
       <ConsultationCTA />
       <FAQSection />
+      <PremiumFinalCTA />
       <FinalCTA />
     </>
   );
