@@ -93,7 +93,7 @@ const periods = [
 const areas = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
 
 export default function FindPage() {
-  const [f, setF] = useState({ grade: "", level: "", sr: "", exam: "", period: "", areas: [] as string[] });
+  const [f, setF] = useState({ grade: "", level: "", sr: "", exam: "", period: "", areas: [] as string[], phone: "" });
   const [done, setDone] = useState(false);
   const [copied, setCopied] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
@@ -122,6 +122,7 @@ export default function FindPage() {
       "새로운 교재 추천이 생성되었습니다.",
       "",
       "■ 기본 정보",
+      `- 연락처: ${f.phone || "-"}`,
       `- 학년: ${f.grade || "-"}`,
       `- 현재 수준: ${f.level || "-"}`,
       `- SR / Reading Level: ${f.sr || "모름"}`,
@@ -147,6 +148,7 @@ export default function FindPage() {
       "안녕하세요.",
       "추천 결과를 보고 상담 요청드립니다.",
       "",
+      `연락처: ${f.phone || "-"}`,
       `학년: ${f.grade || "-"}`,
       `시험: ${f.exam || "-"}`,
       `추천 분량: ${recVolume}`,
@@ -275,6 +277,26 @@ export default function FindPage() {
           </div>
         </div>
 
+        <div className="border border-brass-500/40 bg-brass-500/[0.05] p-4">
+          <label className="block">
+            <span className="mb-1.5 block text-[13px] font-medium text-navy-950">
+              연락처 <span className="font-normal text-charcoal-600">(추천 결과 · 상담 안내용, 필수)</span>
+            </span>
+            <input
+              required
+              type="tel"
+              inputMode="tel"
+              value={f.phone}
+              onChange={(e) => setF({ ...f, phone: e.target.value })}
+              placeholder="010-1234-5678"
+              className={selectCls}
+            />
+          </label>
+          <p className="mt-1.5 text-[11.5px] text-charcoal-600/80">
+            추천 결과 확인과 상담 안내 목적으로만 사용하며, 광고 목적으로 사용하지 않습니다.
+          </p>
+        </div>
+
         <button type="submit" className="inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
           <Sparkles size={16} /> 추천 결과 보기
         </button>
@@ -360,7 +382,7 @@ export default function FindPage() {
               <FileSearch size={15} /> 무료 샘플 보기
             </Link>
             <button onClick={goKakao} className="inline-flex items-center gap-2 bg-navy-900 px-5 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
-              <MessageCircle size={15} /> 카카오톡으로 추천받기
+              <MessageCircle size={15} /> 카카오톡으로 상담·구매하기
             </button>
             <button
               onClick={() => setEmailOpen((v) => !v)}
