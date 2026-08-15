@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { MessageCircle, Sparkles, ArrowRight, Check, FileSearch } from "lucide-react";
+import { MessageCircle, Sparkles, ArrowRight, Check, Copy, FileSearch } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { makeInquiryCode, copyText } from "@/lib/consultation";
 import { products } from "@/data/products";
 import { isFourSkill } from "@/lib/productMeta";
 import { blossomLevel } from "@/lib/utils";
@@ -78,7 +79,8 @@ function recommend(f: { grade: string; level: string; areas: string[] }, track: 
 export default function EnFindPage() {
   const [f, setF] = useState({ grade: "", level: "", sr: "", exam: "", period: "", areas: [] as string[] });
   const [done, setDone] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [code, setCode] = useState("");
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "manual">("idle");
   const teamSent = useRef(false);
 
   const recVolume = periods.find((p) => p.v === f.period)?.vol ?? "60P";
@@ -97,6 +99,9 @@ export default function EnFindPage() {
     return [
       "A new workbook recommendation was generated (EN).",
       "",
+      `■ Inquiry code: ${code}`,
+      "Match the incoming KakaoTalk chat against this code.",
+      "",
       `- Grade: ${f.grade || "-"}`,
       `- Level: ${f.level || "-"}`,
       `- SR / Reading Level: ${f.sr || "unknown"}`,
@@ -111,16 +116,19 @@ export default function EnFindPage() {
       "Auto-generated. Please re-check the student's situation during consultation.",
     ].join("\n");
   }
-  function kakaoMsg(): string {
-    return [
-      "Hello. I'd like to consult about a recommendation.",
-      "",
-      `Grade: ${f.grade || "-"}`,
-      `Exam: ${f.exam || "-"}`,
-      `Recommended volume: ${recVolume}`,
-      `Focus: ${f.areas.join(", ") || "-"}`,
-    ].join("\n");
-  }
+  const kakaoMsg = [
+    "Hello. I'd like to consult about a recommendation.",
+    "",
+    `Inquiry code: ${code}`,
+    `Recommended: ${rec ? `${rec.product.title.split(" — ")[0]} (Fit ${rec.score}%)` : "custom proposal"}`,
+    `Recommended volume: ${recVolume}`,
+    "",
+    `Grade: ${f.grade || "-"}`,
+    `Level: ${f.level || "-"}`,
+    `Exam: ${f.exam || "-"}`,
+    `Time left: ${f.period || "-"}`,
+    `Focus: ${f.areas.join(", ") || "-"}`,
+  ].join("\n");
   async function sendTeam(suffix: string, extra?: Record<string, string>) {
     const key = siteConfig.web3formsAccessKey;
     if (!key) return;
@@ -128,24 +136,33 @@ export default function EnFindPage() {
       await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ access_key: key, from_name: "Blossom Recommender (EN)", subject: `[Blossom Rec] ${f.grade || "-"} · ${f.exam || "-"} · ${recVolume}${suffix}`, message: summary(), ...extra }),
+        body: JSON.stringify({ access_key: key, from_name: "Blossom Recommender (EN)", subject: `[Blossom Rec ${code}] ${f.grade || "-"} · ${f.exam || "-"} · ${recVolume}${suffix}`, message: summary(), ...extra }),
       });
     } catch {}
   }
 
-  function submit(e: React.FormEvent) { e.preventDefault(); setDone(true); }
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    teamSent.current = false;
+    setCopyState("idle");
+    setCode(makeInquiryCode());
+    setDone(true);
+  }
 
   useEffect(() => {
-    if (!done || teamSent.current) return;
+    if (!done || !code || teamSent.current) return;
     teamSent.current = true;
     void sendTeam("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [done]);
+  }, [done, code]);
 
   function goKakao() {
-    try { navigator.clipboard?.writeText(kakaoMsg()); setCopied(true); } catch {}
-    void sendTeam(" · kakao click", { event: "kakao clicked" });
-    window.open(siteConfig.kakaoChannelUrl, "_blank", "noopener,noreferrer");
+    // Start the copy inside the click gesture and open the window before any await,
+    // otherwise Safari blocks the popup.
+    const copying = copyText(kakaoMsg);
+    window.open(siteConfig.kakaoChatUrl, "_blank", "noopener,noreferrer");
+    void sendTeam(" · kakao click", { inquiry_code: code, event: "kakao clicked" });
+    void copying.then((ok) => setCopyState(ok ? "copied" : "manual"));
   }
 
   const sel = "w-full border border-navy-800/20 bg-ivory-100 px-3 py-2.5 text-[13.5px] text-charcoal-900 outline-none focus:border-navy-800/50";
@@ -210,7 +227,12 @@ export default function EnFindPage() {
 
       {done && (
         <div className="mt-8 border border-brass-500/40 bg-brass-500/[0.05] p-6 lg:p-8">
-          <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Recommended for you</p>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Recommended for you</p>
+            <p className="font-label text-[10.5px] tracking-[0.08em] text-navy-800/60">
+              Inquiry code <span className="font-medium text-navy-900">{code}</span>
+            </p>
+          </div>
 
           {rec && (
             <div className="mt-3 border border-navy-800/15 bg-ivory-100 p-5 shadow-card">
@@ -251,10 +273,41 @@ export default function EnFindPage() {
             amount for the student, not the most expensive option.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
-            <button onClick={goKakao} className="inline-flex items-center gap-2 bg-navy-900 px-5 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"><MessageCircle size={15} /> Get help on KakaoTalk</button>
+            <button onClick={goKakao} className="inline-flex items-center gap-2 bg-navy-900 px-5 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"><MessageCircle size={15} /> Consult on KakaoTalk about this result</button>
             <Link href="/en/books" className="inline-flex items-center gap-2 border border-navy-800/25 px-5 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">Browse all books <ArrowRight size={15} /></Link>
           </div>
-          {copied && <p className="mt-3 text-[12px] text-brass-500">Summary copied — paste it into the KakaoTalk chat.</p>}
+
+          {/* After the consult click: show the message either way, so a failed copy is not a dead end. */}
+          {copyState !== "idle" && (
+            <div className="mt-4 border border-navy-800/12 bg-ivory-100 p-4">
+              <p className="flex items-center gap-1.5 text-[12.5px] font-medium text-navy-950">
+                {copyState === "copied" ? (
+                  <><Check size={13} className="text-brass-500" strokeWidth={2.4} /> Summary copied — paste it into the KakaoTalk chat.</>
+                ) : (
+                  <><Copy size={13} className="text-brass-500" /> Copy the text below and paste it into the KakaoTalk chat.</>
+                )}
+              </p>
+              <textarea
+                readOnly
+                rows={7}
+                value={kakaoMsg}
+                onFocus={(e) => e.currentTarget.select()}
+                className="mt-2.5 w-full resize-none border border-navy-800/15 bg-ivory-200 p-3 text-[12.5px] leading-relaxed text-charcoal-900 outline-none focus:border-navy-800/40"
+              />
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                <button
+                  onClick={() => void copyText(kakaoMsg).then((ok) => setCopyState(ok ? "copied" : "manual"))}
+                  className="inline-flex items-center gap-1.5 border border-navy-800/25 px-4 py-2 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+                >
+                  <Copy size={13} /> Copy again
+                </button>
+                <a href={siteConfig.kakaoChatUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 border border-navy-800/25 px-4 py-2 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">
+                  <MessageCircle size={13} /> Reopen the chat
+                </a>
+                <span className="text-[11.5px] text-charcoal-600/80">Inquiry code {code} is already in the message.</span>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

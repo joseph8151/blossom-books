@@ -7,6 +7,7 @@ import { siteConfig } from "@/data/site";
 import { products, trackLabels } from "@/data/products";
 import { isFourSkill } from "@/lib/productMeta";
 import { blossomLevel } from "@/lib/utils";
+import { makeInquiryCode, copyText } from "@/lib/consultation";
 import { Product } from "@/lib/types";
 
 // 입력값을 실제 교재와 매칭해 적합도와 이유를 계산합니다.
@@ -95,7 +96,8 @@ const areas = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
 export default function FindPage() {
   const [f, setF] = useState({ grade: "", level: "", sr: "", exam: "", period: "", areas: [] as string[] });
   const [done, setDone] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [code, setCode] = useState("");
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "manual">("idle");
   const [emailOpen, setEmailOpen] = useState(false);
   const [parentEmail, setParentEmail] = useState("");
   const [emailSent, setEmailSent] = useState(false);
@@ -121,6 +123,9 @@ export default function FindPage() {
     return [
       "새로운 교재 추천이 생성되었습니다.",
       "",
+      `■ 상담코드: ${code}`,
+      "카카오톡 상담이 들어오면 이 코드로 대조해 주세요.",
+      "",
       "■ 기본 정보",
       `- 학년: ${f.grade || "-"}`,
       `- 현재 수준: ${f.level || "-"}`,
@@ -141,20 +146,23 @@ export default function FindPage() {
     ].join("\n");
   }
 
-  // 카카오 상담 시 자동 복사되는 메시지
-  function kakaoRecMessage(): string {
-    return [
-      "안녕하세요.",
-      "추천 결과를 보고 상담 요청드립니다.",
-      "",
-      `학년: ${f.grade || "-"}`,
-      `시험: ${f.exam || "-"}`,
-      `추천 분량: ${recVolume}`,
-      `집중 영역: ${f.areas.join(", ") || "-"}`,
-      "",
-      "이 구성으로 진행해도 될지 상담 부탁드립니다.",
-    ].join("\n");
-  }
+  // 카카오 상담 시 자동 복사되는 메시지 (담당자가 바로 이어받을 수 있게 추천 결과까지 포함)
+  const kakaoRecMessage = [
+    "안녕하세요.",
+    "추천 결과를 보고 상담 요청드립니다.",
+    "",
+    `상담코드: ${code}`,
+    `추천 교재: ${rec ? `${rec.product.titleKo} (Fit ${rec.score}%)` : "맞춤 제작 제안"}`,
+    `추천 분량: ${recVolume}`,
+    "",
+    `학년: ${f.grade || "-"}`,
+    `현재 수준: ${f.level || "-"}`,
+    `시험: ${f.exam || "-"}`,
+    `남은 기간: ${f.period || "-"}`,
+    `집중 영역: ${f.areas.join(", ") || "-"}`,
+    "",
+    "이 구성으로 진행해도 될지 상담 부탁드립니다.",
+  ].join("\n");
 
   async function sendTeam(subjectSuffix: string, extra?: Record<string, string>): Promise<boolean> {
     const key = siteConfig.web3formsAccessKey;
@@ -168,7 +176,7 @@ export default function FindPage() {
         body: JSON.stringify({
           access_key: key,
           from_name: "Blossom 추천 시스템",
-          subject: `[Blossom 추천] ${f.grade || "-"} · ${f.exam || "-"} · ${recVolume}${subjectSuffix}`,
+          subject: `[Blossom 추천 ${code}] ${f.grade || "-"} · ${f.exam || "-"} · ${recVolume}${subjectSuffix}`,
           message: recSummary() + `\n\n기기/경로: ${ua} · ${path}`,
           ...extra,
         }),
@@ -182,29 +190,33 @@ export default function FindPage() {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
+    // 답변을 고쳐 다시 제출하면 새 상담코드로 다시 접수합니다.
+    teamSent.current = false;
+    setCopyState("idle");
+    setCode(makeInquiryCode());
     setDone(true);
   }
 
   // 추천 생성 시 팀 이메일로 1회 자동 전송
   useEffect(() => {
-    if (!done || teamSent.current) return;
+    if (!done || !code || teamSent.current) return;
     teamSent.current = true;
     void sendTeam("");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [done]);
+  }, [done, code]);
 
   function goKakao() {
-    try {
-      navigator.clipboard?.writeText(kakaoRecMessage());
-      setCopied(true);
-    } catch {}
-    void sendTeam(" · 카카오 클릭", { 이벤트: "카카오 상담 클릭됨" });
-    window.open(siteConfig.kakaoChannelUrl, "_blank", "noopener,noreferrer");
+    // 복사는 클릭 제스처 안에서 바로 시작하고, 창 열기도 await 이전에 해야
+    // 사파리에서 팝업이 차단되지 않습니다.
+    const copying = copyText(kakaoRecMessage);
+    window.open(siteConfig.kakaoChatUrl, "_blank", "noopener,noreferrer");
+    void sendTeam(" · 카카오 클릭", { 상담코드: code, 이벤트: "카카오 상담 클릭됨" });
+    void copying.then((ok) => setCopyState(ok ? "copied" : "manual"));
   }
 
   async function sendToParent() {
     if (!parentEmail.trim()) return;
-    await sendTeam(" · 이메일 요청", { 학부모_이메일: parentEmail.trim(), 이벤트: "이메일로 추천 받기" });
+    await sendTeam(" · 이메일 요청", { 상담코드: code, 학부모_이메일: parentEmail.trim(), 이벤트: "이메일로 추천 받기" });
     setEmailSent(true);
   }
 
@@ -282,7 +294,12 @@ export default function FindPage() {
 
       {done && (
         <div className="mt-8 border border-brass-500/40 bg-brass-500/[0.05] p-6 lg:p-8">
-          <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Recommended for you</p>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Recommended for you</p>
+            <p className="font-label text-[10.5px] tracking-[0.08em] text-navy-800/60">
+              상담코드 <span className="font-medium text-navy-900">{code}</span>
+            </p>
+          </div>
 
           {/* 매칭된 추천 교재 */}
           {rec && (
@@ -343,6 +360,9 @@ export default function FindPage() {
                 학생의 목적과 수준에 맞춰 <Link href="/custom-order" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">맞춤 제작</Link>으로
                 구성해 드릴 수 있습니다. 상담에서 더 정확하게 맞춰 드립니다.
               </p>
+              <button onClick={goKakao} className="mt-3 inline-flex items-center gap-1.5 text-[12.5px] font-medium text-burgundy-700 underline decoration-burgundy-700/40 underline-offset-4 hover:decoration-burgundy-700">
+                <MessageCircle size={13} /> 카카오톡으로 맞춤 상담 요청하기
+              </button>
             </div>
           )}
 
@@ -360,7 +380,7 @@ export default function FindPage() {
               <FileSearch size={15} /> 무료 샘플 보기
             </Link>
             <button onClick={goKakao} className="inline-flex items-center gap-2 bg-navy-900 px-5 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
-              <MessageCircle size={15} /> 카카오톡으로 추천받기
+              <MessageCircle size={15} /> 이 결과로 카카오톡 상담하기
             </button>
             <button
               onClick={() => setEmailOpen((v) => !v)}
@@ -370,10 +390,47 @@ export default function FindPage() {
             </button>
           </div>
 
-          {copied && (
-            <p className="mt-3 flex items-center gap-1.5 text-[12px] text-brass-500">
-              <Copy size={12} /> 추천 요약이 복사되었습니다. 카카오톡 채팅창에 붙여넣어 주세요.
-            </p>
+          {/* 카카오 상담 클릭 후: 복사 성공 여부와 무관하게 보낼 내용을 그대로 보여줍니다. */}
+          {copyState !== "idle" && (
+            <div className="mt-4 border border-navy-800/12 bg-ivory-100 p-4">
+              <p className="flex items-center gap-1.5 text-[12.5px] font-medium text-navy-950">
+                {copyState === "copied" ? (
+                  <>
+                    <Check size={13} className="text-brass-500" strokeWidth={2.4} />
+                    추천 요약이 복사되었습니다. 카카오톡 채팅창에 붙여넣어 주세요.
+                  </>
+                ) : (
+                  <>
+                    <Copy size={13} className="text-brass-500" />
+                    아래 내용을 복사해 카카오톡 채팅창에 붙여넣어 주세요.
+                  </>
+                )}
+              </p>
+              <textarea
+                readOnly
+                rows={7}
+                value={kakaoRecMessage}
+                onFocus={(e) => e.currentTarget.select()}
+                className="mt-2.5 w-full resize-none border border-navy-800/15 bg-ivory-200 p-3 text-[12.5px] leading-relaxed text-charcoal-900 outline-none focus:border-navy-800/40"
+              />
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                <button
+                  onClick={() => void copyText(kakaoRecMessage).then((ok) => setCopyState(ok ? "copied" : "manual"))}
+                  className="inline-flex items-center gap-1.5 border border-navy-800/25 px-4 py-2 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+                >
+                  <Copy size={13} /> 다시 복사
+                </button>
+                <a
+                  href={siteConfig.kakaoChatUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 border border-navy-800/25 px-4 py-2 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
+                >
+                  <MessageCircle size={13} /> 채팅창 다시 열기
+                </a>
+                <span className="text-[11.5px] text-charcoal-600/80">상담코드 {code} 는 이미 메시지에 포함되어 있습니다.</span>
+              </div>
+            </div>
           )}
 
           {/* 이메일로 받기 (선택) */}
