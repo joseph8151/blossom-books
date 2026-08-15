@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Check, ArrowRight, MessageCircle } from "lucide-react";
 import { flexibleVolumes, extendedOption, formatKRW, fromPriceKRW, priceDisclaimer, pricingReassurance } from "@/data/pricing";
 import { siteConfig } from "@/data/site";
+import { PREMIUM_MIN_PAGES } from "@/data/premiumBonus";
 
 // 가치 중심 구성 안내 — 메인/시험별 페이지에서는 정확한 금액을 노출하지 않고,
 // 구성과 추천 대상만 보여준 뒤 "가격 확인하기"로 상세 페이지에서 확인하도록 유도합니다.
@@ -12,12 +13,17 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
     <div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {flexibleVolumes.map((v) => {
-          const highlight = !!v.badge;
+          const premium = v.pages >= PREMIUM_MIN_PAGES;
+          const highlight = !!v.badge && !premium;
           return (
             <div
               key={v.pages}
               className={`relative flex flex-col border p-6 ${
-                highlight ? "border-brass-500/60 bg-brass-500/[0.05] shadow-card" : "border-navy-800/12 bg-ivory-100"
+                premium
+                  ? "border-brass-500/45 bg-navy-950 text-ivory-100 shadow-card"
+                  : highlight
+                  ? "border-brass-500/60 bg-brass-500/[0.05] shadow-card"
+                  : "border-navy-800/12 bg-ivory-100"
               }`}
             >
               {v.badge && (
@@ -25,12 +31,17 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
                   {v.badge}
                 </span>
               )}
-              <p className="font-display text-[28px] font-semibold leading-none text-navy-950">{v.label}</p>
+              <p className={`font-display text-[28px] font-semibold leading-none ${premium ? "text-ivory-100" : "text-navy-950"}`}>{v.label}</p>
               <p className="mt-1.5 font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">{v.tier}</p>
-              <p className="mt-1 text-[12.5px] text-charcoal-600">{v.tierKo}</p>
+              <p className={`mt-1 text-[12.5px] ${premium ? "text-ivory-100/65" : "text-charcoal-600"}`}>{v.tierKo}</p>
+              {premium && (
+                <p className="mt-2 font-label text-[9.5px] uppercase tracking-[0.1em] text-brass-500/85">
+                  6 Bonus Materials Included
+                </p>
+              )}
               <ul className="mt-4 flex-1 space-y-1.5">
                 {v.forWhom.map((f) => (
-                  <li key={f} className="flex items-start gap-1.5 text-[12px] leading-snug text-charcoal-600">
+                  <li key={f} className={`flex items-start gap-1.5 text-[12px] leading-snug ${premium ? "text-ivory-100/70" : "text-charcoal-600"}`}>
                     <Check size={12} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} />
                     {f}
                   </li>
@@ -41,6 +52,8 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
                 className={`mt-5 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-[13px] font-medium transition-all hover:-translate-y-0.5 ${
                   highlight
                     ? "bg-navy-900 text-ivory-100 shadow-soft hover:bg-navy-800"
+                    : premium
+                    ? "border border-brass-500/50 text-brass-500 hover:bg-brass-500 hover:text-navy-950"
                     : "border border-navy-800/25 text-navy-900 hover:border-navy-800/50"
                 }`}
               >
@@ -50,32 +63,28 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
             </div>
           );
         })}
+      </div>
 
-        {/* Extended — 맞춤 견적 문의 */}
-        <div className="flex flex-col border border-dashed border-navy-800/25 bg-ivory-200/40 p-6">
-          <p className="font-display text-[28px] font-semibold leading-none text-navy-950">{extendedOption.label}</p>
-          <p className="mt-1.5 font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">
-            {extendedOption.tier}
+      {/* Extended — 그리드 밖 가로 스트립. 가격 문의 구성은 시각적으로 한 단계 낮춥니다. */}
+      <div className="mt-4 flex flex-col gap-4 border border-dashed border-navy-800/25 bg-ivory-200/40 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="flex flex-wrap items-baseline gap-x-2.5">
+            <span className="font-display text-[20px] font-semibold leading-none text-navy-950">{extendedOption.label}</span>
+            <span className="font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">{extendedOption.tier}</span>
           </p>
-          <p className="mt-1 text-[12.5px] text-charcoal-600">{extendedOption.tierKo}</p>
-          <ul className="mt-4 flex-1 space-y-1.5">
-            {extendedOption.forWhom.map((f) => (
-              <li key={f} className="flex items-start gap-1.5 text-[12px] leading-snug text-charcoal-600">
-                <Check size={12} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} />
-                {f}
-              </li>
-            ))}
-          </ul>
-          <a
-            href={siteConfig.kakaoChatUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-5 inline-flex items-center justify-center gap-1.5 border border-navy-800/25 px-4 py-2.5 text-[13px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50"
-          >
-            <MessageCircle size={14} />
-            맞춤 견적 문의
-          </a>
+          <p className="mt-1.5 text-[12.5px] text-charcoal-600">
+            {extendedOption.tierKo} · {extendedOption.forWhom.join(" · ")}
+          </p>
         </div>
+        <a
+          href={siteConfig.kakaoChatUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex shrink-0 items-center justify-center gap-1.5 border border-navy-800/25 bg-ivory-100 px-4 py-2.5 text-[13px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50"
+        >
+          <MessageCircle size={14} />
+          맞춤 견적 문의
+        </a>
       </div>
 
       {/* 가격대 힌트 (최고가는 첫 화면에서 노출하지 않음) */}

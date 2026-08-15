@@ -62,8 +62,25 @@ export const volumeOptions: VolumeOption[] = [
   },
 ];
 
-// 분량 선택형 상품의 전체 옵션 (40 → 60 → 100)
-export const flexibleVolumes: VolumeOption[] = [...volumeOptions];
+// 200P+ Premium Edition — 본교재에 Premium Bonus Package 6종이 함께 제공되는 최상위 구성.
+export const premiumVolume: VolumeOption = {
+  pages: 200,
+  label: "200P+",
+  priceKRW: 290000,
+  priceUSD: 210,
+  tier: "Master Package",
+  tierKo: "복습·실전·관리까지 한 번에",
+  badge: "MOST COMPLETE",
+  duration: "장기 · 시험 전 과정 준비",
+  forWhom: [
+    "시험 준비 전 과정을 한 권으로 끝내고 싶은 학생",
+    "문제풀이뿐 아니라 복습·오답관리까지 필요한 학생",
+    "학습 계획을 세워 꾸준히 관리하려는 학생",
+  ],
+};
+
+// 분량 선택형 상품의 전체 옵션 (40 → 60 → 100 → 200 Premium)
+export const flexibleVolumes: VolumeOption[] = [...volumeOptions, premiumVolume];
 
 // 진입(Starter) 상품 — 영어 레벨테스트 상품에만 제공하는 소분량 진입 구성
 export const starterOption: VolumeOption = {
@@ -80,9 +97,9 @@ export const starterOption: VolumeOption = {
   ],
 };
 
-// 100P 초과 — 가격 문의
+// 200P Premium Edition 초과 — 가격 문의
 export const extendedOption = {
-  label: "150P+",
+  label: "250P+",
   tier: "Extended Prep",
   tierKo: "장기·심화·특수 구성",
   forWhom: [

@@ -15,6 +15,7 @@ import ResearchProcess from "@/components/home/ResearchProcess";
 import QualityFeatures from "@/components/home/QualityFeatures";
 import HowToOrder from "@/components/home/HowToOrder";
 import PrepPricing from "@/components/home/PrepPricing";
+import PremiumBonusSection from "@/components/premium/PremiumBonusSection";
 import WhyCost from "@/components/home/WhyCost";
 import CompareLevels from "@/components/home/CompareLevels";
 import QuoteCalculator from "@/components/home/QuoteCalculator";
@@ -63,6 +64,7 @@ export default function HomePage() {
       {/* How it works → Price (가치 이해 후 가격) */}
       <HowToOrder />
       <PrepPricing />
+      <PremiumBonusSection />
       <QuoteCalculator />
       <WhyCost />
 

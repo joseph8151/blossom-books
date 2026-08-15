@@ -6,6 +6,7 @@ import { MessageCircle, Check, FileSearch, ShieldCheck, Copy } from "lucide-reac
 import { Product } from "@/lib/types";
 import { flexibleVolumes, starterOption, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
 import { offersVolumes, hasStarter } from "@/lib/productMeta";
+import { PREMIUM_MIN_PAGES, premiumIncludes } from "@/data/premiumBonus";
 import { siteConfig } from "@/data/site";
 
 const trustItems = [
@@ -26,6 +27,10 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
   const [copied, setCopied] = useState(false);
   const [addOns, setAddOns] = useState<string[]>([]);
   const selected = vols.find((v) => v.pages === pages) ?? fixedVol ?? vols.find((v) => v.pages === 60) ?? vols[0];
+  // 200P+ 를 선택하면 가격 영역과 CTA 가 Premium Package 구성으로 바뀝니다.
+  const isPremium = selected.pages >= PREMIUM_MIN_PAGES;
+  const [showAllPremium, setShowAllPremium] = useState(false);
+  const premiumShown = showAllPremium ? premiumIncludes : premiumIncludes.slice(0, 4);
 
   // 함께 준비하면 좋은 영역 — 현재 교재 과목과 겹치지 않는 항목만 제안 (Smart Upsell)
   const addOnPool = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
@@ -55,6 +60,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
     if (isDirect) {
       lines.push(`선택: ${selected.label} (${selected.tier})`);
       lines.push(`가격: ${formatKRW(selected.priceKRW)}`);
+      if (isPremium) lines.push("구성: 200P+ Premium Edition · Premium Bonus Package 6종 포함");
     } else {
       lines.push("구성: 별도 구성 (가격 문의)");
     }
@@ -119,20 +125,56 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
               </p>
             )}
 
-            <div className="mt-5 flex items-baseline justify-between border-t border-navy-800/12 pt-4">
-              <span className="text-[13px] text-charcoal-600">선택: {selected.label}</span>
-              <span className="font-display text-[24px] font-semibold text-navy-950">
-                {formatKRW(selected.priceKRW)}
-              </span>
-            </div>
+            {isPremium ? (
+              /* 200P+ — 가격만 단독으로 두지 않고 패키지 구성을 함께 보여줍니다. */
+              <div className="mt-5 border border-brass-500/40 bg-navy-950 p-5 text-ivory-100">
+                <p className="font-label text-[10px] uppercase tracking-[0.16em] text-brass-500">
+                  200P+ Master Package
+                </p>
+                <p className="mt-1.5 font-display text-[26px] font-semibold leading-none">
+                  {formatKRW(selected.priceKRW)}
+                </p>
+                <p className="mt-2 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500/85">
+                  6 Premium Bonus Materials Included
+                </p>
+                <ul className="mt-4 space-y-1.5 border-t border-ivory-100/15 pt-3.5">
+                  {premiumShown.map((it) => (
+                    <li key={it} className="flex items-start gap-2 text-[12.5px] text-ivory-100/85">
+                      <Check size={12} className="mt-1 shrink-0 text-brass-500" strokeWidth={2.4} />
+                      {it}
+                    </li>
+                  ))}
+                </ul>
+                {!showAllPremium && (
+                  <button
+                    onClick={() => setShowAllPremium(true)}
+                    className="mt-2.5 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500 underline underline-offset-4"
+                  >
+                    + More Premium Benefits
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div className="mt-5 flex items-baseline justify-between border-t border-navy-800/12 pt-4">
+                <span className="text-[13px] text-charcoal-600">선택: {selected.label}</span>
+                <span className="font-display text-[24px] font-semibold text-navy-950">
+                  {formatKRW(selected.priceKRW)}
+                </span>
+              </div>
+            )}
 
             <button
               onClick={goKakao}
               className="mt-4 flex w-full items-center justify-center gap-2 bg-navy-900 px-6 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
             >
               <MessageCircle size={16} />
-              카카오톡으로 구매하기
+              {isPremium ? "200P+ Premium 교재 상담하기" : "카카오톡으로 구매하기"}
             </button>
+            {isPremium && (
+              <p className="mt-2 text-center text-[11.5px] leading-relaxed text-charcoal-600">
+                교재와 Premium Bonus Materials가 함께 제공됩니다.
+              </p>
+            )}
           </>
         ) : (
           <>
@@ -260,14 +302,20 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
               <p className="font-display text-[15px] font-semibold text-navy-950">
                 {selected.label} · {formatKRW(selected.priceKRW)}
               </p>
-              <p className="text-[10.5px] text-charcoal-600">{selected.tier}</p>
+              {isPremium ? (
+                <p className="font-label text-[9px] uppercase tracking-[0.1em] text-brass-500">
+                  6 Bonus Materials Included
+                </p>
+              ) : (
+                <p className="text-[10.5px] text-charcoal-600">{selected.tier}</p>
+              )}
             </div>
             <button
               onClick={goKakao}
               className="inline-flex items-center gap-1.5 bg-navy-900 px-5 py-2.5 text-[13.5px] font-medium text-ivory-100"
             >
               <MessageCircle size={15} />
-              카카오톡 구매
+              {isPremium ? "Premium 상담" : "카카오톡 구매"}
             </button>
           </>
         ) : (

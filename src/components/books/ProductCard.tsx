@@ -3,7 +3,8 @@ import { Sparkles, Headphones, FileSearch, ArrowRight } from "lucide-react";
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
 import { coverToneFor } from "@/lib/utils";
-import { productBadges, isDirectPurchase, explanationLanguage } from "@/lib/productMeta";
+import { productBadges, isDirectPurchase, explanationLanguage, premiumEligible } from "@/lib/productMeta";
+import PremiumBadge from "@/components/premium/PremiumBadge";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import { BlossomSeal } from "@/components/books/BlossomSeal";
@@ -15,6 +16,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const lang = explanationLanguage(product);
   const coreAreas = product.units.slice(0, 3).join(" · ");
   const direct = isDirectPurchase(product);
+  const premium = premiumEligible(product);
 
   return (
     <div className="lift group relative flex flex-col overflow-hidden border border-navy-800/12 bg-ivory-100 shadow-card">
@@ -27,6 +29,7 @@ export default function ProductCard({ product }: { product: Product }) {
           </span>
         )}
         <WishlistButton productId={product.id} className="absolute right-3 top-3 z-30" />
+        {premium && <div className="absolute bottom-3 right-3 z-10"><PremiumBadge /></div>}
         <BookCoverMockup
           eyebrow={product.materialType === "existing" ? "Student Workbook" : "Custom Order"}
           title={product.title.split(" — ")[0]}

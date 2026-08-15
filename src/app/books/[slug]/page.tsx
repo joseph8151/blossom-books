@@ -6,6 +6,7 @@ import { coverToneFor, difficultyLabel, blossomLevel, BLOSSOM_LEVEL_KO } from "@
 import {
   offersVolumes as productOffersVolumes,
   isDirectPurchase,
+  premiumEligible,
   insideTheWorkbook,
   productCode,
   hasStarter,
@@ -26,6 +27,9 @@ import { BlossomSeal } from "@/components/books/BlossomSeal";
 import VolumeGuide from "@/components/common/VolumeGuide";
 import PrepComparison from "@/components/common/PrepComparison";
 import { siteConfig } from "@/data/site";
+import PremiumBenefits from "@/components/premium/PremiumBenefits";
+import PremiumBadge from "@/components/premium/PremiumBadge";
+import { premiumFaq } from "@/data/premiumBonus";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.id }));
@@ -45,7 +49,7 @@ const purchaseFaq = [
   { q: "정답과 해설이 포함되나요?", a: "네. 정답과 함께 풀이 과정·오답 포인트를 설명하는 상세 해설집이 포함됩니다." },
   { q: "40P와 60P 차이는 무엇인가요?", a: "40P는 핵심 유형을 빠르게 점검하는 Essential Prep, 60P는 여러 유형을 균형 있게 연습하는 Complete Prep입니다." },
   { q: "어떤 수준을 선택해야 하나요?", a: "시험까지 남은 기간과 현재 실력에 따라 다릅니다. 확실하지 않으시면 구매 전 상담으로 편하게 안내받으실 수 있습니다." },
-  { q: "100P 이상도 가능한가요?", a: "네. 150P 이상, 추가 영역, 특수 구성은 별도 문의(Price on Request)로 안내해 드립니다." },
+  { q: "100P 이상도 가능한가요?", a: "네. 200P+ Premium Edition을 선택하실 수 있으며, 250P 이상·추가 영역·특수 구성은 별도 문의(Price on Request)로 안내해 드립니다." },
   { q: "해외에서도 구매할 수 있나요?", a: "네. 해외 고객은 PayPal로 결제하실 수 있습니다." },
   { q: "환불 정책은 어떻게 되나요?", a: "디지털 상품 특성상 파일 발송 후에는 환불이 제한될 수 있습니다. 구매 전 무료 샘플로 내용을 확인하시길 권장하며, 자세한 정책은 상담으로 안내해 드립니다." },
 ];
@@ -58,6 +62,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const related = products.filter((p) => p.track === product.track && p.id !== product.id).slice(0, 3);
   const nextUp = nextWorkbooks(product, products);
   const offersVolumes = productOffersVolumes(product);
+  const premium = premiumEligible(product);
   const direct = isDirectPurchase(product);
   const inside = insideTheWorkbook(product);
 
@@ -109,6 +114,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             Reviewed 2026
           </span>
           <BlossomSeal />
+          {premium && <PremiumBadge variant="inline" />}
         </div>
         <h1 className="mt-3 font-display text-[28px] font-semibold leading-tight text-navy-950 sm:text-[34px]">
           {product.titleKo}
@@ -283,6 +289,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {/* 10 · Smart Pricing (영어 레벨테스트 상품) */}
           {hasStarter(product) && <SmartPricing />}
 
+          {/* 10-b · 200P+ Premium Benefits (200P 선택 가능 상품에만 노출) */}
+          {premium && <PremiumBenefits />}
+
           {/* 11 · Which Option Should I Choose? */}
           <div className="mt-10 border border-navy-800/12 bg-ivory-200/40 p-6">
             <h2 className="font-display text-[18px] font-semibold text-navy-950">
@@ -293,7 +302,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <li>· 시험이 매우 가까운 경우 → <span className="font-medium text-navy-900">40P</span></li>
               <li>· 기본적인 Prep을 원하는 경우 → <span className="font-medium text-navy-900">60P</span></li>
               <li>· 충분한 반복이 필요한 경우 → <span className="font-medium text-navy-900">100P</span></li>
-              <li>· 100P 이상 / 추가 영역이 필요한 경우 → <span className="font-medium text-navy-900">별도 문의</span></li>
+              <li>· 복습·오답관리까지 한 권으로 끝내고 싶은 경우 → <span className="font-medium text-navy-900">200P+ Premium</span> <span className="text-brass-500">(Bonus 6종 포함)</span></li>
+              <li>· 250P 이상 / 추가 영역이 필요한 경우 → <span className="font-medium text-navy-900">별도 문의</span></li>
               <li>· 현재 수준을 모르겠다면 → <Link href="/find" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">교재 추천받기</Link> 또는 <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">구매 전 상담</Link></li>
             </ul>
           </div>
@@ -320,7 +330,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <div className="mt-10">
             <h2 className="font-display text-[20px] font-semibold text-navy-950">구매 전 자주 묻는 질문</h2>
             <div className="mt-4 divide-y divide-navy-800/10 border-y border-navy-800/10">
-              {purchaseFaq.map((f) => (
+              {[...purchaseFaq, ...(premium ? premiumFaq : [])].map((f) => (
                 <div key={f.q} className="py-4">
                   <p className="flex items-start gap-2 text-[14px] font-medium text-navy-950">
                     <HelpCircle size={16} className="mt-0.5 shrink-0 text-brass-500" />
