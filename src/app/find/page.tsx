@@ -293,7 +293,8 @@ export default function FindPage() {
             />
           </label>
           <p className="mt-1.5 text-[11.5px] text-charcoal-600/80">
-            추천 결과 확인과 상담 안내 목적으로만 사용하며, 광고 목적으로 사용하지 않습니다.
+            추천 결과 확인과 상담 안내 목적으로만 사용하며, 광고 목적으로 사용하지 않습니다. 입력하신 번호로
+            상담 연락이 갈 수 있습니다.
           </p>
         </div>
 
