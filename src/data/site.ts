@@ -3,6 +3,11 @@ export const siteConfig = {
   brandNameKo: "블러섬북스",
   kakaoChannelUrl: "https://pf.kakao.com/_lbMqX",
   email: "blossomprep@naver.com",
+  // 전화 상담 번호. 값을 넣으면 /find 추천 결과와 팀 알림 메일에 전화 상담 버튼이 노출되고,
+  // 비워 두면 전화 항목만 숨기고 카카오톡·이메일 상담으로 안내합니다.
+  // 예: "010-1234-5678"
+  consultPhone: "",
+  consultHours: "평일 10:00–19:00 (주말·공휴일 카카오톡 상담)",
   // 사업자 정보 (상호·대표자명은 표기하지 않음)
   businessRegistrationNumber: "654-60-00645",
   addressKo: "서울특별시 서초구 강남대로8길 39-26, 2층 A9호",

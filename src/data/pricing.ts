@@ -80,6 +80,41 @@ export const starterOption: VolumeOption = {
   ],
 };
 
+// 200P 장기·심화 패키지 — 가장 충실한 구성.
+// priceKRW/priceUSD 에 금액을 넣으면 추천 결과·가이드에 금액이 그대로 노출되고,
+// 비워 두면 "가격 문의 (상담 시 안내)" 로 표시됩니다.
+export interface PackageOption {
+  pages: number;
+  label: string;
+  tier: string;
+  tierKo: string;
+  duration: string;
+  summaryKo: string;
+  summaryEn: string;
+  forWhom: string[];
+  priceKRW?: number;
+  priceUSD?: number;
+}
+
+export const packageOption: PackageOption = {
+  pages: 200,
+  label: "200P",
+  tier: "Package Prep",
+  tierKo: "장기 학습 + 심화",
+  duration: "약 2~3개월+",
+  summaryKo: "한 학기 이상 꾸준히 학습하거나, 심화까지 폭넓게 다루고 싶을 때 선택하는 가장 충실한 구성입니다.",
+  summaryEn: "The most complete option — for a term-long curriculum with advanced practice included.",
+  forWhom: [
+    "한 학기 이상 장기 커리큘럼으로 준비하는 학생",
+    "기본 유형부터 심화까지 한 권으로 끝내고 싶은 경우",
+    "학원·과외 정규 교재로 사용하는 경우",
+  ],
+};
+
+export function packagePriceLabel(): string | null {
+  return packageOption.priceKRW ? formatKRW(packageOption.priceKRW) : null;
+}
+
 // 100P 초과 — 가격 문의
 export const extendedOption = {
   label: "150P+",

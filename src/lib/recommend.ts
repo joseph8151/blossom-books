@@ -1,7 +1,7 @@
 // ────────────────────────────────────────────────────────────
 // 교재 추천 엔진 — /find 와 /en/find 가 공유합니다.
 // 입력(학년·수준·SR·준비 시험·집중 영역)을 실제 교재와 매칭해
-// 적합도(Fit)와 추천 이유를 계산합니다.
+// 적합도(Fit), 항목별 판정, 대안 교재를 계산합니다.
 // ────────────────────────────────────────────────────────────
 import { products } from "@/data/products";
 import { isFourSkill } from "@/lib/productMeta";
@@ -14,12 +14,17 @@ export type FocusArea = (typeof FOCUS_AREAS)[number];
 // 과목 계열 — 영어 계열 교재를 수학 준비 학생에게(또는 그 반대로) 추천하지 않기 위해 사용합니다.
 export type SubjectDomain = "english" | "math" | "mixed";
 
-export type ReasonCode = "track" | "grade" | "focus" | "reading" | "difficulty";
+export type FactorCode = "track" | "grade" | "focus" | "reading" | "difficulty";
 
-// 이유는 코드 + 값으로만 반환하고, 문구는 한/영 페이지가 각각 렌더링합니다.
-export interface RecReason {
-  code: ReasonCode;
-  value: string;
+// 항목별 판정 — 맞은 것뿐 아니라 아쉬운 부분까지 그대로 보여 주기 위한 구조입니다.
+export type FitStatus = "match" | "partial" | "miss";
+
+export interface FitFactor {
+  code: FactorCode;
+  status: FitStatus;
+  value: string; // 교재 쪽 값 (예: "Grade 5–6", "SR 4.5–5.5")
+  student?: string; // 학생 입력 값 (예: "Grade 7–8", "12.5")
+  missing?: string; // 교재가 다루지 않는 집중 영역
 }
 
 export interface RecommendInput {
@@ -32,18 +37,25 @@ export interface RecommendInput {
 export interface Recommendation {
   product: Product;
   score: number;
-  reasons: RecReason[];
+  factors: FitFactor[];
   suggestCustom: boolean;
 }
 
-// 입력한 SR 이 교재 표기 범위에서 이만큼 벗어나면 기존 교재로 맞추기 어렵다고 봅니다.
-const SR_FAR = 2;
+export interface RecommendResult {
+  best: Recommendation;
+  alternatives: Recommendation[];
+}
 
-// 적합도가 이 값보다 낮으면 맞춤 제작을 함께 제안합니다.
+// 적합도가 이 값보다 낮으면 맞춤 제작·상담을 함께 제안합니다.
 export const CUSTOM_SUGGEST_THRESHOLD = 72;
+// 대안으로 보여 줄 최소 적합도.
+const ALT_MIN_SCORE = 60;
 
 const SCORE_MIN = 30;
 const SCORE_MAX = 96;
+
+// 입력한 SR 이 교재 표기 범위에서 이만큼 벗어나면 기존 교재로 맞추기 어렵다고 봅니다.
+const SR_FAR = 2;
 
 // 만 나이 → 미국 학년 환산 (만 6세 ≈ Kindergarten, 만 7세 ≈ Grade 1)
 const AGE_TO_GRADE = 6;
@@ -153,99 +165,152 @@ function parseSr(s: string): number | null {
   return n.length ? n[0] : null;
 }
 
-export function recommendProduct(
+interface Scored extends Recommendation {
+  raw: number;
+  gap: number;
+  srFar: boolean;
+}
+
+function scoreProduct(
+  p: Product,
   f: RecommendInput,
-  track: string,
-  examDomain: SubjectDomain = "mixed"
-): Recommendation | null {
-  const pool = products.filter((p) => p.materialType === "existing" && p.sampleAvailable);
-  if (!pool.length) return null;
+  ctx: { track: string; domain: SubjectDomain; want: number; studentGrade: Span; sr: number | null }
+): Scored {
+  let s = 50;
+  let srFar = false;
+  const factors: FitFactor[] = [];
 
-  const want = desiredDifficulty(f.level);
-  const studentGrade = parseGradeSpan(f.grade);
-  const sr = parseSr(f.sr);
-  const domain = wantedDomain(f.areas, examDomain);
-
-  let best: Recommendation | null = null;
-  let bestGap = Number.POSITIVE_INFINITY;
-  let bestSrFar = false;
-
-  for (const p of pool) {
-    let s = 50;
-    let srFar = false;
-    const reasons: RecReason[] = [];
-
-    // 1) 준비 시험 계열(track)
-    if (track) {
-      if (p.track === track) {
-        s += 20;
-        reasons.push({ code: "track", value: p.track });
-      } else {
-        s -= 6;
-      }
-    }
-
-    // 2) 학년 — 겹치지 않을수록 감점 (만 나이 교재가 상위 학년에 잡히던 문제를 막습니다)
-    const gap = gradeGap(studentGrade, parseGradeSpan(p.gradeRange));
-    if (gap === 0) {
-      s += 18;
-      reasons.push({ code: "grade", value: p.gradeRange });
-    } else if (gap === 1) {
-      s += 8;
+  // 1) 준비 시험 계열(track)
+  if (ctx.track) {
+    if (p.track === ctx.track) {
+      s += 20;
+      factors.push({ code: "track", status: "match", value: p.track });
     } else {
-      s -= Math.min(24, 4 + (gap - 1) * 6);
-    }
-
-    // 3) 과목 계열 — 영어 준비 학생에게 수학 교재(또는 그 반대)를 추천하지 않습니다.
-    const pDomain = productDomain(p);
-    if (domain !== "mixed" && pDomain !== "mixed" && pDomain !== domain) s -= 25;
-
-    // 4) 집중 영역
-    if (f.areas.length) {
-      const covered = coveredAreas(p) as string[];
-      const matched = f.areas.filter((a) => covered.includes(a));
-      if (matched.length === f.areas.length) {
-        s += 14;
-        reasons.push({ code: "focus", value: matched.join(" · ") });
-      } else if (matched.length) {
-        s += 7;
-        reasons.push({ code: "focus", value: matched.join(" · ") });
-      } else {
-        s -= 12;
-      }
-    }
-
-    // 5) SR / 리딩 레벨 (교재에 표기가 있는 경우에만 반영)
-    // 리딩 레벨 표기가 없는 교재가 반사이익을 보지 않도록 가감점 폭을 좁게 유지하고,
-    // 크게 벗어난 경우는 순위 대신 "맞춤 제작 제안"으로 처리합니다.
-    const rSpan = readingSpan(p);
-    if (sr != null && rSpan) {
-      const dist = sr < rSpan[0] ? rSpan[0] - sr : sr > rSpan[1] ? sr - rSpan[1] : 0;
-      if (dist === 0) {
-        s += 8;
-        reasons.push({ code: "reading", value: p.readingLevel as string });
-      } else if (dist <= 1) {
-        s += 3;
-      } else {
-        s -= 8;
-        srFar = dist > SR_FAR;
-      }
-    }
-
-    // 6) 난이도 — 요청 수준과 가까울수록 가점, 가까울 때만 이유로 노출합니다.
-    const dGap = Math.abs(p.difficulty - want);
-    s += 5 - Math.min(5, dGap);
-    if (dGap <= 1) reasons.push({ code: "difficulty", value: blossomLevel(p.difficulty) });
-
-    // 동점이면 학년이 더 잘 맞는 교재를 선택합니다.
-    if (!best || s > best.score || (s === best.score && gap < bestGap)) {
-      best = { product: p, score: s, reasons, suggestCustom: false };
-      bestGap = gap;
-      bestSrFar = srFar;
+      s -= 6;
+      factors.push({ code: "track", status: "miss", value: p.track });
     }
   }
 
-  if (!best) return null;
-  const score = Math.max(SCORE_MIN, Math.min(SCORE_MAX, best.score));
-  return { ...best, score, suggestCustom: score < CUSTOM_SUGGEST_THRESHOLD || bestSrFar };
+  // 2) 학년 — 겹치지 않을수록 감점 (만 나이 교재가 상위 학년에 잡히던 문제를 막습니다)
+  const gap = gradeGap(ctx.studentGrade, parseGradeSpan(p.gradeRange));
+  if (gap === 0) {
+    s += 18;
+    factors.push({ code: "grade", status: "match", value: p.gradeRange });
+  } else if (gap === 1) {
+    s += 8;
+    factors.push({ code: "grade", status: "partial", value: p.gradeRange, student: f.grade });
+  } else {
+    s -= Math.min(24, 4 + (gap - 1) * 6);
+    factors.push({ code: "grade", status: "miss", value: p.gradeRange, student: f.grade });
+  }
+
+  // 3) 과목 계열 — 영어 준비 학생에게 수학 교재(또는 그 반대)를 추천하지 않습니다.
+  const pDomain = productDomain(p);
+  if (ctx.domain !== "mixed" && pDomain !== "mixed" && pDomain !== ctx.domain) s -= 25;
+
+  // 4) 집중 영역
+  if (f.areas.length) {
+    const covered = coveredAreas(p) as string[];
+    const matched = f.areas.filter((a) => covered.includes(a));
+    const missing = f.areas.filter((a) => !covered.includes(a));
+    if (!missing.length) {
+      s += 14;
+      factors.push({ code: "focus", status: "match", value: matched.join(" · ") });
+    } else if (matched.length) {
+      s += 7;
+      factors.push({
+        code: "focus",
+        status: "partial",
+        value: matched.join(" · "),
+        missing: missing.join(" · "),
+      });
+    } else {
+      s -= 12;
+      factors.push({ code: "focus", status: "miss", value: "", missing: missing.join(" · ") });
+    }
+  }
+
+  // 5) SR / 리딩 레벨 (교재에 표기가 있는 경우에만 반영)
+  // 리딩 레벨 표기가 없는 교재가 반사이익을 보지 않도록 가감점 폭을 좁게 유지하고,
+  // 크게 벗어난 경우는 순위 대신 "맞춤 제작·상담 제안"으로 처리합니다.
+  const rSpan = readingSpan(p);
+  if (ctx.sr != null && rSpan) {
+    const dist = ctx.sr < rSpan[0] ? rSpan[0] - ctx.sr : ctx.sr > rSpan[1] ? ctx.sr - rSpan[1] : 0;
+    const value = p.readingLevel as string;
+    if (dist === 0) {
+      s += 8;
+      factors.push({ code: "reading", status: "match", value });
+    } else if (dist <= 1) {
+      s += 3;
+      factors.push({ code: "reading", status: "partial", value, student: f.sr });
+    } else {
+      s -= 8;
+      srFar = dist > SR_FAR;
+      factors.push({ code: "reading", status: "miss", value, student: f.sr });
+    }
+  }
+
+  // 6) 난이도 — 요청 수준과 가까울수록 가점
+  const dGap = Math.abs(p.difficulty - ctx.want);
+  s += 5 - Math.min(5, dGap);
+  factors.push({
+    code: "difficulty",
+    status: dGap === 0 ? "match" : dGap === 1 ? "partial" : "miss",
+    value: blossomLevel(p.difficulty),
+    student: f.level,
+  });
+
+  const score = Math.max(SCORE_MIN, Math.min(SCORE_MAX, s));
+  return { product: p, score, factors, suggestCustom: false, raw: s, gap, srFar };
+}
+
+export function recommend(
+  f: RecommendInput,
+  track: string,
+  examDomain: SubjectDomain = "mixed"
+): RecommendResult | null {
+  const pool = products.filter((p) => p.materialType === "existing" && p.sampleAvailable);
+  if (!pool.length) return null;
+
+  const ctx = {
+    track,
+    domain: wantedDomain(f.areas, examDomain),
+    want: desiredDifficulty(f.level),
+    studentGrade: parseGradeSpan(f.grade),
+    sr: parseSr(f.sr),
+  };
+
+  // 점수 내림차순, 동점이면 학년이 더 잘 맞는 교재를 앞에 둡니다.
+  const ranked = pool.map((p) => scoreProduct(p, f, ctx)).sort((a, b) => b.raw - a.raw || a.gap - b.gap);
+
+  const top = ranked[0];
+  const best: Recommendation = {
+    product: top.product,
+    score: top.score,
+    factors: top.factors,
+    suggestCustom: top.score < CUSTOM_SUGGEST_THRESHOLD || top.srFar,
+  };
+  const alternatives = ranked
+    .slice(1)
+    .filter((r) => r.score >= ALT_MIN_SCORE)
+    .slice(0, 2)
+    .map(({ product, score, factors }) => ({ product, score, factors, suggestCustom: false }));
+
+  return { best, alternatives };
+}
+
+// ── 학습 계획 ────────────────────────────────────────────────
+export interface StudyPlan {
+  pages: number;
+  weeks: number;
+  perWeek: number;
+  perDay: number; // 주 5일 기준
+}
+
+// "100P" + 남은 기간(주)을 주당·하루 학습량으로 환산합니다.
+export function studyPlan(volume: string, weeks?: number): StudyPlan | null {
+  const pages = parseNumbers(volume)[0];
+  if (!pages || !weeks) return null;
+  const perWeek = Math.ceil(pages / weeks);
+  return { pages, weeks, perWeek, perDay: Math.max(1, Math.round(perWeek / 5)) };
 }

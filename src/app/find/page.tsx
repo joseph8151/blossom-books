@@ -2,26 +2,81 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { MessageCircle, Sparkles, ArrowRight, Copy, Check, Mail, FileSearch } from "lucide-react";
+import { Sparkles, Copy, Check, Mail, FileSearch } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { trackLabels } from "@/data/products";
-import { recommendProduct, RecReason, SubjectDomain, FOCUS_AREAS } from "@/lib/recommend";
+import { recommend, studyPlan, FitFactor, SubjectDomain, FOCUS_AREAS } from "@/lib/recommend";
+import { pagesLabel, priceDisplay, explanationLanguage } from "@/lib/productMeta";
+import { packageOption } from "@/data/pricing";
+import RecommendationDetail, { FindCopy } from "@/components/find/RecommendationDetail";
 
-// 추천 이유 문구 — 계산은 @/lib/recommend 에서 하고 여기서는 표시만 합니다.
-function reasonText(r: RecReason): string {
-  switch (r.code) {
+const trackName = (t: string) => trackLabels[t as keyof typeof trackLabels] ?? t;
+
+// 항목별 판정 문구 — 계산은 @/lib/recommend 에서 하고 여기서는 표시만 합니다.
+function factorText(f: FitFactor): string {
+  switch (f.code) {
     case "track":
-      return `준비 시험에 맞는 ${trackLabels[r.value as keyof typeof trackLabels] ?? r.value} 구성`;
+      return f.status === "match"
+        ? `준비 시험에 맞는 ${trackName(f.value)} 구성`
+        : `${trackName(f.value)} 교재입니다 (준비 시험과 다른 계열)`;
     case "grade":
-      return `학년 범위 ${r.value} 에 적합`;
+      if (f.status === "match") return `${f.value} — 학생 학년과 일치`;
+      return `${f.value} — 학생은 ${f.student}${f.status === "partial" ? " (한 단계 차이)" : ""}`;
     case "focus":
-      return `집중 영역(${r.value}) 연습 포함`;
+      if (f.status === "match") return `${f.value} 연습 포함`;
+      if (f.status === "partial") return `${f.value} 포함 · ${f.missing} 는 다루지 않음`;
+      return `${f.missing} 를 다루지 않음`;
     case "reading":
-      return `리딩 레벨 ${r.value} 범위에 해당`;
+      if (f.status === "match") return `${f.value} — 입력하신 SR 과 일치`;
+      return `${f.value} — 입력하신 SR ${f.student} 와 차이 있음`;
     case "difficulty":
-      return `난이도 ${r.value} 수준`;
+      if (f.status === "match") return `${f.value} — 요청하신 수준과 일치`;
+      return `${f.value} — 요청 수준(${f.student})과 ${f.status === "partial" ? "한 단계" : "두 단계 이상"} 차이`;
   }
 }
+
+const findCopy: FindCopy = {
+  fit: "Fit",
+  fitDetailTitle: "항목별 적합도",
+  insideTitle: "교재 구성",
+  includedTitle: "포함 사항",
+  planTitle: "학습 계획",
+  altTitle: "함께 검토해 볼 교재",
+  altNote: "상담에서 아래 교재와 비교해 최종 구성을 잡아 드립니다.",
+  viewBook: "교재 보기 · 무료 샘플",
+  viewSample: "샘플 먼저 보기",
+  packageTitle: "길게 준비한다면 — 200P 장기·심화 패키지",
+  packageSummary: packageOption.summaryKo,
+  packageCta: "200P 구성 상담받기",
+  packagePriceAsk: "가격 문의 (상담 시 안내)",
+  consultTitle: "전문 프랩 선생님이 자세하게 상담해 드립니다",
+  consultBody:
+    "위 추천은 입력값으로 자동 계산한 참고 결과입니다. 학생의 실제 수준과 시험 일정에 맞춰 프랩 전문 선생님이 교재 구성·분량·난이도를 하나씩 짚어 상담해 드립니다.",
+  consultPhone: "전화 상담",
+  consultKakao: "카카오톡 상담",
+  consultEmail: "이메일 문의",
+  factorLabel: {
+    track: "준비 시험",
+    grade: "학년",
+    focus: "집중 영역",
+    reading: "리딩 레벨",
+    difficulty: "난이도",
+  },
+  productTitle: (p) => p.titleKo,
+  productMeta: (p) =>
+    [trackName(p.track), p.gradeRange, p.readingLevel].filter(Boolean).join(" · "),
+  priceLabel: (p) => `${pagesLabel(p)} · ${priceDisplay(p)}`,
+  included: (p) => {
+    const out = [`${p.fileFormat} 파일`];
+    if (p.includesAnswerKey) out.push("정답 포함");
+    if (p.includesDetailedExplanations) out.push(explanationLanguage(p).labelKo);
+    if (p.includesAudio) out.push("리스닝 오디오(MP3)");
+    return out;
+  },
+  factorText,
+  planText: (plan) =>
+    `${plan.pages}P 를 ${plan.weeks}주에 나누면 주 ${plan.perWeek}p · 하루 약 ${plan.perDay}p (주 5일 기준)입니다.`,
+};
 
 const grades = ["Preschool / K", "Grade 1–2", "Grade 3–4", "Grade 5–6", "Grade 7–8", "Grade 9–12"];
 const levels = ["기초 (쉬운 편)", "보통 (학년 수준)", "상위 (앞서가는 편)", "잘 모르겠어요"];
@@ -49,11 +104,12 @@ const exams: { v: string; track: string; domain: SubjectDomain }[] = [
   { v: "미국 교과과정 (보충/선행)", track: "us-curriculum", domain: "mixed" },
   { v: "기타 / 잘 모르겠어요", track: "", domain: "mixed" },
 ];
+// weeks — 학습 계획(주당 페이지)을 계산하기 위한 남은 기간. 미정이면 계획을 생략합니다.
 const periods = [
-  { v: "2주 이내", vol: "40P" },
-  { v: "약 1개월", vol: "60P" },
-  { v: "2~3개월", vol: "100P" },
-  { v: "아직 미정", vol: "60P" },
+  { v: "2주 이내", vol: "40P", weeks: 2 },
+  { v: "약 1개월", vol: "60P", weeks: 4 },
+  { v: "2~3개월", vol: "100P", weeks: 10 },
+  { v: "아직 미정", vol: "60P", weeks: undefined },
 ];
 const areas = [...FOCUS_AREAS];
 
@@ -66,9 +122,12 @@ export default function FindPage() {
   const [emailSent, setEmailSent] = useState(false);
   const teamSent = useRef(false);
 
-  const recVolume = periods.find((p) => p.v === f.period)?.vol ?? "60P";
+  const selectedPeriod = periods.find((p) => p.v === f.period);
+  const recVolume = selectedPeriod?.vol ?? "60P";
   const selectedExam = exams.find((e) => e.v === f.exam);
-  const rec = done ? recommendProduct(f, selectedExam?.track ?? "", selectedExam?.domain ?? "mixed") : null;
+  const result = done ? recommend(f, selectedExam?.track ?? "", selectedExam?.domain ?? "mixed") : null;
+  const rec = result?.best ?? null;
+  const plan = studyPlan(recVolume, selectedPeriod?.weeks);
   const suggestCustom = done && (!rec || rec.suggestCustom);
   const volumeReason =
     recVolume === "40P"
@@ -98,10 +157,23 @@ export default function FindPage() {
       `- 교재: ${rec ? rec.product.titleKo : "커스텀 제작 제안"}`,
       `- 분량: ${recVolume}`,
       `- Fit: ${rec ? rec.score + "%" : "-"}`,
+      ...(plan ? [`- 학습 계획: ${plan.weeks}주 · 주 ${plan.perWeek}p · 하루 약 ${plan.perDay}p`] : []),
       "",
-      "■ 추천 이유",
-      ...(rec ? rec.reasons.map((r) => `- ${reasonText(r)}`) : ["- 기존 교재로 커버가 어려워 맞춤 제작을 제안합니다."]),
+      "■ 항목별 적합도",
+      ...(rec
+        ? rec.factors.map(
+            (x) => `- [${{ match: "O", partial: "△", miss: "X" }[x.status]}] ${findCopy.factorLabel[x.code]}: ${factorText(x)}`
+          )
+        : ["- 기존 교재로 커버가 어려워 맞춤 제작을 제안합니다."]),
+      ...(result?.alternatives.length
+        ? ["", "■ 대안 교재", ...result.alternatives.map((a) => `- ${a.product.titleKo} (${a.score}%)`)]
+        : []),
       ...(suggestCustom ? ["", "※ 적합도가 낮습니다. 맞춤 제작 상담이 필요할 수 있습니다."] : []),
+      "",
+      "■ 상담 안내",
+      "- 전문 프랩 선생님 상담 연결이 필요한 고객입니다.",
+      `- 200P 장기·심화 패키지(${packageOption.duration}) 안내 대상인지 함께 확인해 주세요.`,
+      ...(siteConfig.consultPhone ? [`- 상담 전화: ${siteConfig.consultPhone}`] : []),
       "",
       "이 추천은 자동 생성되었습니다. 상담 시 학생 상황을 한 번 더 확인해 주세요.",
     ].join("\n");
@@ -250,56 +322,19 @@ export default function FindPage() {
         <div className="mt-8 border border-brass-500/40 bg-brass-500/[0.05] p-6 lg:p-8">
           <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Recommended for you</p>
 
-          {/* 매칭된 추천 교재 */}
-          {rec && (
-            <div className="mt-3 border border-navy-800/15 bg-ivory-100 p-5 shadow-card">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="font-display text-[18px] font-semibold leading-snug text-navy-950">{rec.product.titleKo}</p>
-                  <p className="mt-1 text-[12.5px] text-charcoal-600">
-                    {trackLabels[rec.product.track]} · {rec.product.gradeRange}
-                    {rec.product.readingLevel ? ` · ${rec.product.readingLevel}` : ""} · 추천 분량 {recVolume}
-                  </p>
-                </div>
-                <div className="shrink-0 text-right">
-                  <p className="font-display text-[24px] font-semibold leading-none text-brass-500">{rec.score}%</p>
-                  <p className="font-label text-[8.5px] uppercase tracking-[0.1em] text-navy-800/55">Fit</p>
-                </div>
-              </div>
-              <div className="mt-4 border-t border-navy-800/10 pt-3">
-                <p className="font-label text-[10px] uppercase tracking-[0.1em] text-navy-800/55">왜 이 교재를 추천했나요?</p>
-                <ul className="mt-2 space-y-1.5">
-                  {rec.reasons.map((r) => (
-                    <li key={r.code} className="flex items-start gap-2 text-[12.5px] leading-snug text-charcoal-900">
-                      <Check size={13} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} />
-                      {reasonText(r)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <Link
-                  href={`/books/${rec.product.id}`}
-                  className="group inline-flex items-center gap-1.5 bg-navy-900 px-5 py-2.5 text-[13px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
-                >
-                  교재 보기 · 무료 샘플
-                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-                </Link>
-                <Link
-                  href={`/books/${rec.product.id}#sample`}
-                  className="inline-flex items-center gap-1.5 border border-navy-800/25 px-5 py-2.5 text-[13px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
-                >
-                  샘플 먼저 보기
-                </Link>
-              </div>
-            </div>
+          {/* 매칭된 추천 교재 — 항목별 적합도·구성·학습 계획·대안·200P·상담 */}
+          {rec && result && (
+            <RecommendationDetail
+              rec={rec}
+              alternatives={result.alternatives}
+              volume={recVolume}
+              plan={plan}
+              volumeReason={volumeReason}
+              hrefBase="/books"
+              copy={findCopy}
+              onKakao={goKakao}
+            />
           )}
-
-          {/* 추천 분량 + 이유 */}
-          <div className="mt-3 flex items-center gap-3 border border-navy-800/12 bg-ivory-100 p-4">
-            <span className="font-display text-[20px] font-semibold text-navy-950">{recVolume}</span>
-            <span className="text-[12.5px] leading-snug text-charcoal-600">{volumeReason}</span>
-          </div>
 
           {/* 커스텀 제안 (매칭이 약하거나 특이 조합) */}
           {suggestCustom && (
@@ -325,9 +360,6 @@ export default function FindPage() {
             >
               <FileSearch size={15} /> 무료 샘플 보기
             </Link>
-            <button onClick={goKakao} className="inline-flex items-center gap-2 bg-navy-900 px-5 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
-              <MessageCircle size={15} /> 카카오톡으로 추천받기
-            </button>
             <button
               onClick={() => setEmailOpen((v) => !v)}
               className="inline-flex items-center gap-2 border border-navy-800/25 px-5 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
