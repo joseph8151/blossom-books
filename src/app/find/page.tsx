@@ -45,13 +45,16 @@ const findCopy: FindCopy = {
   altNote: "상담에서 아래 교재와 비교해 최종 구성을 잡아 드립니다.",
   viewBook: "교재 보기 · 무료 샘플",
   viewSample: "샘플 먼저 보기",
+  handmadeTitle: "교재는 선생님이 수기로 일일이 만듭니다",
+  handmadeBody:
+    "문항을 자동으로 찍어내지 않습니다. 학생을 직접 지도해 온 선생님이 문제를 하나하나 손으로 만들고, 정답과 해설까지 사람이 검수한 뒤에야 교재로 나갑니다.",
   packageTitle: "길게 준비한다면 — 200P 장기·심화 패키지",
   packageSummary: packageOption.summaryKo,
   packageCta: "200P 구성 상담받기",
   packagePriceAsk: "가격 문의 (상담 시 안내)",
   consultTitle: "전문 프랩 선생님이 자세하게 상담해 드립니다",
   consultBody:
-    "위 추천은 입력값으로 자동 계산한 참고 결과입니다. 학생의 실제 수준과 시험 일정에 맞춰 프랩 전문 선생님이 교재 구성·분량·난이도를 하나씩 짚어 상담해 드립니다.",
+    "위 교재 추천은 입력하신 정보로 자동 계산한 참고 결과입니다. 교재 자체는 선생님이 수기로 만든 것이며, 학생의 실제 수준과 시험 일정에 맞춰 프랩 전문 선생님이 교재 구성·분량·난이도를 하나씩 짚어 상담해 드립니다.",
   consultPhone: "전화 상담",
   consultKakao: "카카오톡 상담",
   consultEmail: "이메일 문의",
@@ -67,7 +70,7 @@ const findCopy: FindCopy = {
     [trackName(p.track), p.gradeRange, p.readingLevel].filter(Boolean).join(" · "),
   priceLabel: (p) => `${pagesLabel(p)} · ${priceDisplay(p)}`,
   included: (p) => {
-    const out = [`${p.fileFormat} 파일`];
+    const out = ["선생님 수기 제작", `${p.fileFormat} 파일`];
     if (p.includesAnswerKey) out.push("정답 포함");
     if (p.includesDetailedExplanations) out.push(explanationLanguage(p).labelKo);
     if (p.includesAudio) out.push("리스닝 오디오(MP3)");

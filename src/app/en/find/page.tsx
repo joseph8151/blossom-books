@@ -78,13 +78,16 @@ const findCopy: FindCopy = {
   altNote: "We'll compare these with you during the consultation before finalising.",
   viewBook: "View workbook · free sample",
   viewSample: "See the sample first",
+  handmadeTitle: "Every workbook is written by hand, question by question",
+  handmadeBody:
+    "Questions are not mass-generated. Teachers who work with students write each question by hand, and every answer and explanation is checked by a person before the workbook ships.",
   packageTitle: "Preparing longer? — the 200P long-term package",
   packageSummary: packageOption.summaryEn,
   packageCta: "Ask about the 200P package",
   packagePriceAsk: "Price on request (shared during consultation)",
   consultTitle: "A specialist prep teacher will walk you through it",
   consultBody:
-    "The recommendation above is calculated automatically from what you entered. A specialist prep teacher will go through the workbook, volume and level in detail against the student's actual level and test date.",
+    "The recommendation above is calculated automatically from what you entered. The workbooks themselves are written by hand, and a specialist prep teacher will go through the workbook, volume and level in detail against the student's actual level and test date.",
   consultPhone: "Call",
   consultKakao: "KakaoTalk",
   consultEmail: "Email us",
@@ -99,7 +102,7 @@ const findCopy: FindCopy = {
   productMeta: (p) => [trackLabelEn[p.track], p.gradeRange, p.readingLevel].filter(Boolean).join(" · "),
   priceLabel: (p) => `${pagesLabel(p)} · ${priceDisplay(p)}`,
   included: (p) => {
-    const out = [`${p.fileFormat} file`];
+    const out = ["Written by hand", `${p.fileFormat} file`];
     if (p.includesAnswerKey) out.push("Answer key");
     if (p.includesDetailedExplanations) out.push(explanationLanguage(p).labelEn);
     if (p.includesAudio) out.push("Listening audio (MP3)");

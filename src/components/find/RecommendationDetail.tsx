@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Check, Minus, X, ArrowRight, MessageCircle, Phone, Mail, Layers } from "lucide-react";
+import { Check, Minus, X, ArrowRight, MessageCircle, Phone, Mail, Layers, PenTool } from "lucide-react";
 import { Product } from "@/lib/types";
 import { FitFactor, FitStatus, FactorCode, Recommendation, StudyPlan } from "@/lib/recommend";
 import { insideTheWorkbook } from "@/lib/productMeta";
@@ -20,6 +20,8 @@ export interface FindCopy {
   altNote: string;
   viewBook: string;
   viewSample: string;
+  handmadeTitle: string;
+  handmadeBody: string;
   packageTitle: string;
   packageSummary: string;
   packageCta: string;
@@ -165,6 +167,17 @@ export default function RecommendationDetail({
             {copy.planText(plan)}
           </p>
         )}
+      </div>
+
+      {/* 수기 제작 안내 — 문항이 자동 생성된 것으로 오해받지 않도록 제작 방식을 밝힙니다. */}
+      <div className="border border-navy-800/12 bg-ivory-100 p-4">
+        <div className="flex items-start gap-2.5">
+          <PenTool size={16} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2} />
+          <div>
+            <p className="text-[13.5px] font-semibold text-navy-950">{copy.handmadeTitle}</p>
+            <p className="mt-1 text-[12.5px] leading-relaxed text-charcoal-600">{copy.handmadeBody}</p>
+          </div>
+        </div>
       </div>
 
       {/* 함께 검토해 볼 교재 */}
