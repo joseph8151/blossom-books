@@ -53,6 +53,9 @@ npm install
 # 3) 비밀값 저장 (입력하면 화면에 안 보이게 저장됩니다)
 npx wrangler secret put CF_API_TOKEN
 npx wrangler secret put RESEND_API_KEY
+
+# REPORT_TO는 생략하면 기본값 yorkboy@gmail.com 으로 발송됩니다.
+# 다른 주소로 받고 싶으면 아래도 실행하세요.
 npx wrangler secret put REPORT_TO      # 예: 본인 이메일 주소
 
 # 4) 배포
