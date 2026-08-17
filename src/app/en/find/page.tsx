@@ -4,10 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { MessageCircle, Sparkles, ArrowRight, Check, FileSearch } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { products } from "@/data/products";
-import { isFourSkill } from "@/lib/productMeta";
-import { blossomLevel } from "@/lib/utils";
-import { Product } from "@/lib/types";
+import { recommendProduct, RecReason, SubjectDomain, FOCUS_AREAS } from "@/lib/recommend";
 
 const trackLabelEn: Record<string, string> = {
   "us-curriculum": "US Curriculum",
@@ -19,20 +16,21 @@ const trackLabelEn: Record<string, string> = {
 
 const grades = ["Preschool / K", "Grade 1–2", "Grade 3–4", "Grade 5–6", "Grade 7–8", "Grade 9–12"];
 const levels = ["Beginner", "On grade level", "Advanced", "Not sure"];
-const exams = [
-  { v: "Academy / School Level Test", track: "level-test" },
-  { v: "International School Admission", track: "admissions" },
-  { v: "SR / STAR Reading", track: "level-test" },
-  { v: "MAP Growth", track: "admissions" },
-  { v: "CAT4", track: "admissions" },
-  { v: "SSAT", track: "admissions" },
-  { v: "ISEE", track: "admissions" },
-  { v: "Digital SAT", track: "certified-exam" },
-  { v: "AP", track: "ap" },
-  { v: "IELTS / TOEFL", track: "certified-exam" },
-  { v: "OET", track: "certified-exam" },
-  { v: "US Curriculum (catch-up / ahead)", track: "us-curriculum" },
-  { v: "Other / Not sure", track: "" },
+// domain — the subject side of the exam, so an English goal never returns a math workbook.
+const exams: { v: string; track: string; domain: SubjectDomain }[] = [
+  { v: "Academy / School Level Test", track: "level-test", domain: "english" },
+  { v: "International School Admission", track: "admissions", domain: "mixed" },
+  { v: "SR / STAR Reading", track: "level-test", domain: "english" },
+  { v: "MAP Growth", track: "admissions", domain: "mixed" },
+  { v: "CAT4", track: "admissions", domain: "mixed" },
+  { v: "SSAT", track: "admissions", domain: "mixed" },
+  { v: "ISEE", track: "admissions", domain: "mixed" },
+  { v: "Digital SAT", track: "certified-exam", domain: "mixed" },
+  { v: "AP", track: "ap", domain: "mixed" },
+  { v: "IELTS / TOEFL", track: "certified-exam", domain: "english" },
+  { v: "OET", track: "certified-exam", domain: "english" },
+  { v: "US Curriculum (catch-up / ahead)", track: "us-curriculum", domain: "mixed" },
+  { v: "Other / Not sure", track: "", domain: "mixed" },
 ];
 const periods = [
   { v: "Within 2 weeks", vol: "40P" },
@@ -40,39 +38,22 @@ const periods = [
   { v: "2–3 months", vol: "100P" },
   { v: "Not decided", vol: "60P" },
 ];
-const areas = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
+const areas = [...FOCUS_AREAS];
 
-function gradeRange(str: string): [number, number] {
-  const n = (str.match(/\d+/g) || []).map(Number);
-  if (/K|Preschool/i.test(str) && !n.length) return [0, 0];
-  if (!n.length) return [0, 12];
-  return [Math.min(...n), Math.max(...n)];
-}
-function overlaps(a: [number, number], b: [number, number]) {
-  return Math.max(a[0], b[0]) <= Math.min(a[1], b[1]);
-}
-function recommend(f: { grade: string; level: string; areas: string[] }, track: string) {
-  const pool = products.filter((p) => p.materialType === "existing" && p.sampleAvailable);
-  const want = f.level.includes("Advanced") ? 4 : f.level.includes("Beginner") ? 2 : 3;
-  const g = gradeRange(f.grade);
-  let best: Product | null = null;
-  let bestScore = -1;
-  let reasons: string[] = [];
-  for (const p of pool) {
-    let s = 50;
-    const r: string[] = [];
-    if (track && p.track === track) { s += 20; r.push(`Matches your ${trackLabelEn[p.track]} goal`); }
-    if (overlaps(g, gradeRange(p.gradeRange))) { s += 15; r.push(`Fits the ${p.gradeRange} range`); }
-    if (f.areas.length) {
-      const u = p.units.join(" ");
-      if (isFourSkill(p) || f.areas.some((a) => u.includes(a))) { s += 10; r.push(`Covers your focus (${f.areas.join(" · ")})`); }
-    }
-    s += 5 - Math.min(5, Math.abs(p.difficulty - want));
-    r.push(`${blossomLevel(p.difficulty)} level`);
-    if (s > bestScore) { bestScore = s; best = p; reasons = r; }
+// Wording for each reason — the scoring itself lives in @/lib/recommend.
+function reasonText(r: RecReason): string {
+  switch (r.code) {
+    case "track":
+      return `Matches your ${trackLabelEn[r.value] ?? r.value} goal`;
+    case "grade":
+      return `Fits the ${r.value} range`;
+    case "focus":
+      return `Covers your focus (${r.value})`;
+    case "reading":
+      return `Matches reading level ${r.value}`;
+    case "difficulty":
+      return `${r.value} level`;
   }
-  if (!best) return null;
-  return { product: best, score: Math.max(62, Math.min(95, bestScore)), reasons };
 }
 
 export default function EnFindPage() {
@@ -82,8 +63,8 @@ export default function EnFindPage() {
   const teamSent = useRef(false);
 
   const recVolume = periods.find((p) => p.v === f.period)?.vol ?? "60P";
-  const recTrack = exams.find((e) => e.v === f.exam)?.track ?? "";
-  const rec = done ? recommend(f, recTrack) : null;
+  const selectedExam = exams.find((e) => e.v === f.exam);
+  const rec = done ? recommendProduct(f, selectedExam?.track ?? "", selectedExam?.domain ?? "mixed") : null;
   const volumeReason =
     recVolume === "40P" ? "A quick check of the key question types — good when the test is close."
     : recVolume === "100P" ? "Room for repetition and harder questions — good with more time."
@@ -107,6 +88,10 @@ export default function EnFindPage() {
       `- Recommended: ${rec ? rec.product.title.split(" — ")[0] : "custom proposal"}`,
       `- Volume: ${recVolume}`,
       `- Fit: ${rec ? rec.score + "%" : "-"}`,
+      "",
+      "- Why:",
+      ...(rec ? rec.reasons.map((r) => `  · ${reasonText(r)}`) : ["  · No close match — propose a custom workbook."]),
+      ...(rec?.suggestCustom ? ["", "* Low fit — a custom workbook may be needed."] : []),
       "",
       "Auto-generated. Please re-check the student's situation during consultation.",
     ].join("\n");
@@ -228,8 +213,8 @@ export default function EnFindPage() {
                 <p className="font-label text-[10px] uppercase tracking-[0.1em] text-navy-800/55">Why this one?</p>
                 <ul className="mt-2 space-y-1.5">
                   {rec.reasons.map((r) => (
-                    <li key={r} className="flex items-start gap-2 text-[12.5px] leading-snug text-charcoal-900">
-                      <Check size={13} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} /> {r}
+                    <li key={r.code} className="flex items-start gap-2 text-[12.5px] leading-snug text-charcoal-900">
+                      <Check size={13} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} /> {reasonText(r)}
                     </li>
                   ))}
                 </ul>

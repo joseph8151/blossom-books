@@ -4,85 +4,50 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { MessageCircle, Sparkles, ArrowRight, Copy, Check, Mail, FileSearch } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { products, trackLabels } from "@/data/products";
-import { isFourSkill } from "@/lib/productMeta";
-import { blossomLevel } from "@/lib/utils";
-import { Product } from "@/lib/types";
+import { trackLabels } from "@/data/products";
+import { recommendProduct, RecReason, SubjectDomain, FOCUS_AREAS } from "@/lib/recommend";
 
-// 입력값을 실제 교재와 매칭해 적합도와 이유를 계산합니다.
-function gradeRange(str: string): [number, number] {
-  const n = (str.match(/\d+/g) || []).map(Number);
-  if (/K|Preschool|유아/i.test(str) && !n.length) return [0, 0];
-  if (!n.length) return [0, 12];
-  return [Math.min(...n), Math.max(...n)];
-}
-function overlaps(a: [number, number], b: [number, number]): boolean {
-  return Math.max(a[0], b[0]) <= Math.min(a[1], b[1]);
-}
-function recommendProduct(
-  f: { grade: string; level: string; areas: string[] },
-  track: string
-): { product: Product; score: number; reasons: string[] } | null {
-  const pool = products.filter((p) => p.materialType === "existing" && p.sampleAvailable);
-  const want = f.level.includes("상위") ? 4 : f.level.includes("기초") ? 2 : 3;
-  const g = gradeRange(f.grade);
-  let best: Product | null = null;
-  let bestScore = -1;
-  let bestReasons: string[] = [];
-  for (const p of pool) {
-    let s = 50;
-    const reasons: string[] = [];
-    if (track && p.track === track) {
-      s += 20;
-      reasons.push(`준비 시험에 맞는 ${trackLabels[p.track]} 구성`);
-    }
-    if (overlaps(g, gradeRange(p.gradeRange))) {
-      s += 15;
-      reasons.push(`학년 범위 ${p.gradeRange} 에 적합`);
-    }
-    if (f.areas.length) {
-      const u = p.units.join(" ");
-      if (isFourSkill(p) || f.areas.some((a) => u.includes(a))) {
-        s += 10;
-        reasons.push(`집중 영역(${f.areas.join(" · ")}) 연습 포함`);
-      }
-    }
-    s += 5 - Math.min(5, Math.abs(p.difficulty - want));
-    reasons.push(`난이도 ${blossomLevel(p.difficulty)} 수준`);
-    if (s > bestScore) {
-      bestScore = s;
-      best = p;
-      bestReasons = reasons;
-    }
+// 추천 이유 문구 — 계산은 @/lib/recommend 에서 하고 여기서는 표시만 합니다.
+function reasonText(r: RecReason): string {
+  switch (r.code) {
+    case "track":
+      return `준비 시험에 맞는 ${trackLabels[r.value as keyof typeof trackLabels] ?? r.value} 구성`;
+    case "grade":
+      return `학년 범위 ${r.value} 에 적합`;
+    case "focus":
+      return `집중 영역(${r.value}) 연습 포함`;
+    case "reading":
+      return `리딩 레벨 ${r.value} 범위에 해당`;
+    case "difficulty":
+      return `난이도 ${r.value} 수준`;
   }
-  if (!best) return null;
-  return { product: best, score: Math.max(62, Math.min(95, bestScore)), reasons: bestReasons };
 }
 
 const grades = ["Preschool / K", "Grade 1–2", "Grade 3–4", "Grade 5–6", "Grade 7–8", "Grade 9–12"];
 const levels = ["기초 (쉬운 편)", "보통 (학년 수준)", "상위 (앞서가는 편)", "잘 모르겠어요"];
-const exams = [
-  { v: "영어학원 / 학교 레벨테스트", track: "level-test" },
-  { v: "국제학교 입학/편입 시험", track: "admissions" },
-  { v: "SR / STAR Reading", track: "level-test" },
-  { v: "MAP Growth", track: "admissions" },
-  { v: "CAT4", track: "admissions" },
-  { v: "ISEE", track: "admissions" },
-  { v: "SSAT", track: "admissions" },
-  { v: "WIDA", track: "certified-exam" },
-  { v: "TOEFL Junior", track: "certified-exam" },
-  { v: "UKiset", track: "admissions" },
-  { v: "ISEB Common Pre-Test", track: "admissions" },
-  { v: "Digital SAT", track: "certified-exam" },
-  { v: "AP", track: "ap" },
-  { v: "IGCSE", track: "us-curriculum" },
-  { v: "GRE", track: "certified-exam" },
-  { v: "LSAT", track: "certified-exam" },
-  { v: "PTE", track: "certified-exam" },
-  { v: "IELTS", track: "certified-exam" },
-  { v: "OET", track: "certified-exam" },
-  { v: "미국 교과과정 (보충/선행)", track: "us-curriculum" },
-  { v: "기타 / 잘 모르겠어요", track: "" },
+// domain — 시험의 과목 계열. 영어 시험에 수학 교재가 추천되지 않도록 사용합니다.
+const exams: { v: string; track: string; domain: SubjectDomain }[] = [
+  { v: "영어학원 / 학교 레벨테스트", track: "level-test", domain: "english" },
+  { v: "국제학교 입학/편입 시험", track: "admissions", domain: "mixed" },
+  { v: "SR / STAR Reading", track: "level-test", domain: "english" },
+  { v: "MAP Growth", track: "admissions", domain: "mixed" },
+  { v: "CAT4", track: "admissions", domain: "mixed" },
+  { v: "ISEE", track: "admissions", domain: "mixed" },
+  { v: "SSAT", track: "admissions", domain: "mixed" },
+  { v: "WIDA", track: "certified-exam", domain: "english" },
+  { v: "TOEFL Junior", track: "certified-exam", domain: "english" },
+  { v: "UKiset", track: "admissions", domain: "mixed" },
+  { v: "ISEB Common Pre-Test", track: "admissions", domain: "mixed" },
+  { v: "Digital SAT", track: "certified-exam", domain: "mixed" },
+  { v: "AP", track: "ap", domain: "mixed" },
+  { v: "IGCSE", track: "us-curriculum", domain: "mixed" },
+  { v: "GRE", track: "certified-exam", domain: "mixed" },
+  { v: "LSAT", track: "certified-exam", domain: "english" },
+  { v: "PTE", track: "certified-exam", domain: "english" },
+  { v: "IELTS", track: "certified-exam", domain: "english" },
+  { v: "OET", track: "certified-exam", domain: "english" },
+  { v: "미국 교과과정 (보충/선행)", track: "us-curriculum", domain: "mixed" },
+  { v: "기타 / 잘 모르겠어요", track: "", domain: "mixed" },
 ];
 const periods = [
   { v: "2주 이내", vol: "40P" },
@@ -90,7 +55,7 @@ const periods = [
   { v: "2~3개월", vol: "100P" },
   { v: "아직 미정", vol: "60P" },
 ];
-const areas = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
+const areas = [...FOCUS_AREAS];
 
 export default function FindPage() {
   const [f, setF] = useState({ grade: "", level: "", sr: "", exam: "", period: "", areas: [] as string[] });
@@ -102,9 +67,9 @@ export default function FindPage() {
   const teamSent = useRef(false);
 
   const recVolume = periods.find((p) => p.v === f.period)?.vol ?? "60P";
-  const recTrack = exams.find((e) => e.v === f.exam)?.track ?? "";
-  const rec = done ? recommendProduct(f, recTrack) : null;
-  const suggestCustom = done && (!rec || rec.score < 68);
+  const selectedExam = exams.find((e) => e.v === f.exam);
+  const rec = done ? recommendProduct(f, selectedExam?.track ?? "", selectedExam?.domain ?? "mixed") : null;
+  const suggestCustom = done && (!rec || rec.suggestCustom);
   const volumeReason =
     recVolume === "40P"
       ? "시험이 가까워 핵심 유형을 빠르게 점검하기 좋은 분량입니다."
@@ -135,7 +100,8 @@ export default function FindPage() {
       `- Fit: ${rec ? rec.score + "%" : "-"}`,
       "",
       "■ 추천 이유",
-      ...(rec ? rec.reasons.map((r) => `- ${r}`) : ["- 기존 교재로 커버가 어려워 맞춤 제작을 제안합니다."]),
+      ...(rec ? rec.reasons.map((r) => `- ${reasonText(r)}`) : ["- 기존 교재로 커버가 어려워 맞춤 제작을 제안합니다."]),
+      ...(suggestCustom ? ["", "※ 적합도가 낮습니다. 맞춤 제작 상담이 필요할 수 있습니다."] : []),
       "",
       "이 추천은 자동 생성되었습니다. 상담 시 학생 상황을 한 번 더 확인해 주세요.",
     ].join("\n");
@@ -304,9 +270,9 @@ export default function FindPage() {
                 <p className="font-label text-[10px] uppercase tracking-[0.1em] text-navy-800/55">왜 이 교재를 추천했나요?</p>
                 <ul className="mt-2 space-y-1.5">
                   {rec.reasons.map((r) => (
-                    <li key={r} className="flex items-start gap-2 text-[12.5px] leading-snug text-charcoal-900">
+                    <li key={r.code} className="flex items-start gap-2 text-[12.5px] leading-snug text-charcoal-900">
                       <Check size={13} className="mt-0.5 shrink-0 text-brass-500" strokeWidth={2.4} />
-                      {r}
+                      {reasonText(r)}
                     </li>
                   ))}
                 </ul>
