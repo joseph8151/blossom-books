@@ -12,22 +12,37 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
     <div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {flexibleVolumes.map((v) => {
-          const highlight = !!v.badge;
+          const highlight = !!v.highlight;
           return (
             <div
               key={v.pages}
               className={`relative flex flex-col border p-6 ${
-                highlight ? "border-brass-500/60 bg-brass-500/[0.05] shadow-card" : "border-navy-800/12 bg-ivory-100"
+                highlight
+                  ? "border-brass-500/60 bg-brass-500/[0.05] shadow-card"
+                  : v.entry
+                  ? "border-navy-800/35 bg-ivory-100"
+                  : "border-navy-800/12 bg-ivory-100"
               }`}
             >
               {v.badge && (
-                <span className="absolute -top-3 left-6 bg-brass-500 px-2.5 py-1 font-label text-[9.5px] uppercase tracking-[0.14em] text-navy-950">
+                // 기준 구성(RECOMMENDED)은 브라스 채움, 진입 구성(START HERE)은 네이비 채움으로
+                // 서로 다른 역할이 한눈에 구분되게 합니다.
+                <span
+                  className={`absolute -top-3 left-6 px-2.5 py-1 font-label text-[9.5px] uppercase tracking-[0.14em] ${
+                    highlight ? "bg-brass-500 text-navy-950" : "bg-navy-900 text-ivory-100"
+                  }`}
+                >
                   {v.badge}
                 </span>
               )}
               <p className="font-display text-[28px] font-semibold leading-none text-navy-950">{v.label}</p>
               <p className="mt-1.5 font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">{v.tier}</p>
               <p className="mt-1 text-[12.5px] text-charcoal-600">{v.tierKo}</p>
+              {v.entryNote && (
+                <p className="mt-3 border-l-2 border-navy-800/30 pl-2.5 text-[12px] leading-relaxed text-charcoal-900">
+                  {v.entryNote}
+                </p>
+              )}
               <ul className="mt-4 flex-1 space-y-1.5">
                 {v.forWhom.map((f) => (
                   <li key={f} className="flex items-start gap-1.5 text-[12px] leading-snug text-charcoal-600">
@@ -78,8 +93,12 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
         </div>
       </div>
 
+      <p className="mt-6 font-display text-[15px] font-medium text-navy-950">
+        처음부터 큰 구성을 구매하지 않아도 됩니다.
+      </p>
+
       {/* 가격대 힌트 (최고가는 첫 화면에서 노출하지 않음) */}
-      <p className="mt-6 text-[13.5px] text-charcoal-900">
+      <p className="mt-3 text-[13.5px] text-charcoal-900">
         교재 구성 40P부터 · <span className="font-display text-[16px] font-semibold text-navy-950">{formatKRW(fromPriceKRW)}부터</span>
         <span className="ml-1.5 text-[12.5px] text-charcoal-600">정확한 가격은 각 교재 상세에서 확인하실 수 있습니다.</span>
       </p>

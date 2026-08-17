@@ -35,7 +35,7 @@ export default function ConsultationCTA() {
             className="mt-8 inline-flex items-center gap-2.5 bg-navy-900 px-8 py-4 text-[15px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
           >
             <MessageCircle size={18} />
-            카카오톡으로 교재 상담하기
+            내 아이에게 맞는 교재 확인
           </a>
         </div>
 

@@ -11,7 +11,10 @@ export interface VolumeOption {
   priceUSD: number;
   tier: string; // "Quick Prep"
   tierKo: string;
-  badge?: string; // "BEST VALUE"
+  badge?: string; // "RECOMMENDED" · "START HERE"
+  highlight?: boolean; // 카드 강조 스타일 (기준 구성 1개에만 사용)
+  entry?: boolean; // 처음 이용하는 고객을 위한 진입 구성
+  entryNote?: string; // 진입 구성 안내 문구
   forWhom: string[]; // 추천 대상
   duration?: string; // 추천 준비 기간
 }
@@ -25,7 +28,12 @@ export const volumeOptions: VolumeOption[] = [
     tier: "Essential Prep",
     tierKo: "핵심 유형 빠르게",
     duration: "시험 임박 · 단기",
+    badge: "START HERE",
+    entry: true,
+    entryNote:
+      "처음 Blossom Books를 이용하는 분께도 추천합니다. 시험 유형을 먼저 경험하거나, 부족한 영역을 단기간 집중적으로 연습하기 좋은 구성입니다.",
     forWhom: [
+      "처음 Blossom Books를 이용하는 학생",
       "시험까지 시간이 많지 않은 학생",
       "주요 유형을 빠르게 확인하고 싶은 학생",
       "특정 영역을 단기간 보완하고 싶은 학생",
@@ -39,6 +47,7 @@ export const volumeOptions: VolumeOption[] = [
     tier: "Complete Prep",
     tierKo: "충분한 실전 대비",
     badge: "RECOMMENDED",
+    highlight: true,
     duration: "약 2–4주 표준 준비",
     forWhom: [
       "시험 유형을 충분히 연습하고 싶은 학생",

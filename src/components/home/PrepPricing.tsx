@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, FileSearch, Check, Compass } from "lucide-react";
 import PrepVolumePricing from "@/components/common/PrepVolumePricing";
 import PrepComparison from "@/components/common/PrepComparison";
+import PriceRiskReversal from "@/components/common/PriceRiskReversal";
 
 // 60P 기준, 가격 옆에 함께 보여주는 "받는 가치"
 const included = [
@@ -29,19 +30,8 @@ export default function PrepPricing() {
           </p>
         </div>
 
-        {/* 가격 저항 완화 — Sample 먼저 */}
-        <div className="mt-8 border-l-2 border-brass-500 bg-ivory-200/40 p-6">
-          <p className="font-display text-[18px] font-semibold text-navy-950 sm:text-[20px]">
-            가격 때문에 고민되신다면, 먼저 Sample을 확인해보세요.
-          </p>
-          <p className="mt-2.5 max-w-2xl text-[13.5px] leading-relaxed text-charcoal-600">
-            Blossom Books는 구매를 서두르게 하지 않습니다. 실제 문제 구성과 해설을 확인하고, 학생에게 필요한
-            분량을 확인한 뒤 결정하셔도 됩니다. 모든 학생에게 100P 구성을 권하지 않습니다.
-          </p>
-        </div>
-
         {/* 어떤 걸 사야 할지 모르겠어요 — 구성 선택 전 추천 유도 */}
-        <div className="mt-6 grid gap-5 border border-navy-800/12 bg-ivory-200/40 p-6 sm:grid-cols-[1.1fr_0.9fr] sm:items-center sm:p-7">
+        <div className="mt-8 grid gap-5 border border-navy-800/12 bg-ivory-200/40 p-6 sm:grid-cols-[1.1fr_0.9fr] sm:items-center sm:p-7">
           <div>
             <div className="flex items-center gap-2">
               <Compass size={16} className="text-brass-500" />
@@ -90,7 +80,12 @@ export default function PrepPricing() {
           </div>
         </div>
 
+        {/* 가격 카드 직전 — 지금 결제하지 않아도 된다는 선택지를 먼저 제시 */}
         <div className="mt-10">
+          <PriceRiskReversal />
+        </div>
+
+        <div className="mt-6">
           <PrepVolumePricing />
         </div>
 

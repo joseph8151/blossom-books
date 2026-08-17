@@ -12,9 +12,10 @@ export default function MobileBottomBar() {
   const isProductDetail = /^\/books\/[^/]+$/.test(pathname ?? "");
   if (isProductDetail) return null;
 
+  // CTA 문구는 목적이 드러나게 씁니다 ("상담하기"/"가격 문의" 대신 무엇을 확인할 수 있는지).
   const labels = isEn
-    ? { sample: "Free Sample", kakao: "Chat on KakaoTalk", sampleHref: "/en#samples" }
-    : { sample: "무료 샘플 보기", kakao: "카카오톡 상담", sampleHref: "/books" };
+    ? { sample: "Free Sample", kakao: "Find the right book", sampleHref: "/en#samples" }
+    : { sample: "무료 Sample 보기", kakao: "내 아이 교재 확인", sampleHref: "/books" };
 
   return (
     <>
