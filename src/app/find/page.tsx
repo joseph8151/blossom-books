@@ -19,20 +19,38 @@ function gradeRange(str: string): [number, number] {
 function overlaps(a: [number, number], b: [number, number]): boolean {
   return Math.max(a[0], b[0]) <= Math.min(a[1], b[1]);
 }
+// 특정 시험명을 선택하면 같은 track 안의 다른 교재가 아니라 반드시 그 시험의
+// 실제 교재가 추천되도록 하는 매핑입니다. (예: CAT4 선택 시 MAP 교재가 나오는
+// 것을 방지) track만으로는 admissions 안에 CAT4/MAP/ISEE/WIDA/SCAT가 섞여
+// 있어 구분되지 않습니다.
+const examToProductId: Record<string, string> = {
+  "MAP Growth": "map-growth-workbook",
+  "CAT4": "cat4-level-e",
+  "ISEE": "isee-workbook",
+  "WIDA": "wida-workbook",
+  "Digital SAT": "sat-math-workbook",
+  "IELTS": "ielts-workbook",
+};
+
 function recommendProduct(
-  f: { grade: string; level: string; areas: string[] },
+  f: { grade: string; level: string; areas: string[]; exam: string },
   track: string
 ): { product: Product; score: number; reasons: string[] } | null {
   const pool = products.filter((p) => p.materialType === "existing" && p.sampleAvailable);
   const want = f.level.includes("상위") ? 4 : f.level.includes("기초") ? 2 : 3;
   const g = gradeRange(f.grade);
+  const pinnedId = examToProductId[f.exam];
   let best: Product | null = null;
   let bestScore = -1;
   let bestReasons: string[] = [];
   for (const p of pool) {
     let s = 50;
     const reasons: string[] = [];
-    if (track && p.track === track) {
+    if (pinnedId && p.id === pinnedId) {
+      // 정확히 그 시험의 교재이므로 같은 track의 다른 교재보다 항상 우선합니다.
+      s += 100;
+      reasons.push(`${f.exam} 전용 구성`);
+    } else if (track && p.track === track) {
       s += 20;
       reasons.push(`준비 시험에 맞는 ${trackLabels[p.track]} 구성`);
     }
@@ -69,7 +87,7 @@ const exams = [
   { v: "CAT4", track: "admissions" },
   { v: "ISEE", track: "admissions" },
   { v: "SSAT", track: "admissions" },
-  { v: "WIDA", track: "certified-exam" },
+  { v: "WIDA", track: "admissions" },
   { v: "TOEFL Junior", track: "certified-exam" },
   { v: "UKiset", track: "admissions" },
   { v: "ISEB Common Pre-Test", track: "admissions" },
@@ -106,6 +124,13 @@ export default function FindPage() {
   const recTrack = exams.find((e) => e.v === f.exam)?.track ?? "";
   const rec = done ? recommendProduct(f, recTrack) : null;
   const suggestCustom = done && (!rec || rec.score < 68);
+  // 선택한 시험이 구조상 다루지 않는 영역(예: CAT4는 Writing이 없음)을
+  // 집중 영역으로 골랐을 때, 추천 교재가 그 영역을 커버하지 못한다는 걸
+  // 조용히 숨기지 않고 알려줍니다.
+  const uncoveredAreas =
+    rec && f.areas.length
+      ? f.areas.filter((a) => !isFourSkill(rec.product) && !rec.product.units.some((u) => u.includes(a)))
+      : [];
   const volumeReason =
     recVolume === "40P"
       ? "시험이 가까워 핵심 유형을 빠르게 점검하기 좋은 분량입니다."
@@ -368,6 +393,27 @@ export default function FindPage() {
                   샘플 먼저 보기
                 </Link>
               </div>
+            </div>
+          )}
+
+          {/* 선택한 집중 영역을 이 시험/교재가 다루지 않을 때의 안내 */}
+          {uncoveredAreas.length > 0 && (
+            <div className="mt-3 border border-burgundy-700/25 bg-burgundy-700/[0.04] p-4">
+              <p className="text-[13px] font-medium text-burgundy-700">
+                {f.exam}는 {uncoveredAreas.join(", ")} 영역을 다루지 않습니다.
+              </p>
+              <p className="mt-1 text-[12.5px] leading-relaxed text-charcoal-600">
+                위 추천 교재는 {f.exam} 실제 출제 영역만 담고 있어 {uncoveredAreas.join(", ")}는 포함되지
+                않습니다. 함께 준비하고 싶으시면{" "}
+                <button
+                  type="button"
+                  onClick={goKakao}
+                  className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2"
+                >
+                  상담에서 별도 교재를 안내
+                </button>
+                해 드릴 수 있습니다.
+              </p>
             </div>
           )}
 
