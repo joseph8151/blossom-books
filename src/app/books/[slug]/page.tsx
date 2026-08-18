@@ -12,7 +12,6 @@ import {
   nextWorkbooks,
 } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
-import { formatKRW, fromPriceKRW } from "@/data/pricing";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import ProductCard from "@/components/books/ProductCard";
 import SamplePreviewButton from "@/components/books/SamplePreviewButton";
@@ -379,7 +378,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <PurchasePanel product={product} isDirect={direct} />
             {direct && (
               <p className="mt-3 text-center text-[12px] text-charcoal-600">
-                {formatKRW(fromPriceKRW)}부터 · 40 / 60 / 100P 바로 구매
+                40 / 60 / 100P 중 선택해 바로 구매
               </p>
             )}
           </div>

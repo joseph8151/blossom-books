@@ -25,6 +25,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
   const [pages, setPages] = useState(flexible ? 60 : fixedVol?.pages ?? 60);
   const [copied, setCopied] = useState(false);
   const [addOns, setAddOns] = useState<string[]>([]);
+  const [priceRevealed, setPriceRevealed] = useState(false);
   const selected = vols.find((v) => v.pages === pages) ?? fixedVol ?? vols.find((v) => v.pages === 60) ?? vols[0];
 
   // 함께 준비하면 좋은 영역 — 현재 교재 과목과 겹치지 않는 항목만 제안 (Smart Upsell)
@@ -104,7 +105,9 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
                           </span>
                         )}
                         <span className="font-display text-[17px] font-semibold text-navy-950">{v.label}</span>
-                        <span className="mt-0.5 text-[11px] text-charcoal-600">{formatKRW(v.priceKRW)}</span>
+                        <span className="mt-0.5 text-[11px] text-charcoal-600">
+                          {priceRevealed ? formatKRW(v.priceKRW) : v.tier}
+                        </span>
                       </button>
                     );
                   })}
@@ -121,9 +124,19 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
 
             <div className="mt-5 flex items-baseline justify-between border-t border-navy-800/12 pt-4">
               <span className="text-[13px] text-charcoal-600">선택: {selected.label}</span>
-              <span className="font-display text-[24px] font-semibold text-navy-950">
-                {formatKRW(selected.priceKRW)}
-              </span>
+              {priceRevealed ? (
+                <span className="font-display text-[24px] font-semibold text-navy-950">
+                  {formatKRW(selected.priceKRW)}
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setPriceRevealed(true)}
+                  className="font-display text-[15px] font-semibold text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2"
+                >
+                  가격 확인하기
+                </button>
+              )}
             </div>
 
             <button
@@ -258,9 +271,20 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
           <>
             <div className="leading-tight">
               <p className="font-display text-[15px] font-semibold text-navy-950">
-                {selected.label} · {formatKRW(selected.priceKRW)}
+                {selected.label}
+                {priceRevealed ? ` · ${formatKRW(selected.priceKRW)}` : ""}
               </p>
-              <p className="text-[10.5px] text-charcoal-600">{selected.tier}</p>
+              {priceRevealed ? (
+                <p className="text-[10.5px] text-charcoal-600">{selected.tier}</p>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setPriceRevealed(true)}
+                  className="text-[10.5px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2"
+                >
+                  가격 확인하기
+                </button>
+              )}
             </div>
             <button
               onClick={goKakao}

@@ -186,9 +186,18 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
   const [page, setPage] = useState(0);
   const [zoom, setZoom] = useState(false);
 
-  const workbook = useMemo(() => leadWithVisual(buildWorkbookItems(product)), [product]);
+  // 무료로 공개하는 샘플 분량은 일부러 제한합니다 — 전체를 다 보여주면 상담 문의로 이어지지 않습니다.
+  const FREE_WORKBOOK_CAP = 5;
+  const FREE_ANSWER_CAP = 2;
+  const workbook = useMemo(
+    () => leadWithVisual(buildWorkbookItems(product)).slice(0, FREE_WORKBOOK_CAP),
+    [product]
+  );
   const answers = useMemo(
-    () => [...workbook].sort((a, b) => (b.wrong || b.steps || b.essay ? 1 : 0) - (a.wrong || a.steps || a.essay ? 1 : 0)).slice(0, 3),
+    () =>
+      [...workbook]
+        .sort((a, b) => (b.wrong || b.steps || b.essay ? 1 : 0) - (a.wrong || a.steps || a.essay ? 1 : 0))
+        .slice(0, FREE_ANSWER_CAP),
     [workbook]
   );
   const items = tab === "workbook" ? workbook : answers;
@@ -604,8 +613,8 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                 <div>
                   <p className="font-display text-[16px] font-semibold text-navy-950 sm:text-[18px]">이 샘플, 아이 수준에 맞을까요?</p>
                   <p className="mt-1 text-[13px] leading-relaxed text-charcoal-600">
-                    궁금한 점이 있으시면 바로 물어보세요. 학년과 현재 수준을 알려주시면 더 정확하게 안내해
-                    드립니다.
+                    지금 보신 페이지는 전체 구성 중 일부입니다. 학년과 현재 수준을 알려주시면 나머지 구성과
+                    난이도까지 더 정확하게 안내해 드립니다.
                   </p>
                 </div>
                 <a

@@ -18,6 +18,7 @@ const included = ["Student Workbook", "정답 · 상세 해설", "선택 과목 
 export default function QuoteCalculator() {
   const [pages, setPages] = useState(60);
   const [subject, setSubject] = useState(subjects[0]);
+  const [revealed, setRevealed] = useState(false);
   const opt = options.find((o) => o.pages === pages) ?? options[1];
   const isExtended = pages >= 150;
 
@@ -72,11 +73,19 @@ export default function QuoteCalculator() {
             <p className="mt-2 text-[13px] text-ivory-200/70">{opt.tierKo} · {subject}</p>
             {isExtended ? (
               <p className="mt-4 font-display text-[26px] font-semibold text-ivory-100">맞춤 견적 문의</p>
-            ) : (
+            ) : revealed ? (
               <p className="mt-4 font-display text-[32px] font-semibold leading-none text-ivory-100">
                 {formatKRW(opt.priceKRW)}
                 <span className="ml-1 text-[13px] font-normal text-ivory-200/60">부터</span>
               </p>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setRevealed(true)}
+                className="mt-4 inline-flex w-fit items-center gap-1.5 border border-ivory-100/25 px-4 py-2.5 text-[13px] font-medium text-ivory-100 transition-colors hover:border-ivory-100/50"
+              >
+                예상 견적 확인하기
+              </button>
             )}
             <ul className="mt-5 flex-1 space-y-1.5">
               {included.map((it) => (
