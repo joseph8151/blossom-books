@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   MessageCircle,
-  Mail,
   FileCheck2,
   Microscope,
   ShieldCheck,
@@ -18,6 +17,7 @@ import { products, trackLabels } from "@/data/products";
 import { siteConfig } from "@/data/site";
 import { coverToneFor } from "@/lib/utils";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
+import { EnContactForm } from "@/components/en/EnContactForm";
 
 export const metadata: Metadata = {
   title: "Blossom Books — Premium Study Materials for International Students",
@@ -468,13 +468,12 @@ export default function EnHomePage() {
             >
               <MessageCircle size={16} /> Chat on KakaoTalk
             </a>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="inline-flex items-center justify-center gap-2 border border-navy-800/25 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
-            >
-              <Mail size={16} /> Email us
-            </a>
           </div>
+          <p className="mx-auto mt-6 max-w-xl text-[13px] text-charcoal-600">
+            Most international visitors don&apos;t use KakaoTalk — send us a message below instead
+            and we&apos;ll reply to your email.
+          </p>
+          <EnContactForm />
         </div>
       </section>
     </div>
