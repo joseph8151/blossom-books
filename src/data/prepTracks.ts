@@ -11,6 +11,7 @@ export interface PrepTrack {
   faq: { q: string; a: string }[];
   match: (p: Product) => boolean;
   booksTrack?: string; // /books?track= 필터
+  srPricing?: boolean; // true면 분량/가격 섹션에 SR 전용(150/200/300P) 가격을 보여줍니다.
 }
 
 export const prepTracks: PrepTrack[] = [
@@ -36,6 +37,7 @@ export const prepTracks: PrepTrack[] = [
     ],
     match: (p) => /SR/i.test(p.examOrCurriculum) || (p.track === "level-test" && /Reading|English/i.test(p.subject)),
     booksTrack: "level-test",
+    srPricing: true,
   },
   {
     slug: "map",

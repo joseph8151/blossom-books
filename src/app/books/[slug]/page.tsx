@@ -10,6 +10,7 @@ import {
   productCode,
   hasStarter,
   nextWorkbooks,
+  volumeOptionsLabel,
 } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
@@ -44,7 +45,7 @@ const purchaseFaq = [
   { q: "정답과 해설이 포함되나요?", a: "네. 정답과 함께 풀이 과정·오답 포인트를 설명하는 상세 해설집이 포함됩니다." },
   { q: "40P와 60P 차이는 무엇인가요?", a: "40P는 핵심 유형을 빠르게 점검하는 Essential Prep, 60P는 여러 유형을 균형 있게 연습하는 Complete Prep입니다." },
   { q: "어떤 수준을 선택해야 하나요?", a: "시험까지 남은 기간과 현재 실력에 따라 다릅니다. 확실하지 않으시면 구매 전 상담으로 편하게 안내받으실 수 있습니다." },
-  { q: "100P 이상도 가능한가요?", a: "네. 150P 이상, 추가 영역, 특수 구성은 별도 문의(Price on Request)로 안내해 드립니다." },
+  { q: "100P 이상도 가능한가요?", a: "네. 상품에 따라 200P까지, SR 리딩 종합 문제집은 300P까지 바로 선택해 구매하실 수 있습니다. 그 이상의 추가 영역·특수 구성은 별도 문의(Price on Request)로 안내해 드립니다." },
   { q: "해외에서도 구매할 수 있나요?", a: "네. 해외 고객은 PayPal로 결제하실 수 있습니다." },
   { q: "환불 정책은 어떻게 되나요?", a: "디지털 상품 특성상 파일 발송 후에는 환불이 제한될 수 있습니다. 구매 전 무료 샘플로 내용을 확인하시길 권장하며, 자세한 정책은 상담으로 안내해 드립니다." },
 ];
@@ -376,9 +377,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         <div>
           <div className="lg:sticky lg:top-24">
             <PurchasePanel product={product} isDirect={direct} />
-            {direct && (
+            {direct && volumeOptionsLabel(product) && (
               <p className="mt-3 text-center text-[12px] text-charcoal-600">
-                40 / 60 / 100P 중 선택해 바로 구매
+                {volumeOptionsLabel(product)} 중 선택해 바로 구매
               </p>
             )}
           </div>

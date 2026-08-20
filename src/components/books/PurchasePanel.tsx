@@ -4,8 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { MessageCircle, Check, FileSearch, ShieldCheck, Copy } from "lucide-react";
 import { Product } from "@/lib/types";
-import { flexibleVolumes, starterOption, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
-import { offersVolumes, hasStarter } from "@/lib/productMeta";
+import { flexibleVolumes, srVolumes, starterOption, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
+import { offersVolumes, offersSrVolumes, hasStarter } from "@/lib/productMeta";
 import { siteConfig } from "@/data/site";
 
 const trustItems = [
@@ -18,11 +18,12 @@ const trustItems = [
 ];
 
 export default function PurchasePanel({ product, isDirect }: { product: Product; isDirect: boolean }) {
-  const flexible = offersVolumes(product); // 40/60/100 분량 선택 가능 여부
+  const srFlexible = offersSrVolumes(product); // SR Reading Prep 전용 150/200/300 분량 선택 가능 여부
+  const flexible = offersVolumes(product); // 40/60/100/200 분량 선택 가능 여부
   // 영어 레벨테스트 상품에는 Starter(25P) 진입 구성을 함께 제공합니다.
-  const vols = hasStarter(product) ? [starterOption, ...flexibleVolumes] : flexibleVolumes;
-  const fixedVol = !flexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
-  const [pages, setPages] = useState(flexible ? 60 : fixedVol?.pages ?? 60);
+  const vols = srFlexible ? srVolumes : hasStarter(product) ? [starterOption, ...flexibleVolumes] : flexibleVolumes;
+  const fixedVol = !flexible && !srFlexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
+  const [pages, setPages] = useState(srFlexible ? srVolumes[0].pages : flexible ? 60 : fixedVol?.pages ?? 60);
   const [copied, setCopied] = useState(false);
   const [addOns, setAddOns] = useState<string[]>([]);
   const [priceRevealed, setPriceRevealed] = useState(false);
@@ -83,7 +84,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
 
         {isDirect ? (
           <>
-            {flexible ? (
+            {flexible || srFlexible ? (
               <>
                 <p className="mt-5 font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
                   Choose Your Volume
@@ -113,7 +114,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
                   })}
                 </div>
                 <p className="mt-2 text-[11.5px] text-charcoal-600/80">
-                  {extendedOption.label} 이상 · 추가 영역은 가격 문의
+                  {srFlexible ? "300P+" : extendedOption.label} 이상 · 추가 영역은 가격 문의
                 </p>
               </>
             ) : (

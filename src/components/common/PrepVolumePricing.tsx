@@ -1,17 +1,28 @@
 import Link from "next/link";
 import { Check, ArrowRight, MessageCircle } from "lucide-react";
-import { flexibleVolumes, extendedOption, formatKRW, fromPriceKRW, priceDisclaimer, pricingReassurance } from "@/data/pricing";
+import {
+  flexibleVolumes,
+  srVolumes,
+  extendedOption,
+  formatKRW,
+  priceDisclaimer,
+  pricingReassurance,
+  type VolumeOption,
+} from "@/data/pricing";
 import { siteConfig } from "@/data/site";
 
 // 가치 중심 구성 안내 — 메인/시험별 페이지에서는 정확한 금액을 노출하지 않고,
 // 구성과 추천 대상만 보여준 뒤 "가격 확인하기"로 상세 페이지에서 확인하도록 유도합니다.
-export default function PrepVolumePricing({ buyProductId }: { buyProductId?: string }) {
+// sr=true면 일반 40/60/100/200P 대신 SR Reading Prep 전용 150/200/300P를 보여줍니다.
+export default function PrepVolumePricing({ buyProductId, sr = false }: { buyProductId?: string; sr?: boolean }) {
   const priceHref = buyProductId ? `/books/${buyProductId}#sample` : "/books";
+  const volumes: VolumeOption[] = sr ? srVolumes : flexibleVolumes;
+  const extendedLabel = sr ? "300P+" : extendedOption.label;
 
   return (
     <div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {flexibleVolumes.map((v) => {
+      <div className={`grid gap-4 sm:grid-cols-2 ${sr ? "lg:grid-cols-4" : "lg:grid-cols-5"}`}>
+        {volumes.map((v) => {
           const highlight = !!v.badge;
           return (
             <div
@@ -53,7 +64,7 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
 
         {/* Extended — 맞춤 견적 문의 */}
         <div className="flex flex-col border border-dashed border-navy-800/25 bg-ivory-200/40 p-6">
-          <p className="font-display text-[28px] font-semibold leading-none text-navy-950">{extendedOption.label}</p>
+          <p className="font-display text-[28px] font-semibold leading-none text-navy-950">{extendedLabel}</p>
           <p className="mt-1.5 font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">
             {extendedOption.tier}
           </p>
@@ -80,7 +91,7 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
 
       {/* 가격대 힌트 (최고가는 첫 화면에서 노출하지 않음) */}
       <p className="mt-6 text-[13.5px] text-charcoal-900">
-        교재 구성 40P부터 · <span className="font-display text-[16px] font-semibold text-navy-950">{formatKRW(fromPriceKRW)}부터</span>
+        교재 구성 {volumes[0].label}부터 · <span className="font-display text-[16px] font-semibold text-navy-950">{formatKRW(volumes[0].priceKRW)}부터</span>
         <span className="ml-1.5 text-[12.5px] text-charcoal-600">정확한 가격은 각 교재 상세에서 확인하실 수 있습니다.</span>
       </p>
 

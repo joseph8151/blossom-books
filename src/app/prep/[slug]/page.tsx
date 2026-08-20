@@ -104,7 +104,7 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <h2 className="font-display text-[24px] font-semibold text-navy-950">분량과 가격</h2>
           <p className="mt-2 text-[14px] text-charcoal-600">필요한 만큼 선택하세요. 결제는 공식 카카오톡을 통해 진행됩니다.</p>
-          <div className="mt-8"><PrepVolumePricing /></div>
+          <div className="mt-8"><PrepVolumePricing sr={t.srPricing} /></div>
         </div>
       </section>
 

@@ -60,10 +60,72 @@ export const volumeOptions: VolumeOption[] = [
       "보다 집중적인 Prep이 필요한 학생",
     ],
   },
+  {
+    pages: 200,
+    label: "200P",
+    priceKRW: 275000,
+    priceUSD: 200,
+    tier: "Advanced Prep",
+    tierKo: "장기 심화",
+    duration: "6주 이상 · 장기 준비",
+    forWhom: [
+      "충분한 시간을 두고 완전히 준비하고 싶은 학생",
+      "여러 영역을 심화까지 반복하고 싶은 학생",
+      "다음 레벨까지 미리 준비하고 싶은 학생",
+    ],
+  },
 ];
 
-// 분량 선택형 상품의 전체 옵션 (40 → 60 → 100)
+// 분량 선택형 상품의 전체 옵션 (40 → 60 → 100 → 200)
 export const flexibleVolumes: VolumeOption[] = [...volumeOptions];
+
+// SR Reading Prep(종합 문제집) 전용 분량 — 40/60/100/200P 라인과는 별도로,
+// SR 점수대별 종합 대비에 맞춘 150/200/300P 구성입니다.
+export const srVolumes: VolumeOption[] = [
+  {
+    pages: 150,
+    label: "150P",
+    priceKRW: 235000,
+    priceUSD: 170,
+    tier: "SR Comprehensive",
+    tierKo: "SR 유형 종합",
+    duration: "약 3~4주",
+    forWhom: [
+      "SR 문제 유형에 아직 익숙하지 않은 학생",
+      "SR 독해 전 유형을 빠르게 한 번 훑고 싶은 학생",
+      "정기 SR 테스트를 앞두고 있는 학생",
+    ],
+  },
+  {
+    pages: 200,
+    label: "200P",
+    priceKRW: 275000,
+    priceUSD: 200,
+    tier: "SR Extended",
+    tierKo: "SR 반복·심화",
+    badge: "RECOMMENDED",
+    duration: "약 5~6주",
+    forWhom: [
+      "SR 점수가 특정 구간에서 정체되어 있는 학생",
+      "약한 유형을 반복 연습으로 보완하고 싶은 학생",
+      "다음 SR 레벨까지 준비 기간이 넉넉한 학생",
+    ],
+  },
+  {
+    pages: 300,
+    label: "300P",
+    priceKRW: 355000,
+    priceUSD: 260,
+    tier: "SR Complete",
+    tierKo: "SR 전 유형 마스터",
+    duration: "8주 이상 · 장기 심화",
+    forWhom: [
+      "SR 상위 레벨을 목표로 전 유형을 마스터하고 싶은 학생",
+      "장기간 집중적으로 SR을 준비하는 학생",
+      "충분한 반복과 심화까지 원하는 학생",
+    ],
+  },
+];
 
 // 진입(Starter) 상품 — 영어 레벨테스트 상품에만 제공하는 소분량 진입 구성
 export const starterOption: VolumeOption = {
@@ -80,9 +142,9 @@ export const starterOption: VolumeOption = {
   ],
 };
 
-// 100P 초과 — 가격 문의
+// 200P 초과(SR Reading Prep은 300P 초과) — 가격 문의
 export const extendedOption = {
-  label: "150P+",
+  label: "200P+",
   tier: "Extended Prep",
   tierKo: "장기·심화·특수 구성",
   forWhom: [
@@ -105,5 +167,5 @@ export function formatKRW(n: number): string {
 }
 
 export function volumeByPages(pages: number): VolumeOption | undefined {
-  return flexibleVolumes.find((v) => v.pages === pages);
+  return flexibleVolumes.find((v) => v.pages === pages) ?? srVolumes.find((v) => v.pages === pages);
 }

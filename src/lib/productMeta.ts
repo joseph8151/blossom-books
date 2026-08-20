@@ -1,8 +1,8 @@
 import { Product } from "@/lib/types";
 import { blossomLevel } from "@/lib/utils";
-import { fromPriceKRW, formatKRW, volumeByPages, starterOption } from "@/data/pricing";
+import { fromPriceKRW, formatKRW, volumeByPages, starterOption, srVolumes, flexibleVolumes } from "@/data/pricing";
 
-const DIRECT_PAGES = [40, 60, 100];
+const DIRECT_PAGES = [40, 60, 100, 200];
 
 // 40·60·100·200p 분량 선택이 가능한 교재인지 판별합니다.
 export function offersVolumes(p: Product): boolean {
@@ -12,15 +12,20 @@ export function offersVolumes(p: Product): boolean {
   );
 }
 
-// 고정 분량(40/60/100P)으로 바로 구매 가능한 교재인지.
+// SR Reading Prep(종합 문제집) 전용 150·200·300P 분량 선택이 가능한 교재인지.
+export function offersSrVolumes(p: Product): boolean {
+  return p.examOrCurriculum === "SR Reading Level";
+}
+
+// 고정 분량(40/60/100/200P)으로 바로 구매 가능한 교재인지.
 export function isFixedDirect(p: Product): boolean {
-  return !offersVolumes(p) && p.pageCount != null && DIRECT_PAGES.includes(p.pageCount);
+  return !offersVolumes(p) && !offersSrVolumes(p) && p.pageCount != null && DIRECT_PAGES.includes(p.pageCount);
 }
 
 // 상담 없이 바로 구매할 수 있는 상품인지 판별합니다.
-// (분량 선택형이거나, 40/60/100P 고정 분량인 경우)
+// (분량 선택형이거나, SR 전용 분량 선택형이거나, 고정 분량인 경우)
 export function isDirectPurchase(p: Product): boolean {
-  return offersVolumes(p) || isFixedDirect(p);
+  return offersVolumes(p) || offersSrVolumes(p) || isFixedDirect(p);
 }
 
 // 진입(Starter, 25P) 구성을 제공하는 상품인지 — 영어 레벨테스트 상품에만 적용합니다.
@@ -28,8 +33,23 @@ export function hasStarter(p: Product): boolean {
   return offersVolumes(p) && p.track === "level-test" && /English/i.test(p.subject);
 }
 
+// 구매 가능한 분량 목록을 "150 / 200 / 300P" 형태로 표시합니다.
+export function volumeOptionsLabel(p: Product): string {
+  if (offersSrVolumes(p)) return srVolumes.map((v) => v.pages).join(" / ") + "P";
+  if (offersVolumes(p)) {
+    const pages = hasStarter(p)
+      ? [starterOption.pages, ...flexibleVolumes.map((v) => v.pages)]
+      : flexibleVolumes.map((v) => v.pages);
+    return pages.join(" / ") + "P";
+  }
+  return "";
+}
+
 // 상품 카드/목록에 표시할 가격 라벨.
 export function priceDisplay(p: Product): string {
+  if (offersSrVolumes(p)) {
+    return `${formatKRW(srVolumes[0].priceKRW)}부터`;
+  }
   if (offersVolumes(p)) {
     return hasStarter(p) ? `${formatKRW(starterOption.priceKRW)}부터` : `${formatKRW(fromPriceKRW)}부터`;
   }
@@ -78,6 +98,7 @@ export function insideTheWorkbook(p: Product): { area: string; items: string[] }
 }
 
 export function pagesLabel(p: Product): string {
+  if (offersSrVolumes(p)) return "150·200·300P";
   if (p.pageCount) return `${p.pageCount}P`;
   if (offersVolumes(p)) return "40·60·100·200P";
   return "구성 상담";
