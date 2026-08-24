@@ -8,6 +8,7 @@ import { difficultyLabel } from "@/lib/utils";
 import { BlossomSeries, seriesFor, seriesInfo, seriesOrder } from "@/data/series";
 import ProductCard from "@/components/books/ProductCard";
 import MissingBookCTA from "@/components/common/MissingBookCTA";
+import { trackEvent } from "@/lib/analytics";
 
 const tracks: (CurriculumTrack | "all")[] = [
   "all",
@@ -35,6 +36,10 @@ export default function BooksPage() {
   const [subject, setSubject] = useState<string>("all");
   const [difficulty, setDifficulty] = useState<number | "all">("all");
   const [series, setSeries] = useState<BlossomSeries | "all">("all");
+
+  useEffect(() => {
+    trackEvent("view_product_list");
+  }, []);
 
   // 다른 페이지에서 ?track=... / ?q=... 로 진입하면 해당 필터를 미리 적용합니다.
   useEffect(() => {

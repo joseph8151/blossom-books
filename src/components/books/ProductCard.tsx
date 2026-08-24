@@ -1,20 +1,26 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { Sparkles, Headphones, FileSearch, ArrowRight } from "lucide-react";
+import { Sparkles, Headphones, FileSearch, MessageCircle } from "lucide-react";
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
 import { coverToneFor } from "@/lib/utils";
-import { productBadges, isDirectPurchase, explanationLanguage } from "@/lib/productMeta";
+import { productBadges, priceDisplay, explanationLanguage } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import { BlossomSeal } from "@/components/books/BlossomSeal";
 import WishlistButton from "@/components/books/WishlistButton";
+import OrderModal from "@/components/books/OrderModal";
+import { trackEvent } from "@/lib/analytics";
 
-// 가치 중심 카드 — 가격 숫자를 전면에 두지 않고, 시험·과목·핵심 영역과 샘플을 먼저 보여줍니다.
-// 정확한 가격은 상세페이지에서 구성을 충분히 확인한 뒤 노출합니다. (Smart Pricing)
+// 가격을 명확히 보여주는 카드 — 방문자가 목록에서 바로 가격까지 확인할 수
+// 있어야 카카오톡 문의까지 이어질 확률이 높아집니다 (Smart Pricing 방식은
+// 폐기: 가격을 숨기면 오히려 이탈이 늘었습니다).
 export default function ProductCard({ product }: { product: Product }) {
   const lang = explanationLanguage(product);
   const coreAreas = product.units.slice(0, 3).join(" · ");
-  const direct = isDirectPurchase(product);
+  const [orderOpen, setOrderOpen] = useState(false);
 
   return (
     <div className="lift group relative flex flex-col overflow-hidden border border-navy-800/12 bg-ivory-100 shadow-card">
@@ -74,7 +80,13 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         <h3 className="mt-3 font-display text-[20px] font-semibold leading-snug text-navy-950">
-          {product.titleKo}
+          <Link
+            href={`/books/${product.id}`}
+            onClick={() => trackEvent("select_product", { product_id: product.id, location: "product_card" })}
+            className="transition-colors hover:text-brass-500"
+          >
+            {product.titleKo}
+          </Link>
         </h3>
         <p className="mt-1 text-[12px] text-charcoal-600">{product.subject}</p>
         <span className="mt-2 inline-flex w-fit items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2 py-0.5 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">
@@ -115,32 +127,36 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         <div className="mt-6 border-t border-navy-800/10 pt-4">
-          {/* 가격 대신 안내 라벨 + 품질 마크 */}
           <div className="flex items-center justify-between gap-2">
-            <p className="text-[12px] text-charcoal-600">
-              {direct ? "구성 선택 · 가격은 상세에서 확인" : "구성에 따라 맞춤 견적"}
-            </p>
+            <p className="font-display text-[20px] font-semibold text-navy-950">{priceDisplay(product)}</p>
             <BlossomSeal />
           </div>
 
           <div className="mt-3 flex gap-2">
             <Link
               href={`/books/${product.id}#sample`}
+              onClick={() => trackEvent("click_sample", { product_id: product.id, location: "product_card" })}
               className="inline-flex items-center justify-center gap-1.5 border border-navy-800/25 px-3.5 py-2 text-[12.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50"
             >
               <FileSearch size={13} />
               샘플 보기
             </Link>
-            <Link
-              href={`/books/${product.id}`}
+            <button
+              type="button"
+              onClick={() => {
+                trackEvent("click_order", { product_id: product.id, location: "product_card" });
+                setOrderOpen(true);
+              }}
               className="flex-1 inline-flex items-center justify-center gap-1.5 bg-navy-900 px-3.5 py-2 text-[12.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
             >
-              구성·가격 확인
-              <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
+              <MessageCircle size={13} />
+              이 교재 주문하기
+            </button>
           </div>
         </div>
       </div>
+
+      <OrderModal product={product} open={orderOpen} onClose={() => setOrderOpen(false)} />
     </div>
   );
 }

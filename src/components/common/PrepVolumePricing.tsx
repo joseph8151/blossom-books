@@ -11,8 +11,8 @@ import {
 } from "@/data/pricing";
 import { siteConfig } from "@/data/site";
 
-// 가치 중심 구성 안내 — 메인/시험별 페이지에서는 정확한 금액을 노출하지 않고,
-// 구성과 추천 대상만 보여준 뒤 "가격 확인하기"로 상세 페이지에서 확인하도록 유도합니다.
+// 분량별 가격 안내 — 가격을 바로 보여주고, 구성과 추천 대상까지 함께
+// 확인한 뒤 상세 페이지로 이동해 교재를 선택하도록 합니다.
 // sr=true면 일반 40/60/100/200P 대신 SR Reading Prep 전용 150/200/300P를 보여줍니다.
 export default function PrepVolumePricing({ buyProductId, sr = false }: { buyProductId?: string; sr?: boolean }) {
   const priceHref = buyProductId ? `/books/${buyProductId}#sample` : "/books";
@@ -37,6 +37,7 @@ export default function PrepVolumePricing({ buyProductId, sr = false }: { buyPro
                 </span>
               )}
               <p className="font-display text-[28px] font-semibold leading-none text-navy-950">{v.label}</p>
+              <p className="mt-2 font-display text-[20px] font-semibold text-navy-950">{formatKRW(v.priceKRW)}</p>
               <p className="mt-1.5 font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">{v.tier}</p>
               <p className="mt-1 text-[12.5px] text-charcoal-600">{v.tierKo}</p>
               <ul className="mt-4 flex-1 space-y-1.5">
@@ -55,7 +56,7 @@ export default function PrepVolumePricing({ buyProductId, sr = false }: { buyPro
                     : "border border-navy-800/25 text-navy-900 hover:border-navy-800/50"
                 }`}
               >
-                가격 확인하기
+                이 구성 주문하기
                 <ArrowRight size={14} />
               </Link>
             </div>

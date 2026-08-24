@@ -25,6 +25,7 @@ import SmartPricing from "@/components/books/SmartPricing";
 import { BlossomSeal } from "@/components/books/BlossomSeal";
 import VolumeGuide from "@/components/common/VolumeGuide";
 import PrepComparison from "@/components/common/PrepComparison";
+import TrackView from "@/components/common/TrackView";
 import { siteConfig } from "@/data/site";
 
 export function generateStaticParams() {
@@ -77,6 +78,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-12 pb-24 lg:px-8 lg:py-16 lg:pb-16">
+      <TrackView event="view_product" params={{ product_id: product.id, track: product.track }} />
       <nav className="text-[12.5px] text-charcoal-600">
         <Link href="/books" className="hover:text-navy-900">교재 찾기</Link>
         <span className="mx-2">/</span>
@@ -103,7 +105,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               direct ? "text-brass-500" : "text-burgundy-700"
             }`}
           >
-            {direct ? "Direct Purchase" : "Custom / Extended"}
+            {direct ? "Ready to Order" : "Custom / Extended"}
           </span>
           <span className="inline-flex items-center border border-navy-800/15 bg-ivory-200/50 px-2 py-0.5 font-label text-[9px] uppercase tracking-[0.1em] text-navy-800/65">
             Reviewed 2026
@@ -171,7 +173,19 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </p>
           </div>
 
-          {/* 04 · What You'll Practice */}
+          {/* 04 · Sample Preview — Inside the Book. 표지가 아니라 실제 문제를 가장 먼저 보여줍니다 */}
+          <div id="sample" className="mt-10 scroll-mt-24 border border-navy-800/12 bg-ivory-100 p-6 shadow-card lg:p-7">
+            <span className="eyebrow">Inside the Book</span>
+            <h2 className="mt-3 font-display text-[20px] font-semibold text-navy-950">표지만 보고 구매하지 마세요.</h2>
+            <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
+              실제 문제의 난이도, 지문 구성, 문제 유형, 해설 방식을 구매 전에 직접 확인하세요.
+            </p>
+            <div className="mt-4">
+              <SamplePreviewButton product={product} />
+            </div>
+          </div>
+
+          {/* 05 · What You'll Practice */}
           <div className="mt-10">
             <h2 className="font-display text-[20px] font-semibold text-navy-950">What You&apos;ll Practice</h2>
             <p className="mt-1.5 text-[13px] text-charcoal-600">이 교재에서 연습하는 영역입니다.</p>
@@ -191,7 +205,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </div>
           </div>
 
-          {/* 05 · How closely does it reflect the actual test? (실제 시험과의 유사성 — 눈에 띄게) */}
+          {/* 06 · How closely does it reflect the actual test? (실제 시험과의 유사성 — 눈에 띄게) */}
           <div className="mt-10 border border-navy-800/15 bg-navy-950 p-6 text-ivory-100 lg:p-7">
             <p className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-400">
               How closely does it reflect the actual test?
@@ -211,21 +225,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </p>
           </div>
 
-          {/* 06 · Difficulty / Structure — Specification · Test Alignment · Difficulty · Quality */}
+          {/* 07 · Difficulty / Structure — Specification · Test Alignment · Difficulty · Quality */}
           <div className="mt-10">
             <WorkbookSpecification product={product} />
-          </div>
-
-          {/* 07 · Sample Preview — 반드시 가격보다 먼저 */}
-          <div id="sample" className="mt-10 scroll-mt-24 border border-navy-800/12 bg-ivory-100 p-6 shadow-card lg:p-7">
-            <span className="eyebrow">See before you buy</span>
-            <h2 className="mt-3 font-display text-[20px] font-semibold text-navy-950">표지만 보고 구매하지 마세요.</h2>
-            <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
-              실제 문제의 난이도, 지문 구성, 문제 유형, 해설 방식을 확인한 뒤 결정하세요.
-            </p>
-            <div className="mt-4">
-              <SamplePreviewButton product={product} />
-            </div>
           </div>
 
           {/* 08 · What's Included */}
@@ -266,7 +268,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {offersVolumes && (
             <div className="mt-10">
               <div className="flex items-baseline justify-between gap-3">
-                <h2 className="font-display text-[20px] font-semibold text-navy-950">페이지 옵션 (40·60·100·200P)</h2>
+                <h2 className="font-display text-[20px] font-semibold text-navy-950">
+                  페이지 옵션 ({volumeOptionsLabel(product)})
+                </h2>
                 <Link href="/guide" className="shrink-0 text-[12.5px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4">
                   선택 가이드
                 </Link>

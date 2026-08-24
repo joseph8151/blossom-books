@@ -4,7 +4,7 @@ import { siteConfig } from "@/data/site";
 
 const trust = [
   { k: "Real Workbooks", v: "실제 Sample을 확인하세요." },
-  { k: "Clear Pricing", v: "40P ₩130,000 · 60P ₩150,000 · 100P ₩190,000" },
+  { k: "Clear Pricing", v: "40P ₩130,000 · 60P ₩150,000 · 100P ₩190,000 · 200P ₩275,000" },
   { k: "Human Support", v: "구매 전 상담원이 확인합니다." },
   { k: "Transparent Policy", v: "발송 후 환불 불가 · 오류 확인 시 최대 2회 수정" },
   { k: "Editorial Standard", v: "일관된 제작·검수 기준." },
@@ -31,8 +31,8 @@ export default function FinalCTA() {
             준비할 시험이 정해졌다면, 필요한 만큼 시작하세요.
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-[14.5px] leading-relaxed text-ivory-200/80">
-            40P ₩130,000 · 60P ₩150,000 · 100P ₩190,000. 100P 이상 집중 Prep이 필요하시면 별도 문의로
-            안내해 드립니다.
+            40P ₩130,000 · 60P ₩150,000 · 100P ₩190,000 · 200P ₩275,000. 200P 이상 집중 Prep이
+            필요하시면 별도 문의로 안내해 드립니다.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
@@ -57,11 +57,11 @@ export default function FinalCTA() {
               className="inline-flex items-center gap-2 bg-brass-500 px-7 py-3.5 text-[14px] font-medium text-navy-950 shadow-gold transition-all hover:-translate-y-0.5 hover:bg-brass-400"
             >
               <MessageCircle size={16} />
-              공식 카카오톡으로 구매
+              카카오톡으로 주문하기
             </a>
           </div>
           <p className="mt-5 text-[12px] text-ivory-200/55">
-            100P 이상의 집중 Prep이 필요하신가요?{" "}
+            200P 이상의 집중 Prep이 필요하신가요?{" "}
             <Link href="/custom-order" className="underline hover:text-ivory-100">Extended Prep 문의</Link>
           </p>
         </div>

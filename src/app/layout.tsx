@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import KakaoFloatingButton from "@/components/layout/KakaoFloatingButton";
 import MobileBottomBar from "@/components/layout/MobileBottomBar";
 
 // 참고: 폰트(Cormorant Garamond, IBM Plex Mono, Pretendard)는
@@ -69,7 +68,6 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <KakaoFloatingButton />
         <MobileBottomBar />
 
         {/*

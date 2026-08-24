@@ -8,6 +8,7 @@ import { products, trackLabels } from "@/data/products";
 import { isFourSkill } from "@/lib/productMeta";
 import { blossomLevel } from "@/lib/utils";
 import { Product } from "@/lib/types";
+import { trackEvent } from "@/lib/analytics";
 
 // 입력값을 실제 교재와 매칭해 적합도와 이유를 계산합니다.
 function gradeRange(str: string): [number, number] {
@@ -381,6 +382,7 @@ export default function FindPage() {
               <div className="mt-4 flex flex-wrap gap-2">
                 <Link
                   href={`/books/${rec.product.id}`}
+                  onClick={() => trackEvent("click_recommendation", { product_id: rec.product.id })}
                   className="group inline-flex items-center gap-1.5 bg-navy-900 px-5 py-2.5 text-[13px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
                 >
                   교재 보기 · 무료 샘플

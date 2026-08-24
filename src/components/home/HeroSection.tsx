@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowRight, Check, GraduationCap } from "lucide-react";
+import { ArrowRight, Check, GraduationCap, FileSearch } from "lucide-react";
 import { BookCoverMockup } from "./BookCoverMockup";
+import { fromPriceKRW, formatKRW } from "@/data/pricing";
+import { trackEvent } from "@/lib/analytics";
 
 // 첫 화면은 가격을 노출하지 않습니다. 목적은 "여기서 내 아이에게 맞는 교재를 찾을 수 있겠다"는 확신.
 // 각 시험 칩 → /books 검색으로 연결 (해당 교재가 없으면 주문제작 안내로 이어집니다)
@@ -34,37 +38,48 @@ export default function HeroSection() {
             International Assessment &amp; Academic Prep
           </span>
 
-          {/* 영문 포지셔닝 라인 — 브랜드가 무엇을 하는지 즉시 전달 */}
-          <h1 className="mt-7 font-display text-[27px] font-semibold leading-[1.15] tracking-[-0.01em] text-navy-950 text-balance min-[400px]:text-[31px] sm:text-[38px] lg:text-[44px]">
-            Assessment Prep,
-            <br />
-            <span className="text-brass-500">Built Around the Student.</span>
+          {/* 상품 중심 후킹 — 브랜드 철학보다 "무엇을 파는지"가 먼저 보이게 */}
+          <p className="mt-6 font-display text-[19px] font-medium leading-snug text-charcoal-900 min-[400px]:text-[21px]">
+            시험 전에, 풀어볼 문제가 부족하다면.
+          </p>
+          <h1 className="mt-2 font-display text-[34px] font-semibold leading-[1.1] tracking-[-0.01em] text-navy-950 min-[400px]:text-[38px] sm:text-[46px] lg:text-[52px]">
+            Blossom Books
           </h1>
 
-          <p className="mt-6 max-w-xl text-[14.5px] font-medium leading-[1.75] text-navy-900">
-            국제학교 · 레벨테스트 · 미국/영국 시험 대비
+          <p className="mt-5 max-w-xl text-[14.5px] font-medium leading-[1.75] text-navy-900">
+            CAT4 · MAP · 국제학교 레벨테스트 · SAT · 미국교과 · Reading · Math
           </p>
           <p className="mt-3 max-w-xl text-[14.5px] leading-[1.9] text-charcoal-600">
-            같은 시험을 준비하더라도 학생의 학년, 현재 수준, 목표 점수에 따라 필요한 문제는 달라집니다.
-            Blossom Books는 시험 이름만 보고 교재를 선택하지 않습니다. 현재 수준과 준비 목적을 기준으로
-            가장 적합한 학습 구성을 안내합니다.
+            시험과 수업 목적에 맞춘 Premium Prep Workbook.
+            <br />
+            문제 + 정답 + 상세해설 · Digital PDF ·{" "}
+            <span className="font-semibold text-navy-950">{formatKRW(fromPriceKRW)}부터</span>
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <Link
-              href="/find"
+              href="/books"
+              onClick={() => trackEvent("view_product_list", { location: "hero" })}
               className="group inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
             >
-              내게 맞는 교재 찾기
+              시험별 교재 찾기
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link
-              href="/books"
+              href="#bestsellers"
               className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50 hover:shadow-soft"
             >
-              시험별 교재 보기
+              <FileSearch size={16} />
+              실제 문제 샘플 보기
             </Link>
           </div>
+
+          <p className="mt-4 text-[13px] text-charcoal-600">
+            어떤 교재를 선택해야 할지 모르시나요?{" "}
+            <Link href="/find" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
+              내게 맞는 교재 추천받기 →
+            </Link>
+          </p>
 
           {/* 제작진 신뢰 배지 — 클릭 시 제작 방식 페이지로 */}
           <Link
@@ -78,7 +93,7 @@ export default function HeroSection() {
 
           {/* 신뢰 마이크로카피 */}
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-charcoal-600">
-            {["구매 전 무료 샘플 확인", "결제 후 PDF 즉시 발송", "전 문항 정답·상세 해설"].map((t) => (
+            {["정답·상세해설 포함", "구매 전 Sample 확인", "결제 확인 후 PDF 발송"].map((t) => (
               <span key={t} className="inline-flex items-center gap-1.5">
                 <Check size={14} className="text-brass-500" strokeWidth={2.5} />
                 {t}
