@@ -47,7 +47,7 @@ export default function HeroSection() {
           </h1>
 
           <p className="mt-5 max-w-xl text-[14.5px] font-medium leading-[1.75] text-navy-900">
-            CAT4 · MAP · 국제학교 레벨테스트 · SAT · 미국교과 · Reading · Math
+            CAT4 · MAP · 학원 레벨테스트 · SAT · 미국교과 · Reading · Math
           </p>
           <p className="mt-3 max-w-xl text-[14.5px] leading-[1.9] text-charcoal-600">
             시험과 수업 목적에 맞춘 Premium Prep Workbook.
