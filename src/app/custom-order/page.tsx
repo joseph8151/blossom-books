@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { CustomerType } from "@/lib/types";
@@ -23,6 +23,29 @@ export default function CustomOrderPage() {
   const [submitting, setSubmitting] = useState(false);
   const [viaMail, setViaMail] = useState(false); // 서버 접수 실패 시 메일 앱으로 대체되었는지
   const [consent, setConsent] = useState(false);
+
+  // /find에서 "이 조건으로 맞춤 견적 받기"로 넘어온 경우, 쿼리스트링에 실려 온
+  // 학년·시험·수준·목적·희망완료시기·연락처를 폼에 미리 채워 넣습니다.
+  const examOrCurriculumRef = useRef<HTMLInputElement>(null);
+  const gradeRef = useRef<HTMLInputElement>(null);
+  const currentLevelRef = useRef<HTMLInputElement>(null);
+  const purposeRef = useRef<HTMLInputElement>(null);
+  const desiredCompletionRef = useRef<HTMLInputElement>(null);
+  const contactRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const set = (ref: React.RefObject<HTMLInputElement | null>, key: string) => {
+      const v = params.get(key);
+      if (v && ref.current) ref.current.value = v;
+    };
+    set(examOrCurriculumRef, "examOrCurriculum");
+    set(gradeRef, "grade");
+    set(currentLevelRef, "currentLevel");
+    set(purposeRef, "purpose");
+    set(desiredCompletionRef, "desiredCompletion");
+    set(contactRef, "contact");
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -150,15 +173,15 @@ export default function CustomOrderPage() {
           </div>
           <div>
             <label className={labelClass}>시험 또는 교육과정</label>
-            <input name="examOrCurriculum" className={fieldClass} placeholder="예: AP Biology, CAT4, 자체 레벨테스트" />
+            <input ref={examOrCurriculumRef} name="examOrCurriculum" className={fieldClass} placeholder="예: AP Biology, CAT4, 자체 레벨테스트" />
           </div>
           <div>
             <label className={labelClass}>학생 학년</label>
-            <input name="grade" className={fieldClass} placeholder="예: 초등 5학년, Grade 9" />
+            <input ref={gradeRef} name="grade" className={fieldClass} placeholder="예: 초등 5학년, Grade 9" />
           </div>
           <div>
             <label className={labelClass}>현재 레벨</label>
-            <input name="currentLevel" className={fieldClass} placeholder="예: 상위권, SR 5.0" />
+            <input ref={currentLevelRef} name="currentLevel" className={fieldClass} placeholder="예: 상위권, SR 5.0" />
           </div>
           <div>
             <label className={labelClass}>필요한 교재 종류</label>
@@ -178,11 +201,11 @@ export default function CustomOrderPage() {
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
             <label className={labelClass}>사용 목적</label>
-            <input name="purpose" className={fieldClass} placeholder="예: 정규 수업용, 레벨테스트 대비" />
+            <input ref={purposeRef} name="purpose" className={fieldClass} placeholder="예: 정규 수업용, 레벨테스트 대비" />
           </div>
           <div>
             <label className={labelClass}>희망 완료 시기</label>
-            <input name="desiredCompletion" className={fieldClass} placeholder="예: 2주 이내, 다음 학기 전까지" />
+            <input ref={desiredCompletionRef} name="desiredCompletion" className={fieldClass} placeholder="예: 2주 이내, 다음 학기 전까지" />
           </div>
         </div>
 
@@ -200,7 +223,7 @@ export default function CustomOrderPage() {
             </div>
             <div>
               <label className={labelClass}>연락처</label>
-              <input name="contact" required className={fieldClass} placeholder="010-0000-0000" />
+              <input ref={contactRef} name="contact" required className={fieldClass} placeholder="010-0000-0000" />
             </div>
             <div>
               <label className={labelClass}>이메일</label>
