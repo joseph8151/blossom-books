@@ -106,13 +106,16 @@ export function pagesLabel(p: Product): string {
 
 // 다음 단계(재구매) 연결 — 명시적 학습 사다리 우선, 없으면 같은 track에서 난이도 높은 교재로 이어집니다.
 const NEXT_ID: Record<string, string> = {
-  "english-level-test-g1-2": "english-level-test-g3-4",
-  "english-level-test-g3-4": "english-level-test-g5-6",
+  "english-level-test-g1": "english-level-test-g2",
+  "english-level-test-g2": "english-level-test-g3",
+  "english-level-test-g3": "english-level-test-g4",
+  "english-level-test-g4": "english-level-test-g5",
+  "english-level-test-g5": "english-level-test-g6",
   "sr-reading-prep-g2-3": "sr-reading-prep-g4-5",
   "sr-reading-prep-g4-5": "sr-reading-prep-g6-8",
   "prealgebra-workbook": "algebra-1-workbook",
   "algebra-1-workbook": "algebra-2-workbook",
-  "math-reasoning-level-test": "english-level-test-g1-2",
+  "math-reasoning-level-test": "english-level-test-g1",
 };
 
 export function nextWorkbooks(p: Product, all: Product[]): Product[] {

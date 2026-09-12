@@ -795,8 +795,11 @@ The discovery of the waggle dance changed the way scientists think about animals
 
 Understanding the language of bees is more than a fascinating puzzle. Honeybees pollinate a large share of the crops that people depend on, from apples to almonds. When bees guide one another efficiently to flowers, they pollinate more plants and strengthen the food supply for humans and wildlife alike. By studying a dance performed in complete darkness, scientists have uncovered lessons about cooperation, survival, and the surprising intelligence hidden within the natural world.`;
 
-export const placementReadingByProduct: Record<string, SampleItem[]> = {
-  "english-level-test-g1-2": [
+// 영어 레벨테스트는 학년마다 따로 나온 단행본입니다(G1–2처럼 묶은 시리즈가
+// 아닙니다). 다만 실제 샘플 지문·문항은 인접한 두 학년(G1·G2 / G3·G4 / G5·G6)이
+// 같은 출제 분석을 바탕으로 만들어져 지문 풀을 공유합니다 — 가상의 샘플을
+// 새로 만들어내지 않고, 실제 존재하는 지문·문항을 그대로 재사용합니다.
+const g1_2Reading: SampleItem[] = [
     {
       area: "Reading", type: "Main Idea", skill: "Identify the central idea", difficulty: "Foundation",
       passage: passageG1_2,
@@ -826,8 +829,9 @@ export const placementReadingByProduct: Record<string, SampleItem[]> = {
       why: "The text says, 'A large group of penguins is called a colony.'",
       whyKo: "지문에 정의가 그대로 나옵니다: ‘A large group of penguins is called a colony.’ 앞뒤 문맥으로 뜻을 확인하는 어휘 유형입니다.",
     },
-  ],
-  "english-level-test-g3-4": [
+];
+
+const g3_4Reading: SampleItem[] = [
     {
       area: "Reading", type: "Main Idea", skill: "Identify the central idea", difficulty: "Standard",
       passage: passageG3_4,
@@ -864,8 +868,9 @@ export const placementReadingByProduct: Record<string, SampleItem[]> = {
       why: "The sentences before the word describe the octopus changing color to match rocks and sand.",
       whyKo: "‘camouflage’ 앞 문장에서 문어가 바위·모래에 맞춰 색을 바꿔 ‘주변에 섞여 숨는다’고 설명합니다. 문맥으로 ‘위장(주변에 섞여 숨기)’ 뜻을 확인합니다.",
     },
-  ],
-  "english-level-test-g5-6": [
+];
+
+const g5_6Reading: SampleItem[] = [
     {
       area: "Reading", type: "Main Idea", skill: "Identify the central idea", difficulty: "Standard",
       passage: passageG5_6,
@@ -907,14 +912,22 @@ export const placementReadingByProduct: Record<string, SampleItem[]> = {
       why: "The dance is described as a precise, multi-part series of movements that carries specific meaning, so 'elaborate' means detailed and complex.",
       whyKo: "‘elaborate series of movements’는 방향·거리 같은 구체적 정보를 담은 정교하고 복잡한 동작을 뜻합니다. 문맥상 ‘정교한/복잡한’이 알맞습니다.",
     },
-  ],
+];
+
+export const placementReadingByProduct: Record<string, SampleItem[]> = {
+  "english-level-test-g1": g1_2Reading,
+  "english-level-test-g2": g1_2Reading,
+  "english-level-test-g3": g3_4Reading,
+  "english-level-test-g4": g3_4Reading,
+  "english-level-test-g5": g5_6Reading,
+  "english-level-test-g6": g5_6Reading,
 };
 
 // ── SR Reading 학년별 (긴 지문 + 유형 확장) ──────────────
 // SR 제품은 Reading 전용이므로 지문 하나에 다양한 유형(주제·세부·추론·어휘·의도·구조)을 담아 풍성하게 구성합니다.
 export const srReadingByProduct: Record<string, SampleItem[]> = {
   "sr-reading-prep-g2-3": [
-    ...placementReadingByProduct["english-level-test-g1-2"],
+    ...g1_2Reading,
     {
       area: "Reading", type: "Author's Purpose", skill: "Identify the author's purpose", difficulty: "Standard",
       passage: passageG1_2,
@@ -935,7 +948,7 @@ export const srReadingByProduct: Record<string, SampleItem[]> = {
     },
   ],
   "sr-reading-prep-g4-5": [
-    ...placementReadingByProduct["english-level-test-g3-4"],
+    ...g3_4Reading,
     {
       area: "Reading", type: "Author's Purpose", skill: "Identify the author's purpose", difficulty: "Advanced",
       passage: passageG3_4,
@@ -956,7 +969,7 @@ export const srReadingByProduct: Record<string, SampleItem[]> = {
     },
   ],
   "sr-reading-prep-g6-8": [
-    ...placementReadingByProduct["english-level-test-g5-6"],
+    ...g5_6Reading,
     {
       area: "Reading", type: "Author's Purpose", skill: "Identify the author's purpose", difficulty: "Advanced",
       passage: passageG5_6,

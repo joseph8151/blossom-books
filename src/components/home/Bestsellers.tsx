@@ -7,7 +7,7 @@ import ProductCard from "@/components/books/ProductCard";
 const bestsellerIds = [
   "cat4-level-e",
   "map-growth-workbook",
-  "english-level-test-g3-4",
+  "english-level-test-g3",
   "sat-math-workbook",
   "ap-calculus-workbook",
   "sr-reading-prep-g4-5",

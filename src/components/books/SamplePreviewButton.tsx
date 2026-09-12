@@ -56,9 +56,12 @@ const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challen
 
 // 학년대별 난이도 티어 — 같은 4영역 레벨테스트라도 학년에 따라 다른 문항을 노출합니다.
 const LT_TIER: Record<string, Difficulty> = {
-  "english-level-test-g1-2": "Foundation",
-  "english-level-test-g3-4": "Standard",
-  "english-level-test-g5-6": "Advanced",
+  "english-level-test-g1": "Foundation",
+  "english-level-test-g2": "Foundation",
+  "english-level-test-g3": "Standard",
+  "english-level-test-g4": "Standard",
+  "english-level-test-g5": "Advanced",
+  "english-level-test-g6": "Advanced",
 };
 
 // 목표 난이도에 가까운 순으로 정렬해 n개를 뽑습니다. (티어 문항이 먼저 오도록)
