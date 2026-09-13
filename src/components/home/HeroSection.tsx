@@ -10,6 +10,7 @@ import { trackEvent } from "@/lib/analytics";
 // 각 시험 칩 → /books 검색으로 연결 (해당 교재가 없으면 주문제작 안내로 이어집니다)
 const assessments: { label: string; href: string }[] = [
   { label: "영어학원 레벨테스트", href: "/books?track=level-test" },
+  { label: "영어 내신 대비 (G5–7)", href: "/books?q=Grammar" },
   { label: "사고력수학 레벨테스트", href: "/books?q=%EC%82%AC%EA%B3%A0%EB%A0%A5" },
   { label: "MAP Growth", href: "/books?q=MAP" },
   { label: "CAT4", href: "/books?q=CAT4" },
