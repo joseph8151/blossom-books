@@ -91,12 +91,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <span className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">
             {trackLabels[product.track]}
           </span>
-          <Link
-            href={`/series#${seriesFor(product)}`}
-            className="inline-flex items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-brass-500 transition-colors hover:border-brass-500/70"
-          >
+          <span className="inline-flex items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-brass-500">
             {seriesInfo[seriesFor(product)].name}
-          </Link>
+          </span>
           <span className="inline-flex items-center gap-1.5 border border-navy-800/20 bg-ivory-200/50 px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-navy-800/80">
             {blossomLevel(product.difficulty)} · {BLOSSOM_LEVEL_KO[blossomLevel(product.difficulty)]}
           </span>

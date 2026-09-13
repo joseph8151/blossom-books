@@ -18,7 +18,6 @@ export const primaryNav = [
   { label: "교재 찾기", href: "/books" },
   { label: "교재 추천받기", href: "/find" },
   { label: "레벨 진단 교재", href: "/level-assessment" },
-  { label: "교재 시리즈", href: "/series" },
   { label: "모의고사", href: "/mock-exams" },
   { label: "분량 선택 가이드", href: "/guide" },
   { label: "주문 제작", href: "/custom-order" },

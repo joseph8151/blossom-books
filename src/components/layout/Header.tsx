@@ -12,7 +12,6 @@ import { useWishlistIds } from "@/components/books/WishlistButton";
 const koDesktopNav = [
   { label: "교재 찾기", href: "/books" },
   { label: "레벨 진단", href: "/level-assessment" },
-  { label: "교재 시리즈", href: "/series" },
   { label: "주문 제작", href: "/custom-order" },
   { label: "기관·학원", href: "/institutions" },
   { label: "블러섬북스 소개", href: "/about" },
