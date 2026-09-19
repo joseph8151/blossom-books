@@ -80,7 +80,7 @@ export default function PrepVolumePricing({ buyProductId }: { buyProductId?: str
 
       {/* 가격대 힌트 (최고가는 첫 화면에서 노출하지 않음) */}
       <p className="mt-6 text-[13.5px] text-charcoal-900">
-        교재 구성 40P부터 · <span className="font-display text-[16px] font-semibold text-navy-950">{formatKRW(fromPriceKRW)}부터</span>
+        교재 구성 100P부터 · <span className="font-display text-[16px] font-semibold text-navy-950">{formatKRW(fromPriceKRW)}부터</span>
         <span className="ml-1.5 text-[12.5px] text-charcoal-600">정확한 가격은 각 교재 상세에서 확인하실 수 있습니다.</span>
       </p>
 
