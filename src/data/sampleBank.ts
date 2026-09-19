@@ -914,6 +914,67 @@ const g5_6Reading: SampleItem[] = [
     },
 ];
 
+// 국어 문해력 레벨테스트 대비 — 학교·기관 기출을 복제하지 않고, 어휘·핵심
+// 요지·내용 파악·문맥·구조·추론을 한 지문 안에서 연습하도록 독립 제작한
+// 정보글 지문입니다.
+const koreanLiteracyPassage1 = `도시의 빈 옥상이 바뀌고 있다. 몇몇 학교는 옥상에 흙을 얇게 깔고 상추와 방울토마토를 심었다. 흙은 여름 햇볕을 덜 받아들이게 해서 건물 안 온도가 조금 낮아진다. 학생들은 매주 물을 주고 수확한 채소를 급식실에 보낸다. 옥상 텃밭이 만능은 아니다. 바람이 세면 화분이 쓰러지고, 겨울에는 작물이 잘 자라지 않는다. 그래도 교실에서만 보던 '환경'이라는 말이 손과 흙으로 연결된다는 점에서, 학교는 이 수업을 계속하기로 했다.`;
+
+const koreanLiteracyReading: SampleItem[] = [
+  {
+    area: "Reading",
+    type: "핵심 요지",
+    skill: "글의 핵심 요지 파악하기",
+    difficulty: "Standard",
+    passage: koreanLiteracyPassage1,
+    question: "이 글의 핵심 요지로 가장 알맞은 것은?",
+    choices: [
+      "모든 도시 건물은 옥상 텃밭을 만들어야 한다.",
+      "학교는 한계를 알면서도 옥상 텃밭 수업을 이어 가기로 했다.",
+      "옥상 텃밭은 겨울에 가장 잘 자란다.",
+      "급식실 채소는 모두 옥상에서 온다.",
+    ],
+    answer: "학교는 한계를 알면서도 옥상 텃밭 수업을 이어 가기로 했다.",
+    why: "글은 옥상 텃밭의 효과와 한계를 말한 뒤, 그래도 수업을 계속한다고 맺습니다.",
+    whyKo:
+      "글은 옥상 텃밭의 효과와 한계를 말한 뒤, 그래도 수업을 계속한다고 맺습니다. A는 글이 주장하지 않습니다. C·D는 지문과 반대이거나 과장입니다.",
+  },
+  {
+    area: "Reading",
+    type: "문맥 · 어휘",
+    skill: "밑줄 친 표현의 의미를 문맥으로 파악하기",
+    difficulty: "Standard",
+    passage: koreanLiteracyPassage1,
+    question: "밑줄 친 '만능은 아니다'의 의미로 가장 알맞은 것은?",
+    choices: [
+      "옥상 텃밭에는 장점만 있다",
+      "옥상 텃밭은 어떤 문제에도 완벽한 해답이 아니다",
+      "옥상 텃밭은 수업을 할 수 없다",
+      "옥상 텃밭은 비용이 전혀 들지 않는다",
+    ],
+    answer: "옥상 텃밭은 어떤 문제에도 완벽한 해답이 아니다",
+    why: "바로 다음 문장에 바람과 겨울 문제가 나옵니다.",
+    whyKo:
+      "바로 다음 문장에 바람과 겨울 문제가 나옵니다. '만능'은 모든 상황을 해결한다는 뜻이므로, 그렇지 않다는 말입니다.",
+  },
+  {
+    area: "Reading",
+    type: "추론",
+    skill: "글을 바탕으로 추론하기",
+    difficulty: "Standard",
+    passage: koreanLiteracyPassage1,
+    question: "이 글을 바탕으로 추론할 수 있는 것은?",
+    choices: [
+      "학교는 환경 수업을 손과 경험으로 연결하려 한다.",
+      "옥상 텃밭만 있으면 에어컨이 필요 없다.",
+      "학생들은 텃밭 일을 싫어한다.",
+      "모든 가정에도 옥상 텃밭이 있다.",
+    ],
+    answer: "학교는 환경 수업을 손과 경험으로 연결하려 한다.",
+    why: "마지막 문장의 '손과 흙으로 연결'이 근거입니다.",
+    whyKo: "마지막 문장의 '손과 흙으로 연결'이 근거입니다. B·C·D는 지문에 없습니다.",
+  },
+];
+
 export const placementReadingByProduct: Record<string, SampleItem[]> = {
   "english-level-test-g1": g1_2Reading,
   "english-level-test-g2": g1_2Reading,
@@ -921,6 +982,7 @@ export const placementReadingByProduct: Record<string, SampleItem[]> = {
   "english-level-test-g4": g3_4Reading,
   "english-level-test-g5": g5_6Reading,
   "english-level-test-g6": g5_6Reading,
+  "korean-literacy-level-test": koreanLiteracyReading,
 };
 
 // ── SR Reading 학년별 (긴 지문 + 유형 확장) ──────────────

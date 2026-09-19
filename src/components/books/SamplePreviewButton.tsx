@@ -142,6 +142,8 @@ function buildWorkbookItems(product: Product): SampleItem[] {
   }
   // SR Reading 전용 제품 — 긴 지문 + 유형 확장
   if (srReadingByProduct[product.id]) return srReadingByProduct[product.id];
+  // 국어 문해력 레벨테스트 — 정보글·이야기글 지문 전용 세트 (전부 노출)
+  if (product.id === "korean-literacy-level-test") return placementReadingByProduct[product.id];
   // Algebra 1 / 2 — 난이도로 서로 다른 문항 세트 노출
   if (product.id === "algebra-1-workbook") return algebraBank.filter((i) => ["Foundation", "Standard"].includes(i.difficulty));
   if (product.id === "algebra-2-workbook") return algebraBank.filter((i) => ["Advanced", "Challenge"].includes(i.difficulty));

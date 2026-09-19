@@ -981,6 +981,38 @@ export const products: Product[] = [
     sampleAvailable: true,
   },
 
+  // ── 국어 문해력 레벨테스트 대비 ──────────────────────────
+  // 학년 범위를 넓게 잡은 단행본 1권. 학교·기관 기출이 아닌 자체 제작 지문입니다.
+  {
+    id: "korean-literacy-level-test",
+    title: "Korean Literacy Level Test Prep",
+    titleKo: "국어 문해력 레벨테스트 대비 문제집",
+    track: "level-test",
+    subject: "Korean Literacy",
+    examOrCurriculum: "국어 문해력 레벨테스트",
+    gradeRange: "Grade 3–6",
+    levelLabel: "40·60·100·200p 선택",
+    difficulty: 3,
+    materialType: "existing",
+    includesAnswerKey: true,
+    includesDetailedExplanations: true,
+    fileFormat: "PDF",
+    components: [
+      { label: "Student Workbook", descriptionKo: "정보글·이야기글 지문 기반 독해 통합 (40·60·100·200p 중 선택)" },
+      { label: "Answer Key & Explanations", descriptionKo: "전 문항 정답 및 상세 해설" },
+    ],
+    units: ["어휘", "핵심 요지", "내용 파악", "문맥", "구조", "추론"],
+    summaryKo:
+      "국어 문해력 레벨테스트·진단 대비 단행본. 기관 기출이 아닌 자체 제작 지문으로 어휘·핵심 요지·내용 파악·문맥·구조·추론을 연습. 40·60·100·200p 선택.",
+    descriptionKo:
+      "국어 문해력 진단·레벨테스트는 기관마다 지문 길이와 묻는 방식이 다릅니다. 이 책은 학교나 기관의 기출문제가 아니라, 국어 문해력 전문 선생님이 정보글·이야기글 지문을 직접 제작해 어휘, 핵심 요지, 내용 파악, 문맥, 구조, 추론을 한 지문 안에서 연습하도록 구성한 단행본입니다.",
+    recommendedForKo: "국어 문해력 진단·레벨테스트를 준비하는 초등 학생",
+    domesticPayment: "bank-transfer",
+    internationalPayment: "paypal",
+    coverAccent: "burgundy",
+    sampleAvailable: true,
+  },
+
   // ── SR Reading Prep (SR 독해 유형 종합 · 150/200/300P 선택) ──
   // SR Reading Level 대비 종합 문제집. 150·200·300P 중 선택해 바로 구매할 수 있습니다.
   {
