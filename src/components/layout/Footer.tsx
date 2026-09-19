@@ -24,6 +24,10 @@ const linkGroups = [
       { label: "SR 대비", href: "/prep/sr" },
       { label: "MAP 대비", href: "/prep/map" },
       { label: "SAT · AP 대비", href: "/prep/sat" },
+      { label: "TOEFL 대비", href: "/prep/toefl" },
+      { label: "IELTS 대비", href: "/prep/ielts" },
+      { label: "PTE 대비", href: "/prep/pte" },
+      { label: "OET 대비", href: "/prep/oet" },
     ],
   },
   {
