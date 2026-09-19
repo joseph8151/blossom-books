@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Check, GraduationCap } from "lucide-react";
-import { BookCoverMockup } from "./BookCoverMockup";
+import { LevelGrowthGraphic } from "./LevelGrowthGraphic";
 
 // 첫 화면은 가격을 노출하지 않습니다. 목적은 "여기서 내 아이에게 맞는 교재를 찾을 수 있겠다"는 확신.
 // 각 시험 칩 → /books 검색으로 연결 (해당 교재가 없으면 주문제작 안내로 이어집니다)
@@ -45,9 +45,8 @@ export default function HeroSection() {
             국제학교 · 레벨테스트 · 미국/영국 시험 대비
           </p>
           <p className="mt-3 max-w-xl text-[14.5px] leading-[1.9] text-charcoal-600">
-            같은 시험을 준비하더라도 학생의 학년, 현재 수준, 목표 점수에 따라 필요한 문제는 달라집니다.
-            Blossom Books는 시험 이름만 보고 교재를 선택하지 않습니다. 현재 수준과 준비 목적을 기준으로
-            가장 적합한 학습 구성을 안내합니다.
+            같은 시험이라도 학년·현재 수준·목표 점수에 따라 필요한 문제는 다릅니다. 시험 이름이 아니라
+            학생의 수준을 기준으로 교재를 안내합니다.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -87,45 +86,25 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* 우측 교재 목업 */}
-        <div className="relative mx-auto flex h-[420px] w-full max-w-md items-center justify-center lg:h-[480px]">
-          {/* 표지 뒤 은은한 브래스 광채 */}
-          <div className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(circle_at_50%_46%,rgba(173,138,78,0.16),transparent_62%)]" />
-          <BookCoverMockup
-            eyebrow="Level Test Workbook"
-            title="Level Test"
-            subtitle="Reading · Vocabulary · Grammar · Writing"
-            tone="pink"
-            tabLabel="LT"
-            className="absolute left-2 top-2 -rotate-[9deg]"
-          />
-          <BookCoverMockup
-            eyebrow="U.S. Curriculum"
-            title="Reading"
-            subtitle="Grade별 학습 문제집"
-            tone="ivory"
-            tabLabel="US"
-            className="absolute right-0 top-6 rotate-[7deg]"
-          />
-          <BookCoverMockup
-            eyebrow="International School"
-            title="Math & English"
-            subtitle="국제학교 학습 콘텐츠"
-            tone="navy"
-            tabLabel="IS"
-            className="relative z-10 -rotate-[2deg]"
-          />
+        {/* 우측 비주얼 — 레벨 매칭 성장 그래프 */}
+        <div className="relative mx-auto flex w-full max-w-md items-center justify-center">
+          <LevelGrowthGraphic />
         </div>
       </div>
 
       {/* 대비 가능한 시험 · 과목 — 첫 화면에서 "무엇을 다루는지" 즉시 이해 */}
       <div className="border-t border-navy-800/12 bg-ivory-200/40">
         <div className="mx-auto max-w-7xl px-5 py-7 lg:px-8">
-          <p className="font-label text-[10.5px] uppercase tracking-[0.16em] text-navy-800/55">
-            Assessments we prepare for
-          </p>
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <p className="font-label text-[10.5px] uppercase tracking-[0.16em] text-navy-800/55">
+              Assessments we prepare for
+            </p>
+            <Link href="/books" className="text-[12px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4">
+              전체 시험 보기
+            </Link>
+          </div>
           <div className="mt-3 flex flex-wrap gap-x-2 gap-y-2">
-            {assessments.map((x) => (
+            {assessments.slice(0, 9).map((x) => (
               <Link
                 key={x.label}
                 href={x.href}
@@ -134,6 +113,12 @@ export default function HeroSection() {
                 {x.label}
               </Link>
             ))}
+            <Link
+              href="/books"
+              className="border border-dashed border-navy-800/25 px-2.5 py-1 font-label text-[11.5px] tracking-wide text-charcoal-600 transition-colors hover:border-brass-500/60 hover:text-navy-900"
+            >
+              +{assessments.length - 9}개 더보기
+            </Link>
           </div>
           <div className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-[12.5px] text-charcoal-600">
             <span className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">Subjects</span>

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Check, ArrowRight, MessageCircle, HelpCircle, Target, ListOrdered } from "lucide-react";
+import { Check, ArrowRight, MessageCircle, HelpCircle } from "lucide-react";
 import { prepTracks } from "@/data/prepTracks";
 import { products } from "@/data/products";
 import { siteConfig } from "@/data/site";
@@ -28,22 +28,14 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
   return (
     <div>
       {/* 히어로 */}
-      <section className="paper-rule relative overflow-hidden border-b border-navy-800/12 bg-ivory-100 py-16 lg:py-24">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,rgba(173,138,78,0.1),transparent_55%)]" />
-        <div className="relative mx-auto max-w-4xl px-5 lg:px-8">
+      <section className="paper-rule border-b border-navy-800/12 bg-ivory-100 py-16 lg:py-24">
+        <div className="mx-auto max-w-4xl px-5 lg:px-8">
           <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Exam prep</p>
           <h1 className="mt-3 font-display text-[32px] font-semibold leading-tight text-navy-950 sm:text-[42px]">
             {t.name}
           </h1>
           <p className="mt-1 font-display text-[18px] text-burgundy-700">{t.ko}</p>
           <p className="mt-5 max-w-2xl text-[15px] leading-[1.9] text-charcoal-600">{t.intro}</p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {t.areas.map((a) => (
-              <span key={a.area} className="border border-brass-500/30 bg-brass-500/[0.07] px-3 py-1.5 font-label text-[10.5px] uppercase tracking-[0.08em] text-navy-900">
-                {a.area}
-              </span>
-            ))}
-          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             {t.booksTrack && (
               <Link href={`/books?track=${t.booksTrack}`} className="lift-sm inline-flex items-center gap-2 bg-navy-900 px-6 py-3.5 text-[14px] font-medium text-ivory-100 shadow-soft transition-colors hover:bg-navy-800">
@@ -73,17 +65,17 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
             </div>
             <div>
               <h2 className="font-display text-[22px] font-semibold text-navy-950">평가하는 영역</h2>
-              <div className="mt-5 space-y-4">
-                {t.areas.map((a) => (
-                  <div key={a.area} className="lift-sm border border-navy-800/12 bg-ivory-100 p-4 shadow-card">
-                    <p className="flex items-center gap-1.5 font-label text-[11px] uppercase tracking-[0.1em] text-brass-500">
-                      <Target size={13} className="text-brass-500" /> {a.area}
+              <div className="mt-5 divide-y divide-navy-800/10 border-y border-navy-800/10">
+                {t.areas.map((a, i) => (
+                  <div key={a.area} className="py-4">
+                    <p className="flex items-center gap-2 font-label text-[11px] uppercase tracking-[0.1em] text-navy-900">
+                      <span
+                        className="h-2 w-2 rounded-full"
+                        style={{ background: ["#7d8a6a", "#ad8a4e", "#b06a3c"][i % 3] }}
+                      />
+                      {a.area}
                     </p>
-                    <div className="mt-2 flex flex-wrap gap-1.5">
-                      {a.items.map((it) => (
-                        <span key={it} className="border border-navy-800/12 bg-ivory-200/50 px-2 py-1 text-[12px] text-charcoal-900">{it}</span>
-                      ))}
-                    </div>
+                    <p className="mt-2 text-[13px] leading-relaxed text-charcoal-600">{a.items.join(" · ")}</p>
                   </div>
                 ))}
               </div>
@@ -100,25 +92,20 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
       {/* 준비 순서 */}
       {t.steps.length > 0 && (
         <section className="border-b border-navy-800/12 bg-ivory-100 py-16 lg:py-20">
-          <div className="mx-auto max-w-3xl px-5 lg:px-8">
-            <div className="flex items-center gap-2">
-              <ListOrdered size={18} className="text-brass-500" />
-              <h2 className="font-display text-[24px] font-semibold text-navy-950 sm:text-[28px]">준비 순서</h2>
+          <div className="mx-auto max-w-5xl px-5 lg:px-8">
+            <div className="max-w-2xl">
+              <span className="eyebrow">Where to start</span>
+              <h2 className="mt-4 font-display text-[24px] font-semibold text-navy-950 sm:text-[28px]">준비 순서</h2>
+              <p className="mt-2 text-[14px] text-charcoal-600">{t.name}를 처음 시작한다면 이 순서를 참고하세요.</p>
             </div>
-            <p className="mt-2 text-[14px] text-charcoal-600">{t.name}를 처음 시작한다면 이 순서를 참고하세요.</p>
-            <ol className="mt-8 space-y-0">
+            <div className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-5">
               {t.steps.map((s, i) => (
-                <li key={s} className="relative flex gap-4 pb-8 last:pb-0">
-                  {i < t.steps.length - 1 && (
-                    <span className="absolute left-[15px] top-8 h-[calc(100%-1.5rem)] w-px bg-navy-800/15" aria-hidden />
-                  )}
-                  <span className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy-950 font-label text-[12.5px] font-medium text-ivory-100">
-                    {i + 1}
-                  </span>
-                  <p className="mt-1 text-[14.5px] leading-relaxed text-charcoal-900">{s}</p>
-                </li>
+                <div key={s} className="border-t border-navy-800/20 pt-5">
+                  <span className="font-label text-[12px] tracking-[0.1em] text-brass-500">{String(i + 1).padStart(2, "0")}</span>
+                  <p className="mt-2.5 text-[13px] leading-relaxed text-charcoal-600">{s}</p>
+                </div>
               ))}
-            </ol>
+            </div>
           </div>
         </section>
       )}

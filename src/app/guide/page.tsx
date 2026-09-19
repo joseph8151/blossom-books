@@ -29,9 +29,8 @@ export default function GuidePage() {
   return (
     <div>
       {/* 히어로 */}
-      <section className="paper-rule relative overflow-hidden border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-24">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_0%,rgba(173,138,78,0.1),transparent_55%)]" />
-        <div className="relative mx-auto max-w-4xl px-5 lg:px-8">
+      <section className="paper-rule border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-24">
+        <div className="mx-auto max-w-4xl px-5 lg:px-8">
           <p className="font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">Selection guide</p>
           <h1 className="mt-3 font-display text-[32px] font-semibold leading-tight text-navy-950 sm:text-[40px]">
             40·60·100·200P,
