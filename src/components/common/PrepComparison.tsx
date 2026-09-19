@@ -12,7 +12,7 @@ const features: { label: string; levels: [Level, Level, Level] }[] = [
   { label: "집중 반복 · 심화", levels: ["none", "partial", "full"] },
 ];
 
-// volumeOptions = [40P Quick, 60P Standard, 100P Intensive]
+// volumeOptions = [100P Quick, 200P Standard, 300P Intensive]
 const tiers = volumeOptions.slice(0, 3);
 
 function Mark({ level }: { level: Level }) {

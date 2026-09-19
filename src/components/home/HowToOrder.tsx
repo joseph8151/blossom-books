@@ -3,7 +3,7 @@ import { Search, FileSearch, ListChecks, MessageCircle, BadgeCheck, Receipt, Fil
 const steps = [
   { n: "01", icon: Search, en: "Find", ko: "원하는 시험과 교재를 찾습니다." },
   { n: "02", icon: FileSearch, en: "Preview", ko: "무료 Sample과 교재 구성을 확인합니다." },
-  { n: "03", icon: ListChecks, en: "Choose", ko: "40P / 60P / 100P 중 원하는 구성을 선택합니다." },
+  { n: "03", icon: ListChecks, en: "Choose", ko: "100P / 200P / 300P 중 원하는 구성을 선택합니다." },
   { n: "04", icon: MessageCircle, en: "Kakao", ko: "카카오톡으로 선택한 상품을 보내주세요." },
   { n: "05", icon: BadgeCheck, en: "Confirm", ko: "상담원이 학년·시험 목적·학생 수준을 간단히 확인합니다." },
   { n: "06", icon: Receipt, en: "Payment", ko: "계좌이체 또는 카드 결제 방법을 안내받습니다." },

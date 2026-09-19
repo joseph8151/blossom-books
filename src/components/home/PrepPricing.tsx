@@ -3,7 +3,7 @@ import { ArrowRight, FileSearch, Check, Compass } from "lucide-react";
 import PrepVolumePricing from "@/components/common/PrepVolumePricing";
 import PrepComparison from "@/components/common/PrepComparison";
 
-// 60P 기준, 가격 옆에 함께 보여주는 "받는 가치"
+// 200P 기준, 가격 옆에 함께 보여주는 "받는 가치"
 const included = [
   "Student Workbook",
   "Answer & Explanation Guide",
@@ -24,7 +24,7 @@ export default function PrepPricing() {
             분량과 가격, 명확하게 안내합니다
           </h2>
           <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">
-            40·60·100P는 바로 구매하실 수 있습니다. 페이지 수만 보지 말고, 각 구성이 어떤 학생에게 적합한지
+            100·200·300P는 바로 구매하실 수 있습니다. 페이지 수만 보지 말고, 각 구성이 어떤 학생에게 적합한지
             확인하고 선택하세요.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function PrepPricing() {
           </p>
           <p className="mt-2.5 max-w-2xl text-[13.5px] leading-relaxed text-charcoal-600">
             Blossom Books는 구매를 서두르게 하지 않습니다. 실제 문제 구성과 해설을 확인하고, 학생에게 필요한
-            분량을 확인한 뒤 결정하셔도 됩니다. 모든 학생에게 100P 구성을 권하지 않습니다.
+            분량을 확인한 뒤 결정하셔도 됩니다. 모든 학생에게 300P 구성을 권하지 않습니다.
           </p>
         </div>
 
@@ -121,7 +121,7 @@ export default function PrepPricing() {
             </p>
             <p className="mt-2.5 text-[13px] leading-relaxed text-ivory-200/80">
               가장 많은 페이지를 권하는 것이 아니라, 학생에게 필요한 구성을 안내합니다. 예산과 준비 기간을
-              알려주시면 40P부터 필요한 범위만 안내해 드립니다.
+              알려주시면 100P부터 필요한 범위만 안내해 드립니다.
             </p>
           </div>
         </div>

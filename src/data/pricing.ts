@@ -1,12 +1,12 @@
 // ────────────────────────────────────────────────────────────
 // 분량(페이지 수) 기반 가격 정책
-// 40·60·100P는 바로 구매 가능, 100P 초과는 가격 문의(Price on Request).
+// 100·200·300P는 바로 구매 가능, 300P 초과는 가격 문의(Price on Request).
 // USD는 해외(PayPal) 결제용 근사값입니다.
 // ────────────────────────────────────────────────────────────
 
 export interface VolumeOption {
   pages: number;
-  label: string; // "40P"
+  label: string; // "100P"
   priceKRW: number;
   priceUSD: number;
   tier: string; // "Quick Prep"
@@ -18,9 +18,9 @@ export interface VolumeOption {
 
 export const volumeOptions: VolumeOption[] = [
   {
-    pages: 40,
-    label: "40P",
-    priceKRW: 130000,
+    pages: 100,
+    label: "100P",
+    priceKRW: 129000,
     priceUSD: 95,
     tier: "Essential Prep",
     tierKo: "핵심 유형 빠르게",
@@ -32,10 +32,10 @@ export const volumeOptions: VolumeOption[] = [
     ],
   },
   {
-    pages: 60,
-    label: "60P",
-    priceKRW: 150000,
-    priceUSD: 110,
+    pages: 200,
+    label: "200P",
+    priceKRW: 199000,
+    priceUSD: 146,
     tier: "Complete Prep",
     tierKo: "충분한 실전 대비",
     badge: "RECOMMENDED",
@@ -47,10 +47,10 @@ export const volumeOptions: VolumeOption[] = [
     ],
   },
   {
-    pages: 100,
-    label: "100P",
-    priceKRW: 190000,
-    priceUSD: 140,
+    pages: 300,
+    label: "300P",
+    priceKRW: 299000,
+    priceUSD: 219,
     tier: "Intensive Prep",
     tierKo: "집중 반복·심화",
     duration: "4주 이상 · 심화 준비",
@@ -62,7 +62,7 @@ export const volumeOptions: VolumeOption[] = [
   },
 ];
 
-// 분량 선택형 상품의 전체 옵션 (40 → 60 → 100)
+// 분량 선택형 상품의 전체 옵션 (100 → 200 → 300)
 export const flexibleVolumes: VolumeOption[] = [...volumeOptions];
 
 // 진입(Starter) 상품 — 영어 레벨테스트 상품에만 제공하는 소분량 진입 구성
@@ -80,9 +80,9 @@ export const starterOption: VolumeOption = {
   ],
 };
 
-// 100P 초과 — 가격 문의
+// 300P 초과 — 가격 문의
 export const extendedOption = {
-  label: "150P+",
+  label: "400P+",
   tier: "Extended Prep",
   tierKo: "장기·심화·특수 구성",
   forWhom: [
@@ -92,7 +92,7 @@ export const extendedOption = {
   ],
 };
 
-export const fromPriceKRW = volumeOptions[0].priceKRW; // 130,000 — "₩130,000부터"
+export const fromPriceKRW = volumeOptions[0].priceKRW; // 129,000 — "₩129,000부터"
 
 export const priceDisclaimer =
   "시험 유형, 과목 및 구성에 따라 일부 상품은 별도 안내될 수 있습니다.";

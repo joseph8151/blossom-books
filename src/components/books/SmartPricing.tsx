@@ -22,7 +22,7 @@ export default function SmartPricing() {
       {/* 가격 — 소프트 범위 */}
       <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <span className="font-display text-[26px] font-semibold text-navy-950">13만원대부터</span>
-        <span className="text-[14px] text-charcoal-600">분량(40·60·100P)에 따라 13만원대 ~ 19만원대</span>
+        <span className="text-[14px] text-charcoal-600">분량(100·200·300P)에 따라 12만원대 ~ 29만원대</span>
       </div>
       <p className="mt-1.5 text-[12.5px] text-charcoal-600">
         정확한 분량별 가격은 위 구매 영역에서 확인하실 수 있습니다.

@@ -35,10 +35,10 @@ const exams = [
   { v: "Other / Not sure", track: "" },
 ];
 const periods = [
-  { v: "Within 2 weeks", vol: "40P" },
-  { v: "About a month", vol: "60P" },
-  { v: "2–3 months", vol: "100P" },
-  { v: "Not decided", vol: "60P" },
+  { v: "Within 2 weeks", vol: "100P" },
+  { v: "About a month", vol: "200P" },
+  { v: "2–3 months", vol: "300P" },
+  { v: "Not decided", vol: "200P" },
 ];
 const areas = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
 
@@ -81,12 +81,12 @@ export default function EnFindPage() {
   const [copied, setCopied] = useState(false);
   const teamSent = useRef(false);
 
-  const recVolume = periods.find((p) => p.v === f.period)?.vol ?? "60P";
+  const recVolume = periods.find((p) => p.v === f.period)?.vol ?? "200P";
   const recTrack = exams.find((e) => e.v === f.exam)?.track ?? "";
   const rec = done ? recommend(f, recTrack) : null;
   const volumeReason =
-    recVolume === "40P" ? "A quick check of the key question types — good when the test is close."
-    : recVolume === "100P" ? "Room for repetition and harder questions — good with more time."
+    recVolume === "100P" ? "A quick check of the key question types — good when the test is close."
+    : recVolume === "300P" ? "Room for repetition and harder questions — good with more time."
     : "A balanced amount of practice across the main types.";
 
   function toggleArea(a: string) {

@@ -85,10 +85,10 @@ const exams = [
   { v: "기타 / 잘 모르겠어요", track: "" },
 ];
 const periods = [
-  { v: "2주 이내", vol: "40P" },
-  { v: "약 1개월", vol: "60P" },
-  { v: "2~3개월", vol: "100P" },
-  { v: "아직 미정", vol: "60P" },
+  { v: "2주 이내", vol: "100P" },
+  { v: "약 1개월", vol: "200P" },
+  { v: "2~3개월", vol: "300P" },
+  { v: "아직 미정", vol: "200P" },
 ];
 const areas = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
 
@@ -101,14 +101,14 @@ export default function FindPage() {
   const [emailSent, setEmailSent] = useState(false);
   const teamSent = useRef(false);
 
-  const recVolume = periods.find((p) => p.v === f.period)?.vol ?? "60P";
+  const recVolume = periods.find((p) => p.v === f.period)?.vol ?? "200P";
   const recTrack = exams.find((e) => e.v === f.exam)?.track ?? "";
   const rec = done ? recommendProduct(f, recTrack) : null;
   const suggestCustom = done && (!rec || rec.score < 68);
   const volumeReason =
-    recVolume === "40P"
+    recVolume === "100P"
       ? "시험이 가까워 핵심 유형을 빠르게 점검하기 좋은 분량입니다."
-      : recVolume === "100P"
+      : recVolume === "300P"
       ? "준비 기간이 넉넉해 충분한 반복·심화까지 담기 좋은 분량입니다."
       : "여러 유형을 균형 있게 연습하기 좋은 표준 분량입니다.";
 

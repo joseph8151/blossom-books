@@ -10,16 +10,16 @@ import { siteConfig } from "@/data/site";
 const subjects = ["English (레벨테스트)", "Reading", "Writing", "Math", "Science", "Vocabulary / Grammar"];
 const options = [
   ...volumeOptions.map((v) => ({ pages: v.pages, label: v.label, tier: v.tier, tierKo: v.tierKo, priceKRW: v.priceKRW })),
-  { pages: 150, label: "150P+", tier: extendedOption.tier, tierKo: extendedOption.tierKo, priceKRW: 0 },
+  { pages: 400, label: "400P+", tier: extendedOption.tier, tierKo: extendedOption.tierKo, priceKRW: 0 },
 ];
 
 const included = ["Student Workbook", "정답 · 상세 해설", "선택 과목 집중 구성", "Digital PDF"];
 
 export default function QuoteCalculator() {
-  const [pages, setPages] = useState(60);
+  const [pages, setPages] = useState(200);
   const [subject, setSubject] = useState(subjects[0]);
   const opt = options.find((o) => o.pages === pages) ?? options[1];
-  const isExtended = pages >= 150;
+  const isExtended = pages >= 400;
 
   return (
     <section className="border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-24">

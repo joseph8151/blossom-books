@@ -350,7 +350,7 @@ export default function EnHomePage() {
             </h2>
             <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">
               Blossom Books does not take direct online payment on the site. Base prices are
-              published — 40P $95 · 60P $110 · 100P $140 (100P+ on request). Confirm your title
+              published — 100P $95 · 200P $146 · 300P $219 (300P+ on request). Confirm your title
               and volume with our team; after your order is confirmed, we arrange payment
               (PayPal for international customers) and send your PDF after confirmation.
             </p>
@@ -433,7 +433,7 @@ export default function EnHomePage() {
             {[
               { q: "Are the questions similar to the actual test?", a: "We analyze each exam's skill areas, question types, and grade-level scope, and build practice around them. We do not provide real or leaked exam questions, and we avoid claims like “100% identical.”" },
               { q: "Does difficulty differ by grade?", a: "Yes. Difficulty is built around the student's grade and target level; some titles progress from Foundation up to Advanced or Challenge." },
-              { q: "How do I choose between 40 / 60 / 100 pages?", a: "It depends on how much time is left and current ability. 40P for a quick check, 60P for standard prep, 100P for intensive repetition. Our team can help you pick." },
+              { q: "How do I choose between 100 / 200 / 300 pages?", a: "It depends on how much time is left and current ability. 100P for a quick check, 200P for standard prep, 300P for intensive repetition. Our team can help you pick." },
               { q: "Is an answer key included? Is it in Korean?", a: "Yes — every title ships with a detailed answer key. International-school, level-test and US-curriculum titles include Korean explanations; SAT/AP and professional exams are explained in English with key points in Korean." },
               { q: "How is it delivered?", a: "As a digital PDF by email after payment is confirmed. You can print it and study on any device." },
               { q: "Can you make a title you don't list?", a: "Yes. We produce custom workbooks to a student's grade, level and target exam. Ask us through our official channel." },
