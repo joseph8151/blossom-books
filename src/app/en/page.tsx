@@ -350,7 +350,7 @@ export default function EnHomePage() {
             </h2>
             <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">
               Blossom Books does not take direct online payment on the site. Base prices are
-              published — 100P $95 · 200P $146 · 300P $219 (300P+ on request). Confirm your title
+              published — 100P $95 · 200P $146 · 300P $212 (300P+ on request). Confirm your title
               and volume with our team; after your order is confirmed, we arrange payment
               (PayPal for international customers) and send your PDF after confirmation.
             </p>

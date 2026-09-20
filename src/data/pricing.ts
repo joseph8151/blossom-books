@@ -49,8 +49,8 @@ export const volumeOptions: VolumeOption[] = [
   {
     pages: 300,
     label: "300P",
-    priceKRW: 299000,
-    priceUSD: 219,
+    priceKRW: 289000,
+    priceUSD: 212,
     tier: "Intensive Prep",
     tierKo: "집중 반복·심화",
     duration: "4주 이상 · 심화 준비",
