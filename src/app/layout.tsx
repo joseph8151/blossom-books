@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileBottomBar from "@/components/layout/MobileBottomBar";
+import { siteKeywords } from "@/data/site";
 
 // 참고: 폰트(Cormorant Garamond, IBM Plex Mono, Pretendard)는
 // globals.css 상단의 @import로 로드합니다.
@@ -16,27 +17,8 @@ export const metadata: Metadata = {
     template: "%s | 블러섬북스 Blossom Books",
   },
   description:
-    "미국 교과과정, 국제학교 입학시험, 공인시험, 실전 모의고사를 분석하여 학생용 문제집과 정답·상세 해설집을 제작합니다. 국제학교 문제집, 미국 교과서 문제집, AP 문제집, CAT4·MAP·ISEE·SSAT 문제집, 학원·프랩학원 교재 주문 제작.",
-  keywords: [
-    "국제학교 문제집",
-    "미국 교과서 문제집",
-    "미국 수학 문제집",
-    "국제학교 입학시험 문제집",
-    "국제학교 모의고사",
-    "학원 교재 제작",
-    "학원 문제집 제작",
-    "프랩학원 교재",
-    "과외 수업 자료",
-    "맞춤 문제집 제작",
-    "AP 문제집",
-    "CAT4 문제집",
-    "MAP 테스트 문제집",
-    "ISEE SSAT 문제집",
-    "OET 문제집",
-    "PTE 문제집",
-    "레벨테스트 문제집",
-    "블러섬북스",
-  ],
+    "미국 교과과정, 국제학교 입학시험, 공인시험, 실전 모의고사를 분석하여 학생용 문제집과 정답·상세 해설집을 제작합니다. 국제학교 문제집, 미국 교과서 문제집, AP 문제집, CAT4·MAP·ISEE·SSAT 문제집, 영어·국어 레벨테스트 문제집, 학원·프랩학원 교재 주문 제작.",
+  keywords: siteKeywords,
   openGraph: {
     title: "블러섬북스 | Blossom Books",
     description: "시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠 — 문제집, 정답·해설집, 실전 모의고사, 맞춤 교재 제작",
@@ -50,6 +32,13 @@ export const metadata: Metadata = {
     title: "블러섬북스 | Blossom Books",
     description: "시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠 — 문제집·해설집·모의고사",
   },
+  // 네이버 서치어드바이저(searchadvisor.naver.com)에서 사이트를 등록하면 발급되는
+  // 소유 확인 코드. 실제 코드를 발급받아 Cloudflare 환경변수
+  // NEXT_PUBLIC_NAVER_SITE_VERIFICATION 에 넣기 전까지는 태그 자체가 생성되지
+  // 않습니다(가짜 코드를 넣지 않음).
+  ...(process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION
+    ? { other: { "naver-site-verification": process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION } }
+    : {}),
 };
 
 export default function RootLayout({

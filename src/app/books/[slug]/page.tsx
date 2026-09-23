@@ -26,7 +26,7 @@ import { BlossomSeal } from "@/components/books/BlossomSeal";
 import VolumeGuide from "@/components/common/VolumeGuide";
 import PrepComparison from "@/components/common/PrepComparison";
 import TrackView from "@/components/common/TrackView";
-import { siteConfig } from "@/data/site";
+import { siteConfig, siteKeywords } from "@/data/site";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.id }));
@@ -37,7 +37,36 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = products.find((p) => p.id === slug);
   if (!product) return {};
-  return { title: product.titleKo, description: product.summaryKo };
+
+  const url = `https://blossombooks.org/books/${product.id}/`;
+  // 상품별 핵심 키워드 — 실제 상품 데이터(시험명·학년·과목·트랙)에서만 생성합니다.
+  const productKeywords = [
+    product.titleKo,
+    product.examOrCurriculum,
+    `${product.examOrCurriculum} 문제집`,
+    `${product.gradeRange} ${product.subject}`,
+    trackLabels[product.track],
+    "PDF 문제집",
+    "정답 해설집",
+  ];
+  const keywords = Array.from(new Set([...productKeywords, ...siteKeywords]));
+
+  return {
+    title: product.titleKo,
+    description: product.summaryKo,
+    keywords,
+    alternates: { canonical: url },
+    openGraph: {
+      title: product.titleKo,
+      description: product.summaryKo,
+      url,
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: product.titleKo,
+      description: product.summaryKo,
+    },
+  };
 }
 
 const purchaseFaq = [
