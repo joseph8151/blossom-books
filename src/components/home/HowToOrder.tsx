@@ -1,9 +1,10 @@
-import { ListChecks, MessageCircle, FileDown } from "lucide-react";
+import { Search, SlidersHorizontal, FileSearch, FileDown } from "lucide-react";
 
 const steps = [
-  { n: "01", icon: ListChecks, en: "교재 선택", ko: "시험, 학년, 레벨에 맞는 교재를 선택합니다." },
-  { n: "02", icon: MessageCircle, en: "카카오톡 주문", ko: "상품명을 확인한 후 카카오톡으로 주문 요청을 보내주세요." },
-  { n: "03", icon: FileDown, en: "결제 후 PDF 수령", ko: "결제 방법 안내와 확인을 거쳐 PDF 교재를 전달해드립니다." },
+  { n: "01", icon: Search, en: "시험을 고릅니다", ko: "CAT4, MAP, ISEE 등 준비할 시험을 선택합니다." },
+  { n: "02", icon: SlidersHorizontal, en: "학년·목표 레벨을 고릅니다", ko: "같은 시험도 학년과 목표 레벨에 따라 구성이 달라집니다." },
+  { n: "03", icon: FileSearch, en: "샘플로 문항 퀄리티를 봅니다", ko: "구매 전 실제 문항과 해설 방식을 직접 확인하세요." },
+  { n: "04", icon: FileDown, en: "결제 확인 후 PDF를 받습니다", ko: "카카오톡 주문 요청 → 결제 방법 안내 → 결제 확인 → PDF 발송." },
 ];
 
 export default function HowToOrder() {
@@ -13,23 +14,23 @@ export default function HowToOrder() {
         <div className="max-w-2xl">
           <span className="eyebrow">How to order</span>
           <h2 className="mt-4 font-display text-[26px] font-semibold leading-tight text-navy-950 sm:text-[31px]">
-            주문은 이렇게 진행됩니다
+            고르고, 확인하고, 받습니다
           </h2>
           <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">
-            홈페이지에서 교재와 가격을 확인하신 뒤, 공식 카카오톡으로 주문 요청을 보내주세요. 결제 방법을
-            안내해 드리고, 결제 확인 후 교재(PDF)를 보내드립니다.
+            시험과 학년에 맞는 교재를 고르고, 샘플로 퀄리티를 확인한 뒤 카카오톡으로 주문하시면 결제 확인
+            후 PDF를 보내드립니다.
           </p>
         </div>
 
-        {/* 3단계 */}
-        <div className="mt-12 grid gap-x-6 gap-y-8 sm:grid-cols-3">
+        {/* 4단계 */}
+        <div className="mt-12 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map(({ n, icon: Icon, en, ko }) => (
             <div key={n} className="border-t border-navy-800/20 pt-5">
               <div className="flex items-center justify-between">
                 <span className="font-label text-[12px] tracking-[0.1em] text-brass-500">{n}</span>
                 <Icon size={18} className="text-navy-800/50" strokeWidth={1.7} />
               </div>
-              <p className="mt-3 font-display text-[18px] font-semibold text-navy-950">{en}</p>
+              <p className="mt-3 font-display text-[16.5px] font-semibold leading-snug text-navy-950">{en}</p>
               <p className="mt-1.5 text-[13px] leading-relaxed text-charcoal-600">{ko}</p>
             </div>
           ))}

@@ -4,7 +4,7 @@ import { siteConfig } from "@/data/site";
 
 const trust = [
   { k: "Real Workbooks", v: "실제 Sample을 확인하세요." },
-  { k: "Clear Pricing", v: "40P ₩130,000 · 60P ₩150,000 · 100P ₩190,000 · 200P ₩275,000" },
+  { k: "Clear Pricing", v: "40P ₩130,000 · 60P ₩150,000 · 100P ₩190,000 · 200P ₩290,000" },
   { k: "Human Support", v: "구매 전 상담원이 확인합니다." },
   { k: "Transparent Policy", v: "발송 후 환불 불가 · 오류 확인 시 최대 2회 수정" },
   { k: "Editorial Standard", v: "일관된 제작·검수 기준." },
@@ -31,7 +31,7 @@ export default function FinalCTA() {
             준비할 시험이 정해졌다면, 필요한 만큼 시작하세요.
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-[14.5px] leading-relaxed text-ivory-200/80">
-            40P ₩130,000 · 60P ₩150,000 · 100P ₩190,000 · 200P ₩275,000. 200P 이상 집중 Prep이
+            40P ₩130,000 · 60P ₩150,000 · 100P ₩190,000 · 200P ₩290,000. 200P 이상 집중 Prep이
             필요하시면 별도 문의로 안내해 드립니다.
           </p>
 

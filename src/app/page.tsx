@@ -1,6 +1,8 @@
 import HeroSection from "@/components/home/HeroSection";
+import NumbersStrip from "@/components/home/NumbersStrip";
 import CoreCategories from "@/components/home/CoreCategories";
 import Bestsellers from "@/components/home/Bestsellers";
+import WhyDifferent from "@/components/home/WhyDifferent";
 import QuestionToUnderstanding from "@/components/home/QuestionToUnderstanding";
 import CompareLevels from "@/components/home/CompareLevels";
 import FindPrepPromo from "@/components/home/FindPrepPromo";
@@ -40,8 +42,10 @@ export default function HomePage() {
     <>
       {/* 상품 발견 — 무엇을 파는지, 가격이 얼마인지 바로 이해 */}
       <HeroSection />
+      <NumbersStrip />
       <CoreCategories />
       <Bestsellers />
+      <WhyDifferent />
 
       {/* Preview — 실제 문제 수준 확인 */}
       <QuestionToUnderstanding />

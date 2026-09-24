@@ -63,8 +63,8 @@ export const volumeOptions: VolumeOption[] = [
   {
     pages: 200,
     label: "200P",
-    priceKRW: 275000,
-    priceUSD: 200,
+    priceKRW: 290000,
+    priceUSD: 210,
     tier: "Advanced Prep",
     tierKo: "장기 심화",
     duration: "6주 이상 · 장기 준비",
