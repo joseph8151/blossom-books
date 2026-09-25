@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { volumeOptions, formatKRW } from "@/data/pricing";
 
-// 성인·취업·유학·대입 영어/수학(OET·MET·CELBAN·PTE·부산외대·SPA·SAT) 문의에만
+// 성인·취업·유학·대입 영어/수학(OET·MET·CELBAN·CELPIP·PTE·부산외대 FLAT·SPA·SAT) 문의에만
 // 카카오톡으로 직접 전달하는 비공개 구성·가격표입니다. 홈/헤더/푸터/사이트맵/
 // /quote 어디와도 연결하지 않으며, 검색 노출도 막아둡니다(아래 robots 설정).
 // /quote(레벨테스트·MAP·CAT4)와는 별도 페이지입니다 — 교차 링크 금지.
@@ -20,7 +20,7 @@ const cellCls = "border border-navy-800/12 px-4 py-3 text-[13.5px]";
 const headCellCls =
   "border border-navy-800/12 bg-ivory-200/60 px-4 py-3 text-left font-label text-[11px] uppercase tracking-[0.08em] text-navy-800/70";
 
-const exams = ["OET", "MET", "CELBAN", "PTE", "부산외대", "SPA(현대차)", "SAT 영어", "SAT 수학"];
+const exams = ["OET", "MET", "CELBAN", "CELPIP", "PTE", "부산외대 FLAT", "SPA(현대차)", "SAT 영어", "SAT 수학"];
 
 const p100 = volumeOptions[2]; // 100P
 const p200 = volumeOptions[3]; // 200P
@@ -34,7 +34,7 @@ export default function QuoteExamPage() {
         카카오톡 상담에서 안내하는 구성표입니다. 홈 메뉴에는 없습니다.
       </p>
       <p className="mt-1.5 text-[12.5px] text-charcoal-600/80">
-        OET · MET · CELBAN · PTE · 부산외대 · SPA(현대차) · SAT 영어 · SAT 수학
+        OET · MET · CELBAN · CELPIP · PTE · 부산외대 FLAT · SPA(현대차) · SAT 영어 · SAT 수학
       </p>
 
       {/* 1. 시험 칩 */}
