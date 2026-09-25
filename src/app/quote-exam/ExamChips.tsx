@@ -5,6 +5,7 @@ import { useState } from "react";
 interface ExamPanel {
   key: string;
   title: string;
+  sublabel?: string;
   subtitle: string;
   p100: string;
   p200: string;
@@ -89,9 +90,10 @@ const PANELS: ExamPanel[] = [
   {
     key: "ESPT",
     title: "ESPT",
-    subtitle: "English Speaking Proficiency Test (영어 말하기 시험)입니다.",
+    sublabel: "영원무역 스피킹",
+    subtitle: "English Speaking Proficiency Test. 영원무역 등에서 쓰는 영어 말하기 시험입니다.",
     p100: "각 파트마다 예상 문항, 답변 골격, 채점 포인트(유창성·과제 수행·어휘)로 구성됩니다. 보고 말하는 연습 중심이며, 음원 여부는 필요 시 카톡으로 안내해 드립니다.",
-    p200: "위 9개 파트를 반복하며 난이도를 높이고, 상황 문항을 추가하며 모범 답변을 확장합니다.",
+    p200: "위 9개 파트를 반복하며 심화합니다.",
     parts: [
       "Part 1 Yes/No",
       "Part 2 Choice",
@@ -103,15 +105,8 @@ const PANELS: ExamPanel[] = [
       "Part 8 Situation response",
       "Part 9 Reading passage",
     ],
-    kakaoLine: "카톡에 적을 말: ESPT · General/Teens 등 종류 · 100P/200P/Special",
-  },
-  {
-    key: "영원무역 스피킹",
-    title: "영원무역 스피킹",
-    subtitle: "사내·진급 영어 말하기 시험입니다.",
-    p100: "자기소개, 업무 상황, 의견·설득, 짧은 발표 답변 골격을 연습합니다.",
-    p200: "상황을 확대하고 예상 질문을 추가합니다.",
-    kakaoLine: "카톡에 적을 말: 영원무역 스피킹 · 100P/200P/Special",
+    note: "회사·전형이 있으면 적어 주세요.",
+    kakaoLine: "카톡에 적을 말: ESPT · 영원무역(해당 시) · 100P/200P/Special",
   },
 ];
 
@@ -119,6 +114,9 @@ const chipCls =
   "shrink-0 whitespace-nowrap rounded-full border border-ivory-300 bg-ivory-100 px-4 py-1.5 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-900 hover:bg-navy-950 hover:text-ivory-100";
 const chipActiveCls =
   "shrink-0 whitespace-nowrap rounded-full border border-navy-900 bg-navy-950 px-4 py-1.5 text-[12.5px] font-medium text-ivory-100 transition-colors";
+// sublabel이 있는 칩(ESPT)은 2줄 표기를 위해 세로 패딩만 살짝 키움
+const chipWithSubCls = chipCls.replace("py-1.5", "py-1");
+const chipWithSubActiveCls = chipActiveCls.replace("py-1.5", "py-1");
 
 export default function ExamChips({ exams }: { exams: string[] }) {
   const [openKey, setOpenKey] = useState<string | null>(null);
@@ -137,13 +135,30 @@ export default function ExamChips({ exams }: { exams: string[] }) {
               </span>
             );
           }
+          const isActive = openKey === e;
+          if (panel.sublabel) {
+            return (
+              <button
+                key={e}
+                type="button"
+                aria-expanded={isActive}
+                onClick={() => setOpenKey((prev) => (prev === e ? null : e))}
+                className={`${isActive ? chipWithSubActiveCls : chipWithSubCls} flex flex-col items-center leading-tight`}
+              >
+                <span>{panel.title}</span>
+                <span className={`text-[9.5px] font-normal ${isActive ? "text-ivory-100/70" : "text-navy-900/55"}`}>
+                  {panel.sublabel}
+                </span>
+              </button>
+            );
+          }
           return (
             <button
               key={e}
               type="button"
-              aria-expanded={openKey === e}
+              aria-expanded={isActive}
               onClick={() => setOpenKey((prev) => (prev === e ? null : e))}
-              className={openKey === e ? chipActiveCls : chipCls}
+              className={isActive ? chipActiveCls : chipCls}
             >
               {e}
             </button>
@@ -154,7 +169,13 @@ export default function ExamChips({ exams }: { exams: string[] }) {
       {openPanel && (
         <div className="mt-4 rounded-xl border border-ivory-300 bg-ivory-100 p-6">
           <p className="font-display text-[16px] font-semibold text-navy-950">
-            {openPanel.title} <span className="font-normal text-charcoal-600">— {openPanel.subtitle}</span>
+            {openPanel.title}
+            {openPanel.sublabel && (
+              <span className="ml-1.5 font-label text-[11px] font-normal text-charcoal-600/70">
+                ({openPanel.sublabel})
+              </span>
+            )}{" "}
+            <span className="font-normal text-charcoal-600">— {openPanel.subtitle}</span>
           </p>
 
           <div className="mt-5">

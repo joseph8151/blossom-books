@@ -32,7 +32,6 @@ const exams = [
   "SAT 영어",
   "SAT 수학",
   "ESPT",
-  "영원무역 스피킹",
 ];
 
 const p100 = volumeOptions[2]; // 100P
