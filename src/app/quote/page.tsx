@@ -138,7 +138,7 @@ export default function QuotePage() {
           </table>
         </div>
         <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">
-          2개 레벨 동시 구매 시 10% 할인됩니다. 2번째 레벨 진행 가능 여부는 상담 시 확인해 드립니다.
+          2개 레벨 동시 구매 시 10% 할인됩니다.
         </p>
       </section>
 
