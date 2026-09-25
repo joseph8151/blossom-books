@@ -279,21 +279,21 @@ export default function QuotePage() {
         </p>
       </section>
 
-      {/* 7. 한 번에 맞추는 구성 — 단품 Special(₩390,000) 카드보다 한 단계 낮은 무게, 페이지 맨 아래 */}
-      <section className="mt-16 border-t border-navy-800/12 pt-12">
-        <h2 className="font-display text-[18px] font-semibold text-navy-950">한 번에 맞추는 구성</h2>
+      {/* 7. 한 번에 맞추는 구성 — 단품 Special(₩390,000) 카드와 같은 무게로 강조, 페이지 맨 아래 */}
+      <section className="mt-16 border-2 border-navy-900/70 bg-ivory-200/50 p-6 sm:p-8">
+        <h2 className="font-display text-[20px] font-semibold text-navy-950">한 번에 맞추는 구성</h2>
         <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
           시험이 두 개이거나, 과목이 세 개이거나, 형제가 두 명일 때만 이 구성을 보세요. 한 시험·한 과목이면
           위의 단품이 맞습니다.
         </p>
 
-        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
           {bundles.map((b) => (
-            <div key={b.title} className="border border-navy-800/15 bg-ivory-100 p-5">
-              <span className="inline-flex items-center border border-brass-500/40 px-2 py-1 font-label text-[10px] uppercase tracking-[0.12em] text-brass-600">
+            <div key={b.title} className="border-2 border-navy-900/60 bg-ivory-100 p-5">
+              <span className="inline-flex items-center border border-brass-500 bg-brass-500 px-2 py-1 font-label text-[10px] uppercase tracking-[0.12em] text-ivory-100">
                 {b.title}
               </span>
-              <p className="mt-4 font-display text-[22px] font-semibold text-navy-950">{formatKRW(b.priceKRW)}</p>
+              <p className="mt-4 font-display text-[26px] font-semibold text-navy-950">{formatKRW(b.priceKRW)}</p>
               <p className="mt-2 text-[13px] leading-relaxed text-charcoal-900">{b.lead}</p>
               <ul className="mt-3 space-y-1 text-[12.5px] leading-relaxed text-charcoal-600">
                 {b.items.map((item) => (
