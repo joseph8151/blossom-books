@@ -96,7 +96,7 @@ export default function QuotePage() {
         </ul>
         <div className="mt-4 space-y-1 text-[12.5px] leading-relaxed text-charcoal-600">
           <p>대상: 8–12주, 목차를 못 짜는 집</p>
-          <p>비추천: 문제만 필요하면 200P({formatKRW(flexibleVolumes[flexibleVolumes.length - 1].priceKRW)}) / 시험 3주 안이면 200P가 과할 수 있음</p>
+          <p>비추천: 문제만 필요하면 200P({formatKRW(flexibleVolumes[flexibleVolumes.length - 1].priceKRW)})</p>
         </div>
       </section>
 
