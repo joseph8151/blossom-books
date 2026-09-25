@@ -24,6 +24,9 @@ const subjects = [
   { name: "수학", note: "사고력 수학 레벨테스트" },
 ];
 
+// Special Package는 해당 구성 금액 + ₩100,000 (구성은 공통 Special과 동일, 금액만 다름)
+const SPECIAL_ADD = 100000;
+
 export default function QuotePage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-14 lg:px-8 lg:py-20">
@@ -92,7 +95,7 @@ export default function QuotePage() {
           <li>· 이 학생용 목차 (시험·학년/레벨·약한 영역 접수 후 푸는 순서만 재배열)</li>
           <li>· Mock 2회 (시간·답지·시간 배분 1장)</li>
           <li>· 오답 기록지 (문항 번호 미리 인쇄)</li>
-          <li>· 시작 상담 30분 × 1회 (카카오톡 음성 또는 줌). 이후 무제한 질문 없음.</li>
+          <li>· 시작 상담 30분 × 1회 (카카오톡 텍스트만). 이후 무제한 질문 없음.</li>
         </ul>
         <div className="mt-4 space-y-1 text-[12.5px] leading-relaxed text-charcoal-600">
           <p>대상: 8–12주, 목차를 못 짜는 집</p>
@@ -111,25 +114,32 @@ export default function QuotePage() {
               <tr>
                 <th className={headCellCls}>구성</th>
                 <th className={headCellCls}>가격</th>
+                <th className={headCellCls}>Special</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td className={cellCls}>MAP 영어 100P 문제집 + 해설집</td>
                 <td className={cellCls}>{formatKRW(190000)}</td>
+                <td className={cellCls}>{formatKRW(190000 + SPECIAL_ADD)}</td>
               </tr>
               <tr>
                 <td className={cellCls}>MAP 수학 60P 문제집 + 해설집</td>
                 <td className={cellCls}>{formatKRW(150000)}</td>
+                <td className={cellCls}>{formatKRW(150000 + SPECIAL_ADD)}</td>
               </tr>
               <tr>
                 <td className={cellCls}>영어 + 수학 함께</td>
                 <td className={cellCls}>{formatKRW(340000)}</td>
+                <td className={cellCls}>{formatKRW(340000 + SPECIAL_ADD)}</td>
               </tr>
             </tbody>
           </table>
         </div>
         <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">학년별로 구매 가능합니다.</p>
+        <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          Special은 각 줄 금액에 +{formatKRW(SPECIAL_ADD)}입니다. 영어+수학 Special은 목차·모의·상담을 한 번에 진행합니다.
+        </p>
       </section>
 
       {/* 4. CAT4 */}
@@ -143,22 +153,93 @@ export default function QuotePage() {
               <tr>
                 <th className={headCellCls}>구성</th>
                 <th className={headCellCls}>가격</th>
+                <th className={headCellCls}>Special</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td className={cellCls}>레벨 1개</td>
                 <td className={cellCls}>{formatKRW(150000)}</td>
+                <td className={cellCls}>{formatKRW(150000 + SPECIAL_ADD)}</td>
               </tr>
               <tr>
                 <td className={cellCls}>레벨 2개 (정가 {formatKRW(300000)})</td>
                 <td className={cellCls}>{formatKRW(270000)} (10% 할인)</td>
+                <td className={cellCls}>{formatKRW(270000 + SPECIAL_ADD)}</td>
               </tr>
             </tbody>
           </table>
         </div>
         <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">
           2개 레벨 동시 구매 시 10% 할인됩니다.
+        </p>
+        <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          Special은 각 줄 금액에 +{formatKRW(SPECIAL_ADD)}입니다.
+        </p>
+      </section>
+
+      {/* 5. ISEE */}
+      <section className="mt-12">
+        <h2 className="font-display text-[18px] font-semibold text-navy-950">
+          5. 국제학교 입시 — ISEE <span className="font-normal text-charcoal-600">(레벨별 Lower / Middle / Upper)</span>
+        </h2>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th className={headCellCls}>분량</th>
+                <th className={headCellCls}>가격</th>
+              </tr>
+            </thead>
+            <tbody>
+              {flexibleVolumes.map((v) => (
+                <tr key={v.pages}>
+                  <td className={cellCls}>{v.label}</td>
+                  <td className={cellCls}>{formatKRW(v.priceKRW)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          200P Special: {formatKRW(390000)}
+        </p>
+        <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          레벨(Lower/Middle/Upper)을 카톡에 적어 주세요. Verbal·Reading·Quant·Math Achievement 중 필요한
+          영역만 고르실 수 있으며, 영역별로 단가가 달라지지 않습니다.
+        </p>
+      </section>
+
+      {/* 6. OOPT */}
+      <section className="mt-12">
+        <h2 className="font-display text-[18px] font-semibold text-navy-950">
+          6. Oxford Online Placement Test (OOPT)
+        </h2>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th className={headCellCls}>구성</th>
+                <th className={headCellCls}>가격</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className={cellCls}>100P 문제집 + 해설집</td>
+                <td className={cellCls}>{formatKRW(190000)}</td>
+              </tr>
+              <tr>
+                <td className={cellCls}>200P 문제집 + 해설집</td>
+                <td className={cellCls}>{formatKRW(290000)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          200P Special: {formatKRW(290000 + SPECIAL_ADD)}
+        </p>
+        <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          학원·학교 배치용 Oxford 온라인 플레이스먼트 대비입니다. 일반 레벨테스트와는 별도 구성입니다.
         </p>
       </section>
 
