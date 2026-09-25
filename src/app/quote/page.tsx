@@ -38,6 +38,10 @@ export default function QuotePage() {
       <p className="mt-1.5 text-[12.5px] text-charcoal-600/80">
         문의 전에 분량과 시험을 고르시면 바로 맞춰 드립니다.
       </p>
+      <p className="mt-1.5 text-[12.5px] text-charcoal-600/80">
+        인터뷰·라이팅·리딩 등 한 유형만 필요하시거나 두 유형을 섞어서 원하시면, 표 가격이 아닌 맞춤 견적으로
+        카카오톡 문의해 주세요.
+      </p>
 
       {/* 1. 레벨테스트 — 과목(영어/국어/수학) 카드 3장. 모바일은 세로 스택 */}
       <section className="mt-10">
@@ -76,6 +80,10 @@ export default function QuotePage() {
         </p>
         <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600/80">
           샘플은 구매 전 확인 가능합니다. 학년·레벨·시험이 다르면 구성이 달라질 수 있습니다.
+        </p>
+        <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          인터뷰·라이팅·리딩 등 한 유형만 필요하시거나 두 유형을 섞어서 원하시면, 표 가격이 아닌 맞춤 견적으로
+          카카오톡 문의해 주세요.
         </p>
       </section>
 
