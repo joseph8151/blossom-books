@@ -53,6 +53,15 @@ const PANELS: ExamPanel[] = [
     kakaoLine: "카톡에 적을 말: PTE · 100P/200P/Special",
   },
   {
+    key: "CELPIP",
+    title: "CELPIP",
+    subtitle: "Canadian English Language Proficiency Index Program. Listening · Reading · Writing · Speaking 네 영역입니다.",
+    p100: "네 영역 유형 연습에 Writing 답변 골격과 Speaking 예상 문항·답변 골격을 더합니다.",
+    p200: "영역별 문항을 반복·심화하고, 시간 맞춰 푸는 세트를 더합니다.",
+    note: "General과 LS(Listening/Speaking) 여부를 모르시면 카톡에 목적만 적어 주세요.",
+    kakaoLine: "카톡에 적을 말: CELPIP · General/LS 여부 · 100P/200P/Special",
+  },
+  {
     key: "부산외대 FLAT",
     title: "부산외대",
     subtitle: "부산외대 관련 영어 시험입니다. 유형은 해마다 달라질 수 있습니다.",
