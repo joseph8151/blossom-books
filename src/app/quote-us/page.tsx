@@ -1,6 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { volumeOptions, formatKRW } from "@/data/pricing";
+import SubjectChips from "./SubjectChips";
 
 // 미국 교과과정(G1–G12 영어·수학) 및 Geometry·Algebra 1·Algebra 2·
 // Precalculus·Calculus·AP 문의에만 카카오톡으로 직접 전달하는 비공개
@@ -62,10 +63,10 @@ export default function QuoteUsPage() {
         구성입니다.
       </p>
 
-      {/* 2. 칩 두 줄 */}
+      {/* 2. 칩 두 줄 — 과목 칩은 클릭 시 같은 페이지 아래 목차 패널 */}
       <div className="mt-8">
         <ChipRow label="학년" items={grades} />
-        <ChipRow label="과목" items={subjects} />
+        <SubjectChips subjects={subjects} />
       </div>
 
       {/* 3. 공통 분량 표 */}
