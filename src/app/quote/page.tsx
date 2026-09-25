@@ -35,6 +35,13 @@ export default function QuotePage() {
         <h2 className="font-display text-[18px] font-semibold text-navy-950">
           1. 레벨테스트 문제집 <span className="font-normal text-charcoal-600">(학원·학교 입학/반 배정)</span>
         </h2>
+        <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
+          학원마다 레벨테스트 유형이 다릅니다.
+          <br />
+          해당 학원 유형에 맞춰 구매하셔도 되고,
+          <br />
+          유형이 확실하지 않으면 일반 레벨테스트(레테 전용)로 문의 주셔도 됩니다.
+        </p>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
@@ -60,23 +67,27 @@ export default function QuotePage() {
         </p>
       </section>
 
-      {/* 2. Special Package */}
-      <section className="mt-12 border border-brass-500/35 bg-brass-500/[0.04] p-6">
-        <h2 className="font-display text-[18px] font-semibold text-navy-950">
-          2. Special Package <span className="font-normal text-charcoal-600">— {formatKRW(390000)}</span>
-        </h2>
-        <p className="mt-3 text-[12.5px] font-medium text-navy-800/70">포함</p>
+      {/* 2. Special Package — 표가 아니라 단독 카드로 강조 (배너처럼 번쩍이지 않게, 네이비·아이보리 톤만 한 단계 진하게) */}
+      <section className="mt-12 border-2 border-navy-900/80 bg-ivory-200/70 p-6 sm:p-8">
+        <span className="inline-flex items-center border border-navy-900/30 bg-navy-950 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-ivory-100">
+          Special Package
+        </span>
+        <p className="mt-4 font-display text-[17px] font-semibold leading-snug text-navy-950">
+          200P와 문항은 같고, 순서·모의·시작만 다릅니다.
+        </p>
+        <p className="mt-3 font-display text-[30px] font-semibold text-navy-950">{formatKRW(390000)}</p>
+
+        <p className="mt-5 text-[12.5px] font-medium text-navy-800/70">포함</p>
         <ul className="mt-1.5 space-y-1.5 text-[13.5px] leading-relaxed text-charcoal-900">
-          <li>· 200P 워크북 + 정답·해설 PDF (200P 기본과 같은 문항 풀)</li>
-          <li>· 이 학생용 목차 (시험·학년/레벨·약한 영역을 받은 뒤 푸는 순서만 재배열)</li>
-          <li>· Mock 2회 (답지 + 시간 배분 1장)</li>
-          <li>· 오답 기록지 (이번 세트 문항 번호가 미리 찍힌 기록지)</li>
-          <li>· 시작 상담 30분 × 1회 (카카오톡 음성 또는 줌)</li>
+          <li>· 200P 워크북 + 정답·해설 PDF (200P와 같은 문항 풀)</li>
+          <li>· 이 학생용 목차 (시험·학년/레벨·약한 영역 접수 후 푸는 순서만 재배열)</li>
+          <li>· Mock 2회 (시간·답지·시간 배분 1장)</li>
+          <li>· 오답 기록지 (문항 번호 미리 인쇄)</li>
+          <li>· 시작 상담 30분 × 1회 (카카오톡 음성 또는 줌). 이후 무제한 질문 없음.</li>
         </ul>
         <div className="mt-4 space-y-1 text-[12.5px] leading-relaxed text-charcoal-600">
-          <p>대상: 시험까지 8–12주, 목차를 직접 짜기 어려운 경우</p>
-          <p>비추천: 문제만 필요하면 200P({formatKRW(flexibleVolumes[flexibleVolumes.length - 1].priceKRW)}) · 시험이 3주 이내면 200P부터가 과할 수 있음</p>
-          <p>진행: 설문 → 48시간 안 목차 PDF → 킥오프 일정 → 본책·Mock·오답지 발송</p>
+          <p>대상: 8–12주, 목차를 못 짜는 집</p>
+          <p>비추천: 문제만 필요하면 200P({formatKRW(flexibleVolumes[flexibleVolumes.length - 1].priceKRW)}) / 시험 3주 안이면 200P가 과할 수 있음</p>
         </div>
       </section>
 
