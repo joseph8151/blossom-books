@@ -20,7 +20,7 @@ const cellCls = "border border-ivory-300 px-4 py-3 text-[13.5px]";
 const headCellCls =
   "border border-ivory-300 bg-ivory-200/70 px-4 py-3 text-left font-label text-[11px] uppercase tracking-[0.08em] text-navy-800/70";
 
-const exams = ["OET", "MET", "CELBAN", "CELPIP", "PTE", "부산외대 FLAT", "SPA(현대차)", "SAT 영어", "SAT 수학"];
+const exams = ["OET", "MET", "CELBAN", "CELPIP", "PTE", "부산외대 FLAT", "SPA(현대차)", "SAT 영어", "SAT 수학", "ESPT"];
 
 const p100 = volumeOptions[2]; // 100P
 const p200 = volumeOptions[3]; // 200P
@@ -37,8 +37,8 @@ export default function QuoteExamPage() {
       {/* 1. H1 + 한 줄 */}
       <h1 className="mt-5 font-display text-[30px] font-semibold text-navy-950 sm:text-[34px]">시험 구성·가격 안내</h1>
       <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
-        OET · MET · CELBAN · PTE · 부산외대 · SPA(현대차) · SAT 영어 · SAT 수학 — 시험을 확인하신 뒤 카카오톡으로
-        문의해 주세요.
+        OET · MET · CELBAN · PTE · 부산외대 · SPA(현대차) · SAT 영어 · SAT 수학 · ESPT — 시험을 확인하신 뒤
+        카카오톡으로 문의해 주세요.
       </p>
 
       {/* 2. 시험 칩 — 알약형, 모바일 가로 스크롤 */}
@@ -78,6 +78,9 @@ export default function QuoteExamPage() {
         </div>
         <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">
           시험·과목마다 문항만 다릅니다. 분량 단가는 같습니다.
+        </p>
+        <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          ESPT는 이 페이지 분량 단가를 따릅니다. 세부 모듈이 있으면 카톡에 적어 주세요.
         </p>
       </section>
 
