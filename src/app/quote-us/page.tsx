@@ -22,29 +22,11 @@ const headCellCls =
   "border border-ivory-300 bg-ivory-200/70 px-4 py-3 text-left font-label text-[11px] uppercase tracking-[0.08em] text-navy-800/70";
 
 const grades = Array.from({ length: 12 }, (_, i) => `G${i + 1}`);
-const subjects = ["영어", "수학", "Geometry", "Algebra 1", "Algebra 2", "Precalculus", "Calculus", "AP"];
+const subjects = ["English", "Math", "Geometry", "Algebra 1", "Algebra 2", "Precalculus", "Calculus", "AP"];
 
 const p100 = volumeOptions[2]; // 100P
 const p200 = volumeOptions[3]; // 200P
 const SPECIAL_KRW = 390000;
-
-function ChipRow({ label, items }: { label: string; items: string[] }) {
-  return (
-    <div className="mt-4 first:mt-0">
-      <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">{label}</p>
-      <div className="mt-2 flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
-        {items.map((item) => (
-          <span
-            key={item}
-            className="shrink-0 whitespace-nowrap rounded-full border border-ivory-300 bg-ivory-100 px-4 py-1.5 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-900 hover:bg-navy-950 hover:text-ivory-100"
-          >
-            {item}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function QuoteUsPage() {
   return (
@@ -59,14 +41,13 @@ export default function QuoteUsPage() {
         미국교과·AP 구성·가격 안내
       </h1>
       <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
-        미국 교과과정 G1–G12 영어·수학, Geometry·Algebra 1·Algebra 2·Precalculus·Calculus, AP 과목 문제집
+        미국 교과과정 G1–G12 English·Math, Geometry·Algebra 1·Algebra 2·Precalculus·Calculus, AP 과목 문제집
         구성입니다.
       </p>
 
-      {/* 2. 칩 두 줄 — 과목 칩은 클릭 시 같은 페이지 아래 목차 패널 */}
+      {/* 2. 학년 + 과목 칩 — 학년 선택 후 English/Math를 누르면 해당 학년 목차 패널이 열림 */}
       <div className="mt-8">
-        <ChipRow label="학년" items={grades} />
-        <SubjectChips subjects={subjects} />
+        <SubjectChips grades={grades} subjects={subjects} />
       </div>
 
       {/* 3. 공통 분량 표 */}
