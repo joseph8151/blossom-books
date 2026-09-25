@@ -27,33 +27,35 @@ const subjects = [
 // Special Package는 해당 구성 금액 + ₩100,000 (구성은 공통 Special과 동일, 금액만 다름)
 const SPECIAL_ADD = 100000;
 
-// 세트 3종 — 시험 2개 이상 / 과목 3개 / 형제 2명일 때만 안내하는 묶음 구성
-const bundles = [
-  {
-    title: "Special 2종",
-    priceKRW: 780000,
-    lead: "두 시험(또는 두 과목) 각각 Special.",
-    items: ["시험마다: 해당 200P + 해설", "이 학생용 목차", "모의고사 2회", "오답지", "카톡 글 상담 30분"],
-    example: "예: ISEE + MAP, SAT 영어 + SAT 수학, 레테 영어 + MAP 영어",
-    note: "음성·줌 없음.",
-  },
-  {
-    title: "200P 3과목",
-    priceKRW: 870000,
-    lead: "200P 문제집 + 해설집 3권.",
-    items: ["200P 워크북 + 해설집 × 3권"],
-    example: "예: 영어·국어·수학, 또는 레테 영어 + MAP 영어 + MAP 수학",
-    note: "Special(목차·모의·상담)은 포함하지 않습니다. 교재 3권만입니다.",
-  },
-  {
-    title: "형제 Special",
-    priceKRW: 780000,
-    lead: "아이 두 명 × Special 각 1.",
-    items: ["아이마다 목차 재배열", "아이마다 모의고사 2회", "아이마다 카톡 글 상담 30분"],
-    example: undefined,
-    note: "같은 시험을 봐도 목차는 아이별로 따로 짭니다.",
-  },
-] as const;
+// 세트 3종 — 시험 2개 이상 / 과목 3개 / 형제 2명일 때만 안내하는 묶음 구성.
+// 객단가·강조 위계: Special 2종(₩780,000) > 형제 Special(₩780,000) > 200P 3과목(₩870,000, 상담 없이 교재만이라 3등)
+const specialTwoBundle = {
+  badge: "BEST SET",
+  title: "Special 2종",
+  priceKRW: 780000,
+  lead: "시험이 두 개일 때 한 결제.",
+  items: ["시험마다 200P + 해설", "이 학생용 목차", "모의고사 2회", "오답지", "카톡 글 상담 30분"],
+  example: "예: ISEE + MAP, SAT 영어 + SAT 수학, 레테 영어 + MAP 영어",
+  note: "음성·줌 없음.",
+};
+
+const siblingBundle = {
+  title: "형제 Special",
+  priceKRW: 780000,
+  lead: "아이 두 명일 때 한 결제.",
+  items: ["아이마다 목차 재배열", "아이마다 모의고사 2회", "아이마다 카톡 글 상담 30분"],
+  example: undefined,
+  note: "같은 시험을 봐도 목차는 아이별로 따로 짭니다.",
+};
+
+const threeSubjectBundle = {
+  title: "200P 3과목",
+  priceKRW: 870000,
+  lead: "200P 문제집 + 해설집 3권.",
+  items: ["200P 워크북 + 해설집 × 3권"],
+  example: "예: 영어·국어·수학, 또는 레테 영어 + MAP 영어 + MAP 수학",
+  note: "교재 3권 · 상담 없음",
+};
 
 export default function QuotePage() {
   return (
@@ -115,9 +117,9 @@ export default function QuotePage() {
         </p>
       </section>
 
-      {/* 2. Special Package — 표가 아니라 단독 카드로 강조 (배너처럼 번쩍이지 않게, 네이비·아이보리 톤만 한 단계 진하게) */}
-      <section className="mt-12 border-2 border-navy-900/80 bg-ivory-200/70 p-6 sm:p-8">
-        <span className="inline-flex items-center border border-navy-900/30 bg-navy-950 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-ivory-100">
+      {/* 2. Special Package — 단독 카드지만, "한 번에 맞추는 구성"의 780 세트보다 한 단계 낮은 무게 */}
+      <section className="mt-12 border border-navy-900/35 bg-ivory-100 p-6 sm:p-8">
+        <span className="inline-flex items-center border border-navy-900/40 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-navy-900">
           Special Package
         </span>
         <p className="mt-4 font-display text-[17px] font-semibold leading-snug text-navy-950">
@@ -279,7 +281,8 @@ export default function QuotePage() {
         </p>
       </section>
 
-      {/* 7. 한 번에 맞추는 구성 — 단품 Special(₩390,000) 카드와 같은 무게로 강조, 페이지 맨 아래 */}
+      {/* 7. 한 번에 맞추는 구성 — 객단가 1위인 780 세트(Special 2종 > 형제 Special) 순으로 강조,
+          870(3과목)은 교재만이라 일반 카드, 페이지 맨 아래 */}
       <section className="mt-16 border-2 border-navy-900/70 bg-ivory-200/50 p-6 sm:p-8">
         <h2 className="font-display text-[20px] font-semibold text-navy-950">한 번에 맞추는 구성</h2>
         <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
@@ -288,24 +291,59 @@ export default function QuotePage() {
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          {bundles.map((b) => (
-            <div key={b.title} className="border-2 border-navy-900/60 bg-ivory-100 p-5">
-              <span className="inline-flex items-center border border-brass-500 bg-brass-500 px-2 py-1 font-label text-[10px] uppercase tracking-[0.12em] text-ivory-100">
-                {b.title}
-              </span>
-              <p className="mt-4 font-display text-[26px] font-semibold text-navy-950">{formatKRW(b.priceKRW)}</p>
-              <p className="mt-2 text-[13px] leading-relaxed text-charcoal-900">{b.lead}</p>
-              <ul className="mt-3 space-y-1 text-[12.5px] leading-relaxed text-charcoal-600">
-                {b.items.map((item) => (
-                  <li key={item}>· {item}</li>
-                ))}
-              </ul>
-              {b.example && (
-                <p className="mt-3 text-[11.5px] leading-relaxed text-charcoal-600/80">{b.example}</p>
-              )}
-              <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600/70">{b.note}</p>
-            </div>
-          ))}
+          {/* 1위: Special 2종 — 네이비 필 배경 + 골드 배지, 세 카드 중 가장 큼 */}
+          <div className="flex flex-col border-2 border-navy-950 bg-navy-950 p-6 sm:col-span-1">
+            <span className="inline-flex w-fit items-center border border-brass-500 bg-brass-500 px-2 py-1 font-label text-[10px] uppercase tracking-[0.12em] text-navy-950">
+              {specialTwoBundle.badge}
+            </span>
+            <p className="mt-1 text-[11px] text-ivory-100/60">{specialTwoBundle.title}</p>
+            <p className="mt-3 font-display text-[32px] font-semibold text-ivory-100">
+              {formatKRW(specialTwoBundle.priceKRW)}
+            </p>
+            <p className="mt-2 text-[13.5px] leading-relaxed text-ivory-100">{specialTwoBundle.lead}</p>
+            <ul className="mt-3 space-y-1 text-[12.5px] leading-relaxed text-ivory-100/75">
+              {specialTwoBundle.items.map((item) => (
+                <li key={item}>· {item}</li>
+              ))}
+            </ul>
+            <p className="mt-3 text-[11.5px] leading-relaxed text-ivory-100/60">{specialTwoBundle.example}</p>
+            <p className="mt-2 text-[11.5px] leading-relaxed text-ivory-100/60">{specialTwoBundle.note}</p>
+          </div>
+
+          {/* 2위: 형제 Special — 아이보리 + 2px 네이비 테두리 + 골드 아웃라인 배지, 1위보다 반 단계 낮음 */}
+          <div className="flex flex-col border-2 border-navy-900 bg-ivory-100 p-5">
+            <span className="inline-flex w-fit items-center border border-brass-500 px-2 py-1 font-label text-[10px] uppercase tracking-[0.12em] text-brass-600">
+              {siblingBundle.title}
+            </span>
+            <p className="mt-4 font-display text-[27px] font-semibold text-navy-950">
+              {formatKRW(siblingBundle.priceKRW)}
+            </p>
+            <p className="mt-2 text-[13px] leading-relaxed text-charcoal-900">{siblingBundle.lead}</p>
+            <ul className="mt-3 space-y-1 text-[12.5px] leading-relaxed text-charcoal-600">
+              {siblingBundle.items.map((item) => (
+                <li key={item}>· {item}</li>
+              ))}
+            </ul>
+            <p className="mt-3 text-[11.5px] leading-relaxed text-charcoal-600/70">{siblingBundle.note}</p>
+          </div>
+
+          {/* 3위: 200P 3과목 — 회색 테두리 일반 카드. 네이비·골드 필 없음 */}
+          <div className="flex flex-col border border-navy-800/15 bg-ivory-100 p-5">
+            <span className="inline-flex w-fit items-center border border-navy-800/20 px-2 py-1 font-label text-[10px] uppercase tracking-[0.12em] text-charcoal-600">
+              {threeSubjectBundle.title}
+            </span>
+            <p className="mt-4 font-display text-[22px] font-semibold text-navy-950">
+              {formatKRW(threeSubjectBundle.priceKRW)}
+            </p>
+            <p className="mt-2 text-[13px] leading-relaxed text-charcoal-900">{threeSubjectBundle.lead}</p>
+            <ul className="mt-3 space-y-1 text-[12.5px] leading-relaxed text-charcoal-600">
+              {threeSubjectBundle.items.map((item) => (
+                <li key={item}>· {item}</li>
+              ))}
+            </ul>
+            <p className="mt-3 text-[11.5px] leading-relaxed text-charcoal-600/80">{threeSubjectBundle.example}</p>
+            <p className="mt-2 text-[11px] leading-relaxed text-charcoal-600/60">{threeSubjectBundle.note}</p>
+          </div>
         </div>
       </section>
 
