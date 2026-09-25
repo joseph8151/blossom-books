@@ -18,6 +18,12 @@ export const metadata = {
 const cellCls = "border border-navy-800/12 px-4 py-3 text-[13.5px]";
 const headCellCls = "border border-navy-800/12 bg-ivory-200/60 px-4 py-3 text-left font-label text-[11px] uppercase tracking-[0.08em] text-navy-800/70";
 
+const subjects = [
+  { name: "영어", note: "영어 레벨테스트" },
+  { name: "국어", note: "국어 문해력 레벨테스트" },
+  { name: "수학", note: "사고력 수학 레벨테스트" },
+];
+
 export default function QuotePage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-14 lg:px-8 lg:py-20">
@@ -30,7 +36,7 @@ export default function QuotePage() {
         문의 전에 분량과 시험을 고르시면 바로 맞춰 드립니다.
       </p>
 
-      {/* 1. 레벨테스트 */}
+      {/* 1. 레벨테스트 — 과목(영어/국어/수학) 카드 3장. 모바일은 세로 스택 */}
       <section className="mt-10">
         <h2 className="font-display text-[18px] font-semibold text-navy-950">
           1. 레벨테스트 문제집 <span className="font-normal text-charcoal-600">(학원·학교 입학/반 배정)</span>
@@ -41,28 +47,31 @@ export default function QuotePage() {
           해당 학원 유형에 맞춰 구매하셔도 되고,
           <br />
           유형이 확실하지 않으면 일반 레벨테스트(레테 전용)로 문의 주셔도 됩니다.
+          <br />
+          영어·국어·수학 중 필요한 과목만 고르시면 됩니다.
         </p>
-        <div className="mt-3 overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead>
-              <tr>
-                <th className={headCellCls}>분량</th>
-                <th className={headCellCls}>구성</th>
-                <th className={headCellCls}>가격</th>
-              </tr>
-            </thead>
-            <tbody>
-              {flexibleVolumes.map((v) => (
-                <tr key={v.pages}>
-                  <td className={cellCls}>{v.label}</td>
-                  <td className={cellCls}>문제집 + 해설집</td>
-                  <td className={cellCls}>{formatKRW(v.priceKRW)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+
+        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          {subjects.map((s) => (
+            <div key={s.name} className="border border-navy-800/15 bg-ivory-100 p-4">
+              <p className="font-display text-[16px] font-semibold text-navy-950">{s.name}</p>
+              <p className="mt-0.5 text-[11.5px] text-charcoal-600/70">{s.note}</p>
+              <div className="mt-3 divide-y divide-navy-800/10 border-t border-navy-800/10">
+                {flexibleVolumes.map((v) => (
+                  <div key={v.pages} className="flex items-center justify-between py-2 text-[13px]">
+                    <span className="text-charcoal-600">{v.label}</span>
+                    <span className="font-medium text-navy-950">{formatKRW(v.priceKRW)}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-        <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">
+
+        <p className="mt-3 text-[12px] leading-relaxed text-charcoal-600/80">
+          과목을 합쳐 주문할 수 있습니다. 합계는 카톡으로 맞춰 드립니다.
+        </p>
+        <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600/80">
           샘플은 구매 전 확인 가능합니다. 학년·레벨·시험이 다르면 구성이 달라질 수 있습니다.
         </p>
       </section>
