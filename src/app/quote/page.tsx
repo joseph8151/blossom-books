@@ -27,6 +27,34 @@ const subjects = [
 // Special Package는 해당 구성 금액 + ₩100,000 (구성은 공통 Special과 동일, 금액만 다름)
 const SPECIAL_ADD = 100000;
 
+// 세트 3종 — 시험 2개 이상 / 과목 3개 / 형제 2명일 때만 안내하는 묶음 구성
+const bundles = [
+  {
+    title: "Special 2종",
+    priceKRW: 780000,
+    lead: "두 시험(또는 두 과목) 각각 Special.",
+    items: ["시험마다: 해당 200P + 해설", "이 학생용 목차", "모의고사 2회", "오답지", "카톡 글 상담 30분"],
+    example: "예: ISEE + MAP, SAT 영어 + SAT 수학, 레테 영어 + MAP 영어",
+    note: "음성·줌 없음.",
+  },
+  {
+    title: "200P 3과목",
+    priceKRW: 870000,
+    lead: "200P 문제집 + 해설집 3권.",
+    items: ["200P 워크북 + 해설집 × 3권"],
+    example: "예: 영어·국어·수학, 또는 레테 영어 + MAP 영어 + MAP 수학",
+    note: "Special(목차·모의·상담)은 포함하지 않습니다. 교재 3권만입니다.",
+  },
+  {
+    title: "형제 Special",
+    priceKRW: 780000,
+    lead: "아이 두 명 × Special 각 1.",
+    items: ["아이마다 목차 재배열", "아이마다 모의고사 2회", "아이마다 카톡 글 상담 30분"],
+    example: undefined,
+    note: "같은 시험을 봐도 목차는 아이별로 따로 짭니다.",
+  },
+] as const;
+
 export default function QuotePage() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-14 lg:px-8 lg:py-20">
@@ -249,6 +277,36 @@ export default function QuotePage() {
         <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600/80">
           학원·학교 배치용 Oxford 온라인 플레이스먼트 대비입니다. 일반 레벨테스트와는 별도 구성입니다.
         </p>
+      </section>
+
+      {/* 7. 한 번에 맞추는 구성 — 단품 Special(₩390,000) 카드보다 한 단계 낮은 무게, 페이지 맨 아래 */}
+      <section className="mt-16 border-t border-navy-800/12 pt-12">
+        <h2 className="font-display text-[18px] font-semibold text-navy-950">한 번에 맞추는 구성</h2>
+        <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
+          시험이 두 개이거나, 과목이 세 개이거나, 형제가 두 명일 때만 이 구성을 보세요. 한 시험·한 과목이면
+          위의 단품이 맞습니다.
+        </p>
+
+        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+          {bundles.map((b) => (
+            <div key={b.title} className="border border-navy-800/15 bg-ivory-100 p-5">
+              <span className="inline-flex items-center border border-brass-500/40 px-2 py-1 font-label text-[10px] uppercase tracking-[0.12em] text-brass-600">
+                {b.title}
+              </span>
+              <p className="mt-4 font-display text-[22px] font-semibold text-navy-950">{formatKRW(b.priceKRW)}</p>
+              <p className="mt-2 text-[13px] leading-relaxed text-charcoal-900">{b.lead}</p>
+              <ul className="mt-3 space-y-1 text-[12.5px] leading-relaxed text-charcoal-600">
+                {b.items.map((item) => (
+                  <li key={item}>· {item}</li>
+                ))}
+              </ul>
+              {b.example && (
+                <p className="mt-3 text-[11.5px] leading-relaxed text-charcoal-600/80">{b.example}</p>
+              )}
+              <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600/70">{b.note}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* CTA */}
