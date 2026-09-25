@@ -1,6 +1,7 @@
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { volumeOptions, formatKRW } from "@/data/pricing";
+import ExamChips from "./ExamChips";
 
 // 성인·취업·유학·대입 영어/수학(OET·MET·CELBAN·CELPIP·PTE·부산외대 FLAT·SPA·SAT) 문의에만
 // 카카오톡으로 직접 전달하는 비공개 구성·가격표입니다. 홈/헤더/푸터/사이트맵/
@@ -20,7 +21,19 @@ const cellCls = "border border-ivory-300 px-4 py-3 text-[13.5px]";
 const headCellCls =
   "border border-ivory-300 bg-ivory-200/70 px-4 py-3 text-left font-label text-[11px] uppercase tracking-[0.08em] text-navy-800/70";
 
-const exams = ["OET", "MET", "CELBAN", "CELPIP", "PTE", "부산외대 FLAT", "SPA(현대차)", "SAT 영어", "SAT 수학", "ESPT"];
+const exams = [
+  "OET",
+  "MET",
+  "CELBAN",
+  "CELPIP",
+  "PTE",
+  "부산외대 FLAT",
+  "SPA(현대차)",
+  "SAT 영어",
+  "SAT 수학",
+  "ESPT",
+  "영원무역 스피킹",
+];
 
 const p100 = volumeOptions[2]; // 100P
 const p200 = volumeOptions[3]; // 200P
@@ -41,17 +54,8 @@ export default function QuoteExamPage() {
         카카오톡으로 문의해 주세요.
       </p>
 
-      {/* 2. 시험 칩 — 알약형, 모바일 가로 스크롤 */}
-      <div className="mt-8 flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
-        {exams.map((e) => (
-          <span
-            key={e}
-            className="shrink-0 whitespace-nowrap rounded-full border border-ivory-300 bg-ivory-100 px-4 py-1.5 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-900 hover:bg-navy-950 hover:text-ivory-100"
-          >
-            {e}
-          </span>
-        ))}
-      </div>
+      {/* 2. 시험 칩 — 알약형, 모바일 가로 스크롤. ESPT는 클릭 시 같은 페이지 아래 패널 */}
+      <ExamChips exams={exams} />
 
       {/* 3. 공통 분량 표 */}
       <section className="mt-[72px]">
