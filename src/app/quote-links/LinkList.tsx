@@ -20,6 +20,21 @@ const links = [
     url: "https://www.blossombooks.org/quote-us/",
   },
   {
+    title: "영국 교과·입학시험",
+    who: "Year 1–11 · GCSE · A-level · 11+ · ISEB · UKiset 문의 고객",
+    url: "https://www.blossombooks.org/quote-uk/",
+  },
+  {
+    title: "캐나다 교과",
+    who: "Grade 1–12 English·Math, 주(province)별 상급 수학 스트림 문의 고객",
+    url: "https://www.blossombooks.org/quote-ca/",
+  },
+  {
+    title: "호주 교과",
+    who: "Foundation–Year 12 English·Maths, Methods/Specialist 문의 고객",
+    url: "https://www.blossombooks.org/quote-au/",
+  },
+  {
     title: "국제학교 입학시험",
     who: "MAP Growth · CAT4 · ISEE · Oxford Online Placement Test 문의 고객",
     url: "https://www.blossombooks.org/quote-international-school/",

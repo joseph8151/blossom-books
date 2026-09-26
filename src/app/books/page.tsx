@@ -9,6 +9,9 @@ import { BlossomSeries, seriesFor, seriesInfo, seriesOrder } from "@/data/series
 import ProductCard from "@/components/books/ProductCard";
 import MissingBookCTA from "@/components/common/MissingBookCTA";
 import { trackEvent } from "@/lib/analytics";
+import { countryPrograms } from "@/data/countryPrograms";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const tracks: (CurriculumTrack | "all")[] = [
   "all",
@@ -87,6 +90,24 @@ export default function BooksPage() {
           교육과정, 과목, 학년, 난이도, 시리즈별로 교재를 확인하실 수 있습니다. 원하시는 교재가 없다면
           주문 제작을 상담해보세요.
         </p>
+      </div>
+
+      {/* 나라별 교과 과정 카드 */}
+      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {countryPrograms.map((c) => (
+          <Link
+            key={c.href}
+            href={c.href}
+            className="flex flex-col border border-navy-800/12 bg-ivory-100 p-4 transition-colors hover:border-navy-800/30"
+          >
+            <p className="font-display text-[14.5px] font-semibold text-navy-950">{c.title}</p>
+            <p className="mt-1.5 flex-1 text-[11.5px] leading-relaxed text-charcoal-600">{c.desc}</p>
+            <span className="mt-2.5 inline-flex items-center gap-1 text-[11.5px] font-medium text-navy-900">
+              구성·가격 보기
+              <ArrowRight size={11} />
+            </span>
+          </Link>
+        ))}
       </div>
 
       {/* 검색 */}

@@ -1,6 +1,7 @@
 import HeroSection from "@/components/home/HeroSection";
 import NumbersStrip from "@/components/home/NumbersStrip";
 import CoreCategories from "@/components/home/CoreCategories";
+import CountryPrograms from "@/components/home/CountryPrograms";
 import Bestsellers from "@/components/home/Bestsellers";
 import WhyDifferent from "@/components/home/WhyDifferent";
 import QuestionToUnderstanding from "@/components/home/QuestionToUnderstanding";
@@ -44,6 +45,7 @@ export default function HomePage() {
       <HeroSection />
       <NumbersStrip />
       <CoreCategories />
+      <CountryPrograms />
       <Bestsellers />
       <WhyDifferent />
 
