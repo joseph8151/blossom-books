@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { flexibleVolumes, formatKRW, MAP_PRICES, CAT4_PRICES, OOPT_PRICES, SPECIAL_ADD, SPECIAL_KRW } from "../data";
+import { flexibleVolumes, formatKRW, SPECIAL_KRW } from "../data";
 
 const rowCls = "flex items-baseline justify-between gap-4 py-1.5 text-[13px]";
 
+// MAP·CAT4·OOPT는 /quote-international-school로 이동했습니다.
+// ISEE는 사용자 요청에 따라 이 페이지(레벨테스트 중심 Quote)에 남겨둡니다.
 export default function ExamConfigurations() {
   return (
     <section className="border-b border-ivory-300 bg-ivory-100 py-12 sm:py-16">
@@ -12,70 +12,10 @@ export default function ExamConfigurations() {
           <span className="font-label text-[10px] uppercase tracking-[0.12em] text-brass-500">
             International School Admission
           </span>
-          <h2 className="mt-2.5 font-display text-[21px] font-semibold text-navy-950">
-            시험별 구성
-          </h2>
+          <h2 className="mt-2.5 font-display text-[21px] font-semibold text-navy-950">ISEE 구성</h2>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:mt-9 lg:grid-cols-2">
-          {/* MAP Growth */}
-          <div className="border border-ivory-300 bg-white p-5 sm:p-6">
-            <p className="font-display text-[16px] font-semibold text-navy-950">MAP Growth</p>
-            <div className="mt-3 divide-y divide-ivory-300 border-t border-ivory-300">
-              <div className={rowCls}>
-                <span className="text-charcoal-600">English — 100P + Explanation</span>
-                <span className="font-medium text-navy-950">{formatKRW(MAP_PRICES.english)}</span>
-              </div>
-              <div className={rowCls}>
-                <span className="text-charcoal-600">Math — 60P + Explanation</span>
-                <span className="font-medium text-navy-950">{formatKRW(MAP_PRICES.math)}</span>
-              </div>
-              <div className={rowCls}>
-                <span className="text-charcoal-600">English + Math</span>
-                <span className="font-medium text-navy-950">{formatKRW(MAP_PRICES.both)}</span>
-              </div>
-              <div className={rowCls}>
-                <span className="text-charcoal-600">Special</span>
-                <span className="font-medium text-navy-950">기본 구성 + {formatKRW(SPECIAL_ADD)}</span>
-              </div>
-            </div>
-            <Link
-              href="/prep/map"
-              className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-medium text-navy-900 underline decoration-navy-900/30 underline-offset-4 hover:decoration-navy-900"
-            >
-              MAP 교재 보기
-              <ArrowRight size={13} />
-            </Link>
-          </div>
-
-          {/* CAT4 */}
-          <div className="border border-ivory-300 bg-white p-5 sm:p-6">
-            <p className="font-display text-[16px] font-semibold text-navy-950">CAT4</p>
-            <div className="mt-3 divide-y divide-ivory-300 border-t border-ivory-300">
-              <div className={rowCls}>
-                <span className="text-charcoal-600">1 Level</span>
-                <span className="font-medium text-navy-950">{formatKRW(CAT4_PRICES.oneLevel)}</span>
-              </div>
-              <div className={rowCls}>
-                <span className="text-charcoal-600">
-                  2 Levels{" "}
-                  <span className="font-label text-[9.5px] uppercase tracking-[0.08em] text-brass-500">
-                    10% Package Saving
-                  </span>
-                </span>
-                <span className="font-medium text-navy-950">{formatKRW(CAT4_PRICES.twoLevels)}</span>
-              </div>
-              <div className={rowCls}>
-                <span className="text-charcoal-600">Special</span>
-                <span className="font-medium text-navy-950">기본 구성 + {formatKRW(SPECIAL_ADD)}</span>
-              </div>
-            </div>
-            <p className="mt-5 text-[12.5px] leading-relaxed text-charcoal-600/80">
-              CAT4는 학생 연령에 따라 Level이 달라지므로 현재 학년 또는 시험 Level을 상담 시 알려주세요.
-            </p>
-          </div>
-
-          {/* ISEE */}
+        <div className="mx-auto mt-8 max-w-[420px] sm:mt-9">
           <div className="border border-ivory-300 bg-white p-5 sm:p-6">
             <p className="font-display text-[16px] font-semibold text-navy-950">ISEE</p>
             <p className="mt-1 text-[12px] text-charcoal-600/70">Lower · Middle · Upper</p>
@@ -94,28 +34,6 @@ export default function ExamConfigurations() {
             <p className="mt-5 text-[12.5px] leading-relaxed text-charcoal-600/80">
               Verbal Reasoning · Reading Comprehension · Quantitative Reasoning · Mathematics Achievement 중
               필요 영역을 선택할 수 있습니다.
-            </p>
-          </div>
-
-          {/* OOPT */}
-          <div className="border border-ivory-300 bg-white p-5 sm:p-6">
-            <p className="font-display text-[16px] font-semibold text-navy-950">Oxford Online Placement Test</p>
-            <div className="mt-3 divide-y divide-ivory-300 border-t border-ivory-300">
-              <div className={rowCls}>
-                <span className="text-charcoal-600">100P</span>
-                <span className="font-medium text-navy-950">{formatKRW(OOPT_PRICES.p100)}</span>
-              </div>
-              <div className={rowCls}>
-                <span className="text-charcoal-600">200P</span>
-                <span className="font-medium text-navy-950">{formatKRW(OOPT_PRICES.p200)}</span>
-              </div>
-              <div className={rowCls}>
-                <span className="text-charcoal-600">200P Special</span>
-                <span className="font-medium text-navy-950">{formatKRW(SPECIAL_KRW)}</span>
-              </div>
-            </div>
-            <p className="mt-5 text-[12.5px] leading-relaxed text-charcoal-600/80">
-              학원·학교 배치용 Oxford Placement Test 대비이며 일반 레벨테스트와 별도 구성입니다.
             </p>
           </div>
         </div>

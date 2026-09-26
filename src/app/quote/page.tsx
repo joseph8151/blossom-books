@@ -5,6 +5,7 @@ import BaseVolumes from "./components/BaseVolumes";
 import VolumeGuide from "./components/VolumeGuide";
 import SpecialPackage from "./components/SpecialPackage";
 import ExamConfigurations from "./components/ExamConfigurations";
+import InternationalSchoolConnector from "./components/InternationalSchoolConnector";
 import ComboPackages from "./components/ComboPackages";
 import IncludedSection from "./components/IncludedSection";
 import CustomQuoteSection from "./components/CustomQuoteSection";
@@ -27,7 +28,9 @@ export const metadata = {
 
 // 레벨테스트 문제집이 실제 문의 비중이 가장 높은 대표 상품이므로 Hero 바로 다음에
 // 배치하고(다른 시험과 동일 선상에 두지 않음), 그 뒤로 공통 3-Step 안내·기본 분량·
-// 일반 분량 가이드가 이어진 다음 MAP/CAT4/ISEE 등 나머지 시험을 비교적 compact하게 둡니다.
+// 일반 분량 가이드가 이어진 다음 ISEE를 비교적 compact하게 둡니다. MAP·CAT4·
+// Oxford Online Placement Test는 /quote-international-school로 분리했고,
+// 여기에는 그리로 넘어가는 작은 연결 섹션(InternationalSchoolConnector)만 남깁니다.
 export default function QuotePage() {
   return (
     <div>
@@ -38,6 +41,7 @@ export default function QuotePage() {
       <VolumeGuide />
       <SpecialPackage />
       <ExamConfigurations />
+      <InternationalSchoolConnector />
       <ComboPackages />
       <IncludedSection />
       <CustomQuoteSection />
