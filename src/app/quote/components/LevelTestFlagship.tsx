@@ -5,11 +5,11 @@ import { flexibleVolumes, formatKRW, LEVEL_TEST_BUNDLES } from "../data";
 
 const trustPoints = ["학원별 유형 대응", "영어·국어·수학 선택", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
 
-const volumeCopy: Record<number, string> = {
-  40: "유형 확인·맛보기",
-  60: "짧은 대비",
-  100: "이번 시험",
-  200: "심화·재응시·다음 레벨. 100P와 문항이 겹치지 않습니다.",
+const volumeMeta: Record<number, { desc: string; stage?: "STANDARD" | "ADVANCED" }> = {
+  40: { desc: "취약 유형 집중 · 단기 보완" },
+  60: { desc: "기본 시험 대비" },
+  100: { desc: "기본 유형 + 충분한 실전 연습", stage: "STANDARD" },
+  200: { desc: "심화 + 고난도 + 상위 레벨 대비", stage: "ADVANCED" },
 };
 
 const subjects = [
@@ -99,32 +99,32 @@ export default function LevelTestFlagship() {
           ))}
         </div>
 
-        {/* 4-1. 구성·가격 — 페이지 수 4단 + 묶음 1칸 */}
+        {/* 4-1. 구성·가격 — 페이지 수 4단, 100P/200P는 STANDARD/ADVANCED 단계로 이어짐 */}
         <div className="mt-10 sm:mt-12">
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {flexibleVolumes.map((v) => (
-              <div key={v.pages} className="border border-ivory-300 bg-white p-5 text-center sm:p-6">
-                <p className="font-display text-[19px] font-semibold text-navy-950">{v.label}</p>
-                <p className="mt-2 text-[16px] font-semibold text-navy-950">{formatKRW(v.priceKRW)}</p>
-                <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600">{volumeCopy[v.pages]}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="relative mt-4 border-2 border-navy-900 bg-white p-6 sm:p-7">
-            <span className="inline-flex items-center rounded-sm bg-brass-500 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-navy-950">
-              함께 준비
-            </span>
-            <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="font-display text-[19px] font-semibold text-navy-950">본시험 + 심화</p>
-                <p className="mt-1.5 text-[12.5px] text-charcoal-600">100페이지 + 200페이지 · 문제집·해설집</p>
-                <p className="mt-1.5 text-[13px] text-charcoal-700">이번 시험과 다음 레벨을 한 번에.</p>
-              </div>
-              <p className="font-display text-[26px] font-semibold text-navy-950 sm:text-[28px]">
-                {formatKRW(LEVEL_TEST_BUNDLES.mainPlusAdvanced)}
-              </p>
-            </div>
+            {flexibleVolumes.map((v) => {
+              const meta = volumeMeta[v.pages];
+              return (
+                <div key={v.pages} className="border border-ivory-300 bg-white p-5 text-center sm:p-6">
+                  <div className="flex h-5 items-center justify-center">
+                    {meta.stage && (
+                      <span
+                        className={`inline-flex items-center rounded-sm px-2 py-0.5 font-label text-[9px] uppercase tracking-[0.12em] ${
+                          meta.stage === "STANDARD"
+                            ? "bg-navy-900/10 text-navy-900"
+                            : "bg-navy-950 text-ivory-100"
+                        }`}
+                      >
+                        {meta.stage}
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-2 font-display text-[19px] font-semibold text-navy-950">{v.label}</p>
+                  <p className="mt-2 text-[16px] font-semibold text-navy-950">{formatKRW(v.priceKRW)}</p>
+                  <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600">{meta.desc}</p>
+                </div>
+              );
+            })}
           </div>
 
           <p className="mt-4 text-center text-[12px] leading-relaxed text-charcoal-600/70">
