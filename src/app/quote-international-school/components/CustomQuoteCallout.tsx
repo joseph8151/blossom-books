@@ -20,7 +20,8 @@ export default function CustomQuoteCallout() {
         </ul>
 
         <p className="mt-6 text-[13px] leading-relaxed text-charcoal-600/70">
-          이 경우 기본 가격표 대신 시험 구성에 따라 맞춤 견적으로 안내합니다.
+          이 경우 기본 가격표 대신 시험 구성에 따라 맞춤 견적으로 안내합니다. 시험 성격에 따라 STANDARD와
+          ADVANCED 구성으로 나눠 준비하는 것도 상담에서 안내해 드립니다.
         </p>
 
         <a
