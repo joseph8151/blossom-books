@@ -5,11 +5,13 @@ import { flexibleVolumes, formatKRW, LEVEL_TEST_BUNDLES } from "../data";
 
 const trustPoints = ["학원별 유형 대응", "영어·국어·수학 선택", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
 
-const volumeMeta: Record<number, { desc: string; stage?: "STANDARD" | "ADVANCED" }> = {
-  40: { desc: "취약 유형 집중 · 단기 보완" },
-  60: { desc: "기본 시험 대비" },
-  100: { desc: "기본 유형 + 충분한 실전 연습", stage: "STANDARD" },
-  200: { desc: "심화 + 고난도 + 상위 레벨 대비", stage: "ADVANCED" },
+// 페이지 수는 "문제량"입니다. 난이도(Standard/Advanced)와는 별개의 축이므로
+// 여기에서는 분량 설명만 하고, 단계 이야기는 하지 않습니다.
+const volumeMeta: Record<number, { desc: string }> = {
+  40: { desc: "집중 연습" },
+  60: { desc: "기본 준비" },
+  100: { desc: "충분한 실전 연습" },
+  200: { desc: "장기 준비 · 충분한 문제량" },
 };
 
 const subjects = [
@@ -99,27 +101,14 @@ export default function LevelTestFlagship() {
           ))}
         </div>
 
-        {/* 4-1. 구성·가격 — 페이지 수 4단, 100P/200P는 STANDARD/ADVANCED 단계로 이어짐 */}
+        {/* 4-1. 구성·가격 — 페이지 수 4단(문제량). 난이도(Standard/Advanced)는 별도 축입니다 */}
         <div className="mt-10 sm:mt-12">
           <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {flexibleVolumes.map((v) => {
               const meta = volumeMeta[v.pages];
               return (
                 <div key={v.pages} className="border border-ivory-300 bg-white p-5 text-center sm:p-6">
-                  <div className="flex h-5 items-center justify-center">
-                    {meta.stage && (
-                      <span
-                        className={`inline-flex items-center rounded-sm px-2 py-0.5 font-label text-[9px] uppercase tracking-[0.12em] ${
-                          meta.stage === "STANDARD"
-                            ? "bg-navy-900/10 text-navy-900"
-                            : "bg-navy-950 text-ivory-100"
-                        }`}
-                      >
-                        {meta.stage}
-                      </span>
-                    )}
-                  </div>
-                  <p className="mt-2 font-display text-[19px] font-semibold text-navy-950">{v.label}</p>
+                  <p className="font-display text-[19px] font-semibold text-navy-950">{v.label}</p>
                   <p className="mt-2 text-[16px] font-semibold text-navy-950">{formatKRW(v.priceKRW)}</p>
                   <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600">{meta.desc}</p>
                 </div>
@@ -127,7 +116,11 @@ export default function LevelTestFlagship() {
             })}
           </div>
 
-          <p className="mt-4 text-center text-[12px] leading-relaxed text-charcoal-600/70">
+          <p className="mx-auto mt-4 max-w-[560px] text-center text-[12px] leading-relaxed text-charcoal-600/70">
+            페이지 수는 학습량의 차이입니다. 실제 난이도는 학생의 학년, 현재 수준, 시험 유형에 맞춰
+            구성됩니다.
+          </p>
+          <p className="mt-2 text-center text-[12px] leading-relaxed text-charcoal-600/70">
             입문 {formatKRW(LEVEL_TEST_BUNDLES.starter)}(40P+60P) · 풀세트{" "}
             {formatKRW(LEVEL_TEST_BUNDLES.fullSet)}(60P+100P+200P)도 카카오톡으로 문의 가능합니다.
           </p>
