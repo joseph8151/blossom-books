@@ -155,6 +155,35 @@ export default function IseeSection() {
           </div>
         </div>
 
+        {/* 한 단계 더 준비한다면 */}
+        <div className="mt-8 border border-ivory-300 bg-white p-7 sm:p-8">
+          <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
+            한 단계 더 준비한다면
+          </p>
+          <div className="mt-5 grid items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
+            <div className="border-t-2 border-navy-900/70 bg-ivory-100 p-4">
+              <p className="font-label text-[10px] tracking-[0.12em] text-brass-500">현재</p>
+              <p className="mt-1.5 font-display text-[14.5px] font-semibold text-navy-950">{level} STANDARD</p>
+              <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600">
+                {level} Level의 주요 유형 전체 대비
+              </p>
+            </div>
+            <div className="flex items-center justify-center text-navy-800/40">
+              <span className="hidden font-display text-[18px] leading-none sm:inline">→</span>
+              <span className="font-display text-[18px] leading-none sm:hidden">↓</span>
+            </div>
+            <div className="border-t-2 border-navy-900/70 bg-ivory-100 p-4">
+              <p className="font-label text-[10px] tracking-[0.12em] text-brass-500">같은 Level 심화</p>
+              <p className="mt-1.5 font-display text-[14.5px] font-semibold text-navy-950">
+                {level} ADVANCED PRACTICE
+              </p>
+              <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600">
+                고난도 Vocabulary·Reading·Quantitative·Math 추가 연습
+              </p>
+            </div>
+          </div>
+        </div>
+
         <a
           href={siteConfig.kakaoChannelUrl}
           target="_blank"

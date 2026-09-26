@@ -39,7 +39,10 @@ export default function MapSection() {
           단계가 아니라 더 높은 난도의 문제를 연습하는 Blossom Books의 별도 구성입니다.
         </p>
 
-        <div className="mt-8 divide-y divide-ivory-300 border-y border-ivory-300">
+        <p className="mt-6 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
+          STEP 1 · 영역 선택
+        </p>
+        <div className="mt-2 divide-y divide-ivory-300 border-y border-ivory-300">
           <div className={rowCls}>
             <span className="text-charcoal-600">English — 100P + Explanation</span>
             <span className="font-medium text-navy-950">{formatKRW(MAP_PRICES.english)}</span>
@@ -59,7 +62,10 @@ export default function MapSection() {
         </div>
 
         {/* STANDARD / ADVANCED PRACTICE — 가격은 동일합니다 */}
-        <div className="mt-6 flex gap-2">
+        <p className="mt-6 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
+          STEP 2 · 준비 단계
+        </p>
+        <div className="mt-2 flex gap-2">
           <button
             type="button"
             aria-pressed={stage === "STANDARD"}
@@ -124,11 +130,20 @@ export default function MapSection() {
           )}
         </div>
 
-        <p className="mt-4 text-[12px] leading-relaxed text-charcoal-600/70">
-          MAP English Standard + MAP English Advanced Practice처럼 두 단계 구매도 가능합니다({formatKRW(
-            MAP_PRICES.english * 2
-          )}). 두 교재는 서로 다른 문제로 구성됩니다.
+        <p className="mt-6 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
+          STEP 3 · 한 단계 더 준비할 것인가?
         </p>
+        <div className="mt-2 space-y-1.5">
+          <p className="text-[12px] leading-relaxed text-charcoal-600/70">
+            MAP English 100P Standard + 100P Advanced Practice — 총 200P ({formatKRW(MAP_PRICES.english * 2)})
+          </p>
+          <p className="text-[12px] leading-relaxed text-charcoal-600/70">
+            MAP Math 60P Standard + 60P Advanced Practice — 총 120P ({formatKRW(MAP_PRICES.math * 2)})
+          </p>
+          <p className="text-[12px] leading-relaxed text-charcoal-600/70">
+            두 교재는 서로 다른 문제로 구성됩니다.
+          </p>
+        </div>
 
         <p className="mt-5 text-[13px] leading-relaxed text-charcoal-600/80">
           학년과 목표 점수를 알려주시면 필요한 영역과 분량을 기준으로 안내합니다.
