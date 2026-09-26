@@ -52,12 +52,57 @@ export default function QuoteExamPage() {
       {/* 1. H1 + 한 줄 */}
       <h1 className="mt-5 font-display text-[30px] font-semibold text-navy-950 sm:text-[34px]">시험 구성·가격 안내</h1>
       <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
-        OET · MET · CELBAN · PTE · 부산외대 · SPA(현대차) · SAT 영어 · SAT 수학 · ESPT — 시험을 확인하신 뒤
-        카카오톡으로 문의해 주세요.
+        OET · MET · CELBAN · PTE · 부산외대 · SPA(현대차) · SAT 영어 · SAT 수학 · ESPT — 시험마다 STANDARD와
+        ADVANCED 또는 INTENSIVE 중 하나를 선택할 수 있습니다. 시험을 확인하신 뒤 카카오톡으로 문의해 주세요.
       </p>
+
+      {/* 1-1. 구매 흐름 — 시험 · 준비 방식 · 분량은 각각 선택합니다 */}
+      <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
+        <div className="border-t-2 border-brass-500 bg-ivory-100 p-4">
+          <p className="font-label text-[10px] uppercase tracking-[0.12em] text-brass-500">STEP 01 · 시험</p>
+          <p className="mt-1 text-[13px] font-medium text-navy-950">아래 칩에서 시험 선택</p>
+        </div>
+        <div className="border-t-2 border-brass-500 bg-ivory-100 p-4">
+          <p className="font-label text-[10px] uppercase tracking-[0.12em] text-brass-500">STEP 02 · 준비 방식</p>
+          <p className="mt-1 text-[13px] font-medium text-navy-950">STANDARD / ADVANCED·INTENSIVE</p>
+        </div>
+        <div className="border-t-2 border-brass-500 bg-ivory-100 p-4">
+          <p className="font-label text-[10px] uppercase tracking-[0.12em] text-brass-500">STEP 03 · 분량</p>
+          <p className="mt-1 text-[13px] font-medium text-navy-950">100P / 200P</p>
+        </div>
+      </div>
 
       {/* 2. 시험 칩 — 알약형, 모바일 가로 스크롤. ESPT는 클릭 시 같은 페이지 아래 패널 */}
       <ExamChips exams={exams} />
+
+      {/* 2-1. Advanced와 Intensive는 무엇이 다른가요? */}
+      <section className="mt-10 border border-ivory-300 bg-white p-6">
+        <h2 className="font-display text-[16px] font-semibold text-navy-950">
+          Advanced와 Intensive는 무엇이 다른가요?
+        </h2>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div>
+            <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/60">Advanced</p>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-charcoal-700">
+              같은 시험에서 문제 난이도를 한 단계 높인 심화 구성입니다.
+            </p>
+            <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600/70">
+              MET · CELPIP · PTE · 부산외대 FLAT · SAT 영어 · SAT 수학
+            </p>
+          </div>
+          <div>
+            <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/60">Intensive</p>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-charcoal-700">
+              특정 영역의 문제량과 실전 훈련을 강화한 집중 구성입니다.
+            </p>
+            <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600/70">OET · CELBAN · SPA · ESPT</p>
+          </div>
+        </div>
+        <p className="mt-4 border-t border-ivory-300 pt-3 text-[12px] leading-relaxed text-charcoal-600/70">
+          한 줄 요약 — Advanced = 난이도 강화, Intensive = 훈련량·취약 영역 강화. 페이지 수(문제량)와는 다른
+          축이며, 가격은 분량에서만 달라집니다.
+        </p>
+      </section>
 
       {/* 3. 공통 분량 표 */}
       <section className="mt-[72px]">
