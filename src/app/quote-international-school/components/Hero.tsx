@@ -17,6 +17,12 @@ const exams = [
     cta: "CAT4 보기",
   },
   {
+    id: "isee",
+    title: "ISEE",
+    desc: "Verbal Reasoning · Reading Comprehension · Quantitative Reasoning · Mathematics Achievement — Lower · Middle · Upper 레벨별 대비",
+    cta: "ISEE 보기",
+  },
+  {
     id: "oopt",
     title: "Oxford Online Placement Test",
     desc: "영어 능력과 Placement를 확인하기 위한 Oxford 기반 온라인 레벨 테스트 대비",
@@ -39,8 +45,8 @@ export default function Hero() {
           </h1>
           <p className="mx-auto mt-5 max-w-[560px] text-[15px] leading-[1.85] text-charcoal-600">
             국제학교와 외국인학교 입학 및 반 배정 과정에서는 학교와 학년에 따라 서로 다른 평가가 사용됩니다.
-            Blossom Books는 MAP Growth, CAT4, Oxford Online Placement Test 등 시험별 유형과 학생 수준에
-            맞춘 문제집을 제공합니다.
+            Blossom Books는 MAP Growth, CAT4, ISEE, Oxford Online Placement Test 등 시험별 유형과 학생
+            수준에 맞춘 문제집을 제공합니다.
           </p>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -79,7 +85,7 @@ export default function Hero() {
             어떤 시험을 준비하시나요?
           </h2>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {exams.map((e) => (
               <div key={e.id} className="flex flex-col border border-ivory-300 bg-white p-6 sm:p-7">
                 <p className="font-display text-[18px] font-semibold text-navy-950">{e.title}</p>

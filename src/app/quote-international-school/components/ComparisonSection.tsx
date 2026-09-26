@@ -14,6 +14,13 @@ const rows = [
     prep: "연령·Level 확인 후 준비",
   },
   {
+    exam: "ISEE",
+    purpose: "학업 성취도 평가",
+    areas: "Verbal Reasoning · Reading · Quantitative · Math Achievement",
+    basis: "Lower/Middle/Upper 레벨 기준",
+    prep: "레벨 확인 후 필요 영역만 준비",
+  },
+  {
     exam: "Oxford Online Placement Test",
     purpose: "영어 Placement 평가",
     areas: "English",
@@ -38,7 +45,7 @@ export default function ComparisonSection() {
     <section className="border-b border-ivory-300 bg-ivory-100 py-16 sm:py-20">
       <div className="mx-auto max-w-[1180px] px-5 sm:px-8">
         <h2 className="text-center font-display text-[24px] font-semibold text-navy-950 sm:text-[27px]">
-          MAP, CAT4, OOPT는 무엇이 다른가요?
+          MAP, CAT4, ISEE, OOPT는 무엇이 다른가요?
         </h2>
 
         {/* Desktop: table */}

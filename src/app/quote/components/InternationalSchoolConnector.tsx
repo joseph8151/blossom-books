@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-// MAP Growth·CAT4·Oxford Online Placement Test는 /quote-international-school로
+// MAP Growth·CAT4·ISEE·Oxford Online Placement Test는 /quote-international-school로
 // 분리되었습니다. 여기서는 완전히 끊지 않고 작은 연결 섹션만 남깁니다.
 export default function InternationalSchoolConnector() {
   return (
@@ -14,8 +14,8 @@ export default function InternationalSchoolConnector() {
           국제학교 입학시험은 별도로 준비해 주세요.
         </h2>
         <p className="mx-auto mt-3 max-w-[520px] text-[13.5px] leading-relaxed text-charcoal-600">
-          MAP Growth, CAT4, Oxford Online Placement Test 등 국제학교·외국인학교 입학 및 배치 시험은 별도
-          페이지에서 시험별 구성과 가격을 확인할 수 있습니다.
+          MAP Growth, CAT4, ISEE, Oxford Online Placement Test 등 국제학교·외국인학교 입학 및 배치 시험은
+          별도 페이지에서 시험별 구성과 가격을 확인할 수 있습니다.
         </p>
         <Link
           href="/quote-international-school"
