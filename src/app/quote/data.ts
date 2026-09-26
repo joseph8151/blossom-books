@@ -32,8 +32,10 @@ export const COMBO_PRICES = {
 
 // 레벨테스트 페이지 묶음 — 40/60/100/200P를 그대로 두 권 이상 묶은 가격입니다.
 // (Special Package 39만원과는 별개 상품입니다.)
+// 주의: STANDARD/ADVANCED는 페이지 수와 무관한 난이도 축이므로, 특정 페이지 수
+// 조합(예: 100P+200P)을 "2단계 패키지" 고정 가격으로 만들지 않습니다. 같은
+// 분량의 Standard+Advanced 조합 가격은 해당 분량 단가 × 2로 계산합니다.
 export const LEVEL_TEST_BUNDLES = {
-  mainPlusAdvanced: 430000, // 본시험(100P) + 심화(200P)
   starter: 250000, // 입문: 40P + 60P
   fullSet: 550000, // 풀세트: 60P + 100P + 200P
 };

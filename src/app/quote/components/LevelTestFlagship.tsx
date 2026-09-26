@@ -6,12 +6,13 @@ import { flexibleVolumes, formatKRW, LEVEL_TEST_BUNDLES } from "../data";
 const trustPoints = ["학원별 유형 대응", "영어·국어·수학 선택", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
 
 // 페이지 수는 "문제량"입니다. 난이도(Standard/Advanced)와는 별개의 축이므로
-// 여기에서는 분량 설명만 하고, 단계 이야기는 하지 않습니다.
-const volumeMeta: Record<number, { desc: string }> = {
+// 60/100/200P는 각각 Standard·Advanced를 선택할 수 있다는 점만 짧게 표시하고,
+// 40P는 선택지를 늘리지 않도록 간단한 집중 연습 상품으로 유지합니다.
+const volumeMeta: Record<number, { desc: string; hasLevels?: boolean }> = {
   40: { desc: "집중 연습" },
-  60: { desc: "기본 준비" },
-  100: { desc: "충분한 실전 연습" },
-  200: { desc: "장기 준비 · 충분한 문제량" },
+  60: { desc: "기본 준비", hasLevels: true },
+  100: { desc: "충분한 실전 연습", hasLevels: true },
+  200: { desc: "가장 충분한 문제량", hasLevels: true },
 };
 
 const subjects = [
@@ -111,6 +112,11 @@ export default function LevelTestFlagship() {
                   <p className="font-display text-[19px] font-semibold text-navy-950">{v.label}</p>
                   <p className="mt-2 text-[16px] font-semibold text-navy-950">{formatKRW(v.priceKRW)}</p>
                   <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600">{meta.desc}</p>
+                  {meta.hasLevels && (
+                    <p className="mt-2 font-label text-[9.5px] uppercase tracking-[0.1em] text-brass-500">
+                      Standard / Advanced 선택 가능
+                    </p>
+                  )}
                 </div>
               );
             })}

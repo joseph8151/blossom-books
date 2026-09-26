@@ -1,30 +1,36 @@
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { flexibleVolumes, formatKRW, LEVEL_TEST_BUNDLES } from "../data";
+import { flexibleVolumes, formatKRW } from "../data";
+import LevelTestConfigurator from "./LevelTestConfigurator";
 
-// 중요한 상품 정책: 페이지 수(40/60/100/200P)는 "문제량"이고,
+// 중요한 상품 정책: 페이지 수(60/100/200P)는 "문제량"이고,
 // STANDARD/ADVANCED는 "난이도·학습 단계"입니다. 서로 다른 축이므로
 // 200P가 곧 Advanced라거나 100P가 곧 Standard라는 식으로 고정하지 않습니다.
+// 60P/100P/200P 모두 Standard·Advanced를 각각 선택할 수 있습니다.
 
 const buyingSteps = [
-  { n: "STEP 1", title: "얼마나 많은 문제를 풀 것인가?", body: "40P / 60P / 100P / 200P" },
-  { n: "STEP 2", title: "어느 단계로 준비할 것인가?", body: "STANDARD / ADVANCED" },
-  { n: "STEP 3", title: "두 단계가 모두 필요한가?", body: "STANDARD + ADVANCED" },
+  { n: "STEP 1", title: "얼마나 많은 문제를 풀 것인가?", body: "60P / 100P / 200P" },
+  { n: "STEP 2", title: "어느 난이도로 준비할 것인가?", body: "STANDARD / ADVANCED" },
+  { n: "STEP 3", title: "한 단계 더 준비할 것인가?", body: "STANDARD + ADVANCED" },
 ];
 
-const standardPoints = ["현재 시험 대비", "기본·주요 유형", "학생 수준에 맞춘 일반 난이도", "충분한 실전 연습"];
-const advancedPoints = ["심화 문제", "고난도·변형 유형", "상위 레벨 대비", "추가적인 난이도 훈련"];
-
-const standard200Includes = [
-  "200P Student Workbook",
-  "Answer & Explanation Guide",
-  "현재 시험 수준 중심",
-  "충분한 반복 및 실전 연습",
-];
+const standardPoints = ["본시험 대비", "핵심 유형", "학생 수준에 맞춘 일반 난이도", "충분한 실전 연습"];
+const advancedPoints = ["고난도 문제", "변형 유형", "상위 난이도 대비", "추가적인 사고력과 응용 문제"];
 
 const twoStepFlow = [
-  { label: "STEP 01", title: "STANDARD", body: "현재 시험 유형과 난이도에 맞춰 충분히 연습" },
-  { label: "STEP 02", title: "ADVANCED", body: "서로 다른 문제로 난이도를 높여 한 단계 더 연습" },
+  { label: "STEP 01", title: "STANDARD", body: "현재 시험 유형과 난이도에 맞춰 기본·주요 유형을 충분히 연습" },
+  { label: "STEP 02", title: "ADVANCED", body: "서로 다른 문제로 난이도를 한 단계 높여 추가 연습" },
+];
+
+const cases = [
+  { n: "CASE 01", need: "시험은 처음이고, 충분히 연습하고 싶어요.", result: "100P STANDARD" },
+  { n: "CASE 02", need: "기본은 이미 했고 어려운 문제만 더 풀고 싶어요.", result: "60P ADVANCED" },
+  {
+    n: "CASE 03",
+    need: "시험까지 시간이 있어서 기본부터 심화까지 준비하고 싶어요.",
+    result: "100P STANDARD + 100P ADVANCED",
+  },
+  { n: "CASE 04", need: "문제량을 많이 확보하고 싶지만 심화판은 필요 없어요.", result: "200P STANDARD" },
 ];
 
 const comparisonRows: { label: string; standard: string; advanced: string }[] = [
@@ -62,7 +68,7 @@ function KakaoLink({ label, className }: { label: string; className: string }) {
 }
 
 export default function LevelTestTwoStepPackage() {
-  const p200 = flexibleVolumes.find((v) => v.pages === 200)!;
+  const p100 = flexibleVolumes.find((v) => v.pages === 100)!;
 
   return (
     <section className="border-b border-ivory-300 bg-ivory-200/40 py-20 sm:py-28">
@@ -86,15 +92,15 @@ export default function LevelTestTwoStepPackage() {
           ))}
         </div>
 
-        {/* DIFFICULTY OPTIONS */}
+        {/* CHOOSE YOUR LEVEL */}
         <div className="mx-auto mt-16 max-w-[680px] text-center sm:mt-20">
-          <p className="font-label text-[11px] uppercase tracking-[0.2em] text-brass-500">Difficulty Options</p>
+          <p className="font-label text-[11px] uppercase tracking-[0.2em] text-brass-500">Choose Your Level</p>
           <h2 className="mt-4 font-display text-[28px] font-semibold leading-tight text-navy-950 sm:text-[33px]">
-            같은 분량도, 준비 단계는 다르게.
+            같은 분량도, 난이도는 다르게.
           </h2>
           <p className="mt-4 text-[14.5px] leading-[1.9] text-charcoal-600">
-            40P부터 200P까지 필요한 문제량을 선택한 뒤, 학생의 현재 수준과 준비 목적에 따라 Standard 또는
-            Advanced 구성이 가능합니다.
+            필요한 문제량을 선택한 뒤, 학생의 현재 수준과 준비 목적에 따라 Standard 또는 Advanced를 선택할
+            수 있습니다.
           </p>
         </div>
 
@@ -108,7 +114,7 @@ export default function LevelTestTwoStepPackage() {
               ))}
             </ul>
             <p className="mt-5 border-t border-ivory-300 pt-4 text-[12px] leading-relaxed text-charcoal-600/80">
-              Standard는 쉬운 문제집이 아니라, 학생의 시험 수준에 맞춘 &ldquo;기본 본시험 대비 버전&rdquo;입니다.
+              Standard는 &ldquo;현재 시험을 제대로 준비하는 정규 버전&rdquo;이라는 의미입니다.
             </p>
           </div>
 
@@ -120,31 +126,29 @@ export default function LevelTestTwoStepPackage() {
               ))}
             </ul>
             <p className="mt-5 border-t border-ivory-100/15 pt-4 text-[12px] leading-relaxed text-ivory-100/60">
-              Advanced는 Standard보다 한 단계 높은, 별도로 제작된 문제 구성입니다.
+              Advanced는 Standard보다 한 단계 높은, 별도로 제작된 심화 문제 구성입니다.
             </p>
           </div>
         </div>
 
-        {/* 200P STANDARD — 독립 상품 예시 */}
-        <div className="mx-auto mt-10 max-w-[620px] border border-ivory-300 bg-white p-7 sm:p-8">
-          <span className="inline-flex items-center rounded-sm bg-navy-900/8 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-navy-900">
-            200P Standard 예시
-          </span>
-          <p className="mt-3 font-display text-[19px] font-semibold text-navy-950">200P STANDARD</p>
-          <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
-            현재 준비하는 시험을 한 단계 안에서 충분한 문제량으로 연습합니다.
-          </p>
-          <ul className="mt-4 space-y-1.5 text-[12.5px] leading-relaxed text-charcoal-700">
-            {standard200Includes.map((item) => (
-              <li key={item}>· {item}</li>
+        {/* 직접 선택해보는 configurator */}
+        <LevelTestConfigurator />
+
+        {/* 선택 예시 */}
+        <div className="mx-auto mt-14 max-w-[980px] sm:mt-16">
+          <h3 className="text-center font-display text-[20px] font-semibold text-navy-950 sm:text-[22px]">
+            이렇게 선택합니다.
+          </h3>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {cases.map((c) => (
+              <div key={c.n} className="border border-ivory-300 bg-white p-5">
+                <p className="font-label text-[10px] uppercase tracking-[0.14em] text-brass-500">{c.n}</p>
+                <p className="mt-2 text-[13px] leading-relaxed text-charcoal-700">&ldquo;{c.need}&rdquo;</p>
+                <p className="mt-3 border-t border-ivory-300 pt-3 font-display text-[14px] font-semibold text-navy-950">
+                  {c.result}
+                </p>
+              </div>
             ))}
-          </ul>
-          <div className="mt-5 flex flex-col gap-4 border-t border-ivory-300 pt-5 sm:flex-row sm:items-center sm:justify-between">
-            <p className="font-display text-[22px] font-semibold text-navy-950">{formatKRW(p200.priceKRW)}</p>
-            <KakaoLink
-              label="200P 기본 구성 상담"
-              className="inline-flex min-h-[46px] items-center justify-center gap-2 border border-navy-900 px-6 text-[13px] font-medium text-navy-900 transition-colors hover:bg-navy-900 hover:text-ivory-100"
-            />
           </div>
         </div>
 
@@ -176,11 +180,10 @@ export default function LevelTestTwoStepPackage() {
           </div>
 
           <div className="mx-auto mt-8 max-w-[620px] space-y-2 text-center">
+            <p className="text-[13.5px] leading-relaxed text-charcoal-600">두 교재는 서로 다른 문제로 구성됩니다.</p>
+            <p className="text-[13.5px] leading-relaxed text-charcoal-600">같은 문제를 반복하는 방식이 아닙니다.</p>
             <p className="font-display text-[15px] font-semibold text-navy-950">
-              &ldquo;Advanced는 Standard의 문제를 반복한 교재가 아닙니다.&rdquo;
-            </p>
-            <p className="text-[13.5px] leading-relaxed text-charcoal-600">
-              두 단계는 서로 다른 문제로 구성됩니다.
+              Standard에서 시험 유형을 익히고, Advanced에서 난이도를 높여 한 단계 더 준비합니다.
             </p>
           </div>
         </div>
@@ -240,7 +243,7 @@ export default function LevelTestTwoStepPackage() {
           </div>
         </div>
 
-        {/* STANDARD + ADVANCED Premium Card */}
+        {/* STANDARD + ADVANCED Premium Card — 특정 페이지 조합을 고정하지 않음 */}
         <div className="relative mx-auto mt-16 max-w-[860px] border-2 border-navy-900 bg-white p-8 shadow-card sm:mt-20 sm:p-10">
           <span className="inline-flex items-center rounded-sm bg-brass-500 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-navy-950">
             Upgrade Path
@@ -250,22 +253,24 @@ export default function LevelTestTwoStepPackage() {
               <p className="font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
                 STANDARD + ADVANCED
               </p>
-              <p className="mt-1.5 text-[14px] font-medium text-navy-800">
-                기본 단계와 심화 단계를 각각 다른 문제집으로 준비합니다.
-              </p>
+              <p className="mt-1.5 text-[14px] font-medium text-navy-800">같은 분량으로, 두 단계까지 준비</p>
               <p className="mt-4 max-w-[440px] text-[13.5px] leading-[1.9] text-charcoal-600">
-                두 단계 모두 서로 다른 문제로 제작되어 같은 문제를 반복하는 방식이 아닙니다. 이 패키지는
-                100P Standard + 200P Advanced로 진행되며, 다른 분량 조합이 필요하면 상담에서 조정합니다.
+                현재 시험을 위한 Standard 교재와 별도의 심화 문제로 구성된 Advanced 교재를 단계적으로
+                학습합니다. 60P·100P·200P 중 원하는 분량으로 같은 조합을 구성할 수 있습니다.
               </p>
             </div>
             <div className="text-left sm:text-right">
+              <p className="font-display text-[13px] font-medium text-charcoal-600/70">예: 100P 기준</p>
               <p className="font-display text-[30px] font-semibold text-navy-950 sm:text-[34px]">
-                {formatKRW(LEVEL_TEST_BUNDLES.mainPlusAdvanced)}
+                {formatKRW(p100.priceKRW * 2)}
               </p>
-              <p className="mt-1 text-[11.5px] text-charcoal-600/70">100P Standard + 200P Advanced</p>
+              <p className="mt-1 text-[11.5px] text-charcoal-600/70">100P STANDARD + 100P ADVANCED · 총 2권</p>
             </div>
           </div>
-          <div className="mt-7">
+          <p className="mt-5 text-[12px] leading-relaxed text-charcoal-600/70">
+            모든 문제는 별도 구성입니다. 60P·200P 조합이나 서로 다른 분량의 맞춤 조합은 상담에서 안내합니다.
+          </p>
+          <div className="mt-6">
             <KakaoLink
               label="STANDARD + ADVANCED 구성 문의"
               className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 bg-navy-900 px-7 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800 sm:w-auto"
@@ -278,9 +283,7 @@ export default function LevelTestTwoStepPackage() {
           {purchaseOptions.map((o) => (
             <div
               key={o.n}
-              className={`border p-6 ${
-                o.highlight ? "border-navy-900 bg-white" : "border-ivory-300 bg-white/60"
-              }`}
+              className={`border p-6 ${o.highlight ? "border-navy-900 bg-white" : "border-ivory-300 bg-white/60"}`}
             >
               <p className="font-label text-[13px] tracking-[0.05em] text-brass-500">{o.n}</p>
               <p className="mt-2 font-display text-[16px] font-semibold text-navy-950">{o.title}</p>
@@ -288,10 +291,10 @@ export default function LevelTestTwoStepPackage() {
             </div>
           ))}
         </div>
-        <p className="mx-auto mt-5 max-w-[620px] text-center text-[12.5px] leading-relaxed text-charcoal-600/70">
-          더 많은 페이지가 아니라 더 넓은 난이도 범위, 단계적인 훈련으로 이해해주세요. 200P Standard만
-          선택하셔도 충분한 구성입니다.
-        </p>
+        <div className="mx-auto mt-5 max-w-[620px] space-y-1.5 text-center text-[12.5px] leading-relaxed text-charcoal-600/70">
+          <p>STANDARD만 구매해도 완전한 본시험 대비 상품입니다.</p>
+          <p>이미 기본 유형을 충분히 연습했다면 Advanced만 선택할 수도 있습니다.</p>
+        </div>
 
         {/* 상담 전환 */}
         <div className="mx-auto mt-16 max-w-[560px] text-center sm:mt-20">
