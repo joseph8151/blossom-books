@@ -46,7 +46,52 @@ export interface CourseToc {
   toc: string[];
 }
 
-// 고교 수학 선택 과목 (G9–G12에서 활성화, 학년 무관 고정 목차)
+// Course-Based 과목은 특정 학년에 고정하지 않습니다(학생 학년은 카카오톡
+// 상담에서 별도로 받습니다). 카테고리별로 노출 순서를 정리해 둔 목록이며,
+// 실제 목차(TOC)가 있는 과목은 HS_MATH_COURSES에서, 없는 과목은 상담 안내
+// (InquireOnlyPanel)로 처리합니다 — 가짜 목차를 만들어내지 않습니다.
+export const COURSE_CATEGORIES: Record<string, string[]> = {
+  Math: [
+    "Pre-Algebra",
+    "Algebra 1",
+    "Geometry",
+    "Algebra 2",
+    "Integrated Math I",
+    "Integrated Math II",
+    "Integrated Math III",
+    "Trigonometry",
+    "Precalculus",
+    "Calculus",
+    "Statistics",
+    "College Algebra",
+  ],
+  Science: [
+    "Biology",
+    "Chemistry",
+    "Physics",
+    "Environmental Science",
+    "Earth & Space Science",
+    "Anatomy & Physiology",
+    "Physical Science",
+  ],
+  "Social Studies": ["U.S. History", "World History", "World Geography", "Government & Civics", "Economics"],
+  "English & Literature": [
+    "Academic Writing",
+    "English Composition",
+    "American Literature",
+    "British Literature",
+    "World Literature",
+    "Literary Analysis",
+  ],
+};
+
+// Science 카테고리 안에서 수요가 가장 높은 3과목(Biology/Chemistry/Physics)을
+// Core로, 나머지를 Additional로 구분해 보여줍니다.
+export const CORE_SCIENCE = ["Biology", "Chemistry", "Physics"];
+
+// 고교 수학 선택 과목 중 실제 목차(TOC)가 확정된 과목입니다. Integrated Math
+// I–III·Trigonometry·College Algebra 등은 목차 데이터가 아직 없어 상담
+// 안내로 처리합니다(임의로 목차를 만들어내지 않습니다).
 export const HS_MATH_COURSES: Record<string, CourseToc> = {
   Geometry: {
     title: "Geometry",

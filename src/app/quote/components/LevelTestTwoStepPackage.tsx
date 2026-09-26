@@ -69,6 +69,7 @@ function KakaoLink({ label, className }: { label: string; className: string }) {
 
 export default function LevelTestTwoStepPackage() {
   const p100 = flexibleVolumes.find((v) => v.pages === 100)!;
+  const p200 = flexibleVolumes.find((v) => v.pages === 200)!;
 
   return (
     <section className="border-b border-ivory-300 bg-ivory-200/40 py-20 sm:py-28">
@@ -256,19 +257,22 @@ export default function LevelTestTwoStepPackage() {
               <p className="mt-1.5 text-[14px] font-medium text-navy-800">같은 분량으로, 두 단계까지 준비</p>
               <p className="mt-4 max-w-[440px] text-[13.5px] leading-[1.9] text-charcoal-600">
                 현재 시험을 위한 Standard 교재와 별도의 심화 문제로 구성된 Advanced 교재를 단계적으로
-                학습합니다. 60P·100P·200P 중 원하는 분량으로 같은 조합을 구성할 수 있습니다.
+                학습합니다. 각 권의 분량 단가를 그대로 더한 가격이며, 별도의 패키지 할인은 없습니다.
               </p>
             </div>
             <div className="text-left sm:text-right">
-              <p className="font-display text-[13px] font-medium text-charcoal-600/70">예: 100P 기준</p>
+              <p className="font-display text-[13px] font-medium text-charcoal-600/70">예: 100P Standard + 200P Advanced</p>
               <p className="font-display text-[30px] font-semibold text-navy-950 sm:text-[34px]">
-                {formatKRW(p100.priceKRW * 2)}
+                {formatKRW(p100.priceKRW + p200.priceKRW)}
               </p>
-              <p className="mt-1 text-[11.5px] text-charcoal-600/70">100P STANDARD + 100P ADVANCED · 총 2권</p>
+              <p className="mt-1 text-[11.5px] text-charcoal-600/70">
+                100P Standard + 200P Advanced · 총 {p100.pages + p200.pages}P · {formatKRW(p100.priceKRW + p200.priceKRW)}
+              </p>
             </div>
           </div>
           <p className="mt-5 text-[12px] leading-relaxed text-charcoal-600/70">
-            모든 문제는 별도 구성입니다. 60P·200P 조합이나 서로 다른 분량의 맞춤 조합은 상담에서 안내합니다.
+            모든 문제는 별도 구성입니다. 같은 분량(60P+60P·100P+100P·200P+200P)이나 다른 맞춤 조합도 각
+            분량 단가를 그대로 더한 가격으로 상담에서 안내합니다.
           </p>
           <div className="mt-6">
             <KakaoLink
