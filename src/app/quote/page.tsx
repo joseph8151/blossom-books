@@ -119,7 +119,8 @@ export default function QuotePage() {
 
       {/* 2. Special Package — 단독 카드지만, "한 번에 맞추는 구성"의 780 세트보다 한 단계 낮은 무게 */}
       <section className="mt-12 border border-navy-900/35 bg-ivory-100 p-6 sm:p-8">
-        <span className="inline-flex items-center border border-navy-900/40 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-navy-900">
+        <h2 className="font-display text-[18px] font-semibold text-navy-950">2. Special Package</h2>
+        <span className="mt-3 inline-flex items-center border border-navy-900/40 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-navy-900">
           Special Package
         </span>
         <p className="mt-4 font-display text-[17px] font-semibold leading-snug text-navy-950">
