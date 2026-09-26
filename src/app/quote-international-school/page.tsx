@@ -17,9 +17,12 @@ export const metadata = {
   title: "국제학교 입학시험 준비",
   description: "카카오톡 상담에서 안내하는 국제학교 입학시험(MAP·CAT4·ISEE·OOPT) 구성표입니다.",
   robots: { index: false, follow: false },
+  alternates: { canonical: "https://www.blossombooks.org/quote-international-school/" },
   openGraph: {
     title: "Blossom Books 국제학교 입학시험 준비",
     description: "카카오톡 상담에서 안내하는 국제학교 입학시험(MAP·CAT4·ISEE·OOPT) 구성표입니다.",
+    url: "https://www.blossombooks.org/quote-international-school/",
+    images: ["https://www.blossombooks.org/quote-international-school/opengraph-image"],
   },
 };
 

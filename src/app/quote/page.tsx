@@ -19,9 +19,12 @@ export const metadata = {
   title: "구성·가격 안내",
   description: "카카오톡 상담에서 안내하는 구성표입니다.",
   robots: { index: false, follow: false },
+  alternates: { canonical: "https://www.blossombooks.org/quote/" },
   openGraph: {
     title: "Blossom Books 구성 안내",
     description: "카카오톡 상담에서 안내하는 구성표입니다.",
+    url: "https://www.blossombooks.org/quote/",
+    images: ["https://www.blossombooks.org/quote/opengraph-image"],
   },
 };
 

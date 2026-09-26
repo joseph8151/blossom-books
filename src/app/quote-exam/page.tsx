@@ -11,9 +11,12 @@ export const metadata = {
   title: "시험 구성·가격 안내",
   description: "카카오톡 상담에서 안내하는 시험별 구성표입니다.",
   robots: { index: false, follow: false },
+  alternates: { canonical: "https://www.blossombooks.org/quote-exam/" },
   openGraph: {
     title: "Blossom Books 시험 구성 안내",
     description: "카카오톡 상담에서 안내하는 시험별 구성표입니다.",
+    url: "https://www.blossombooks.org/quote-exam/",
+    images: ["https://www.blossombooks.org/quote-exam/opengraph-image"],
   },
 };
 
