@@ -4,7 +4,7 @@ import { siteConfig } from "@/data/site";
 const items = [
   { n: "01", label: "지원 학교명" },
   { n: "02", label: "학생 현재 학년" },
-  { n: "03", label: "시험명 (MAP / CAT4 / ISEE / OOPT / 기타)" },
+  { n: "03", label: "시험명 (모르셔도 괜찮습니다)" },
   { n: "04", label: "시험 예정일" },
 ];
 
