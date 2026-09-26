@@ -29,3 +29,11 @@ export const COMBO_PRICES = {
   sibling: 780000,
   threeSubject: 870000,
 };
+
+// 레벨테스트 페이지 묶음 — 40/60/100/200P를 그대로 두 권 이상 묶은 가격입니다.
+// (Special Package 39만원과는 별개 상품입니다.)
+export const LEVEL_TEST_BUNDLES = {
+  mainPlusAdvanced: 430000, // 본시험(100P) + 심화(200P)
+  starter: 250000, // 입문: 40P + 60P
+  fullSet: 550000, // 풀세트: 60P + 100P + 200P
+};
