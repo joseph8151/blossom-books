@@ -1,8 +1,8 @@
 import QuoteHero from "./components/QuoteHero";
+import LevelTestFlagship from "./components/LevelTestFlagship";
 import ThreeSteps from "./components/ThreeSteps";
 import BaseVolumes from "./components/BaseVolumes";
 import VolumeGuide from "./components/VolumeGuide";
-import LevelTestCards from "./components/LevelTestCards";
 import SpecialPackage from "./components/SpecialPackage";
 import ExamConfigurations from "./components/ExamConfigurations";
 import ComboPackages from "./components/ComboPackages";
@@ -25,14 +25,17 @@ export const metadata = {
   },
 };
 
+// 레벨테스트 문제집이 실제 문의 비중이 가장 높은 대표 상품이므로 Hero 바로 다음에
+// 배치하고(다른 시험과 동일 선상에 두지 않음), 그 뒤로 공통 3-Step 안내·기본 분량·
+// 일반 분량 가이드가 이어진 다음 MAP/CAT4/ISEE 등 나머지 시험을 비교적 compact하게 둡니다.
 export default function QuotePage() {
   return (
     <div>
       <QuoteHero />
+      <LevelTestFlagship />
       <ThreeSteps />
       <BaseVolumes />
       <VolumeGuide />
-      <LevelTestCards />
       <SpecialPackage />
       <ExamConfigurations />
       <ComboPackages />

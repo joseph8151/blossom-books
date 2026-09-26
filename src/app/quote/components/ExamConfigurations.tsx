@@ -2,25 +2,25 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { flexibleVolumes, formatKRW, MAP_PRICES, CAT4_PRICES, OOPT_PRICES, SPECIAL_ADD, SPECIAL_KRW } from "../data";
 
-const rowCls = "flex items-baseline justify-between gap-4 py-2 text-[13.5px]";
+const rowCls = "flex items-baseline justify-between gap-4 py-1.5 text-[13px]";
 
 export default function ExamConfigurations() {
   return (
-    <section className="border-b border-ivory-300 bg-ivory-100 py-16 sm:py-24">
+    <section className="border-b border-ivory-300 bg-ivory-100 py-12 sm:py-16">
       <div className="mx-auto max-w-[1180px] px-5 sm:px-8">
         <div className="mx-auto max-w-[680px] text-center">
-          <span className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
+          <span className="font-label text-[10px] uppercase tracking-[0.12em] text-brass-500">
             International School Admission
           </span>
-          <h2 className="mt-3 font-display text-[24px] font-semibold text-navy-950 sm:text-[27px]">
+          <h2 className="mt-2.5 font-display text-[21px] font-semibold text-navy-950">
             시험별 구성
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-5 sm:mt-12 lg:grid-cols-2">
+        <div className="mt-8 grid gap-4 sm:mt-9 lg:grid-cols-2">
           {/* MAP Growth */}
-          <div className="border border-ivory-300 bg-white p-6 sm:p-7">
-            <p className="font-display text-[18px] font-semibold text-navy-950">MAP Growth</p>
+          <div className="border border-ivory-300 bg-white p-5 sm:p-6">
+            <p className="font-display text-[16px] font-semibold text-navy-950">MAP Growth</p>
             <div className="mt-3 divide-y divide-ivory-300 border-t border-ivory-300">
               <div className={rowCls}>
                 <span className="text-charcoal-600">English — 100P + Explanation</span>
@@ -49,8 +49,8 @@ export default function ExamConfigurations() {
           </div>
 
           {/* CAT4 */}
-          <div className="border border-ivory-300 bg-white p-6 sm:p-7">
-            <p className="font-display text-[18px] font-semibold text-navy-950">CAT4</p>
+          <div className="border border-ivory-300 bg-white p-5 sm:p-6">
+            <p className="font-display text-[16px] font-semibold text-navy-950">CAT4</p>
             <div className="mt-3 divide-y divide-ivory-300 border-t border-ivory-300">
               <div className={rowCls}>
                 <span className="text-charcoal-600">1 Level</span>
@@ -76,8 +76,8 @@ export default function ExamConfigurations() {
           </div>
 
           {/* ISEE */}
-          <div className="border border-ivory-300 bg-white p-6 sm:p-7">
-            <p className="font-display text-[18px] font-semibold text-navy-950">ISEE</p>
+          <div className="border border-ivory-300 bg-white p-5 sm:p-6">
+            <p className="font-display text-[16px] font-semibold text-navy-950">ISEE</p>
             <p className="mt-1 text-[12px] text-charcoal-600/70">Lower · Middle · Upper</p>
             <div className="mt-3 divide-y divide-ivory-300 border-t border-ivory-300">
               {flexibleVolumes.map((v) => (
@@ -98,8 +98,8 @@ export default function ExamConfigurations() {
           </div>
 
           {/* OOPT */}
-          <div className="border border-ivory-300 bg-white p-6 sm:p-7">
-            <p className="font-display text-[18px] font-semibold text-navy-950">Oxford Online Placement Test</p>
+          <div className="border border-ivory-300 bg-white p-5 sm:p-6">
+            <p className="font-display text-[16px] font-semibold text-navy-950">Oxford Online Placement Test</p>
             <div className="mt-3 divide-y divide-ivory-300 border-t border-ivory-300">
               <div className={rowCls}>
                 <span className="text-charcoal-600">100P</span>
