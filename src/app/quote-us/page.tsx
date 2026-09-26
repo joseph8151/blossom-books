@@ -24,9 +24,6 @@ const cellCls = "border border-ivory-300 px-4 py-3 text-[13.5px]";
 const headCellCls =
   "border border-ivory-300 bg-ivory-200/70 px-4 py-3 text-left font-label text-[11px] uppercase tracking-[0.08em] text-navy-800/70";
 
-const grades = Array.from({ length: 12 }, (_, i) => `G${i + 1}`);
-const subjects = ["English", "Math", "Geometry", "Algebra 1", "Algebra 2", "Precalculus", "Calculus", "AP"];
-
 const p100 = volumeOptions[2]; // 100P
 const p200 = volumeOptions[3]; // 200P
 const SPECIAL_KRW = 390000;
@@ -44,13 +41,14 @@ export default function QuoteUsPage() {
         미국교과·AP 구성·가격 안내
       </h1>
       <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
-        미국 교과과정 G1–G12 English·Math, Geometry·Algebra 1·Algebra 2·Precalculus·Calculus, AP 과목 문제집
-        구성입니다.
+        미국 교과과정 G1–G12 English·Math, Pre-Algebra, Geometry·Algebra 1·Algebra 2·Precalculus·Calculus·
+        Statistics, AP 전 과목 문제집 구성입니다.
       </p>
 
-      {/* 2. 학년 + 과목 칩 — 학년 선택 후 English/Math를 누르면 해당 학년 목차 패널이 열림 */}
+      {/* 2. 학년 + 과목 칩 — 학년을 고르면 그 학년에서 가능한 과목만 나타나고,
+          과목을 고르면 해당 조합의 목차 패널이 바로 열립니다. */}
       <div className="mt-8">
-        <SubjectChips grades={grades} subjects={subjects} />
+        <SubjectChips />
       </div>
 
       {/* 3. 공통 분량 표 */}
@@ -78,6 +76,9 @@ export default function QuoteUsPage() {
         </div>
         <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">
           학년·과목마다 문항만 다릅니다. 분량 단가는 같습니다.
+        </p>
+        <p className="mt-1.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          유형 1개만 필요하거나 유형 2개를 믹스하고 싶으시면 카카오톡으로 문의해 주세요.
         </p>
       </section>
 
