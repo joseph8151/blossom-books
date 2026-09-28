@@ -51,15 +51,22 @@ export default function ExamSelector({
   const [stage, setStage] = useState<Stage>("STANDARD");
   const [addBoth, setAddBoth] = useState(false);
   const [pages, setPages] = useState<number>(VOLUMES[Math.min(1, VOLUMES.length - 1)].pages);
+  const [advancedPages, setAdvancedPages] = useState<number>(VOLUMES[Math.min(1, VOLUMES.length - 1)].pages);
 
   const result = useMemo(() => {
     const levelPart = level ? ` ${level}` : "";
     const unitPrice = VOLUMES.find((v) => v.pages === pages)!.priceKRW;
     if (hasStage && addBoth) {
+      const advPrice = VOLUMES.find((v) => v.pages === advancedPages)!.priceKRW;
+      const sameVolume = pages === advancedPages;
       return {
-        name: `${title}${levelPart} STANDARD + ADVANCED PRACTICE`,
-        desc: "기본 대비와 심화 연습을 함께 준비합니다. 두 교재는 서로 다른 문제로 구성됩니다.",
-        price: unitPrice * 2,
+        name: sameVolume
+          ? `${title}${levelPart} ${pages}P STANDARD + ${pages}P ADVANCED PRACTICE`
+          : `${title}${levelPart} ${pages}P STANDARD + ${advancedPages}P ADVANCED PRACTICE`,
+        desc: sameVolume
+          ? "기본 대비와 심화 연습을 함께 준비합니다. 두 교재는 서로 다른 문제로 구성됩니다."
+          : "분량을 각각 선택해 기본 대비와 심화 연습을 함께 준비합니다. 두 교재는 서로 다른 문제로 구성됩니다.",
+        price: unitPrice + advPrice,
       };
     }
     if (hasStage) {
@@ -75,7 +82,7 @@ export default function ExamSelector({
       price: unitPrice,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [level, stage, addBoth, pages, title, hasStage, standardDesc, advancedDesc]);
+  }, [level, stage, addBoth, pages, advancedPages, title, hasStage, standardDesc, advancedDesc]);
 
   return (
     <div id={id} className="scroll-mt-20 border border-ivory-300 bg-white p-6 sm:p-7">
@@ -134,7 +141,9 @@ export default function ExamSelector({
       )}
 
       <div className="mt-4">
-        <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">분량</p>
+        <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
+          분량{addBoth && " (STANDARD)"}
+        </p>
         <div className="mt-2 flex flex-wrap gap-1.5">
           {VOLUMES.map((v) => (
             <button
@@ -148,6 +157,26 @@ export default function ExamSelector({
           ))}
         </div>
       </div>
+
+      {hasStage && addBoth && (
+        <div className="mt-3">
+          <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
+            분량 (ADVANCED PRACTICE, STANDARD와 다르게 선택 가능)
+          </p>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {VOLUMES.map((v) => (
+              <button
+                key={v.pages}
+                type="button"
+                onClick={() => setAdvancedPages(v.pages)}
+                className={advancedPages === v.pages ? smallChipActiveCls : smallChipCls}
+              >
+                {v.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="mt-5 border-t border-ivory-300 pt-4">
         <p className="font-display text-[15px] font-semibold text-navy-950">{result.name}</p>

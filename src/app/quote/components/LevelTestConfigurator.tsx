@@ -24,6 +24,7 @@ const chipActiveCls = "flex-1 border border-navy-900 bg-navy-900 px-3 py-2.5 tex
 
 export default function LevelTestConfigurator() {
   const [volume, setVolume] = useState<Volume>(100);
+  const [advancedVolume, setAdvancedVolume] = useState<Volume>(100);
   const [stage, setStage] = useState<Stage>("STANDARD");
   const [addBoth, setAddBoth] = useState(false);
 
@@ -32,11 +33,20 @@ export default function LevelTestConfigurator() {
   const result = useMemo(() => {
     const copy = stageCopy[volume];
     if (addBoth) {
+      const sameVolume = volume === advancedVolume;
       return {
-        title: `${volume}P STANDARD + ${volume}P ADVANCED`,
-        desc: "같은 분량으로 두 단계를 모두 준비합니다. 두 교재는 서로 다른 문제로 구성됩니다.",
-        price: priceOf(volume) * 2,
-        includes: [`${volume}P STANDARD 1권`, `${volume}P ADVANCED 1권`, "각 권 Answer & Explanation Guide"],
+        title: sameVolume
+          ? `${volume}P STANDARD + ${volume}P ADVANCED`
+          : `${volume}P STANDARD + ${advancedVolume}P ADVANCED`,
+        desc: sameVolume
+          ? "같은 분량으로 두 단계를 모두 준비합니다. 두 교재는 서로 다른 문제로 구성됩니다."
+          : "분량을 각각 선택해 두 단계를 준비합니다. 두 교재는 서로 다른 문제로 구성됩니다.",
+        price: priceOf(volume) + priceOf(advancedVolume),
+        includes: [
+          `${volume}P STANDARD 1권`,
+          `${advancedVolume}P ADVANCED 1권`,
+          "각 권 Answer & Explanation Guide",
+        ],
       };
     }
     return {
@@ -45,7 +55,7 @@ export default function LevelTestConfigurator() {
       price: priceOf(volume),
       includes: [`${volume}P Student Workbook`, "Answer & Explanation Guide"],
     };
-  }, [volume, stage, addBoth]);
+  }, [volume, advancedVolume, stage, addBoth]);
 
   return (
     <div className="mx-auto mt-10 max-w-[620px] border border-ivory-300 bg-white p-6 sm:mt-12 sm:p-8">
@@ -55,7 +65,7 @@ export default function LevelTestConfigurator() {
 
       <div className="mt-5">
         <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
-          STEP 1 · 얼마나 많은 문제를 풀 것인가?
+          STEP 1 · 얼마나 많은 문제를 풀 것인가?{addBoth && " (STANDARD 분량)"}
         </p>
         <div className="mt-2 flex gap-2">
           {volumes.map((v) => (
@@ -95,6 +105,26 @@ export default function LevelTestConfigurator() {
             STANDARD + ADVANCED
           </button>
         </div>
+
+        {addBoth && (
+          <div className="mt-3">
+            <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
+              ADVANCED 분량 (STANDARD와 다르게 선택할 수 있습니다)
+            </p>
+            <div className="mt-2 flex gap-2">
+              {volumes.map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  onClick={() => setAdvancedVolume(v)}
+                  className={advancedVolume === v ? chipActiveCls : chipCls}
+                >
+                  {v}P
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="mt-6 border-t border-ivory-300 pt-6">

@@ -20,15 +20,21 @@ export default function IseeSection() {
   const [stage, setStage] = useState<Stage>("STANDARD");
   const [addBoth, setAddBoth] = useState(false);
   const [pages, setPages] = useState<number>(100);
+  const [advancedPages, setAdvancedPages] = useState<number>(100);
 
   const priceOf = (p: number) => flexibleVolumes.find((v) => v.pages === p)!.priceKRW;
 
   const result = useMemo(() => {
     if (addBoth) {
+      const sameVolume = pages === advancedPages;
       return {
-        title: `ISEE ${level} STANDARD + ${level} ADVANCED PRACTICE`,
-        desc: `${level} Level 안에서 기본 대비와 심화 연습을 함께 준비합니다. 두 교재는 서로 다른 문제로 구성됩니다.`,
-        price: priceOf(pages) * 2,
+        title: sameVolume
+          ? `ISEE ${level} ${pages}P STANDARD + ${pages}P ADVANCED PRACTICE`
+          : `ISEE ${level} ${pages}P STANDARD + ${advancedPages}P ADVANCED PRACTICE`,
+        desc: sameVolume
+          ? `${level} Level 안에서 기본 대비와 심화 연습을 함께 준비합니다. 두 교재는 서로 다른 문제로 구성됩니다.`
+          : `${level} Level 안에서 분량을 각각 선택해 기본 대비와 심화 연습을 함께 준비합니다. 두 교재는 서로 다른 문제로 구성됩니다.`,
+        price: priceOf(pages) + priceOf(advancedPages),
       };
     }
     return {
@@ -39,7 +45,7 @@ export default function IseeSection() {
           : `${level} Level 범위 안에서 더 어려운 Verbal · Reading · Quantitative · Math 문제에 집중합니다. 상위 Level을 의미하지 않습니다.`,
       price: priceOf(pages),
     };
-  }, [level, stage, addBoth, pages]);
+  }, [level, stage, addBoth, pages, advancedPages]);
 
   return (
     <section id="isee" className="scroll-mt-20 border-b border-ivory-300 bg-ivory-200/30 py-16 sm:py-20">
@@ -135,6 +141,26 @@ export default function IseeSection() {
                 STANDARD + ADVANCED PRACTICE
               </button>
             </div>
+
+            {addBoth && (
+              <div className="mt-4">
+                <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
+                  ADVANCED PRACTICE 분량 (STANDARD와 다르게 선택할 수 있습니다)
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {flexibleVolumes.map((v) => (
+                    <button
+                      key={v.pages}
+                      type="button"
+                      onClick={() => setAdvancedPages(v.pages)}
+                      className={advancedPages === v.pages ? chipActiveCls : chipCls}
+                    >
+                      {v.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="mt-6 border-t border-ivory-300 pt-5">
