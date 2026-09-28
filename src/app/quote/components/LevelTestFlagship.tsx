@@ -17,22 +17,22 @@ const volumeMeta: Record<number, { desc: string; hasLevels?: boolean }> = {
 
 const subjects = [
   {
-    en: "English",
-    ko: "영어 레벨테스트",
+    title: "어학원 레테",
+    subtitle: "English Level Test",
     areas: ["Reading", "Vocabulary", "Grammar", "Writing", "Comprehension"],
     desc: "학생의 학년과 시험 유형에 맞춰 영어 레벨테스트 대비 문제를 구성합니다.",
     cta: "영어 레벨테스트 상담",
   },
   {
-    en: "Korean",
-    ko: "국어 문해력 레벨테스트",
+    title: "국어학원 레테",
+    subtitle: "Korean Level Test",
     areas: ["독해", "어휘", "문해력", "추론", "서술형"],
     desc: "학년과 시험 목적에 따라 국어 문해력 중심으로 구성합니다.",
     cta: "국어 레벨테스트 상담",
   },
   {
-    en: "Mathematics",
-    ko: "사고력 수학 레벨테스트",
+    title: "수학 학원 레테",
+    subtitle: "Math Level Test",
     areas: ["연산", "문제 해결", "사고력", "응용", "학년별 수학"],
     desc: "학원 및 학교 시험 수준에 맞춰 사고력과 학년별 수학을 구성합니다.",
     cta: "수학 레벨테스트 상담",
@@ -83,9 +83,9 @@ export default function LevelTestFlagship() {
         {/* 4~6. 영어/국어/수학 대표 카드 */}
         <div className="mt-14 grid gap-6 sm:mt-16 lg:grid-cols-3">
           {subjects.map((s) => (
-            <div key={s.en} className="flex flex-col border border-ivory-300 bg-white p-7 sm:p-8">
-              <p className="font-display text-[22px] font-semibold text-navy-950">{s.en}</p>
-              <p className="mt-1 text-[13px] text-charcoal-600/70">{s.ko}</p>
+            <div key={s.title} className="flex flex-col border border-ivory-300 bg-white p-7 sm:p-8">
+              <p className="font-display text-[22px] font-semibold text-navy-950">{s.title}</p>
+              <p className="mt-1 text-[13px] text-charcoal-600/70">{s.subtitle}</p>
               <p className="mt-3 text-[12.5px] leading-relaxed text-charcoal-600">{s.areas.join(" · ")}</p>
               <p className="mt-4 flex-1 text-[13.5px] leading-relaxed text-charcoal-700">{s.desc}</p>
 
