@@ -39,6 +39,11 @@ const links = [
     who: "MAP Growth · CAT4 · ISEE · Oxford Online Placement Test 문의 고객",
     url: "https://www.blossombooks.org/quote-international-school/",
   },
+  {
+    title: "사고력·영재 검사 · 경시대회",
+    who: "SCAT · CogAT · NNAT · OLSAT · AMC · MATHCOUNTS · MOEMS 문의 고객",
+    url: "https://www.blossombooks.org/quote-scat/",
+  },
 ];
 
 function LinkRow({ title, who, url }: { title: string; who: string; url: string }) {
