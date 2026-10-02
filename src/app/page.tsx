@@ -26,8 +26,6 @@ import UseCaseSection from "@/components/home/UseCaseSection";
 import AudienceCards from "@/components/home/AudienceCards";
 import SelectionExamples from "@/components/home/SelectionExamples";
 import BrandNumbers from "@/components/home/BrandNumbers";
-import PrepPricing from "@/components/home/PrepPricing";
-import QuoteCalculator from "@/components/home/QuoteCalculator";
 import HowToOrder from "@/components/home/HowToOrder";
 import ConsultationCTA from "@/components/home/ConsultationCTA";
 import FAQSection from "@/components/home/FAQSection";
@@ -80,10 +78,6 @@ export default function HomePage() {
       <AudienceCards />
       <SelectionExamples />
       <BrandNumbers />
-
-      {/* 가격 */}
-      <PrepPricing />
-      <QuoteCalculator />
 
       {/* How to Order → FAQ → Final CTA */}
       <HowToOrder />

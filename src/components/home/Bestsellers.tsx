@@ -3,7 +3,8 @@ import ProductCard from "@/components/books/ProductCard";
 
 // 에디토리얼 큐레이션 — 실제 판매량 데이터가 없으므로 "베스트셀러 500개 판매"
 // 같은 수치는 표시하지 않습니다. 대신 주요 시험을 대표하는 실제 상품을
-// 큐레이션해 "지금 많이 찾는 교재"로 보여줍니다. 가격은 카드에서 바로 확인됩니다.
+// 큐레이션해 "지금 많이 찾는 교재"로 보여줍니다. 홈에서는 가격을 숨기고,
+// 정확한 가격은 교재 상세페이지에서 확인합니다.
 const bestsellerIds = [
   "cat4-level-e",
   "map-growth-workbook",
@@ -31,14 +32,14 @@ export default function Bestsellers() {
             지금 많이 찾는 교재
           </h2>
           <p className="mt-4 text-[14.5px] leading-[1.85] text-charcoal-600">
-            CAT4·MAP·SAT·AP 등 주요 시험별로 가장 먼저 찾아보시는 교재입니다. 가격과 구성을 바로 확인하고,
+            CAT4·MAP·SAT·AP 등 주요 시험별로 가장 먼저 찾아보시는 교재입니다. 구성을 바로 확인하고,
             샘플로 실제 문제 퀄리티까지 확인해보세요.
           </p>
         </div>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} hidePrice />
           ))}
         </div>
       </div>

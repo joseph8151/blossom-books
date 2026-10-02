@@ -17,7 +17,7 @@ import { trackEvent } from "@/lib/analytics";
 // 가격을 명확히 보여주는 카드 — 방문자가 목록에서 바로 가격까지 확인할 수
 // 있어야 카카오톡 문의까지 이어질 확률이 높아집니다 (Smart Pricing 방식은
 // 폐기: 가격을 숨기면 오히려 이탈이 늘었습니다).
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product, hidePrice = false }: { product: Product; hidePrice?: boolean }) {
   const lang = explanationLanguage(product);
   const coreAreas = product.units.slice(0, 3).join(" · ");
   const [orderOpen, setOrderOpen] = useState(false);
@@ -127,8 +127,10 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         <div className="mt-6 border-t border-navy-800/10 pt-4">
-          <div className="flex items-center justify-between gap-2">
-            <p className="font-display text-[20px] font-semibold text-navy-950">{priceDisplay(product)}</p>
+          <div className={`flex items-center gap-2 ${hidePrice ? "justify-end" : "justify-between"}`}>
+            {!hidePrice && (
+              <p className="font-display text-[20px] font-semibold text-navy-950">{priceDisplay(product)}</p>
+            )}
             <BlossomSeal />
           </div>
 

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, GraduationCap, FileSearch, ChevronDown } from "lucide-react";
-import { starterOption, flexibleVolumes, formatKRW } from "@/data/pricing";
 import { trackEvent } from "@/lib/analytics";
 
 // 첫 화면은 가격을 노출하지 않습니다. 목적은 "여기서 내 아이에게 맞는 교재를 찾을 수 있겠다"는 확신.
@@ -38,7 +37,6 @@ const subjects = ["English", "Reading", "Writing", "Vocabulary", "Grammar", "Mat
 
 export default function HeroSection() {
   const [showAll, setShowAll] = useState(false);
-  const advancedPrice = flexibleVolumes[flexibleVolumes.length - 1].priceKRW;
 
   return (
     <section className="paper-rule relative overflow-hidden border-b border-navy-800/12 bg-ivory-100">
@@ -61,11 +59,6 @@ export default function HeroSection() {
           <p className="mt-3 max-w-xl text-[14.5px] leading-[1.9] text-charcoal-600">
             문제 + 정답 + 한국어 상세해설 · Digital PDF
           </p>
-          <p className="mt-3 max-w-xl text-[14.5px] leading-relaxed text-navy-900">
-            맞춤 구성 <span className="font-semibold text-navy-950">{formatKRW(starterOption.priceKRW)}</span>부터 ·
-            Advanced 200P <span className="font-semibold text-navy-950">{formatKRW(advancedPrice)}</span>
-          </p>
-
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <Link
               href="/books"
