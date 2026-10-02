@@ -1,6 +1,11 @@
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { flexibleVolumes, formatKRW, SPECIAL_KRW } from "../data";
+import { flexibleVolumes, formatKRW } from "../data";
+
+// 이 페이지(/quote)의 Special Package 전용 가격입니다. 다른 /quote-* 페이지와
+// quote-international-school이 함께 쓰는 공용 SPECIAL_KRW(390,000)와는
+// 별개이며, 그 값을 바꾸지 않습니다.
+const QUOTE_SPECIAL_KRW = 490000;
 
 const includes = [
   "200P Student Workbook",
@@ -31,7 +36,7 @@ export default function SpecialPackage() {
           <h2 className="mt-4 font-display text-[26px] font-semibold text-ivory-100 sm:text-[30px]">
             Special Package
           </h2>
-          <p className="mt-3 font-display text-[34px] font-semibold text-ivory-100">{formatKRW(SPECIAL_KRW)}</p>
+          <p className="mt-3 font-display text-[34px] font-semibold text-ivory-100">{formatKRW(QUOTE_SPECIAL_KRW)}</p>
           <p className="mx-auto mt-4 max-w-[520px] text-[14px] leading-relaxed text-ivory-100/80">
             200P 문제집에 학생별 학습 순서와 시작 전략을 더한 구성입니다.
           </p>
