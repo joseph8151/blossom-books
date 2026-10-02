@@ -16,13 +16,18 @@ const volumes: VolumeTile[] = [
   { pages: 300, label: "300P", priceKRW: 390000 },
 ];
 
-const meta: Record<number, { eyebrow: string; badge?: string; desc: string }> = {
+const meta: Record<number, { eyebrow: string; badge?: string; desc: string; note?: string }> = {
   60: { eyebrow: "Recommended", badge: "MOST SELECTED", desc: "가장 많이 선택하는 기본 구성" },
   100: { eyebrow: "Full Practice", desc: "시험 전 충분한 문제 연습" },
-  200: { eyebrow: "Extended Practice", desc: "장기 준비 및 충분한 반복 학습" },
+  200: {
+    eyebrow: "Extended Practice",
+    desc: "장기 준비 및 충분한 반복 학습",
+    note: "같은 범위를 한 번 더 풉니다. 틀린 유형이 두 가지 이상이면 100P에서 반복이 끝납니다.",
+  },
   300: {
     eyebrow: "Maximum Practice",
     desc: "200P에 장을 붙인 구성이 아니라, 같은 범위의 문항이 더 많은 구성입니다.",
+    note: "같은 유형을 다른 지문으로 다시 봅니다. 한 회를 끝내고 오답이 같은 칸에 남을 때 고릅니다.",
   },
 };
 
@@ -37,6 +42,10 @@ export default function BaseVolumes() {
           <p className="mt-3 text-[14px] leading-relaxed text-charcoal-600">
             대부분의 기본 교재는 아래 분량을 기준으로 구성됩니다. 시험과 특수 구성에 따라 별도 가격이 적용될
             수 있습니다.
+          </p>
+          <p className="mt-3 text-[14px] leading-relaxed text-charcoal-600">
+            분량은 기간이 아니라 반복 횟수로 고르세요. 100P는 한 바퀴, 200P는 틀린 유형 반복, 300P는 다른
+            지문으로 한 번 더입니다.
           </p>
         </div>
 
@@ -58,6 +67,9 @@ export default function BaseVolumes() {
                   {formatKRW(v.priceKRW)}
                 </p>
                 <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">{m.desc}</p>
+                {m.note && (
+                  <p className="mt-2 text-[12px] leading-relaxed text-charcoal-600/80">{m.note}</p>
+                )}
 
                 <ul className="mt-5 space-y-1 border-t border-ivory-300 pt-4 text-[11.5px] leading-relaxed text-charcoal-600/80">
                   {included.map((item) => (
