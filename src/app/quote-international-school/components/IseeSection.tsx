@@ -9,6 +9,7 @@ type Level = "Lower" | "Middle" | "Upper";
 type Stage = "STANDARD" | "ADVANCED";
 
 const LEVELS: Level[] = ["Lower", "Middle", "Upper"];
+const VOLUMES = flexibleVolumes.filter((v) => v.pages === 100 || v.pages === 200); // ISEE는 100/200P만 판매
 
 const chipCls =
   "flex-1 border border-ivory-300 bg-white px-3 py-2 text-center text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-900";
@@ -22,7 +23,7 @@ export default function IseeSection() {
   const [pages, setPages] = useState<number>(100);
   const [advancedPages, setAdvancedPages] = useState<number>(100);
 
-  const priceOf = (p: number) => flexibleVolumes.find((v) => v.pages === p)!.priceKRW;
+  const priceOf = (p: number) => VOLUMES.find((v) => v.pages === p)!.priceKRW;
 
   const result = useMemo(() => {
     if (addBoth) {
@@ -62,7 +63,7 @@ export default function IseeSection() {
 
         {/* 공통 분량 표 — 참고용, 아래 선택과 별개로 그대로 유지 */}
         <div className="mt-8 divide-y divide-ivory-300 border-y border-ivory-300">
-          {flexibleVolumes.map((v) => (
+          {VOLUMES.map((v) => (
             <div key={v.pages} className="flex items-baseline justify-between gap-4 py-2.5 text-[13.5px]">
               <span className="text-charcoal-600">{v.label}</span>
               <span className="font-medium text-navy-950">{formatKRW(v.priceKRW)}</span>
@@ -96,7 +97,7 @@ export default function IseeSection() {
               얼마나 많은 문제를 풀 것인가?
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
-              {flexibleVolumes.map((v) => (
+              {VOLUMES.map((v) => (
                 <button
                   key={v.pages}
                   type="button"
@@ -148,7 +149,7 @@ export default function IseeSection() {
                   ADVANCED PRACTICE 분량 (STANDARD와 다르게 선택할 수 있습니다)
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
-                  {flexibleVolumes.map((v) => (
+                  {VOLUMES.map((v) => (
                     <button
                       key={v.pages}
                       type="button"

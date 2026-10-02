@@ -3,12 +3,13 @@
 import { useMemo, useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { CAT4_PRICES, SPECIAL_ADD, formatKRW } from "@/app/quote/data";
+import { CAT4_PRICES, SPECIAL_ADD, flexibleVolumes, formatKRW } from "@/app/quote/data";
 
 type Level = "A" | "B" | "C" | "D" | "E" | "F" | "G";
 type Stage = "STANDARD" | "ADVANCED";
 
 const LEVELS: Level[] = ["A", "B", "C", "D", "E", "F", "G"];
+const VOLUMES = flexibleVolumes.filter((v) => v.pages === 100 || v.pages === 200); // CAT4는 100/200P만 판매
 
 const rowCls = "flex items-baseline justify-between gap-4 py-2.5 text-[13.5px]";
 
@@ -29,24 +30,27 @@ export default function Cat4Section() {
   const [level, setLevel] = useState<Level>("E");
   const [stage, setStage] = useState<Stage>("STANDARD");
   const [addBoth, setAddBoth] = useState(false);
+  const [pages, setPages] = useState<number>(100);
+
+  const priceOf = (p: number) => VOLUMES.find((v) => v.pages === p)!.priceKRW;
 
   const result = useMemo(() => {
     if (addBoth) {
       return {
-        title: `CAT4 Level ${level} STANDARD + ADVANCED PRACTICE`,
+        title: `CAT4 Level ${level} ${pages}P STANDARD + ADVANCED PRACTICE`,
         desc: `같은 Level ${level} 안에서 기본 대비와 심화 연습을 함께 준비합니다. 두 교재는 서로 다른 문제로 구성됩니다.`,
-        price: CAT4_PRICES.oneLevel * 2,
+        price: priceOf(pages) * 2,
       };
     }
     return {
-      title: `CAT4 Level ${level} ${stage === "STANDARD" ? "Standard" : "Advanced Practice"}`,
+      title: `CAT4 Level ${level} ${pages}P ${stage === "STANDARD" ? "Standard" : "Advanced Practice"}`,
       desc:
         stage === "STANDARD"
           ? `Level ${level}의 Verbal · Non-Verbal · Quantitative · Spatial Reasoning 주요 유형을 충분히 연습합니다.`
           : `같은 Level ${level}을 기반으로 더 복합적인 reasoning, 변형 문제, 고난도 패턴, 다단계 사고를 추가 연습합니다.`,
-      price: CAT4_PRICES.oneLevel,
+      price: priceOf(pages),
     };
-  }, [level, stage, addBoth]);
+  }, [level, stage, addBoth, pages]);
 
   return (
     <section id="cat4" className="scroll-mt-20 border-b border-ivory-300 bg-ivory-200/30 py-16 sm:py-20">
@@ -62,10 +66,12 @@ export default function Cat4Section() {
         </p>
 
         <div className="mt-8 divide-y divide-ivory-300 border-y border-ivory-300">
-          <div className={rowCls}>
-            <span className="text-charcoal-600">1 Level</span>
-            <span className="font-medium text-navy-950">{formatKRW(CAT4_PRICES.oneLevel)}</span>
-          </div>
+          {VOLUMES.map((v) => (
+            <div key={v.pages} className={rowCls}>
+              <span className="text-charcoal-600">{v.label}</span>
+              <span className="font-medium text-navy-950">{formatKRW(v.priceKRW)}</span>
+            </div>
+          ))}
           <div className={rowCls}>
             <span className="text-charcoal-600">Special</span>
             <span className="font-medium text-navy-950">기본 구성 + {formatKRW(SPECIAL_ADD)}</span>
@@ -93,7 +99,20 @@ export default function Cat4Section() {
 
           <div className="mt-4">
             <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
-              STEP 2 · 준비 단계
+              STEP 2 · 분량 선택
+            </p>
+            <div className="mt-2 flex gap-2">
+              {VOLUMES.map((v) => (
+                <button key={v.pages} type="button" onClick={() => setPages(v.pages)} className={pages === v.pages ? chipActiveCls : chipCls}>
+                  {v.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
+              STEP 3 · 준비 단계
             </p>
             <div className="mt-2 grid grid-cols-2 gap-2">
               <button
@@ -133,7 +152,7 @@ export default function Cat4Section() {
 
           <div className="mt-4">
             <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
-              STEP 3 · 한 단계 더 준비할 것인가?
+              STEP 4 · 한 단계 더 준비할 것인가?
             </p>
             <div className="mt-2 grid grid-cols-2 gap-2">
               <button type="button" onClick={() => setAddBoth(false)} className={!addBoth ? chipActiveCls : chipCls}>

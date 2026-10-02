@@ -56,6 +56,16 @@ export default function SsatSection() {
           교재는 서로 다른 문제로 구성됩니다.
         </p>
 
+        {/* 공통 분량 표 — 참고용, 아래 선택과 별개로 그대로 유지 */}
+        <div className="mt-8 divide-y divide-ivory-300 border-y border-ivory-300">
+          {VOLUMES.map((v) => (
+            <div key={v.pages} className="flex items-baseline justify-between gap-4 py-2.5 text-[13.5px]">
+              <span className="text-charcoal-600">{v.label}</span>
+              <span className="font-medium text-navy-950">{formatKRW(v.priceKRW)}</span>
+            </div>
+          ))}
+        </div>
+
         <div className="mt-8 border border-ivory-300 bg-white p-6">
           <p className="text-center font-label text-[10.5px] uppercase tracking-[0.14em] text-charcoal-600/60">
             직접 선택해보세요
