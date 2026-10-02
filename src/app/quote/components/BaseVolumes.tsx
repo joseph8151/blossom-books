@@ -72,6 +72,9 @@ export default function BaseVolumes() {
         <p className="mx-auto mt-6 max-w-[680px] text-center text-[12px] leading-relaxed text-charcoal-600/70">
           시험·과목·학년별 구성에 따라 실제 페이지 배분은 달라질 수 있습니다.
         </p>
+        <p className="mx-auto mt-2 max-w-[680px] text-center text-[12px] leading-relaxed text-charcoal-600/70">
+          500P·600P도 주문할 수 있습니다. 학년과 과목을 보내 주시면 분량을 맞춰 안내합니다.
+        </p>
       </div>
     </section>
   );
