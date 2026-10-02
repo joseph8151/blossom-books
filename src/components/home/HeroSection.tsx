@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, GraduationCap, FileSearch, ChevronDown } from "lucide-react";
+import { ArrowRight, FileSearch, ChevronDown } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
 // 첫 화면은 가격을 노출하지 않습니다. 목적은 "여기서 내 아이에게 맞는 교재를 찾을 수 있겠다"는 확신.
@@ -47,13 +47,9 @@ export default function HeroSection() {
             International Assessment &amp; Academic Prep
           </span>
 
-          <h1 className="mt-6 font-display text-[32px] font-semibold leading-[1.15] tracking-[-0.01em] text-navy-950 min-[400px]:text-[36px] sm:text-[44px] lg:text-[48px]">
-            레벨테스트와 SR을 집에서 확인하는 문제집
-          </h1>
-
-          <p className="mt-5 max-w-xl text-[14.5px] font-medium leading-[1.75] text-navy-900">
+          <h1 className="mt-6 max-w-xl text-[14.5px] font-medium leading-[1.75] text-navy-900">
             CAT4 · MAP · ISEE · SSAT · 학원 레벨테스트 · 미국교과
-          </p>
+          </h1>
           <p className="mt-3 max-w-xl text-[14.5px] leading-[1.9] text-charcoal-600">
             문제 + 정답 + 한국어 상세해설 · Digital PDF
           </p>
@@ -74,33 +70,6 @@ export default function HeroSection() {
               실제 문항 샘플 보기
             </Link>
           </div>
-
-          <p className="mt-4 text-[13px] text-charcoal-600">
-            어떤 교재를 선택해야 할지 모르시나요?{" "}
-            <Link href="/find" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
-              내게 맞는 교재 추천받기 →
-            </Link>
-          </p>
-
-          {/* 신뢰 마이크로카피 */}
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-charcoal-600">
-            {["정답·오답 이유 포함", "결제 전 샘플 확인", "결제 확인 후 PDF 발송"].map((t) => (
-              <span key={t} className="inline-flex items-center gap-1.5">
-                <Check size={14} className="text-brass-500" strokeWidth={2.5} />
-                {t}
-              </span>
-            ))}
-          </div>
-
-          {/* 제작진 신뢰 배지 — 클릭 시 제작 방식 페이지로 */}
-          <Link
-            href="/our-approach"
-            className="group mt-5 inline-flex items-center gap-2 border border-burgundy-700/25 bg-burgundy-700/[0.04] px-3.5 py-2 text-[13px] font-medium text-burgundy-700 transition-colors hover:border-burgundy-700/55 hover:bg-burgundy-700/[0.08]"
-          >
-            <GraduationCap size={16} strokeWidth={1.9} />
-            미국 현지 학업 경험과 프렙 티칭 데이터를 바탕으로 설계한 교재
-            <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-          </Link>
         </div>
 
         {/* 우측 — 표지 + 펼친 문제 페이지 플랫레이 */}
