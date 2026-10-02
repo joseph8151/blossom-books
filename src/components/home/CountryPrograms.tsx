@@ -28,7 +28,7 @@ export default function CountryPrograms() {
               <p className="font-display text-[17px] font-semibold text-navy-950">{c.title}</p>
               <p className="mt-2 flex-1 text-[12.5px] leading-relaxed text-charcoal-600">{c.desc}</p>
               <span className="mt-4 inline-flex items-center gap-1.5 text-[12.5px] font-medium text-navy-900">
-                구성·가격 보기
+                교재 보기
                 <ArrowRight size={13} />
               </span>
             </Link>

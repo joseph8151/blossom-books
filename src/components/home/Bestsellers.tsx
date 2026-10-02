@@ -1,5 +1,6 @@
 import { products } from "@/data/products";
 import ProductCard from "@/components/books/ProductCard";
+import { sanitizeProductForHome } from "@/lib/sanitizeForHome";
 
 // 에디토리얼 큐레이션 — 실제 판매량 데이터가 없으므로 "베스트셀러 500개 판매"
 // 같은 수치는 표시하지 않습니다. 대신 주요 시험을 대표하는 실제 상품을
@@ -19,7 +20,8 @@ const bestsellerIds = [
 export default function Bestsellers() {
   const items = bestsellerIds
     .map((id) => products.find((p) => p.id === id))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
+    .map(sanitizeProductForHome);
 
   if (items.length === 0) return null;
 
@@ -39,7 +41,7 @@ export default function Bestsellers() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((product) => (
-            <ProductCard key={product.id} product={product} hidePrice />
+            <ProductCard key={product.id} product={product} hidePrice hideVolumeInfo />
           ))}
         </div>
       </div>

@@ -1,5 +1,4 @@
 import HeroSection from "@/components/home/HeroSection";
-import NumbersStrip from "@/components/home/NumbersStrip";
 import CoreCategories from "@/components/home/CoreCategories";
 import CountryPrograms from "@/components/home/CountryPrograms";
 import Bestsellers from "@/components/home/Bestsellers";
@@ -41,7 +40,6 @@ export default function HomePage() {
     <>
       {/* 상품 발견 — 무엇을 파는지, 가격이 얼마인지 바로 이해 */}
       <HeroSection />
-      <NumbersStrip />
       <CoreCategories />
       <CountryPrograms />
       <Bestsellers />

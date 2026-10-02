@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   // og:image 등 메타 이미지의 절대 URL 생성을 위한 기준 도메인
   metadataBase: new URL("https://blossombooks.org"),
   title: {
-    default: "블러섬북스 | Blossom Books — 시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠",
+    default: "블러섬북스 | Blossom Books — 시험과 수업 목적에 맞춘 문제집·해설집",
     template: "%s | 블러섬북스 Blossom Books",
   },
   description:
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   keywords: siteKeywords,
   openGraph: {
     title: "블러섬북스 | Blossom Books",
-    description: "시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠 — 문제집, 정답·해설집, 실전 모의고사, 맞춤 교재 제작",
+    description: "시험과 수업 목적에 맞춘 문제집·해설집 — 정답·해설, 실전 모의고사, 맞춤 교재 제작",
     url: "https://blossombooks.org",
     siteName: "블러섬북스 Blossom Books",
     locale: "ko_KR",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "블러섬북스 | Blossom Books",
-    description: "시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠 — 문제집·해설집·모의고사",
+    description: "시험과 수업 목적에 맞춘 문제집·해설집·모의고사",
   },
   // 네이버 서치어드바이저(searchadvisor.naver.com)에서 사이트를 등록하면 발급되는
   // 소유 확인 코드. 실제 코드를 발급받아 Cloudflare 환경변수

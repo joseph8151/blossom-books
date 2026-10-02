@@ -8,6 +8,7 @@ import { trackLabels } from "@/data/products";
 import { coverToneFor } from "@/lib/utils";
 import { productBadges, priceDisplay, explanationLanguage } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
+import { stripVolumeMentions } from "@/lib/sanitizeForHome";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import { BlossomSeal } from "@/components/books/BlossomSeal";
 import WishlistButton from "@/components/books/WishlistButton";
@@ -17,10 +18,26 @@ import { trackEvent } from "@/lib/analytics";
 // 가격을 명확히 보여주는 카드 — 방문자가 목록에서 바로 가격까지 확인할 수
 // 있어야 카카오톡 문의까지 이어질 확률이 높아집니다 (Smart Pricing 방식은
 // 폐기: 가격을 숨기면 오히려 이탈이 늘었습니다).
-export default function ProductCard({ product, hidePrice = false }: { product: Product; hidePrice?: boolean }) {
+// hidePrice/hideVolumeInfo는 홈(가격 비노출 지면) 전용 표시 옵션입니다.
+// 기본값은 false이므로 /books, 상세페이지 등 기존 동작은 그대로입니다.
+const VOLUME_BADGES = new Set(["40·60·100·200P", "150·200·300P"]);
+
+export default function ProductCard({
+  product,
+  hidePrice = false,
+  hideVolumeInfo = false,
+}: {
+  product: Product;
+  hidePrice?: boolean;
+  hideVolumeInfo?: boolean;
+}) {
   const lang = explanationLanguage(product);
   const coreAreas = product.units.slice(0, 3).join(" · ");
   const [orderOpen, setOrderOpen] = useState(false);
+  const summary = hideVolumeInfo ? stripVolumeMentions(product.summaryKo) : product.summaryKo;
+  const badges = hideVolumeInfo
+    ? productBadges(product).filter((b) => !VOLUME_BADGES.has(b))
+    : productBadges(product);
 
   return (
     <div className="lift group relative flex flex-col overflow-hidden border border-navy-800/12 bg-ivory-100 shadow-card">
@@ -94,7 +111,7 @@ export default function ProductCard({ product, hidePrice = false }: { product: P
         </span>
 
         <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600 line-clamp-2">
-          {product.summaryKo}
+          {summary}
         </p>
 
         {/* 핵심 영역 */}
@@ -106,7 +123,7 @@ export default function ProductCard({ product, hidePrice = false }: { product: P
 
         {/* 통일 정보 배지 — Grade · Level · Pages · Skills · Answer Guide (가격 아님) */}
         <div className="mt-3.5 flex flex-wrap gap-1.5">
-          {productBadges(product).map((b) => (
+          {badges.map((b) => (
             <span
               key={b}
               className="border border-navy-800/15 bg-ivory-200/50 px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-navy-800/80"

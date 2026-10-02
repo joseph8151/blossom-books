@@ -1,7 +1,7 @@
 const points = [
   { title: "시험 유형 그대로", body: "출제 영역·문항 형식을 시험별로 맞춤" },
   { title: "학년·레벨로 묶음", body: "같은 시험도 학생 수준이 다르면 구성이 다름" },
-  { title: "분량을 고름", body: "단기 40P부터 심화 200P까지" },
+  { title: "분량을 고름", body: "단기 집중부터 장기 심화까지" },
 ];
 
 export default function WhyDifferent() {

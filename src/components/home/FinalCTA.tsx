@@ -61,7 +61,7 @@ export default function FinalCTA() {
             </a>
           </div>
           <p className="mt-5 text-[12px] text-ivory-200/55">
-            200P 이상의 집중 Prep이 필요하신가요?{" "}
+            더 많은 분량의 집중 Prep이 필요하신가요?{" "}
             <Link href="/custom-order" className="underline hover:text-ivory-100">Extended Prep 문의</Link>
           </p>
         </div>

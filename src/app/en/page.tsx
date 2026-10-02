@@ -349,14 +349,14 @@ export default function EnHomePage() {
               How to order
             </h2>
             <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">
-              Blossom Books does not take direct online payment on the site. Base prices are
-              published — 40P $95 · 60P $110 · 100P $140 (100P+ on request). Confirm your title
-              and volume with our team; after your order is confirmed, we arrange payment
-              (PayPal for international customers) and send your PDF after confirmation.
+              Blossom Books does not take direct online payment on the site. Confirm your title
+              and volume with our team, and we&apos;ll share the exact price for that configuration;
+              after your order is confirmed, we arrange payment (PayPal for international
+              customers) and send your PDF after confirmation.
             </p>
             <ul className="mt-6 space-y-3 text-[14px] text-charcoal-600">
               {[
-                "Published pricing by volume — no need to ask just to see the price",
+                "A clear price for your exact configuration, confirmed before you pay",
                 "A quick fit check before you order — the right option, not the biggest",
                 "Digital PDF delivery after payment confirmation — non-refundable after delivery",
               ].map((line) => (
@@ -382,7 +382,7 @@ export default function EnHomePage() {
                 title="SAT Math"
                 subtitle="Full practice workbook"
                 tone="navy"
-                tabLabel="$"
+                tabLabel="PDF"
                 className="mx-auto"
               />
             </div>

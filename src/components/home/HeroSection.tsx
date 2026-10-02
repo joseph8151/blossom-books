@@ -48,9 +48,7 @@ export default function HeroSection() {
           </span>
 
           <h1 className="mt-6 font-display text-[32px] font-semibold leading-[1.15] tracking-[-0.01em] text-navy-950 min-[400px]:text-[36px] sm:text-[44px] lg:text-[48px]">
-            그 시험의 그 유형만.
-            <br />
-            학년과 레벨에 맞춰 묶습니다.
+            레벨테스트와 SR을 집에서 확인하는 문제집
           </h1>
 
           <p className="mt-5 max-w-xl text-[14.5px] font-medium leading-[1.75] text-navy-900">
