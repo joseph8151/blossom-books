@@ -7,10 +7,11 @@ import { trackEvent } from "@/lib/analytics";
 
 // 첫 화면은 가격을 노출하지 않습니다. 목적은 "여기서 내 아이에게 맞는 교재를 찾을 수 있겠다"는 확신.
 // 각 시험 칩 → /books 검색으로 연결 (해당 교재가 없으면 주문제작 안내로 이어집니다)
-// 첫 화면에는 실제 교재가 바로 붙는 6개만 노출하고, 나머지(GRE·LSAT 등)는
+// 첫 화면에는 실제 교재가 바로 붙는 항목만 노출하고, 나머지(GRE·LSAT 등)는
 // "전체 시험 보기"로 펼쳐서 봅니다 — LSAT·GRE를 CAT4·MAP과 나란히 두지 않습니다.
 const primaryAssessments: { label: string; href: string }[] = [
   { label: "학원 레벨테스트", href: "/books?track=level-test" },
+  { label: "SR TEST", href: "/books?q=SR" },
   { label: "MAP Growth", href: "/books?q=MAP" },
   { label: "CAT4", href: "/books?q=CAT4" },
   { label: "ISEE", href: "/books?q=ISEE" },
