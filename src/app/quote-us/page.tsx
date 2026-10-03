@@ -26,7 +26,7 @@ const headCellCls =
 
 const p100 = volumeOptions[2]; // 100P
 const p200 = volumeOptions[3]; // 200P
-const SPECIAL_KRW = 390000;
+const p300 = { label: "300P", priceKRW: 390000 }; // 이 페이지 전용 분량 — 공용 volumeOptions에는 추가하지 않음
 
 export default function QuoteUsPage() {
   return (
@@ -42,15 +42,15 @@ export default function QuoteUsPage() {
       </h1>
       <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
         미국 교과과정 G1–G12 English·Math, Pre-Algebra, Geometry·Algebra 1·Algebra 2·Precalculus·Calculus·
-        Statistics, AP 전 과목 문제집 구성입니다. 분량(100P/200P)과 난이도(Standard/Advanced)는 각각 선택할
-        수 있습니다.
+        Statistics, AP 전 과목 문제집 구성입니다. 분량(100P/200P/300P)과 난이도(Standard/Advanced)는 각각
+        선택할 수 있습니다.
       </p>
 
       {/* 1-1. 구매 흐름 — 분량과 난이도는 별개의 선택입니다 */}
       <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2">
         <div className="border-t-2 border-brass-500 bg-ivory-100 p-4">
           <p className="font-label text-[10px] uppercase tracking-[0.12em] text-brass-500">STEP 01 · 분량</p>
-          <p className="mt-1 text-[13px] font-medium text-navy-950">100P / 200P</p>
+          <p className="mt-1 text-[13px] font-medium text-navy-950">100P / 200P / 300P</p>
         </div>
         <div className="border-t-2 border-brass-500 bg-ivory-100 p-4">
           <p className="font-label text-[10px] uppercase tracking-[0.12em] text-brass-500">STEP 02 · 난이도</p>
@@ -85,6 +85,11 @@ export default function QuoteUsPage() {
               <tr>
                 <td className={cellCls}>{p200.label} 문제집 + 해설집</td>
                 <td className={cellCls}>{formatKRW(p200.priceKRW)}</td>
+                <td className={`${cellCls} text-charcoal-600`}>Standard / Advanced 선택 가능</td>
+              </tr>
+              <tr>
+                <td className={cellCls}>{p300.label} 문제집 + 해설집</td>
+                <td className={cellCls}>{formatKRW(p300.priceKRW)}</td>
                 <td className={`${cellCls} text-charcoal-600`}>Standard / Advanced 선택 가능</td>
               </tr>
             </tbody>
@@ -160,32 +165,6 @@ export default function QuoteUsPage() {
         <p className="mt-3 text-[12px] leading-relaxed text-charcoal-600/70">
           실제 상품 예시이며, 개별 후기가 아닙니다. 필요하다면 100P Standard + 200P Advanced 같은 맞춤 조합도
           카카오톡 상담으로 안내해 드립니다.
-        </p>
-      </section>
-
-      {/* 4. Special Package — 이 페이지 1등 강조 */}
-      <section className="mt-[72px] rounded-xl bg-navy-950 p-7 shadow-[0_20px_44px_-28px_rgba(13,22,38,0.45)] sm:p-9">
-        <span className="inline-flex items-center rounded-full bg-brass-500 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-navy-950">
-          Special Package
-        </span>
-        <p className="mt-4 font-display text-[18px] font-semibold leading-snug text-ivory-100">
-          200P와 문항은 같고, 순서·모의·시작만 다릅니다.
-        </p>
-        <p className="mt-3 font-display text-[32px] font-semibold text-ivory-100">{formatKRW(SPECIAL_KRW)}</p>
-        <p className="mt-1.5 text-[12px] text-ivory-100/60">학년·과목 1개 기준</p>
-
-        <p className="mt-5 text-[12.5px] font-medium text-ivory-100/70">포함</p>
-        <ul className="mt-1.5 space-y-1.5 text-[13.5px] leading-relaxed text-ivory-100/90">
-          <li>· 해당 과목 200P + 정답·해설</li>
-          <li>· 이 학생용 목차 (학년·약한 단원 기준 순서)</li>
-          <li>· 모의고사 2회 + 시간 배분</li>
-          <li>· 번호 찍힌 오답지</li>
-          <li>· 카톡 글 상담 30분 (음성·줌 없음)</li>
-        </ul>
-
-        <p className="mt-5 border-t border-ivory-100/15 pt-4 text-[12px] leading-relaxed text-ivory-100/60">
-          Special Package는 난이도(Standard/Advanced)가 아니라 학생별 학습 설계와 모의고사가 추가된
-          서비스입니다. Standard·Advanced 어느 쪽을 선택하든 Special Package를 더할 수 있습니다.
         </p>
       </section>
 

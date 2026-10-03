@@ -403,14 +403,6 @@ export default function SubjectChips() {
               <MessageCircle size={15} />
               이 구성 카톡 문의
             </a>
-            <a
-              href={siteConfig.kakaoChannelUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 border border-navy-900/30 px-6 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-900"
-            >
-              Special Package 문의
-            </a>
           </div>
         </div>
       ) : null}
