@@ -129,8 +129,8 @@ export default function LevelTestFlagship() {
           </p>
           <p className="mt-2 text-center text-[12px] leading-relaxed text-charcoal-600/70">
             입문 {formatKRW(LEVEL_TEST_BUNDLES.starter)}(40P+60P) · 풀세트{" "}
-            {formatKRW(LEVEL_TEST_BUNDLES.fullSet)}(60P+100P+200P) · 300P {formatKRW(390000)}도 카카오톡으로
-            문의 가능합니다.
+            {formatKRW(LEVEL_TEST_BUNDLES.fullSet)}(60P+100P+200P) · 300P {formatKRW(390000)}(같은 범위, 더
+            많은 문항)도 카카오톡으로 문의 가능합니다.
           </p>
         </div>
 
