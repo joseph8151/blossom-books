@@ -2,10 +2,10 @@ import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import LevelTestConfigurator from "./LevelTestConfigurator";
 
-// 중요한 상품 정책: 페이지 수(60/100/200P)는 "문제량"이고,
+// 중요한 상품 정책: 페이지 수(60/100/200/300P)는 "문제량"이고,
 // STANDARD/ADVANCED는 "난이도·학습 단계"입니다. 서로 다른 축이므로
 // 200P가 곧 Advanced라거나 100P가 곧 Standard라는 식으로 고정하지 않습니다.
-// 60P/100P/200P 모두 Standard·Advanced를 각각 선택할 수 있습니다.
+// 60P/100P/200P/300P 모두 Standard·Advanced를 각각 선택할 수 있습니다.
 //
 // 이 섹션은 한 번 크게 압축했습니다(2026-09). CASE 예시, STEP01→02 흐름도,
 // Premium Card, 구매 옵션 3칸은 모두 LevelTestConfigurator 하나가 실제로
@@ -13,7 +13,7 @@ import LevelTestConfigurator from "./LevelTestConfigurator";
 // 페이지 길이를 줄였습니다.
 
 const buyingSteps = [
-  { n: "STEP 1", title: "얼마나 많은 문제를 풀 것인가?", body: "60P / 100P / 200P" },
+  { n: "STEP 1", title: "얼마나 많은 문제를 풀 것인가?", body: "60P / 100P / 200P / 300P" },
   { n: "STEP 2", title: "어느 난이도로 준비할 것인가?", body: "STANDARD / ADVANCED" },
   { n: "STEP 3", title: "한 단계 더 준비할 것인가?", body: "STANDARD + ADVANCED" },
 ];

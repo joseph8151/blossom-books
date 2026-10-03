@@ -5,10 +5,13 @@ import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { flexibleVolumes, formatKRW } from "../data";
 
-type Volume = 60 | 100 | 200;
+type Volume = 60 | 100 | 200 | 300;
 type Stage = "STANDARD" | "ADVANCED";
 
-const volumes: Volume[] = [60, 100, 200];
+const volumes: Volume[] = [60, 100, 200, 300];
+
+// 300P는 공용 단가표(flexibleVolumes)에 없는 이 페이지 전용 분량입니다.
+const PAGE_300_KRW = 390000;
 
 // 분량(문제량)과 난이도는 서로 다른 축입니다. 이 매트릭스는 "같은 분량, 다른
 // 난이도"를 짧은 문장으로 설명할 뿐, 페이지 수가 곧 난이도라는 뜻이 아닙니다.
@@ -16,6 +19,7 @@ const stageCopy: Record<Volume, { standard: string; advanced: string }> = {
   60: { standard: "기본 시험 대비", advanced: "심화 집중 대비" },
   100: { standard: "충분한 본시험 대비", advanced: "충분한 심화 문제 대비" },
   200: { standard: "가장 많은 문제량의 본시험 대비", advanced: "가장 많은 문제량의 고난도 대비" },
+  300: { standard: "200P와 같은 범위를 반복하는 본시험 대비", advanced: "200P와 같은 범위를 반복하는 고난도 대비" },
 };
 
 const chipCls =
@@ -28,7 +32,7 @@ export default function LevelTestConfigurator() {
   const [stage, setStage] = useState<Stage>("STANDARD");
   const [addBoth, setAddBoth] = useState(false);
 
-  const priceOf = (v: Volume) => flexibleVolumes.find((x) => x.pages === v)!.priceKRW;
+  const priceOf = (v: Volume) => (v === 300 ? PAGE_300_KRW : flexibleVolumes.find((x) => x.pages === v)!.priceKRW);
 
   const result = useMemo(() => {
     const copy = stageCopy[volume];

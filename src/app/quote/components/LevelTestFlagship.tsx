@@ -6,13 +6,22 @@ import { flexibleVolumes, formatKRW, LEVEL_TEST_BUNDLES } from "../data";
 const trustPoints = ["학원별 유형 대응", "영어·국어·수학 선택", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
 
 // 페이지 수는 "문제량"입니다. 난이도(Standard/Advanced)와는 별개의 축이므로
-// 60/100/200P는 각각 Standard·Advanced를 선택할 수 있다는 점만 짧게 표시합니다.
+// 60/100/200/300P는 각각 Standard·Advanced를 선택할 수 있다는 점만 짧게 표시합니다.
 // 40P는 더 이상 이 상품의 개별 분량으로 판매하지 않습니다.
 const volumeMeta: Record<number, { desc: string; hasLevels?: boolean }> = {
   60: { desc: "기본 준비", hasLevels: true },
   100: { desc: "충분한 실전 연습", hasLevels: true },
   200: { desc: "가장 충분한 문제량", hasLevels: true },
+  300: { desc: "같은 범위를 반복하는 구성", hasLevels: true },
 };
+
+// 300P는 공용 단가표(flexibleVolumes)에 없는 이 페이지 전용 분량입니다.
+const volumeTiles: { pages: number; label: string; priceKRW: number }[] = [
+  ...flexibleVolumes
+    .filter((v) => v.pages !== 40)
+    .map((v) => ({ pages: v.pages, label: v.label, priceKRW: v.priceKRW })),
+  { pages: 300, label: "300P", priceKRW: 390000 },
+];
 
 const subjects = [
   {
@@ -103,24 +112,22 @@ export default function LevelTestFlagship() {
 
         {/* 4-1. 구성·가격 — 페이지 수 4단(문제량). 난이도(Standard/Advanced)는 별도 축입니다 */}
         <div className="mt-10 sm:mt-12">
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
-            {flexibleVolumes
-              .filter((v) => v.pages !== 40)
-              .map((v) => {
-                const meta = volumeMeta[v.pages];
-                return (
-                  <div key={v.pages} className="border border-ivory-300 bg-white p-5 text-center sm:p-6">
-                    <p className="font-display text-[19px] font-semibold text-navy-950">{v.label}</p>
-                    <p className="mt-2 text-[16px] font-semibold text-navy-950">{formatKRW(v.priceKRW)}</p>
-                    <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600">{meta.desc}</p>
-                    {meta.hasLevels && (
-                      <p className="mt-2 font-label text-[9.5px] uppercase tracking-[0.1em] text-brass-500">
-                        Standard / Advanced 선택 가능
-                      </p>
-                    )}
-                  </div>
-                );
-              })}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {volumeTiles.map((v) => {
+              const meta = volumeMeta[v.pages];
+              return (
+                <div key={v.pages} className="border border-ivory-300 bg-white p-5 text-center sm:p-6">
+                  <p className="font-display text-[19px] font-semibold text-navy-950">{v.label}</p>
+                  <p className="mt-2 text-[16px] font-semibold text-navy-950">{formatKRW(v.priceKRW)}</p>
+                  <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600">{meta.desc}</p>
+                  {meta.hasLevels && (
+                    <p className="mt-2 font-label text-[9.5px] uppercase tracking-[0.1em] text-brass-500">
+                      Standard / Advanced 선택 가능
+                    </p>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           <p className="mx-auto mt-4 max-w-[560px] text-center text-[12px] leading-relaxed text-charcoal-600/70">
@@ -129,8 +136,7 @@ export default function LevelTestFlagship() {
           </p>
           <p className="mt-2 text-center text-[12px] leading-relaxed text-charcoal-600/70">
             입문 {formatKRW(LEVEL_TEST_BUNDLES.starter)}(40P+60P) · 풀세트{" "}
-            {formatKRW(LEVEL_TEST_BUNDLES.fullSet)}(60P+100P+200P) · 300P {formatKRW(390000)}(같은 범위, 더
-            많은 문항)도 카카오톡으로 문의 가능합니다.
+            {formatKRW(LEVEL_TEST_BUNDLES.fullSet)}(60P+100P+200P)도 카카오톡으로 문의 가능합니다.
           </p>
         </div>
 
