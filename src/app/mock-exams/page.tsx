@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { MessageCircle, Clock, FileText } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { formatKRW } from "@/data/pricing";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
+
+const MOCK_EXAM_PRICE_KRW = 90000; // 모의고사 1회분(세트)당 단가
 
 export const metadata = {
   title: "모의고사",
@@ -67,8 +70,8 @@ export default function MockExamsPage() {
         </h1>
         <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">
           시험 구조와 출제 비중을 분석해 실전 형식으로 구성한 모의고사입니다. 레벨테스트는
-          학년별 영어·수학으로, MAP·CAT4는 실전 1회분으로 준비하실 수 있습니다. 가격과 학년별
-          구성은 상담으로 편하게 안내해 드립니다.
+          학년별 영어·수학으로, MAP·CAT4는 실전 1회분으로 준비하실 수 있습니다. 1회분 기준
+          {formatKRW(MOCK_EXAM_PRICE_KRW)}이며, 학년별 구성은 상담으로 편하게 안내해 드립니다.
         </p>
       </div>
 
@@ -106,22 +109,27 @@ export default function MockExamsPage() {
                   </span>
                 ))}
               </div>
-              <div className="mt-6 flex items-center gap-4 border-t border-navy-800/10 pt-4">
-                <a
-                  href={siteConfig.kakaoChannelUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-navy-900 px-4 py-2 text-[12.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
-                >
-                  <MessageCircle size={13} />
-                  상담·구매
-                </a>
-                <Link
-                  href="/custom-order"
-                  className="text-[12.5px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4"
-                >
-                  학년별 문의
-                </Link>
+              <div className="mt-6 border-t border-navy-800/10 pt-4">
+                <p className="font-display text-[19px] font-semibold text-navy-950">
+                  {formatKRW(MOCK_EXAM_PRICE_KRW)}
+                </p>
+                <div className="mt-3 flex items-center gap-4">
+                  <a
+                    href={siteConfig.kakaoChannelUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 bg-navy-900 px-4 py-2 text-[12.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+                  >
+                    <MessageCircle size={13} />
+                    상담·구매
+                  </a>
+                  <Link
+                    href="/custom-order"
+                    className="text-[12.5px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4"
+                  >
+                    학년별 문의
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
