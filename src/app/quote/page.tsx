@@ -1,17 +1,4 @@
-import QuoteHero from "./components/QuoteHero";
-import LevelTestFlagship from "./components/LevelTestFlagship";
-import LevelTestTwoStepPackage from "./components/LevelTestTwoStepPackage";
-import ThreeSteps from "./components/ThreeSteps";
-import BaseVolumes from "./components/BaseVolumes";
-import VolumeGuide from "./components/VolumeGuide";
-import SpecialPackage from "./components/SpecialPackage";
-import InternationalSchoolConnector from "./components/InternationalSchoolConnector";
-import ComboPackages from "./components/ComboPackages";
-import IncludedSection from "./components/IncludedSection";
-import CustomQuoteSection from "./components/CustomQuoteSection";
-import BeforeYouChat from "./components/BeforeYouChat";
-import QuoteFAQ from "./components/QuoteFAQ";
-import QuoteFinalCTA from "./components/QuoteFinalCTA";
+import QuoteGuide from "./components/QuoteGuide";
 
 // 카카오톡 상담사가 고객에게 "가격 물어볼 때" 직접 링크로만 전달하는 비공개
 // Workbook Selection & Pricing Guide입니다. 홈/메뉴/푸터/사이트맵/교재 찾기
@@ -29,29 +16,9 @@ export const metadata = {
   },
 };
 
-// 레벨테스트 문제집이 실제 문의 비중이 가장 높은 대표 상품이므로 Hero 바로 다음에
-// 배치하고(다른 시험과 동일 선상에 두지 않음), 가격표 바로 아래에 STANDARD(100P)
-// → ADVANCED(200P) 2단계 구성을 강조하는 독립 섹션을 둡니다. 그 뒤로 공통 3-Step
-// 안내·기본 분량·일반 분량 가이드가 이어집니다. MAP·CAT4·ISEE·Oxford Online
-// Placement Test는 모두 /quote-international-school로 분리했고, 여기에는
-// 그리로 넘어가는 작은 연결 섹션(InternationalSchoolConnector)만 남깁니다.
+// 학부모가 "무엇을 사면 되는지"를 먼저 보고, 가격은 표 하나로만 확인하도록
+// 한 화면 흐름으로 정리했습니다. 상담 버튼은 페이지에 하나만 둡니다.
+// 국제학교 입학시험(MAP·CAT4·ISEE 등)은 /quote-international-school 링크 한 줄로만 연결합니다.
 export default function QuotePage() {
-  return (
-    <div>
-      <QuoteHero />
-      <LevelTestFlagship />
-      <LevelTestTwoStepPackage />
-      <ThreeSteps />
-      <BaseVolumes />
-      <VolumeGuide />
-      <SpecialPackage />
-      <InternationalSchoolConnector />
-      <ComboPackages />
-      <IncludedSection />
-      <CustomQuoteSection />
-      <BeforeYouChat />
-      <QuoteFAQ />
-      <QuoteFinalCTA />
-    </div>
-  );
+  return <QuoteGuide />;
 }

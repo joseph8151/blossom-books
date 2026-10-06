@@ -72,6 +72,8 @@ export default function Header() {
   const desktopNav = isEn ? enNav : koDesktopNav;
   const mobileNav = isEn ? enNav : primaryNav;
   const kakaoLabel = isEn ? "Chat on KakaoTalk" : "카카오톡 상담";
+  // /quote는 본문에 상담 버튼을 하나만 두므로 헤더 상담 버튼을 숨깁니다.
+  const hideKakaoButton = pathname === "/quote" || pathname === "/quote/";
 
   const isActive = (href: string) => {
     const base = href.split("#")[0].split("?")[0];
@@ -155,6 +157,7 @@ export default function Header() {
             <LanguageSwitcher isEn={isEn} />
           </div>
 
+          {!hideKakaoButton && (
           <a
             href={siteConfig.kakaoChannelUrl}
             target="_blank"
@@ -164,6 +167,7 @@ export default function Header() {
             <MessageCircle size={15} strokeWidth={2} />
             {kakaoLabel}
           </a>
+          )}
 
           {/* 모바일 메뉴 버튼 */}
           <button

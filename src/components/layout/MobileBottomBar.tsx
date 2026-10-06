@@ -12,6 +12,8 @@ export default function MobileBottomBar() {
   // 상품 상세페이지에는 자체 구매 스티키 바(PurchasePanel)가 있으므로 전역 바는 숨깁니다.
   const isProductDetail = /^\/books\/[^/]+$/.test(pathname ?? "");
   if (isProductDetail) return null;
+  // /quote는 본문에 상담 버튼을 하나만 두므로 전역 바를 숨깁니다.
+  if (pathname?.startsWith("/quote/") || pathname === "/quote") return null;
 
   const labels = isEn
     ? { sample: "Free Sample", kakao: "Chat on KakaoTalk", sampleHref: "/en#samples" }
