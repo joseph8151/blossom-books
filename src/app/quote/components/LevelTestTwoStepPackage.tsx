@@ -8,9 +8,12 @@ import LevelTestConfigurator from "./LevelTestConfigurator";
 // 60P/100P/200P/300P 모두 Standard·Advanced를 각각 선택할 수 있습니다.
 //
 // 이 섹션은 한 번 크게 압축했습니다(2026-09). CASE 예시, STEP01→02 흐름도,
-// Premium Card, 구매 옵션 3칸은 모두 LevelTestConfigurator 하나가 실제로
-// 대신하는 내용이라 제거했습니다. 배너·카드·비교표·상담 CTA만 남겨
-// 페이지 길이를 줄였습니다.
+// Premium Card, 구매 옵션 3칸을 모두 제거하고 배너·카드·비교표·상담 CTA만
+// 남겨 페이지 길이를 줄였습니다. 이후(2026-10) 압축이 과했다는 피드백으로
+// CASE 예시("이렇게 선택합니다"), STEP01→02 흐름도, 구매 옵션 3칸을 다시
+// 추가했습니다. Premium Card(특정 분량 조합을 고정 가격으로 보여주는 카드)는
+// 과거 가격 표기 오류를 일으킨 적이 있어 복원하지 않고, 대신
+// LevelTestConfigurator로 모든 조합의 정확한 가격을 바로 확인하도록 합니다.
 
 const buyingSteps = [
   { n: "STEP 1", title: "얼마나 많은 문제를 풀 것인가?", body: "60P / 100P / 200P / 300P" },
@@ -39,6 +42,19 @@ const comparisonRows: { label: string; standard: string; advanced: string }[] = 
     advanced: "충분한 연습이 필요하거나 상위반을 목표하는 학생, 재응시 준비생",
   },
   { label: "활용 시점", standard: "시험 준비 초반", advanced: "Standard 이후 또는 다음 레벨 준비 시" },
+];
+
+const cases: { need: string; result: string }[] = [
+  { need: "레벨테스트가 처음이에요.", result: "60P 또는 100P STANDARD" },
+  { need: "학원에서 상위반 배정을 목표로 하고 있어요.", result: "100P STANDARD + 100P ADVANCED" },
+  { need: "기본 유형은 이미 풀어봤고, 어려운 문제만 더 풀고 싶어요.", result: "100P ADVANCED" },
+  { need: "재응시인데 지난번보다 확실하게 준비하고 싶어요.", result: "200P STANDARD + 200P ADVANCED" },
+];
+
+const purchaseOptions: { n: string; title: string; desc: string }[] = [
+  { n: "①", title: "STANDARD만 구매", desc: "현재 시험을 제대로 준비하는 본시험 대비 구성" },
+  { n: "②", title: "ADVANCED만 구매", desc: "기본 유형은 충분히 연습한 상태에서 심화 문제만" },
+  { n: "③", title: "STANDARD + ADVANCED", desc: "기본부터 심화까지 한 번에 이어서 준비" },
 ];
 
 const beforeChat = ["시험명", "현재 학습 수준", "지원 학원", "최근 사용 교재 또는 Reading Level"];
@@ -87,6 +103,33 @@ export default function LevelTestTwoStepPackage() {
           </p>
         </div>
 
+        {/* LEVEL TEST 2-STEP 흐름도 */}
+        <div className="mx-auto mt-10 max-w-[620px] sm:mt-12">
+          <p className="text-center font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">
+            Level Test 2-Step
+          </p>
+          <div className="mt-5 grid items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
+            <div className="border-t-2 border-navy-900/70 bg-white p-5">
+              <p className="font-label text-[11px] tracking-[0.12em] text-brass-500">STEP 01</p>
+              <p className="mt-1.5 font-display text-[16px] font-semibold text-navy-950">STANDARD</p>
+              <p className="mt-1.5 text-[12.5px] leading-relaxed text-charcoal-600">
+                현재 시험을 제대로 준비하는 정규 버전
+              </p>
+            </div>
+            <div className="flex items-center justify-center text-navy-800/40">
+              <span className="hidden font-display text-[20px] leading-none sm:inline">→</span>
+              <span className="font-display text-[20px] leading-none sm:hidden">↓</span>
+            </div>
+            <div className="border-t-2 border-navy-900/70 bg-navy-950 p-5">
+              <p className="font-label text-[11px] tracking-[0.12em] text-brass-400">STEP 02</p>
+              <p className="mt-1.5 font-display text-[16px] font-semibold text-ivory-100">ADVANCED</p>
+              <p className="mt-1.5 text-[12.5px] leading-relaxed text-ivory-100/75">
+                Standard보다 한 단계 높은 심화 문제
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* STANDARD / ADVANCED 카드 */}
         <div className="mt-10 grid gap-4 sm:mt-12 lg:grid-cols-2">
           <div className="border border-ivory-300 bg-white p-8">
@@ -111,6 +154,39 @@ export default function LevelTestTwoStepPackage() {
             <p className="mt-5 border-t border-ivory-100/15 pt-4 text-[12px] leading-relaxed text-ivory-100/60">
               Advanced는 Standard보다 한 단계 높은, 별도로 제작된 심화 문제 구성입니다.
             </p>
+          </div>
+        </div>
+
+        {/* 이렇게 선택합니다 — 상황별 예시 */}
+        <div className="mx-auto mt-14 max-w-[900px] sm:mt-16">
+          <h3 className="text-center font-display text-[20px] font-semibold text-navy-950 sm:text-[22px]">
+            이렇게 선택합니다
+          </h3>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {cases.map((c) => (
+              <div key={c.need} className="border border-ivory-300 bg-white p-4">
+                <p className="text-[13px] leading-relaxed text-charcoal-700">&ldquo;{c.need}&rdquo;</p>
+                <p className="mt-2.5 border-t border-ivory-300 pt-2.5 font-display text-[14px] font-semibold text-navy-950">
+                  → {c.result}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 구매 선택 구조 */}
+        <div className="mx-auto mt-14 max-w-[900px] sm:mt-16">
+          <h3 className="text-center font-display text-[20px] font-semibold text-navy-950 sm:text-[22px]">
+            구매 선택 구조
+          </h3>
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            {purchaseOptions.map((o) => (
+              <div key={o.n} className="border border-ivory-300 bg-white p-5">
+                <p className="font-display text-[20px] font-semibold text-brass-500">{o.n}</p>
+                <p className="mt-2 font-display text-[15px] font-semibold text-navy-950">{o.title}</p>
+                <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">{o.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
 
