@@ -1,5 +1,6 @@
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { flexibleVolumes, formatKRW } from "../data";
 import LevelTestConfigurator from "./LevelTestConfigurator";
 
 // 중요한 상품 정책: 페이지 수(60/100/200/300P)는 "문제량"이고,
@@ -188,6 +189,45 @@ export default function LevelTestTwoStepPackage() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* STANDARD + ADVANCED 함께 구매 — 심화까지 원하는 고객을 위한 설명.
+            가격은 공용 단가표(flexibleVolumes)에서 매번 계산하므로 과거처럼
+            고정 숫자가 틀어질 일이 없습니다. */}
+        <div className="mx-auto mt-8 max-w-[760px] border-2 border-navy-900 bg-white p-7 sm:p-8">
+          <span className="inline-flex items-center rounded-sm bg-brass-500 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-navy-950">
+            STANDARD + ADVANCED
+          </span>
+          <p className="mt-4 font-display text-[18px] font-semibold text-navy-950">
+            기본(STANDARD)과 심화(ADVANCED)를 함께 구매할 수 있습니다.
+          </p>
+          <p className="mt-3 text-[13.5px] leading-relaxed text-charcoal-700">
+            STANDARD는 현재 시험을 제대로 준비하는 정규 구성이고, ADVANCED는 그보다 한 단계 높은 별도
+            제작 심화 문제입니다. 두 권을 함께 구매하면 기본 대비부터 심화 연습까지 한 번에 준비할 수
+            있습니다.
+          </p>
+          <div className="mt-5 grid gap-3 border-t border-ivory-300 pt-5 sm:grid-cols-2">
+            {[100, 200].map((pages) => {
+              const unit = flexibleVolumes.find((v) => v.pages === pages)!.priceKRW;
+              return (
+                <div key={pages}>
+                  <p className="font-label text-[10.5px] uppercase tracking-[0.1em] text-charcoal-600/60">
+                    예시 ({pages}P 기준)
+                  </p>
+                  <p className="mt-1.5 text-[13px] text-charcoal-700">
+                    {pages}P STANDARD + {pages}P ADVANCED
+                  </p>
+                  <p className="mt-1 font-display text-[18px] font-semibold text-navy-950">
+                    {formatKRW(unit * 2)}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-4 text-[12px] leading-relaxed text-charcoal-600/70">
+            분량을 다르게 조합하고 싶다면(예: 100P STANDARD + 200P ADVANCED) 아래에서 바로 선택하고
+            정확한 금액을 확인할 수 있습니다.
+          </p>
         </div>
 
         {/* 직접 선택해보는 configurator — STANDARD만/ADVANCED만/두 단계 모두를
