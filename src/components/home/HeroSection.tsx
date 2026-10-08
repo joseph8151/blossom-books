@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, FileSearch, ChevronDown } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
@@ -9,20 +10,23 @@ import { trackEvent } from "@/lib/analytics";
 // 각 시험 칩 → /books 검색으로 연결 (해당 교재가 없으면 주문제작 안내로 이어집니다)
 // 첫 화면에는 실제 교재가 바로 붙는 항목만 노출하고, 나머지(GRE·LSAT 등)는
 // "전체 시험 보기"로 펼쳐서 봅니다 — LSAT·GRE를 CAT4·MAP과 나란히 두지 않습니다.
+// 레벨테스트 관련 칩 라벨은 실제 현장에서 자주 쓰이는 표현(영어 4대영역 레테·
+// 사고력 수학·문해력 국어)을 그대로 사용합니다.
 const primaryAssessments: { label: string; href: string }[] = [
-  { label: "학원 레벨테스트", href: "/books?track=level-test" },
+  { label: "영어 4대영역 레테", href: "/books?track=level-test" },
+  { label: "사고력 수학", href: "/books?q=%EC%82%AC%EA%B3%A0%EB%A0%A5" },
+  { label: "문해력 국어", href: "/books?q=%EB%AC%B8%ED%95%B4%EB%A0%A5" },
   { label: "SR TEST", href: "/books?q=SR" },
   { label: "MAP Growth", href: "/books?q=MAP" },
   { label: "CAT4", href: "/books?q=CAT4" },
   { label: "ISEE", href: "/books?q=ISEE" },
   { label: "SSAT", href: "/books?q=SSAT" },
   { label: "미국교과", href: "/books?track=us-curriculum" },
+  { label: "국제학교 입학 패키지", href: "/admission-full-package" },
 ];
 
 const moreAssessments: { label: string; href: string }[] = [
   { label: "영어 내신 대비 (G5–7)", href: "/books?q=Grammar" },
-  { label: "사고력수학 레벨테스트", href: "/books?q=%EC%82%AC%EA%B3%A0%EB%A0%A5" },
-  { label: "국어 문해력 레벨테스트", href: "/books?q=%EB%AC%B8%ED%95%B4%EB%A0%A5" },
   { label: "NGRT", href: "/books?q=NGRT" },
   { label: "WIDA", href: "/books?q=WIDA" },
   { label: "UKiset", href: "/books?q=UKiset" },
@@ -76,11 +80,14 @@ export default function HeroSection() {
         {/* 우측 — 표지 + 펼친 문제 페이지 플랫레이 */}
         <div className="relative mx-auto w-full max-w-md">
           <div className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(circle_at_50%_46%,rgba(173,138,78,0.14),transparent_62%)]" />
-          <div className="relative overflow-hidden border border-navy-800/12 shadow-lift">
-            <img
+          <div className="relative aspect-[4/3] overflow-hidden border border-navy-800/12 shadow-lift">
+            <Image
               src="/images/marketing/hero-flatlay.jpg"
               alt="Blossom Books 교재 표지와 펼친 문제 페이지, 정답 PDF"
-              className="aspect-[4/3] w-full object-cover"
+              fill
+              priority
+              sizes="(min-width: 1024px) 460px, 90vw"
+              className="object-cover"
             />
           </div>
         </div>
