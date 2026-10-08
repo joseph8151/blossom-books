@@ -11,6 +11,7 @@ import {
   hasStarter,
   nextWorkbooks,
   volumeOptionsLabel,
+  productOfferPrice,
 } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
@@ -91,6 +92,37 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const direct = isDirectPurchase(product);
   const inside = insideTheWorkbook(product);
 
+  // Product 구조화 데이터(JSON-LD) — 가격을 특정할 수 없는 상품(가격 상담 문의)은
+  // offers 자체를 생략합니다. 실제 사진·평점 데이터가 없으므로 image·review는 넣지 않습니다.
+  const offerPrice = productOfferPrice(product);
+  const offers = offerPrice
+    ? "price" in offerPrice
+      ? {
+          "@type": "Offer",
+          priceCurrency: "KRW",
+          price: offerPrice.price,
+          availability: "https://schema.org/InStock",
+          url: `https://blossombooks.org/books/${product.id}/`,
+        }
+      : {
+          "@type": "AggregateOffer",
+          priceCurrency: "KRW",
+          lowPrice: offerPrice.lowPrice,
+          highPrice: offerPrice.highPrice,
+          availability: "https://schema.org/InStock",
+          url: `https://blossombooks.org/books/${product.id}/`,
+        }
+    : undefined;
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.titleKo,
+    description: product.summaryKo,
+    sku: product.id,
+    brand: { "@type": "Brand", name: "블러섬북스" },
+    ...(offers ? { offers } : {}),
+  };
+
   const receive = [
     "Student Workbook",
     product.includesAnswerKey ? "Answer & Explanation Guide" : null,
@@ -107,6 +139,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-12 pb-24 lg:px-8 lg:py-16 lg:pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <TrackView event="view_product" params={{ product_id: product.id, track: product.track }} />
       <nav className="text-[12.5px] text-charcoal-600">
         <Link href="/books" className="hover:text-navy-900">교재 찾기</Link>

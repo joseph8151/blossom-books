@@ -60,6 +60,26 @@ export function priceDisplay(p: Product): string {
   return "Price on Request";
 }
 
+// Product 구조화 데이터(JSON-LD)용 가격 범위. 실제 단가표에서만 계산하며,
+// 가격을 특정할 수 없는 상품(가격 상담 문의)은 null을 반환해 offers 자체를
+// 생략하도록 합니다 — 틀린 가격을 구조화 데이터에 넣지 않기 위함입니다.
+export function productOfferPrice(p: Product): { price: number } | { lowPrice: number; highPrice: number } | null {
+  if (offersSrVolumes(p)) {
+    const prices = srVolumes.map((v) => v.priceKRW);
+    return { lowPrice: Math.min(...prices), highPrice: Math.max(...prices) };
+  }
+  if (offersVolumes(p)) {
+    const prices = flexibleVolumes.map((v) => v.priceKRW);
+    if (hasStarter(p)) prices.push(starterOption.priceKRW);
+    return { lowPrice: Math.min(...prices), highPrice: Math.max(...prices) };
+  }
+  if (isFixedDirect(p)) {
+    const v = volumeByPages(p.pageCount as number);
+    return v ? { price: v.priceKRW } : null;
+  }
+  return null;
+}
+
 // Reading·Vocabulary·Grammar·Writing 4개 영역 통합 교재인지 판별합니다.
 export function isFourSkill(p: Product): boolean {
   const u = p.units.join(" ");
