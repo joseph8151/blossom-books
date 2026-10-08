@@ -1,5 +1,15 @@
 import Link from "next/link";
+import { BookOpen, Languages, Calculator, PenLine, MessageCircle, ClipboardCheck } from "lucide-react";
 import { packageCategories, testAdaptations } from "../data";
+
+const categoryIcons: Record<string, typeof BookOpen> = {
+  Reading: BookOpen,
+  Vocabulary: Languages,
+  Math: Calculator,
+  Writing: PenLine,
+  Interview: MessageCircle,
+  "Mock Test": ClipboardCheck,
+};
 
 export default function PackageBreakdown() {
   return (
@@ -13,12 +23,19 @@ export default function PackageBreakdown() {
         </div>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {packageCategories.map((c) => (
-            <div key={c.title} className="border border-navy-800/10 bg-white p-6">
-              <span className="font-display text-[26px] font-semibold leading-none text-[#5f6f52]/35">
-                {c.n}
-              </span>
-              <p className="mt-3 font-display text-[18px] font-semibold text-navy-950">{c.title}</p>
+          {packageCategories.map((c) => {
+            const Icon = categoryIcons[c.title] ?? BookOpen;
+            return (
+            <div key={c.title} className="border border-navy-800/10 bg-white p-6 transition-shadow hover:shadow-card">
+              <div className="flex items-center justify-between">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#eef1e8] text-[#5f6f52]">
+                  <Icon size={20} strokeWidth={1.7} />
+                </span>
+                <span className="font-display text-[26px] font-semibold leading-none text-[#5f6f52]/25">
+                  {c.n}
+                </span>
+              </div>
+              <p className="mt-4 font-display text-[18px] font-semibold text-navy-950">{c.title}</p>
               <ul className="mt-4 space-y-1.5 text-[12.5px] leading-relaxed text-charcoal-600">
                 {c.items.map((item) => (
                   <li key={item} className="flex gap-1.5">
@@ -28,7 +45,8 @@ export default function PackageBreakdown() {
                 ))}
               </ul>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* 시험 유형별 추가 구성 — 학교가 요구하는 시험(MAP/CAT4/자체 시험)에 따라

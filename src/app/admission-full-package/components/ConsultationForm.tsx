@@ -54,7 +54,7 @@ export default function ConsultationForm() {
       <div className="mx-auto flex max-w-md flex-col items-center gap-2 py-10 text-center">
         <Check size={22} className="text-[#aab79c]" strokeWidth={2.4} />
         <p className="text-[14.5px] font-medium text-ivory-100">상담 요청이 접수되었습니다.</p>
-        <p className="text-[13px] text-ivory-200/70">지원 학교와 학년을 확인한 뒤 안내드리겠습니다.</p>
+        <p className="text-[13px] text-ivory-200/85">지원 학교와 학년을 확인한 뒤 안내드리겠습니다.</p>
       </div>
     );
   }

@@ -42,16 +42,16 @@ function SchoolCard({ school }: { school: School }) {
         <div className="border-t border-navy-800/10 p-5 pt-4">
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
-              <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">지원 가능한 학년</p>
+              <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-700/80">지원 가능한 학년</p>
               <p className="mt-1 text-[13px] text-charcoal-700">{school.grades}</p>
             </div>
             <div>
-              <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">추천 Package</p>
+              <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-700/80">추천 Package</p>
               <p className="mt-1 text-[13px] text-charcoal-700">{school.recommendedPackage}</p>
             </div>
           </div>
           <div className="mt-3">
-            <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
+            <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-700/80">
               예상/공개된 평가 영역
             </p>
             <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -61,7 +61,7 @@ function SchoolCard({ school }: { school: School }) {
                 </span>
               ))}
             </div>
-            <p className="mt-2 text-[11px] leading-relaxed text-charcoal-600/60">{schoolDataCaveat}</p>
+            <p className="mt-2 text-[11px] leading-relaxed text-charcoal-600/85">{schoolDataCaveat}</p>
           </div>
           <a
             href={siteConfig.kakaoChannelUrl}
@@ -159,7 +159,7 @@ export default function SchoolFinder() {
 
         {/* 아직 개별 학교를 등록하지 않은 지역 */}
         <div className="mt-14 border-t border-navy-800/10 pt-10">
-          <p className="text-center font-label text-[11px] uppercase tracking-[0.16em] text-charcoal-600/60">
+          <p className="text-center font-label text-[11px] uppercase tracking-[0.16em] text-charcoal-700/80">
             곧 추가될 지역
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
@@ -170,7 +170,7 @@ export default function SchoolFinder() {
               </div>
             ))}
           </div>
-          <p className="mx-auto mt-5 max-w-[520px] text-center text-[12.5px] leading-relaxed text-charcoal-600/70">
+          <p className="mx-auto mt-5 max-w-[520px] text-center text-[12.5px] leading-relaxed text-charcoal-600/90">
             위 지역은 특정 학교명을 임의로 올리지 않았습니다. 지원 학교명을 알려주시면 확인 후 패키지를
             구성해 드립니다.
           </p>

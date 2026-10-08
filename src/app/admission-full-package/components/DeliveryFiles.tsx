@@ -21,7 +21,7 @@ export default function DeliveryFiles() {
             </div>
           ))}
         </div>
-        <p className="mt-4 text-center text-[12.5px] leading-relaxed text-charcoal-600/70">
+        <p className="mt-4 text-center text-[12.5px] leading-relaxed text-charcoal-600/90">
           Signature는 {signatureExtraFiles.join(", ")}를 추가로 포함합니다.
         </p>
       </div>

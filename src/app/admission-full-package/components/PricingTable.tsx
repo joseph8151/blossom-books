@@ -1,6 +1,12 @@
-import { Check, MessageCircle } from "lucide-react";
+import { Check, MessageCircle, Compass, Star, Gem } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { pricingTiers, formatKRW } from "../data";
+
+const tierIcons: Record<string, typeof Compass> = {
+  standard: Compass,
+  premium: Star,
+  signature: Gem,
+};
 
 export default function PricingTable() {
   return (
@@ -16,7 +22,9 @@ export default function PricingTable() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {pricingTiers.map((t) => (
+          {pricingTiers.map((t) => {
+            const TierIcon = tierIcons[t.id] ?? Compass;
+            return (
             <div
               key={t.id}
               className={`relative flex flex-col border p-7 sm:p-8 ${
@@ -28,8 +36,15 @@ export default function PricingTable() {
                   Most Popular
                 </span>
               )}
+              <span
+                className={`flex h-10 w-10 items-center justify-center rounded-full ${
+                  t.mostPopular ? "bg-ivory-100/10 text-[#aab79c]" : "bg-[#eef1e8] text-[#5f6f52]"
+                }`}
+              >
+                <TierIcon size={18} strokeWidth={1.7} />
+              </span>
               <p
-                className={`font-label text-[11px] uppercase tracking-[0.16em] ${
+                className={`mt-4 font-label text-[11px] uppercase tracking-[0.16em] ${
                   t.mostPopular ? "text-[#aab79c]" : "text-[#5f6f52]"
                 }`}
               >
@@ -38,7 +53,7 @@ export default function PricingTable() {
               <p className={`mt-3 font-display text-[30px] font-semibold ${t.mostPopular ? "text-ivory-100" : "text-navy-950"}`}>
                 {formatKRW(t.priceKRW)}
               </p>
-              <p className={`mt-1.5 text-[12px] ${t.mostPopular ? "text-ivory-200/60" : "text-charcoal-600/70"}`}>
+              <p className={`mt-1.5 text-[12px] ${t.mostPopular ? "text-ivory-200/80" : "text-charcoal-600/90"}`}>
                 {t.pages}
               </p>
 
@@ -69,7 +84,8 @@ export default function PricingTable() {
                 {t.name} 상담하기
               </a>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

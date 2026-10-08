@@ -3,8 +3,17 @@ import { ArrowRight, Search } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="border-b border-navy-800/10 bg-ivory-100">
-      <div className="mx-auto max-w-[1040px] px-5 py-20 text-center sm:px-8 sm:py-28">
+    <section className="relative overflow-hidden border-b border-navy-800/10 bg-ivory-100">
+      {/* 은은한 배경 악센트 — 평면적인 느낌을 덜어내기 위한 장식용 그라디언트, 콘텐츠와 겹치지 않도록 pointer-events-none */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 right-[-10%] h-[420px] w-[420px] rounded-full bg-[#5f6f52]/[0.07] blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-32 left-[-8%] h-[380px] w-[380px] rounded-full bg-brass-500/[0.08] blur-3xl"
+      />
+      <div className="relative mx-auto max-w-[1040px] px-5 py-20 text-center sm:px-8 sm:py-28">
         <span className="inline-flex items-center gap-2 border border-[#5f6f52]/30 bg-[#eef1e8] px-4 py-1.5 font-label text-[10.5px] uppercase tracking-[0.18em] text-[#4f5d45]">
           Admission Full Package
         </span>
