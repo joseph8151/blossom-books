@@ -47,7 +47,7 @@ export default function PackageBreakdown() {
             </p>
           </div>
 
-          <div className="mx-auto mt-8 grid max-w-[940px] gap-4 sm:grid-cols-3">
+          <div className="mx-auto mt-8 grid max-w-[1040px] gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {testAdaptations.map((t) => (
               <div key={t.test} className="border border-[#5f6f52]/25 bg-[#eef1e8]/40 p-5">
                 <p className="font-display text-[15px] font-semibold text-navy-950">{t.test}</p>

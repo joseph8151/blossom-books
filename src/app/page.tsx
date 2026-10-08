@@ -1,6 +1,7 @@
 import HeroSection from "@/components/home/HeroSection";
 import CoreCategories from "@/components/home/CoreCategories";
 import CountryPrograms from "@/components/home/CountryPrograms";
+import AdmissionPackagePromo from "@/components/home/AdmissionPackagePromo";
 import Bestsellers from "@/components/home/Bestsellers";
 import WhyDifferent from "@/components/home/WhyDifferent";
 import QuestionToUnderstanding from "@/components/home/QuestionToUnderstanding";
@@ -42,6 +43,7 @@ export default function HomePage() {
       <HeroSection />
       <CoreCategories />
       <CountryPrograms />
+      <AdmissionPackagePromo />
       <Bestsellers />
       <WhyDifferent />
 

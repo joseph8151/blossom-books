@@ -117,6 +117,16 @@ export const testAdaptations: TestAdaptation[] = [
     items: ["Verbal Reasoning", "Non-verbal Reasoning", "Quantitative Reasoning", "Spatial Reasoning"],
   },
   {
+    test: "PTE (Pearson Test of English)",
+    note: "영국계 학교에서 CAT4와 함께 요구하는 경우가 있는 Pearson의 영어능력 평가입니다.",
+    items: ["Reading", "Writing", "Listening/Speaking 연계 어휘·표현"],
+  },
+  {
+    test: "PTM (Pearson Test of Maths)",
+    note: "영국계 학교에서 수학 영역 배치를 위해 함께 요구하는 경우가 있는 Pearson의 수학 평가입니다.",
+    items: ["Number & Operations", "Problem Solving", "학교 학년 기준 배치 연습"],
+  },
+  {
     test: "자체 시험 (School-specific Assessment)",
     note: "학교가 공개한 입학 안내 자료·기출 유형을 바탕으로 맞춤 구성합니다.",
     items: ["학교 공개 자료 기반 유형 분석", "학교 발표 범위 맞춤 구성", "School Finder에서 학교별 확인"],
