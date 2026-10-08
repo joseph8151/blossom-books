@@ -1,0 +1,77 @@
+import { Check, MessageCircle } from "lucide-react";
+import { siteConfig } from "@/data/site";
+import { pricingTiers, formatKRW } from "../data";
+
+export default function PricingTable() {
+  return (
+    <section className="border-b border-navy-800/10 bg-white py-20 sm:py-28">
+      <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+        <div className="mx-auto max-w-[680px] text-center">
+          <span className="font-label text-[11px] uppercase tracking-[0.18em] text-[#5f6f52]">Package Tiers</span>
+          <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">가격표</h2>
+          <p className="mt-5 text-[14.5px] leading-[1.9] text-charcoal-600">
+            페이지 수가 아니라 지원 학교에 맞춘 구성과 시험 영역별 패키지가 핵심입니다. 같은 Standard라도
+            학교와 학년에 따라 실제 수록 문항은 다르게 구성됩니다.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {pricingTiers.map((t) => (
+            <div
+              key={t.id}
+              className={`relative flex flex-col border p-7 sm:p-8 ${
+                t.mostPopular ? "border-2 border-navy-950 bg-navy-950 text-ivory-100" : "border-navy-800/12 bg-ivory-100"
+              }`}
+            >
+              {t.mostPopular && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#7c8a6e] px-3 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-white">
+                  Most Popular
+                </span>
+              )}
+              <p
+                className={`font-label text-[11px] uppercase tracking-[0.16em] ${
+                  t.mostPopular ? "text-[#aab79c]" : "text-[#5f6f52]"
+                }`}
+              >
+                {t.name}
+              </p>
+              <p className={`mt-3 font-display text-[30px] font-semibold ${t.mostPopular ? "text-ivory-100" : "text-navy-950"}`}>
+                {formatKRW(t.priceKRW)}
+              </p>
+              <p className={`mt-1.5 text-[12px] ${t.mostPopular ? "text-ivory-200/60" : "text-charcoal-600/70"}`}>
+                {t.pages}
+              </p>
+
+              <ul className="mt-6 flex-1 space-y-2 text-[13px] leading-relaxed">
+                {t.features.map((f) => (
+                  <li key={f} className={`flex items-start gap-2 ${t.mostPopular ? "text-ivory-100/90" : "text-charcoal-700"}`}>
+                    <Check
+                      size={14}
+                      className={`mt-0.5 shrink-0 ${t.mostPopular ? "text-[#aab79c]" : "text-[#5f6f52]"}`}
+                      strokeWidth={2.4}
+                    />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={siteConfig.kakaoChannelUrl}
+                target="_blank"
+                rel="noreferrer"
+                className={`mt-7 inline-flex min-h-[48px] items-center justify-center gap-2 px-6 text-[13.5px] font-medium transition-colors ${
+                  t.mostPopular
+                    ? "bg-[#7c8a6e] text-white hover:bg-[#6c7a5f]"
+                    : "bg-navy-950 text-ivory-100 hover:bg-navy-900"
+                }`}
+              >
+                <MessageCircle size={15} />
+                {t.name} 상담하기
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

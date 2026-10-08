@@ -11,6 +11,10 @@ export const siteConfig = {
   // Cloudflare 환경변수 NEXT_PUBLIC_WEB3FORMS_KEY 가 있으면 그 값을 우선 사용합니다.
   web3formsAccessKey:
     process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "d9731ac4-cebd-4fdc-94be-ce0191935a6b",
+  // /admission-full-package 상담 폼 전용 Formspree 엔드포인트. 실제 폼 ID가
+  // 발급되어 Cloudflare 환경변수 NEXT_PUBLIC_FORMSPREE_ADMISSION_URL에
+  // 설정되기 전까지는 빈 문자열이며, 그 동안 폼은 카카오톡 상담으로 안내합니다.
+  admissionPackageFormspreeUrl: process.env.NEXT_PUBLIC_FORMSPREE_ADMISSION_URL || "",
 };
 
 export const primaryNav = [

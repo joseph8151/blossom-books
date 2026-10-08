@@ -22,6 +22,16 @@ export default function QuoteLinksPage() {
       </p>
 
       <LinkList />
+
+      <p className="mt-8 border-t border-ivory-300 pt-6 text-[13px] text-charcoal-600">
+        국제학교 Admission Full Package 상담용 랜딩페이지:{" "}
+        <a
+          href="https://www.blossombooks.org/admission-full-package/"
+          className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2"
+        >
+          /admission-full-package
+        </a>
+      </p>
     </div>
   );
 }

@@ -11,7 +11,9 @@ export default function MobileBottomBar() {
   const isEn = pathname?.startsWith("/en") ?? false;
   // 상품 상세페이지에는 자체 구매 스티키 바(PurchasePanel)가 있으므로 전역 바는 숨깁니다.
   const isProductDetail = /^\/books\/[^/]+$/.test(pathname ?? "");
-  if (isProductDetail) return null;
+  // /admission-full-package는 자체 상담 스티키 CTA(MobileStickyCTA)를 쓰므로 전역 바는 숨깁니다.
+  const hasOwnStickyCta = pathname?.startsWith("/admission-full-package") ?? false;
+  if (isProductDetail || hasOwnStickyCta) return null;
 
   const labels = isEn
     ? { sample: "Free Sample", kakao: "Chat on KakaoTalk", sampleHref: "/en#samples" }

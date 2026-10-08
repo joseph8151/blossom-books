@@ -23,6 +23,7 @@ const staticPaths = [
   { path: "/faq", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/compare", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/mock-exams", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/admission-full-package", priority: 0.5, changeFrequency: "monthly" as const },
   { path: "/consultation", priority: 0.5, changeFrequency: "monthly" as const },
   { path: "/learn", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/transparency", priority: 0.4, changeFrequency: "yearly" as const },
