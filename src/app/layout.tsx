@@ -3,7 +3,37 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileBottomBar from "@/components/layout/MobileBottomBar";
-import { siteKeywords } from "@/data/site";
+import { siteConfig, siteKeywords } from "@/data/site";
+
+// Organization/WebSite 구조화 데이터 — 네이버·구글 검색결과의 사이트 정보(로고,
+// 검색창 등) 인식을 돕습니다. 실제 사이트에 이미 공개된 정보(주소·이메일)만
+// 사용하고, 전화번호 등 없는 정보는 넣지 않습니다.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "블러섬북스",
+  alternateName: "Blossom Books",
+  url: "https://www.blossombooks.org",
+  logo: "https://www.blossombooks.org/opengraph-image.png",
+  email: siteConfig.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: siteConfig.addressKo,
+    addressCountry: "KR",
+  },
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "블러섬북스 Blossom Books",
+  url: "https://www.blossombooks.org",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://www.blossombooks.org/books/?q={search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
+};
 
 // 참고: 폰트(Cormorant Garamond, IBM Plex Mono, Pretendard)는
 // globals.css 상단의 @import로 로드합니다.
@@ -57,6 +87,14 @@ export default function RootLayout({
         lg 이상에서는 바가 숨겨지므로(lg:hidden) 여백을 제거합니다.
       */}
       <body className="min-h-full flex flex-col bg-ivory-100 text-charcoal-900 pb-[calc(3.5rem+env(safe-area-inset-bottom))] lg:pb-0">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
