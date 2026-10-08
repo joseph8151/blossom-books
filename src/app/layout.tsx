@@ -12,12 +12,15 @@ import { siteKeywords } from "@/data/site";
 export const metadata: Metadata = {
   // og:image 등 메타 이미지의 절대 URL 생성을 위한 기준 도메인
   metadataBase: new URL("https://blossombooks.org"),
+  // 네이버 서치어드바이저는 사이트 제목 40자 이내·설명 80자 이내를 권장합니다.
+  // title.default는 템플릿(%s | ...)이 붙지 않는 홈페이지 자체의 <title>이라
+  // 이 값만 줄이면 홈 제목 길이가 바로 줄어듭니다.
   title: {
-    default: "블러섬북스 | Blossom Books — 시험과 수업 목적에 맞춘 문제집·해설집",
+    default: "블러섬북스 Blossom Books | 맞춤 문제집·해설집",
     template: "%s | 블러섬북스 Blossom Books",
   },
   description:
-    "미국 교과과정, 국제학교 입학시험, 공인시험, 실전 모의고사를 분석하여 학생용 문제집과 정답·상세 해설집을 제작합니다. 국제학교 문제집, 미국 교과서 문제집, AP 문제집, CAT4·MAP·ISEE·SSAT 문제집, 영어·국어 레벨테스트 문제집, 학원·프랩학원 교재 주문 제작.",
+    "미국 교과과정·국제학교 입학시험·공인시험 맞춤 문제집·해설집 제작. AP·CAT4·MAP·ISEE·SSAT, 레벨테스트 교재 주문 제작.",
   keywords: siteKeywords,
   openGraph: {
     title: "블러섬북스 | Blossom Books",
