@@ -96,6 +96,33 @@ export const packageCategories: PackageCategory[] = [
   },
 ];
 
+// 위 6개 영역은 모든 패키지에 공통으로 포함되는 기본 구성입니다. 지원 학교가
+// 요구하는 시험 유형(MAP / CAT4 / 자체 시험 등)에 따라 아래 구성이 추가됩니다.
+// School Finder(schools.ts)에서 학교별로 확인된 평가 유형과 연결되는 내용입니다.
+export interface TestAdaptation {
+  test: string;
+  note: string;
+  items: string[];
+}
+
+export const testAdaptations: TestAdaptation[] = [
+  {
+    test: "MAP (MAP Growth)",
+    note: "적응형(adaptive) 시험 — 난이도가 학생 수준에 맞춰 자동 조정됩니다.",
+    items: ["RIT 구간별 난이도 연습", "Adaptive Reading 문항", "Adaptive Math 문항"],
+  },
+  {
+    test: "CAT4",
+    note: "언어·비언어·수리·공간 4개 영역의 추론(Reasoning) 능력을 평가합니다.",
+    items: ["Verbal Reasoning", "Non-verbal Reasoning", "Quantitative Reasoning", "Spatial Reasoning"],
+  },
+  {
+    test: "자체 시험 (School-specific Assessment)",
+    note: "학교가 공개한 입학 안내 자료·기출 유형을 바탕으로 맞춤 구성합니다.",
+    items: ["학교 공개 자료 기반 유형 분석", "학교 발표 범위 맞춤 구성", "School Finder에서 학교별 확인"],
+  },
+];
+
 export interface PricingTier {
   id: "standard" | "premium" | "signature";
   name: string;
