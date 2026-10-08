@@ -44,6 +44,11 @@ const links = [
     who: "SCAT · CogAT · NNAT · OLSAT · AMC · MATHCOUNTS · MOEMS 문의 고객",
     url: "https://www.blossombooks.org/quote-scat/",
   },
+  {
+    title: "국제학교 Admission Full Package",
+    who: "국제학교·해외 학교 입학 준비 전체 패키지(상담) 문의 고객",
+    url: "https://www.blossombooks.org/admission-full-package/",
+  },
 ];
 
 function LinkRow({ title, who, url }: { title: string; who: string; url: string }) {
