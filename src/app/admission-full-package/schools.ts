@@ -38,6 +38,7 @@ export const assessmentFilters = [
   "WIDA",
   "SSAT",
   "ISEE",
+  "TOEFL",
   "Math Placement",
   "Writing Test",
   "Interview",
@@ -311,14 +312,269 @@ export const internationalSchools: School[] = [
   kr("Frankfurt International School", "Frankfurt, Germany", ["Europe"]),
   // 공식 페이지에서 구체적 시험 내용을 확인하지 못함 — 확인 필요로 유지.
   kr("Munich International School", "Munich, Germany", ["Europe"]),
+
+  // ── USA 보딩스쿨 (한국 학생 다수 지원 학교 위주) ────────
+  // 출처: https://www.exeter.edu/admissions-and-financial-aid/application-process/how-apply
+  // Grade 9-10: SSAT/ISEE 필수. 인터뷰 필수. TOEFL/IELTS/Duolingo는 "권장"이며 필수는 아님.
+  kr("Phillips Exeter Academy", "Exeter, New Hampshire, USA", ["USA", "Boarding School"], {
+    grades: "Grade 9–12",
+    assessmentAreas: ["SSAT", "ISEE", "Interview"],
+    confirmed: true,
+  }),
+  // 출처: https://www.andover.edu/admission/admission-faqs
+  // SSAT/ISEE 또는 PSAT/SAT/ACT 중 선택 제출. 비영어권 학교 출신은 TOEFL/IELTS/Duolingo 필요.
+  kr("Phillips Academy Andover", "Andover, Massachusetts, USA", ["USA", "Boarding School"], {
+    grades: "Grade 9–12",
+    assessmentAreas: ["SSAT", "ISEE", "TOEFL"],
+    confirmed: true,
+  }),
+  // 출처: https://www.hotchkiss.org/admission/standardized-tests — Grade 9-10 SSAT/ISEE
+  // (필수 여부는 페이지마다 다르게 안내되어 확인 필요), 비원어민은 TOEFL/Duolingo/IELTS.
+  kr("The Hotchkiss School", "Lakeville, Connecticut, USA", ["USA", "Boarding School"], {
+    grades: "Grade 9–12, PG",
+    assessmentAreas: ["SSAT", "ISEE", "TOEFL"],
+    confirmed: true,
+  }),
+  // 출처: https://deerfield.edu/admission/frequently-asked-questions — Grade 9-10 SSAT/ISEE,
+  // 영어가 모국어가 아니거나 영어 수업 경력 3년 미만이면 IELTS/TOEFL iBT/Duolingo, 인터뷰 필수.
+  kr("Deerfield Academy", "Deerfield, Massachusetts, USA", ["USA", "Boarding School"], {
+    grades: "Grade 9–12",
+    assessmentAreas: ["SSAT", "ISEE", "TOEFL", "Interview"],
+    confirmed: true,
+  }),
+  // 출처: https://www.milton.edu/admission/how-to-apply/ — Test-optional(SSAT/ISEE 불필요),
+  // 영어 학습자는 TOEFL/IELTS/Duolingo 강력 권장.
+  kr("Milton Academy", "Milton, Massachusetts, USA", ["USA", "Boarding School"], {
+    grades: "Grade 9–12",
+    assessmentAreas: ["TOEFL"],
+    confirmed: true,
+  }),
+  // 출처: https://www.loomischaffee.org/fs/pages/1871 — Test-optional(SSAT/ISEE/SAT/ACT 불필요),
+  // 영어권 학교 재학 2년 미만이면 TOEFL 또는 IELTS 필요.
+  kr("The Loomis Chaffee School", "Windsor, Connecticut, USA", ["USA", "Boarding School"], {
+    grades: "Grade 9–12, PG",
+    assessmentAreas: ["TOEFL"],
+    confirmed: true,
+  }),
+  // 출처: https://www.cushing.org/admissions/how-to-apply , .../international-students
+  // SSAT 선택, 국제 지원자는 TOEFL iBT 또는 Duolingo 필수.
+  kr("Cushing Academy", "Ashburnham, Massachusetts, USA", ["USA", "Boarding School"], {
+    grades: "Grade 9–12, PG",
+    assessmentAreas: ["TOEFL"],
+    confirmed: true,
+  }),
+  // 출처: https://peddie.org/admission/international-applicants/ — 전원 SSAT 또는 ISEE 필수,
+  // 영어권 학교 재학 3년 미만이면 TOEFL/IELTS/Duolingo 필수, 인터뷰 필수.
+  kr("The Peddie School", "Hightstown, New Jersey, USA", ["USA", "Boarding School"], {
+    grades: "Grade 9–12, PG",
+    assessmentAreas: ["SSAT", "ISEE", "TOEFL", "Interview"],
+    confirmed: true,
+  }),
+  // 출처: https://www.thehill.org/admission/how-to-apply — Grade 9-10: SSAT/ISEE/PSAT,
+  // Grade 11-12/PG: PSAT/SAT/ACT/SSAT. 비원어민은 TOEFL·Duolingo(영어권 학교 3년 이상 재학 시 면제).
+  kr("The Hill School", "Pottstown, Pennsylvania, USA", ["USA", "Boarding School"], {
+    grades: "Grade 9–12, PG",
+    assessmentAreas: ["SSAT", "ISEE", "TOEFL"],
+    confirmed: true,
+  }),
+  // 출처: https://www.sps.edu/admissions/applying — TOEFL 필요(영어권 학교 3년 이상 재학 시 면제,
+  // 코드 2342). SSAT/ISEE·인터뷰 세부 요건은 이번 조사에서 공식 확인하지 못함.
+  kr("St. Paul's School", "Concord, New Hampshire, USA", ["USA", "Boarding School"], {
+    grades: "Grade 9–12",
+    assessmentAreas: ["TOEFL"],
+    confirmed: true,
+  }),
+  // 공식 FAQ에 "국제학생은 영어능력시험이 필요한가?" 질문은 있으나 답변 내용을 확인하지
+  // 못함 — 확인 필요로 유지.
+  kr("Choate Rosemary Hall", "Wallingford, Connecticut, USA", ["USA", "Boarding School"]),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함(제3자 출처만 SSAT/TOEFL/인터뷰 언급)
+  // — 확인 필요로 유지.
+  kr("The Lawrenceville School", "Lawrenceville, New Jersey, USA", ["USA", "Boarding School"]),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함 — 확인 필요로 유지.
+  kr("Suffield Academy", "Suffield, Connecticut, USA", ["USA", "Boarding School"]),
+
+  // ── Canada 보딩스쿨 (한국 학생 다수 지원 학교 위주) ─────
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함(제3자 출처만 SSAT·영어시험 언급)
+  // — 확인 필요로 유지.
+  kr("Appleby College", "Oakville, Ontario, Canada", ["Canada", "Boarding School"]),
+  // 출처: https://ucc.on.ca/admission/apply/applying-to-boarding — 모든 보딩 지원자는
+  // UCC 자체 온라인 입학 평가 완료, 영어가 수업언어가 아닌 경우 영어능력시험 필요(시험명 비공개).
+  kr("Upper Canada College", "Toronto, Ontario, Canada", ["Canada", "Boarding School"], {
+    grades: "Boarding: Grade 9–12",
+    assessmentAreas: ["School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함(제3자 출처만 SSAT 장학 연계 언급)
+  // — 확인 필요로 유지.
+  kr("Ridley College", "St. Catharines, Ontario, Canada", ["Canada", "Boarding School"]),
+  // 출처: https://www.sac.on.ca/admission/how-to-apply — 대부분의 국제 지원자는 SSAT 필수
+  // (학교 코드 6263), 합격 후보자는 인터뷰 필수.
+  kr("St. Andrew's College", "Aurora, Ontario, Canada", ["Canada", "Boarding School"], {
+    grades: "Boarding: Grade 9–12",
+    assessmentAreas: ["SSAT", "Interview"],
+    confirmed: true,
+  }),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함 — 확인 필요로 유지.
+  kr("Lakefield College School", "Lakefield, Ontario, Canada", ["Canada", "Boarding School"]),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함(제3자 출처만 "입학시험 없음" 일관 언급)
+  // — 확인 필요로 유지.
+  kr("Shawnigan Lake School", "Shawnigan Lake, British Columbia, Canada", ["Canada", "Boarding School"]),
+  // 출처: https://www.smus.ca/admissions/apply-to-boarding/boarding-9-12 — SSAT 성적을
+  // 자체 입학시험 대신 인정(학교 코드 6869), PSAT도 인정. 영어권 학교 재학 3년 미만이면
+  // 영어능력시험 필요(시험명 비공개).
+  kr("St. Michaels University School", "Victoria, British Columbia, Canada", ["Canada", "Boarding School"], {
+    grades: "Boarding: Grade 9–12",
+    assessmentAreas: ["SSAT", "Interview", "School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 출처: https://www.tcs.on.ca/apply — Senior School(9-12)은 SSAT·TOEFL·CAT·MAP·Duolingo 등
+  // 다양한 시험 성적 인정 또는 TCS 자체 시험. Junior School(5-8)은 독해·수학·작문 평가.
+  kr("Trinity College School", "Port Hope, Ontario, Canada", ["Canada", "Boarding School"], {
+    grades: "Grade 5–12",
+    assessmentAreas: ["SSAT", "TOEFL", "MAP", "Writing Test", "Math Placement"],
+    confirmed: true,
+  }),
+  // 출처: https://www.pickeringcollege.on.ca/apply1 — Grade 4-12 지원자는 온라인 에세이+
+  // 온라인 인터뷰, 비원어민은 TOEFL/IELTS/CEFR/Duolingo 중 하나 제출(SSAT 요구 없음).
+  kr("Pickering College", "Newmarket, Ontario, Canada", ["Canada", "Boarding School"], {
+    grades: "Day: JK–12 · Boarding(ESL Academy): Grade 9–10",
+    assessmentAreas: ["Writing Test", "Interview", "TOEFL"],
+    confirmed: true,
+  }),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함(EAL 프로그램 존재만 확인) — 확인 필요로 유지.
+  kr("Rothesay Netherwood School", "Rothesay, New Brunswick, Canada", ["Canada", "Boarding School"]),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함 — 확인 필요로 유지.
+  kr("Columbia International College", "Hamilton, Ontario, Canada", ["Canada", "Boarding School"]),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함(제3자 출처만 SSAT 대체 가능 언급)
+  // — 확인 필요로 유지.
+  kr("Brentwood College School", "Mill Bay, British Columbia, Canada", ["Canada", "Boarding School"]),
+
+  // ── Vietnam (Hanoi / Ho Chi Minh City) ──────────────────
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함 — 확인 필요로 유지.
+  kr("UNIS Hanoi", "Hanoi, Vietnam", ["Southeast Asia"]),
+  // 출처: https://www.nordangliaeducation.com/bis-hanoi/admissions/entry-requirements
+  // Year 3-6: Writing Test + CAT4("CAT computer test") + EAL 평가 + 인터뷰. 저학년은 관찰 평가.
+  kr("British International School Hanoi", "Hanoi, Vietnam", ["Southeast Asia"], {
+    grades: "Nursery/Foundation–Year 13",
+    assessmentAreas: ["CAT4", "Writing Test", "Interview", "School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함 — 확인 필요로 유지.
+  kr("Hanoi International School", "Hanoi, Vietnam", ["Southeast Asia"]),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함(제3자 출처만 MAP 언급) — 확인 필요로 유지.
+  kr("Concordia International School Hanoi", "Hanoi, Vietnam", ["Southeast Asia"]),
+  // 출처: 학교 공식 수수료 안내 PDF(gamudagardens.sis.edu.vn) — Placement Test 존재 확인,
+  // 시험 과목·형식은 비공개.
+  kr("Singapore International School Gamuda Gardens", "Hanoi, Vietnam", ["Southeast Asia"], {
+    assessmentAreas: ["School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 출처: https://stpaulhanoi.com/admissions/enrollment-process/ — 영어능력 + 수학
+  // 입학시험 합격 필요(시험명 비공개).
+  kr("St. Paul American School Hanoi", "Hanoi, Vietnam", ["Southeast Asia"], {
+    assessmentAreas: ["Math Placement", "School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 베트남 국가교육과정 기반 + Cambridge/AP 국제 트랙 병행 학교. 공식 사이트에서 구체적
+  // 시험 내용은 확인하지 못함 — 확인 필요로 유지.
+  kr("Wellspring International Bilingual School Hanoi", "Hanoi, Vietnam", ["Southeast Asia"]),
+  // 출처: https://www.ishcmc.com/admission/applying-to-ishcmc/ — KG-Grade12 영어능력평가
+  // (듣기·말하기·읽기·쓰기), K-Grade5 EAL 평가 추가, Grade6-12는 과목별 평가+인터뷰.
+  kr("International School Ho Chi Minh City", "Ho Chi Minh City, Vietnam", ["Southeast Asia"], {
+    grades: "Early Explorers–Grade 12",
+    assessmentAreas: ["Interview", "School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 출처: https://www.nordangliaeducation.com/bis-hcmc/admissions/entry-requirements
+  // 학년별 평가 진행, 비원어민은 EAL 평가(자체 명칭, CAT4 등 특정 시험명 공개되어 있지 않음).
+  kr("British International School Ho Chi Minh City", "Ho Chi Minh City, Vietnam", ["Southeast Asia"], {
+    grades: "Nursery–Year 13",
+    assessmentAreas: ["School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 출처: 학교 공식 2025-26 Admissions Policy PDF(renaissance.edu.vn) — Year2-13: Oxford
+  // Online English Test(자체 명칭), Year3-13: CAT4 또는 이에 준하는 인지능력 평가, 전 학년 인터뷰.
+  kr("Renaissance International School Saigon", "Ho Chi Minh City, Vietnam", ["Southeast Asia"], {
+    grades: "Early Years–Year 13",
+    assessmentAreas: ["CAT4", "Interview", "School-specific Assessment"],
+    confirmed: true,
+  }),
+
+  // ── Malaysia (Kuala Lumpur 지역) ─────────────────────────
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함 — 확인 필요로 유지.
+  kr("Garden International School", "Mont Kiara, Kuala Lumpur, Malaysia", ["Southeast Asia"]),
+  // 공식 사이트에서 구체적 시험 내용을 확인하지 못함 — 확인 필요로 유지.
+  kr("Mont'Kiara International School", "Mont Kiara, Kuala Lumpur, Malaysia", ["Southeast Asia"]),
+  // 출처: 학교 공식 Admissions Policy PDF(alice-smith.edu.my) — 비선발 평가(적합한 학년
+  // 배정 목적), 영어가 모국어가 아니면 짧은 인터뷰·작문 샘플 추가.
+  kr("The Alice Smith School", "Kuala Lumpur, Malaysia", ["Southeast Asia"], {
+    grades: "Early Years–Sixth Form",
+    assessmentAreas: ["Writing Test", "Interview", "School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 출처: https://www.nexus.edu.my/admissions/ , .../assessing-learning/ — 학년별 입학
+  // 평가 진행(자체 자료, 비공개), 인터뷰 포함 가능.
+  kr("Nexus International School Malaysia", "Kuala Lumpur, Malaysia", ["Southeast Asia"], {
+    grades: "Early Years–Year 13",
+    assessmentAreas: ["Interview", "School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 출처: https://www.epsomcollege.edu.my/admissions/how-to-apply — Cambridge Assessment
+  // Baseline Test(수학·IQ·문해력) + Oxford Placement Test(영어) + 에세이 + 인터뷰.
+  kr("Epsom College in Malaysia", "Bandar Enstek, Negeri Sembilan, Malaysia", ["Southeast Asia"], {
+    grades: "Year 3–Sixth Form",
+    assessmentAreas: ["Writing Test", "Interview", "School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 출처: https://www.iskl.edu.my/admissions/admissions-essentials , .../frequently-asked-questions
+  // 전통적 입학시험 없음. 전 학년 WIDA로 영어능력 평가, High School은 인터뷰 포함.
+  kr("The International School of Kuala Lumpur", "Kuala Lumpur, Malaysia", ["Southeast Asia"], {
+    grades: "Prep Reception–Grade 12",
+    assessmentAreas: ["WIDA", "Interview", "School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 출처: https://aism.edu.my/admission/how-to-apply — 필요 시 입학 평가 + 인터뷰 진행(자체
+  // 자료, 특정 표준화 시험명 비공개).
+  kr("Australian International School Malaysia", "Kuala Lumpur, Malaysia", ["Southeast Asia"], {
+    grades: "Early Learning–Year 12",
+    assessmentAreas: ["Interview", "School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 출처: nordangliaeducation.com(BSKL) 공식 입학 안내 — 학년에 맞는 평가(영어 말하기·쓰기·
+  // 수학 테스트 포함 가능) + 인터뷰.
+  kr("British International School Kuala Lumpur", "Kuala Lumpur, Malaysia", ["Southeast Asia"], {
+    grades: "Nursery–Year 13",
+    assessmentAreas: ["Writing Test", "Math Placement", "Interview"],
+    confirmed: true,
+  }),
+  // 공식 사이트에 접근하지 못함(제3자 출처만 CAT4 언급, 캠퍼스 간 확인 필요) — 확인 필요로 유지.
+  kr("Sri KDU International School", "Selangor, Malaysia", ["Southeast Asia"]),
+  // Ipoh·Penang 캠퍼스는 공식 Admissions Policy에서 CAT4(GL Assessment) 사용을 확인했으나,
+  // Kuala Lumpur 지역 캠퍼스(Setia Eco Gardens 등)는 공식 확인이 안 되어 혼동 방지를 위해
+  // 확인 필요로 유지합니다 — 캠퍼스별로 반드시 재확인하세요.
+  kr("Tenby International School", "Setia Eco Park, Klang Valley, Malaysia", ["Southeast Asia"]),
+  // 출처: https://fairview.edu.my/school-admission/admission-information — 서류 제출 후
+  // 배치고사(Placement Test) + 인터뷰 진행(시험 형식 비공개).
+  kr("Fairview International School", "Mont Kiara / Wangsa Maju, Kuala Lumpur, Malaysia", ["Southeast Asia"], {
+    grades: "Age 4–19",
+    assessmentAreas: ["Interview", "School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 출처: https://his.edu.my/how-to-apply/ — 배치고사(Placement Assessment) 결과와 학업
+  // 기록에 따라 입학 결정(시험 형식 비공개).
+  kr("HELP International School", "Subang Bestari, Shah Alam, Selangor, Malaysia", ["Southeast Asia"], {
+    assessmentAreas: ["School-specific Assessment"],
+    confirmed: true,
+  }),
+  // 공식 사이트를 확인하지 못함(제3자 출처만 존재) — 확인 필요로 유지.
+  kr("Sri Kuala Lumpur International School", "Subang Jaya, Selangor, Malaysia", ["Southeast Asia"]),
 ];
 
 export const allSchools: School[] = [...koreaSchools, ...internationalSchools];
 
-// USA / Canada / UK는 사용자가 특정 학교명을 알려주지 않아 임의로 학교를
-// 만들지 않습니다. 대신 지역 카테고리만 안내하고 상담으로 연결합니다.
+// UK는 사용자가 특정 학교명을 알려주지 않아 임의로 학교를 만들지 않습니다.
+// 대신 지역 카테고리만 안내하고 상담으로 연결합니다. (USA·Canada는 보딩스쿨
+// 위주로 실제 학교명이 추가되어 더 이상 이 목록에 없습니다.)
 export const inquireOnlyRegions: { region: RegionTag; categories: string[] }[] = [
-  { region: "USA", categories: ["International schools", "Private schools", "Boarding schools"] },
   { region: "UK", categories: ["British international schools", "Independent schools"] },
-  { region: "Canada", categories: ["International schools", "Private schools"] },
 ];
