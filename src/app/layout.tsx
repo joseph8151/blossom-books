@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     title: "블러섬북스 | Blossom Books",
     description: "시험과 수업 목적에 맞춘 문제집·해설집·모의고사",
   },
-  // 네이버 서치어드바이저(searchadvisor.naver.com)에서 사이트를 등록하면 발급되는
-  // 소유 확인 코드. 실제 코드를 발급받아 Cloudflare 환경변수
-  // NEXT_PUBLIC_NAVER_SITE_VERIFICATION 에 넣기 전까지는 태그 자체가 생성되지
-  // 않습니다(가짜 코드를 넣지 않음).
-  ...(process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION
-    ? { other: { "naver-site-verification": process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION } }
-    : {}),
+  // 네이버 서치어드바이저(searchadvisor.naver.com) 소유 확인 코드. Cloudflare
+  // 환경변수 NEXT_PUBLIC_NAVER_SITE_VERIFICATION이 설정되면 그 값을 우선
+  // 쓰고, 없으면 아래 발급받은 코드를 기본값으로 사용합니다.
+  other: {
+    "naver-site-verification":
+      process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION || "d11f3ebdea72ba44f40715f49ed975c0a65a1dbb",
+  },
 };
 
 export default function RootLayout({
