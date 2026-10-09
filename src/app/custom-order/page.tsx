@@ -21,7 +21,7 @@ export default function CustomOrderPage() {
   const [customerType, setCustomerType] = useState<CustomerType>("individual");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [viaMail, setViaMail] = useState(false); // 서버 접수 실패 시 메일 앱으로 대체되었는지
+  const [submitError, setSubmitError] = useState(false);
   const [consent, setConsent] = useState(false);
 
   // /find에서 "이 조건으로 맞춤 견적 받기"로 넘어온 경우, 쿼리스트링에 실려 온
@@ -71,54 +71,39 @@ export default function CustomOrderPage() {
     };
 
     setSubmitting(true);
+    setSubmitError(false);
 
-    // 1) 폼서비스(Web3Forms)로 직접 접수 — 수신 메일 주소는 Web3Forms에만 저장되고 화면엔 노출되지 않습니다.
-    //    (정적 배포 환경이라 서버 없이 클라이언트에서 전송합니다. access_key는 공개용 키입니다.)
-    const web3Key = siteConfig.web3formsAccessKey;
-    if (web3Key) {
-      try {
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            access_key: web3Key,
-            subject: "[블러섬북스] 주문 제작 상담 신청",
-            from_name: "블러섬북스 웹사이트",
-            ...fields,
-          }),
-        });
-        const json = (await res.json().catch(() => ({ success: false }))) as { success?: boolean };
-        if (json.success) {
-          setSubmitting(false);
-          setSubmitted(true);
-          return;
-        }
-      } catch {
-        /* 아래 메일 앱 방식으로 대체 */
+    // Formspree로 접수 — 수신 메일 주소는 Formspree 계정에만 저장되고 화면엔 노출되지 않습니다.
+    try {
+      const res = await fetch(siteConfig.formspreeUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          subject: "[블러섬북스] 주문 제작 상담 신청",
+          from_name: "블러섬북스 웹사이트",
+          ...fields,
+        }),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(true);
       }
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
     }
-
-    // 2) 대체: 이메일 앱(mailto)으로 접수 내용을 전달(수신: 공개용 브랜드 이메일)
-    const body = ["■ 주문 제작 상담 신청", "", ...Object.entries(fields).map(([k, v]) => `· ${k}: ${v}`)].join("\n");
-    window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-      "[블러섬북스] 주문 제작 상담 신청"
-    )}&body=${encodeURIComponent(body)}`;
-    setViaMail(true);
-    setSubmitting(false);
-    setSubmitted(true);
   }
 
   if (submitted) {
     return (
       <div className="mx-auto max-w-xl px-5 py-28 text-center lg:px-8">
         <p className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">Submitted</p>
-        <h1 className="mt-3 font-display text-[30px] font-semibold text-navy-950">
-          {viaMail ? "신청 내용이 준비되었습니다." : "문의가 접수되었습니다."}
-        </h1>
+        <h1 className="mt-3 font-display text-[30px] font-semibold text-navy-950">문의가 접수되었습니다.</h1>
         <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">
-          {viaMail
-            ? "이메일 작성 창이 열립니다. 내용을 확인하고 그대로 보내주시면 접수됩니다. 창이 열리지 않으면 카카오톡으로 편하게 문의해 주세요."
-            : "전달해주신 내용을 확인한 후 제작 가능 범위와 상담 방법을 안내드립니다. 더 빠른 상담은 카카오톡을 이용해 주세요."}
+          전달해주신 내용을 확인한 후 제작 가능 범위와 상담 방법을 안내드립니다. 더 빠른 상담은 카카오톡을
+          이용해 주세요.
         </p>
         <a
           href={siteConfig.kakaoChannelUrl}
@@ -261,6 +246,11 @@ export default function CustomOrderPage() {
             카카오톡으로 바로 상담하기
           </a>
         </div>
+        {submitError && (
+          <p className="text-[12.5px] text-burgundy-700">
+            전송 중 문제가 발생했습니다. 다시 시도하시거나 위 카카오톡으로 문의해 주세요.
+          </p>
+        )}
       </form>
     </div>
   );

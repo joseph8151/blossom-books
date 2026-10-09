@@ -7,14 +7,9 @@ export const siteConfig = {
   businessRegistrationNumber: "654-60-00645",
   addressKo: "서울특별시 서초구 강남대로8길 39-26, 2층 A9호",
   addressShort: "서울 서초구 강남대로8길 39-26",
-  // 문의 접수용 Web3Forms 공개 access key. (수신 메일 주소는 Web3Forms에만 저장되어 화면엔 노출되지 않음)
-  // Cloudflare 환경변수 NEXT_PUBLIC_WEB3FORMS_KEY 가 있으면 그 값을 우선 사용합니다.
-  web3formsAccessKey:
-    process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "d9731ac4-cebd-4fdc-94be-ce0191935a6b",
-  // /admission-full-package 상담 폼 전용 Formspree 엔드포인트. 실제 폼 ID가
-  // 발급되어 Cloudflare 환경변수 NEXT_PUBLIC_FORMSPREE_ADMISSION_URL에
-  // 설정되기 전까지는 빈 문자열이며, 그 동안 폼은 카카오톡 상담으로 안내합니다.
-  admissionPackageFormspreeUrl: process.env.NEXT_PUBLIC_FORMSPREE_ADMISSION_URL || "",
+  // 사이트 전체 문의/신청 폼 공통 Formspree 엔드포인트. Cloudflare 환경변수
+  // NEXT_PUBLIC_FORMSPREE_URL이 있으면 그 값을 우선 사용합니다.
+  formspreeUrl: process.env.NEXT_PUBLIC_FORMSPREE_URL || "https://formspree.io/f/xbgdopbg",
 };
 
 export const primaryNav = [

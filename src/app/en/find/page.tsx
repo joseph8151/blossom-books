@@ -122,13 +122,11 @@ export default function EnFindPage() {
     ].join("\n");
   }
   async function sendTeam(suffix: string, extra?: Record<string, string>) {
-    const key = siteConfig.web3formsAccessKey;
-    if (!key) return;
     try {
-      await fetch("https://api.web3forms.com/submit", {
+      await fetch(siteConfig.formspreeUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ access_key: key, from_name: "Blossom Recommender (EN)", subject: `[Blossom Rec] ${f.grade || "-"} · ${f.exam || "-"} · ${recVolume}${suffix}`, message: summary(), ...extra }),
+        body: JSON.stringify({ from_name: "Blossom Recommender (EN)", subject: `[Blossom Rec] ${f.grade || "-"} · ${f.exam || "-"} · ${recVolume}${suffix}`, message: summary(), ...extra }),
       });
     } catch {}
   }

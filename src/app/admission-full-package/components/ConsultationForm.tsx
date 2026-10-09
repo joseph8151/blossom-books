@@ -12,23 +12,14 @@ const fieldCls =
   "w-full border border-ivory-100/20 bg-ivory-100 px-4 py-3 text-[13.5px] text-charcoal-900 outline-none focus:border-ivory-100/50";
 const labelCls = "text-[12px] font-medium text-ivory-200/80";
 
-// Formspree 엔드포인트가 아직 발급되지 않은 동안에는(siteConfig.admissionPackageFormspreeUrl
-// 가 빈 문자열) 폼 구조와 항목은 그대로 제공하면서 제출만 막고, 카카오톡 상담으로
-// 안내합니다. 실제 Formspree 폼 ID가 생기면 Cloudflare 환경변수
-// NEXT_PUBLIC_FORMSPREE_ADMISSION_URL에 "https://formspree.io/f/xxxxxxx" 형태로
-// 넣기만 하면 바로 연결됩니다.
 export default function ConsultationForm() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(false);
-  const endpoint = siteConfig.admissionPackageFormspreeUrl;
+  const endpoint = siteConfig.formspreeUrl;
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!endpoint) {
-      setError(true);
-      return;
-    }
     setSending(true);
     setError(false);
     try {
@@ -139,10 +130,7 @@ export default function ConsultationForm() {
         </button>
         {error && (
           <p className="mt-3 text-[12.5px] leading-relaxed text-ivory-200/80">
-            {endpoint
-              ? "전송 중 문제가 발생했습니다. 다시 시도하시거나 아래 카카오톡으로 문의해 주세요."
-              : "폼 연결 준비 중입니다. 아래 카카오톡으로 문의해 주시면 바로 안내드립니다."}
-            {" "}
+            전송 중 문제가 발생했습니다. 다시 시도하시거나 아래 카카오톡으로 문의해 주세요.{" "}
             <a
               href={siteConfig.kakaoChannelUrl}
               target="_blank"

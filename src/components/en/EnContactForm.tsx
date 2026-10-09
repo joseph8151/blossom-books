@@ -6,9 +6,9 @@ import { siteConfig } from "@/data/site";
 
 // International visitors mostly don't use KakaoTalk, and a mailto: link
 // both exposes the receiving address and depends on the visitor having a
-// desktop mail client configured. This posts straight to Web3Forms instead
-// — same delivery pipeline the Korean pages already use — so no email
-// address ever appears in the page source, and it works from any browser.
+// desktop mail client configured. This posts straight to Formspree instead
+// — same delivery pipeline the Korean pages use — so no email address ever
+// appears in the page source, and it works from any browser.
 export function EnContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,24 +19,20 @@ export function EnContactForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const key = siteConfig.web3formsAccessKey;
-    if (!key) return;
     setSending(true);
     setError(false);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch(siteConfig.formspreeUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: key,
           from_name: name || "Blossom Books website (EN)",
           replyto: email,
           subject: `[Blossom Books EN] Inquiry from ${name || "website visitor"}`,
           message: `Name: ${name}\nEmail: ${email}\n\n${message}`,
         }),
       });
-      const json = (await res.json().catch(() => ({ success: false }))) as { success?: boolean };
-      if (json.success) {
+      if (res.ok) {
         setSent(true);
       } else {
         setError(true);

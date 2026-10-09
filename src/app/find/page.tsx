@@ -275,22 +275,18 @@ export default function FindPage() {
   }
 
   async function sendTeam(result: RecommendResult, subjectSuffix = "", extra?: Record<string, string>): Promise<boolean> {
-    const key = siteConfig.web3formsAccessKey;
-    if (!key) return false;
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch(siteConfig.formspreeUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: key,
           from_name: "Blossom 추천 시스템",
           subject: `[Blossom 추천] ${f.grade || "-"} · ${f.exam || "-"} · ${result.matchType}${subjectSuffix}`,
           message: buildTeamSummary(f, result),
           ...extra,
         }),
       });
-      const json = (await res.json().catch(() => ({ success: false }))) as { success?: boolean };
-      return !!json.success;
+      return res.ok;
     } catch {
       return false;
     }

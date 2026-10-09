@@ -22,6 +22,7 @@ import LevelAssessment from "@/components/home/LevelAssessment";
 import CurriculumMap from "@/components/home/CurriculumMap";
 import LevelTestStatement from "@/components/home/LevelTestStatement";
 import ExistingVsCustomSection from "@/components/home/ExistingVsCustomSection";
+import CustomOrderPromo from "@/components/home/CustomOrderPromo";
 import UseCaseSection from "@/components/home/UseCaseSection";
 import AudienceCards from "@/components/home/AudienceCards";
 import SelectionExamples from "@/components/home/SelectionExamples";
@@ -74,6 +75,7 @@ export default function HomePage() {
       <CurriculumMap />
       <LevelTestStatement />
       <ExistingVsCustomSection />
+      <CustomOrderPromo />
       <UseCaseSection />
       <AudienceCards />
       <SelectionExamples />
