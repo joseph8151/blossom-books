@@ -1,6 +1,8 @@
 import Hero from "./components/Hero";
+import AdmissionPlanStrip from "./components/AdmissionPlanStrip";
 import WhySchoolSpecific from "./components/WhySchoolSpecific";
 import PackageBreakdown from "./components/PackageBreakdown";
+import AdmissionsDesk from "./components/AdmissionsDesk";
 import PricingTable from "./components/PricingTable";
 import SchoolFinder from "./components/SchoolFinder";
 import StudentExamples from "./components/StudentExamples";
@@ -33,8 +35,10 @@ export default function AdmissionFullPackagePage() {
   return (
     <div className="pb-20 lg:pb-0">
       <Hero />
+      <AdmissionPlanStrip />
       <WhySchoolSpecific />
       <PackageBreakdown />
+      <AdmissionsDesk />
       <PricingTable />
       <SchoolFinder />
       <StudentExamples />

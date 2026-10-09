@@ -10,7 +10,7 @@ export default function MobileStickyCTA() {
         href="#consult"
         className="flex min-h-[48px] items-center justify-center gap-2 bg-navy-950 text-[14px] font-medium text-ivory-100"
       >
-        학교별 패키지 상담하기
+        Admission Package 상담
         <ArrowRight size={16} />
       </Link>
     </div>

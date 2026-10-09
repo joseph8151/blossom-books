@@ -19,9 +19,52 @@ export const assessmentTypes = [
   "학교 자체 온라인 Assessment",
 ];
 
+// 서브브랜드 표기. Blossom Books와 별개 회사처럼 보이지 않도록 항상
+// "by Blossom Books"와 함께 노출합니다(Hero, 메타데이터 등).
+export const subBrand = {
+  name: "Blossom Admissions",
+  parent: "by Blossom Books",
+  tagline: "International School Admission Preparation",
+};
+
+// Hero 우측의 "Admission Card" 예시 — 실제 KIS Jeju의 확정된 요구사항이
+// 아니라 서비스 결과물이 어떻게 보이는지 보여주는 순수 예시입니다.
+// Hero.tsx에서 "예시"임을 명확히 라벨링합니다.
+export const heroCardExample = {
+  school: "KIS Jeju",
+  subtitle: "Grade 5 Admission",
+  rows: [
+    { area: "Reading", level: "Target" },
+    { area: "Math", level: "Advanced" },
+    { area: "Writing", level: "Booster" },
+    { area: "Interview", level: "Included" },
+  ],
+  recommended: "Premium Admission Program",
+};
+
+// Hero 바로 아래 한 줄로 지나가는 4단계 서비스 흐름.
+export const admissionPlanSteps = [
+  { n: "01", title: "School", desc: "지원 학교와 학년 확인" },
+  { n: "02", title: "Student", desc: "현재 Reading · Math · Writing 수준 확인" },
+  { n: "03", title: "Assessment", desc: "학교가 요구하는 시험 유형 확인" },
+  { n: "04", title: "Preparation", desc: "맞춤 Workbook · Interview · Mock Test 구성" },
+];
+
+// "Admissions Desk" 시그니처 섹션 — 학교×학생 기준으로 설계한다는 메시지를
+// 서류 3장 비유로 보여줍니다.
+export const admissionsDesk = {
+  quote: "Every admission package starts with a school and a student — not a page count.",
+  cards: [
+    { title: "School Brief", desc: "지원 학교 평가 방식" },
+    { title: "Student Profile", desc: "현재 수준과 약점" },
+    { title: "Preparation Plan", desc: "시험일까지 학습 구성" },
+  ],
+};
+
 export interface PackageCategory {
   n: string;
   title: string;
+  tagline: string;
   items: string[];
 }
 
@@ -29,6 +72,7 @@ export const packageCategories: PackageCategory[] = [
   {
     n: "1",
     title: "Reading",
+    tagline: "Academic Reading & Comprehension",
     items: [
       "Fiction / Nonfiction",
       "Main Idea",
@@ -43,11 +87,13 @@ export const packageCategories: PackageCategory[] = [
   {
     n: "2",
     title: "Vocabulary",
+    tagline: "Academic Vocabulary",
     items: ["Meaning in Context", "Synonym", "Antonym", "Word Choice", "Sentence Completion", "Academic Vocabulary"],
   },
   {
     n: "3",
     title: "Math",
+    tagline: "Placement & Problem Solving",
     items: [
       "Number & Operations",
       "Fractions",
@@ -62,6 +108,7 @@ export const packageCategories: PackageCategory[] = [
   {
     n: "4",
     title: "Writing",
+    tagline: "Essay & Written Response",
     items: [
       "Opinion",
       "Narrative",
@@ -77,6 +124,7 @@ export const packageCategories: PackageCategory[] = [
   {
     n: "5",
     title: "Interview",
+    tagline: "Student & Follow-up Interview",
     items: [
       "Self Introduction",
       "School Life",
@@ -92,6 +140,7 @@ export const packageCategories: PackageCategory[] = [
   {
     n: "6",
     title: "Mock Test",
+    tagline: "School-Specific Simulation",
     items: ["Baseline Test", "Target Test", "Challenge Test"],
   },
 ];
@@ -136,6 +185,7 @@ export const testAdaptations: TestAdaptation[] = [
 export interface PricingTier {
   id: "standard" | "premium" | "signature";
   name: string;
+  tagline: string;
   priceKRW: number;
   pages: string;
   mostPopular?: boolean;
@@ -146,58 +196,52 @@ export const pricingTiers: PricingTier[] = [
   {
     id: "standard",
     name: "Standard",
+    tagline: "Essential Admission Preparation",
     priceKRW: 490000,
-    pages: "약 200페이지",
+    pages: "Typical volume: approximately 200 pages",
     features: [
-      "Reading",
-      "Vocabulary",
-      "Math",
-      "Writing 4~6개",
-      "Interview 30~50문항",
+      "지원 학교 분석",
+      "맞춤 Workbook (Reading · Vocabulary · Math)",
+      "Writing",
+      "Interview",
       "Mock Test 1회",
-      "기본 학습 가이드",
-      "학교 맞춤 체크리스트",
-      "학교/학년 맞춤 구성",
+      "Study Guide",
     ],
   },
   {
     id: "premium",
     name: "Premium",
+    tagline: "Personalized Admission Program",
     priceKRW: 790000,
-    pages: "약 300페이지",
+    pages: "Typical volume: approximately 300 pages",
     mostPopular: true,
     features: [
-      "Reading",
-      "Vocabulary",
-      "Math",
-      "Writing 8~10개",
-      "Interview 60~80문항",
+      "지원 학교 분석",
+      "상세 Level Mapping",
+      "맞춤 Workbook (Reading · Vocabulary · Math)",
+      "Writing Sample 포함",
+      "Interview 확장",
       "Mock Test 2회",
-      "Writing Sample",
-      "4주 학습 플랜",
-      "학교 맞춤 체크리스트",
       "Vocabulary Flashcards",
-      "학생 수준별 세부 난도 조정",
+      "Weakness Booster",
     ],
   },
   {
     id: "signature",
     name: "Signature",
+    tagline: "Complete Admission Preparation",
     priceKRW: 1290000,
-    pages: "약 400페이지 이상",
+    pages: "Typical volume: approximately 400+ pages",
     features: [
-      "Reading Advanced",
-      "Vocabulary Advanced",
-      "Math Target + Challenge",
-      "Writing 12~15개",
+      "지원 학교 분석",
+      "상세 Level Mapping",
+      "Advanced Workbook (전 영역)",
+      "Writing 단계별 Sample",
       "Interview 100문항 이상",
       "Mock Test 3회",
-      "Writing 단계별 Sample",
-      "6~8주 Study Plan",
-      "학교 맞춤 체크리스트",
-      "Vocabulary Flashcards",
-      "학부모 가이드",
-      "지원 학교/학생 맞춤형 구성",
+      "Admission Roadmap",
+      "Parent Admission Guide",
+      "Additional Practice",
       "부족 영역 집중 구성",
       "우선 제작 · 빠른 납품",
     ],
@@ -229,19 +273,25 @@ export const studentExamples: StudentExample[] = [
 
 export const deliveryFiles = [
   { n: "01", title: "Admission Workbook" },
-  { n: "02", title: "Writing Preparation Book" },
-  { n: "03", title: "Interview Preparation Guide" },
-  { n: "04", title: "Mock Test A" },
-  { n: "05", title: "Mock Test B" },
-  { n: "06", title: "Answer & Explanation Book" },
-  { n: "07", title: "Study Plan" },
-  { n: "08", title: "School-Specific Checklist" },
+  { n: "02", title: "Math Preparation Book" },
+  { n: "03", title: "Writing Preparation Book" },
+  { n: "04", title: "Interview Preparation Guide" },
+  { n: "05", title: "Mock Test A" },
+  { n: "06", title: "Mock Test B" },
+  { n: "07", title: "Answer & Explanation Book" },
+  { n: "08", title: "Study Plan" },
+  { n: "09", title: "School-Specific Checklist" },
 ];
 
 // Premium부터 포함되는 추가 파일. Signature는 여기에 더해 Mock Test C·
 // Additional Practice·학부모 가이드까지 포함합니다(pricingTiers의 features와 연동).
 export const premiumExtraFiles = ["Vocabulary Flashcards"];
-export const signatureExtraFiles = ["Vocabulary Flashcards", "Mock Test C", "Additional Practice", "Parent Guide"];
+export const signatureExtraFiles = [
+  "Vocabulary Flashcards",
+  "Mock Test C",
+  "Additional Practice",
+  "Parent Admission Guide",
+];
 
 export const disclaimers = [
   "실제 학교의 비공개 기출문제를 복제하지 않습니다.",

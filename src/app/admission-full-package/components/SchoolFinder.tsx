@@ -97,10 +97,11 @@ export default function SchoolFinder() {
     <section id="schools" className="scroll-mt-16 border-b border-navy-800/10 bg-ivory-100 py-20 sm:py-28">
       <div className="mx-auto max-w-[1040px] px-5 sm:px-8">
         <div className="mx-auto max-w-[640px] text-center">
-          <span className="font-label text-[11px] uppercase tracking-[0.18em] text-[#5f6f52]">School Finder</span>
+          <span className="font-label text-[11px] uppercase tracking-[0.18em] text-[#5f6f52]">Find Your School</span>
           <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
-            학교별 패키지 찾기
+            Where are you applying?
           </h2>
+          <p className="mt-2 text-[13.5px] text-charcoal-600">지원 학교별 맞춤 Admission Package를 확인하세요.</p>
           <p className="mt-4 text-[13px] leading-relaxed text-charcoal-600/80">{schoolDataCaveat}</p>
         </div>
 

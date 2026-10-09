@@ -10,9 +10,9 @@ export default function FinalConsultSection() {
           지원 학교를 알려주세요.
         </h2>
         <p className="mt-4 text-[14.5px] leading-[1.9] text-ivory-200/80">
-          학교명과 학년만 알려주셔도
+          학교명과 지원 학년만 알려주셔도
           <br />
-          어떤 영역을 준비해야 하는지 먼저 확인해드립니다.
+          어떤 평가를 준비해야 하는지부터 확인해드립니다.
         </p>
         <ConsultationForm />
 
