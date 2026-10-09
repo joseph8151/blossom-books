@@ -19,6 +19,9 @@ export default function PricingTable() {
             페이지 수가 아니라 지원 학교에 맞춘 구성과 시험 영역별 패키지가 핵심입니다. 같은 Standard라도
             학교와 학년에 따라 실제 수록 문항은 다르게 구성됩니다.
           </p>
+          <p className="mt-3 text-[12.5px] leading-relaxed text-charcoal-600/80">
+            실시간 상담·첨삭 세션이 아닌, 학생에게 맞춰 제작되는 학습 자료(문제집·해설집·모의고사) 패키지입니다.
+          </p>
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">

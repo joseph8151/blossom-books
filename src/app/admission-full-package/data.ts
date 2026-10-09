@@ -156,6 +156,7 @@ export const pricingTiers: PricingTier[] = [
       "Interview 30~50문항",
       "Mock Test 1회",
       "기본 학습 가이드",
+      "학교 맞춤 체크리스트",
       "학교/학년 맞춤 구성",
     ],
   },
@@ -174,6 +175,8 @@ export const pricingTiers: PricingTier[] = [
       "Mock Test 2회",
       "Writing Sample",
       "4주 학습 플랜",
+      "학교 맞춤 체크리스트",
+      "Vocabulary Flashcards",
       "학생 수준별 세부 난도 조정",
     ],
   },
@@ -191,8 +194,12 @@ export const pricingTiers: PricingTier[] = [
       "Mock Test 3회",
       "Writing 단계별 Sample",
       "6~8주 Study Plan",
+      "학교 맞춤 체크리스트",
+      "Vocabulary Flashcards",
+      "학부모 가이드",
       "지원 학교/학생 맞춤형 구성",
       "부족 영역 집중 구성",
+      "우선 제작 · 빠른 납품",
     ],
   },
 ];
@@ -228,9 +235,13 @@ export const deliveryFiles = [
   { n: "05", title: "Mock Test B" },
   { n: "06", title: "Answer & Explanation Book" },
   { n: "07", title: "Study Plan" },
+  { n: "08", title: "School-Specific Checklist" },
 ];
 
-export const signatureExtraFiles = ["Mock Test C", "Additional Practice"];
+// Premium부터 포함되는 추가 파일. Signature는 여기에 더해 Mock Test C·
+// Additional Practice·학부모 가이드까지 포함합니다(pricingTiers의 features와 연동).
+export const premiumExtraFiles = ["Vocabulary Flashcards"];
+export const signatureExtraFiles = ["Vocabulary Flashcards", "Mock Test C", "Additional Practice", "Parent Guide"];
 
 export const disclaimers = [
   "실제 학교의 비공개 기출문제를 복제하지 않습니다.",

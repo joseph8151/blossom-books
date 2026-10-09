@@ -1,5 +1,5 @@
 import { FileText } from "lucide-react";
-import { deliveryFiles, signatureExtraFiles } from "../data";
+import { deliveryFiles, premiumExtraFiles, signatureExtraFiles } from "../data";
 
 export default function DeliveryFiles() {
   return (
@@ -21,9 +21,10 @@ export default function DeliveryFiles() {
             </div>
           ))}
         </div>
-        <p className="mt-4 text-center text-[12.5px] leading-relaxed text-charcoal-600/90">
-          Signature는 {signatureExtraFiles.join(", ")}를 추가로 포함합니다.
-        </p>
+        <div className="mt-4 space-y-1 text-center text-[12.5px] leading-relaxed text-charcoal-600/90">
+          <p>Premium 이상은 {premiumExtraFiles.join(", ")}를 추가로 포함합니다.</p>
+          <p>Signature는 {signatureExtraFiles.join(", ")}를 추가로 포함합니다.</p>
+        </div>
       </div>
     </section>
   );
