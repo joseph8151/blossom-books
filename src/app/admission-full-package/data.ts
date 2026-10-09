@@ -145,40 +145,108 @@ export const packageCategories: PackageCategory[] = [
   },
 ];
 
-// 위 6개 영역은 모든 패키지에 공통으로 포함되는 기본 구성입니다. 지원 학교가
-// 요구하는 시험 유형(MAP / CAT4 / 자체 시험 등)에 따라 아래 구성이 추가됩니다.
-// School Finder(schools.ts)에서 학교별로 확인된 평가 유형과 연결되는 내용입니다.
-export interface TestAdaptation {
+// 위 6개 영역은 모든 학생에게 똑같이 제공되는 고정 패키지가 아니라, 지원
+// 학교가 요구하는 평가 방식에 따라 교체·재구성되는 "출발점"입니다. 아래
+// Test-Specific Configuration 섹션에서 이 기준값(baseAreas)을 그대로 보여주고,
+// 학교별로 무엇이 무엇으로 바뀌는지 Before → After로 표현합니다.
+export const baseAreas = ["Reading", "Vocabulary", "Math", "Writing", "Interview", "Mock Test"];
+
+export interface TestConfiguration {
   test: string;
+  replaces: string; // 대체되는 기본 영역 → 교체 결과 (한 줄 요약)
   note: string;
-  items: string[];
+  items: string[]; // 실제 구성 예
 }
 
-export const testAdaptations: TestAdaptation[] = [
+export const testConfigurations: TestConfiguration[] = [
   {
     test: "MAP (MAP Growth)",
-    note: "적응형(adaptive) 시험 — 난이도가 학생 수준에 맞춰 자동 조정됩니다.",
-    items: ["RIT 구간별 난이도 연습", "Adaptive Reading 문항", "Adaptive Math 문항"],
+    replaces: "Reading → MAP Reading · Math → MAP Math",
+    note: "적응형 시험 특성을 고려해 학생의 현재 수준과 목표 구간에 맞춰 난도를 구성합니다.",
+    items: ["RIT 구간별 Reading", "RIT 구간별 Math", "Adaptive-style Practice", "MAP Mock Test"],
   },
   {
     test: "CAT4",
-    note: "언어·비언어·수리·공간 4개 영역의 추론(Reasoning) 능력을 평가합니다.",
+    replaces: "Vocabulary / Math Reasoning → CAT4 Reasoning",
+    note: "일반 영어·수학 문제를 추가하는 것이 아니라, CAT4의 추론 구조에 맞게 문제집 구성을 변경합니다.",
     items: ["Verbal Reasoning", "Non-verbal Reasoning", "Quantitative Reasoning", "Spatial Reasoning"],
   },
   {
     test: "PTE (Pearson Test of English)",
-    note: "영국계 학교에서 CAT4와 함께 요구하는 경우가 있는 Pearson의 영어능력 평가입니다.",
-    items: ["Reading", "Writing", "Listening/Speaking 연계 어휘·표현"],
+    replaces: "Reading / Vocabulary / Writing / Listening·Speaking → PTE Preparation",
+    note: "영역별로 따로 준비하지 않고, PTE 시험 방식에 맞춰 하나로 통합·재구성합니다.",
+    items: ["PTE Reading", "PTE Writing", "Listening", "Speaking", "Integrated Language Practice"],
   },
   {
     test: "PTM (Pearson Test of Maths)",
-    note: "영국계 학교에서 수학 영역 배치를 위해 함께 요구하는 경우가 있는 Pearson의 수학 평가입니다.",
-    items: ["Number & Operations", "Problem Solving", "학교 학년 기준 배치 연습"],
+    replaces: "Math → PTM Mathematics",
+    note: "일반 Math 대신 PTM이 실제로 평가하는 영역 구성으로 교체합니다.",
+    items: ["Number", "Calculation", "Problem Solving", "Geometry", "Measurement", "Data Handling"],
   },
   {
     test: "자체 시험 (School-specific Assessment)",
-    note: "학교가 공개한 입학 안내 자료·기출 유형을 바탕으로 맞춤 구성합니다.",
-    items: ["학교 공개 자료 기반 유형 분석", "학교 발표 범위 맞춤 구성", "School Finder에서 학교별 확인"],
+    replaces: "기본 6영역 중 필요한 항목만 선택 또는 교체",
+    note: "학교가 공개한 입학 평가 영역과 학생의 학년을 확인한 뒤 Reading, Math, Writing, Interview, Reasoning 등의 비중을 다시 설계합니다.",
+    items: [],
+  },
+];
+
+// Before → After 대표 예시 3개. "시험을 추가"하는 게 아니라 기본 6영역이
+// 학교 요구에 맞춰 "교체"된다는 것을 한눈에 보여줍니다.
+export interface ConfigExample {
+  label: string;
+  after: string[];
+  note?: string;
+}
+
+export const configExamples: ConfigExample[] = [
+  {
+    label: "MAP 요구 학교",
+    after: ["MAP Reading", "MAP Math", "Writing", "Interview", "MAP-style Mock Test"],
+  },
+  {
+    label: "CAT4 요구 학교",
+    after: [
+      "Verbal Reasoning",
+      "Non-verbal Reasoning",
+      "Quantitative Reasoning",
+      "Spatial Reasoning",
+      "Writing",
+      "Interview",
+      "CAT4 Practice Test",
+    ],
+  },
+  {
+    label: "MAP + CAT4 요구 학교",
+    after: [
+      "MAP Reading",
+      "MAP Math",
+      "CAT4 Verbal Reasoning",
+      "CAT4 Non-verbal Reasoning",
+      "CAT4 Quantitative Reasoning",
+      "CAT4 Spatial Reasoning",
+      "Writing",
+      "Interview",
+      "Mock Test",
+    ],
+    note: "모든 영역을 무조건 넣는 것이 아니라, 지원 학교와 학생 수준에 따라 필요한 항목만 선택합니다.",
+  },
+];
+
+// 같은 학년이라도 지원 학교 요구 시험에 따라 준비 구성이 달라진다는 것을
+// 보여주는 4개 학생 예시.
+export const studentConfigExamples = [
+  { label: "Student A", requirement: "School requires MAP", config: "MAP Reading + MAP Math + Writing + Interview" },
+  { label: "Student B", requirement: "School requires CAT4", config: "CAT4 Reasoning + Writing + Interview" },
+  {
+    label: "Student C",
+    requirement: "School uses its own assessment",
+    config: "Reading + Math Placement + Writing + Interview",
+  },
+  {
+    label: "Student D",
+    requirement: "School requires MAP + CAT4",
+    config: "MAP Reading + MAP Math + CAT4 Reasoning + Interview",
   },
 ];
 
@@ -200,11 +268,11 @@ export const pricingTiers: PricingTier[] = [
     priceKRW: 490000,
     pages: "Typical volume: approximately 200 pages",
     features: [
-      "지원 학교 분석",
-      "맞춤 Workbook (Reading · Vocabulary · Math)",
-      "Writing",
-      "Interview",
-      "Mock Test 1회",
+      "지원 학교 1곳 기준 분석",
+      "핵심 시험 영역 중심 구성",
+      "기본 Writing",
+      "기본 Interview",
+      "기본 Mock Test",
       "Study Guide",
     ],
   },
@@ -216,14 +284,13 @@ export const pricingTiers: PricingTier[] = [
     pages: "Typical volume: approximately 300 pages",
     mostPopular: true,
     features: [
-      "지원 학교 분석",
-      "상세 Level Mapping",
-      "맞춤 Workbook (Reading · Vocabulary · Math)",
-      "Writing Sample 포함",
+      "학교 요구 시험에 맞춘 상세 재구성",
+      "상세 Level Mapping · 난도 세분화",
+      "Writing 확장",
       "Interview 확장",
       "Mock Test 2회",
-      "Vocabulary Flashcards",
       "Weakness Booster",
+      "Vocabulary Flashcards",
     ],
   },
   {
@@ -233,16 +300,12 @@ export const pricingTiers: PricingTier[] = [
     priceKRW: 1290000,
     pages: "Typical volume: approximately 400+ pages",
     features: [
-      "지원 학교 분석",
-      "상세 Level Mapping",
-      "Advanced Workbook (전 영역)",
-      "Writing 단계별 Sample",
-      "Interview 100문항 이상",
-      "Mock Test 3회",
-      "Admission Roadmap",
+      "복합 평가 유형 대응 (예: MAP + CAT4)",
+      "Challenge Level 구성",
+      "다단계 Mock Test (3회)",
+      "Weakness Booster 확대",
+      "6~8주 Admission Roadmap",
       "Parent Admission Guide",
-      "Additional Practice",
-      "부족 영역 집중 구성",
       "우선 제작 · 빠른 납품",
     ],
   },

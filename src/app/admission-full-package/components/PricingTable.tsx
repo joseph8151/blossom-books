@@ -15,9 +15,12 @@ export default function PricingTable() {
         <div className="mx-auto max-w-[680px] text-center">
           <span className="font-label text-[11px] uppercase tracking-[0.18em] text-[#5f6f52]">Package Tiers</span>
           <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">가격표</h2>
-          <p className="mt-5 text-[14.5px] leading-[1.9] text-charcoal-600">
-            페이지 수가 아니라 학교 분석, 학생 수준, 시험 영역, 모의평가와 준비 기간에 따라 구성되는 맞춤
-            입학 준비 패키지입니다.
+          <p className="mt-5 font-display text-[16px] font-semibold italic text-navy-900">
+            One student, one admission configuration.
+          </p>
+          <p className="mt-4 text-[14.5px] leading-[1.9] text-charcoal-600">
+            페이지 수나 시험 개수로 가격이 결정되는 것이 아니라, 지원 학교의 평가 구조와 학생의 현재
+            수준에 따라 준비 범위가 달라집니다.
           </p>
           <p className="mt-3 text-[12.5px] leading-relaxed text-charcoal-600/80">
             실시간 상담·첨삭 세션이 아닌, 학생에게 맞춰 제작되는 학습 자료(문제집·해설집·모의고사) 패키지입니다.

@@ -2,6 +2,7 @@ import Hero from "./components/Hero";
 import AdmissionPlanStrip from "./components/AdmissionPlanStrip";
 import WhySchoolSpecific from "./components/WhySchoolSpecific";
 import PackageBreakdown from "./components/PackageBreakdown";
+import TestSpecificConfiguration from "./components/TestSpecificConfiguration";
 import AdmissionsDesk from "./components/AdmissionsDesk";
 import PricingTable from "./components/PricingTable";
 import SchoolFinder from "./components/SchoolFinder";
@@ -38,6 +39,7 @@ export default function AdmissionFullPackagePage() {
       <AdmissionPlanStrip />
       <WhySchoolSpecific />
       <PackageBreakdown />
+      <TestSpecificConfiguration />
       <AdmissionsDesk />
       <PricingTable />
       <SchoolFinder />
