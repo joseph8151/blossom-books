@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowRight, Search, MessageCircle } from "lucide-react";
+import { siteConfig } from "@/data/site";
 
 export default function Hero() {
   return (
@@ -50,6 +51,15 @@ export default function Hero() {
             지원 학교 찾기
           </Link>
         </div>
+        <a
+          href={siteConfig.kakaoChannelUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-[#5f6f52] underline decoration-[#5f6f52]/40 decoration-2 underline-offset-4 transition-colors hover:text-[#4f5d45]"
+        >
+          <MessageCircle size={14} />
+          바로 카카오톡으로 상담하기
+        </a>
       </div>
     </section>
   );

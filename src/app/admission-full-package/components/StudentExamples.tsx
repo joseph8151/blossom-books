@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, GraduationCap } from "lucide-react";
 import { studentExamples } from "../data";
 
 export default function StudentExamples() {
@@ -18,7 +18,10 @@ export default function StudentExamples() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {studentExamples.map((ex) => (
             <div key={ex.label} className="border border-navy-800/12 bg-ivory-100 p-7">
-              <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-[#5f6f52]">{ex.label}</p>
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eef1e8] text-[#5f6f52]">
+                <GraduationCap size={18} strokeWidth={1.7} />
+              </span>
+              <p className="mt-4 font-label text-[10.5px] uppercase tracking-[0.14em] text-[#5f6f52]">{ex.label}</p>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {ex.profile.map((p) => (
                   <span key={p} className="border border-navy-800/15 bg-white px-2.5 py-1 text-[11.5px] text-navy-800">

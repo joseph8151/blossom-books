@@ -1,3 +1,5 @@
+import { MessageCircle } from "lucide-react";
+import { siteConfig } from "@/data/site";
 import ConsultationForm from "./ConsultationForm";
 
 export default function FinalConsultSection() {
@@ -13,6 +15,19 @@ export default function FinalConsultSection() {
           어떤 영역을 준비해야 하는지 먼저 확인해드립니다.
         </p>
         <ConsultationForm />
+
+        <div className="mt-10 border-t border-ivory-100/10 pt-8">
+          <p className="text-[13px] text-ivory-200/70">폼 작성이 번거로우신가요?</p>
+          <a
+            href={siteConfig.kakaoChannelUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-flex items-center gap-2 border border-ivory-100/25 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:border-ivory-100/50"
+          >
+            <MessageCircle size={15} />
+            카카오톡으로 바로 상담하기
+          </a>
+        </div>
       </div>
     </section>
   );
