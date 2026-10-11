@@ -18,7 +18,7 @@ export default function QuoteHero() {
         </h1>
         <p className="mx-auto mt-5 max-w-[560px] text-[15px] leading-[1.85] text-charcoal-600">
           시험, 학년, 준비 기간에 따라 필요한 문제량은 다릅니다. Blossom Books는 가장 많은 페이지가 아니라
-          학생에게 필요한 구성을 기준으로 안내합니다. 40P부터 시작해 시험별·과목별·수준별로 필요한 구성만
+          학생에게 필요한 구성을 기준으로 안내합니다. 60P부터 시작해 시험별·과목별·수준별로 필요한 구성만
           선택할 수 있습니다.
         </p>
 

@@ -121,7 +121,7 @@ export default function PrepPricing() {
             </p>
             <p className="mt-2.5 text-[13px] leading-relaxed text-ivory-200/80">
               가장 많은 페이지를 권하는 것이 아니라, 학생에게 필요한 구성을 안내합니다. 예산과 준비 기간을
-              알려주시면 40P부터 필요한 범위만 안내해 드립니다.
+              알려주시면 60P부터 필요한 범위만 안내해 드립니다.
             </p>
           </div>
         </div>
