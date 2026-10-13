@@ -82,6 +82,9 @@ export default function BaseVolumes() {
         </div>
 
         <p className="mx-auto mt-6 max-w-[680px] text-center text-[12px] leading-relaxed text-charcoal-600/70">
+          시험까지 시간이 많지 않다면 40P(₩130,000)도 선택할 수 있습니다.
+        </p>
+        <p className="mx-auto mt-2 max-w-[680px] text-center text-[12px] leading-relaxed text-charcoal-600/70">
           시험·과목·학년별 구성에 따라 실제 페이지 배분은 달라질 수 있습니다.
         </p>
         <p className="mx-auto mt-2 max-w-[680px] text-center text-[12px] leading-relaxed text-charcoal-600/70">
