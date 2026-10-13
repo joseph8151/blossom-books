@@ -1,5 +1,6 @@
 import QuoteHero from "./components/QuoteHero";
 import LevelTestFlagship from "./components/LevelTestFlagship";
+import GradeSamplePreview from "./components/GradeSamplePreview";
 import LevelTestTwoStepPackage from "./components/LevelTestTwoStepPackage";
 import ThreeSteps from "./components/ThreeSteps";
 import BaseVolumes from "./components/BaseVolumes";
@@ -40,6 +41,7 @@ export default function QuotePage() {
     <div>
       <QuoteHero />
       <LevelTestFlagship />
+      <GradeSamplePreview />
       <LevelTestTwoStepPackage />
       <ThreeSteps />
       <BaseVolumes />
