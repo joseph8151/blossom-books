@@ -15,16 +15,16 @@ import WishlistButton from "@/components/books/WishlistButton";
 import OrderModal from "@/components/books/OrderModal";
 import { trackEvent } from "@/lib/analytics";
 
-// 가격을 명확히 보여주는 카드 — 방문자가 목록에서 바로 가격까지 확인할 수
-// 있어야 카카오톡 문의까지 이어질 확률이 높아집니다 (Smart Pricing 방식은
-// 폐기: 가격을 숨기면 오히려 이탈이 늘었습니다).
-// hidePrice/hideVolumeInfo는 홈(가격 비노출 지면) 전용 표시 옵션입니다.
-// 기본값은 false이므로 /books, 상세페이지 등 기존 동작은 그대로입니다.
+// 가격은 더 이상 카드에 노출하지 않습니다 — 카카오톡 상담에서만 안내합니다.
+// (과거 "Smart Pricing"으로 가격을 숨겼다가 이탈이 늘어 되돌린 이력이
+// 있으니, 이 결정을 다시 바꿀 때는 전환율 데이터를 함께 확인하세요.)
+// hidePrice 기본값을 true로 바꿨으므로, 호출부에서 별도 설정 없이도
+// /books·홈·위시리스트·상세페이지 관련 상품 등 모든 카드에서 가격이 숨겨집니다.
 const VOLUME_BADGES = new Set(["40·60·100·200P", "150·200·300P"]);
 
 export default function ProductCard({
   product,
-  hidePrice = false,
+  hidePrice = true,
   hideVolumeInfo = false,
 }: {
   product: Product;

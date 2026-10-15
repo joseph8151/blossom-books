@@ -1,6 +1,6 @@
 import { Product } from "@/lib/types";
 import { blossomLevel } from "@/lib/utils";
-import { fromPriceKRW, formatKRW, volumeByPages, starterOption, srVolumes, flexibleVolumes } from "@/data/pricing";
+import { starterOption, srVolumes, flexibleVolumes } from "@/data/pricing";
 
 const DIRECT_PAGES = [40, 60, 100, 200];
 
@@ -46,37 +46,19 @@ export function volumeOptionsLabel(p: Product): string {
 }
 
 // 상품 카드/목록에 표시할 가격 라벨.
+// 가격은 더 이상 공개 지면에 노출하지 않습니다 — 카카오톡 상담 또는
+// /quote-* 비공개 링크에서만 안내합니다. (과거 "Smart Pricing"으로 가격을
+// 숨췄다가 이탈이 늘어 되돌린 이력이 있으니, 이 결정을 다시 바꿀 때는
+// 전환율 데이터를 함께 확인하세요.)
 export function priceDisplay(p: Product): string {
-  if (offersSrVolumes(p)) {
-    return `${formatKRW(srVolumes[0].priceKRW)}부터`;
-  }
-  if (offersVolumes(p)) {
-    return hasStarter(p) ? `${formatKRW(starterOption.priceKRW)}부터` : `${formatKRW(fromPriceKRW)}부터`;
-  }
-  if (isFixedDirect(p)) {
-    const v = volumeByPages(p.pageCount as number);
-    return v ? formatKRW(v.priceKRW) : "Price on Request";
-  }
+  void p;
   return "Price on Request";
 }
 
-// Product 구조화 데이터(JSON-LD)용 가격 범위. 실제 단가표에서만 계산하며,
-// 가격을 특정할 수 없는 상품(가격 상담 문의)은 null을 반환해 offers 자체를
-// 생략하도록 합니다 — 틀린 가격을 구조화 데이터에 넣지 않기 위함입니다.
+// Product 구조화 데이터(JSON-LD)용 가격 범위. 가격을 공개 지면에 노출하지
+// 않기로 했으므로 항상 null을 반환해 offers 자체를 생략합니다.
 export function productOfferPrice(p: Product): { price: number } | { lowPrice: number; highPrice: number } | null {
-  if (offersSrVolumes(p)) {
-    const prices = srVolumes.map((v) => v.priceKRW);
-    return { lowPrice: Math.min(...prices), highPrice: Math.max(...prices) };
-  }
-  if (offersVolumes(p)) {
-    const prices = flexibleVolumes.map((v) => v.priceKRW);
-    if (hasStarter(p)) prices.push(starterOption.priceKRW);
-    return { lowPrice: Math.min(...prices), highPrice: Math.max(...prices) };
-  }
-  if (isFixedDirect(p)) {
-    const v = volumeByPages(p.pageCount as number);
-    return v ? { price: v.priceKRW } : null;
-  }
+  void p;
   return null;
 }
 

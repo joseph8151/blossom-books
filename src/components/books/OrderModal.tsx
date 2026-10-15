@@ -133,9 +133,7 @@ export default function OrderModal({
               <span>정답 · 상세해설 포함</span>
             </p>
           </div>
-          <p className="font-display text-[24px] font-semibold text-navy-950">
-            {direct ? formatKRW(selected.priceKRW) : "Price on Request"}
-          </p>
+          <p className="font-display text-[15px] font-semibold text-burgundy-700">Price on Request</p>
         </div>
 
         <div className="mt-5">

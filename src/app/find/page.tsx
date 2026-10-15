@@ -146,7 +146,7 @@ function recommend(f: FindForm, examTrack: string, periodPages: number): Recomme
   if (!fixed) {
     const otherVols = (offersSrVolumes(product) ? srVolumes : flexibleVolumes).filter((v) => v.pages !== pages);
     otherVols.slice(0, 2).forEach((v) => {
-      alternatives.push({ title: product.titleKo, slug: `/books/${product.id}`, note: `${v.label} · ${formatKRW(v.priceKRW)}` });
+      alternatives.push({ title: product.titleKo, slug: `/books/${product.id}`, note: v.label });
     });
   } else {
     nextWorkbooks(product, products)
@@ -415,9 +415,7 @@ export default function FindPage() {
               <p className="font-display text-[19px] font-semibold leading-snug text-navy-950">
                 {r.primary.product.titleKo}
               </p>
-              <p className="mt-1.5 text-[15px] font-medium text-navy-900">
-                {r.primary.pagesLabel} · {r.primary.priceLabel}
-              </p>
+              <p className="mt-1.5 text-[15px] font-medium text-navy-900">{r.primary.pagesLabel}</p>
               <p className="mt-2 text-[13px] leading-relaxed text-charcoal-600">{r.primary.why}</p>
 
               <div className="mt-5 flex flex-wrap gap-2.5">

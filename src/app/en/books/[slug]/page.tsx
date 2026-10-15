@@ -39,8 +39,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-const usd = (n: number) => `$${n}`;
-
 export default async function EnProductDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = products.find((p) => p.id === slug);
@@ -203,7 +201,6 @@ export default async function EnProductDetail({ params }: { params: Promise<{ sl
                       {(offersSrVolumes ? srVolumes : volumeOptions).map((v) => (
                         <div key={v.pages} className="flex items-center justify-between border border-navy-800/15 px-3 py-2.5">
                           <span className="text-[13px] text-charcoal-900">{v.label} · {v.tier}</span>
-                          <span className="font-display text-[15px] font-semibold text-navy-950">{usd(v.priceUSD)}</span>
                         </div>
                       ))}
                       <p className="text-[11.5px] text-charcoal-600/80">
@@ -212,9 +209,7 @@ export default async function EnProductDetail({ params }: { params: Promise<{ sl
                     </div>
                   </div>
                 ) : (
-                  <p className="mt-5 font-display text-[24px] font-semibold text-navy-950">
-                    {product.pageCount ? (volumeOptions.find((v) => v.pages === product.pageCount)?.priceUSD ? usd(volumeOptions.find((v) => v.pages === product.pageCount)!.priceUSD) : "Price on request") : "Price on request"}
-                  </p>
+                  <p className="mt-5 font-display text-[15px] font-semibold text-burgundy-700">Price on request</p>
                 )}
               </>
             ) : (

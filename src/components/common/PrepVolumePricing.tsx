@@ -4,7 +4,6 @@ import {
   flexibleVolumes,
   srVolumes,
   extendedOption,
-  formatKRW,
   priceDisclaimer,
   pricingReassurance,
   type VolumeOption,
@@ -37,8 +36,7 @@ export default function PrepVolumePricing({ buyProductId, sr = false }: { buyPro
                 </span>
               )}
               <p className="font-display text-[28px] font-semibold leading-none text-navy-950">{v.label}</p>
-              <p className="mt-2 font-display text-[20px] font-semibold text-navy-950">{formatKRW(v.priceKRW)}</p>
-              <p className="mt-1.5 font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">{v.tier}</p>
+              <p className="mt-2 font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">{v.tier}</p>
               <p className="mt-1 text-[12.5px] text-charcoal-600">{v.tierKo}</p>
               <ul className="mt-4 flex-1 space-y-1.5">
                 {v.forWhom.map((f) => (
@@ -90,10 +88,9 @@ export default function PrepVolumePricing({ buyProductId, sr = false }: { buyPro
         </div>
       </div>
 
-      {/* 가격대 힌트 (최고가는 첫 화면에서 노출하지 않음) */}
       <p className="mt-6 text-[13.5px] text-charcoal-900">
-        교재 구성 {volumes[0].label}부터 · <span className="font-display text-[16px] font-semibold text-navy-950">{formatKRW(volumes[0].priceKRW)}부터</span>
-        <span className="ml-1.5 text-[12.5px] text-charcoal-600">정확한 가격은 각 교재 상세에서 확인하실 수 있습니다.</span>
+        교재 구성 {volumes[0].label}부터
+        <span className="ml-1.5 text-[12.5px] text-charcoal-600">정확한 가격은 카카오톡 상담에서 확인하실 수 있습니다.</span>
       </p>
 
       <p className="mt-5 text-center font-display text-[17px] font-medium text-navy-950 sm:text-[19px]">

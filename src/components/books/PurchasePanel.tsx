@@ -110,7 +110,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
                           </span>
                         )}
                         <span className="font-display text-[17px] font-semibold text-navy-950">{v.label}</span>
-                        <span className="mt-0.5 text-[11px] text-charcoal-600">{formatKRW(v.priceKRW)}</span>
+                        <span className="mt-0.5 text-[11px] text-charcoal-600">{v.tier}</span>
                       </button>
                     );
                   })}
@@ -127,9 +127,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
 
             <div className="mt-5 flex items-baseline justify-between border-t border-navy-800/12 pt-4">
               <span className="text-[13px] text-charcoal-600">선택: {selected.label}</span>
-              <span className="font-display text-[24px] font-semibold text-navy-950">
-                {formatKRW(selected.priceKRW)}
-              </span>
+              <span className="font-display text-[15px] font-semibold text-burgundy-700">Price on Request</span>
             </div>
 
             <button
@@ -264,10 +262,8 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
         {isDirect ? (
           <>
             <div className="leading-tight">
-              <p className="font-display text-[15px] font-semibold text-navy-950">
-                {selected.label} · {formatKRW(selected.priceKRW)}
-              </p>
-              <p className="text-[10.5px] text-charcoal-600">{selected.tier}</p>
+              <p className="font-display text-[15px] font-semibold text-navy-950">{selected.label}</p>
+              <p className="text-[10.5px] text-charcoal-600">{selected.tier} · Price on Request</p>
             </div>
             <button
               onClick={goKakao}
