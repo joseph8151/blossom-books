@@ -5,10 +5,10 @@ import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { flexibleVolumes, formatKRW } from "../data";
 
-type Volume = 60 | 100 | 200 | 300;
+type Volume = 40 | 60 | 100 | 200 | 300;
 type Stage = "STANDARD" | "ADVANCED";
 
-const volumes: Volume[] = [60, 100, 200, 300];
+const volumes: Volume[] = [40, 60, 100, 200, 300];
 
 // 300P는 공용 단가표(flexibleVolumes)에 없는 이 페이지 전용 분량입니다.
 const PAGE_300_KRW = 390000;
@@ -16,6 +16,7 @@ const PAGE_300_KRW = 390000;
 // 분량(문제량)과 난이도는 서로 다른 축입니다. 이 매트릭스는 "같은 분량, 다른
 // 난이도"를 짧은 문장으로 설명할 뿐, 페이지 수가 곧 난이도라는 뜻이 아닙니다.
 const stageCopy: Record<Volume, { standard: string; advanced: string }> = {
+  40: { standard: "빠른 핵심 점검", advanced: "빠른 심화 유형 점검" },
   60: { standard: "기본 시험 대비", advanced: "심화 집중 대비" },
   100: { standard: "충분한 본시험 대비", advanced: "충분한 심화 문제 대비" },
   200: { standard: "가장 많은 문제량의 본시험 대비", advanced: "가장 많은 문제량의 고난도 대비" },
