@@ -6,9 +6,9 @@ import { flexibleVolumes, formatKRW, LEVEL_TEST_BUNDLES } from "../data";
 const trustPoints = ["학원별 유형 대응", "영어·국어·수학 선택", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
 
 // 페이지 수는 "문제량"입니다. 난이도(Standard/Advanced)와는 별개의 축이므로
-// 60/100/200/300P는 각각 Standard·Advanced를 선택할 수 있다는 점만 짧게 표시합니다.
-// 40P는 더 이상 이 상품의 개별 분량으로 판매하지 않습니다.
+// 40/60/100/200/300P는 각각 Standard·Advanced를 선택할 수 있다는 점만 짧게 표시합니다.
 const volumeMeta: Record<number, { desc: string; hasLevels?: boolean }> = {
+  40: { desc: "빠른 핵심 점검", hasLevels: true },
   60: { desc: "기본 준비", hasLevels: true },
   100: { desc: "충분한 실전 연습", hasLevels: true },
   200: { desc: "가장 충분한 문제량", hasLevels: true },
@@ -17,9 +17,7 @@ const volumeMeta: Record<number, { desc: string; hasLevels?: boolean }> = {
 
 // 300P는 공용 단가표(flexibleVolumes)에 없는 이 페이지 전용 분량입니다.
 const volumeTiles: { pages: number; label: string; priceKRW: number }[] = [
-  ...flexibleVolumes
-    .filter((v) => v.pages !== 40)
-    .map((v) => ({ pages: v.pages, label: v.label, priceKRW: v.priceKRW })),
+  ...flexibleVolumes.map((v) => ({ pages: v.pages, label: v.label, priceKRW: v.priceKRW })),
   { pages: 300, label: "300P", priceKRW: 390000 },
 ];
 
@@ -112,7 +110,7 @@ export default function LevelTestFlagship() {
 
         {/* 4-1. 구성·가격 — 페이지 수 4단(문제량). 난이도(Standard/Advanced)는 별도 축입니다 */}
         <div className="mt-10 sm:mt-12">
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
             {volumeTiles.map((v) => {
               const meta = volumeMeta[v.pages];
               return (
@@ -137,6 +135,9 @@ export default function LevelTestFlagship() {
           <p className="mt-2 text-center text-[12px] leading-relaxed text-charcoal-600/70">
             입문 {formatKRW(LEVEL_TEST_BUNDLES.starter)}(40P+60P) · 풀세트{" "}
             {formatKRW(LEVEL_TEST_BUNDLES.fullSet)}(60P+100P+200P)도 카카오톡으로 문의 가능합니다.
+          </p>
+          <p className="mt-2 text-center text-[12px] leading-relaxed text-charcoal-600/70">
+            학원마다 시험 유형이 달라, 같은 분량이라도 학원에 맞춰 교재 구성이 달라집니다.
           </p>
         </div>
 
