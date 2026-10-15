@@ -1,6 +1,6 @@
 import { Check, MessageCircle, Compass, Star, Gem } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { pricingTiers, formatKRW } from "../data";
+import { pricingTiers } from "../data";
 
 const tierIcons: Record<string, typeof Compass> = {
   standard: Compass,
@@ -14,7 +14,7 @@ export default function PricingTable() {
       <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
         <div className="mx-auto max-w-[680px] text-center">
           <span className="font-label text-[11px] uppercase tracking-[0.18em] text-[#5f6f52]">Package Tiers</span>
-          <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">가격표</h2>
+          <h2 className="mt-4 font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">패키지 구성</h2>
           <p className="mt-5 font-display text-[16px] font-semibold italic text-navy-900">
             One student, one admission configuration.
           </p>
@@ -24,6 +24,9 @@ export default function PricingTable() {
           </p>
           <p className="mt-3 text-[12.5px] leading-relaxed text-charcoal-600/80">
             실시간 상담·첨삭 세션이 아닌, 학생에게 맞춰 제작되는 학습 자료(문제집·해설집·모의고사) 패키지입니다.
+          </p>
+          <p className="mt-3 text-[12.5px] leading-relaxed text-charcoal-600/80">
+            정확한 가격은 카카오톡 상담에서 학생 상황에 맞춰 안내해 드립니다.
           </p>
         </div>
 
@@ -56,10 +59,10 @@ export default function PricingTable() {
               >
                 {t.name}
               </p>
-              <p className={`mt-3 font-display text-[30px] font-semibold ${t.mostPopular ? "text-ivory-100" : "text-navy-950"}`}>
-                {formatKRW(t.priceKRW)}
+              {/* 가격은 공개 페이지에 노출하지 않습니다 — 카카오톡 상담에서만 안내합니다 */}
+              <p className={`mt-3 font-label text-[10.5px] uppercase tracking-[0.1em] ${t.mostPopular ? "text-ivory-100/55" : "text-charcoal-600/55"}`}>
+                Price on consultation
               </p>
-              {/* 서비스 성격(tagline)을 가격 바로 아래, 분량 정보보다 먼저 보여줍니다 */}
               <p className={`mt-1.5 text-[13px] font-medium ${t.mostPopular ? "text-ivory-100/90" : "text-navy-800/80"}`}>
                 {t.tagline}
               </p>
