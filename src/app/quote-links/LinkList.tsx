@@ -45,6 +45,11 @@ const links = [
     url: "https://www.blossombooks.org/quote-scat/",
   },
   {
+    title: "경시·영재·시험 대비 (수학·영어·국어·과학)",
+    who: "성대 경시·교육청 수학경시·KMO·수학영재원, TOEFL Junior/Primary·리딩 레벨테스트, 초등 문해력·국어, 과학영재원·과학경시 대비 문의 고객",
+    url: "https://www.blossombooks.org/quote-contest/",
+  },
+  {
     title: "국제학교 Admission Full Package",
     who: "국제학교·해외 학교 입학 준비 전체 패키지(상담) 문의 고객",
     url: "https://www.blossombooks.org/admission-full-package/",
