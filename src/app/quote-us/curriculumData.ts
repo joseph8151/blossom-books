@@ -129,6 +129,7 @@ export interface ApSubject {
 export const AP_SUBJECTS: ApSubject[] = [
   { id: "ap-english-language", title: "AP English Language", toc: ["Rhetorical Situation", "Claims and Evidence", "Reasoning and Organization", "Style"] },
   { id: "ap-english-literature", title: "AP English Literature", toc: ["Short Fiction", "Poetry", "Longer Fiction or Drama", "Literary Argument"] },
+  { id: "ap-precalculus", title: "AP Precalculus", toc: ["Polynomial and Rational Functions", "Exponential and Logarithmic Functions", "Trigonometric and Polar Functions", "Functions Involving Parameters, Vectors, and Matrices"] },
   { id: "ap-calculus-ab", title: "AP Calculus AB", toc: ["Limits", "Differentiation", "Contextual Applications", "Analytical Applications", "Integration", "Differential Equations", "Applications of Integration"] },
   { id: "ap-calculus-bc", title: "AP Calculus BC", toc: ["Limits", "Differentiation", "Contextual Applications", "Analytical Applications", "Integration", "Differential Equations", "Applications of Integration", "Parametric, Polar, and Vector Functions", "Infinite Sequences and Series"] },
   { id: "ap-statistics", title: "AP Statistics", toc: ["Exploring One-Variable Data", "Exploring Two-Variable Data", "Collecting Data", "Probability and Random Variables", "Sampling Distributions", "Inference for Proportions", "Inference for Means", "Inference for Categories / Slope"] },

@@ -128,8 +128,12 @@ export default function SubjectChips() {
       if (!ap) return null;
       if (!ap.toc) return { inquire: true as const, title: ap.title };
       const core = ap.toc.slice(0, Math.ceil(ap.toc.length / 2));
+      const rest = ap.toc.slice(core.length);
       const p100 = [...core, "Skill Drills"];
-      const p200 = [...ap.toc, "Section Review 1", "Section Review 2"];
+      // p200은 아래 렌더에서 p100.length만큼 slice해 "추가분"만 보여주므로,
+      // p100과 정확히 같은 접두사로 시작해야 합니다(그렇지 않으면 ap.toc의
+      // 단원이 하나씩 누락됩니다).
+      const p200 = [...p100, ...rest, "Section Review 1", "Section Review 2"];
       const sample = ap.toc.slice(0, 3).join(", ");
       const intro = `이 구성은 ${ap.title} 시험 대비 문제집입니다. College Board 공식 유닛 기준으로 ${sample} 등을 다룹니다. 학교 진도와 다를 수 있으며, 필요한 유닛은 카카오톡으로 추가 요청하실 수 있습니다.`;
       return { inquire: false as const, title: ap.title, intro, p100, p200 };
