@@ -150,5 +150,8 @@ export const AP_SUBJECTS: ApSubject[] = [
   { id: "ap-psychology", title: "AP Psychology", toc: ["Biological Bases", "Cognition", "Development", "Social Psychology and Personality", "Mental and Physical Health"] },
   { id: "ap-computer-science-a", title: "AP Computer Science A", toc: ["Primitive Types", "Using Objects", "Boolean Expressions and if", "Iteration", "Writing Classes", "Array", "ArrayList", "2D Array", "Inheritance", "Recursion"] },
   { id: "ap-computer-science-principles", title: "AP Computer Science Principles", toc: ["Creative Development", "Data", "Algorithms and Programming", "Computing Systems and Networks", "Impact of Computing"] },
+  { id: "ap-cybersecurity", title: "AP Cybersecurity", toc: null },
+  { id: "ap-art-history", title: "AP Art History", toc: ["Global Prehistory", "Ancient Mediterranean", "Early Europe and Colonial Americas", "Later Europe and Americas", "Indigenous Americas", "Africa", "West and Central Asia", "South, East, and Southeast Asia", "The Pacific", "Global Contemporary"] },
+  { id: "ap-music-theory", title: "AP Music Theory", toc: ["Music Fundamentals", "Melody and Harmony", "Harmony and Voice Leading", "Modulation and Modal Mixture", "20th/21st-Century Music"] },
   { id: "ap-spanish-language", title: "AP Spanish Language", toc: null },
 ];

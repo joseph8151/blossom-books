@@ -1237,6 +1237,29 @@ export const apPhysicsBank: SampleItem[] = [
   },
 ];
 
+// Physics 2 / Physics C: E&M은 역학(Physics 1/C: Mechanics)과 달리 회로·전자기를
+// 다루므로 별도 뱅크를 둡니다.
+export const apPhysicsEmBank: SampleItem[] = [
+  {
+    area: "Physics", type: "Circuits (Ohm's Law)", skill: "Apply V = IR", difficulty: "Standard",
+    question: "The circuit shows a 12 V battery connected in series with a 4 Ω resistor. What is the current flowing through the circuit?",
+    figure: "circuit-simple",
+    choices: ["0.33 A", "3 A", "8 A", "48 A"],
+    answer: "3 A",
+    why: "By Ohm's law, I = V / R = 12 V / 4 Ω = 3 A.",
+    whyKo: "옴의 법칙: I = V/R = 12V ÷ 4Ω = 3A.",
+    steps: ["I = V / R", "= 12 / 4", "= 3 A"],
+  },
+  {
+    area: "Physics", type: "Circuits (Series)", skill: "Reason about series resistance", difficulty: "Advanced",
+    question: "In the same circuit, a second 4 Ω resistor is added in series with the first. What happens to the current?",
+    choices: ["It doubles", "It stays the same", "It is cut in half", "It becomes zero"],
+    answer: "It is cut in half",
+    why: "Adding a series resistor increases total resistance from 4 Ω to 8 Ω. Since I = V/R, doubling R halves the current (12V / 8Ω = 1.5 A, half of 3 A).",
+    whyKo: "직렬로 저항을 추가하면 전체 저항이 4Ω에서 8Ω으로 늘어납니다. I=V/R이므로 저항이 2배가 되면 전류는 절반이 됩니다(12V÷8Ω=1.5A, 기존 3A의 절반).",
+  },
+];
+
 export const apStatsBank: SampleItem[] = [
   {
     area: "Statistics", type: "Scatter & Correlation", skill: "Describe correlation from a scatter plot", difficulty: "Standard",
@@ -1684,3 +1707,200 @@ export const apExtraByProduct: Record<string, SampleItem[]> = {
     },
   ],
 };
+
+// ── AP Precalculus ───────────────────────────────────────
+export const apPrecalcBank: SampleItem[] = [
+  {
+    area: "Functions", type: "Composition", skill: "Evaluate a composite function", difficulty: "Standard",
+    question: "If f(x) = 2x + 1 and g(x) = x², what is f(g(3))?",
+    choices: ["7", "10", "19", "37"],
+    answer: "19",
+    why: "g(3) = 3² = 9, then f(9) = 2(9) + 1 = 19.",
+    whyKo: "g(3) = 3² = 9, 이어서 f(9) = 2(9) + 1 = 19. 합성함수는 안쪽 함수부터 먼저 계산합니다.",
+    steps: ["g(3) = 9", "f(9) = 2(9) + 1", "= 19"],
+  },
+  {
+    area: "Trigonometric Functions", type: "Unit Circle", skill: "Evaluate a trig function at a special angle", difficulty: "Advanced",
+    question: "What is the exact value of sin(120°)?",
+    choices: ["1/2", "√2/2", "√3/2", "−√3/2"],
+    answer: "√3/2",
+    why: "120° has a reference angle of 60° in the second quadrant, where sine is positive: sin(120°) = sin(60°) = √3/2.",
+    whyKo: "120°의 참조각은 60°이고 2사분면에서는 sin이 양수입니다. 따라서 sin(120°) = sin(60°) = √3/2.",
+  },
+];
+
+// ── AP Computer Science A (Java) ──────────────────────────
+export const apCsABank: SampleItem[] = [
+  {
+    area: "Programming", type: "Iteration", skill: "Trace a for-loop", difficulty: "Standard",
+    question: 'What is printed by the following code?\n\nint sum = 0;\nfor (int i = 1; i <= 4; i++) {\n    sum += i;\n}\nSystem.out.println(sum);',
+    choices: ["4", "6", "10", "15"],
+    answer: "10",
+    why: "The loop adds 1 + 2 + 3 + 4 = 10 to sum.",
+    whyKo: "반복문이 1부터 4까지 더합니다: 1+2+3+4 = 10. for문은 i가 조건을 만족하는 동안 계속 실행됩니다.",
+    steps: ["i=1: sum=1", "i=2: sum=3", "i=3: sum=6", "i=4: sum=10"],
+  },
+  {
+    area: "Programming", type: "Boolean Logic", skill: "Evaluate a boolean expression", difficulty: "Standard",
+    question: "int x = 5;\nboolean result = (x > 2) && (x < 10);\nWhat is the value of result?",
+    choices: ["true", "false", "5", "Compile error"],
+    answer: "true",
+    why: "Both conditions (x > 2) and (x < 10) are true for x = 5, so the && (AND) expression evaluates to true.",
+    whyKo: "x=5일 때 (x>2)와 (x<10) 모두 참이므로, && (AND) 연산의 결과는 true입니다.",
+  },
+];
+
+export const apCsPrinciplesBank: SampleItem[] = [
+  {
+    area: "Computing Systems and Networks", type: "Network Topology", skill: "Interpret a network diagram", difficulty: "Standard",
+    question: "The diagram shows four client devices connected to one central server. If the server goes down, what happens to communication between Client 1 and Client 2?",
+    figure: "network-diagram",
+    choices: [
+      "It continues normally",
+      "It stops, since all traffic routes through the server",
+      "It gets faster",
+      "Only Client 1 is affected",
+    ],
+    answer: "It stops, since all traffic routes through the server",
+    why: "In a star topology, every device connects only to the central server, so a server failure disconnects communication between the clients.",
+    whyKo: "스타(star) 토폴로지에서는 모든 장치가 중앙 서버를 거쳐 통신하므로, 서버가 다운되면 클라이언트 간 통신도 끊깁니다.",
+  },
+  {
+    area: "Data", type: "Binary Representation", skill: "Convert binary to decimal", difficulty: "Standard",
+    question: "What is the decimal value of the binary number 1011?",
+    choices: ["9", "11", "13", "22"],
+    answer: "11",
+    why: "1011 in binary = 1×8 + 0×4 + 1×2 + 1×1 = 8 + 0 + 2 + 1 = 11.",
+    whyKo: "1011(2) = 1×8 + 0×4 + 1×2 + 1×1 = 8+0+2+1 = 11.",
+    steps: ["1×2³ = 8", "0×2² = 0", "1×2¹ = 2", "1×2⁰ = 1", "합계 = 11"],
+  },
+];
+
+// ── AP Environmental Science ──────────────────────────────
+export const apEnvSciBank: SampleItem[] = [
+  {
+    area: "Ecosystems", type: "Food Chain", skill: "Predict population effects", difficulty: "Standard",
+    question: "The food chain diagram shows Grass → Rabbit → Fox. If a disease wiped out most of the rabbit population, what would most likely happen to the fox population?",
+    figure: "food-chain",
+    choices: ["It would increase", "It would decrease", "It would stay the same", "Foxes would start eating grass"],
+    answer: "It would decrease",
+    why: "Foxes depend on rabbits as a primary food source; losing that food source would reduce the fox population.",
+    whyKo: "여우는 토끼를 주요 먹이로 삼으므로, 먹이가 줄면 여우 개체수도 감소합니다.",
+  },
+  {
+    area: "Populations", type: "Carrying Capacity", skill: "Apply the concept of carrying capacity", difficulty: "Advanced",
+    question: "A lake's fish population grows quickly, then levels off as food and space become limited. This leveling-off point is called the —",
+    choices: ["Limiting factor", "Carrying capacity", "Biotic potential", "Ecological footprint"],
+    answer: "Carrying capacity",
+    why: "Carrying capacity is the maximum population size an environment can sustain long-term, given its resources.",
+    whyKo: "수용력(carrying capacity)은 주어진 자원으로 환경이 장기적으로 유지할 수 있는 최대 개체수입니다.",
+  },
+];
+
+// ── AP Psychology ──────────────────────────────────────────
+export const apPsychBank: SampleItem[] = [
+  {
+    area: "Learning", type: "Classical Conditioning", skill: "Identify conditioned/unconditioned stimuli", difficulty: "Standard",
+    question: "A dog learns to salivate at the sound of a bell after the bell is repeatedly paired with food. In this scenario, the bell is the —",
+    choices: ["Unconditioned stimulus", "Unconditioned response", "Conditioned stimulus", "Conditioned response"],
+    answer: "Conditioned stimulus",
+    why: "The bell was originally neutral but became associated with food through repeated pairing, making it the conditioned stimulus.",
+    whyKo: "종소리는 원래 중립 자극이었지만, 먹이와 반복적으로 짝지어지며 조건 자극(conditioned stimulus)이 되었습니다.",
+  },
+  {
+    area: "Memory", type: "Memory Systems", skill: "Distinguish types of long-term memory", difficulty: "Standard",
+    question: "Remembering HOW to ride a bicycle (rather than facts about bicycles) is an example of —",
+    choices: ["Semantic memory", "Episodic memory", "Procedural memory", "Sensory memory"],
+    answer: "Procedural memory",
+    why: "Procedural memory stores skills and how to perform tasks, such as riding a bike, distinct from memory for facts (semantic) or events (episodic).",
+    whyKo: "절차 기억(procedural memory)은 자전거 타기처럼 ‘방법’에 대한 기억입니다. 사실에 대한 기억은 의미 기억, 경험한 사건에 대한 기억은 일화 기억입니다.",
+  },
+];
+
+// ── AP Human Geography ─────────────────────────────────────
+export const apHumanGeoBank: SampleItem[] = [
+  {
+    area: "Population", type: "Demographic Transition", skill: "Interpret the demographic transition model", difficulty: "Advanced",
+    question: "A country has low birth rates, low death rates, and slow population growth. This is most typical of which stage of the demographic transition model?",
+    choices: ["Stage 1 (pre-industrial)", "Stage 2 (early industrial)", "Stage 4 (post-industrial)", "There is no such stage"],
+    answer: "Stage 4 (post-industrial)",
+    why: "Stage 4 is characterized by both low birth and death rates, resulting in slow or stable population growth, typical of developed economies.",
+    whyKo: "4단계(후기 산업화)는 출생률과 사망률이 모두 낮아 인구 증가가 느리거나 안정적인 단계로, 선진국에서 흔히 나타납니다.",
+  },
+  {
+    area: "Migration", type: "Push-Pull Factors", skill: "Classify migration factors", difficulty: "Standard",
+    question: "A family leaves their home country due to a lack of jobs and moves to a country with better employment opportunities. The lack of jobs is an example of a —",
+    choices: ["Pull factor", "Push factor", "Intervening obstacle", "Step migration"],
+    answer: "Push factor",
+    why: "Push factors are conditions that drive people away from a location, such as a lack of jobs; pull factors attract people to a new location.",
+    whyKo: "배출 요인(push factor)은 사람들을 원래 지역에서 밀어내는 조건(예: 일자리 부족)이고, 흡인 요인(pull factor)은 새로운 지역으로 끌어들이는 조건입니다.",
+  },
+];
+
+// ── AP US Government and Politics ──────────────────────────
+export const apGovBank: SampleItem[] = [
+  {
+    area: "Foundations", type: "Checks and Balances", skill: "Identify a constitutional check", difficulty: "Standard",
+    question: "Which action is an example of the legislative branch checking the executive branch?",
+    choices: [
+      "The President vetoes a bill",
+      "The Senate confirms or rejects a presidential nominee",
+      "The Supreme Court rules a law unconstitutional",
+      "The President issues an executive order",
+    ],
+    answer: "The Senate confirms or rejects a presidential nominee",
+    why: "Senate confirmation of presidential appointments is a legislative check on executive power.",
+    whyKo: "상원의 대통령 지명자 인준(또는 거부)은 입법부가 행정부를 견제하는 권한입니다.",
+  },
+  {
+    area: "Federalism", type: "Division of Powers", skill: "Classify powers as federal, state, or shared", difficulty: "Standard",
+    question: "The power to issue driver's licenses belongs primarily to —",
+    choices: ["The federal government", "State governments", "The judicial branch only", "International treaties"],
+    answer: "State governments",
+    why: "Under federalism, powers not delegated to the federal government — like issuing driver's licenses — are reserved to the states.",
+    whyKo: "연방주의 아래, 연방정부에 위임되지 않은 권한(예: 운전면허 발급)은 주정부에 남아 있습니다(수정헌법 10조).",
+  },
+];
+
+// ── AP Art History ──────────────────────────────────────────
+// 실제 작품 이미지는 저작권 문제로 포함하지 않고, 양식적 특징을 글로
+// 설명한 뒤 그 특징으로 시대·양식을 추론하는 형태로 구성했습니다.
+export const apArtHistoryBank: SampleItem[] = [
+  {
+    area: "Later Europe and Americas", type: "Style Identification", skill: "Identify a style from its formal features", difficulty: "Advanced",
+    question: "A cathedral is described as having pointed arches, ribbed vaults, flying buttresses, and large stained-glass windows that let in colored light. This building is most likely an example of which style?",
+    choices: ["Romanesque", "Gothic", "Baroque", "Neoclassical"],
+    answer: "Gothic",
+    why: "Pointed arches, ribbed vaults, flying buttresses, and large stained-glass windows are hallmark structural and decorative features of Gothic architecture.",
+    whyKo: "뾰족한 아치, 리브 볼트, 플라잉 버트레스, 큰 스테인드글라스 창은 고딕 건축의 대표적인 구조·장식적 특징입니다.",
+  },
+  {
+    area: "Content & Form", type: "Vocabulary in Context", skill: "Apply art-historical vocabulary", difficulty: "Standard",
+    question: 'A sculpture shows a standing figure with its weight shifted onto one leg, causing the hips and shoulders to tilt in opposite directions. This pose is called —',
+    choices: ["Foreshortening", "Contrapposto", "Chiaroscuro", "Linear perspective"],
+    answer: "Contrapposto",
+    why: "Contrapposto describes a figure standing with weight on one leg, creating a naturalistic counter-tilt in the hips and shoulders — common in Classical and Renaissance sculpture.",
+    whyKo: "콘트라포스토(contrapposto)는 한쪽 다리에 무게를 싣고 서서 엉덩이와 어깨가 반대 방향으로 살짝 기울어지는 자연스러운 자세로, 고전·르네상스 조각에서 자주 나타납니다.",
+  },
+];
+
+// ── AP Music Theory ──────────────────────────────────────────
+export const apMusicTheoryBank: SampleItem[] = [
+  {
+    area: "Melody & Harmony", type: "Interval Identification", skill: "Identify an interval on the staff", difficulty: "Standard",
+    question: "The staff shows two notes: C and E. What interval do these two notes form?",
+    figure: "music-staff",
+    choices: ["A second", "A third", "A fourth", "A fifth"],
+    answer: "A third",
+    why: "C to E spans three letter names (C, D, E), making it a third — specifically a major third.",
+    whyKo: "C에서 E까지는 음이름 세 개(C, D, E)에 걸쳐 있으므로 3도(third) 음정입니다(장3도).",
+  },
+  {
+    area: "Music Fundamentals", type: "Key Signatures", skill: "Identify scale degree relationships", difficulty: "Advanced",
+    question: "In the key of C major, which scale degree is the dominant?",
+    choices: ["The 2nd degree (D)", "The 4th degree (F)", "The 5th degree (G)", "The 7th degree (B)"],
+    answer: "The 5th degree (G)",
+    why: "The dominant is the 5th scale degree; in C major, that is G, a key pitch for building tension that resolves back to the tonic (C).",
+    whyKo: "딸림음(dominant)은 음계의 5번째 음입니다. C장조에서는 G이며, 으뜸음(C)으로 해결되는 긴장감을 만드는 핵심 음입니다.",
+  },
+];

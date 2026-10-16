@@ -536,5 +536,64 @@ export default function SampleFigure({ name }: { name: string }) {
     );
   }
 
+  // ── AP Computer Science / Physics(회로) / Music Theory ───────
+  if (name === "circuit-simple") {
+    // 전지 + 저항 직렬 회로
+    return (
+      <svg viewBox="0 0 220 120" className={`${svgCls} max-w-[300px]`} role="img" aria-label="Simple series circuit with battery and resistor">
+        <line x1="20" y1="20" x2="160" y2="20" stroke={INK} strokeWidth="1.6" />
+        <line x1="160" y1="20" x2="200" y2="20" stroke={INK} strokeWidth="1.6" />
+        <line x1="200" y1="20" x2="200" y2="100" stroke={INK} strokeWidth="1.6" />
+        <line x1="200" y1="100" x2="20" y2="100" stroke={INK} strokeWidth="1.6" />
+        {/* 전지 기호 (긴 선 + 짧은 선) */}
+        <line x1="20" y1="100" x2="20" y2="60" stroke={INK} strokeWidth="1.6" />
+        <line x1="10" y1="60" x2="30" y2="60" stroke={INK} strokeWidth="2.2" />
+        <line x1="14" y1="52" x2="26" y2="52" stroke={INK} strokeWidth="1.2" />
+        <line x1="20" y1="52" x2="20" y2="20" stroke={INK} strokeWidth="1.6" />
+        <text x="36" y="58" fontSize="9" fill={INK}>12 V</text>
+        {/* 저항 (지그재그) */}
+        <polyline points="70,20 78,8 92,32 106,8 120,32 128,20" fill="none" stroke={ACCENT} strokeWidth="1.8" />
+        <text x="90" y="46" textAnchor="middle" fontSize="9" fill={ACCENT}>R = 4 Ω</text>
+      </svg>
+    );
+  }
+  if (name === "network-diagram") {
+    // 중앙 서버 + 여러 클라이언트(스타 토폴로지), 인터넷 개념 설명용
+    const clients: [number, number][] = [[30, 20], [190, 20], [30, 100], [190, 100]];
+    return (
+      <svg viewBox="0 0 220 120" className={`${svgCls} max-w-[300px]`} role="img" aria-label="Star network topology diagram">
+        {clients.map(([x, y], i) => (
+          <line key={i} x1="110" y1="60" x2={x} y2={y} stroke={FAINT} strokeWidth="1.3" />
+        ))}
+        <rect x="90" y="44" width="40" height="32" fill={FILL} stroke={INK} strokeWidth="1.3" />
+        <text x="110" y="64" textAnchor="middle" fontSize="8.5" fill={INK}>Server</text>
+        {clients.map(([x, y], i) => (
+          <g key={i}>
+            <rect x={x - 16} y={y - 12} width="32" height="24" fill="#fff" stroke={INK} strokeWidth="1.1" />
+            <text x={x} y={y + 4} textAnchor="middle" fontSize="8" fill={INK}>Client {i + 1}</text>
+          </g>
+        ))}
+      </svg>
+    );
+  }
+  if (name === "music-staff") {
+    // 5선보 + 음표 두 개 (간격 확인용) — C4(가운데 줄 아래)와 E4
+    const lineYs = [10, 20, 30, 40, 50];
+    return (
+      <svg viewBox="0 0 180 80" className={`${svgCls} max-w-[260px]`} role="img" aria-label="Staff with two notes a third apart">
+        {lineYs.map((y, i) => (
+          <line key={i} x1="20" y1={y + 10} x2="160" y2={y + 10} stroke={INK} strokeWidth="1" />
+        ))}
+        {/* 음표 1: C4 (아래 덧줄) */}
+        <line x1="54" y1="58" x2="70" y2="58" stroke={INK} strokeWidth="1" />
+        <ellipse cx="62" cy="58" rx="7" ry="5.5" fill={INK} transform="rotate(-18 62 58)" />
+        <text x="62" y="72" textAnchor="middle" fontSize="8" fill={FAINT}>C</text>
+        {/* 음표 2: E4 (첫 줄과 둘째 줄 사이) */}
+        <ellipse cx="112" cy="48" rx="7" ry="5.5" fill={ACCENT} transform="rotate(-18 112 48)" />
+        <text x="112" y="72" textAnchor="middle" fontSize="8" fill={FAINT}>E</text>
+      </svg>
+    );
+  }
+
   return null;
 }

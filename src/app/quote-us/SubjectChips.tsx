@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, FileSearch } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import {
   GRADES,
@@ -13,6 +13,8 @@ import {
   CORE_SCIENCE,
   type Grade,
 } from "./curriculumData";
+import { AP_SAMPLES } from "./apSamples";
+import ApSampleModal from "./ApSampleModal";
 
 type Mode = "us" | "ap";
 type SubMode = "grade" | "course";
@@ -116,6 +118,10 @@ export default function SubjectChips() {
   const [course, setCourse] = useState<string>("Algebra 1");
   const [apSubject, setApSubject] = useState<string>(AP_SUBJECTS[0].title);
   const [stage, setStage] = useState<Stage>("STANDARD");
+  const [sampleOpen, setSampleOpen] = useState(false);
+
+  const apId = AP_SUBJECTS.find((a) => a.title === apSubject)?.id;
+  const apSampleItems = apId ? AP_SAMPLES[apId] : undefined;
 
   function handleCategorySelect(cat: CourseCategory) {
     setCourseCategory(cat);
@@ -351,7 +357,10 @@ export default function SubjectChips() {
                 key={a.id}
                 type="button"
                 aria-pressed={apSubject === a.title}
-                onClick={() => setApSubject(a.title)}
+                onClick={() => {
+                  setApSubject(a.title);
+                  setSampleOpen(false);
+                }}
                 className={apSubject === a.title ? chipActiveCls : chipCls}
               >
                 {a.title}
@@ -373,7 +382,18 @@ export default function SubjectChips() {
           {mode === "us" && (
             <p className="font-label text-[10px] uppercase tracking-[0.14em] text-navy-800/60">Standard</p>
           )}
-          <p className="mt-1 font-display text-[16px] font-semibold text-navy-950">{standardPanel.title}</p>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="mt-1 font-display text-[16px] font-semibold text-navy-950">{standardPanel.title}</p>
+            {mode === "ap" && apSampleItems && (
+              <button
+                type="button"
+                onClick={() => setSampleOpen(true)}
+                className="inline-flex items-center gap-1.5 border border-brass-500/40 bg-brass-500/[0.06] px-3 py-1.5 text-[12px] font-medium text-brass-500 transition-colors hover:bg-brass-500/[0.12]"
+              >
+                <FileSearch size={13} /> 샘플 보기
+              </button>
+            )}
+          </div>
           <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600">{standardPanel.intro}</p>
 
           <div className="mt-5 grid gap-6 sm:grid-cols-2">
@@ -410,6 +430,15 @@ export default function SubjectChips() {
           </div>
         </div>
       ) : null}
+
+      {mode === "ap" && apSampleItems && (
+        <ApSampleModal
+          title={standardPanel && !standardPanel.inquire ? standardPanel.title : apSubject}
+          items={apSampleItems}
+          open={sampleOpen}
+          onClose={() => setSampleOpen(false)}
+        />
+      )}
     </div>
   );
 }

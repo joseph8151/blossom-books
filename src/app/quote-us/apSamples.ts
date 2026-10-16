@@ -1,0 +1,53 @@
+import {
+  SampleItem,
+  apCalcBank,
+  apPhysicsBank,
+  apPhysicsEmBank,
+  apStatsBank,
+  apBiologyBank,
+  apChemistryBank,
+  apEconomicsBank,
+  apEnglishBank,
+  apHistoryBank,
+  apPrecalcBank,
+  apCsABank,
+  apCsPrinciplesBank,
+  apEnvSciBank,
+  apPsychBank,
+  apHumanGeoBank,
+  apGovBank,
+  apArtHistoryBank,
+  apMusicTheoryBank,
+} from "@/data/sampleBank";
+
+// AP 과목 id → 샘플 문항(1~2개). 전용 문항이 없는 과목은 같은 성격의
+// 공용 뱅크를 재사용합니다(예: Physics 1/2/C 세 과목 모두 apPhysicsBank).
+// 목차(toc)가 null인 과목(AP Spanish, AP Cybersecurity)은 공식 유닛 데이터가
+// 아직 없어 샘플도 만들지 않고 상담 안내로만 처리합니다.
+export const AP_SAMPLES: Record<string, SampleItem[]> = {
+  "ap-english-language": apEnglishBank,
+  "ap-english-literature": apEnglishBank,
+  "ap-precalculus": apPrecalcBank,
+  "ap-calculus-ab": apCalcBank,
+  "ap-calculus-bc": apCalcBank,
+  "ap-statistics": apStatsBank,
+  "ap-physics-1": apPhysicsBank,
+  "ap-physics-2": apPhysicsEmBank,
+  "ap-physics-c-mechanics": apPhysicsBank,
+  "ap-physics-c-em": apPhysicsEmBank,
+  "ap-biology": apBiologyBank,
+  "ap-chemistry": apChemistryBank,
+  "ap-environmental-science": apEnvSciBank,
+  "ap-us-history": apHistoryBank,
+  "ap-world-history": apHistoryBank,
+  "ap-european-history": apHistoryBank,
+  "ap-human-geography": apHumanGeoBank,
+  "ap-us-government": apGovBank,
+  "ap-macroeconomics": apEconomicsBank,
+  "ap-microeconomics": apEconomicsBank,
+  "ap-psychology": apPsychBank,
+  "ap-computer-science-a": apCsABank,
+  "ap-computer-science-principles": apCsPrinciplesBank,
+  "ap-art-history": apArtHistoryBank,
+  "ap-music-theory": apMusicTheoryBank,
+};
