@@ -595,5 +595,48 @@ export default function SampleFigure({ name }: { name: string }) {
     );
   }
 
+  // ── IB Math / Biology ────────────────────────────────────
+  if (name === "parabola-vertex") {
+    // y = 2x² − 8x + 3 형태의 위로 볼록(아래로 열린 ×) 포물선, 꼭짓점 표시
+    const ox = 24, oy = 108, ux = 20, uy = 9;
+    const px = (x: number) => ox + x * ux;
+    const py = (y: number) => oy - (y + 5) * uy; // y=-5을 바닥 기준으로 평행이동
+    const curve: string[] = [];
+    for (let x = -0.3; x <= 4.3; x += 0.2) {
+      const y = 2 * x * x - 8 * x + 3;
+      curve.push(`${px(x)},${py(y)}`);
+    }
+    return (
+      <svg viewBox="0 0 170 130" className={`${svgCls} max-w-[240px]`} role="img" aria-label="Upward parabola with vertex marked">
+        <line x1={ox} y1="8" x2={ox} y2={oy} stroke={INK} strokeWidth="1.1" />
+        <line x1={ox} y1={oy} x2="160" y2={oy} stroke={INK} strokeWidth="1.1" />
+        <polyline points={curve.join(" ")} fill="none" stroke={INK} strokeWidth="1.7" />
+        <line x1={px(2)} y1="8" x2={px(2)} y2={oy} stroke={ACCENT} strokeWidth="1" strokeDasharray="3 3" />
+        <circle cx={px(2)} cy={py(-5)} r="3.2" fill={ACCENT} />
+        <text x={px(2) + 6} y={py(-5) + 4} fontSize="9" fill={INK}>(2, −5)</text>
+        <text x="150" y={oy - 6} fontSize="8.5" fill={FAINT}>x</text>
+      </svg>
+    );
+  }
+  if (name === "saturation-curve") {
+    // 빛의 세기에 따른 광합성 속도 — 초반 증가 후 포화(plateau)
+    const pts: [number, number][] = [[0, 0], [10, 4], [20, 9], [30, 13], [40, 15], [50, 15]];
+    const ox = 30, oy = 108, ux = 2.6, uy = 5.8;
+    const px = (x: number) => ox + x * ux;
+    const py = (y: number) => oy - y * uy;
+    return (
+      <svg viewBox="0 0 210 132" className={`${svgCls} max-w-[320px]`} role="img" aria-label="Line graph of reaction rate leveling off as light intensity increases">
+        <line x1={ox} y1="14" x2={ox} y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox} y1={oy} x2="200" y2={oy} stroke={INK} strokeWidth="1.2" />
+        <polyline points={pts.map(([x, y]) => `${px(x)},${py(y)}`).join(" ")} fill="none" stroke={ACCENT} strokeWidth="1.8" />
+        {pts.map(([x, y], i) => (
+          <circle key={i} cx={px(x)} cy={py(y)} r="2.8" fill={INK} />
+        ))}
+        <text x="4" y="12" fontSize="8" fill={FAINT}>Rate</text>
+        <text x="178" y={oy + 11} fontSize="8" fill={FAINT}>Light intensity</text>
+      </svg>
+    );
+  }
+
   return null;
 }
