@@ -50,6 +50,11 @@ const links = [
     url: "https://www.blossombooks.org/quote-contest/",
   },
   {
+    title: "IB(International Baccalaureate)",
+    who: "Math AA·AI, Sciences, Economics, Business Management 토픽 문제집 · 모의고사 · IA/EE/TOK 가이드 문의 고객",
+    url: "https://www.blossombooks.org/quote-ib/",
+  },
+  {
     title: "국제학교 Admission Full Package",
     who: "국제학교·해외 학교 입학 준비 전체 패키지(상담) 문의 고객",
     url: "https://www.blossombooks.org/admission-full-package/",
