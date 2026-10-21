@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, ArrowUpRight } from "lucide-react";
 
 const links = [
   {
@@ -74,12 +74,25 @@ function LinkRow({ title, who, url }: { title: string; who: string; url: string 
 
   return (
     <div className="border border-ivory-300 bg-white p-5 sm:p-6">
-      <p className="font-display text-[16px] font-semibold text-navy-950">{title}</p>
+      <a
+        href={url}
+        target="_blank"
+        rel="noreferrer"
+        className="group inline-flex items-center gap-1.5 font-display text-[16px] font-semibold text-navy-950 transition-colors hover:text-navy-700"
+      >
+        {title}
+        <ArrowUpRight size={15} className="text-charcoal-600/50 transition-colors group-hover:text-navy-700" />
+      </a>
       <p className="mt-1.5 text-[12.5px] leading-relaxed text-charcoal-600">{who}</p>
       <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
-        <code className="flex-1 break-all border border-ivory-300 bg-ivory-200/40 px-3 py-2.5 text-[12.5px] text-charcoal-700">
+        <a
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+          className="flex-1 break-all border border-ivory-300 bg-ivory-200/40 px-3 py-2.5 text-[12.5px] text-charcoal-700 transition-colors hover:border-navy-800/30 hover:bg-ivory-200/70"
+        >
           {url}
-        </code>
+        </a>
         <button
           type="button"
           onClick={handleCopy}
