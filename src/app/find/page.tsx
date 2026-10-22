@@ -269,6 +269,8 @@ export default function FindPage() {
   const [copied, setCopied] = useState(false);
   const [altOpen, setAltOpen] = useState(false);
   const [contactSaved, setContactSaved] = useState(false);
+  // 추천 결과(교재명·분량·가격·샘플 링크)는 카카오톡 상담 버튼을 눌러야 공개됩니다.
+  const [revealed, setRevealed] = useState(false);
 
   function toggleArea(a: string) {
     setF((prev) => ({ ...prev, areas: prev.areas.includes(a) ? prev.areas.filter((x) => x !== a) : [...prev.areas, a] }));
@@ -300,6 +302,7 @@ export default function FindPage() {
     setRecommendation(result);
     setDone(true);
     setAltOpen(false);
+    setRevealed(false);
     trackEvent("find_submit", { exam: f.exam, match_type: result.matchType });
     trackEvent("find_result_view", { match_type: result.matchType });
     void sendTeam(result);
@@ -313,6 +316,7 @@ export default function FindPage() {
     } catch {}
     trackEvent("find_kakao_click", { match_type: recommendation.matchType, location });
     window.open(siteConfig.kakaoChannelUrl, "_blank", "noopener,noreferrer");
+    setRevealed(true);
   }
 
   async function submitContact() {
@@ -398,7 +402,7 @@ export default function FindPage() {
         <div className="mt-8 border border-brass-500/40 bg-brass-500/[0.05] p-6 lg:p-8">
           <p className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Free workbook fit check</p>
           <h2 className="mt-3 font-display text-[24px] font-semibold text-navy-950 sm:text-[28px]">
-            이 구성이 맞습니다
+            {revealed ? "이 구성이 맞습니다" : "추천 결과가 준비되었습니다"}
           </h2>
           <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
             {f.grade} · {f.exam} · 시험까지 {f.period}
@@ -409,6 +413,25 @@ export default function FindPage() {
             )}
           </p>
 
+          {!revealed ? (
+            <div className="mt-5 border border-navy-800/15 bg-ivory-100 p-5 text-center shadow-card sm:p-6">
+              <p className="text-[13.5px] leading-relaxed text-charcoal-700">
+                입력하신 조건에 맞는 교재 구성·분량·가격을 확인했습니다. 아래 버튼으로 카카오톡 상담을 받으시면
+                추천 교재와 샘플 링크를 바로 안내해 드립니다.
+              </p>
+              <button
+                type="button"
+                onClick={() => goKakao("reveal_gate")}
+                className="mt-5 inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
+              >
+                <MessageCircle size={16} /> 카카오톡 상담받고 결과 확인하기
+              </button>
+              <p className="mt-3 text-[11.5px] text-charcoal-600/70">
+                카카오톡 채널이 열린 뒤 이 페이지로 돌아오시면 추천 구성을 확인하실 수 있습니다.
+              </p>
+            </div>
+          ) : (
+            <>
           {/* 1안 카드 (catalog 매칭) */}
           {r.matchType === "catalog" && r.primary && (
             <div className="mt-5 border border-navy-800/15 bg-ivory-100 p-5 shadow-card sm:p-6">
@@ -571,6 +594,8 @@ export default function FindPage() {
               </div>
             )}
           </div>
+            </>
+          )}
         </div>
       )}
     </div>
