@@ -6,7 +6,7 @@ import Bestsellers from "@/components/home/Bestsellers";
 import WhyDifferent from "@/components/home/WhyDifferent";
 import QuestionToUnderstanding from "@/components/home/QuestionToUnderstanding";
 import CompareLevels from "@/components/home/CompareLevels";
-import FindPrepPromo from "@/components/home/FindPrepPromo";
+import LearningTypeQuiz from "@/components/home/LearningTypeQuiz";
 import Testimonials from "@/components/home/Testimonials";
 import TrustSignals from "@/components/home/TrustSignals";
 import WhyBlossom from "@/components/home/WhyBlossom";
@@ -52,8 +52,8 @@ export default function HomePage() {
       <QuestionToUnderstanding />
       <CompareLevels />
 
-      {/* 문제 해결 — 어떤 교재가 맞는지 모를 때 */}
-      <FindPrepPromo />
+      {/* 문제 해결 — 어떤 교재가 맞는지 모를 때 (30초 진단 퀴즈) */}
+      <LearningTypeQuiz />
 
       {/* Reviews / 신뢰 */}
       <Testimonials />
