@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { products } from "@/data/products";
 import { blossomLevel, BLOSSOM_LEVEL_KO } from "@/lib/utils";
 import { priceDisplay, pagesLabel } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
+import { siteConfig } from "@/data/site";
 
 const sorted = [...products].sort((a, b) => a.titleKo.localeCompare(b.titleKo, "ko"));
 
@@ -102,6 +103,23 @@ export default function ComparePage() {
 
       {selected.length < 2 && (
         <p className="mt-6 text-[13px] text-charcoal-600">비교하려면 교재를 2개 이상 선택하세요.</p>
+      )}
+
+      {selected.length >= 2 && (
+        <div className="mt-10 border-t border-ivory-300 pt-8 text-center">
+          <p className="text-[13.5px] text-charcoal-600">
+            어떤 교재가 맞을지 고민되시면 카카오톡으로 비교해드립니다.
+          </p>
+          <a
+            href={siteConfig.kakaoChannelUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-4 inline-flex items-center gap-2 rounded-full bg-navy-900 px-7 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
+          >
+            <MessageCircle size={16} />
+            카카오톡으로 비교 상담하기
+          </a>
+        </div>
       )}
     </div>
   );

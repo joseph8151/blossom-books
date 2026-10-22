@@ -20,6 +20,13 @@ const chipActiveCls =
 
 function SchoolCard({ school }: { school: School }) {
   const [open, setOpen] = useState(false);
+  const [revealed, setRevealed] = useState(false);
+
+  function goKakao() {
+    window.open(siteConfig.kakaoChannelUrl, "_blank", "noopener,noreferrer");
+    setRevealed(true);
+  }
+
   return (
     <div className="border border-navy-800/12 bg-white">
       <button
@@ -40,38 +47,57 @@ function SchoolCard({ school }: { school: School }) {
       </button>
       {open && (
         <div className="border-t border-navy-800/10 p-5 pt-4">
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div>
-              <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-700/80">지원 가능한 학년</p>
-              <p className="mt-1 text-[13px] text-charcoal-700">{school.grades}</p>
-            </div>
-            <div>
-              <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-700/80">추천 Package</p>
-              <p className="mt-1 text-[13px] text-charcoal-700">{school.recommendedPackage}</p>
-            </div>
-          </div>
-          <div className="mt-3">
-            <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-700/80">
-              예상/공개된 평가 영역
-            </p>
-            <div className="mt-1.5 flex flex-wrap gap-1.5">
-              {school.assessmentAreas.map((a) => (
-                <span key={a} className="border border-[#5f6f52]/25 bg-[#eef1e8] px-2 py-0.5 text-[11px] text-[#4f5d45]">
-                  {a}
-                </span>
-              ))}
-            </div>
-            <p className="mt-2 text-[11px] leading-relaxed text-charcoal-600/85">{schoolDataCaveat}</p>
-          </div>
-          <a
-            href={siteConfig.kakaoChannelUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-4 inline-flex min-h-[42px] items-center justify-center gap-2 bg-navy-950 px-5 text-[12.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-900"
-          >
-            <MessageCircle size={14} />
-            이 학교로 상담하기
-          </a>
+          {!revealed ? (
+            <>
+              <p className="text-[12.5px] leading-relaxed text-charcoal-700">
+                {school.name}의 지원 가능 학년, 추천 Package, 예상 평가 영역을 확인했습니다. 카카오톡 상담을
+                받으시면 바로 안내해 드립니다.
+              </p>
+              <button
+                type="button"
+                onClick={goKakao}
+                className="mt-4 inline-flex min-h-[42px] items-center justify-center gap-2 bg-navy-950 px-5 text-[12.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-900"
+              >
+                <MessageCircle size={14} />
+                카카오톡 상담받고 학교 정보 확인하기
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-700/80">지원 가능한 학년</p>
+                  <p className="mt-1 text-[13px] text-charcoal-700">{school.grades}</p>
+                </div>
+                <div>
+                  <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-700/80">추천 Package</p>
+                  <p className="mt-1 text-[13px] text-charcoal-700">{school.recommendedPackage}</p>
+                </div>
+              </div>
+              <div className="mt-3">
+                <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-700/80">
+                  예상/공개된 평가 영역
+                </p>
+                <div className="mt-1.5 flex flex-wrap gap-1.5">
+                  {school.assessmentAreas.map((a) => (
+                    <span key={a} className="border border-[#5f6f52]/25 bg-[#eef1e8] px-2 py-0.5 text-[11px] text-[#4f5d45]">
+                      {a}
+                    </span>
+                  ))}
+                </div>
+                <p className="mt-2 text-[11px] leading-relaxed text-charcoal-600/85">{schoolDataCaveat}</p>
+              </div>
+              <a
+                href={siteConfig.kakaoChannelUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex min-h-[42px] items-center justify-center gap-2 bg-navy-950 px-5 text-[12.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-900"
+              >
+                <MessageCircle size={14} />
+                이 학교로 상담하기
+              </a>
+            </>
+          )}
         </div>
       )}
     </div>
