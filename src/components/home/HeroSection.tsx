@@ -5,6 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, FileSearch, ChevronDown } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { products } from "@/data/products";
+import { allSchools } from "@/app/admission-full-package/schools";
+
+// 실제 카탈로그 데이터에서 계산한 수치만 씁니다(BrandNumbers.tsx와 동일 원칙) — 과장 없음.
+const titleCount = products.length;
+const subjectCount = new Set(products.map((p) => p.subject)).size;
+const schoolCount = allSchools.length;
 
 // 첫 화면은 가격을 노출하지 않습니다. 목적은 "여기서 내 아이에게 맞는 교재를 찾을 수 있겠다"는 확신.
 // 각 시험 칩 → /books 검색으로 연결 (해당 교재가 없으면 주문제작 안내로 이어집니다)
@@ -52,13 +59,35 @@ export default function HeroSection() {
             International Assessment &amp; Academic Prep
           </span>
 
-          <h1 className="mt-6 max-w-xl text-[14.5px] font-medium leading-[1.75] text-navy-900">
-            CAT4 · MAP · ISEE · SSAT · 학원 레벨테스트 · 미국교과
+          <h1 className="mt-6 max-w-lg font-display text-[34px] font-semibold leading-[1.18] text-navy-950 sm:text-[42px]">
+            학생에게 필요한 문제만, <span className="text-brass-500">정확하게</span>.
           </h1>
-          <p className="mt-3 max-w-xl text-[14.5px] leading-[1.9] text-charcoal-600">
+          <p className="mt-4 max-w-xl text-[14px] leading-[1.75] text-charcoal-600">
+            CAT4 · MAP · ISEE · SSAT · 학원 레벨테스트 · 미국교과
+          </p>
+          <p className="mt-1.5 max-w-xl text-[14px] leading-[1.75] text-charcoal-600/85">
             문제 + 정답 + 한국어 상세해설 · Digital PDF
           </p>
-          <div className="mt-9 flex flex-wrap items-center gap-4">
+
+          {/* 신뢰 지표 — BrandNumbers와 동일하게 실제 데이터 기반 */}
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-y border-navy-800/10 py-3.5">
+            {[
+              { value: `${titleCount}개`, label: "교재" },
+              { value: "K–12", label: "전학년" },
+              { value: `${subjectCount}개`, label: "과목·평가 영역" },
+              { value: `${schoolCount}+`, label: "등록 학교" },
+            ].map((s, i) => (
+              <span key={s.label} className="inline-flex items-center gap-5">
+                {i > 0 && <span className="h-6 w-px bg-navy-800/12" />}
+                <span className="flex items-baseline gap-1.5">
+                  <span className="font-display text-[17px] font-semibold text-navy-950">{s.value}</span>
+                  <span className="text-[11.5px] text-charcoal-600">{s.label}</span>
+                </span>
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-7 flex flex-wrap items-center gap-4">
             <Link
               href="/books"
               onClick={() => trackEvent("view_product_list", { location: "hero" })}
