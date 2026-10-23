@@ -63,7 +63,7 @@ export default function HeroSection() {
             학생에게 필요한 문제만, <span className="text-brass-500">정확하게</span>.
           </h1>
           <p className="mt-4 max-w-xl text-[14px] leading-[1.75] text-charcoal-600">
-            CAT4 · MAP · ISEE · SSAT · 학원 레벨테스트 · 미국교과
+            학원 입학·레벨테스트 · CAT4 · MAP · ISEE · SSAT · 미국교과
           </p>
           <p className="mt-1.5 max-w-xl text-[14px] leading-[1.75] text-charcoal-600/85">
             문제 + 정답 + 한국어 상세해설 · Digital PDF
