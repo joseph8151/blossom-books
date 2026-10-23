@@ -50,19 +50,12 @@ export default function Testimonials() {
           {shown.map((r, i) => (
             <figure key={i} className="lift flex flex-col border border-navy-800/12 bg-ivory-100 p-7 shadow-card">
               <Quote size={22} className="text-brass-500" />
-              <blockquote className="mt-4 flex-1 text-[13.5px] leading-relaxed text-charcoal-900">{r.quote}</blockquote>
+              <blockquote className="mt-4 flex-1 text-[13.5px] leading-relaxed text-charcoal-900 line-clamp-6">
+                {r.quote}
+              </blockquote>
               <figcaption className="mt-6 border-t border-navy-800/10 pt-4">
                 <p className="text-[13.5px] font-medium text-navy-950">{r.author}</p>
                 <p className="mt-0.5 font-label text-[11px] uppercase tracking-[0.12em] text-brass-500">{r.context}</p>
-                {r.tags && r.tags.length > 0 && (
-                  <div className="mt-2.5 flex flex-wrap gap-1.5">
-                    {r.tags.map((t) => (
-                      <span key={t} className="border border-navy-800/12 bg-ivory-200/50 px-1.5 py-0.5 font-label text-[9px] tracking-wide text-navy-800/60">
-                        #{t}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </figcaption>
             </figure>
           ))}
