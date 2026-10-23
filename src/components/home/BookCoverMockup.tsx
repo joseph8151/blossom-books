@@ -14,25 +14,49 @@ interface BookCoverProps {
   tabLabel?: string;
 }
 
-// 표지 색상 테마
-const THEMES: Record<
-  Tone,
-  { bg: string; ink: string; accent: string; faint: string; dark: boolean }
-> = {
-  navy: { bg: "#131f38", ink: "#f7f2e7", accent: "#c4a568", faint: "rgba(247,242,231,0.14)", dark: true },
-  burgundy: { bg: "#6d2432", ink: "#f6e7db", accent: "#dcae72", faint: "rgba(246,231,219,0.16)", dark: true },
-  brown: { bg: "#553a28", ink: "#f4e9d8", accent: "#d9b473", faint: "rgba(244,233,216,0.16)", dark: true },
-  ivory: { bg: "#f4ecdb", ink: "#1a2743", accent: "#a5793c", faint: "rgba(26,39,67,0.14)", dark: false },
-  pink: { bg: "#c07f8b", ink: "#3d1c25", accent: "#54262f", faint: "rgba(61,28,37,0.2)", dark: false },
+// 표지 색상 테마 — 책등(spine)은 시리즈 전체 통일감을 위해 항상 네이비를
+// 쓰고, 본문 패널만 상품별 톤을 따릅니다(비대칭 "Modern Editorial" 표지).
+const THEMES: Record<Tone, { bg: string; ink: string; accent: string; faint: string }> = {
+  navy: { bg: "#131f38", ink: "#f7f2e7", accent: "#c4a568", faint: "rgba(247,242,231,0.14)" },
+  burgundy: { bg: "#6d2432", ink: "#f6e7db", accent: "#dcae72", faint: "rgba(246,231,219,0.16)" },
+  brown: { bg: "#553a28", ink: "#f4e9d8", accent: "#d9b473", faint: "rgba(244,233,216,0.16)" },
+  ivory: { bg: "#f4ecdb", ink: "#1a2743", accent: "#a5793c", faint: "rgba(26,39,67,0.14)" },
+  pink: { bg: "#c07f8b", ink: "#3d1c25", accent: "#54262f", faint: "rgba(61,28,37,0.2)" },
 };
+const SPINE = { bg: "#131f38", accent: "#c4a568" };
 
 // 크기별 고정 타이포 — 카드(sm)/상세(md)/히어로(lg)에서 각각 안정적으로 렌더링됩니다.
-const SIZES: Record<Size, {
-  frame: string; rule: string; eyebrow: string; title: string; sub: string; mono: string; monoText: string; foot: string;
-}> = {
-  sm: { frame: "px-4 pb-4 pt-5", rule: "w-6", eyebrow: "text-[7.5px] tracking-[0.18em]", title: "text-[14.5px]", sub: "text-[9px]", mono: "h-6 w-6", monoText: "text-[10px]", foot: "text-[5.5px] tracking-[0.1em]" },
-  md: { frame: "px-6 pb-5 pt-9", rule: "w-9", eyebrow: "text-[9px] tracking-[0.22em]", title: "text-[21px]", sub: "text-[11px]", mono: "h-8 w-8", monoText: "text-[13px]", foot: "text-[7px] tracking-[0.14em]" },
-  lg: { frame: "px-7 pb-6 pt-11", rule: "w-10", eyebrow: "text-[9.5px] tracking-[0.24em]", title: "text-[25px]", sub: "text-[11.5px]", mono: "h-9 w-9", monoText: "text-[15px]", foot: "text-[7.5px] tracking-[0.16em]" },
+const SIZES: Record<
+  Size,
+  { pad: string; eyebrow: string; title: string; sub: string; mono: string; monoText: string; spineText: string }
+> = {
+  sm: {
+    pad: "pl-3.5 pr-3.5 pb-3.5 pt-4",
+    eyebrow: "text-[7px] tracking-[0.16em]",
+    title: "text-[14px]",
+    sub: "text-[8.5px]",
+    mono: "h-6 w-6",
+    monoText: "text-[10px]",
+    spineText: "text-[6.5px] tracking-[0.16em]",
+  },
+  md: {
+    pad: "pl-5 pr-5 pb-5 pt-7",
+    eyebrow: "text-[8.5px] tracking-[0.2em]",
+    title: "text-[20px]",
+    sub: "text-[10.5px]",
+    mono: "h-8 w-8",
+    monoText: "text-[13px]",
+    spineText: "text-[7.5px] tracking-[0.18em]",
+  },
+  lg: {
+    pad: "pl-6 pr-6 pb-6 pt-9",
+    eyebrow: "text-[9px] tracking-[0.22em]",
+    title: "text-[24px]",
+    sub: "text-[11px]",
+    mono: "h-9 w-9",
+    monoText: "text-[15px]",
+    spineText: "text-[8px] tracking-[0.2em]",
+  },
 };
 
 export function BookCoverMockup({
@@ -51,28 +75,53 @@ export function BookCoverMockup({
   return (
     <div
       className={cn(
-        "relative aspect-[3/4] w-full max-w-[230px] overflow-hidden rounded-[4px] shadow-[0_28px_60px_-20px_rgba(13,22,38,0.6)]",
+        "relative flex aspect-[3/4] w-full max-w-[230px] overflow-hidden rounded-[4px] shadow-[0_28px_60px_-20px_rgba(13,22,38,0.6)]",
         rotate,
         className
       )}
-      style={{ background: t.bg, color: t.ink }}
     >
-      {/* 얇은 그래픽 레이어 — 프레임과 코너만. 텍스트 뒤는 비웁니다. */}
-      <svg
-        viewBox="0 0 240 320"
-        preserveAspectRatio="none"
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        aria-hidden="true"
+      {/* 책등 — 항상 네이비, 시리즈 전체를 하나로 묶는 통일 요소 */}
+      <div
+        className="relative flex w-[17%] shrink-0 flex-col items-center justify-end pb-[8%]"
+        style={{ background: SPINE.bg }}
       >
-        <rect x="0" y="0" width="240" height="6" fill={t.accent} opacity="0.9" />
-        <rect x="12" y="16" width="216" height="288" fill="none" stroke={t.accent} strokeWidth="1.1" opacity="0.85" />
-        <rect x="16.5" y="20.5" width="207" height="279" fill="none" stroke={t.accent} strokeWidth="0.6" opacity="0.4" />
-        {["M16,34 L16,20 L30,20", "M224,34 L224,20 L210,20", "M16,286 L16,300 L30,300", "M224,286 L224,300 L210,300"].map(
-          (d) => (
-            <path key={d} d={d} fill="none" stroke={t.accent} strokeWidth="1.2" />
-          )
-        )}
-      </svg>
+        <span
+          className={cn("whitespace-nowrap font-label font-medium uppercase [writing-mode:vertical-rl]", s.spineText)}
+          style={{ color: SPINE.accent, opacity: 0.85 }}
+        >
+          Blossom Books
+        </span>
+      </div>
+
+      {/* 본문 패널 — 상품별 톤 */}
+      <div className={cn("relative flex flex-1 flex-col", s.pad)} style={{ background: t.bg, color: t.ink }}>
+        <p className={cn("font-label font-medium uppercase", s.eyebrow)} style={{ color: t.accent, opacity: 0.95 }}>
+          {eyebrow}
+        </p>
+        <p
+          className={cn(
+            "mt-[14%] font-display font-semibold leading-[1.14] [hyphens:none] [overflow-wrap:normal] [word-break:keep-all]",
+            s.title
+          )}
+        >
+          {title}
+        </p>
+        <p className={cn("mt-[6%] font-medium leading-snug [word-break:keep-all]", s.sub)} style={{ opacity: 0.78 }}>
+          {subtitle}
+        </p>
+
+        <div className="mt-auto flex items-center justify-between">
+          <div
+            className={cn("flex items-center justify-center rounded-full", s.mono)}
+            style={{ background: SPINE.bg }}
+          >
+            <span className={cn("font-display font-semibold italic", s.monoText)} style={{ color: SPINE.accent }}>
+              B
+            </span>
+          </div>
+          <div className="h-px flex-1 mx-[6%]" style={{ background: t.faint }} />
+        </div>
+      </div>
 
       {/* 인덱스 탭 */}
       {tabLabel && (
@@ -83,37 +132,6 @@ export function BookCoverMockup({
           {tabLabel}
         </div>
       )}
-
-      {/* 텍스트 레이어 */}
-      <div className={cn("relative z-10 flex h-full flex-col", s.frame)}>
-        <div className={cn("h-px", s.rule)} style={{ background: t.accent }} />
-        <p className={cn("mt-[6%] font-label font-medium uppercase", s.eyebrow)} style={{ opacity: 0.9 }}>
-          {eyebrow}
-        </p>
-        <p className={cn("mt-[5%] font-display font-semibold leading-[1.12] [hyphens:none] [overflow-wrap:normal] [word-break:keep-all]", s.title)}>
-          {title}
-        </p>
-        <p className={cn("mt-[4%] font-medium leading-snug [word-break:keep-all]", s.sub)} style={{ opacity: 0.82 }}>
-          {subtitle}
-        </p>
-
-        {/* 하단 — 모노그램 + 발행처 */}
-        <div className="mt-auto">
-          <div className={cn("flex items-center justify-center rounded-full border", s.mono)} style={{ borderColor: t.accent }}>
-            <span className={cn("font-display font-semibold italic", s.monoText)} style={{ color: t.accent }}>
-              B
-            </span>
-          </div>
-          <div className="mt-[6%] h-px w-full" style={{ background: t.faint }} />
-          <div
-            className={cn("mt-[3%] flex items-center justify-between font-label font-medium uppercase", s.foot)}
-            style={{ opacity: 0.72 }}
-          >
-            <span>Blossom Books</span>
-            <span>Edu Publishing</span>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
