@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
-// 3개 진입점을 동등하게 노출하되, 클릭하면 아래로 펼쳐지는 아코디언 카드입니다.
-// 국제시험 전문처럼 보이지 않도록 레벨테스트를 co-equal로 배치하면서도,
-// 02(입학·레벨테스트)는 가장 많이 들어오는 문의라 살짝 강조합니다.
-// 세 카드 모두 "교재 보기"(카탈로그 링크) 대신 카카오톡 상담으로 바로
-// 이어지는 CTA를 둡니다 — 과목·난이도·학원 스타일까지 섞인 질문은 카탈로그
-// 필터보다 상담에서 정확히 짚어주는 편이 낫다는 판단입니다.
+// 3개 핵심 서비스는 모두 동등하게 중요합니다 — 특정 카드만 강조하지 않습니다.
+// 클릭하면 다른 페이지로 이동하지 않고, 카드 바로 아래에 상세 패널이
+// 펼쳐집니다("자세히 보기 +" / "접기 −"). 상세 패널은 전부 카카오톡 상담
+// CTA로 끝납니다 — 과목·난이도·학원 스타일이 섞인 질문은 카탈로그 필터보다
+// 상담에서 정확히 짚어주는 편이 낫다는 판단입니다.
 interface CategoryGroup {
-  label?: string; // 있으면 칩 형태, 없으면 불릿 리스트
+  label: string;
   items: string[];
 }
 
@@ -23,9 +22,8 @@ interface Category {
   areas: string; // 접힌 상태 하단 태그 라인
   intro: string; // 펼친 상태 첫 문장
   groups: CategoryGroup[];
-  notes?: string[]; // 펼친 상태, CTA 위 보조 문장
+  notes: string[]; // 펼친 상태, CTA 위 보조 문장
   ctaLabel: string;
-  emphasized?: boolean;
 }
 
 const categories: Category[] = [
@@ -38,15 +36,24 @@ const categories: Category[] = [
     intro: "국제학교 재학생과 입학 준비 학생을 위한 학년별·과목별 맞춤 교재를 구성합니다.",
     groups: [
       {
+        label: "포함 예시",
         items: [
-          "English · Math · Science · Reading",
-          "미국·영국·국제 커리큘럼 대응",
-          "학년과 현재 수준에 맞춘 난이도 조정",
-          "단원별 보강 · 학기별 복습 · 시험 대비 구성",
+          "English",
+          "Math",
+          "Science",
+          "Reading",
+          "미국·영국·국제 커리큘럼",
+          "학년별 학습",
+          "단원별 보강",
+          "학기별 복습",
+          "시험 대비",
         ],
       },
     ],
-    ctaLabel: "맞춤 상담하기",
+    notes: [
+      "학년만 기준으로 만들지 않고, 학생의 현재 수준과 필요한 과목, 학습 목적에 맞춰 난이도와 구성을 조정합니다.",
+    ],
+    ctaLabel: "국제학교 교재 상담하기",
   },
   {
     no: "02",
@@ -54,16 +61,16 @@ const categories: Category[] = [
     ko: "입학 · 레벨테스트 대비",
     teaser: "학년이 아니라, 현재 레벨과 목표 학원에 맞춰 구성합니다.",
     areas: "영어 · 국어 · 수학 레벨테스트",
-    intro: "같은 학년이라도 목표 학원과 현재 레벨에 따라 필요한 문제 구성은 달라집니다.",
+    intro:
+      "같은 학년이라도 현재 레벨, 목표 학원, 시험 난이도에 따라 필요한 문제 구성은 달라집니다. Blossom Books에서는 아래 기준으로 맞춤 구성합니다.",
     groups: [
-      { label: "맞춤 기준", items: ["학년", "현재 레벨", "목표 학원", "시험 난이도"] },
-      { label: "영어", items: ["Reading", "Vocabulary", "Grammar", "Writing"] },
-      { label: "국어", items: ["문해력", "어휘", "요지", "추론", "구조 파악"] },
-      { label: "수학", items: ["연산", "사고력", "문제해결", "학년별 심화"] },
+      { label: "맞춤 기준", items: ["학년", "현재 레벨", "목표 학원", "시험 난이도", "필요한 영역"] },
+      { label: "영어 레벨테스트", items: ["Reading", "Vocabulary", "Grammar", "Writing", "Interview"] },
+      { label: "국어 레벨테스트", items: ["문해력", "어휘", "핵심 요지", "내용 파악", "추론", "구조 파악"] },
+      { label: "수학 레벨테스트", items: ["연산", "사고력", "문제해결", "학년별 심화", "입학·반배정용 문제"] },
     ],
-    notes: ["바로 구매 가능한 구성과 주문 제작형 모두 가능합니다.", "SR 대비는 별도 카테고리로 운영합니다."],
+    notes: ["바로 구매 가능한 구성과 주문 제작형 교재 모두 제공합니다.", "SR 대비는 별도 카테고리에서 안내합니다."],
     ctaLabel: "레벨테스트 상담하기",
-    emphasized: true,
   },
   {
     no: "03",
@@ -71,9 +78,11 @@ const categories: Category[] = [
     ko: "표준화 시험 대비",
     teaser: "시험마다 다른 구조에 맞춰 각각 따로 준비합니다.",
     areas: "MAP · CAT4 · SSAT · ISEE · UKiset · SAT · AP · GRE · LSAT",
-    intro: "시험마다 보는 능력과 문제 구조가 다르기 때문에 같은 방식으로 교재를 만들지 않습니다.",
-    groups: [{ items: ["MAP · CAT4 · SSAT · ISEE · UKiset", "SAT · AP · GRE · LSAT 등"] }],
-    notes: ["시험별 영역과 문항 유형에 맞춰 문제·해설·모의형 구성을 제작합니다."],
+    intro: "시험마다 평가 영역과 문제 구조가 다르기 때문에 같은 방식으로 교재를 구성하지 않습니다.",
+    groups: [
+      { label: "예시 시험", items: ["MAP", "CAT4", "SSAT", "ISEE", "UKiset", "SAT", "AP", "GRE", "LSAT"] },
+    ],
+    notes: ["각 시험의 평가 영역, 문항 유형, 난이도에 맞춰 문제집·해설집·모의형 구성 등을 제작합니다."],
     ctaLabel: "시험별 상담하기",
   },
 ];
@@ -82,38 +91,24 @@ function CategoryCard({ c }: { c: Category }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div
-      className={`flex flex-col bg-ivory-100 transition-shadow ${
-        c.emphasized
-          ? "border-2 border-navy-900 shadow-[0_18px_40px_-28px_rgba(13,22,38,0.35)]"
-          : "border border-navy-800/12"
-      }`}
-    >
-      {c.emphasized && (
-        <span className="self-start bg-navy-900 px-3 py-1.5 font-label text-[10px] uppercase tracking-[0.12em] text-brass-400">
-          가장 많이 문의하는 서비스
-        </span>
-      )}
-
+    <div className="flex flex-col border border-navy-800/12 bg-ivory-100">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className="flex flex-col p-7 text-left transition-colors hover:bg-ivory-200/40 lg:p-8"
       >
-        <div className="flex items-start justify-between gap-3">
-          <span className="font-display text-[34px] font-semibold leading-none text-navy-800/18">{c.no}</span>
-          <ChevronDown
-            size={18}
-            className={`mt-1 shrink-0 text-navy-800/50 transition-transform ${open ? "rotate-180" : ""}`}
-          />
-        </div>
+        <span className="font-display text-[34px] font-semibold leading-none text-navy-800/18">{c.no}</span>
         <p className="mt-5 font-label text-[10.5px] uppercase tracking-[0.13em] text-brass-500">{c.en}</p>
         <h3 className="mt-2 font-display text-[21px] font-semibold leading-snug text-navy-950">{c.ko}</h3>
         <p className="mt-3 text-[13.5px] leading-[1.8] text-charcoal-600">{c.teaser}</p>
         <p className="mt-5 border-t border-navy-800/10 pt-4 font-label text-[10.5px] uppercase tracking-[0.06em] text-navy-800/60">
           {c.areas}
         </p>
+        <span className="mt-4 inline-flex items-center gap-1 font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-brass-500">
+          {open ? "접기" : "자세히 보기"}
+          <span className="text-[14px] leading-none">{open ? "−" : "+"}</span>
+        </span>
       </button>
 
       {open && (
@@ -121,43 +116,30 @@ function CategoryCard({ c }: { c: Category }) {
           <p className="text-[13.5px] leading-[1.8] text-charcoal-700">{c.intro}</p>
 
           <div className="mt-4 space-y-4">
-            {c.groups.map((g, i) =>
-              g.label ? (
-                <div key={g.label}>
-                  <p className="font-label text-[10px] uppercase tracking-[0.1em] text-navy-800/60">{g.label}</p>
-                  <div className="mt-1.5 flex flex-wrap gap-1.5">
-                    {g.items.map((it) => (
-                      <span
-                        key={it}
-                        className="border border-navy-800/15 bg-white px-2.5 py-1 text-[12px] text-charcoal-700"
-                      >
-                        {it}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <ul key={`list-${i}`} className="space-y-1.5">
+            {c.groups.map((g) => (
+              <div key={g.label}>
+                <p className="font-label text-[10px] uppercase tracking-[0.1em] text-navy-800/60">{g.label}</p>
+                <div className="mt-1.5 flex flex-wrap gap-1.5">
                   {g.items.map((it) => (
-                    <li key={it} className="flex gap-2 text-[13px] leading-relaxed text-charcoal-700">
-                      <span className="text-brass-500">·</span>
-                      <span>{it}</span>
-                    </li>
+                    <span
+                      key={it}
+                      className="border border-navy-800/15 bg-white px-2.5 py-1 text-[12px] text-charcoal-700"
+                    >
+                      {it}
+                    </span>
                   ))}
-                </ul>
-              )
-            )}
+                </div>
+              </div>
+            ))}
           </div>
 
-          {c.notes && (
-            <div className="mt-4 space-y-1.5 border-t border-navy-800/10 pt-4">
-              {c.notes.map((n) => (
-                <p key={n} className="text-[12px] leading-relaxed text-charcoal-600/85">
-                  {n}
-                </p>
-              ))}
-            </div>
-          )}
+          <div className="mt-4 space-y-1.5 border-t border-navy-800/10 pt-4">
+            {c.notes.map((n) => (
+              <p key={n} className="text-[12px] leading-relaxed text-charcoal-600/85">
+                {n}
+              </p>
+            ))}
+          </div>
 
           <a
             href={siteConfig.kakaoChannelUrl}
