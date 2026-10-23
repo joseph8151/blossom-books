@@ -13,6 +13,14 @@ import { countryPrograms } from "@/data/countryPrograms";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+// countryPrograms(나라별)에 더해, 레벨테스트·공인시험 상담표로도 바로 연결합니다.
+// 홈페이지의 "나라별 교과 과정" 섹션은 같은 countryPrograms 데이터를 쓰지만
+// 국가만 다루므로, 이 두 항목은 countryPrograms에 넣지 않고 /books에서만 더합니다.
+const examPrograms = [
+  { title: "학원 레벨테스트 준비", desc: "영어·국어·수학 레벨테스트, 반 배정 시험 대비", href: "/quote" },
+  { title: "공인 영어 시험", desc: "OET·MET·CELBAN·PTE·SAT 등 공인·전문시험 대비", href: "/quote-exam" },
+];
+
 const tracks: (CurriculumTrack | "all")[] = [
   "all",
   "us-curriculum",
@@ -121,9 +129,9 @@ export default function BooksPage() {
         </p>
       </div>
 
-      {/* 나라별 교과 과정 카드 */}
+      {/* 나라별 교과 과정 + 레벨테스트·공인시험 카드 */}
       <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {countryPrograms.map((c) => (
+        {[...countryPrograms, ...examPrograms].map((c) => (
           <Link
             key={c.href}
             href={c.href}
