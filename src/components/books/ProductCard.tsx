@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Sparkles, Headphones, FileSearch, MessageCircle } from "lucide-react";
+import { Sparkles, FileSearch, MessageCircle } from "lucide-react";
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
 import { coverToneFor } from "@/lib/utils";
-import { productBadges, priceDisplay, explanationLanguage } from "@/lib/productMeta";
+import { priceDisplay, pagesLabel } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
 import { stripVolumeMentions } from "@/lib/sanitizeForHome";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
@@ -31,13 +31,17 @@ export default function ProductCard({
   hidePrice?: boolean;
   hideVolumeInfo?: boolean;
 }) {
-  const lang = explanationLanguage(product);
   const coreAreas = product.units.slice(0, 3).join(" · ");
   const [orderOpen, setOrderOpen] = useState(false);
   const summary = hideVolumeInfo ? stripVolumeMentions(product.summaryKo) : product.summaryKo;
-  const badges = hideVolumeInfo
-    ? productBadges(product).filter((b) => !VOLUME_BADGES.has(b))
-    : productBadges(product);
+  // 카드에는 가장 먼저 필요한 정보(학년대·분량)만 남기고, Answer Guide·Audio·
+  // 4 Skills 같은 세부 사항은 상세 페이지로 넘깁니다 — 모든 교재에 해설이
+  // 포함된다는 건 이미 사이트 전체에서 약속하는 내용이라 카드마다 반복해서
+  // 배지로 보여줄 필요가 없습니다.
+  const pages = pagesLabel(product);
+  const primaryTags = [product.gradeRange, hideVolumeInfo && VOLUME_BADGES.has(pages) ? null : pages].filter(
+    (t): t is string => Boolean(t)
+  );
 
   return (
     <div className="lift group relative flex flex-col overflow-hidden border border-navy-800/12 bg-ivory-100 shadow-card">
@@ -105,10 +109,10 @@ export default function ProductCard({
             {product.titleKo}
           </Link>
         </h3>
-        <p className="mt-1 text-[12px] text-charcoal-600">{product.subject}</p>
-        <span className="mt-2 inline-flex w-fit items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2 py-0.5 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">
-          {seriesInfo[seriesFor(product)].name}
-        </span>
+        <p className="mt-1.5 font-label text-[10px] uppercase tracking-[0.08em] text-charcoal-600/70">
+          {product.subject} <span className="text-navy-800/25">·</span>{" "}
+          <span className="text-brass-500">{seriesInfo[seriesFor(product)].name}</span>
+        </p>
 
         <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600 line-clamp-2">
           {summary}
@@ -121,27 +125,19 @@ export default function ProductCard({
           </p>
         )}
 
-        {/* 통일 정보 배지 — Grade · Level · Pages · Skills · Answer Guide (가격 아님) */}
-        <div className="mt-3.5 flex flex-wrap gap-1.5">
-          {badges.map((b) => (
-            <span
-              key={b}
-              className="border border-navy-800/15 bg-ivory-200/50 px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-navy-800/80"
-            >
-              {b}
-            </span>
-          ))}
-          {product.includesAudio && (
-            <span className="inline-flex items-center gap-1 border border-navy-800/15 bg-ivory-200/50 px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-navy-800/80">
-              <Headphones size={11} /> Audio
-            </span>
-          )}
-          {product.includesAnswerKey && (
-            <span className="border border-brass-500/30 bg-brass-500/[0.05] px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-brass-500">
-              {lang.labelEn}
-            </span>
-          )}
-        </div>
+        {/* 가장 먼저 필요한 정보만 — 학년대 · 분량 */}
+        {primaryTags.length > 0 && (
+          <div className="mt-3.5 flex flex-wrap gap-1.5">
+            {primaryTags.map((t) => (
+              <span
+                key={t}
+                className="border border-navy-800/12 bg-ivory-200/40 px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-navy-800/75"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
 
         <div className="mt-6 border-t border-navy-800/10 pt-4">
           <div className={`flex items-center gap-2 ${hidePrice ? "justify-end" : "justify-between"}`}>
