@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
-// 6개 핵심 서비스는 모두 동등하게 중요합니다 — 특정 카드만 강조하지 않습니다.
+// 7개 핵심 서비스는 모두 동등하게 중요합니다 — 특정 카드만 강조하지 않습니다.
 // 클릭하면 다른 페이지로 이동하지 않고, 카드 바로 아래에 상세 패널이
 // 펼쳐집니다("자세히 보기 +" / "접기 −"). 상세 패널은 전부 카카오톡 상담
 // CTA로 끝납니다 — 과목·난이도·학원 스타일이 섞인 질문은 카탈로그 필터보다
@@ -140,6 +140,24 @@ const categories: Category[] = [
     ],
     notes: ["SL/HL, 분량, 현재 진도에 맞춰 Unit 단위로 구성합니다."],
     ctaLabel: "IB 상담하기",
+  },
+  {
+    no: "07",
+    en: "US Math Competition & Gifted Test Prep",
+    ko: "미국 수학 경시대회 · 사고력 검사",
+    teaser: "경시대회와 영재(GT) 사고력 검사는 성격이 달라 각각 다른 기준으로 준비합니다.",
+    areas: "AMC · MATHCOUNTS · SCAT · CogAT · NNAT · OLSAT",
+    intro:
+      "영재 프로그램(GT) 진단·선발에 활용되는 사고력 검사와 미국 수학 경시대회는 시험마다 공식 Level·Division 구분이 다릅니다. 공식 구분과 난이도 구성을 섞지 않고 각각에 맞춰 준비합니다.",
+    groups: [
+      { label: "미국 수학 경시대회", items: ["AMC", "MATHCOUNTS", "MOEMS", "Math Kangaroo", "SASMO", "KMC", "성대경시"] },
+      { label: "사고력·영재 검사(GT)", items: ["SCAT", "CogAT", "NNAT", "OLSAT"] },
+    ],
+    notes: [
+      "SCAT·CogAT·NNAT·OLSAT는 경시대회가 아니라 영재 프로그램 선발용 사고력 검사로, 경시대회와는 다른 기준으로 구성합니다.",
+      "목록에 없는 사고력 검사나 경시대회도 상담을 통해 확인 후 구성합니다.",
+    ],
+    ctaLabel: "경시대회·사고력 검사 상담하기",
   },
 ];
 
