@@ -39,6 +39,12 @@ export interface Product {
   units: string[]; // 주요 단원
   summaryKo: string; // 카드용 짧은 설명
   descriptionKo: string; // 상세 설명
+  // 검색결과 <title>/설명문 전용 오버라이드. 생략 시 각각 titleKo/summaryKo를
+  // 그대로 씁니다 — titleKo는 H1·카드·구조화 데이터에도 쓰이므로 검색 CTR
+  // 목적으로 문구를 늘리고 싶을 때 titleKo 자체를 바꾸지 않고 이 필드만
+  // 채웁니다(네이버 서치어드바이저 권장: 제목 40자·설명 80자 이내).
+  seoTitle?: string;
+  seoDescription?: string;
   recommendedForKo: string; // 추천 대상
   // 가격 — 관리자가 상품별로 개별 설정. 미정인 경우 undefined → "상담 문의" 표시
   priceKRW?: number;

@@ -38,6 +38,9 @@ export const products: Product[] = [
       "종합 실전",
     ],
     summaryKo: "Algebra 1 전 범위를 12개 단원으로 구성한 개념서+문제집. 모의고사 2회분 포함.",
+    // 실제 검색어("Algebra 1 문제집")를 제목 앞부분에 반영.
+    seoTitle: "Algebra 1 문제집 G8-9 | 미국 교과 실전 대비 - 블러섬북스",
+    seoDescription: "미국 교과 Algebra 1(G8-9) 개념+문제집. 전 범위 12단원, 모의고사 2회분 포함.",
     descriptionKo:
       "미국 교과과정 Algebra 1의 출제 범위를 단원별로 분석하여 개념 확인 문제부터 응용·심화 문제까지 단계적으로 구성했습니다. 정답과 함께 풀이 과정과 자주 틀리는 지점을 설명하는 상세 해설집을 제공합니다.",
     recommendedForKo: "Algebra 1을 처음 시작하거나 학기 중 체계적으로 복습하려는 학생",
@@ -308,6 +311,9 @@ export const products: Product[] = [
     ],
     units: ["정수와 유리수", "비와 비율", "일차식과 방정식", "기초 기하", "자료와 통계"],
     summaryKo: "Algebra 진입 전 기초를 다지는 Pre-Algebra 개념서+문제집.",
+    // 실제 검색어("Pre Algebra", "Pre-Algebra")를 제목 앞부분에 반영.
+    seoTitle: "Pre-Algebra 문제집 G6-8 | 미국 중등수학 기초 - 블러섬북스",
+    seoDescription: "미국 교과 Pre-Algebra(G6-8) 개념+문제집. Algebra 진입 전 기초 개념 단계별 연습.",
     descriptionKo: "Algebra 학습에 필요한 기초 개념을 단원별로 정리하고 단계적으로 연습하도록 구성했습니다. 자세한 분량·구성은 상담으로 안내해 드립니다.",
     recommendedForKo: "Algebra를 앞두고 기초를 다지려는 학생",
     domesticPayment: "bank-transfer",
@@ -440,6 +446,9 @@ export const products: Product[] = [
     ],
     units: ["극한과 연속", "미분", "적분", "미적분의 응용", "급수(BC)"],
     summaryKo: "AP Calculus AB/BC 전 범위 개념+문제집. FRQ 유형 포함.",
+    // 실제 검색어("AP Calculus 문제")를 제목 앞부분에 반영.
+    seoTitle: "AP Calculus 문제집 | AB·BC FRQ 실전 대비 - 블러섬북스",
+    seoDescription: "AP Calculus AB/BC(G11-12) 개념+문제집. FRQ 자유응답형 포함, 상세 해설 제공.",
     descriptionKo: "AB/BC 출제 범위를 단원별로 구성하고 자유응답형(FRQ) 유형을 반영했습니다.",
     recommendedForKo: "AP Calculus를 준비하는 학생",
     domesticPayment: "bank-transfer",
@@ -1156,6 +1165,9 @@ export const products: Product[] = [
     ],
     units: ["Mathematics", "Reading", "Language Usage"],
     summaryKo: "MAP Growth 대비 문제집. Math·Reading·Language 영역, 학년별로 제공.",
+    // 실제 검색어("MAP Test 문제집")를 제목 앞부분에 반영.
+    seoTitle: "MAP Test 문제집 | 학년별 Math·Reading 대비 - 블러섬북스",
+    seoDescription: "MAP Growth 학년별 대비 문제집. Math·Reading·Language Usage 실전 연습, 상세 해설 포함.",
     descriptionKo: "MAP Growth 출제 영역(Math·Reading·Language Usage)을 학년 수준에 맞춰 구성합니다. 학년·영역 선택은 상담을 통해 편하게 안내해 드립니다.",
     recommendedForKo: "국제학교 입학·편입을 위한 MAP 테스트를 준비하는 학생",
     domesticPayment: "bank-transfer",
@@ -1212,6 +1224,9 @@ export const products: Product[] = [
     ],
     units: ["Listening", "Reading", "Writing", "Speaking"],
     summaryKo: "WIDA ACCESS 대비 문제집. 4개 영역, 학년별 제공, 리스닝 오디오 포함.",
+    // 실제 검색어("WIDA Test")를 제목 앞부분에 반영.
+    seoTitle: "WIDA Test 문제집 (학년별) | 4개 영역 실전 대비 - 블러섬북스",
+    seoDescription: "WIDA ACCESS 학년별 대비 문제집. Listening·Reading·Writing·Speaking, 오디오 포함.",
     descriptionKo: "WIDA ACCESS 4개 영역을 학년 수준에 맞춰 구성하고 리스닝 오디오를 제공합니다. 학년 선택은 상담으로 안내해 드립니다.",
     recommendedForKo: "WIDA ACCESS(영어 숙련도 평가)를 준비하는 학생",
     domesticPayment: "bank-transfer",
@@ -1622,6 +1637,10 @@ export const products: Product[] = [
     ],
     units: ["Main Idea", "Supporting Details", "Inference", "Vocabulary in Context", "Author's Purpose", "Text Structure", "Sequence", "Cause & Effect", "Compare & Contrast", "Summarizing"],
     summaryKo: "SR Reading Level(3.5–4.5) 대비 종합 문제집. SR 독해 전 유형을 반복·심화까지 연습. 150·200·300P 선택.",
+    // 실제 검색어("SR 테스트 문제집" 등)에 맞춘 제목·설명. G6-8과 겹치지 않게
+    // 이 학년의 특징(반복 연습으로 실수 유형 극복)을 반영합니다.
+    seoTitle: "SR 테스트 문제집 G4-5 | 반복 연습 실전 대비 - 블러섬북스",
+    seoDescription: "SR Test(Reading) G4-5 대비 문제집. Inference·Main Idea 반복 연습, 상세 해설 포함.",
     descriptionKo:
       "SR 리딩 유형을 총망라한 종합 문제집입니다. Inference와 Main Idea, Vocabulary in Context 등 SR에서 자주 실수하는 유형을 반복 연습하며 문제에서 무엇을 묻는지 먼저 파악하는 습관을 기릅니다. 현재 수준에서 조금씩 난도를 높여갈 수 있도록 지문 난이도를 단계적으로 구성했습니다. 필요한 반복량에 따라 150·200·300P 중 선택해 구매하실 수 있습니다.",
     recommendedForKo: "SR 점수가 4점대 초반에서 정체되어 있거나 상위 레벨로 올라가고 싶은 Grade 4–5 학생",
@@ -1651,6 +1670,12 @@ export const products: Product[] = [
     ],
     units: ["Main Idea", "Supporting Details", "Inference", "Vocabulary in Context", "Author's Purpose", "Text Structure", "Sequence", "Cause & Effect", "Compare & Contrast", "Summarizing"],
     summaryKo: "SR Reading Level(5.0–6.5) 대비 종합 문제집. 긴 지문·추론·심화 유형까지 SR 독해 전 유형. 150·200·300P 선택.",
+    // 네이버 서치어드바이저 노출 대비 0클릭 — 상품명 위주 제목을, 실제 검색어
+    // ("SR 테스트 문제", "SR test 문제", "SR 테스트 문제집")와 실제 연습 영역이
+    // 드러나는 제목·설명으로 교체. G4-5와 차별화되도록 이 학년만의 특징(긴
+    // 지문·추론 심화)을 반영합니다.
+    seoTitle: "SR 테스트 문제집 G6-8 | 긴 지문·추론 실전 대비 - 블러섬북스",
+    seoDescription: "SR Test(Reading) G6-8 대비 문제집. 긴 지문·추론·구조분석 유형, 상세 해설 포함.",
     descriptionKo:
       "상위 SR 레벨을 목표로 하는 학생을 위한 종합 문제집입니다. 긴 지문 독해와 추론, 글의 구조 분석 등 SR 상위 레벨에서 요구되는 유형을 심화까지 연습합니다. 정답 근거를 지문에서 찾는 훈련을 중심으로 구성했습니다. 필요한 반복량에 따라 150·200·300P 중 선택해 구매하실 수 있습니다.",
     recommendedForKo: "SR 상위 레벨을 목표로 하거나 긴 지문 독해가 필요한 Grade 6–8 학생",

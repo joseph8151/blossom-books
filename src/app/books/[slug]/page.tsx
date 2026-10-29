@@ -28,6 +28,7 @@ import VolumeGuide from "@/components/common/VolumeGuide";
 import PrepComparison from "@/components/common/PrepComparison";
 import TrackView from "@/components/common/TrackView";
 import { siteConfig, siteKeywords } from "@/data/site";
+import { buildProductSeo } from "@/lib/seo";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.id }));
@@ -52,20 +53,30 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   ];
   const keywords = Array.from(new Set([...productKeywords, ...siteKeywords]));
 
+  // 검색결과용 제목·설명 — buildProductSeo가 product.seoTitle/seoDescription이
+  // 있으면 그대로, 없으면 상품 데이터로 자동 생성합니다(src/lib/seo.ts).
+  // H1·카드 등 다른 곳에 쓰이는 titleKo는 그대로 둡니다. 생성된 title은
+  // 이미 "- 블러섬북스" 접미사를 포함하므로 템플릿("%s | 블러섬북스
+  // Blossom Books")을 거치지 않도록 title.absolute로 지정합니다.
+  const seo = buildProductSeo(product);
+  const ogImageUrl = `${url}opengraph-image`;
+
   return {
-    title: product.titleKo,
-    description: product.summaryKo,
+    title: { absolute: seo.title },
+    description: seo.description,
     keywords,
     alternates: { canonical: url },
     openGraph: {
-      title: product.titleKo,
-      description: product.summaryKo,
+      title: seo.title,
+      description: seo.description,
       url,
+      images: [ogImageUrl],
     },
     twitter: {
       card: "summary_large_image" as const,
-      title: product.titleKo,
-      description: product.summaryKo,
+      title: seo.title,
+      description: seo.description,
+      images: [ogImageUrl],
     },
   };
 }
@@ -113,11 +124,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           url: `https://blossombooks.org/books/${product.id}/`,
         }
     : undefined;
+  const productUrl = `https://blossombooks.org/books/${product.id}/`;
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.titleKo,
     description: product.summaryKo,
+    image: `${productUrl}opengraph-image`,
+    url: productUrl,
     sku: product.id,
     brand: { "@type": "Brand", name: "블러섬북스" },
     ...(offers ? { offers } : {}),
