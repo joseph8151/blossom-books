@@ -32,6 +32,7 @@ export const primaryNav = [
 export const siteKeywords = [
   "국제학교 문제집",
   "국제학교 교재",
+  "국제학교 수학 교재",
   "미국 교과서 문제집",
   "미국 수학 문제집",
   "국제학교 입학시험 문제집",
@@ -45,6 +46,7 @@ export const siteKeywords = [
   "국어 과외",
   "과학 과외",
   "국제학교 과외",
+  "국제학교 수학 과외",
   "AP 과외",
   "SAT 과외",
   "토플 과외",
