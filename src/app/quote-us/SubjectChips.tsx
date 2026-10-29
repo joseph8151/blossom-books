@@ -428,7 +428,9 @@ export default function SubjectChips() {
           <div className="mt-5 border-t border-ivory-300 pt-4">
             <p className="text-[12.5px] font-medium text-navy-950">What&rsquo;s Inside</p>
             <p className="mt-1.5 text-[12.5px] leading-relaxed text-charcoal-600">
-              Workbook + Answer Key (해설은 한글 가능, 목차는 영어).
+              {mode === "ap"
+                ? "개념서 + 문제집(100P 또는 200P) + 해설집 (해설은 한글 요청 가능, 목차는 영어)."
+                : "Workbook + Answer Key (해설은 한글 가능, 목차는 영어)."}
             </p>
           </div>
 
