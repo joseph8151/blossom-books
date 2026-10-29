@@ -6,21 +6,15 @@ interface VolumeTile {
   priceKRW: number;
 }
 
-// 40/60/100/200P는 공용 단가표(flexibleVolumes)를 그대로 쓰고, 300P는 이
-// 페이지에서만 쓰는 별도 분량이라 공용 단가표(flexibleVolumes)에는 추가하지
-// 않았습니다.
-const volumes: VolumeTile[] = [
-  ...flexibleVolumes.map((v) => ({ pages: v.pages, label: v.label, priceKRW: v.priceKRW })),
-  { pages: 300, label: "300P", priceKRW: 390000 },
-];
+// 100/200/300P 모두 공용 단가표(flexibleVolumes)를 그대로 씁니다.
+const volumes: VolumeTile[] = flexibleVolumes.map((v) => ({ pages: v.pages, label: v.label, priceKRW: v.priceKRW }));
 
 const meta: Record<number, { eyebrow: string; badge?: string; desc: string; note?: string }> = {
-  40: { eyebrow: "Quick Check", desc: "시험까지 시간이 많지 않을 때 빠르게 점검하는 구성" },
-  60: { eyebrow: "Recommended", badge: "MOST SELECTED", desc: "가장 많이 선택하는 기본 구성" },
-  100: { eyebrow: "Full Practice", desc: "시험 전 충분한 문제 연습" },
+  100: { eyebrow: "Quick Check", desc: "시험까지 시간이 많지 않을 때 빠르게 점검하는 구성" },
   200: {
-    eyebrow: "Extended Practice",
-    desc: "장기 준비 및 충분한 반복 학습",
+    eyebrow: "Recommended",
+    badge: "MOST SELECTED",
+    desc: "가장 많이 선택하는 기본 구성 · 장기 준비 및 충분한 반복 학습",
     note: "같은 범위를 한 번 더 풉니다. 틀린 유형이 두 가지 이상이면 100P에서 반복이 끝납니다.",
   },
   300: {

@@ -38,11 +38,11 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
           <p className="mt-5 max-w-2xl text-[15px] leading-[1.9] text-charcoal-600">{t.intro}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             {t.booksTrack && (
-              <Link href={`/books?track=${t.booksTrack}`} className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
+              <Link href={`/books?track=${t.booksTrack}`} className="lift-sm inline-flex items-center gap-2 bg-navy-900 px-6 py-3.5 text-[14px] font-medium text-ivory-100 shadow-soft transition-colors hover:bg-navy-800">
                 교재 보기 <ArrowRight size={16} />
               </Link>
             )}
-            <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3.5 text-[14px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">
+            <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="lift-sm inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3.5 text-[14px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">
               <MessageCircle size={16} /> 카카오톡 문의
             </a>
           </div>
@@ -65,15 +65,17 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
             </div>
             <div>
               <h2 className="font-display text-[22px] font-semibold text-navy-950">평가하는 영역</h2>
-              <div className="mt-5 space-y-4">
-                {t.areas.map((a) => (
-                  <div key={a.area} className="border border-navy-800/12 bg-ivory-100 p-4">
-                    <p className="font-label text-[11px] uppercase tracking-[0.1em] text-brass-500">{a.area}</p>
-                    <div className="mt-2 flex flex-wrap gap-1.5">
-                      {a.items.map((it) => (
-                        <span key={it} className="border border-navy-800/12 bg-ivory-200/50 px-2 py-1 text-[12px] text-charcoal-900">{it}</span>
-                      ))}
-                    </div>
+              <div className="mt-5 divide-y divide-navy-800/10 border-y border-navy-800/10">
+                {t.areas.map((a, i) => (
+                  <div key={a.area} className="py-4">
+                    <p className="flex items-center gap-2 font-label text-[11px] uppercase tracking-[0.1em] text-navy-900">
+                      <span
+                        className="h-2 w-2 rounded-full"
+                        style={{ background: ["#7d8a6a", "#ad8a4e", "#b06a3c"][i % 3] }}
+                      />
+                      {a.area}
+                    </p>
+                    <p className="mt-2 text-[13px] leading-relaxed text-charcoal-600">{a.items.join(" · ")}</p>
                   </div>
                 ))}
               </div>
@@ -86,6 +88,27 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
           </div>
         </div>
       </section>
+
+      {/* 준비 순서 */}
+      {t.steps.length > 0 && (
+        <section className="border-b border-navy-800/12 bg-ivory-100 py-16 lg:py-20">
+          <div className="mx-auto max-w-5xl px-5 lg:px-8">
+            <div className="max-w-2xl">
+              <span className="eyebrow">Where to start</span>
+              <h2 className="mt-4 font-display text-[24px] font-semibold text-navy-950 sm:text-[28px]">준비 순서</h2>
+              <p className="mt-2 text-[14px] text-charcoal-600">{t.name}를 처음 시작한다면 이 순서를 참고하세요.</p>
+            </div>
+            <div className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-5">
+              {t.steps.map((s, i) => (
+                <div key={s} className="border-t border-navy-800/20 pt-5">
+                  <span className="font-label text-[12px] tracking-[0.1em] text-brass-500">{String(i + 1).padStart(2, "0")}</span>
+                  <p className="mt-2.5 text-[13px] leading-relaxed text-charcoal-600">{s}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 관련 교재 */}
       {related.length > 0 && (
@@ -110,12 +133,12 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
 
       {/* FAQ */}
       {t.faq.length > 0 && (
-        <section className="border-b border-navy-800/12 bg-ivory-100 py-16 lg:py-20">
+        <section className="border-b border-navy-800/12 bg-ivory-200/50 py-16 lg:py-20">
           <div className="mx-auto max-w-3xl px-5 lg:px-8">
             <h2 className="font-display text-[24px] font-semibold text-navy-950">자주 묻는 질문</h2>
-            <div className="mt-6 divide-y divide-navy-800/10 border-y border-navy-800/10">
+            <div className="mt-6 space-y-3">
               {t.faq.map((f) => (
-                <div key={f.q} className="py-4">
+                <div key={f.q} className="border border-navy-800/12 bg-ivory-100 p-5 shadow-card">
                   <p className="flex items-start gap-2 text-[14.5px] font-medium text-navy-950">
                     <HelpCircle size={16} className="mt-0.5 shrink-0 text-brass-500" /> {f.q}
                   </p>

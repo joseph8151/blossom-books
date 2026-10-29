@@ -20,8 +20,8 @@ export const metadata = {
   },
 };
 
-const p100 = volumeOptions[2]; // 100P
-const p200 = volumeOptions[3]; // 200P
+const p100 = volumeOptions[0]; // 100P
+const p200 = volumeOptions[1]; // 200P
 const p300 = { label: "300P", priceKRW: 390000 }; // 이 페이지 전용 분량 — 공용 volumeOptions에는 추가하지 않음
 const volumes = [p100, p200, p300];
 

@@ -125,9 +125,14 @@ export default function HeroSection() {
       {/* 대비 가능한 시험 · 과목 — 첫 화면에서 "무엇을 다루는지" 즉시 이해 */}
       <div className="border-t border-navy-800/12 bg-ivory-200/40">
         <div className="mx-auto max-w-7xl px-5 py-7 lg:px-8">
-          <p className="font-label text-[10.5px] uppercase tracking-[0.16em] text-navy-800/55">
-            Assessments we prepare for
-          </p>
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <p className="font-label text-[10.5px] uppercase tracking-[0.16em] text-navy-800/55">
+              Assessments we prepare for
+            </p>
+            <Link href="/books" className="text-[12px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4">
+              전체 시험 보기
+            </Link>
+          </div>
           <div className="mt-3 flex flex-wrap gap-x-2 gap-y-2">
             {primaryAssessments.map((x) => (
               <Link

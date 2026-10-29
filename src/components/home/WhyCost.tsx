@@ -3,7 +3,7 @@ import { Check, Minus } from "lucide-react";
 // 일반 문제집 vs Blossom Books 비교 (경쟁사 비방 없이, 구성 방식의 차이만)
 const rows: [string, string][] = [
   ["학년 중심 선택", "학년 + 현재 수준 + 목표 고려"],
-  ["정해진 구성", "40P / 60P / 100P 선택"],
+  ["정해진 구성", "100P / 200P / 300P 선택"],
   ["일반적인 문제 유형", "목표 시험·Skill에 맞춘 구성"],
   ["정답 위주", "정답 + 상세 해설"],
   ["동일 난이도 중심", "Foundation → Challenge Level"],

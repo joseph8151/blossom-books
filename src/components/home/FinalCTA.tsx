@@ -31,7 +31,7 @@ export default function FinalCTA() {
             준비할 시험이 정해졌다면, 필요한 만큼 시작하세요.
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-[14.5px] leading-relaxed text-ivory-200/80">
-            필요한 분량만큼 선택해 바로 시작하세요. 정확한 가격은 각 교재 상세페이지에서 확인하실 수
+            필요한 분량만큼 선택해 바로 시작하세요. 정확한 가격은 카카오톡 상담에서 확인하실 수
             있습니다.
           </p>
 
@@ -61,7 +61,7 @@ export default function FinalCTA() {
             </a>
           </div>
           <p className="mt-5 text-[12px] text-ivory-200/55">
-            더 많은 분량의 집중 Prep이 필요하신가요?{" "}
+            300P 이상의 집중 Prep이 필요하신가요?{" "}
             <Link href="/custom-order" className="underline hover:text-ivory-100">Extended Prep 문의</Link>
           </p>
         </div>

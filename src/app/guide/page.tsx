@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { MessageCircle, HelpCircle } from "lucide-react";
+import { MessageCircle, HelpCircle, ArrowRight, BookOpen } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import VolumeGuide from "@/components/common/VolumeGuide";
+import { prepTracks } from "@/data/prepTracks";
 
 export const metadata = {
   title: "페이지 수 선택 가이드 (40·60·100·200P)",
@@ -57,6 +58,35 @@ export default function GuidePage() {
             * 추천 학습 기간은 하루 2~4페이지 기준의 예시이며, 학생의 학년과 수준에 따라 달라질 수 있습니다.
             정확한 구성과 난이도는 상담 시 안내해 드립니다.
           </p>
+        </div>
+      </section>
+
+      {/* 시험별 준비 가이드 */}
+      <section className="border-b border-navy-800/12 bg-ivory-100 py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-5 lg:px-8">
+          <h2 className="font-display text-[24px] font-semibold text-navy-950 sm:text-[28px]">
+            시험별 준비 가이드
+          </h2>
+          <p className="mt-2 text-[14px] text-charcoal-600">
+            준비 중인 시험을 선택하면 평가 영역, 준비 순서, 자주 묻는 질문까지 한 번에 확인하실 수 있습니다.
+          </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {prepTracks.map((t) => (
+              <Link
+                key={t.slug}
+                href={`/prep/${t.slug}`}
+                className="lift-sm group flex flex-col border border-navy-800/12 bg-ivory-200/40 p-5 shadow-card transition-colors hover:border-brass-500/50"
+              >
+                <BookOpen size={18} className="text-brass-500" strokeWidth={1.7} />
+                <p className="mt-3 font-display text-[16px] font-semibold leading-snug text-navy-950">{t.name}</p>
+                <p className="mt-1 text-[12.5px] text-charcoal-600">{t.ko}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-medium text-navy-900">
+                  가이드 보기
+                  <ArrowRight size={13} className="text-brass-500 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
