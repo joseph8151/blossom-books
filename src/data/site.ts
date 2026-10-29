@@ -57,6 +57,7 @@ export const siteKeywords = [
   "맵테스트 문제",
   "맵테스트 문제집",
   "맵테스트 교재",
+  "맵테스트 수학",
   "ISEE SSAT 문제집",
   "OET 문제집",
   "PTE 문제집",
