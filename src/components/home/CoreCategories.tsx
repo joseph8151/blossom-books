@@ -91,7 +91,7 @@ const categories: Category[] = [
   {
     no: "04",
     en: "SR / STAR Reading Prep",
-    ko: "SR 리딩 레벨 대비",
+    ko: "SR 테스트 리딩 레벨 대비",
     teaser: "지문을 많이 읽는 것보다, SR이 요구하는 독해 유형에 맞춰 연습합니다.",
     areas: "SR · STAR Reading · Accelerated Reader",
     intro:
