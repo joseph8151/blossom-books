@@ -21,6 +21,9 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 const examPrograms = [
   { title: "학원 레벨테스트 준비", desc: "영어·국어·수학 레벨테스트, 반 배정 시험 대비", href: "/quote" },
   { title: "공인 영어 시험", desc: "OET·MET·CELBAN·PTE·SAT 등 공인·전문시험 대비", href: "/quote-exam" },
+  { title: "SR 리딩 레벨 대비", desc: "SR·STAR Reading이 요구하는 독해 유형 연습", href: "/quote#sr" },
+  { title: "AP 시험 대비", desc: "Calculus·Biology·Chemistry·Physics 등 AP 전 과목", href: "/quote-us#ap" },
+  { title: "IB 디플로마 대비", desc: "Math AA/AI·Biology·Chemistry·Economics 등 IB", href: "/quote-ib" },
 ];
 
 const tracks: (CurriculumTrack | "all")[] = [
