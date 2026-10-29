@@ -8,14 +8,14 @@ export default function EnglishLanguageExtrasSection() {
           English Placement & Language
         </p>
         <h2 className="mt-2.5 font-display text-[24px] font-semibold text-navy-950 sm:text-[27px]">
-          TOEFL Junior · WIDA Assessments
+          TOEFL Junior · TOEIC Bridge · WIDA Assessments
         </h2>
         <p className="mt-3 max-w-[680px] text-[14px] leading-relaxed text-charcoal-600">
           국제학교 영어 배치·진단 목적으로 활용되는 추가 시험입니다. WIDA는 공식 문제를 복제하지 않으며,
           유형 대비·영어 영역 연습 중심으로 구성합니다.
         </p>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           <NoPriceExamCard
             title="TOEFL Junior"
             subtitle="K-12 학생의 영어 능력을 평가하며 학교 입학·배치 목적과 연관될 수 있는 시험입니다. TOEFL iBT와는 다른 시험이며, 이 페이지에서는 TOEFL Junior만 다룹니다."
@@ -26,6 +26,13 @@ export default function EnglishLanguageExtrasSection() {
               upgradeDesc: "Reading · Listening · Language Form 등 취약 영역을 집중적으로 추가 연습합니다.",
             }}
             ctaLabel="TOEFL Junior 구성 문의"
+          />
+          <NoPriceExamCard
+            title="TOEIC Bridge"
+            officialName="ETS TOEIC Bridge"
+            subtitle="초·중급 학습자의 실용 영어 능력을 평가하는 ETS 시험입니다. TOEIC(일반)과는 난이도·목적이 다르며, 이 페이지에서는 TOEIC Bridge만 다룹니다."
+            areas={["Listening", "Reading"]}
+            ctaLabel="TOEIC Bridge 구성 문의"
           />
           <NoPriceExamCard
             title="WIDA MODEL"

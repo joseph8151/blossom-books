@@ -18,8 +18,8 @@ import CustomQuoteCallout from "./components/CustomQuoteCallout";
 import BackToLevelTest from "./components/BackToLevelTest";
 
 // 카카오톡 상담사가 고객에게 국제학교·사립학교·영국계 학교 입학, 배치, 교내 진단·성취도
-// 평가(MAP·CAT4·ISEE·SSAT·UKiset·ISEB·OOPT·TOEFL Junior·GL Progress Test Series·
-// WIDA·NGRT) 구성을 안내할 때 링크로만 전달하는 비공개 페이지입니다. /quote와 같은
+// 평가(MAP·CAT4·ISEE·SSAT·UKiset·ISEB·OOPT·TOEFL Junior·TOEIC Bridge·GL Progress
+// Test Series·WIDA·NGRT) 구성을 안내할 때 링크로만 전달하는 비공개 페이지입니다. /quote와 같은
 // 계열로, 홈/헤더/푸터/사이트맵 어디에도 연결하지 않으며 검색 노출도 막아둡니다
 // (아래 robots 설정). SAT·GRE·TOEFL iBT 등 대입·대학원·성인 시험은 이 페이지에
 // 포함하지 않습니다(별도 페이지 대상). 가격 정책이 없는 신규 시험(UKiset·ISEB·
