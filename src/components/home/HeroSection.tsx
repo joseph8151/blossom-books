@@ -1,30 +1,55 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, GraduationCap } from "lucide-react";
-import { LevelGrowthGraphic } from "./LevelGrowthGraphic";
+import Image from "next/image";
+import { ArrowRight, FileSearch, ChevronDown } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
+import { products } from "@/data/products";
+import { allSchools } from "@/app/admission-full-package/schools";
+
+// 실제 카탈로그 데이터에서 계산한 수치만 씁니다(BrandNumbers.tsx와 동일 원칙) — 과장 없음.
+const titleCount = products.length;
+const subjectCount = new Set(products.map((p) => p.subject)).size;
+const schoolCount = allSchools.length;
 
 // 첫 화면은 가격을 노출하지 않습니다. 목적은 "여기서 내 아이에게 맞는 교재를 찾을 수 있겠다"는 확신.
 // 각 시험 칩 → /books 검색으로 연결 (해당 교재가 없으면 주문제작 안내로 이어집니다)
-const assessments: { label: string; href: string }[] = [
-  { label: "영어학원 레벨테스트", href: "/books?track=level-test" },
-  { label: "사고력수학 레벨테스트", href: "/books?q=%EC%82%AC%EA%B3%A0%EB%A0%A5" },
+// 첫 화면에는 실제 교재가 바로 붙는 항목만 노출하고, 나머지(GRE·LSAT 등)는
+// "전체 시험 보기"로 펼쳐서 봅니다 — LSAT·GRE를 CAT4·MAP과 나란히 두지 않습니다.
+// 레벨테스트 관련 칩 라벨은 실제 현장에서 자주 쓰이는 표현(영어 4대영역 레테·
+// 사고력 수학·문해력 국어)을 그대로 사용합니다.
+const primaryAssessments: { label: string; href: string }[] = [
+  { label: "영어 4대영역 레테", href: "/books?track=level-test" },
+  { label: "사고력 수학", href: "/books?q=%EC%82%AC%EA%B3%A0%EB%A0%A5" },
+  { label: "문해력 국어", href: "/books?q=%EB%AC%B8%ED%95%B4%EB%A0%A5" },
+  { label: "SR TEST", href: "/books?q=SR" },
   { label: "MAP Growth", href: "/books?q=MAP" },
   { label: "CAT4", href: "/books?q=CAT4" },
+  { label: "ISEE", href: "/books?q=ISEE" },
+  { label: "SSAT", href: "/books?q=SSAT" },
+  { label: "미국교과", href: "/books?track=us-curriculum" },
+  { label: "국제학교 입학 패키지", href: "/admission-full-package" },
+];
+
+const moreAssessments: { label: string; href: string }[] = [
+  { label: "영어 내신 대비 (G5–7)", href: "/books?q=Grammar" },
   { label: "NGRT", href: "/books?q=NGRT" },
   { label: "WIDA", href: "/books?q=WIDA" },
-  { label: "SSAT", href: "/books?q=SSAT" },
-  { label: "ISEE", href: "/books?q=ISEE" },
   { label: "UKiset", href: "/books?q=UKiset" },
   { label: "ISEB", href: "/books?q=ISEB" },
   { label: "SAT", href: "/books?q=SAT" },
   { label: "AP", href: "/books?track=ap" },
+  { label: "International School Placement", href: "/books?track=admissions" },
   { label: "GRE", href: "/books?q=GRE" },
   { label: "LSAT", href: "/books?q=LSAT" },
-  { label: "International School Placement", href: "/books?track=admissions" },
 ];
 
 const subjects = ["English", "Reading", "Writing", "Vocabulary", "Grammar", "Math", "Science"];
 
 export default function HeroSection() {
+  const [showAll, setShowAll] = useState(false);
+
   return (
     <section className="paper-rule relative overflow-hidden border-b border-navy-800/12 bg-ivory-100">
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 pb-16 pt-14 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:pb-24 lg:pt-20">
@@ -34,61 +59,66 @@ export default function HeroSection() {
             International Assessment &amp; Academic Prep
           </span>
 
-          {/* 영문 포지셔닝 라인 — 브랜드가 무엇을 하는지 즉시 전달 */}
-          <h1 className="mt-7 font-display text-[27px] font-semibold leading-[1.15] tracking-[-0.01em] text-navy-950 text-balance min-[400px]:text-[31px] sm:text-[38px] lg:text-[44px]">
-            Assessment Prep,
-            <br />
-            <span className="text-brass-500">Built Around the Student.</span>
+          <h1 className="mt-6 max-w-lg font-display text-[34px] font-semibold leading-[1.18] text-navy-950 sm:text-[42px]">
+            학생에게 필요한 문제만, <span className="text-brass-500">정확하게</span>.
           </h1>
-
-          <p className="mt-6 max-w-xl text-[14.5px] font-medium leading-[1.75] text-navy-900">
-            국제학교 · 레벨테스트 · 미국/영국 시험 대비
+          <p className="mt-4 max-w-xl text-[14px] leading-[1.75] text-charcoal-600">
+            학원 입학·레벨테스트 · CAT4 · MAP · ISEE · SSAT · 미국교과
           </p>
-          <p className="mt-3 max-w-xl text-[14.5px] leading-[1.9] text-charcoal-600">
-            같은 시험이라도 학년·현재 수준·목표 점수에 따라 필요한 문제는 다릅니다. 시험 이름이 아니라
-            학생의 수준을 기준으로 교재를 안내합니다.
+          <p className="mt-1.5 max-w-xl text-[14px] leading-[1.75] text-charcoal-600/85">
+            문제 + 정답 + 한국어 상세해설 · Digital PDF
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <Link
-              href="/find"
-              className="group inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
-            >
-              내게 맞는 교재 찾기
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
-            <Link
-              href="/books"
-              className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50 hover:shadow-soft"
-            >
-              시험별 교재 보기
-            </Link>
-          </div>
-
-          {/* 제작진 신뢰 배지 — 클릭 시 제작 방식 페이지로 */}
-          <Link
-            href="/our-approach"
-            className="group mt-6 inline-flex items-center gap-2 border border-burgundy-700/25 bg-burgundy-700/[0.04] px-3.5 py-2 text-[13px] font-medium text-burgundy-700 transition-colors hover:border-burgundy-700/55 hover:bg-burgundy-700/[0.08]"
-          >
-            <GraduationCap size={16} strokeWidth={1.9} />
-            미국 현지 학업 경험과 프렙 티칭 데이터를 바탕으로 설계한 교재
-            <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-          </Link>
-
-          {/* 신뢰 마이크로카피 */}
-          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12.5px] text-charcoal-600">
-            {["구매 전 무료 샘플 확인", "결제 후 PDF 즉시 발송", "전 문항 정답·상세 해설"].map((t) => (
-              <span key={t} className="inline-flex items-center gap-1.5">
-                <Check size={14} className="text-brass-500" strokeWidth={2.5} />
-                {t}
+          {/* 신뢰 지표 — BrandNumbers와 동일하게 실제 데이터 기반 */}
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-y border-navy-800/10 py-3.5">
+            {[
+              { value: `${titleCount}개`, label: "교재" },
+              { value: "K–12", label: "전학년" },
+              { value: `${subjectCount}개`, label: "과목·평가 영역" },
+              { value: `${schoolCount}+`, label: "등록 학교" },
+            ].map((s, i) => (
+              <span key={s.label} className="inline-flex items-center gap-5">
+                {i > 0 && <span className="h-6 w-px bg-navy-800/12" />}
+                <span className="flex items-baseline gap-1.5">
+                  <span className="font-display text-[17px] font-semibold text-navy-950">{s.value}</span>
+                  <span className="text-[11.5px] text-charcoal-600">{s.label}</span>
+                </span>
               </span>
             ))}
           </div>
+
+          <div className="mt-7 flex flex-wrap items-center gap-4">
+            <Link
+              href="/books"
+              onClick={() => trackEvent("view_product_list", { location: "hero" })}
+              className="group inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
+            >
+              시험별 교재 찾기
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
+            </Link>
+            <Link
+              href="#bestsellers"
+              className="inline-flex items-center gap-2 border border-navy-800/25 bg-ivory-100 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50 hover:shadow-soft"
+            >
+              <FileSearch size={16} />
+              실제 문항 샘플 보기
+            </Link>
+          </div>
         </div>
 
-        {/* 우측 비주얼 — 레벨 매칭 성장 그래프 */}
-        <div className="relative mx-auto flex w-full max-w-md items-center justify-center">
-          <LevelGrowthGraphic />
+        {/* 우측 — 표지 + 펼친 문제 페이지 플랫레이 */}
+        <div className="relative mx-auto w-full max-w-md">
+          <div className="pointer-events-none absolute inset-0 -z-0 bg-[radial-gradient(circle_at_50%_46%,rgba(173,138,78,0.14),transparent_62%)]" />
+          <div className="relative aspect-[4/3] overflow-hidden border border-navy-800/12 shadow-lift">
+            <Image
+              src="/images/marketing/hero-flatlay.jpg"
+              alt="Blossom Books 교재 표지와 펼친 문제 페이지, 정답 PDF"
+              fill
+              priority
+              sizes="(min-width: 1024px) 460px, 90vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </div>
 
@@ -104,7 +134,7 @@ export default function HeroSection() {
             </Link>
           </div>
           <div className="mt-3 flex flex-wrap gap-x-2 gap-y-2">
-            {assessments.slice(0, 9).map((x) => (
+            {primaryAssessments.map((x) => (
               <Link
                 key={x.label}
                 href={x.href}
@@ -113,12 +143,24 @@ export default function HeroSection() {
                 {x.label}
               </Link>
             ))}
-            <Link
-              href="/books"
-              className="border border-dashed border-navy-800/25 px-2.5 py-1 font-label text-[11.5px] tracking-wide text-charcoal-600 transition-colors hover:border-brass-500/60 hover:text-navy-900"
+            {showAll &&
+              moreAssessments.map((x) => (
+                <Link
+                  key={x.label}
+                  href={x.href}
+                  className="border border-navy-800/15 bg-ivory-100 px-2.5 py-1 font-label text-[11.5px] tracking-wide text-navy-800 transition-colors hover:border-brass-500/60 hover:text-navy-900"
+                >
+                  {x.label}
+                </Link>
+              ))}
+            <button
+              type="button"
+              onClick={() => setShowAll((v) => !v)}
+              className="inline-flex items-center gap-1 px-2.5 py-1 font-label text-[11.5px] tracking-wide text-navy-800/60 transition-colors hover:text-navy-900"
             >
-              +{assessments.length - 9}개 더보기
-            </Link>
+              {showAll ? "접기" : "전체 시험 보기"}
+              <ChevronDown size={12} className={`transition-transform ${showAll ? "rotate-180" : ""}`} />
+            </button>
           </div>
           <div className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-[12.5px] text-charcoal-600">
             <span className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">Subjects</span>

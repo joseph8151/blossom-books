@@ -4,28 +4,31 @@ import { useState } from "react";
 import Link from "next/link";
 import { MessageCircle, Check, FileSearch, ShieldCheck, Copy } from "lucide-react";
 import { Product } from "@/lib/types";
-import { flexibleVolumes, starterOption, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
-import { offersVolumes, hasStarter } from "@/lib/productMeta";
+import { flexibleVolumes, srVolumes, starterOption, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
+import { offersVolumes, offersSrVolumes, hasStarter } from "@/lib/productMeta";
 import { siteConfig } from "@/data/site";
+import { trackEvent } from "@/lib/analytics";
 
 const trustItems = [
-  "가격 확인 후 문의 가능",
-  "무료 Sample 제공",
-  "학생 수준 간단 확인",
   "정답 및 상세 해설 포함",
   "Digital PDF 제공",
+  "구매 전 Sample 확인 가능",
+  "결제 확인 후 발송",
+  "시험 및 학년별 선택 가능",
   "카카오톡 상담원 안내",
 ];
 
 export default function PurchasePanel({ product, isDirect }: { product: Product; isDirect: boolean }) {
-  const flexible = offersVolumes(product); // 40/60/100 분량 선택 가능 여부
+  const srFlexible = offersSrVolumes(product); // SR Reading Prep 전용 150/200/300 분량 선택 가능 여부
+  const flexible = offersVolumes(product); // 100/200/300 분량 선택 가능 여부
   // 영어 레벨테스트 상품에는 Starter(25P) 진입 구성을 함께 제공합니다.
-  const vols = hasStarter(product) ? [starterOption, ...flexibleVolumes] : flexibleVolumes;
-  const fixedVol = !flexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
-  const [pages, setPages] = useState(flexible ? 60 : fixedVol?.pages ?? 60);
+  const vols = srFlexible ? srVolumes : hasStarter(product) ? [starterOption, ...flexibleVolumes] : flexibleVolumes;
+  const fixedVol = !flexible && !srFlexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
+  const defaultPages = srFlexible ? srVolumes[0].pages : flexible ? flexibleVolumes[0].pages : fixedVol?.pages ?? flexibleVolumes[0].pages;
+  const [pages, setPages] = useState(defaultPages);
   const [copied, setCopied] = useState(false);
   const [addOns, setAddOns] = useState<string[]>([]);
-  const selected = vols.find((v) => v.pages === pages) ?? fixedVol ?? vols.find((v) => v.pages === 60) ?? vols[0];
+  const selected = vols.find((v) => v.pages === pages) ?? fixedVol ?? vols.find((v) => v.pages === flexibleVolumes[0].pages) ?? vols[0];
 
   // 함께 준비하면 좋은 영역 — 현재 교재 과목과 겹치지 않는 항목만 제안 (Smart Upsell)
   const addOnPool = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
@@ -46,10 +49,10 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
 
   const subjectLine = product.units.slice(0, 4).join(" · ");
 
-  // 카카오톡 구매 문의 시 자동으로 복사되는 메시지 (고객이 다시 타이핑할 필요 없이 붙여넣기)
-  function purchaseMessage(): string {
+  // 카카오톡 주문 요청 시 자동으로 복사되는 메시지 (고객이 다시 타이핑할 필요 없이 붙여넣기)
+  function orderMessage(): string {
     const lines = [
-      "안녕하세요. Blossom Books 홈페이지에서 보고 문의드립니다.",
+      "안녕하세요. Blossom Books 홈페이지에서 보고 주문 문의드립니다.",
       `상품: ${product.titleKo}`,
     ];
     if (isDirect) {
@@ -60,17 +63,18 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
     }
     lines.push(`학생 학년(참고): ${product.gradeRange}`);
     if (addOns.length) lines.push(`함께 준비 희망 영역: ${addOns.join(", ")} (별도 구성 안내)`);
-    lines.push("구매를 원합니다.");
+    lines.push("주문을 진행하고 싶습니다.");
     return lines.join("\n");
   }
 
   function goKakao() {
     try {
-      navigator.clipboard?.writeText(purchaseMessage());
+      navigator.clipboard?.writeText(orderMessage());
       setCopied(true);
     } catch {
       /* 클립보드 미지원 환경은 무시 */
     }
+    trackEvent("click_kakao", { product_id: product.id, location: "purchase_panel" });
     window.open(siteConfig.kakaoChannelUrl, "_blank", "noopener,noreferrer");
   }
 
@@ -82,7 +86,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
 
         {isDirect ? (
           <>
-            {flexible ? (
+            {flexible || srFlexible ? (
               <>
                 <p className="mt-5 font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
                   Choose Your Volume
@@ -93,7 +97,10 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
                     return (
                       <button
                         key={v.pages}
-                        onClick={() => setPages(v.pages)}
+                        onClick={() => {
+                          setPages(v.pages);
+                          trackEvent("select_page_option", { product_id: product.id, pages: v.pages });
+                        }}
                         className={`relative flex flex-col items-center border px-2 py-3 transition-colors ${
                           on ? "border-navy-900 bg-ivory-200/60" : "border-navy-800/20 hover:border-navy-800/40"
                         }`}
@@ -104,13 +111,13 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
                           </span>
                         )}
                         <span className="font-display text-[17px] font-semibold text-navy-950">{v.label}</span>
-                        <span className="mt-0.5 text-[11px] text-charcoal-600">{formatKRW(v.priceKRW)}</span>
+                        <span className="mt-0.5 text-[11px] text-charcoal-600">{v.tier}</span>
                       </button>
                     );
                   })}
                 </div>
                 <p className="mt-2 text-[11.5px] text-charcoal-600/80">
-                  {extendedOption.label} 이상 · 추가 영역은 가격 문의
+                  {srFlexible ? "300P+" : extendedOption.label} 이상 · 추가 영역은 가격 문의
                 </p>
               </>
             ) : (
@@ -121,9 +128,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
 
             <div className="mt-5 flex items-baseline justify-between border-t border-navy-800/12 pt-4">
               <span className="text-[13px] text-charcoal-600">선택: {selected.label}</span>
-              <span className="font-display text-[24px] font-semibold text-navy-950">
-                {formatKRW(selected.priceKRW)}
-              </span>
+              <span className="font-display text-[15px] font-semibold text-burgundy-700">Price on Request</span>
             </div>
 
             <button
@@ -131,7 +136,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
               className="mt-4 flex w-full items-center justify-center gap-2 bg-navy-900 px-6 py-3.5 text-[14.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
             >
               <MessageCircle size={16} />
-              카카오톡으로 구매하기
+              카카오톡으로 주문 요청
             </button>
           </>
         ) : (
@@ -152,12 +157,13 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
 
         {copied && (
           <p className="mt-2 flex items-center justify-center gap-1.5 text-[11.5px] text-brass-500">
-            <Copy size={12} /> 구매 정보가 복사되었습니다. 카카오톡 채팅창에 붙여넣어 주세요.
+            <Copy size={12} /> 주문 정보가 복사되었습니다. 카카오톡 채팅창에 붙여넣어 주세요.
           </p>
         )}
 
         <a
           href="#sample"
+          onClick={() => trackEvent("click_sample", { product_id: product.id, location: "purchase_panel" })}
           className="mt-2.5 flex items-center justify-center gap-2 border border-navy-800/25 px-6 py-3 text-[13.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50"
         >
           <FileSearch size={15} />
@@ -165,7 +171,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
         </a>
 
         <p className="mt-3 text-[11.5px] leading-relaxed text-charcoal-600">
-          카카오톡 상담 후 계좌이체 또는 카드로 결제하시면, 결제 확인 후 교재(PDF)를 이메일로 보내드립니다.{" "}
+          카카오톡 주문 요청 후 결제 방법을 안내드리며, 결제 확인 후 교재(PDF)를 이메일로 보내드립니다.{" "}
           <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
             구성 상담
           </Link>
@@ -252,22 +258,20 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
         </div>
       </div>
 
-      {/* 모바일 스티키 구매 바 */}
+      {/* 모바일 스티키 주문 바 */}
       <div className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-between gap-3 border-t border-navy-800/15 bg-ivory-100/97 px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
         {isDirect ? (
           <>
             <div className="leading-tight">
-              <p className="font-display text-[15px] font-semibold text-navy-950">
-                {selected.label} · {formatKRW(selected.priceKRW)}
-              </p>
-              <p className="text-[10.5px] text-charcoal-600">{selected.tier}</p>
+              <p className="font-display text-[15px] font-semibold text-navy-950">{selected.label}</p>
+              <p className="text-[10.5px] text-charcoal-600">{selected.tier} · Price on Request</p>
             </div>
             <button
               onClick={goKakao}
               className="inline-flex items-center gap-1.5 bg-navy-900 px-5 py-2.5 text-[13.5px] font-medium text-ivory-100"
             >
               <MessageCircle size={15} />
-              카카오톡 구매
+              주문 요청
             </button>
           </>
         ) : (

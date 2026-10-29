@@ -536,5 +536,153 @@ export default function SampleFigure({ name }: { name: string }) {
     );
   }
 
+  // ── AP Computer Science / Physics(회로) / Music Theory ───────
+  if (name === "circuit-simple") {
+    // 전지 + 저항 직렬 회로
+    return (
+      <svg viewBox="0 0 220 120" className={`${svgCls} max-w-[300px]`} role="img" aria-label="Simple series circuit with battery and resistor">
+        <line x1="20" y1="20" x2="160" y2="20" stroke={INK} strokeWidth="1.6" />
+        <line x1="160" y1="20" x2="200" y2="20" stroke={INK} strokeWidth="1.6" />
+        <line x1="200" y1="20" x2="200" y2="100" stroke={INK} strokeWidth="1.6" />
+        <line x1="200" y1="100" x2="20" y2="100" stroke={INK} strokeWidth="1.6" />
+        {/* 전지 기호 (긴 선 + 짧은 선) */}
+        <line x1="20" y1="100" x2="20" y2="60" stroke={INK} strokeWidth="1.6" />
+        <line x1="10" y1="60" x2="30" y2="60" stroke={INK} strokeWidth="2.2" />
+        <line x1="14" y1="52" x2="26" y2="52" stroke={INK} strokeWidth="1.2" />
+        <line x1="20" y1="52" x2="20" y2="20" stroke={INK} strokeWidth="1.6" />
+        <text x="36" y="58" fontSize="9" fill={INK}>12 V</text>
+        {/* 저항 (지그재그) */}
+        <polyline points="70,20 78,8 92,32 106,8 120,32 128,20" fill="none" stroke={ACCENT} strokeWidth="1.8" />
+        <text x="90" y="46" textAnchor="middle" fontSize="9" fill={ACCENT}>R = 4 Ω</text>
+      </svg>
+    );
+  }
+  if (name === "network-diagram") {
+    // 중앙 서버 + 여러 클라이언트(스타 토폴로지), 인터넷 개념 설명용
+    const clients: [number, number][] = [[30, 20], [190, 20], [30, 100], [190, 100]];
+    return (
+      <svg viewBox="0 0 220 120" className={`${svgCls} max-w-[300px]`} role="img" aria-label="Star network topology diagram">
+        {clients.map(([x, y], i) => (
+          <line key={i} x1="110" y1="60" x2={x} y2={y} stroke={FAINT} strokeWidth="1.3" />
+        ))}
+        <rect x="90" y="44" width="40" height="32" fill={FILL} stroke={INK} strokeWidth="1.3" />
+        <text x="110" y="64" textAnchor="middle" fontSize="8.5" fill={INK}>Server</text>
+        {clients.map(([x, y], i) => (
+          <g key={i}>
+            <rect x={x - 16} y={y - 12} width="32" height="24" fill="#fff" stroke={INK} strokeWidth="1.1" />
+            <text x={x} y={y + 4} textAnchor="middle" fontSize="8" fill={INK}>Client {i + 1}</text>
+          </g>
+        ))}
+      </svg>
+    );
+  }
+  if (name === "music-staff") {
+    // 5선보 + 음표 두 개 (간격 확인용) — C4(가운데 줄 아래)와 E4
+    const lineYs = [10, 20, 30, 40, 50];
+    return (
+      <svg viewBox="0 0 180 80" className={`${svgCls} max-w-[260px]`} role="img" aria-label="Staff with two notes a third apart">
+        {lineYs.map((y, i) => (
+          <line key={i} x1="20" y1={y + 10} x2="160" y2={y + 10} stroke={INK} strokeWidth="1" />
+        ))}
+        {/* 음표 1: C4 (아래 덧줄) */}
+        <line x1="54" y1="58" x2="70" y2="58" stroke={INK} strokeWidth="1" />
+        <ellipse cx="62" cy="58" rx="7" ry="5.5" fill={INK} transform="rotate(-18 62 58)" />
+        <text x="62" y="72" textAnchor="middle" fontSize="8" fill={FAINT}>C</text>
+        {/* 음표 2: E4 (첫 줄과 둘째 줄 사이) */}
+        <ellipse cx="112" cy="48" rx="7" ry="5.5" fill={ACCENT} transform="rotate(-18 112 48)" />
+        <text x="112" y="72" textAnchor="middle" fontSize="8" fill={FAINT}>E</text>
+      </svg>
+    );
+  }
+
+  // ── IB Math / Biology ────────────────────────────────────
+  if (name === "parabola-vertex") {
+    // y = 2x² − 8x + 3 형태의 위로 볼록(아래로 열린 ×) 포물선, 꼭짓점 표시
+    const ox = 24, oy = 108, ux = 20, uy = 9;
+    const px = (x: number) => ox + x * ux;
+    const py = (y: number) => oy - (y + 5) * uy; // y=-5을 바닥 기준으로 평행이동
+    const curve: string[] = [];
+    for (let x = -0.3; x <= 4.3; x += 0.2) {
+      const y = 2 * x * x - 8 * x + 3;
+      curve.push(`${px(x)},${py(y)}`);
+    }
+    return (
+      <svg viewBox="0 0 170 130" className={`${svgCls} max-w-[240px]`} role="img" aria-label="Upward parabola with vertex marked">
+        <line x1={ox} y1="8" x2={ox} y2={oy} stroke={INK} strokeWidth="1.1" />
+        <line x1={ox} y1={oy} x2="160" y2={oy} stroke={INK} strokeWidth="1.1" />
+        <polyline points={curve.join(" ")} fill="none" stroke={INK} strokeWidth="1.7" />
+        <line x1={px(2)} y1="8" x2={px(2)} y2={oy} stroke={ACCENT} strokeWidth="1" strokeDasharray="3 3" />
+        <circle cx={px(2)} cy={py(-5)} r="3.2" fill={ACCENT} />
+        <text x={px(2) + 6} y={py(-5) + 4} fontSize="9" fill={INK}>(2, −5)</text>
+        <text x="150" y={oy - 6} fontSize="8.5" fill={FAINT}>x</text>
+      </svg>
+    );
+  }
+  if (name === "saturation-curve") {
+    // 빛의 세기에 따른 광합성 속도 — 초반 증가 후 포화(plateau)
+    const pts: [number, number][] = [[0, 0], [10, 4], [20, 9], [30, 13], [40, 15], [50, 15]];
+    const ox = 30, oy = 108, ux = 2.6, uy = 5.8;
+    const px = (x: number) => ox + x * ux;
+    const py = (y: number) => oy - y * uy;
+    return (
+      <svg viewBox="0 0 210 132" className={`${svgCls} max-w-[320px]`} role="img" aria-label="Line graph of reaction rate leveling off as light intensity increases">
+        <line x1={ox} y1="14" x2={ox} y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox} y1={oy} x2="200" y2={oy} stroke={INK} strokeWidth="1.2" />
+        <polyline points={pts.map(([x, y]) => `${px(x)},${py(y)}`).join(" ")} fill="none" stroke={ACCENT} strokeWidth="1.8" />
+        {pts.map(([x, y], i) => (
+          <circle key={i} cx={px(x)} cy={py(y)} r="2.8" fill={INK} />
+        ))}
+        <text x="4" y="12" fontSize="8" fill={FAINT}>Rate</text>
+        <text x="178" y={oy + 11} fontSize="8" fill={FAINT}>Light intensity</text>
+      </svg>
+    );
+  }
+  if (name === "logistic-growth") {
+    // 로지스틱 개체군 성장 곡선 — 초반 지수적 증가 후 수용력(K)에서 수평화
+    const ox = 28, oy = 110, K = 88;
+    const pts: [number, number][] = [
+      [0, 2], [20, 4], [40, 10], [60, 24], [80, 46], [100, 66], [120, 78], [140, 84], [160, 86.5], [180, 87.5], [196, 88],
+    ];
+    const px = (x: number) => ox + x * 0.9;
+    const py = (y: number) => oy - y * 0.78;
+    return (
+      <svg viewBox="0 0 220 130" className={`${svgCls} max-w-[340px]`} role="img" aria-label="Logistic population growth curve leveling off at carrying capacity K">
+        <line x1={ox} y1="10" x2={ox} y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox} y1={oy} x2="210" y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox} y1={py(K)} x2="210" y2={py(K)} stroke={ACCENT} strokeWidth="1" strokeDasharray="3 3" />
+        <text x="188" y={py(K) - 4} fontSize="8" fill={ACCENT}>K</text>
+        <polyline points={pts.map(([x, y]) => `${px(x)},${py(y)}`).join(" ")} fill="none" stroke={INK} strokeWidth="1.8" />
+        <text x="4" y="14" fontSize="8" fill={FAINT}>Population</text>
+        <text x="186" y={oy + 11} fontSize="8" fill={FAINT}>Time</text>
+      </svg>
+    );
+  }
+  if (name === "trophic-pyramid") {
+    // 영양 단계 에너지 피라미드 — 단계마다 에너지의 약 10%만 다음 단계로 전달(10% rule)
+    const levels = [
+      { label: "Tertiary Consumers", kcal: "10 kcal", y: 8, w1: 30, w2: 70 },
+      { label: "Secondary Consumers", kcal: "100 kcal", y: 38, w1: 70, w2: 110 },
+      { label: "Primary Consumers", kcal: "1,000 kcal", y: 68, w1: 110, w2: 150 },
+      { label: "Producers", kcal: "10,000 kcal", y: 98, w1: 150, w2: 190 },
+    ];
+    const cx = 110;
+    return (
+      <svg viewBox="0 0 220 140" className={`${svgCls} max-w-[340px]`} role="img" aria-label="Trophic-level energy pyramid showing the 10% energy transfer rule">
+        {levels.map((lv) => (
+          <g key={lv.label}>
+            <polygon
+              points={`${cx - lv.w1 / 2},${lv.y} ${cx + lv.w1 / 2},${lv.y} ${cx + lv.w2 / 2},${lv.y + 26} ${cx - lv.w2 / 2},${lv.y + 26}`}
+              fill={FILL}
+              stroke={INK}
+              strokeWidth="1"
+            />
+            <text x={cx} y={lv.y + 13} textAnchor="middle" fontSize="7.5" fill={INK}>{lv.label}</text>
+            <text x={cx} y={lv.y + 23} textAnchor="middle" fontSize="7.5" fontWeight="600" fill={ACCENT}>{lv.kcal}</text>
+          </g>
+        ))}
+      </svg>
+    );
+  }
+
   return null;
 }

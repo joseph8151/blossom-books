@@ -2,8 +2,38 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import KakaoFloatingButton from "@/components/layout/KakaoFloatingButton";
 import MobileBottomBar from "@/components/layout/MobileBottomBar";
+import { siteConfig, siteKeywords } from "@/data/site";
+
+// Organization/WebSite 구조화 데이터 — 네이버·구글 검색결과의 사이트 정보(로고,
+// 검색창 등) 인식을 돕습니다. 실제 사이트에 이미 공개된 정보(주소·이메일)만
+// 사용하고, 전화번호 등 없는 정보는 넣지 않습니다.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "블러섬북스",
+  alternateName: "Blossom Books",
+  url: "https://www.blossombooks.org",
+  logo: "https://www.blossombooks.org/opengraph-image.png",
+  email: siteConfig.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: siteConfig.addressKo,
+    addressCountry: "KR",
+  },
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "블러섬북스 Blossom Books",
+  url: "https://www.blossombooks.org",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://www.blossombooks.org/books/?q={search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
+};
 
 // 참고: 폰트(Cormorant Garamond, IBM Plex Mono, Pretendard)는
 // globals.css 상단의 @import로 로드합니다.
@@ -12,35 +42,19 @@ import MobileBottomBar from "@/components/layout/MobileBottomBar";
 export const metadata: Metadata = {
   // og:image 등 메타 이미지의 절대 URL 생성을 위한 기준 도메인
   metadataBase: new URL("https://blossombooks.org"),
+  // 네이버 서치어드바이저는 사이트 제목 40자 이내·설명 80자 이내를 권장합니다.
+  // title.default는 템플릿(%s | ...)이 붙지 않는 홈페이지 자체의 <title>이라
+  // 이 값만 줄이면 홈 제목 길이가 바로 줄어듭니다.
   title: {
-    default: "블러섬북스 | Blossom Books — 시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠",
+    default: "블러섬북스 Blossom Books | 맞춤 문제집·해설집",
     template: "%s | 블러섬북스 Blossom Books",
   },
   description:
-    "미국 교과과정, 국제학교 입학시험, 공인시험, 실전 모의고사를 분석하여 학생용 문제집과 정답·상세 해설집을 제작합니다. 국제학교 문제집, 미국 교과서 문제집, AP 문제집, CAT4·MAP·ISEE·SSAT 문제집, 학원·프랩학원 교재 주문 제작.",
-  keywords: [
-    "국제학교 문제집",
-    "미국 교과서 문제집",
-    "미국 수학 문제집",
-    "국제학교 입학시험 문제집",
-    "국제학교 모의고사",
-    "학원 교재 제작",
-    "학원 문제집 제작",
-    "프랩학원 교재",
-    "과외 수업 자료",
-    "맞춤 문제집 제작",
-    "AP 문제집",
-    "CAT4 문제집",
-    "MAP 테스트 문제집",
-    "ISEE SSAT 문제집",
-    "OET 문제집",
-    "PTE 문제집",
-    "레벨테스트 문제집",
-    "블러섬북스",
-  ],
+    "미국 교과과정·국제학교 입학시험·공인시험 맞춤 문제집·해설집 제작. AP·CAT4·MAP·ISEE·SSAT, 레벨테스트 교재 주문 제작.",
+  keywords: siteKeywords,
   openGraph: {
     title: "블러섬북스 | Blossom Books",
-    description: "시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠 — 문제집, 정답·해설집, 실전 모의고사, 맞춤 교재 제작",
+    description: "시험과 수업 목적에 맞춘 문제집·해설집 — 정답·해설, 실전 모의고사, 맞춤 교재 제작",
     url: "https://blossombooks.org",
     siteName: "블러섬북스 Blossom Books",
     locale: "ko_KR",
@@ -49,7 +63,14 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "블러섬북스 | Blossom Books",
-    description: "시험과 수업의 목적에 맞춘 프리미엄 교육 콘텐츠 — 문제집·해설집·모의고사",
+    description: "시험과 수업 목적에 맞춘 문제집·해설집·모의고사",
+  },
+  // 네이버 서치어드바이저(searchadvisor.naver.com) 소유 확인 코드. Cloudflare
+  // 환경변수 NEXT_PUBLIC_NAVER_SITE_VERIFICATION이 설정되면 그 값을 우선
+  // 쓰고, 없으면 아래 발급받은 코드를 기본값으로 사용합니다.
+  other: {
+    "naver-site-verification":
+      process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION || "d11f3ebdea72ba44f40715f49ed975c0a65a1dbb",
   },
 };
 
@@ -66,10 +87,17 @@ export default function RootLayout({
         lg 이상에서는 바가 숨겨지므로(lg:hidden) 여백을 제거합니다.
       */}
       <body className="min-h-full flex flex-col bg-ivory-100 text-charcoal-900 pb-[calc(3.5rem+env(safe-area-inset-bottom))] lg:pb-0">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <KakaoFloatingButton />
         <MobileBottomBar />
 
         {/*

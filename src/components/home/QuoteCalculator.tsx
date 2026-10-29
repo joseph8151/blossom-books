@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { MessageCircle, ArrowRight, Check } from "lucide-react";
-import { volumeOptions, extendedOption, formatKRW } from "@/data/pricing";
+import { MessageCircle, Check } from "lucide-react";
+import { volumeOptions, extendedOption } from "@/data/pricing";
 import { siteConfig } from "@/data/site";
 
-// 견적 계산기 — 분량+과목 선택 시 예상 가격을 바로 안내해 가격 문의를 줄입니다.
+// 구성 빌더 — 분량+과목을 선택하면 카카오톡 상담 메시지에 바로 담을 수 있게
+// 구성을 정리해 보여줍니다. 가격은 더 이상 이 화면에서 바로 보여주지 않고
+// 카카오톡 상담에서만 안내합니다.
 const subjects = ["English (레벨테스트)", "Reading", "Writing", "Math", "Science", "Vocabulary / Grammar"];
 const options = [
-  ...volumeOptions.map((v) => ({ pages: v.pages, label: v.label, tier: v.tier, tierKo: v.tierKo, priceKRW: v.priceKRW })),
-  { pages: 400, label: "400P+", tier: extendedOption.tier, tierKo: extendedOption.tierKo, priceKRW: 0 },
+  ...volumeOptions.map((v) => ({ pages: v.pages, label: v.label, tier: v.tier, tierKo: v.tierKo })),
+  { pages: 400, label: extendedOption.label, tier: extendedOption.tier, tierKo: extendedOption.tierKo },
 ];
 
 const included = ["Student Workbook", "정답 · 상세 해설", "선택 과목 집중 구성", "Digital PDF"];
@@ -18,20 +19,26 @@ const included = ["Student Workbook", "정답 · 상세 해설", "선택 과목 
 export default function QuoteCalculator() {
   const [pages, setPages] = useState(200);
   const [subject, setSubject] = useState(subjects[0]);
+  const [revealed, setRevealed] = useState(false);
   const opt = options.find((o) => o.pages === pages) ?? options[1];
   const isExtended = pages >= 400;
+
+  function goKakao() {
+    window.open(siteConfig.kakaoChannelUrl, "_blank", "noopener,noreferrer");
+    setRevealed(true);
+  }
 
   return (
     <section className="border-b border-navy-800/12 bg-ivory-100 py-20 lg:py-24">
       <div className="mx-auto max-w-5xl px-5 lg:px-8">
         <div className="max-w-2xl">
-          <span className="eyebrow">Quick estimate</span>
+          <span className="eyebrow">Build your request</span>
           <h2 className="mt-4 font-display text-[26px] font-semibold leading-tight text-navy-950 sm:text-[31px]">
-            예상 가격을 바로 확인하세요
+            구성을 선택하고 바로 상담하세요
           </h2>
           <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">
-            분량과 과목만 선택하면 예상 금액을 안내해 드립니다. 정확한 최종 금액은 구성 확인 후 결제 전에
-            다시 안내됩니다.
+            분량과 과목만 선택하면 그 구성 그대로 카카오톡 상담으로 연결해 드립니다. 가격은 상담에서
+            안내됩니다.
           </p>
         </div>
 
@@ -66,45 +73,54 @@ export default function QuoteCalculator() {
             </select>
           </div>
 
-          {/* 결과 */}
+          {/* 결과 — 카카오톡 상담을 받아야 구성 요약이 공개됩니다 */}
           <div className="flex flex-col border border-navy-800/15 bg-navy-950 p-6 text-ivory-100">
-            <p className="font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-400">예상 견적</p>
-            <p className="mt-2 text-[13px] text-ivory-200/70">{opt.tierKo} · {subject}</p>
-            {isExtended ? (
-              <p className="mt-4 font-display text-[26px] font-semibold text-ivory-100">맞춤 견적 문의</p>
+            <p className="font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-400">선택한 구성</p>
+            {!revealed ? (
+              <>
+                <p className="mt-3 flex-1 text-[13px] leading-relaxed text-ivory-200/75">
+                  분량·과목 선택이 끝났습니다. 카카오톡 상담을 받으시면 선택하신 구성 요약과 포함 내역을 바로
+                  안내해 드립니다.
+                </p>
+                <button
+                  type="button"
+                  onClick={goKakao}
+                  className="mt-5 inline-flex items-center justify-center gap-1.5 bg-brass-500 px-5 py-2.5 text-[13px] font-medium text-navy-950 transition-colors hover:bg-brass-400"
+                >
+                  <MessageCircle size={14} /> 카카오톡 상담받고 구성 확인하기
+                </button>
+              </>
             ) : (
-              <p className="mt-4 font-display text-[32px] font-semibold leading-none text-ivory-100">
-                {formatKRW(opt.priceKRW)}
-                <span className="ml-1 text-[13px] font-normal text-ivory-200/60">부터</span>
-              </p>
+              <>
+                <p className="mt-2 text-[13px] text-ivory-200/70">{opt.tierKo} · {subject}</p>
+                <p className="mt-4 font-display text-[22px] font-semibold leading-snug text-ivory-100">
+                  {opt.label} · {subject}
+                </p>
+                <p className="mt-1.5 text-[12.5px] text-ivory-200/70">
+                  {isExtended ? "맞춤 견적 문의" : "가격은 카카오톡 상담에서 안내해 드립니다"}
+                </p>
+                <ul className="mt-5 flex-1 space-y-1.5">
+                  {included.map((it) => (
+                    <li key={it} className="flex items-center gap-2 text-[12.5px] text-ivory-200/85">
+                      <Check size={13} className="text-brass-400" strokeWidth={2.4} /> {it}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <a
+                    href={siteConfig.kakaoChannelUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 bg-brass-500 px-5 py-2.5 text-[13px] font-medium text-navy-950 transition-colors hover:bg-brass-400"
+                  >
+                    <MessageCircle size={14} /> 이 구성으로 상담
+                  </a>
+                </div>
+                <p className="mt-3 text-[11px] leading-relaxed text-ivory-200/55">
+                  * 과목·구성에 따라 일부 상품은 별도 안내될 수 있습니다. 최종 금액은 결제 전 확인됩니다.
+                </p>
+              </>
             )}
-            <ul className="mt-5 flex-1 space-y-1.5">
-              {included.map((it) => (
-                <li key={it} className="flex items-center gap-2 text-[12.5px] text-ivory-200/85">
-                  <Check size={13} className="text-brass-400" strokeWidth={2.4} /> {it}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 flex flex-wrap gap-2">
-              <a
-                href={siteConfig.kakaoChannelUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 bg-brass-500 px-5 py-2.5 text-[13px] font-medium text-navy-950 transition-colors hover:bg-brass-400"
-              >
-                <MessageCircle size={14} /> 이 구성으로 상담
-              </a>
-              <Link
-                href="/find"
-                className="group inline-flex items-center gap-1.5 border border-ivory-100/25 px-5 py-2.5 text-[13px] font-medium text-ivory-100 transition-colors hover:border-ivory-100/50"
-              >
-                교재 추천받기
-                <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-              </Link>
-            </div>
-            <p className="mt-3 text-[11px] leading-relaxed text-ivory-200/55">
-              * 과목·구성에 따라 일부 상품은 별도 안내될 수 있습니다. 최종 금액은 결제 전 확인됩니다.
-            </p>
           </div>
         </div>
       </div>

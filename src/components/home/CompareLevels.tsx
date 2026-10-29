@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { siteConfig } from "@/data/site";
 
 // 같은 스킬을 Foundation → Standard → Advanced 실제 문제로 비교시켜, 난이도에 대한 의심을 해소합니다.
 type Level = "Foundation" | "Standard" | "Advanced";
@@ -106,10 +106,15 @@ export default function CompareLevels() {
 
         <p className="mt-6 text-[13px] text-charcoal-600">
           어느 단계가 맞는지 모르시겠나요?{" "}
-          <Link href="/find" className="group inline-flex items-center gap-1 font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">
-            내게 맞는 교재 찾기
+          <a
+            href={siteConfig.kakaoChannelUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex items-center gap-1 font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2"
+          >
+            카카오톡으로 상담하기
             <ArrowRight size={14} className="text-brass-500 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+          </a>
         </p>
       </div>
     </section>

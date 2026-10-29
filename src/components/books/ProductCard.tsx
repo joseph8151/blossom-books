@@ -1,20 +1,47 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { Sparkles, Headphones, FileSearch, ArrowRight } from "lucide-react";
+import { Sparkles, FileSearch, MessageCircle } from "lucide-react";
 import { Product } from "@/lib/types";
 import { trackLabels } from "@/data/products";
 import { coverToneFor } from "@/lib/utils";
-import { productBadges, isDirectPurchase, explanationLanguage } from "@/lib/productMeta";
+import { priceDisplay, pagesLabel } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
+import { stripVolumeMentions } from "@/lib/sanitizeForHome";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import { BlossomSeal } from "@/components/books/BlossomSeal";
 import WishlistButton from "@/components/books/WishlistButton";
+import OrderModal from "@/components/books/OrderModal";
+import { trackEvent } from "@/lib/analytics";
 
-// 가치 중심 카드 — 가격 숫자를 전면에 두지 않고, 시험·과목·핵심 영역과 샘플을 먼저 보여줍니다.
-// 정확한 가격은 상세페이지에서 구성을 충분히 확인한 뒤 노출합니다. (Smart Pricing)
-export default function ProductCard({ product }: { product: Product }) {
-  const lang = explanationLanguage(product);
+// 가격은 더 이상 카드에 노출하지 않습니다 — 카카오톡 상담에서만 안내합니다.
+// (과거 "Smart Pricing"으로 가격을 숨겼다가 이탈이 늘어 되돌린 이력이
+// 있으니, 이 결정을 다시 바꿀 때는 전환율 데이터를 함께 확인하세요.)
+// hidePrice 기본값을 true로 바꿨으므로, 호출부에서 별도 설정 없이도
+// /books·홈·위시리스트·상세페이지 관련 상품 등 모든 카드에서 가격이 숨겨집니다.
+const VOLUME_BADGES = new Set(["40·60·100·200P", "150·200·300P"]);
+
+export default function ProductCard({
+  product,
+  hidePrice = true,
+  hideVolumeInfo = false,
+}: {
+  product: Product;
+  hidePrice?: boolean;
+  hideVolumeInfo?: boolean;
+}) {
   const coreAreas = product.units.slice(0, 3).join(" · ");
-  const direct = isDirectPurchase(product);
+  const [orderOpen, setOrderOpen] = useState(false);
+  const summary = hideVolumeInfo ? stripVolumeMentions(product.summaryKo) : product.summaryKo;
+  // 카드에는 가장 먼저 필요한 정보(학년대·분량)만 남기고, Answer Guide·Audio·
+  // 4 Skills 같은 세부 사항은 상세 페이지로 넘깁니다 — 모든 교재에 해설이
+  // 포함된다는 건 이미 사이트 전체에서 약속하는 내용이라 카드마다 반복해서
+  // 배지로 보여줄 필요가 없습니다.
+  const pages = pagesLabel(product);
+  const primaryTags = [product.gradeRange, hideVolumeInfo && VOLUME_BADGES.has(pages) ? null : pages].filter(
+    (t): t is string => Boolean(t)
+  );
 
   return (
     <div className="lift group relative flex flex-col overflow-hidden border border-navy-800/12 bg-ivory-100 shadow-card">
@@ -74,15 +101,21 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
 
         <h3 className="mt-3 font-display text-[20px] font-semibold leading-snug text-navy-950">
-          {product.titleKo}
+          <Link
+            href={`/books/${product.id}`}
+            onClick={() => trackEvent("select_product", { product_id: product.id, location: "product_card" })}
+            className="transition-colors hover:text-brass-500"
+          >
+            {product.titleKo}
+          </Link>
         </h3>
-        <p className="mt-1 text-[12px] text-charcoal-600">{product.subject}</p>
-        <span className="mt-2 inline-flex w-fit items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2 py-0.5 font-label text-[10px] uppercase tracking-[0.1em] text-brass-500">
-          {seriesInfo[seriesFor(product)].name}
-        </span>
+        <p className="mt-1.5 font-label text-[10px] uppercase tracking-[0.08em] text-charcoal-600/70">
+          {product.subject} <span className="text-navy-800/25">·</span>{" "}
+          <span className="text-brass-500">{seriesInfo[seriesFor(product)].name}</span>
+        </p>
 
         <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600 line-clamp-2">
-          {product.summaryKo}
+          {summary}
         </p>
 
         {/* 핵심 영역 */}
@@ -92,55 +125,53 @@ export default function ProductCard({ product }: { product: Product }) {
           </p>
         )}
 
-        {/* 통일 정보 배지 — Grade · Level · Pages · Skills · Answer Guide (가격 아님) */}
-        <div className="mt-3.5 flex flex-wrap gap-1.5">
-          {productBadges(product).map((b) => (
-            <span
-              key={b}
-              className="border border-navy-800/15 bg-ivory-200/50 px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-navy-800/80"
-            >
-              {b}
-            </span>
-          ))}
-          {product.includesAudio && (
-            <span className="inline-flex items-center gap-1 border border-navy-800/15 bg-ivory-200/50 px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-navy-800/80">
-              <Headphones size={11} /> Audio
-            </span>
-          )}
-          {product.includesAnswerKey && (
-            <span className="border border-brass-500/30 bg-brass-500/[0.05] px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-brass-500">
-              {lang.labelEn}
-            </span>
-          )}
-        </div>
+        {/* 가장 먼저 필요한 정보만 — 학년대 · 분량 */}
+        {primaryTags.length > 0 && (
+          <div className="mt-3.5 flex flex-wrap gap-1.5">
+            {primaryTags.map((t) => (
+              <span
+                key={t}
+                className="border border-navy-800/12 bg-ivory-200/40 px-2 py-1 font-label text-[10px] uppercase tracking-[0.06em] text-navy-800/75"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
 
         <div className="mt-6 border-t border-navy-800/10 pt-4">
-          {/* 가격 대신 안내 라벨 + 품질 마크 */}
-          <div className="flex items-center justify-between gap-2">
-            <p className="text-[12px] text-charcoal-600">
-              {direct ? "구성 선택 · 가격은 상세에서 확인" : "구성에 따라 맞춤 견적"}
-            </p>
+          <div className={`flex items-center gap-2 ${hidePrice ? "justify-end" : "justify-between"}`}>
+            {!hidePrice && (
+              <p className="font-display text-[20px] font-semibold text-navy-950">{priceDisplay(product)}</p>
+            )}
             <BlossomSeal />
           </div>
 
           <div className="mt-3 flex gap-2">
             <Link
               href={`/books/${product.id}#sample`}
+              onClick={() => trackEvent("click_sample", { product_id: product.id, location: "product_card" })}
               className="inline-flex items-center justify-center gap-1.5 border border-navy-800/25 px-3.5 py-2 text-[12.5px] font-medium text-navy-900 transition-all hover:-translate-y-0.5 hover:border-navy-800/50"
             >
               <FileSearch size={13} />
               샘플 보기
             </Link>
-            <Link
-              href={`/books/${product.id}`}
+            <button
+              type="button"
+              onClick={() => {
+                trackEvent("click_order", { product_id: product.id, location: "product_card" });
+                setOrderOpen(true);
+              }}
               className="flex-1 inline-flex items-center justify-center gap-1.5 bg-navy-900 px-3.5 py-2 text-[12.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
             >
-              구성·가격 확인
-              <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
+              <MessageCircle size={13} />
+              이 교재 주문하기
+            </button>
           </div>
         </div>
       </div>
+
+      <OrderModal product={product} open={orderOpen} onClose={() => setOrderOpen(false)} />
     </div>
   );
 }

@@ -8,6 +8,23 @@ import { difficultyLabel } from "@/lib/utils";
 import { BlossomSeries, seriesFor, seriesInfo, seriesOrder } from "@/data/series";
 import ProductCard from "@/components/books/ProductCard";
 import MissingBookCTA from "@/components/common/MissingBookCTA";
+import { trackEvent } from "@/lib/analytics";
+import { countryPrograms } from "@/data/countryPrograms";
+import { siteConfig } from "@/data/site";
+import { ArrowRight, MessageCircle } from "lucide-react";
+
+// countryPrograms(나라별)에 더해, 레벨테스트·공인시험 상담표로도 바로 연결합니다.
+// 이 href들은 전부 카카오 상담사가 고객에게 직접 전달하는 비공개 /quote-*
+// 구성표(검색 노출 차단, 홈 메뉴에도 없음)를 가리키므로, 공개 /books
+// 카탈로그에서도 홈페이지 CountryPrograms 섹션과 동일하게 그 링크를 타지
+// 않고 전부 카카오톡 상담으로 보냅니다.
+const examPrograms = [
+  { title: "학원 레벨테스트 준비", desc: "영어·국어·수학 레벨테스트, 반 배정 시험 대비", href: "/quote" },
+  { title: "공인 영어 시험", desc: "OET·MET·CELBAN·PTE·SAT 등 공인·전문시험 대비", href: "/quote-exam" },
+  { title: "SR 테스트 리딩 레벨 대비", desc: "SR·STAR Reading이 요구하는 독해 유형 연습", href: "/quote#sr" },
+  { title: "AP 시험 대비", desc: "Calculus·Biology·Chemistry·Physics 등 AP 전 과목", href: "/quote-us#ap" },
+  { title: "IB 디플로마 대비", desc: "Math AA/AI·Biology·Chemistry·Economics 등 IB", href: "/quote-ib" },
+];
 
 const tracks: (CurriculumTrack | "all")[] = [
   "all",
@@ -17,6 +34,18 @@ const tracks: (CurriculumTrack | "all")[] = [
   "level-test",
   "certified-exam",
 ];
+
+// 기본 화면(필터 없음)에서 트랙별로 묶어 보여줄 때 쓰는 한 줄 소개.
+// trackLabels(제목)와 짝을 이루는 보조 설명일 뿐, 가격·구성 등 사실 정보는
+// 담지 않습니다.
+const trackDescriptions: Record<CurriculumTrack, string> = {
+  "us-curriculum": "미국 교과과정 기반 학년별 개념 + 문제집",
+  ap: "AP 전 과목 개념 정리와 실전 문제집",
+  admissions: "국제학교 입학시험 대비 교재",
+  "level-test": "학원·학교 레벨테스트, 반 배정 대비 교재",
+  "certified-exam": "공인 영어시험 및 전문시험 대비 교재",
+};
+const PREVIEW_COUNT = 4;
 
 const materialFilters: { value: MaterialType | "all"; label: string }[] = [
   { value: "all", label: "전체" },
@@ -36,10 +65,16 @@ export default function BooksPage() {
   const [difficulty, setDifficulty] = useState<number | "all">("all");
   const [series, setSeries] = useState<BlossomSeries | "all">("all");
 
+  useEffect(() => {
+    trackEvent("view_product_list");
+  }, []);
+
   // 다른 페이지에서 ?track=... / ?q=... 로 진입하면 해당 필터를 미리 적용합니다.
+  // (정적 export라 window는 마운트 후에만 접근 가능 — 최초 1회성 URL 동기화이므로 규칙 예외 처리)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const t = params.get("track");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (t && (tracks as string[]).includes(t)) setTrack(t as CurriculumTrack);
     const q = params.get("q");
     if (q) setQuery(q);
@@ -70,6 +105,21 @@ export default function BooksPage() {
     setSeries("all");
   };
 
+  // 아무 필터도 적용하지 않은 기본 화면에서는 64개 교재를 한 번에 나열하는
+  // 대신 트랙별로 묶어 미리보기 4개 + "전체 보기"로 보여줍니다. 검색이나
+  // 필터를 하나라도 적용하면 바로 전체 결과 그리드로 전환됩니다.
+  const isBrowsing = track === "all" && material === "all" && !hasRefine && !query.trim();
+  const groupedByTrack = useMemo(() => {
+    if (!isBrowsing) return [];
+    return tracks
+      .filter((t): t is CurriculumTrack => t !== "all")
+      .map((t) => ({
+        track: t,
+        items: products.filter((p) => p.track === t),
+      }))
+      .filter((g) => g.items.length > 0);
+  }, [isBrowsing]);
+
   const selectClass =
     "border border-navy-800/20 bg-ivory-100 py-2 pl-3 pr-8 text-[13px] text-charcoal-900 outline-none focus:border-navy-800/50";
 
@@ -82,6 +132,26 @@ export default function BooksPage() {
           교육과정, 과목, 학년, 난이도, 시리즈별로 교재를 확인하실 수 있습니다. 원하시는 교재가 없다면
           주문 제작을 상담해보세요.
         </p>
+      </div>
+
+      {/* 나라별 교과 과정 + 레벨테스트·공인시험 카드 */}
+      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {[...countryPrograms, ...examPrograms].map((c) => (
+          <a
+            key={c.href}
+            href={siteConfig.kakaoChannelUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="flex flex-col border border-navy-800/12 bg-ivory-100 p-4 transition-colors hover:border-navy-800/30"
+          >
+            <p className="font-display text-[14.5px] font-semibold text-navy-950">{c.title}</p>
+            <p className="mt-1.5 flex-1 text-[11.5px] leading-relaxed text-charcoal-600">{c.desc}</p>
+            <span className="mt-2.5 inline-flex items-center gap-1 text-[11.5px] font-medium text-navy-900">
+              <MessageCircle size={12} />
+              카카오톡으로 상담하기
+            </span>
+          </a>
+        ))}
       </div>
 
       {/* 검색 */}
@@ -178,15 +248,46 @@ export default function BooksPage() {
         ))}
       </div>
 
-      <p className="mt-6 text-[12.5px] text-charcoal-600">총 {filtered.length}개 교재</p>
+      {!isBrowsing && (
+        <p className="mt-6 text-[12.5px] text-charcoal-600">총 {filtered.length}개 교재</p>
+      )}
 
-      <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {filtered.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {isBrowsing ? (
+        <div className="mt-10 space-y-16">
+          {groupedByTrack.map((g, i) => (
+            <div key={g.track} className={i > 0 ? "border-t border-navy-800/10 pt-14" : ""}>
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">
+                    {trackLabels[g.track]}
+                  </p>
+                  <p className="mt-1.5 text-[13.5px] text-charcoal-600">{trackDescriptions[g.track]}</p>
+                </div>
+                <button
+                  onClick={() => setTrack(g.track)}
+                  className="inline-flex shrink-0 items-center gap-1.5 text-[13px] font-medium text-navy-900 hover:text-brass-500"
+                >
+                  전체 {g.items.length}개 보기
+                  <ArrowRight size={13} />
+                </button>
+              </div>
+              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {g.items.slice(0, PREVIEW_COUNT).map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {filtered.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
 
-      {filtered.length === 0 && (
+      {!isBrowsing && filtered.length === 0 && (
         <div className="mt-16 border border-dashed border-navy-800/20 py-16 text-center">
           <p className="text-[14px] text-charcoal-600">조건에 맞는 교재를 찾지 못했습니다.</p>
           <p className="mt-2 text-[13px] text-charcoal-600">

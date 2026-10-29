@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
   // 정적 호스팅에서 경로를 안정적으로 서빙하기 위해 후행 슬래시 사용 (/books/ → /books/index.html)
   trailingSlash: true,
   images: {
-    // next/image 최적화 서버가 없으므로 비활성화 (현재 프로젝트는 next/image 미사용)
+    // next/image 최적화 서버가 없는 정적 호스팅이라 리사이징은 비활성화하지만,
+    // next/image 자체는 lazy loading·CLS 방지 등을 위해 사용합니다.
     unoptimized: true,
   },
 };

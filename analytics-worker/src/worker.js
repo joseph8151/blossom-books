@@ -9,7 +9,7 @@
 //   - CF_SITE_TAG    : Web Analytics 사이트 태그(beacon token) (wrangler.jsonc vars)
 //   - CF_API_TOKEN   : "Account Analytics: Read" 권한 API 토큰 (secret)
 //   - RESEND_API_KEY : Resend 이메일 발송 API 키 (secret)
-//   - REPORT_TO      : 받을 이메일 주소 (secret)
+//   - REPORT_TO      : 받을 이메일 주소 (secret, 기본값 yorkboy@gmail.com)
 //   - REPORT_FROM    : 보내는 주소 (wrangler.jsonc vars, 예: report@blossombooks.org)
 // ────────────────────────────────────────────────────────────
 
@@ -118,7 +118,7 @@ async function sendReport(env) {
     },
     body: JSON.stringify({
       from: env.REPORT_FROM,
-      to: env.REPORT_TO,
+      to: env.REPORT_TO || "yorkboy@gmail.com",
       subject,
       html,
     }),

@@ -1,14 +1,16 @@
 import { products } from "@/data/products";
+import { allSchools } from "@/app/admission-full-package/schools";
 
 // 실제 카탈로그 데이터에서 계산한 수치만 사용합니다 (과장 없음).
 const titleCount = products.length;
 const subjectCount = new Set(products.map((p) => p.subject)).size;
+const schoolCount = allSchools.length;
 
 const stats = [
   { value: `${titleCount}`, label: "Workbook Titles", ko: "판매 교재" },
   { value: "K–12", label: "Grade Coverage", ko: "학년 범위" },
   { value: `${subjectCount}`, label: "Subjects & Assessment Areas", ko: "과목·평가 영역" },
-  { value: "40·60·100·200", label: "Page Options", ko: "분량 선택" },
+  { value: `${schoolCount}+`, label: "Schools in Database", ko: "School Finder 등록 학교" },
 ];
 
 export default function BrandNumbers() {

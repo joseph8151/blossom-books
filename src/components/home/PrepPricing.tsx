@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, FileSearch, Check, Compass } from "lucide-react";
+import { ArrowRight, FileSearch, Check, Compass, MessageCircle } from "lucide-react";
 import PrepVolumePricing from "@/components/common/PrepVolumePricing";
 import PrepComparison from "@/components/common/PrepComparison";
+import { siteConfig } from "@/data/site";
 
 // 200P 기준, 가격 옆에 함께 보여주는 "받는 가치"
 const included = [
@@ -69,13 +70,14 @@ export default function PrepPricing() {
             </ul>
           </div>
           <div className="sm:text-right">
-            <Link
-              href="/find"
+            <a
+              href={siteConfig.kakaoChannelUrl}
+              target="_blank"
+              rel="noreferrer"
               className="group inline-flex items-center gap-2 bg-navy-900 px-6 py-3.5 text-[14px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-lift"
             >
-              내게 맞는 교재 추천받기
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
+              <MessageCircle size={16} /> 카카오톡으로 교재 추천받기
+            </a>
           </div>
         </div>
 

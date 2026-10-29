@@ -56,9 +56,12 @@ const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challen
 
 // 학년대별 난이도 티어 — 같은 4영역 레벨테스트라도 학년에 따라 다른 문항을 노출합니다.
 const LT_TIER: Record<string, Difficulty> = {
-  "english-level-test-g1-2": "Foundation",
-  "english-level-test-g3-4": "Standard",
-  "english-level-test-g5-6": "Advanced",
+  "english-level-test-g1": "Foundation",
+  "english-level-test-g2": "Foundation",
+  "english-level-test-g3": "Standard",
+  "english-level-test-g4": "Standard",
+  "english-level-test-g5": "Advanced",
+  "english-level-test-g6": "Advanced",
 };
 
 // 목표 난이도에 가까운 순으로 정렬해 n개를 뽑습니다. (티어 문항이 먼저 오도록)
@@ -139,6 +142,8 @@ function buildWorkbookItems(product: Product): SampleItem[] {
   }
   // SR Reading 전용 제품 — 긴 지문 + 유형 확장
   if (srReadingByProduct[product.id]) return srReadingByProduct[product.id];
+  // 국어 문해력 레벨테스트 — 정보글·이야기글 지문 전용 세트 (전부 노출)
+  if (product.id === "korean-literacy-level-test") return placementReadingByProduct[product.id];
   // Algebra 1 / 2 — 난이도로 서로 다른 문항 세트 노출
   if (product.id === "algebra-1-workbook") return algebraBank.filter((i) => ["Foundation", "Standard"].includes(i.difficulty));
   if (product.id === "algebra-2-workbook") return algebraBank.filter((i) => ["Advanced", "Challenge"].includes(i.difficulty));
@@ -186,9 +191,18 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
   const [page, setPage] = useState(0);
   const [zoom, setZoom] = useState(false);
 
-  const workbook = useMemo(() => leadWithVisual(buildWorkbookItems(product)), [product]);
+  // 무료로 공개하는 샘플 분량은 일부러 제한합니다 — 전체를 다 보여주면 상담 문의로 이어지지 않습니다.
+  const FREE_WORKBOOK_CAP = 5;
+  const FREE_ANSWER_CAP = 2;
+  const workbook = useMemo(
+    () => leadWithVisual(buildWorkbookItems(product)).slice(0, FREE_WORKBOOK_CAP),
+    [product]
+  );
   const answers = useMemo(
-    () => [...workbook].sort((a, b) => (b.wrong || b.steps || b.essay ? 1 : 0) - (a.wrong || a.steps || a.essay ? 1 : 0)).slice(0, 3),
+    () =>
+      [...workbook]
+        .sort((a, b) => (b.wrong || b.steps || b.essay ? 1 : 0) - (a.wrong || a.steps || a.essay ? 1 : 0))
+        .slice(0, FREE_ANSWER_CAP),
     [workbook]
   );
   const items = tab === "workbook" ? workbook : answers;
@@ -604,8 +618,8 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                 <div>
                   <p className="font-display text-[16px] font-semibold text-navy-950 sm:text-[18px]">이 샘플, 아이 수준에 맞을까요?</p>
                   <p className="mt-1 text-[13px] leading-relaxed text-charcoal-600">
-                    궁금한 점이 있으시면 바로 물어보세요. 학년과 현재 수준을 알려주시면 더 정확하게 안내해
-                    드립니다.
+                    지금 보신 페이지는 전체 구성 중 일부입니다. 학년과 현재 수준을 알려주시면 나머지 구성과
+                    난이도까지 더 정확하게 안내해 드립니다.
                   </p>
                 </div>
                 <a

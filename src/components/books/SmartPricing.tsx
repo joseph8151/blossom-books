@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { Check, FileSearch, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
-// 영어 레벨테스트 상세페이지용 — 가격을 소프트하게 노출하고 구성 가치를 함께 보여주는 섹션.
-// 정확한 분량별 가격은 구매 박스에, 여기서는 범위·구성 중심으로 차분하게 안내합니다.
+// 영어 레벨테스트 상세페이지용 — 가격은 노출하지 않고 구성 가치를 보여주는 섹션.
+// 정확한 가격은 카카오톡 상담에서만 안내합니다.
 const includes = [
   ["문제집", "실전 유형 예상문제"],
   ["정답 및 한글 상세해설", "왜 정답인지·왜 오답인지 한국어로 설명"],
@@ -14,18 +13,12 @@ const includes = [
 export default function SmartPricing() {
   return (
     <section className="mt-10 border border-navy-800/12 bg-ivory-200/40 p-6 lg:p-8">
-      <span className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Price &amp; contents</span>
+      <span className="font-label text-[11px] uppercase tracking-[0.14em] text-brass-500">Contents</span>
       <h2 className="mt-2 font-display text-[20px] font-semibold text-navy-950 sm:text-[23px]">
-        구성을 먼저 보시고, 가격을 판단하세요.
+        구성을 먼저 확인하세요.
       </h2>
-
-      {/* 가격 — 소프트 범위 */}
-      <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <span className="font-display text-[26px] font-semibold text-navy-950">13만원대부터</span>
-        <span className="text-[14px] text-charcoal-600">분량(100·200·300P)에 따라 12만원대 ~ 29만원대</span>
-      </div>
-      <p className="mt-1.5 text-[12.5px] text-charcoal-600">
-        정확한 분량별 가격은 위 구매 영역에서 확인하실 수 있습니다.
+      <p className="mt-3 text-[12.5px] text-charcoal-600">
+        가격은 분량(100·200·300P)에 따라 달라지며, 카카오톡 상담에서 안내해 드립니다.
       </p>
 
       {/* 포함 구성 */}

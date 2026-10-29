@@ -10,9 +10,10 @@ import {
   productCode,
   hasStarter,
   nextWorkbooks,
+  volumeOptionsLabel,
+  productOfferPrice,
 } from "@/lib/productMeta";
 import { seriesFor, seriesInfo } from "@/data/series";
-import { formatKRW, fromPriceKRW } from "@/data/pricing";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import ProductCard from "@/components/books/ProductCard";
 import SamplePreviewButton from "@/components/books/SamplePreviewButton";
@@ -25,7 +26,9 @@ import SmartPricing from "@/components/books/SmartPricing";
 import { BlossomSeal } from "@/components/books/BlossomSeal";
 import VolumeGuide from "@/components/common/VolumeGuide";
 import PrepComparison from "@/components/common/PrepComparison";
-import { siteConfig } from "@/data/site";
+import TrackView from "@/components/common/TrackView";
+import { siteConfig, siteKeywords } from "@/data/site";
+import { buildProductSeo } from "@/lib/seo";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.id }));
@@ -36,7 +39,46 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = products.find((p) => p.id === slug);
   if (!product) return {};
-  return { title: product.titleKo, description: product.summaryKo };
+
+  const url = `https://blossombooks.org/books/${product.id}/`;
+  // 상품별 핵심 키워드 — 실제 상품 데이터(시험명·학년·과목·트랙)에서만 생성합니다.
+  const productKeywords = [
+    product.titleKo,
+    product.examOrCurriculum,
+    `${product.examOrCurriculum} 문제집`,
+    `${product.gradeRange} ${product.subject}`,
+    trackLabels[product.track],
+    "PDF 문제집",
+    "정답 해설집",
+  ];
+  const keywords = Array.from(new Set([...productKeywords, ...siteKeywords]));
+
+  // 검색결과용 제목·설명 — buildProductSeo가 product.seoTitle/seoDescription이
+  // 있으면 그대로, 없으면 상품 데이터로 자동 생성합니다(src/lib/seo.ts).
+  // H1·카드 등 다른 곳에 쓰이는 titleKo는 그대로 둡니다. 생성된 title은
+  // 이미 "- 블러섬북스" 접미사를 포함하므로 템플릿("%s | 블러섬북스
+  // Blossom Books")을 거치지 않도록 title.absolute로 지정합니다.
+  const seo = buildProductSeo(product);
+  const ogImageUrl = `${url}opengraph-image`;
+
+  return {
+    title: { absolute: seo.title },
+    description: seo.description,
+    keywords,
+    alternates: { canonical: url },
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      url,
+      images: [ogImageUrl],
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: seo.title,
+      description: seo.description,
+      images: [ogImageUrl],
+    },
+  };
 }
 
 const purchaseFaq = [
@@ -45,7 +87,7 @@ const purchaseFaq = [
   { q: "정답과 해설이 포함되나요?", a: "네. 정답과 함께 풀이 과정·오답 포인트를 설명하는 상세 해설집이 포함됩니다." },
   { q: "100P와 200P 차이는 무엇인가요?", a: "100P는 핵심 유형을 빠르게 점검하는 Essential Prep, 200P는 여러 유형을 균형 있게 연습하는 Complete Prep입니다." },
   { q: "어떤 수준을 선택해야 하나요?", a: "시험까지 남은 기간과 현재 실력에 따라 다릅니다. 확실하지 않으시면 구매 전 상담으로 편하게 안내받으실 수 있습니다." },
-  { q: "300P 이상도 가능한가요?", a: "네. 400P 이상, 추가 영역, 특수 구성은 별도 문의(Price on Request)로 안내해 드립니다." },
+  { q: "300P 이상도 가능한가요?", a: "네. 상품에 따라 300P까지(SR 리딩 종합 문제집도 300P까지) 바로 선택해 구매하실 수 있습니다. 그 이상, 추가 영역·특수 구성은 별도 문의(Price on Request)로 안내해 드립니다." },
   { q: "해외에서도 구매할 수 있나요?", a: "네. 해외 고객은 PayPal로 결제하실 수 있습니다." },
   { q: "환불 정책은 어떻게 되나요?", a: "디지털 상품 특성상 파일 발송 후에는 환불이 제한될 수 있습니다. 구매 전 무료 샘플로 내용을 확인하시길 권장하며, 자세한 정책은 상담으로 안내해 드립니다." },
 ];
@@ -60,6 +102,40 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const offersVolumes = productOffersVolumes(product);
   const direct = isDirectPurchase(product);
   const inside = insideTheWorkbook(product);
+
+  // Product 구조화 데이터(JSON-LD) — 가격을 특정할 수 없는 상품(가격 상담 문의)은
+  // offers 자체를 생략합니다. 실제 사진·평점 데이터가 없으므로 image·review는 넣지 않습니다.
+  const offerPrice = productOfferPrice(product);
+  const offers = offerPrice
+    ? "price" in offerPrice
+      ? {
+          "@type": "Offer",
+          priceCurrency: "KRW",
+          price: offerPrice.price,
+          availability: "https://schema.org/InStock",
+          url: `https://blossombooks.org/books/${product.id}/`,
+        }
+      : {
+          "@type": "AggregateOffer",
+          priceCurrency: "KRW",
+          lowPrice: offerPrice.lowPrice,
+          highPrice: offerPrice.highPrice,
+          availability: "https://schema.org/InStock",
+          url: `https://blossombooks.org/books/${product.id}/`,
+        }
+    : undefined;
+  const productUrl = `https://blossombooks.org/books/${product.id}/`;
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.titleKo,
+    description: product.summaryKo,
+    image: `${productUrl}opengraph-image`,
+    url: productUrl,
+    sku: product.id,
+    brand: { "@type": "Brand", name: "블러섬북스" },
+    ...(offers ? { offers } : {}),
+  };
 
   const receive = [
     "Student Workbook",
@@ -77,6 +153,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-12 pb-24 lg:px-8 lg:py-16 lg:pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <TrackView event="view_product" params={{ product_id: product.id, track: product.track }} />
       <nav className="text-[12.5px] text-charcoal-600">
         <Link href="/books" className="hover:text-navy-900">교재 찾기</Link>
         <span className="mx-2">/</span>
@@ -89,12 +170,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <span className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-500">
             {trackLabels[product.track]}
           </span>
-          <Link
-            href={`/series#${seriesFor(product)}`}
-            className="inline-flex items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-brass-500 transition-colors hover:border-brass-500/70"
-          >
+          <span className="inline-flex items-center gap-1.5 border border-brass-500/35 bg-brass-500/[0.06] px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-brass-500">
             {seriesInfo[seriesFor(product)].name}
-          </Link>
+          </span>
           <span className="inline-flex items-center gap-1.5 border border-navy-800/20 bg-ivory-200/50 px-2.5 py-1 font-label text-[10.5px] uppercase tracking-[0.1em] text-navy-800/80">
             {blossomLevel(product.difficulty)} · {BLOSSOM_LEVEL_KO[blossomLevel(product.difficulty)]}
           </span>
@@ -103,7 +181,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               direct ? "text-brass-500" : "text-burgundy-700"
             }`}
           >
-            {direct ? "Direct Purchase" : "Custom / Extended"}
+            {direct ? "Ready to Order" : "Custom / Extended"}
           </span>
           <span className="inline-flex items-center border border-navy-800/15 bg-ivory-200/50 px-2 py-0.5 font-label text-[9px] uppercase tracking-[0.1em] text-navy-800/65">
             Reviewed 2026
@@ -171,7 +249,19 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </p>
           </div>
 
-          {/* 04 · What You'll Practice */}
+          {/* 04 · Sample Preview — Inside the Book. 표지가 아니라 실제 문제를 가장 먼저 보여줍니다 */}
+          <div id="sample" className="mt-10 scroll-mt-24 border border-navy-800/12 bg-ivory-100 p-6 shadow-card lg:p-7">
+            <span className="eyebrow">Inside the Book</span>
+            <h2 className="mt-3 font-display text-[20px] font-semibold text-navy-950">표지만 보고 구매하지 마세요.</h2>
+            <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
+              실제 문제의 난이도, 지문 구성, 문제 유형, 해설 방식을 구매 전에 직접 확인하세요.
+            </p>
+            <div className="mt-4">
+              <SamplePreviewButton product={product} />
+            </div>
+          </div>
+
+          {/* 05 · What You'll Practice */}
           <div className="mt-10">
             <h2 className="font-display text-[20px] font-semibold text-navy-950">What You&apos;ll Practice</h2>
             <p className="mt-1.5 text-[13px] text-charcoal-600">이 교재에서 연습하는 영역입니다.</p>
@@ -191,7 +281,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </div>
           </div>
 
-          {/* 05 · How closely does it reflect the actual test? (실제 시험과의 유사성 — 눈에 띄게) */}
+          {/* 06 · How closely does it reflect the actual test? (실제 시험과의 유사성 — 눈에 띄게) */}
           <div className="mt-10 border border-navy-800/15 bg-navy-950 p-6 text-ivory-100 lg:p-7">
             <p className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-400">
               How closely does it reflect the actual test?
@@ -211,21 +301,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </p>
           </div>
 
-          {/* 06 · Difficulty / Structure — Specification · Test Alignment · Difficulty · Quality */}
+          {/* 07 · Difficulty / Structure — Specification · Test Alignment · Difficulty · Quality */}
           <div className="mt-10">
             <WorkbookSpecification product={product} />
-          </div>
-
-          {/* 07 · Sample Preview — 반드시 가격보다 먼저 */}
-          <div id="sample" className="mt-10 scroll-mt-24 border border-navy-800/12 bg-ivory-100 p-6 shadow-card lg:p-7">
-            <span className="eyebrow">See before you buy</span>
-            <h2 className="mt-3 font-display text-[20px] font-semibold text-navy-950">표지만 보고 구매하지 마세요.</h2>
-            <p className="mt-2 text-[13.5px] leading-relaxed text-charcoal-600">
-              실제 문제의 난이도, 지문 구성, 문제 유형, 해설 방식을 확인한 뒤 결정하세요.
-            </p>
-            <div className="mt-4">
-              <SamplePreviewButton product={product} />
-            </div>
           </div>
 
           {/* 08 · What's Included */}
@@ -266,7 +344,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {offersVolumes && (
             <div className="mt-10">
               <div className="flex items-baseline justify-between gap-3">
-                <h2 className="font-display text-[20px] font-semibold text-navy-950">페이지 옵션 (40·60·100·200P)</h2>
+                <h2 className="font-display text-[20px] font-semibold text-navy-950">
+                  페이지 옵션 ({volumeOptionsLabel(product)})
+                </h2>
                 <Link href="/guide" className="shrink-0 text-[12.5px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-4">
                   선택 가이드
                 </Link>
@@ -294,7 +374,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <li>· 기본적인 Prep을 원하는 경우 → <span className="font-medium text-navy-900">200P</span></li>
               <li>· 충분한 반복이 필요한 경우 → <span className="font-medium text-navy-900">300P</span></li>
               <li>· 300P 이상 / 추가 영역이 필요한 경우 → <span className="font-medium text-navy-900">별도 문의</span></li>
-              <li>· 현재 수준을 모르겠다면 → <Link href="/find" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">교재 추천받기</Link> 또는 <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">구매 전 상담</Link></li>
+              <li>· 현재 수준을 모르겠다면 → <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">구매 전 상담</Link></li>
             </ul>
           </div>
 
@@ -377,9 +457,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         <div>
           <div className="lg:sticky lg:top-24">
             <PurchasePanel product={product} isDirect={direct} />
-            {direct && (
+            {direct && volumeOptionsLabel(product) && (
               <p className="mt-3 text-center text-[12px] text-charcoal-600">
-                {formatKRW(fromPriceKRW)}부터 · 100 / 200 / 300P 바로 구매
+                {volumeOptionsLabel(product)} 중 선택해 바로 구매
               </p>
             )}
           </div>

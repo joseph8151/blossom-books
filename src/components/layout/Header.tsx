@@ -12,8 +12,8 @@ import { useWishlistIds } from "@/components/books/WishlistButton";
 const koDesktopNav = [
   { label: "교재 찾기", href: "/books" },
   { label: "레벨 진단", href: "/level-assessment" },
-  { label: "교재 시리즈", href: "/series" },
   { label: "주문 제작", href: "/custom-order" },
+  { label: "Admissions", href: "/admission-full-package" },
   { label: "기관·학원", href: "/institutions" },
   { label: "블러섬북스 소개", href: "/about" },
 ];
@@ -22,7 +22,6 @@ const koDesktopNav = [
 const enNav = [
   { label: "Home", href: "/en" },
   { label: "Browse Books", href: "/en/books" },
-  { label: "Find My Workbook", href: "/en/find" },
   { label: "Why Blossom", href: "/en#why" },
   { label: "Payment", href: "/en#payment" },
   { label: "Contact", href: "/en#contact" },
@@ -151,7 +150,10 @@ export default function Header() {
             </Link>
           )}
 
-          <LanguageSwitcher isEn={isEn} />
+          {/* 좁은 모바일 화면에서는 숨기고 모바일 메뉴 패널 안에 배치 — 헤더 폭 초과로 햄버거 버튼이 밀려나는 것 방지 */}
+          <div className="hidden sm:block">
+            <LanguageSwitcher isEn={isEn} />
+          </div>
 
           <a
             href={siteConfig.kakaoChannelUrl}
@@ -183,6 +185,10 @@ export default function Header() {
       >
         <div className="overflow-hidden">
           <nav className="flex flex-col px-5 py-2">
+            <div className="flex items-center justify-between border-b border-navy-800/8 py-3.5 sm:hidden">
+              <span className="text-[13px] text-charcoal-900/70">{isEn ? "Language" : "언어"}</span>
+              <LanguageSwitcher isEn={isEn} />
+            </div>
             {mobileNav.map((item) => (
               <Link
                 key={item.href}

@@ -9,7 +9,6 @@ const linkGroups = [
       { label: "블러섬북스 소개", href: "/about" },
       { label: "교재 찾기", href: "/books" },
       { label: "레벨 진단 교재", href: "/level-assessment" },
-      { label: "교재 시리즈", href: "/series" },
       { label: "분량 선택 가이드", href: "/guide" },
       { label: "주문 제작", href: "/custom-order" },
       { label: "학원·기관 상담", href: "/institutions" },
@@ -18,7 +17,6 @@ const linkGroups = [
   {
     title: "찾기·시험별",
     links: [
-      { label: "교재 추천받기", href: "/find" },
       { label: "교재 비교", href: "/compare" },
       { label: "학부모 가이드", href: "/learn" },
       { label: "SR 대비", href: "/prep/sr" },
@@ -35,7 +33,6 @@ const linkGroups = [
     links: [
       { label: "자주 묻는 질문", href: "/faq" },
       { label: "카카오톡 상담", href: siteConfig.kakaoChannelUrl },
-      { label: "이메일 문의", href: `mailto:${siteConfig.email}` },
     ],
   },
   {
@@ -99,10 +96,7 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col gap-4 border-t border-ivory-100/10 pt-8 text-[12px] leading-relaxed text-ivory-200/55 lg:flex-row lg:items-center lg:justify-between">
           <p>
-            사업자등록번호 {siteConfig.businessRegistrationNumber} · {siteConfig.addressShort} ·{" "}
-            <a href={`mailto:${siteConfig.email}`} className="transition-colors hover:text-brass-400">
-              이메일 문의
-            </a>
+            사업자등록번호 {siteConfig.businessRegistrationNumber} · {siteConfig.addressShort}
           </p>
           <p>© {new Date().getFullYear()} Blossom Books. All rights reserved.</p>
         </div>

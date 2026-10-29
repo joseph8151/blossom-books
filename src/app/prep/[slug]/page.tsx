@@ -127,7 +127,7 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <h2 className="font-display text-[24px] font-semibold text-navy-950">분량과 가격</h2>
           <p className="mt-2 text-[14px] text-charcoal-600">필요한 만큼 선택하세요. 결제는 공식 카카오톡을 통해 진행됩니다.</p>
-          <div className="mt-8"><PrepVolumePricing /></div>
+          <div className="mt-8"><PrepVolumePricing sr={t.srPricing} /></div>
         </div>
       </section>
 
@@ -158,10 +158,7 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
             학생의 학년과 현재 수준을 알려주시면 적합한 교재와 구성을 안내해 드립니다.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="/find" className="inline-flex items-center gap-2 bg-brass-500 px-6 py-3.5 text-[14px] font-medium text-navy-950 transition-colors hover:bg-brass-400">
-              교재 추천받기 <ArrowRight size={16} />
-            </Link>
-            <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-ivory-100/30 px-6 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:border-ivory-100/60">
+            <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-brass-500 px-6 py-3.5 text-[14px] font-medium text-navy-950 transition-colors hover:bg-brass-400">
               <MessageCircle size={16} /> 카카오톡으로 구매
             </a>
           </div>

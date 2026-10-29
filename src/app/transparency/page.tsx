@@ -45,7 +45,6 @@ export default function TransparencyPage() {
               ["사업자등록번호", siteConfig.businessRegistrationNumber],
               ["사업장 소재지", siteConfig.addressKo],
               ["공식 카카오톡", "Blossom Books 공식 채널 (구매·상담)"],
-              ["이메일 문의", "홈페이지 문의 폼 / 이메일로 접수"],
               ["결제 방식", "카카오톡 상담 후 계좌이체 또는 카드 결제"],
               ["제공 방식", "결제 확인 후 Digital PDF를 이메일로 발송"],
               ["상담 운영", "카카오톡 채널로 순차 응대"],

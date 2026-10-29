@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   MessageCircle,
-  Mail,
   FileCheck2,
   Microscope,
   ShieldCheck,
@@ -18,6 +17,7 @@ import { products, trackLabels } from "@/data/products";
 import { siteConfig } from "@/data/site";
 import { coverToneFor } from "@/lib/utils";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
+import { EnContactForm } from "@/components/en/EnContactForm";
 
 export const metadata: Metadata = {
   title: "Blossom Books — Premium Study Materials for International Students",
@@ -95,13 +95,14 @@ export default function EnHomePage() {
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Link
-                href="/en/find"
+              <a
+                href={siteConfig.kakaoChannelUrl}
+                target="_blank"
+                rel="noreferrer"
                 className="group inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
               >
-                Find my workbook
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-              </Link>
+                <MessageCircle size={16} /> Chat with us on KakaoTalk
+              </a>
               <Link
                 href="/en/books"
                 className="inline-flex items-center gap-2 border border-navy-800/25 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
@@ -349,14 +350,14 @@ export default function EnHomePage() {
               How to order
             </h2>
             <p className="mt-4 max-w-xl text-[14.5px] leading-relaxed text-charcoal-600">
-              Blossom Books does not take direct online payment on the site. Base prices are
-              published — 100P $95 · 200P $146 · 300P $212 (300P+ on request). Confirm your title
-              and volume with our team; after your order is confirmed, we arrange payment
-              (PayPal for international customers) and send your PDF after confirmation.
+              Blossom Books does not take direct online payment on the site. Confirm your title
+              and volume with our team, and we&apos;ll share the exact price for that configuration;
+              after your order is confirmed, we arrange payment (PayPal for international
+              customers) and send your PDF after confirmation.
             </p>
             <ul className="mt-6 space-y-3 text-[14px] text-charcoal-600">
               {[
-                "Published pricing by volume — no need to ask just to see the price",
+                "A clear price for your exact configuration, confirmed before you pay",
                 "A quick fit check before you order — the right option, not the biggest",
                 "Digital PDF delivery after payment confirmation — non-refundable after delivery",
               ].map((line) => (
@@ -382,7 +383,7 @@ export default function EnHomePage() {
                 title="SAT Math"
                 subtitle="Full practice workbook"
                 tone="navy"
-                tabLabel="$"
+                tabLabel="PDF"
                 className="mx-auto"
               />
             </div>
@@ -468,13 +469,12 @@ export default function EnHomePage() {
             >
               <MessageCircle size={16} /> Chat on KakaoTalk
             </a>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="inline-flex items-center justify-center gap-2 border border-navy-800/25 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
-            >
-              <Mail size={16} /> Email us
-            </a>
           </div>
+          <p className="mx-auto mt-6 max-w-xl text-[13px] text-charcoal-600">
+            Most international visitors don&apos;t use KakaoTalk — send us a message below instead
+            and we&apos;ll reply to your email.
+          </p>
+          <EnContactForm />
         </div>
       </section>
     </div>

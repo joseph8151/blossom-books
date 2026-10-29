@@ -110,7 +110,7 @@ export default function EnBooksPage() {
                 ))}
               </div>
               <div className="mt-6 border-t border-navy-800/10 pt-4">
-                <p className="text-[12px] text-charcoal-600">{isDirectPurchase(p) ? "Options & price on the detail page" : "Custom quote"}</p>
+                <p className="text-[12px] text-charcoal-600">{isDirectPurchase(p) ? "Price on consultation" : "Custom quote"}</p>
                 <div className="mt-3 flex gap-2">
                   <Link href={`/en/books/${p.id}#sample`} className="inline-flex items-center justify-center gap-1.5 border border-navy-800/25 px-3.5 py-2 text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50">
                     <FileSearch size={13} /> Sample
