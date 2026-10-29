@@ -35,7 +35,12 @@ function SchoolCard({ school }: { school: School }) {
         className="flex w-full items-center justify-between gap-3 p-5 text-left"
       >
         <div>
-          <p className="font-display text-[16px] font-semibold text-navy-950">{school.name}</p>
+          <p className="font-display text-[16px] font-semibold text-navy-950">
+            {school.name}
+            {school.nameKo && (
+              <span className="ml-1.5 text-[13px] font-normal text-charcoal-600">({school.nameKo})</span>
+            )}
+          </p>
           <p className="mt-1 inline-flex items-center gap-1 text-[12px] text-charcoal-600">
             <MapPin size={12} /> {school.city}
           </p>
@@ -112,7 +117,7 @@ export default function SchoolFinder() {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return allSchools.filter((s) => {
-      if (q && !`${s.name} ${s.city}`.toLowerCase().includes(q)) return false;
+      if (q && !`${s.name} ${s.nameKo ?? ""} ${s.city}`.toLowerCase().includes(q)) return false;
       if (region !== "all" && !s.regions.includes(region)) return false;
       if (assessment !== "all" && !s.assessmentAreas.includes(assessment)) return false;
       return true;
