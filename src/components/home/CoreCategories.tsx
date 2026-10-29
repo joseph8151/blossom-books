@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
-// 3개 핵심 서비스는 모두 동등하게 중요합니다 — 특정 카드만 강조하지 않습니다.
+// 6개 핵심 서비스는 모두 동등하게 중요합니다 — 특정 카드만 강조하지 않습니다.
 // 클릭하면 다른 페이지로 이동하지 않고, 카드 바로 아래에 상세 패널이
 // 펼쳐집니다("자세히 보기 +" / "접기 −"). 상세 패널은 전부 카카오톡 상담
 // CTA로 끝납니다 — 과목·난이도·학원 스타일이 섞인 질문은 카탈로그 필터보다
@@ -80,13 +80,66 @@ const categories: Category[] = [
     en: "Standardized Test Prep",
     ko: "표준화 시험 대비",
     teaser: "시험마다 다른 구조에 맞춰 각각 따로 준비합니다.",
-    areas: "MAP · CAT4 · SSAT · ISEE · UKiset · SAT · AP · GRE · LSAT",
+    areas: "MAP · CAT4 · SSAT · ISEE · UKiset · SAT · GRE · LSAT",
     intro: "시험마다 평가 영역과 문제 구조가 다르기 때문에 같은 방식으로 교재를 구성하지 않습니다.",
     groups: [
-      { label: "예시 시험", items: ["MAP", "CAT4", "SSAT", "ISEE", "UKiset", "SAT", "AP", "GRE", "LSAT"] },
+      { label: "예시 시험", items: ["MAP", "CAT4", "SSAT", "ISEE", "UKiset", "SAT", "GRE", "LSAT"] },
     ],
     notes: ["각 시험의 평가 영역, 문항 유형, 난이도에 맞춰 문제집·해설집·모의형 구성 등을 제작합니다."],
     ctaLabel: "시험별 상담하기",
+  },
+  {
+    no: "04",
+    en: "SR / STAR Reading Prep",
+    ko: "SR 리딩 레벨 대비",
+    teaser: "지문을 많이 읽는 것보다, SR이 요구하는 독해 유형에 맞춰 연습합니다.",
+    areas: "SR · STAR Reading · Accelerated Reader",
+    intro:
+      "SR(Reading Level) 준비의 핵심은 지문을 많이 읽는 것만이 아니라, SR에서 요구되는 독해 유형에 익숙해지는 것입니다. 학생의 현재 읽기 수준을 기준으로 단계적으로 연습하도록 구성합니다.",
+    groups: [
+      {
+        label: "SR 독해 유형",
+        items: ["Main Idea", "Supporting Details", "Inference", "Vocabulary in Context", "Author's Purpose", "Cause & Effect"],
+      },
+    ],
+    notes: [
+      "다양한 길이·난이도의 독립 제작 지문으로 유형별 연습을 제공하고, 정답 근거를 지문에서 찾는 습관을 기르도록 한글 상세해설을 함께 제공합니다.",
+    ],
+    ctaLabel: "SR 대비 상담하기",
+  },
+  {
+    no: "05",
+    en: "AP Exam Prep",
+    ko: "AP 시험 대비",
+    teaser: "과목별 출제 범위와 FRQ·자료 해석 유형까지 반영해 구성합니다.",
+    areas: "Calculus · Biology · Chemistry · Physics · Statistics · US History · Economics 외 전 과목",
+    intro:
+      "AP는 대학 수준의 과목별 내용 지식과 자유응답형(FRQ) 사고력을 평가합니다. 과목별 출제 범위와 유형을 반영한 심화 문제와 상세 해설을 제공합니다.",
+    groups: [
+      {
+        label: "과목 예시",
+        items: ["AP Calculus AB/BC", "AP Biology", "AP Chemistry", "AP Physics", "AP Statistics", "AP US History", "AP English Language", "AP Economics"],
+      },
+    ],
+    notes: [
+      "과목별 핵심 개념과 자료 해석·서술형(FRQ) 유형을 반영해 구성하며, 공식 AP 문항을 복제하지 않습니다.",
+      "해설은 영어 중심 + 한글 핵심 설명으로 제공합니다.",
+    ],
+    ctaLabel: "AP 시험 상담하기",
+  },
+  {
+    no: "06",
+    en: "IB Diploma Prep",
+    ko: "IB 디플로마 대비",
+    teaser: "과목·SL/HL·분량까지 선택해 Unit 단위로 맞춤 구성합니다.",
+    areas: "Math AA/AI · Biology · Chemistry · Physics · Economics",
+    intro:
+      "IB는 과목마다 SL/HL 난이도와 평가 방식이 다릅니다. 과목·SL/HL·분량(100P/200P)과 현재 진도를 확인해 필요한 Unit만 맞춤 구성합니다.",
+    groups: [
+      { label: "과목 예시", items: ["Math AA", "Math AI", "Biology", "Chemistry", "Physics", "Economics", "Business"] },
+    ],
+    notes: ["SL/HL, 분량, 현재 진도에 맞춰 Unit 단위로 구성합니다."],
+    ctaLabel: "IB 상담하기",
   },
 ];
 
