@@ -53,12 +53,6 @@ export default function WishlistPage() {
               >
                 <MessageCircle size={15} /> 카카오톡 상담
               </a>
-              <Link
-                href="/find"
-                className="inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"
-              >
-                교재 추천받기 <ArrowRight size={15} />
-              </Link>
             </div>
           </div>
         </>

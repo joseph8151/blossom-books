@@ -13,7 +13,6 @@ const baseUrl = "https://blossombooks.org";
 const staticPaths = [
   { path: "", priority: 1, changeFrequency: "daily" as const },
   { path: "/books", priority: 0.9, changeFrequency: "daily" as const },
-  { path: "/find", priority: 0.8, changeFrequency: "weekly" as const },
   { path: "/level-assessment", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/guide", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/custom-order", priority: 0.6, changeFrequency: "monthly" as const },
@@ -33,7 +32,6 @@ const staticPaths = [
   { path: "/copyright", priority: 0.3, changeFrequency: "yearly" as const },
   { path: "/en", priority: 0.5, changeFrequency: "monthly" as const },
   { path: "/en/books", priority: 0.5, changeFrequency: "weekly" as const },
-  { path: "/en/find", priority: 0.4, changeFrequency: "monthly" as const },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

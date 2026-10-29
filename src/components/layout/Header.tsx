@@ -22,7 +22,6 @@ const koDesktopNav = [
 const enNav = [
   { label: "Home", href: "/en" },
   { label: "Browse Books", href: "/en/books" },
-  { label: "Find My Workbook", href: "/en/find" },
   { label: "Why Blossom", href: "/en#why" },
   { label: "Payment", href: "/en#payment" },
   { label: "Contact", href: "/en#contact" },

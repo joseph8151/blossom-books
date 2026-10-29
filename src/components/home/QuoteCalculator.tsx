@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { MessageCircle, ArrowRight, Check } from "lucide-react";
+import { MessageCircle, Check } from "lucide-react";
 import { volumeOptions, extendedOption } from "@/data/pricing";
 import { siteConfig } from "@/data/site";
 
@@ -90,13 +89,6 @@ export default function QuoteCalculator() {
                 >
                   <MessageCircle size={14} /> 카카오톡 상담받고 구성 확인하기
                 </button>
-                <Link
-                  href="/find"
-                  className="group mt-2.5 inline-flex items-center gap-1.5 text-[12.5px] font-medium text-ivory-100/70 transition-colors hover:text-ivory-100"
-                >
-                  교재 추천받기
-                  <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
-                </Link>
               </>
             ) : (
               <>
@@ -123,13 +115,6 @@ export default function QuoteCalculator() {
                   >
                     <MessageCircle size={14} /> 이 구성으로 상담
                   </a>
-                  <Link
-                    href="/find"
-                    className="group inline-flex items-center gap-1.5 border border-ivory-100/25 px-5 py-2.5 text-[13px] font-medium text-ivory-100 transition-colors hover:border-ivory-100/50"
-                  >
-                    교재 추천받기
-                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-                  </Link>
                 </div>
                 <p className="mt-3 text-[11px] leading-relaxed text-ivory-200/55">
                   * 과목·구성에 따라 일부 상품은 별도 안내될 수 있습니다. 최종 금액은 결제 전 확인됩니다.

@@ -17,7 +17,6 @@ const linkGroups = [
   {
     title: "찾기·시험별",
     links: [
-      { label: "교재 추천받기", href: "/find" },
       { label: "교재 비교", href: "/compare" },
       { label: "학부모 가이드", href: "/learn" },
       { label: "SR 대비", href: "/prep/sr" },

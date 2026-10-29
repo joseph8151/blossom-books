@@ -24,8 +24,8 @@ export default function CustomOrderPage() {
   const [submitError, setSubmitError] = useState(false);
   const [consent, setConsent] = useState(false);
 
-  // /find에서 "이 조건으로 맞춤 견적 받기"로 넘어온 경우, 쿼리스트링에 실려 온
-  // 학년·시험·수준·목적·희망완료시기·연락처를 폼에 미리 채워 넣습니다.
+  // 다른 페이지에서 쿼리스트링으로 학년·시험·수준·목적·희망완료시기·연락처를
+  // 실어 넘어온 경우, 폼에 미리 채워 넣습니다.
   const examOrCurriculumRef = useRef<HTMLInputElement>(null);
   const gradeRef = useRef<HTMLInputElement>(null);
   const currentLevelRef = useRef<HTMLInputElement>(null);

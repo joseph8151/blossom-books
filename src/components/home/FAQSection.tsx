@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, ArrowRight, FileSearch } from "lucide-react";
+import { Plus, MessageCircle, FileSearch } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/data/site";
 
 // 가격보다 먼저 "이 교재가 우리 아이에게 맞는가"를 판단하도록, 가치·시험·구성 질문을 앞에 둡니다.
 const faqs = [
@@ -110,13 +111,14 @@ export default function FAQSection() {
             어떤 교재가 맞는지 아직 고민되시나요?
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/find"
-              className="group inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
+            <a
+              href={siteConfig.kakaoChannelUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 shadow-soft transition-all hover:-translate-y-0.5 hover:bg-navy-800"
             >
-              내게 맞는 교재 찾기
-              <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
-            </Link>
+              <MessageCircle size={15} /> 카카오톡으로 상담하기
+            </a>
             <Link
               href="/books"
               className="inline-flex items-center gap-2 border border-navy-800/25 px-6 py-3 text-[13.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"

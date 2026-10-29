@@ -135,10 +135,7 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
             학생의 학년과 현재 수준을 알려주시면 적합한 교재와 구성을 안내해 드립니다.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="/find" className="inline-flex items-center gap-2 bg-brass-500 px-6 py-3.5 text-[14px] font-medium text-navy-950 transition-colors hover:bg-brass-400">
-              교재 추천받기 <ArrowRight size={16} />
-            </Link>
-            <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-ivory-100/30 px-6 py-3.5 text-[14px] font-medium text-ivory-100 transition-colors hover:border-ivory-100/60">
+            <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-brass-500 px-6 py-3.5 text-[14px] font-medium text-navy-950 transition-colors hover:bg-brass-400">
               <MessageCircle size={16} /> 카카오톡으로 구매
             </a>
           </div>

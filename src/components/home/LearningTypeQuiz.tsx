@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { ArrowRight, MessageCircle, RotateCcw } from "lucide-react";
+import { MessageCircle, RotateCcw } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
-// 홈페이지용 30초 진단 퀴즈 — /find(전체 추천 도구)로 가기 전, 가볍게 재미로
-// 해보는 3문항 퀴즈입니다. 결과 "유형"은 바로 보여주되(재미 요소), 구체적인
-// 추천 구성은 다른 카톡 유도 도구들과 동일하게 카카오톡 상담을 받아야
-// 공개됩니다.
+// 홈페이지용 30초 진단 퀴즈 — 가볍게 재미로 해보는 3문항 퀴즈입니다. 결과
+// "유형"은 바로 보여주되(재미 요소), 구체적인 추천 구성은 다른 카톡 유도
+// 도구들과 동일하게 카카오톡 상담을 받아야 공개됩니다.
 
 interface QuizType {
   id: string;
@@ -216,13 +214,6 @@ export default function LearningTypeQuiz() {
                 >
                   <RotateCcw size={13} /> 다시 하기
                 </button>
-                <Link
-                  href="/find"
-                  className="group inline-flex items-center gap-1.5 text-[12.5px] font-medium text-ivory-100/60 transition-colors hover:text-ivory-100"
-                >
-                  더 정확한 추천 받기
-                  <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
-                </Link>
               </div>
             </div>
           )}

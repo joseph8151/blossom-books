@@ -95,13 +95,14 @@ export default function EnHomePage() {
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Link
-                href="/en/find"
+              <a
+                href={siteConfig.kakaoChannelUrl}
+                target="_blank"
+                rel="noreferrer"
                 className="group inline-flex items-center gap-2 bg-navy-900 px-7 py-3.5 text-[14.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800"
               >
-                Find my workbook
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-              </Link>
+                <MessageCircle size={16} /> Chat with us on KakaoTalk
+              </a>
               <Link
                 href="/en/books"
                 className="inline-flex items-center gap-2 border border-navy-800/25 px-7 py-3.5 text-[14.5px] font-medium text-navy-900 transition-colors hover:border-navy-800/50"

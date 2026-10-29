@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { siteConfig } from "@/data/site";
 
 // 학년별 학습 로드맵 — 단순 설명이 아니라 시각적 로드맵으로 Blossom Level 체계를 보여줍니다.
 const grades = ["K", "G1", "G2", "G3", "G4", "G5", "G6"];
@@ -94,13 +95,15 @@ export default function CurriculumMap() {
             현재 Reading Level과 영역별 실력에 따라{prev ? ` ${prev} Advanced 또는` : ""} {grade} Foundation이 더 적합할 수
             있습니다. 학생의 실제 수준을 기준으로 시작점을 안내합니다.
           </p>
-          <Link
-            href="/find"
+          <a
+            href={siteConfig.kakaoChannelUrl}
+            target="_blank"
+            rel="noreferrer"
             className="group mt-4 inline-flex items-center gap-2 text-[13.5px] font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2"
           >
-            내게 맞는 시작점 찾기
+            카카오톡으로 시작점 상담하기
             <ArrowRight size={14} className="text-brass-500 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+          </a>
         </div>
       </div>
     </section>

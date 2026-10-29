@@ -360,7 +360,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               <li>· 기본적인 Prep을 원하는 경우 → <span className="font-medium text-navy-900">60P</span></li>
               <li>· 충분한 반복이 필요한 경우 → <span className="font-medium text-navy-900">100P</span></li>
               <li>· 100P 이상 / 추가 영역이 필요한 경우 → <span className="font-medium text-navy-900">별도 문의</span></li>
-              <li>· 현재 수준을 모르겠다면 → <Link href="/find" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">교재 추천받기</Link> 또는 <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">구매 전 상담</Link></li>
+              <li>· 현재 수준을 모르겠다면 → <Link href="/consultation" className="font-medium text-navy-900 underline decoration-brass-500 decoration-2 underline-offset-2">구매 전 상담</Link></li>
             </ul>
           </div>
 
