@@ -10,12 +10,14 @@ import ProductCard from "@/components/books/ProductCard";
 import MissingBookCTA from "@/components/common/MissingBookCTA";
 import { trackEvent } from "@/lib/analytics";
 import { countryPrograms } from "@/data/countryPrograms";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { siteConfig } from "@/data/site";
+import { ArrowRight, MessageCircle } from "lucide-react";
 
 // countryPrograms(나라별)에 더해, 레벨테스트·공인시험 상담표로도 바로 연결합니다.
-// 홈페이지의 "나라별 교과 과정" 섹션은 같은 countryPrograms 데이터를 쓰지만
-// 국가만 다루므로, 이 두 항목은 countryPrograms에 넣지 않고 /books에서만 더합니다.
+// 이 href들은 전부 카카오 상담사가 고객에게 직접 전달하는 비공개 /quote-*
+// 구성표(검색 노출 차단, 홈 메뉴에도 없음)를 가리키므로, 공개 /books
+// 카탈로그에서도 홈페이지 CountryPrograms 섹션과 동일하게 그 링크를 타지
+// 않고 전부 카카오톡 상담으로 보냅니다.
 const examPrograms = [
   { title: "학원 레벨테스트 준비", desc: "영어·국어·수학 레벨테스트, 반 배정 시험 대비", href: "/quote" },
   { title: "공인 영어 시험", desc: "OET·MET·CELBAN·PTE·SAT 등 공인·전문시험 대비", href: "/quote-exam" },
@@ -132,18 +134,20 @@ export default function BooksPage() {
       {/* 나라별 교과 과정 + 레벨테스트·공인시험 카드 */}
       <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {[...countryPrograms, ...examPrograms].map((c) => (
-          <Link
+          <a
             key={c.href}
-            href={c.href}
+            href={siteConfig.kakaoChannelUrl}
+            target="_blank"
+            rel="noreferrer"
             className="flex flex-col border border-navy-800/12 bg-ivory-100 p-4 transition-colors hover:border-navy-800/30"
           >
             <p className="font-display text-[14.5px] font-semibold text-navy-950">{c.title}</p>
             <p className="mt-1.5 flex-1 text-[11.5px] leading-relaxed text-charcoal-600">{c.desc}</p>
             <span className="mt-2.5 inline-flex items-center gap-1 text-[11.5px] font-medium text-navy-900">
-              구성·가격 보기
-              <ArrowRight size={11} />
+              <MessageCircle size={12} />
+              카카오톡으로 상담하기
             </span>
-          </Link>
+          </a>
         ))}
       </div>
 
