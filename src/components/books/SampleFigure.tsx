@@ -637,6 +637,52 @@ export default function SampleFigure({ name }: { name: string }) {
       </svg>
     );
   }
+  if (name === "logistic-growth") {
+    // 로지스틱 개체군 성장 곡선 — 초반 지수적 증가 후 수용력(K)에서 수평화
+    const ox = 28, oy = 110, K = 88;
+    const pts: [number, number][] = [
+      [0, 2], [20, 4], [40, 10], [60, 24], [80, 46], [100, 66], [120, 78], [140, 84], [160, 86.5], [180, 87.5], [196, 88],
+    ];
+    const px = (x: number) => ox + x * 0.9;
+    const py = (y: number) => oy - y * 0.78;
+    return (
+      <svg viewBox="0 0 220 130" className={`${svgCls} max-w-[340px]`} role="img" aria-label="Logistic population growth curve leveling off at carrying capacity K">
+        <line x1={ox} y1="10" x2={ox} y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox} y1={oy} x2="210" y2={oy} stroke={INK} strokeWidth="1.2" />
+        <line x1={ox} y1={py(K)} x2="210" y2={py(K)} stroke={ACCENT} strokeWidth="1" strokeDasharray="3 3" />
+        <text x="188" y={py(K) - 4} fontSize="8" fill={ACCENT}>K</text>
+        <polyline points={pts.map(([x, y]) => `${px(x)},${py(y)}`).join(" ")} fill="none" stroke={INK} strokeWidth="1.8" />
+        <text x="4" y="14" fontSize="8" fill={FAINT}>Population</text>
+        <text x="186" y={oy + 11} fontSize="8" fill={FAINT}>Time</text>
+      </svg>
+    );
+  }
+  if (name === "trophic-pyramid") {
+    // 영양 단계 에너지 피라미드 — 단계마다 에너지의 약 10%만 다음 단계로 전달(10% rule)
+    const levels = [
+      { label: "Tertiary Consumers", kcal: "10 kcal", y: 8, w1: 30, w2: 70 },
+      { label: "Secondary Consumers", kcal: "100 kcal", y: 38, w1: 70, w2: 110 },
+      { label: "Primary Consumers", kcal: "1,000 kcal", y: 68, w1: 110, w2: 150 },
+      { label: "Producers", kcal: "10,000 kcal", y: 98, w1: 150, w2: 190 },
+    ];
+    const cx = 110;
+    return (
+      <svg viewBox="0 0 220 140" className={`${svgCls} max-w-[340px]`} role="img" aria-label="Trophic-level energy pyramid showing the 10% energy transfer rule">
+        {levels.map((lv) => (
+          <g key={lv.label}>
+            <polygon
+              points={`${cx - lv.w1 / 2},${lv.y} ${cx + lv.w1 / 2},${lv.y} ${cx + lv.w2 / 2},${lv.y + 26} ${cx - lv.w2 / 2},${lv.y + 26}`}
+              fill={FILL}
+              stroke={INK}
+              strokeWidth="1"
+            />
+            <text x={cx} y={lv.y + 13} textAnchor="middle" fontSize="7.5" fill={INK}>{lv.label}</text>
+            <text x={cx} y={lv.y + 23} textAnchor="middle" fontSize="7.5" fontWeight="600" fill={ACCENT}>{lv.kcal}</text>
+          </g>
+        ))}
+      </svg>
+    );
+  }
 
   return null;
 }

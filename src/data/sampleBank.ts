@@ -1729,6 +1729,404 @@ export const apPrecalcBank: SampleItem[] = [
   },
 ];
 
+// ── Algebra 1 (US Curriculum, Course-Based) ───────────────
+export const algebra1Bank: SampleItem[] = [
+  {
+    area: "Linear Equations and Inequalities", type: "Solving Equations", skill: "Solve a multi-step linear equation", difficulty: "Standard",
+    question: "Solve for x: 3(x − 4) + 2 = 2x + 5",
+    choices: ["x = 7", "x = 9", "x = 11", "x = 15"],
+    answer: "x = 15",
+    why: "Distribute, combine like terms, then isolate x: 3x − 10 = 2x + 5 → x = 15.",
+    whyKo: "분배법칙을 적용한 뒤 동류항을 정리하고 x를 구합니다: 3x − 10 = 2x + 5 → x = 15.",
+    steps: ["3x − 12 + 2 = 2x + 5", "3x − 10 = 2x + 5", "x = 15"],
+  },
+  {
+    area: "Quadratic Functions", type: "Factoring", skill: "Solve a quadratic equation by factoring", difficulty: "Advanced",
+    question: "Solve for x: x² − 5x + 6 = 0",
+    choices: ["x = 2, 3", "x = −2, −3", "x = 1, 6", "x = −1, −6"],
+    answer: "x = 2, 3",
+    why: "Factor as (x − 2)(x − 3) = 0, so x = 2 or x = 3.",
+    whyKo: "(x − 2)(x − 3) = 0 형태로 인수분해하면 x = 2 또는 x = 3입니다.",
+    steps: ["x² − 5x + 6 = 0", "(x − 2)(x − 3) = 0", "x = 2 또는 x = 3"],
+  },
+];
+
+// ── Algebra 2 (US Curriculum, Course-Based) ───────────────
+export const algebra2Bank: SampleItem[] = [
+  {
+    area: "Exponential and Logarithmic Functions", type: "Solving Equations", skill: "Solve an exponential equation", difficulty: "Standard",
+    question: "Solve for x: 2^(x+1) = 32",
+    choices: ["x = 3", "x = 4", "x = 5", "x = 16"],
+    answer: "x = 4",
+    why: "Rewrite 32 as 2⁵, so x + 1 = 5, giving x = 4.",
+    whyKo: "32를 2⁵로 바꾸면 x + 1 = 5이므로 x = 4입니다.",
+    steps: ["2^(x+1) = 2⁵", "x + 1 = 5", "x = 4"],
+  },
+  {
+    area: "Quadratic Functions", type: "Vertex Form", skill: "Find the vertex of a parabola", difficulty: "Advanced",
+    question: "What is the vertex of f(x) = 2x² − 8x + 3?",
+    choices: ["(2, −5)", "(−2, 27)", "(2, 3)", "(4, 3)"],
+    answer: "(2, −5)",
+    why: "The x-coordinate of the vertex is −b/2a = 8/4 = 2. Substituting gives f(2) = 2(4) − 16 + 3 = −5.",
+    whyKo: "꼭짓점의 x좌표는 −b/2a = 8/4 = 2입니다. 대입하면 f(2) = 2(4) − 16 + 3 = −5.",
+    steps: ["x = −b/2a = 8/4 = 2", "f(2) = 2(4) − 16 + 3", "= −5"],
+    figure: "parabola-vertex",
+  },
+];
+
+// ── US Curriculum, Grade-Based English (G1–G12) ───────────
+export const ENGLISH_GRADE_SAMPLES: Record<string, SampleItem[]> = {
+  G1: [
+    {
+      area: "Phonics and Sight Words", type: "Fill in the Blank", skill: "Use a sight word to complete a sentence", difficulty: "Foundation",
+      question: "Fill in the blank with the correct word.\n\"___ is a sunny day.\"",
+      choices: ["It", "Cat", "Run", "Jump"],
+      answer: "It",
+      why: "\"It\" is a common sight word used to start sentences about weather; the sentence needs a subject before \"is.\"",
+      whyKo: "'It'은 날씨를 나타낼 때 문장 맨 앞에 자주 오는 사이트워드입니다. 'is' 앞에는 주어가 필요하므로 'It'이 들어갑니다.",
+    },
+  ],
+  G2: [
+    {
+      area: "Short Passages", type: "Story Sequence", skill: "Identify the beginning of a story", difficulty: "Foundation",
+      passage: "Mia woke up early. She brushed her teeth and ate breakfast. Then she packed her bag and walked to school with her dog, Max.",
+      question: "What happens at the beginning of the story?",
+      choices: ["Mia walks to school.", "Mia wakes up early.", "Mia packs her bag.", "Mia eats breakfast with Max."],
+      answer: "Mia wakes up early.",
+      why: "The first event in the passage is Mia waking up, which marks the beginning of the story.",
+      whyKo: "이야기의 첫 번째 사건은 미아가 일찍 일어나는 것으로, 이것이 이야기의 '시작' 부분입니다.",
+    },
+  ],
+  G3: [
+    {
+      area: "Context Clues", type: "Vocabulary in Context", skill: "Use context clues to determine word meaning", difficulty: "Standard",
+      passage: "Ben felt famished after the long hike, so he quickly ate three sandwiches and a bag of chips.",
+      question: "What does the word \"famished\" most likely mean?",
+      choices: ["Tired", "Very hungry", "Happy", "Confused"],
+      answer: "Very hungry",
+      why: "The context clue \"quickly ate three sandwiches and a bag of chips\" shows Ben was extremely hungry, so \"famished\" means very hungry.",
+      whyKo: "'세 개의 샌드위치와 과자 한 봉지를 빠르게 먹었다'는 문맥 단서로 보아 벤이 매우 배고팠다는 것을 알 수 있으므로, 'famished'는 '매우 배고픈'이라는 뜻입니다.",
+    },
+  ],
+  G4: [
+    {
+      area: "Figurative Language (simile)", type: "Identify Simile", skill: "Recognize a simile in a sentence", difficulty: "Standard",
+      question: "Which sentence contains a simile?",
+      choices: ["The wind howled like a wolf.", "The wind blew hard.", "The trees shook in the storm.", "Rain fell on the roof."],
+      answer: "The wind howled like a wolf.",
+      why: "A simile compares two things using \"like\" or \"as.\" This sentence compares the wind's sound to a wolf's howl using \"like.\"",
+      whyKo: "직유법(simile)은 'like'나 'as'를 사용해 두 대상을 비교하는 표현입니다. 이 문장은 바람 소리를 늑대의 울음소리에 'like'로 비유하고 있습니다.",
+    },
+  ],
+  G5: [
+    {
+      area: "Point of View", type: "Narrative Perspective", skill: "Identify point of view in a passage", difficulty: "Standard",
+      passage: "I couldn't believe my eyes when I saw the trophy with my name on it. All those months of practice had finally paid off.",
+      question: "This passage is written from which point of view?",
+      choices: ["First person", "Second person", "Third person limited", "Third person omniscient"],
+      answer: "First person",
+      why: "The narrator uses \"I\" and \"my,\" which signals a first-person point of view — the narrator is a character telling their own story.",
+      whyKo: "서술자가 'I'와 'my'를 사용하는 것은 1인칭 시점의 특징입니다 — 서술자 자신이 이야기 속 인물로 등장해 자기 이야기를 전달합니다.",
+    },
+  ],
+  G6: [
+    {
+      area: "Claim and Evidence", type: "Argument Analysis", skill: "Evaluate how evidence supports a claim", difficulty: "Standard",
+      passage: "Claim: Schools should start later in the morning.\nEvidence: Studies show that teenagers who sleep more perform better on tests and report fewer symptoms of depression.",
+      question: "Which best describes the relationship between the claim and the evidence?",
+      choices: [
+        "The evidence contradicts the claim.",
+        "The evidence supports the claim with research findings.",
+        "The evidence is unrelated to the claim.",
+        "The evidence restates the claim without proof.",
+      ],
+      answer: "The evidence supports the claim with research findings.",
+      why: "The evidence cites specific research findings (better test performance, fewer depression symptoms) that directly back up the claim about later school start times.",
+      whyKo: "제시된 근거는 '시험 성적 향상'과 '우울 증상 감소'라는 구체적인 연구 결과를 들어 '등교 시간을 늦춰야 한다'는 주장을 직접적으로 뒷받침합니다.",
+    },
+  ],
+  G7: [
+    {
+      area: "Literary Devices", type: "Figurative Language", skill: "Identify a simile and explain its effect", difficulty: "Standard",
+      passage: "The old dog moved like a rusty gate, each step creaking with effort, but his eyes still sparkled like a puppy's.",
+      question: "Which phrase from the passage is a simile, and what effect does it create?",
+      choices: [
+        "\"moved like a rusty gate\" — it compares the dog's slow, stiff movement to something mechanical and worn",
+        "\"his eyes still sparkled\" — it shows the dog is happy",
+        "\"each step creaking with effort\" — it describes the sound of footsteps",
+        "\"like a puppy's\" — it means the dog is actually young",
+      ],
+      answer: "\"moved like a rusty gate\" — it compares the dog's slow, stiff movement to something mechanical and worn",
+      why: "A simile uses 'like' or 'as' to compare two unlike things; comparing the dog's movement to a rusty gate emphasizes stiffness and age.",
+      whyKo: "직유법은 'like'나 'as'를 사용해 서로 다른 두 대상을 비교합니다. 개의 움직임을 녹슨 문에 비유하면서 뻣뻣함과 나이 든 느낌을 강조합니다.",
+      wrong: "The other options either misidentify the simile or misread its meaning.",
+      wrongKo: "나머지 보기들은 직유를 잘못 짚었거나 의미를 잘못 해석한 것입니다.",
+    },
+  ],
+  G8: [
+    {
+      area: "Argument Essays", type: "Claim and Counterclaim", skill: "Identify an effective counterclaim response", difficulty: "Standard",
+      question: "A student argues that schools should start later in the morning. Which sentence BEST addresses a counterclaim?",
+      choices: [
+        "Some people think earlier start times teach discipline, but research shows teenagers' sleep cycles make early starts harmful to learning.",
+        "Starting school later would make students happier.",
+        "Most students dislike waking up early.",
+        "Teachers also prefer later start times.",
+      ],
+      answer: "Some people think earlier start times teach discipline, but research shows teenagers' sleep cycles make early starts harmful to learning.",
+      why: "An effective counterclaim response acknowledges the opposing view and then refutes it with evidence.",
+      whyKo: "효과적인 반론 대응은 상대방의 주장을 먼저 인정한 뒤, 근거를 들어 반박하는 것입니다.",
+    },
+  ],
+  G9: [
+    {
+      area: "Rhetorical Situation", type: "Audience and Purpose", skill: "Identify the rhetorical situation of a text", difficulty: "Standard",
+      passage: "To the City Council: As a longtime resident, I am writing to request additional funding for our public library. Many families in our neighborhood rely on it for free internet access and after-school programs.",
+      question: "What is the primary purpose of this passage?",
+      choices: [
+        "To entertain readers with a story",
+        "To persuade the council to fund the library",
+        "To inform readers about library hours",
+        "To describe the history of the library",
+      ],
+      answer: "To persuade the council to fund the library",
+      why: "The writer directly requests funding and provides reasons, which is a persuasive purpose aimed at a specific audience (the City Council).",
+      whyKo: "글쓴이는 도서관 예산 지원을 직접 요청하고 이유를 제시하고 있으므로, 특정 청중(시의회)을 설득하려는 목적입니다.",
+    },
+  ],
+  G10: [
+    {
+      area: "Synthesis Writing", type: "Outline Planning", skill: "Plan a synthesis essay using multiple sources", difficulty: "Advanced",
+      question: "You are writing a synthesis essay arguing whether social media helps or harms teen mental health, using three sources with different viewpoints. Outline the structure of your essay, including how you will use each source.",
+      answer: "Intro with a clear thesis; one body paragraph per major reason, each weaving in evidence from at least one source and explaining how it supports your claim; a paragraph addressing a counterargument from an opposing source; conclusion restating the synthesized position.",
+      why: "A strong synthesis essay doesn't summarize sources one by one — it organizes ideas by theme/claim and uses sources as evidence for the writer's own argument.",
+      whyKo: "좋은 종합 에세이(synthesis essay)는 출처를 하나씩 요약하지 않고, 주장별로 구성한 뒤 각 출처를 근거로 엮어 사용합니다.",
+      steps: ["Thesis 문장 작성", "주장별로 단락 구성 (출처 근거 포함)", "반대 의견 단락 추가", "결론에서 종합된 입장 재진술"],
+    },
+  ],
+  G11: [
+    {
+      area: "Rhetorical Analysis", type: "Essay Planning", skill: "Plan a rhetorical analysis essay", difficulty: "Advanced",
+      question: "You must write a rhetorical analysis of a speech that uses repetition, a strong emotional appeal, and statistics. Outline how you would structure your essay body paragraphs.",
+      answer: "One body paragraph per rhetorical strategy (repetition, pathos, statistics/logos), each identifying the specific technique, giving a textual example, and explaining its effect on the audience — rather than simply summarizing the speech's content.",
+      why: "Rhetorical analysis focuses on HOW the author persuades, not WHAT the author says — organizing by strategy keeps the analysis focused.",
+      whyKo: "수사적 분석(rhetorical analysis)은 저자가 '무엇을' 말했는지가 아니라 '어떻게' 설득하는지에 초점을 둡니다. 전략별로 단락을 구성하면 분석이 명확해집니다.",
+      steps: ["전략 1: 반복법 — 예시 + 효과", "전략 2: 감정적 호소(pathos) — 예시 + 효과", "전략 3: 통계(logos) — 예시 + 효과"],
+    },
+  ],
+  G12: [
+    {
+      area: "Research Paper Structure", type: "Outline Planning", skill: "Structure a college-level research paper", difficulty: "Advanced",
+      question: "Outline the standard structure of a college-level argumentative research paper, from introduction to conclusion.",
+      answer: "Introduction with context and a clear thesis; literature review or background section; body paragraphs organized by sub-claim, each supported by cited evidence and the writer's analysis; a paragraph addressing counterarguments; conclusion that synthesizes findings and suggests broader significance; Works Cited/References page.",
+      why: "College research papers require explicit engagement with existing scholarship (not just opinion) and a clear logical progression from claim to evidence to significance.",
+      whyKo: "대학 수준 연구 논문은 단순한 의견이 아니라 기존 연구와의 연계를 요구하며, 주장 → 근거 → 의의로 이어지는 명확한 논리 전개가 필요합니다.",
+      steps: ["서론(배경+논제)", "선행연구/배경 설명", "본론(하위 주장별 단락, 인용 근거 포함)", "반론 대응 단락", "결론(종합+의의)", "참고문헌"],
+    },
+  ],
+};
+
+// ── US Curriculum, Grade-Based Math (G1–G12) ──────────────
+export const MATH_GRADE_SAMPLES: Record<string, SampleItem[]> = {
+  G1: [
+    {
+      area: "Addition and Subtraction within 20", type: "Word Problem", skill: "Add two numbers within 20", difficulty: "Standard",
+      question: "There are 8 apples in a basket. 5 more apples are put in. How many apples are in the basket now?",
+      choices: ["11", "12", "13", "14"],
+      answer: "13",
+      why: "Add the starting amount and the amount added: 8 + 5 = 13.",
+      whyKo: "처음 있던 사과 수와 더 넣은 사과 수를 더합니다: 8 + 5 = 13.",
+      steps: ["8 + 5", "= 13"],
+    },
+  ],
+  G2: [
+    {
+      area: "Place Value to 1,000", type: "Place Value", skill: "Identify the value of a digit", difficulty: "Standard",
+      question: "What is the value of the digit 6 in the number 462?",
+      choices: ["6", "60", "600", "400"],
+      answer: "60",
+      why: "The digit 6 is in the tens place, so its value is 6 × 10 = 60.",
+      whyKo: "숫자 6은 십의 자리에 있으므로 값은 6 × 10 = 60입니다.",
+      steps: ["6은 십의 자리", "6 × 10 = 60"],
+    },
+  ],
+  G3: [
+    {
+      area: "Multiplication and Division Facts", type: "Division", skill: "Divide to share equally", difficulty: "Standard",
+      question: "A teacher has 24 pencils to share equally among 4 students. How many pencils does each student get?",
+      choices: ["4", "5", "6", "8"],
+      answer: "6",
+      why: "Divide the total by the number of students: 24 ÷ 4 = 6.",
+      whyKo: "전체 개수를 학생 수로 나눕니다: 24 ÷ 4 = 6.",
+      steps: ["24 ÷ 4", "= 6"],
+    },
+  ],
+  G4: [
+    {
+      area: "Equivalent Fractions", type: "Equivalent Fractions", skill: "Find an equivalent fraction", difficulty: "Standard",
+      question: "Which fraction is equivalent to 2/3?",
+      choices: ["4/6", "3/4", "5/6", "2/5"],
+      answer: "4/6",
+      why: "Multiply the numerator and denominator by the same number: 2/3 × 2/2 = 4/6.",
+      whyKo: "분자와 분모에 같은 수를 곱합니다: 2/3 × 2/2 = 4/6.",
+      steps: ["2/3 × 2/2", "= 4/6"],
+    },
+  ],
+  G5: [
+    {
+      area: "Fraction Operations", type: "Adding Fractions", skill: "Add fractions with unlike denominators", difficulty: "Standard",
+      question: "What is 3/4 + 1/8?",
+      choices: ["4/12", "1/2", "7/12", "7/8"],
+      answer: "7/8",
+      why: "Rewrite 3/4 as 6/8 so the denominators match, then add: 6/8 + 1/8 = 7/8.",
+      whyKo: "3/4를 6/8로 바꿔 분모를 같게 만든 뒤 더합니다: 6/8 + 1/8 = 7/8.",
+      steps: ["3/4 = 6/8", "6/8 + 1/8", "= 7/8"],
+    },
+  ],
+  G6: [
+    {
+      area: "Fractions/Decimals/Percents", type: "Percent of a Number", skill: "Find a percent of a quantity", difficulty: "Standard",
+      question: "What is 25% of 60?",
+      choices: ["12", "15", "20", "25"],
+      answer: "15",
+      why: "Convert 25% to the decimal 0.25, then multiply: 0.25 × 60 = 15.",
+      whyKo: "25%를 소수 0.25로 바꾼 뒤 곱합니다: 0.25 × 60 = 15.",
+      steps: ["25% = 0.25", "0.25 × 60", "= 15"],
+    },
+  ],
+  G7: [
+    {
+      area: "Proportional Relationships", type: "Ratio Problem", skill: "Solve a proportion using cross-multiplication", difficulty: "Standard",
+      question: "A recipe calls for 2 cups of flour for every 3 cups of sugar. If you use 9 cups of sugar, how many cups of flour do you need?",
+      choices: ["4", "6", "7.5", "13.5"],
+      answer: "6",
+      why: "Set up a proportion comparing flour to sugar, then solve for the missing quantity using cross-multiplication.",
+      whyKo: "밀가루와 설탕의 비율을 비례식으로 세운 뒤 외항·내항 곱으로 x를 구합니다: 2/3 = x/9 → x = 6.",
+      steps: ["2/3 = x/9", "x = 2 × (9 ÷ 3)", "x = 6"],
+    },
+  ],
+  G8: [
+    {
+      area: "Pythagorean Theorem", type: "Right Triangle", skill: "Find the hypotenuse using the Pythagorean theorem", difficulty: "Standard",
+      question: "A right triangle has legs of length 6 and 8. What is the length of the hypotenuse?",
+      figure: "right-triangle",
+      choices: ["10", "14", "48", "100"],
+      answer: "10",
+      why: "Apply the Pythagorean theorem a² + b² = c² to find the hypotenuse of a right triangle given both legs.",
+      whyKo: "피타고라스 정리 a² + b² = c²를 적용해 빗변의 길이를 구합니다: 6² + 8² = 100, c = 10.",
+      steps: ["c² = 6² + 8²", "c² = 36 + 64 = 100", "c = 10"],
+    },
+  ],
+  G9: [
+    {
+      area: "Linear and Quadratic Functions", type: "Quadratic Equation", skill: "Solve a quadratic equation by factoring out a common term", difficulty: "Standard",
+      question: "Solve for t: −t² + 6t = 0",
+      choices: ["t = 0 or t = 6", "t = 3 only", "t = 6 only", "t = −6 or 0"],
+      answer: "t = 0 or t = 6",
+      why: "Factor out the common term −t, then use the zero product property to find both solutions.",
+      whyKo: "공통인수 −t를 묶어낸 뒤 영인자의 법칙을 적용해 두 해를 구합니다: −t(t − 6) = 0 → t = 0 또는 t = 6.",
+      steps: ["−t² + 6t = 0", "−t(t − 6) = 0", "t = 0 또는 t = 6"],
+    },
+  ],
+  G10: [
+    {
+      area: "Similarity", type: "Similar Triangles", skill: "Find a missing side using similar triangle ratios", difficulty: "Advanced",
+      question: "Triangle ABC is similar to triangle DEF. If AB = 4, BC = 6, and DE = 10, what is EF?",
+      choices: ["9", "12", "15", "24"],
+      answer: "15",
+      why: "Similar triangles have proportional corresponding sides. Set up a proportion between the known and unknown sides.",
+      whyKo: "닮은 삼각형은 대응변의 비가 일정합니다. 알고 있는 변과 모르는 변 사이에 비례식을 세워 풉니다: 4/10 = 6/EF → EF = 15.",
+      steps: ["AB/DE = BC/EF", "4/10 = 6/EF", "EF = 6 × (10 ÷ 4) = 15"],
+    },
+  ],
+  G11: [
+    {
+      area: "Exponential and Log", type: "Logarithmic Equation", skill: "Convert a logarithmic equation to exponential form", difficulty: "Advanced",
+      question: "Solve for x: log₂(x) = 5",
+      choices: ["10", "25", "32", "64"],
+      answer: "32",
+      why: "Rewrite the logarithmic equation in exponential form to solve for x.",
+      whyKo: "로그 방정식을 지수 형태로 바꿔 x를 구합니다: log₂(x) = 5 → x = 2⁵ = 32.",
+      steps: ["log₂(x) = 5", "x = 2⁵", "x = 32"],
+    },
+  ],
+  G12: [
+    {
+      area: "Trig Identities", type: "Pythagorean Identity", skill: "Apply the Pythagorean identity to find a trig value", difficulty: "Advanced",
+      question: "If sin θ = 3/5 and θ is in Quadrant I, find cos θ.",
+      choices: ["3/5", "4/5", "5/4", "5/3"],
+      answer: "4/5",
+      why: "Use the Pythagorean identity sin²θ + cos²θ = 1 to solve for cos θ, choosing the positive root since θ is in Quadrant I.",
+      whyKo: "피타고라스 항등식 sin²θ + cos²θ = 1을 이용해 cosθ를 구합니다. θ가 1사분면에 있으므로 양의 값을 택합니다: cosθ = 4/5.",
+      steps: ["sin²θ + cos²θ = 1", "(3/5)² + cos²θ = 1", "cos²θ = 1 − 9/25 = 16/25", "cosθ = 4/5"],
+    },
+  ],
+};
+
+// ── US Curriculum, Course-Based: Precalculus (non-AP) ─────
+export const hsPrecalcBank: SampleItem[] = [
+  {
+    area: "Functions and Graphs", type: "Function Evaluation", skill: "Determine the domain of a function", difficulty: "Standard",
+    question: "If f(x) = √(x − 3), what is the domain of f?",
+    choices: ["x ≥ 3", "x > 3", "x ≤ 3", "All real numbers"],
+    answer: "x ≥ 3",
+    why: "The expression under a square root must be ≥ 0, so x − 3 ≥ 0, which gives x ≥ 3.",
+    whyKo: "제곱근 안의 식은 0 이상이어야 하므로 x − 3 ≥ 0, 즉 x ≥ 3입니다.",
+    steps: ["x − 3 ≥ 0", "x ≥ 3"],
+  },
+  {
+    area: "Exponential and Log", type: "Logarithmic Equations", skill: "Solve a logarithmic equation", difficulty: "Advanced",
+    question: "Solve for x: log₂(x) + log₂(x − 2) = 3",
+    choices: ["x = 4", "x = −2", "x = 4 or x = −2", "x = 8"],
+    answer: "x = 4",
+    why: "Combine logs: log₂(x(x−2)) = 3, so x(x−2) = 2³ = 8. This gives x² − 2x − 8 = 0, which factors to (x−4)(x+2) = 0. Since x must be > 2 for the original logs to be defined, x = 4.",
+    whyKo: "로그를 합치면 log₂(x(x−2)) = 3이므로 x(x−2) = 2³ = 8. x² − 2x − 8 = 0 → (x−4)(x+2) = 0. 원래 로그가 정의되려면 x > 2여야 하므로 x = 4만 답입니다.",
+    steps: ["log₂(x(x−2)) = 3", "x(x−2) = 8", "x² − 2x − 8 = 0 → (x−4)(x+2) = 0", "x = 4 (x = −2는 정의역에서 제외)"],
+  },
+];
+
+// ── US Curriculum, Course-Based: Calculus (non-AP) ────────
+export const hsCalcBank: SampleItem[] = [
+  {
+    area: "Derivatives", type: "Power Rule", skill: "Differentiate a polynomial function", difficulty: "Standard",
+    question: "Find the derivative of f(x) = 4x³ − 2x² + 7.",
+    choices: ["12x² − 4x", "12x² − 4x + 7", "4x² − 2x", "12x³ − 4x"],
+    answer: "12x² − 4x",
+    why: "Apply the power rule to each term: d/dx(4x³) = 12x², d/dx(−2x²) = −4x, d/dx(7) = 0.",
+    whyKo: "각 항에 거듭제곱 법칙을 적용합니다: 4x³의 도함수는 12x², −2x²의 도함수는 −4x, 상수 7의 도함수는 0입니다.",
+    steps: ["d/dx(4x³) = 12x²", "d/dx(−2x²) = −4x", "d/dx(7) = 0", "f′(x) = 12x² − 4x"],
+  },
+  {
+    area: "Applications of Derivatives", type: "Critical Points", skill: "Find and classify a critical point", difficulty: "Advanced",
+    question: "For f(x) = x³ − 3x² + 2, find the x-value of the local minimum.",
+    answer: "x = 2",
+    why: "f′(x) = 3x² − 6x = 3x(x − 2) = 0 gives critical points x = 0 and x = 2. Since f″(x) = 6x − 6, f″(0) = −6 < 0 (local max) and f″(2) = 6 > 0 (local min). So the local minimum occurs at x = 2.",
+    whyKo: "f′(x) = 3x² − 6x = 3x(x−2) = 0 → 임계점 x=0, x=2. f″(x) = 6x−6이므로 f″(0)=−6<0(극대), f″(2)=6>0(극소). 따라서 극솟값은 x=2에서 발생합니다.",
+    steps: ["f′(x) = 3x² − 6x = 3x(x−2) = 0 → x = 0, 2", "f″(x) = 6x − 6", "f″(0) = −6 (극대), f″(2) = 6 (극소)", "극소점: x = 2"],
+  },
+];
+
+// ── US Curriculum, Course-Based: Statistics (non-AP) ──────
+export const hsStatsBank: SampleItem[] = [
+  {
+    area: "Exploring Data", type: "Measures of Center", skill: "Compute the median and mean, and identify the effect of an outlier", difficulty: "Standard",
+    question: "A data set is: 4, 5, 6, 7, 38. Find the median and the mean, and explain why they differ so much.",
+    answer: "Median = 6; Mean = 12. The median is much lower than the mean because the outlier (38) pulls the mean up but doesn't affect the median.",
+    why: "Sorted data: 4, 5, 6, 7, 38 → median (middle value) = 6. Mean = (4+5+6+7+38)/5 = 60/5 = 12. The outlier 38 inflates the mean but has little effect on the median.",
+    whyKo: "정렬된 자료: 4, 5, 6, 7, 38 → 중앙값(가운데 값) = 6. 평균 = (4+5+6+7+38)/5 = 60/5 = 12. 이상치 38이 평균을 끌어올리지만 중앙값에는 거의 영향을 주지 않습니다.",
+    steps: ["정렬: 4, 5, 6, 7, 38", "중앙값 = 6", "평균 = (4+5+6+7+38)/5 = 60/5 = 12"],
+  },
+  {
+    area: "Probability", type: "Independent Events", skill: "Compute the probability of independent events", difficulty: "Advanced",
+    question: "A bag contains 3 red and 2 blue marbles. One marble is drawn, replaced, and a second marble is drawn. What is the probability both marbles are red?",
+    choices: ["3/5", "6/25", "9/25", "3/10"],
+    answer: "9/25",
+    why: "Since the marble is replaced, the draws are independent: P(red) = 3/5 each time, so P(both red) = 3/5 × 3/5 = 9/25.",
+    whyKo: "구슬을 다시 넣으므로(복원추출) 두 사건은 독립입니다. P(빨강) = 3/5이므로 P(둘 다 빨강) = 3/5 × 3/5 = 9/25.",
+    steps: ["P(red) = 3/5", "복원추출 → 독립사건", "P(both red) = 3/5 × 3/5 = 9/25"],
+  },
+];
+
 // ── AP Computer Science A (Java) ──────────────────────────
 export const apCsABank: SampleItem[] = [
   {
@@ -1794,6 +2192,39 @@ export const apEnvSciBank: SampleItem[] = [
     answer: "Carrying capacity",
     why: "Carrying capacity is the maximum population size an environment can sustain long-term, given its resources.",
     whyKo: "수용력(carrying capacity)은 주어진 자원으로 환경이 장기적으로 유지할 수 있는 최대 개체수입니다.",
+  },
+  {
+    area: "Populations", type: "Population Growth Model", skill: "Interpret a logistic growth curve and calculate rate of change", difficulty: "Advanced",
+    question:
+      "The graph shows a deer population introduced to an island over time.\n(a) Identify what the dashed line labeled K represents.\n(b) Explain why the population's growth rate slows as it approaches K.\n(c) The population was about 500 at year 40 and about 780 at year 80. Calculate the average rate of change in population per year over this interval.",
+    figure: "logistic-growth",
+    answer:
+      "(a) K is the carrying capacity — the maximum population the environment can sustain long-term. (b) As the population nears K, resources such as food, water, and space become limiting, increasing competition, which raises the death rate and/or lowers the birth rate. (c) (780 − 500) ÷ (80 − 40) = 280 ÷ 40 = 7 deer per year.",
+    why:
+      "Logistic growth slows near K because density-dependent limiting factors (competition, disease, predation) intensify as resources per individual decrease.",
+    whyKo:
+      "(a) K는 수용력(carrying capacity)으로, 환경이 장기적으로 유지할 수 있는 최대 개체수입니다.\n(b) 개체수가 K에 가까워질수록 먹이·물·공간 같은 자원이 제한되어 경쟁이 심해지고, 그 결과 사망률이 높아지거나 출생률이 낮아집니다.\n(c) (780 − 500) ÷ (80 − 40) = 280 ÷ 40 = 연간 7마리.",
+    steps: [
+      "(a) 곡선이 평평해지는 지점의 값 = K",
+      "(b) 자원 제한 → 밀도의존적 요인(경쟁·질병·포식) 증가 → 성장률 감소",
+      "(c) (780 − 500) ÷ (80 − 40) = 280 ÷ 40 = 7마리/년",
+    ],
+  },
+  {
+    area: "Ecosystems", type: "Energy Flow", skill: "Apply the 10% energy transfer rule across trophic levels", difficulty: "Advanced",
+    question:
+      "The energy pyramid shows energy available at each trophic level in a grassland ecosystem.\n(a) Explain why only about 10% of the energy at one trophic level is transferred to the next.\n(b) If producers contain 10,000 kcal of energy, calculate how much energy is available to secondary consumers.\n(c) Explain one reason food chains rarely have more than 4–5 trophic levels.",
+    figure: "trophic-pyramid",
+    answer:
+      "(a) Most energy is lost as heat through cellular respiration and other metabolic processes at each level, and some biomass is never consumed by the next level. (b) 10,000 × 0.10 × 0.10 = 100 kcal available to secondary consumers. (c) So little energy remains after a few transfers that there usually isn't enough left to support additional trophic levels.",
+    why:
+      "Only about 10% of energy at each trophic level is passed on (the 10% rule), since the rest is used for an organism's own life processes or lost as heat.",
+    whyKo:
+      "(a) 각 영양 단계에서 에너지 대부분은 세포호흡 등 생명 활동 중 열로 손실되고, 일부 생물량은 다음 단계에 섭취되지 않습니다.\n(b) 10,000 × 0.10 × 0.10 = 100 kcal.\n(c) 몇 단계를 거치면 남는 에너지가 너무 적어 추가 영양 단계를 유지할 수 없습니다.",
+    steps: [
+      "Producers → Primary Consumers: 10,000 × 0.10 = 1,000 kcal",
+      "Primary → Secondary Consumers: 1,000 × 0.10 = 100 kcal",
+    ],
   },
 ];
 

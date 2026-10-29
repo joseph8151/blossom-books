@@ -13,7 +13,7 @@ import {
   CORE_SCIENCE,
   type Grade,
 } from "./curriculumData";
-import { AP_SAMPLES } from "./apSamples";
+import { AP_SAMPLES, COURSE_SAMPLES, GRADE_SAMPLES } from "./apSamples";
 import ApSampleModal from "./ApSampleModal";
 
 type Mode = "us" | "ap";
@@ -122,6 +122,12 @@ export default function SubjectChips() {
 
   const apId = AP_SUBJECTS.find((a) => a.title === apSubject)?.id;
   const apSampleItems = apId ? AP_SAMPLES[apId] : undefined;
+  const courseSampleItems = mode === "us" && subMode === "course" ? COURSE_SAMPLES[course] : undefined;
+  const gradeSampleItems =
+    mode === "us" && subMode === "grade" && gradeSubject !== "Science"
+      ? GRADE_SAMPLES[gradeSubject][grade]
+      : undefined;
+  const sampleItems = mode === "ap" ? apSampleItems : subMode === "course" ? courseSampleItems : gradeSampleItems;
 
   function handleCategorySelect(cat: CourseCategory) {
     setCourseCategory(cat);
@@ -217,7 +223,10 @@ export default function SubjectChips() {
                       key={g}
                       type="button"
                       aria-pressed={grade === g}
-                      onClick={() => setGrade(g)}
+                      onClick={() => {
+                        setGrade(g);
+                        setSampleOpen(false);
+                      }}
                       className={grade === g ? chipActiveCls : chipCls}
                     >
                       {g}
@@ -233,7 +242,10 @@ export default function SubjectChips() {
                       key={s}
                       type="button"
                       aria-pressed={gradeSubject === s}
-                      onClick={() => setGradeSubject(s)}
+                      onClick={() => {
+                        setGradeSubject(s);
+                        setSampleOpen(false);
+                      }}
                       className={gradeSubject === s ? chipActiveCls : chipCls}
                     >
                       {s}
@@ -312,7 +324,10 @@ export default function SubjectChips() {
                         key={c}
                         type="button"
                         aria-pressed={course === c}
-                        onClick={() => setCourse(c)}
+                        onClick={() => {
+                          setCourse(c);
+                          setSampleOpen(false);
+                        }}
                         className={course === c ? chipActiveCls : chipCls}
                       >
                         {c}
@@ -384,7 +399,7 @@ export default function SubjectChips() {
           )}
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="mt-1 font-display text-[16px] font-semibold text-navy-950">{standardPanel.title}</p>
-            {mode === "ap" && apSampleItems && (
+            {sampleItems && (
               <button
                 type="button"
                 onClick={() => setSampleOpen(true)}
@@ -431,10 +446,10 @@ export default function SubjectChips() {
         </div>
       ) : null}
 
-      {mode === "ap" && apSampleItems && (
+      {sampleItems && (
         <ApSampleModal
-          title={standardPanel && !standardPanel.inquire ? standardPanel.title : apSubject}
-          items={apSampleItems}
+          title={standardPanel && !standardPanel.inquire ? standardPanel.title : currentTitle}
+          items={sampleItems}
           open={sampleOpen}
           onClose={() => setSampleOpen(false)}
         />
