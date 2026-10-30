@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { MessageCircle, RotateCcw } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
@@ -63,7 +64,7 @@ const Q3_OPTIONS = [
   "특정 시험 대비 (SAT·AP·IB 등)",
 ];
 
-export default function LearningTypeQuiz() {
+export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {}) {
   const [step, setStep] = useState(0); // 0,1,2 = questions, 3 = result
   const [grade, setGrade] = useState("");
   const [concern, setConcern] = useState("");
@@ -128,6 +129,14 @@ export default function LearningTypeQuiz() {
           <p className="mt-3 text-[14px] leading-relaxed text-ivory-200/75">
             질문 3개에 답하면 바로 결과가 나옵니다. 30초면 충분해요.
           </p>
+          {pageHref && (
+            <Link
+              href={pageHref}
+              className="mt-3 inline-block text-[12.5px] font-medium text-brass-400 underline decoration-brass-400/50 underline-offset-4 transition-colors hover:text-brass-300"
+            >
+              전체 화면으로 진단하기
+            </Link>
+          )}
         </div>
 
         <div className="mx-auto mt-10 max-w-xl border border-ivory-100/12 bg-ivory-100/[0.04] p-6 sm:p-8">
