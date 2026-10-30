@@ -10,6 +10,11 @@ const links = [
     url: "https://www.blossombooks.org/quote/",
   },
   {
+    title: "학원 레벨테스트 샘플",
+    who: "영어 레벨테스트(G1–G6) 실제 샘플 문제를 바로 보여줄 때",
+    url: "https://www.blossombooks.org/quote-level-test-sample/",
+  },
+  {
     title: "시험 대비 (공인시험·사내영어)",
     who: "OET · MET · CELBAN · PTE · 부산외대 FLAT · SPA · SAT · ESPT 등 문의 고객",
     url: "https://www.blossombooks.org/quote-exam/",
