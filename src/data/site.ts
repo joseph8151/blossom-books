@@ -15,6 +15,7 @@ export const siteConfig = {
 export const primaryNav = [
   { label: "홈", href: "/" },
   { label: "교재 찾기", href: "/books" },
+  { label: "후기 모음", href: "/reviews" },
   { label: "레벨 진단 교재", href: "/level-assessment" },
   { label: "모의고사", href: "/mock-exams" },
   { label: "분량 선택 가이드", href: "/guide" },
