@@ -3,13 +3,13 @@
 import { useMemo, useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { CAT4_PRICES, SPECIAL_ADD, flexibleVolumes, formatKRW } from "@/app/quote/data";
+import { CAT4_PRICES, flexibleVolumes, formatKRW } from "@/app/quote/data";
 
 type Level = "A" | "B" | "C" | "D" | "E" | "F" | "G";
 type Stage = "STANDARD" | "ADVANCED";
 
 const LEVELS: Level[] = ["A", "B", "C", "D", "E", "F", "G"];
-const VOLUMES = flexibleVolumes.filter((v) => v.pages === 100 || v.pages === 200); // CAT4는 100/200P만 판매
+const VOLUMES = flexibleVolumes.filter((v) => v.pages === 100 || v.pages === 200 || v.pages === 300); // CAT4는 100/200/300P 판매
 
 const rowCls = "flex items-baseline justify-between gap-4 py-2.5 text-[13.5px]";
 
@@ -72,10 +72,6 @@ export default function Cat4Section() {
               <span className="font-medium text-navy-950">{formatKRW(v.priceKRW)}</span>
             </div>
           ))}
-          <div className={rowCls}>
-            <span className="text-charcoal-600">Special</span>
-            <span className="font-medium text-navy-950">기본 구성 + {formatKRW(SPECIAL_ADD)}</span>
-          </div>
         </div>
 
         {/* Level × Standard/Advanced Practice — 같은 Level 안에서 심화 연습을 선택합니다 */}
@@ -101,7 +97,7 @@ export default function Cat4Section() {
             <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
               STEP 2 · 분량 선택 — 가격
             </p>
-            <div className="mt-2 grid grid-cols-2 gap-2">
+            <div className="mt-2 grid grid-cols-3 gap-2">
               {VOLUMES.map((v) => (
                 <button
                   key={v.pages}
