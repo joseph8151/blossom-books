@@ -108,6 +108,69 @@ export const prepTracks: PrepTrack[] = [
     booksTrack: "admissions",
   },
   {
+    slug: "isee",
+    name: "ISEE Prep",
+    ko: "ISEE 대비",
+    intro:
+      "ISEE는 미국 사립학교 입학시험으로, Lower·Middle·Upper 레벨마다 난이도가 다른 Verbal Reasoning·Reading Comprehension·Quantitative Reasoning·Mathematics Achievement 4개 영역과 Essay로 구성됩니다. Blossom Books는 레벨별 출제 형식에 맞춰 영역별 문제를 제공합니다.",
+    forWhom: [
+      "미국 사립학교(Private/Independent School) 입학을 준비하는 학생",
+      "Lower·Middle·Upper 중 본인 레벨의 출제 형식을 먼저 확인하고 싶은 학생",
+      "Verbal·Quantitative 중 특정 영역이 약한 학생",
+    ],
+    areas: [
+      { area: "Verbal & Reading", items: ["Synonyms", "Sentence Completion", "Reading Comprehension"] },
+      { area: "Quantitative & Math", items: ["Quantitative Reasoning", "Mathematics Achievement"] },
+      { area: "Essay", items: ["Essay (채점 미반영, 지원 학교 참고용)"] },
+    ],
+    howWePrepare:
+      "ISEE 출제 형식에 맞춰 레벨(Lower/Middle/Upper)별로 4개 영역 문제를 구성하고, 영역별 정답과 풀이를 함께 제공합니다. 레벨 선택과 세부 구성은 상담으로 안내해 드립니다.",
+    steps: [
+      "지원 학교가 요구하는 ISEE 레벨(Lower/Middle/Upper)을 먼저 확인합니다.",
+      "무료 샘플로 레벨별 난이도가 학생 수준과 맞는지 확인합니다.",
+      "Verbal·Quantitative 중 약한 영역을 먼저 집중 연습합니다.",
+      "Reading Comprehension은 지문에서 근거를 찾는 연습을 반복합니다.",
+      "시험 전 4개 영역을 실전 시간에 맞춰 통합 연습합니다.",
+    ],
+    faq: [
+      { q: "Lower·Middle·Upper 중 어떤 레벨을 준비해야 하나요?", a: "지원하는 학년과 학교에 따라 레벨이 정해집니다. 학년을 알려주시면 적합한 레벨을 안내해 드립니다." },
+      { q: "Essay도 채점되나요?", a: "Essay는 ISEE 자체 채점에는 포함되지 않고 지원 학교가 참고 자료로 받는 항목입니다. 답안 구조를 연습하는 용도로 제공합니다." },
+    ],
+    match: (p) => /ISEE/i.test(p.examOrCurriculum),
+    booksTrack: "admissions",
+  },
+  {
+    slug: "wida",
+    name: "WIDA ACCESS Prep",
+    ko: "WIDA 대비",
+    intro:
+      "WIDA ACCESS는 미국 공립학교의 영어 학습자(ELL) 영어능력 평가시험으로, Listening·Reading·Writing·Speaking 4개 영역을 학년군에 맞춰 평가합니다. Blossom Books는 학년별 출제 수준에 맞춘 4개 영역 문제와 모의고사 리스닝 음원을 함께 제공합니다.",
+    forWhom: [
+      "미국 공립학교 편입을 준비하거나 재학 중인 ELL 학생",
+      "학년별 WIDA 출제 수준에 맞춰 4개 영역을 연습하고 싶은 학생",
+      "Listening 음원으로 실전 감각을 미리 익히고 싶은 학생",
+    ],
+    areas: [
+      { area: "Listening & Speaking", items: ["Listening Comprehension", "Oral Response"] },
+      { area: "Reading & Writing", items: ["Reading Comprehension", "Writing Response"] },
+    ],
+    howWePrepare:
+      "WIDA ACCESS 4개 영역을 학년 수준에 맞춰 구성하고, 모의고사 리스닝 음원(MP3)을 함께 제공합니다. 학년 선택은 상담으로 안내해 드립니다.",
+    steps: [
+      "현재 학년과 영어 학습 기간을 확인합니다.",
+      "무료 샘플로 학년별 난이도가 맞는지 확인합니다.",
+      "Listening 음원으로 실전과 동일한 환경에서 연습합니다.",
+      "Writing·Speaking은 짧은 답변부터 구조를 갖춰 연습합니다.",
+      "4개 영역을 고르게 접했는지 점검하고 약한 영역을 보충합니다.",
+    ],
+    faq: [
+      { q: "학년별로 난이도가 다른가요?", a: "네, WIDA ACCESS는 학년군(Grade Cluster)별로 출제 수준이 다릅니다. 현재 학년을 알려주시면 맞는 구성으로 안내해 드립니다." },
+      { q: "리스닝 음원은 어떻게 제공되나요?", a: "모의고사 리스닝 음원(MP3)을 함께 제공합니다." },
+    ],
+    match: (p) => /WIDA/i.test(p.examOrCurriculum),
+    booksTrack: "admissions",
+  },
+  {
     slug: "sat",
     name: "SAT Prep",
     ko: "SAT 대비",

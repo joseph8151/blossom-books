@@ -26,7 +26,7 @@ const primaryAssessments: { label: string; href: string }[] = [
   { label: "SR TEST", href: "/books?q=SR" },
   { label: "MAP Growth", href: "/books?q=MAP" },
   { label: "CAT4", href: "/books?q=CAT4" },
-  { label: "ISEE", href: "/books?q=ISEE" },
+  { label: "ISEE", href: "/prep/isee" },
   { label: "SSAT", href: "/books?q=SSAT" },
   { label: "미국교과", href: "/books?track=us-curriculum" },
   { label: "국제학교 입학 패키지", href: "/admission-full-package" },
@@ -35,7 +35,7 @@ const primaryAssessments: { label: string; href: string }[] = [
 const moreAssessments: { label: string; href: string }[] = [
   { label: "영어 내신 대비 (G5–7)", href: "/books?q=Grammar" },
   { label: "NGRT", href: "/books?q=NGRT" },
-  { label: "WIDA", href: "/books?q=WIDA" },
+  { label: "WIDA", href: "/prep/wida" },
   { label: "UKiset", href: "/books?q=UKiset" },
   { label: "ISEB", href: "/books?q=ISEB" },
   { label: "SAT", href: "/books?q=SAT" },
