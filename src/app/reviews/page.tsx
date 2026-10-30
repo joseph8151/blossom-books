@@ -6,6 +6,13 @@ export const metadata = {
   title: "후기 모음 — 실제 고객님들의 이야기",
   description:
     "블러섬북스로 레벨테스트·국제학교 입학시험·공인영어시험을 준비하신 고객님들이 카카오톡으로 직접 남겨주신 실제 후기 모음입니다.",
+  openGraph: {
+    title: "블러섬북스 후기 모음",
+    description:
+      "레벨테스트·국제학교 입학시험·공인영어시험을 준비하신 고객님들이 카카오톡으로 직접 남겨주신 실제 후기입니다.",
+    url: "https://blossombooks.org/reviews/",
+    images: ["https://blossombooks.org/reviews/opengraph-image"],
+  },
 };
 
 const images = [
