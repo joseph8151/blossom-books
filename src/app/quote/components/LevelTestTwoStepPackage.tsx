@@ -3,10 +3,10 @@ import { siteConfig } from "@/data/site";
 import { flexibleVolumes, formatKRW } from "../data";
 import LevelTestConfigurator from "./LevelTestConfigurator";
 
-// 중요한 상품 정책: 페이지 수(60/100/200/300P)는 "문제량"이고,
+// 중요한 상품 정책: 페이지 수(100/200/300P)는 "문제량"이고,
 // STANDARD/ADVANCED는 "난이도·학습 단계"입니다. 서로 다른 축이므로
 // 200P가 곧 Advanced라거나 100P가 곧 Standard라는 식으로 고정하지 않습니다.
-// 60P/100P/200P/300P 모두 Standard·Advanced를 각각 선택할 수 있습니다.
+// 100P/200P/300P 모두 Standard·Advanced를 각각 선택할 수 있습니다.
 //
 // 이 섹션은 한 번 크게 압축했습니다(2026-09). CASE 예시, STEP01→02 흐름도,
 // Premium Card, 구매 옵션 3칸을 모두 제거하고 배너·카드·비교표·상담 CTA만
@@ -17,7 +17,7 @@ import LevelTestConfigurator from "./LevelTestConfigurator";
 // LevelTestConfigurator로 모든 조합의 정확한 가격을 바로 확인하도록 합니다.
 
 const buyingSteps = [
-  { n: "STEP 1", title: "얼마나 많은 문제를 풀 것인가?", body: "60P / 100P / 200P / 300P" },
+  { n: "STEP 1", title: "얼마나 많은 문제를 풀 것인가?", body: "100P / 200P / 300P" },
   { n: "STEP 2", title: "어느 난이도로 준비할 것인가?", body: "STANDARD / ADVANCED" },
   { n: "STEP 3", title: "한 단계 더 준비할 것인가?", body: "STANDARD + ADVANCED" },
 ];
@@ -46,7 +46,7 @@ const comparisonRows: { label: string; standard: string; advanced: string }[] = 
 ];
 
 const cases: { need: string; result: string }[] = [
-  { need: "레벨테스트가 처음이에요.", result: "60P 또는 100P STANDARD" },
+  { need: "레벨테스트가 처음이에요.", result: "100P STANDARD" },
   { need: "학원에서 상위반 배정을 목표로 하고 있어요.", result: "100P STANDARD + 100P ADVANCED" },
   { need: "기본 유형은 이미 풀어봤고, 어려운 문제만 더 풀고 싶어요.", result: "100P ADVANCED" },
   { need: "재응시인데 지난번보다 확실하게 준비하고 싶어요.", result: "200P STANDARD + 200P ADVANCED" },

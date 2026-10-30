@@ -9,7 +9,7 @@ type Level = "Elementary" | "Middle" | "Upper";
 type Stage = "STANDARD" | "ADVANCED";
 
 const LEVELS: Level[] = ["Elementary", "Middle", "Upper"];
-const VOLUMES = flexibleVolumes.filter((v) => v.pages !== 40); // SSAT는 60/100/200P만 판매
+const VOLUMES = flexibleVolumes; // SSAT는 공용 단가표(100/200/300P)를 그대로 판매
 
 const chipCls =
   "flex-1 border border-ivory-300 bg-white px-3 py-2 text-center text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-900";

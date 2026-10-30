@@ -204,7 +204,7 @@ export default function LevelAssessmentPage() {
                 { k: "Reading Level / SR", v: "현재 읽기 수준" },
                 { k: "Skills", v: "Reading · Vocabulary · Grammar · Writing" },
                 { k: "Difficulty", v: "기초 ~ 응용" },
-                { k: "Page Length", v: "40P / 60P / 100P / 200P" },
+                { k: "Page Length", v: "100P / 200P / 300P" },
                 { k: "Answer Guide", v: "상세 해설 포함" },
               ].map((o) => (
                 <div key={o.k} className="border border-navy-800/12 bg-ivory-100 p-4">

@@ -31,7 +31,7 @@ export default function OrderModal({
     : hasStarter(product)
     ? [starterOption, ...flexibleVolumes]
     : flexibleVolumes;
-  const defaultPages = srFlexible ? srVolumes[0].pages : 60;
+  const defaultPages = srFlexible ? srVolumes[0].pages : flexibleVolumes[0].pages;
   const [pages, setPages] = useState(defaultPages);
   const selected = vols.find((v) => v.pages === pages) ?? vols[0];
 

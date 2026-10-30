@@ -1,8 +1,7 @@
 const guides = [
-  { label: "40P", body: "시험까지 시간이 짧거나, 특정 취약 영역만 집중적으로 연습하고 싶은 경우" },
-  { label: "60P", body: "한 과목을 기본부터 실전까지 균형 있게 준비하고 싶은 경우" },
-  { label: "100P", body: "여러 유형을 충분히 반복하거나 시험 준비 기간이 비교적 긴 경우" },
-  { label: "200P", body: "8–12주 이상 장기적으로 준비하거나 많은 실전 문제와 반복 학습이 필요한 경우" },
+  { label: "100P", body: "시험까지 시간이 짧거나, 특정 취약 영역만 집중적으로 연습하고 싶은 경우" },
+  { label: "200P", body: "여러 유형을 충분히 반복하거나 시험 준비 기간이 비교적 긴 경우" },
+  { label: "300P", body: "8–12주 이상 장기적으로 준비하거나 많은 실전 문제와 반복 학습이 필요한 경우" },
 ];
 
 export default function VolumeGuide() {
@@ -13,7 +12,7 @@ export default function VolumeGuide() {
           어떤 분량이 맞을까요?
         </h2>
 
-        <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-3">
           {guides.map((g) => (
             <div key={g.label} className="border-t-2 border-navy-900/70 pt-4">
               <p className="font-display text-[18px] font-semibold text-navy-950">{g.label}</p>
