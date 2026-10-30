@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MessageCircle, Check, FileSearch, ShieldCheck, Copy } from "lucide-react";
 import { Product } from "@/lib/types";
 import { flexibleVolumes, srVolumes, starterOption, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
-import { offersVolumes, offersSrVolumes, hasStarter } from "@/lib/productMeta";
+import { offersVolumes, offersSrVolumes, hasStarter, volumesForProduct } from "@/lib/productMeta";
 import { siteConfig } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
 
@@ -20,15 +20,16 @@ const trustItems = [
 
 export default function PurchasePanel({ product, isDirect }: { product: Product; isDirect: boolean }) {
   const srFlexible = offersSrVolumes(product); // SR Reading Prep 전용 150/200/300 분량 선택 가능 여부
-  const flexible = offersVolumes(product); // 60/100/200/300 분량 선택 가능 여부
+  const flexible = offersVolumes(product); // 60/100/200/300(또는 상품별 지정 일부) 분량 선택 가능 여부
+  const productVols = volumesForProduct(product);
   // 영어 레벨테스트 상품에는 Starter(25P) 진입 구성을 함께 제공합니다.
-  const vols = srFlexible ? srVolumes : hasStarter(product) ? [starterOption, ...flexibleVolumes] : flexibleVolumes;
+  const vols = srFlexible ? srVolumes : hasStarter(product) ? [starterOption, ...productVols] : productVols;
   const fixedVol = !flexible && !srFlexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
-  const defaultPages = srFlexible ? srVolumes[0].pages : flexible ? flexibleVolumes[0].pages : fixedVol?.pages ?? flexibleVolumes[0].pages;
+  const defaultPages = srFlexible ? srVolumes[0].pages : flexible ? vols[0].pages : fixedVol?.pages ?? flexibleVolumes[0].pages;
   const [pages, setPages] = useState(defaultPages);
   const [copied, setCopied] = useState(false);
   const [addOns, setAddOns] = useState<string[]>([]);
-  const selected = vols.find((v) => v.pages === pages) ?? fixedVol ?? vols.find((v) => v.pages === flexibleVolumes[0].pages) ?? vols[0];
+  const selected = vols.find((v) => v.pages === pages) ?? fixedVol ?? vols[0];
 
   // 함께 준비하면 좋은 영역 — 현재 교재 과목과 겹치지 않는 항목만 제안 (Smart Upsell)
   const addOnPool = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];

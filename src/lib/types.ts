@@ -35,6 +35,10 @@ export interface Product {
   includesAudio?: boolean; // 리스닝 오디오(MP3) 파일 제공 여부
   fileFormat: "PDF";
   pageCount?: number;
+  // 분량 선택형 상품이 공용 라인업(60/100/200/300P) 전체가 아니라 일부만
+  // 판매할 때 명시합니다. 생략하면 offersVolumes()가 true인 상품은 전체
+  // 라인업을 판매합니다. 예: ISEE는 [100, 200]만.
+  offeredVolumes?: number[];
   components: ProductComponent[];
   units: string[]; // 주요 단원
   summaryKo: string; // 카드용 짧은 설명

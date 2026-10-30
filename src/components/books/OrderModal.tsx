@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { X, MessageCircle, FileSearch, Check } from "lucide-react";
 import { Product } from "@/lib/types";
-import { flexibleVolumes, srVolumes, starterOption, formatKRW } from "@/data/pricing";
-import { offersVolumes, offersSrVolumes, hasStarter, isDirectPurchase } from "@/lib/productMeta";
+import { srVolumes, starterOption, formatKRW } from "@/data/pricing";
+import { offersVolumes, offersSrVolumes, hasStarter, isDirectPurchase, volumesForProduct } from "@/lib/productMeta";
 import { siteConfig } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
@@ -26,12 +26,13 @@ export default function OrderModal({
   const srFlexible = offersSrVolumes(product);
   const flexible = offersVolumes(product);
   const direct = isDirectPurchase(product);
+  const productVols = volumesForProduct(product);
   const vols = srFlexible
     ? srVolumes
     : hasStarter(product)
-    ? [starterOption, ...flexibleVolumes]
-    : flexibleVolumes;
-  const defaultPages = srFlexible ? srVolumes[0].pages : flexibleVolumes[0].pages;
+    ? [starterOption, ...productVols]
+    : productVols;
+  const defaultPages = srFlexible ? srVolumes[0].pages : productVols[0].pages;
   const [pages, setPages] = useState(defaultPages);
   const selected = vols.find((v) => v.pages === pages) ?? vols[0];
 

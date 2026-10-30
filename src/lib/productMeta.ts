@@ -5,11 +5,19 @@ import { starterOption, srVolumes, flexibleVolumes } from "@/data/pricing";
 const DIRECT_PAGES = [60, 100, 200, 300];
 
 // 60·100·200·300P 분량 선택이 가능한 교재인지 판별합니다.
+// offeredVolumes가 지정된 상품(예: ISEE)은 전체 라인업이 아닌 지정된 일부만 판매합니다.
 export function offersVolumes(p: Product): boolean {
   return (
     (p.levelLabel?.includes("60·100·200·300P") ?? false) ||
-    p.components.some((c) => c.descriptionKo.includes("60·100·200·300P"))
+    p.components.some((c) => c.descriptionKo.includes("60·100·200·300P")) ||
+    !!p.offeredVolumes
   );
+}
+
+// 상품이 실제로 판매하는 분량 목록 — offeredVolumes가 없으면 전체 라인업입니다.
+export function volumesForProduct(p: Product) {
+  if (p.offeredVolumes) return flexibleVolumes.filter((v) => p.offeredVolumes!.includes(v.pages));
+  return flexibleVolumes;
 }
 
 // SR Reading Prep(종합 문제집) 전용 150·200·300P 분량 선택이 가능한 교재인지.
@@ -37,9 +45,8 @@ export function hasStarter(p: Product): boolean {
 export function volumeOptionsLabel(p: Product): string {
   if (offersSrVolumes(p)) return srVolumes.map((v) => v.pages).join(" / ") + "P";
   if (offersVolumes(p)) {
-    const pages = hasStarter(p)
-      ? [starterOption.pages, ...flexibleVolumes.map((v) => v.pages)]
-      : flexibleVolumes.map((v) => v.pages);
+    const vols = volumesForProduct(p);
+    const pages = hasStarter(p) ? [starterOption.pages, ...vols.map((v) => v.pages)] : vols.map((v) => v.pages);
     return pages.join(" / ") + "P";
   }
   return "";
