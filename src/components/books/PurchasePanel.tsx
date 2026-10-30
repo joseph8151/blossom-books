@@ -20,14 +20,15 @@ const trustItems = [
 
 export default function PurchasePanel({ product, isDirect }: { product: Product; isDirect: boolean }) {
   const srFlexible = offersSrVolumes(product); // SR Reading Prep 전용 150/200/300 분량 선택 가능 여부
-  const flexible = offersVolumes(product); // 40/60/100/200 분량 선택 가능 여부
+  const flexible = offersVolumes(product); // 100/200/300 분량 선택 가능 여부
   // 영어 레벨테스트 상품에는 Starter(25P) 진입 구성을 함께 제공합니다.
   const vols = srFlexible ? srVolumes : hasStarter(product) ? [starterOption, ...flexibleVolumes] : flexibleVolumes;
   const fixedVol = !flexible && !srFlexible && product.pageCount ? volumeByPages(product.pageCount) : undefined;
-  const [pages, setPages] = useState(srFlexible ? srVolumes[0].pages : flexible ? 60 : fixedVol?.pages ?? 60);
+  const defaultPages = srFlexible ? srVolumes[0].pages : flexible ? flexibleVolumes[0].pages : fixedVol?.pages ?? flexibleVolumes[0].pages;
+  const [pages, setPages] = useState(defaultPages);
   const [copied, setCopied] = useState(false);
   const [addOns, setAddOns] = useState<string[]>([]);
-  const selected = vols.find((v) => v.pages === pages) ?? fixedVol ?? vols.find((v) => v.pages === 60) ?? vols[0];
+  const selected = vols.find((v) => v.pages === pages) ?? fixedVol ?? vols.find((v) => v.pages === flexibleVolumes[0].pages) ?? vols[0];
 
   // 함께 준비하면 좋은 영역 — 현재 교재 과목과 겹치지 않는 항목만 제안 (Smart Upsell)
   const addOnPool = ["Reading", "Vocabulary", "Grammar", "Writing", "Math"];
