@@ -37,9 +37,9 @@ const exams = [
   "ESPT",
 ];
 
+const p60 = volumeOptions.find((v) => v.pages === 60)!;
 const p100 = volumeOptions.find((v) => v.pages === 100)!;
 const p200 = volumeOptions.find((v) => v.pages === 200)!;
-const SPECIAL_KRW = 390000;
 
 export default function QuoteExamPage() {
   return (
@@ -68,7 +68,7 @@ export default function QuoteExamPage() {
         </div>
         <div className="border-t-2 border-brass-500 bg-ivory-100 p-4">
           <p className="font-label text-[10px] uppercase tracking-[0.12em] text-brass-500">STEP 03 · 분량</p>
-          <p className="mt-1 text-[13px] font-medium text-navy-950">100P / 200P</p>
+          <p className="mt-1 text-[13px] font-medium text-navy-950">60P / 100P / 200P</p>
         </div>
       </div>
 
@@ -117,6 +117,10 @@ export default function QuoteExamPage() {
             </thead>
             <tbody>
               <tr>
+                <td className={cellCls}>{p60.label} 문제집 + 해설집</td>
+                <td className={cellCls}>{formatKRW(p60.priceKRW)}</td>
+              </tr>
+              <tr>
                 <td className={cellCls}>{p100.label} 문제집 + 해설집</td>
                 <td className={cellCls}>{formatKRW(p100.priceKRW)}</td>
               </tr>
@@ -144,6 +148,10 @@ export default function QuoteExamPage() {
               <p className="text-[13.5px] font-medium text-navy-950">{name}</p>
               <div className="mt-2.5 space-y-1.5 text-[12.5px] text-charcoal-600">
                 <div className="flex items-center justify-between">
+                  <span>{p60.label}</span>
+                  <span className="font-medium text-navy-950">{formatKRW(p60.priceKRW)}</span>
+                </div>
+                <div className="flex items-center justify-between">
                   <span>{p100.label}</span>
                   <span className="font-medium text-navy-950">{formatKRW(p100.priceKRW)}</span>
                 </div>
@@ -151,56 +159,12 @@ export default function QuoteExamPage() {
                   <span>{p200.label}</span>
                   <span className="font-medium text-navy-950">{formatKRW(p200.priceKRW)}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span>Special</span>
-                  <span className="font-medium text-navy-950">{formatKRW(SPECIAL_KRW)}</span>
-                </div>
               </div>
             </div>
           ))}
         </div>
         <p className="mt-3 text-[12px] leading-relaxed text-charcoal-600/80">
           함께 주문하실 경우 단가 × 2이며, 카카오톡에 &ldquo;SAT 영어+수학&rdquo;과 각 분량을 적어 주세요.
-        </p>
-      </section>
-
-      {/* 5. Special Package — 이 페이지 1등 강조: 네이비 필 + 골드 배지 */}
-      <section className="mt-[72px] rounded-xl bg-navy-950 p-7 shadow-[0_20px_44px_-28px_rgba(13,22,38,0.45)] sm:p-9">
-        <span className="inline-flex items-center rounded-full bg-brass-500 px-2.5 py-1 font-label text-[10px] uppercase tracking-[0.14em] text-navy-950">
-          Special Package
-        </span>
-        <p className="mt-4 font-display text-[18px] font-semibold leading-snug text-ivory-100">
-          200P와 문항은 같고, 순서·모의·시작만 다릅니다.
-        </p>
-        <p className="mt-3 font-display text-[32px] font-semibold text-ivory-100">{formatKRW(SPECIAL_KRW)}</p>
-        <p className="mt-1.5 text-[12px] text-ivory-100/60">시험·과목 1개 기준</p>
-
-        <p className="mt-5 text-[12.5px] font-medium text-ivory-100/70">포함</p>
-        <ul className="mt-1.5 space-y-1.5 text-[13.5px] leading-relaxed text-ivory-100/90">
-          <li>· 200P 워크북 + 정답·해설 PDF (해당 시험·해당 과목 200P와 같은 문항)</li>
-          <li>· 이 응시자용 목차 (푸는 순서만 재배열)</li>
-          <li>· 모의 2회 + 시간 배분 1장</li>
-          <li>· 번호 찍힌 오답지</li>
-          <li>· 카톡 글 상담 30분 (음성·줌 없음)</li>
-        </ul>
-
-        <div className="mt-5 grid gap-4 border-t border-ivory-100/15 pt-4 sm:grid-cols-2">
-          <div>
-            <p className="font-label text-[10px] uppercase tracking-[0.1em] text-ivory-100/50">대상</p>
-            <p className="mt-1 text-[12.5px] leading-relaxed text-ivory-100/75">
-              시험일까지 계획을 스스로 못 짜는 응시자
-            </p>
-          </div>
-          <div>
-            <p className="font-label text-[10px] uppercase tracking-[0.1em] text-ivory-100/50">비추천</p>
-            <p className="mt-1 text-[12.5px] leading-relaxed text-ivory-100/75">
-              문제만 필요하면 200P({formatKRW(p200.priceKRW)})
-            </p>
-          </div>
-        </div>
-
-        <p className="mt-5 text-[12px] leading-relaxed text-ivory-100/60">
-          SAT 영어+수학 Special을 원하시면 과목마다 Special을 각각 주문하시면 됩니다.
         </p>
       </section>
 

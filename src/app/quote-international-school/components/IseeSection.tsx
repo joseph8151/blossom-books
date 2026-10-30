@@ -3,13 +3,13 @@
 import { useMemo, useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { flexibleVolumes, SPECIAL_KRW, formatKRW } from "@/app/quote/data";
+import { flexibleVolumes, formatKRW } from "@/app/quote/data";
 
 type Level = "Lower" | "Middle" | "Upper";
 type Stage = "STANDARD" | "ADVANCED";
 
 const LEVELS: Level[] = ["Lower", "Middle", "Upper"];
-const VOLUMES = flexibleVolumes.filter((v) => v.pages === 100 || v.pages === 200); // ISEE는 100/200P만 판매
+const VOLUMES = flexibleVolumes.filter((v) => v.pages === 100 || v.pages === 200 || v.pages === 300); // ISEE는 100/200/300P만 판매
 
 const chipCls =
   "flex-1 border border-ivory-300 bg-white px-3 py-2 text-center text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-900";
@@ -69,10 +69,6 @@ export default function IseeSection() {
               <span className="font-medium text-navy-950">{formatKRW(v.priceKRW)}</span>
             </div>
           ))}
-          <div className="flex items-baseline justify-between gap-4 py-2.5 text-[13.5px]">
-            <span className="text-charcoal-600">200P Special</span>
-            <span className="font-medium text-navy-950">{formatKRW(SPECIAL_KRW)}</span>
-          </div>
         </div>
 
         {/* Level × Stage × 분량 선택 */}

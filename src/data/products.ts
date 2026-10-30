@@ -1189,15 +1189,15 @@ export const products: Product[] = [
     includesAnswerKey: true,
     includesDetailedExplanations: true,
     fileFormat: "PDF",
-    // ISEE는 공용 라인업(60/100/200/300P) 전체가 아니라 100P/200P만 판매합니다.
-    offeredVolumes: [100, 200],
+    // ISEE는 공용 라인업(60/100/200/300P) 전체가 아니라 100P/200P/300P만 판매합니다.
+    offeredVolumes: [100, 200, 300],
     components: [
-      { label: "Student Workbook", descriptionKo: "언어·독해·수리·수학 영역 실전 문제 (100P/200P 중 선택)" },
+      { label: "Student Workbook", descriptionKo: "언어·독해·수리·수학 영역 실전 문제 (100P/200P/300P 중 선택)" },
       { label: "Answer Key & Explanations", descriptionKo: "영역별 정답 및 풀이" },
     ],
     units: ["Verbal Reasoning", "Reading Comprehension", "Quantitative Reasoning", "Mathematics Achievement", "Essay"],
-    summaryKo: "ISEE Lower/Middle/Upper 레벨별 대비 문제집. 4개 영역+에세이. 100P/200P 중 선택.",
-    descriptionKo: "ISEE 출제 형식에 맞춰 레벨별로 구성했습니다. 100P/200P 중 선택할 수 있으며, 레벨 선택과 세부 구성은 상담으로 안내해 드립니다.",
+    summaryKo: "ISEE Lower/Middle/Upper 레벨별 대비 문제집. 4개 영역+에세이. 100P/200P/300P 중 선택.",
+    descriptionKo: "ISEE 출제 형식에 맞춰 레벨별로 구성했습니다. 100P/200P/300P 중 선택할 수 있으며, 레벨 선택과 세부 구성은 상담으로 안내해 드립니다.",
     recommendedForKo: "미국 사립학교 입학 ISEE를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",

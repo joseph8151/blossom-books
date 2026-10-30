@@ -5,13 +5,7 @@ import { flexibleVolumes, formatKRW } from "@/data/pricing";
 export { flexibleVolumes, formatKRW };
 
 export const SPECIAL_KRW = 390000;
-export const SPECIAL_ADD = 100000; // MAP·CAT4 Special = 해당 구성 금액 + 100,000
-
-export const MAP_PRICES = {
-  english: 190000,
-  math: 150000,
-  both: 340000,
-};
+export const SPECIAL_ADD = 100000; // CAT4 Special = 해당 구성 금액 + 100,000
 
 export const CAT4_PRICES = {
   oneLevel: 150000,
@@ -22,6 +16,7 @@ export const CAT4_PRICES = {
 export const OOPT_PRICES = {
   p100: 190000,
   p200: 290000,
+  p300: 390000,
 };
 
 export const COMBO_PRICES = {
