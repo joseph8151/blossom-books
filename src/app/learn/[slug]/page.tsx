@@ -46,8 +46,8 @@ export default async function LearnArticlePage({ params }: { params: Promise<{ s
       {/* CTA */}
       <div className="mt-12 border-t border-navy-800/12 pt-8">
         <div className="flex flex-wrap items-center gap-3">
-          <Link href={a.relatedTrack ? `/books?track=${a.relatedTrack}` : "/books"} className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
-            관련 교재 보기 <ArrowRight size={15} />
+          <Link href={a.ctaHref ?? (a.relatedTrack ? `/books?track=${a.relatedTrack}` : "/books")} className="inline-flex items-center gap-2 bg-navy-900 px-6 py-3 text-[13.5px] font-medium text-ivory-100 transition-colors hover:bg-navy-800">
+            {a.ctaLabel ?? "관련 교재 보기"} <ArrowRight size={15} />
           </Link>
           <a href={siteConfig.kakaoChannelUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[13px] text-charcoal-600 hover:text-navy-900">
             <MessageCircle size={15} /> 카카오톡 문의
