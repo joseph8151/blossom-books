@@ -11,7 +11,7 @@ const steps = [
     n: "02",
     icon: SlidersHorizontal,
     title: "필요한 분량 선택",
-    body: "40P / 60P / 100P / 200P 중 준비 기간과 학습량에 맞춰 선택합니다.",
+    body: "100P / 200P / 300P 중 준비 기간과 학습량에 맞춰 선택합니다.",
   },
   {
     n: "03",

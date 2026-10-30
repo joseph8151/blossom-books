@@ -20,8 +20,8 @@ export const volumeOptions: VolumeOption[] = [
   {
     pages: 100,
     label: "100P",
-    priceKRW: 129000,
-    priceUSD: 95,
+    priceKRW: 190000,
+    priceUSD: 140,
     tier: "Essential Prep",
     tierKo: "핵심 유형 빠르게",
     duration: "시험 임박 · 단기",
@@ -34,8 +34,8 @@ export const volumeOptions: VolumeOption[] = [
   {
     pages: 200,
     label: "200P",
-    priceKRW: 199000,
-    priceUSD: 146,
+    priceKRW: 290000,
+    priceUSD: 212,
     tier: "Complete Prep",
     tierKo: "충분한 실전 대비",
     badge: "RECOMMENDED",
@@ -49,8 +49,8 @@ export const volumeOptions: VolumeOption[] = [
   {
     pages: 300,
     label: "300P",
-    priceKRW: 289000,
-    priceUSD: 212,
+    priceKRW: 390000,
+    priceUSD: 285,
     tier: "Intensive Prep",
     tierKo: "집중 반복·심화",
     duration: "4주 이상 · 심화 준비",
@@ -140,7 +140,7 @@ export const extendedOption = {
   ],
 };
 
-export const fromPriceKRW = volumeOptions[0].priceKRW; // 129,000 — "₩129,000부터"
+export const fromPriceKRW = volumeOptions[0].priceKRW; // 190,000 — "₩190,000부터"
 
 export const priceDisclaimer =
   "시험 유형, 과목 및 구성에 따라 일부 상품은 별도 안내될 수 있습니다.";
