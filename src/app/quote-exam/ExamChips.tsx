@@ -37,8 +37,7 @@ interface ExamPanel {
 
 const OPTION_LETTERS = ["A", "B", "C", "D"];
 
-const SPECIAL_TEXT =
-  "해당 200P와 문항은 같습니다. 이 응시자용 목차, 모의 2회, 오답지, 카톡 글 상담 30분을 더합니다. 음성·줌 상담은 없습니다.";
+const QUICK_CHECK_TEXT = "시험 직전, 핵심 유형만 빠르게 점검하고 싶을 때 적합한 분량입니다.";
 
 const DISCLAIMER = "비공식 대비 교재이며, 주관 기관과 무관합니다.";
 
@@ -49,7 +48,7 @@ const PANELS: ExamPanel[] = [
     subtitle: "의료 영어 시험입니다. Listening · Reading · Writing · Speaking 네 영역으로 구성됩니다.",
     p100: "네 영역 유형 연습에 샘플 Writing과 Speaking 답변 골격을 더합니다.",
     p200: "영역별 문항을 반복하고, 간호 등 직종별 상황을 추가합니다. 직종은 카톡에 적어 주세요.",
-    kakaoLine: "카톡에 적을 말: OET · 직종 · 100P/200P/Special",
+    kakaoLine: "카톡에 적을 말: OET · 직종 · 60P/100P/200P",
     stageType: "intensive",
     stageText:
       "취약 영역 집중, 고난도 실전 연습, 반복 훈련, Writing·Speaking 강화, Reading·Listening 집중 연습으로 구성됩니다.",
@@ -77,7 +76,7 @@ const PANELS: ExamPanel[] = [
     subtitle: "Michigan English Test. Listening · Reading · Speaking · Writing 네 영역입니다.",
     p100: "네 영역 유형 연습에 짧은 쓰기·말하기 답변 골격을 더합니다.",
     p200: "난이도를 높이고 모의 파트를 확대합니다.",
-    kakaoLine: "카톡에 적을 말: MET · 100P/200P/Special",
+    kakaoLine: "카톡에 적을 말: MET · 60P/100P/200P",
     stageType: "advanced",
     stageText: "높은 수준의 어휘와 독해, 복합적인 Writing, 상위 Speaking 대응, 난도 높은 실전 문제로 구성됩니다.",
     sample: {
@@ -96,7 +95,7 @@ const PANELS: ExamPanel[] = [
     subtitle: "캐나다 간호사 영어 시험입니다. Speaking · Listening · Reading · Writing 네 영역입니다.",
     p100: "의료 상황 듣기·읽기 연습에 차트 쓰기와 환자 대화 답변 골격을 더합니다.",
     p200: "상황을 확대하고 쓰기 과제를 추가합니다.",
-    kakaoLine: "카톡에 적을 말: CELBAN · 100P/200P/Special",
+    kakaoLine: "카톡에 적을 말: CELBAN · 60P/100P/200P",
     stageType: "intensive",
     stageText:
       "취약 영역 집중, 의료 커뮤니케이션 문제 강화, Writing·Speaking 실전량 증가, Reading·Listening 추가 훈련으로 구성됩니다.",
@@ -118,7 +117,7 @@ const PANELS: ExamPanel[] = [
     subtitle: "PTE Academic. Speaking & Writing · Reading · Listening 세 파트입니다.",
     p100: "Read Aloud, Repeat Sentence, Describe Image와 읽기·듣기 유형을 연습합니다.",
     p200: "유형별 문항을 반복하고 통합 쓰기를 더합니다.",
-    kakaoLine: "카톡에 적을 말: PTE · 100P/200P/Special",
+    kakaoLine: "카톡에 적을 말: PTE · 60P/100P/200P",
     stageType: "advanced",
     stageText:
       "고득점 목표 Reading·Listening 고난도 구성, 복합 Speaking·Writing, 변형 문제 및 상위 난이도 실전 연습으로 구성됩니다.",
@@ -140,7 +139,7 @@ const PANELS: ExamPanel[] = [
     p100: "네 영역 유형 연습에 Writing 답변 골격과 Speaking 예상 문항·답변 골격을 더합니다.",
     p200: "영역별 문항을 반복·심화하고, 시간 맞춰 푸는 세트를 더합니다.",
     note: "General과 LS(Listening/Speaking) 여부를 모르시면 카톡에 목적만 적어 주세요.",
-    kakaoLine: "카톡에 적을 말: CELPIP · General/LS 여부 · 100P/200P/Special",
+    kakaoLine: "카톡에 적을 말: CELPIP · General/LS 여부 · 60P/100P/200P",
     stageType: "advanced",
     stageText: "높은 수준의 표현, 복합 Reading, 고난도 Listening, Speaking·Writing의 상위 난이도 연습으로 구성됩니다.",
     sample: {
@@ -159,7 +158,7 @@ const PANELS: ExamPanel[] = [
     subtitle: "읽기 · 어휘 · 문법, 있는 경우 쓰기 골격으로 구성됩니다.",
     p100: "독해 유형 연습에 어휘·문법을 더합니다.",
     p200: "같은 영역을 반복·심화하고, 지문 난이도를 높입니다.",
-    kakaoLine: "카톡에 적을 말: 부산외대 FLAT · 100P/200P/Special",
+    kakaoLine: "카톡에 적을 말: 부산외대 FLAT · 60P/100P/200P",
     stageType: "advanced",
     stageText: "상위 난이도 Vocabulary, 고난도 Reading, 복잡한 Composition, 고난도 Interview 대응으로 구성됩니다.",
     sample: {
@@ -178,7 +177,7 @@ const PANELS: ExamPanel[] = [
     subtitle: "현대차 영어 말하기 시험입니다.",
     p100: "자기소개·업무 상황·의견 말하기 답변 골격과 채점 포인트를 연습합니다.",
     p200: "상황을 확대하고 반박·설득 문항을 더합니다.",
-    kakaoLine: "카톡에 적을 말: SPA 현대차 · 100P/200P/Special",
+    kakaoLine: "카톡에 적을 말: SPA 현대차 · 60P/100P/200P",
     stageType: "intensive",
     stageText:
       "실전 Speaking 반복, 고득점 답변 연습, 돌발 질문, 후속 질문, 복잡한 상황 대응, 답변 확장 훈련으로 구성됩니다.",
@@ -198,7 +197,7 @@ const PANELS: ExamPanel[] = [
     p100: "Craft & Structure, Information & Ideas, Standard English Conventions, Expression of Ideas 네 영역을 연습합니다.",
     p200: "모듈을 반복하고 오답 유형을 정리합니다.",
     note: "SAT 영어와 SAT 수학은 각각 칩으로 구분되어 있습니다. 두 과목이 필요하면 두 칩을 각각 확인해 주세요.",
-    kakaoLine: "카톡에 적을 말: SAT 영어 · 100P/200P/Special",
+    kakaoLine: "카톡에 적을 말: SAT 영어 · 60P/100P/200P",
     stageType: "advanced",
     stageText:
       "고난도 Reading & Writing, 복잡한 문장 구조, 상위 수준 Vocabulary in Context, 고난도 Inference, Rhetorical Analysis, 고난도 Grammar·Expression으로 구성됩니다.",
@@ -220,7 +219,7 @@ const PANELS: ExamPanel[] = [
     p100: "Algebra, Advanced Math, Problem-Solving & Data Analysis, Geometry/Trig 기초를 연습합니다.",
     p200: "약점 단원을 반복하고 계산·문장제를 더합니다.",
     note: "SAT 영어와 SAT 수학은 각각 칩으로 구분되어 있습니다. 두 과목이 필요하면 두 칩을 각각 확인해 주세요.",
-    kakaoLine: "카톡에 적을 말: SAT 수학 · 100P/200P/Special",
+    kakaoLine: "카톡에 적을 말: SAT 수학 · 60P/100P/200P",
     stageType: "advanced",
     stageText:
       "고난도 Algebra, Advanced Math, 복합 Data Analysis, Geometry·Trigonometry, Multi-step Problems 등 상위 난이도 문제 중심으로 구성됩니다.",
@@ -252,7 +251,7 @@ const PANELS: ExamPanel[] = [
       "Part 9 Reading passage",
     ],
     note: "회사·전형이 있으면 적어 주세요.",
-    kakaoLine: "카톡에 적을 말: ESPT · 영원무역(해당 시) · 100P/200P/Special",
+    kakaoLine: "카톡에 적을 말: ESPT · 영원무역(해당 시) · 60P/100P/200P",
     stageType: "intensive",
     stageText: "Speaking 반복 훈련, 답변 확장, 돌발 질문, 복합 상황, 고난도 실전 연습으로 구성됩니다.",
     sample: {
@@ -381,6 +380,11 @@ export default function ExamChips({ exams }: { exams: string[] }) {
               </p>
 
               <div className="mt-5">
+                <p className="text-[13.5px] font-medium text-navy-950">60P 문제집 + 해설집</p>
+                <p className="mt-2.5 text-[12.5px] leading-relaxed text-charcoal-600">{QUICK_CHECK_TEXT}</p>
+              </div>
+
+              <div className="mt-5 border-t border-ivory-300 pt-4">
                 <p className="text-[13.5px] font-medium text-navy-950">100P 문제집 + 해설집</p>
                 {openPanel.parts && (
                   <div className="mt-2.5 grid grid-cols-2 gap-1.5 sm:grid-cols-3">
@@ -401,11 +405,6 @@ export default function ExamChips({ exams }: { exams: string[] }) {
                 <p className="text-[13.5px] font-medium text-navy-950">200P 문제집 + 해설집</p>
                 <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">{openPanel.p200}</p>
               </div>
-
-              <div className="mt-5 border-t border-ivory-300 pt-4">
-                <p className="text-[13.5px] font-medium text-navy-950">Special</p>
-                <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">{SPECIAL_TEXT}</p>
-              </div>
             </>
           ) : (
             <div className="mt-5">
@@ -417,7 +416,7 @@ export default function ExamChips({ exams }: { exams: string[] }) {
                 <p className="mt-3 text-[12.5px] leading-relaxed text-charcoal-700">{openPanel.stageNote}</p>
               )}
               <p className="mt-3 text-[12px] leading-relaxed text-charcoal-600/70">
-                100P·200P 분량은 STANDARD와 동일하게 적용되며, 가격도 같은 분량 기준 그대로입니다. STANDARD와{" "}
+                60P·100P·200P 분량은 STANDARD와 동일하게 적용되며, 가격도 같은 분량 기준 그대로입니다. STANDARD와{" "}
                 {stageLabel(openPanel.stageType)}는 서로 다른 문제로 구성됩니다 — 단순히 문제 수를 늘린
                 버전이 아닙니다.
               </p>

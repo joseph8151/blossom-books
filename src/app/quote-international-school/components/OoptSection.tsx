@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { OOPT_PRICES, SPECIAL_KRW, formatKRW } from "@/app/quote/data";
+import { OOPT_PRICES, formatKRW } from "@/app/quote/data";
 
 type Stage = "STANDARD" | "INTENSIVE";
 
@@ -42,8 +42,8 @@ export default function OoptSection() {
             <span className="font-medium text-navy-950">{formatKRW(OOPT_PRICES.p200)}</span>
           </div>
           <div className={rowCls}>
-            <span className="text-charcoal-600">200P Special</span>
-            <span className="font-medium text-navy-950">{formatKRW(SPECIAL_KRW)}</span>
+            <span className="text-charcoal-600">300P</span>
+            <span className="font-medium text-navy-950">{formatKRW(OOPT_PRICES.p300)}</span>
           </div>
         </div>
 

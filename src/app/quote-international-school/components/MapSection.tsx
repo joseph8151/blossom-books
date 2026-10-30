@@ -3,11 +3,18 @@
 import { useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { MAP_PRICES, SPECIAL_ADD, formatKRW } from "@/app/quote/data";
+import { flexibleVolumes, formatKRW } from "@/app/quote/data";
 
+type Area = "English" | "Math";
 type Stage = "STANDARD" | "ADVANCED";
 
-const rowCls = "flex items-baseline justify-between gap-4 py-2.5 text-[13.5px]";
+const AREAS: Area[] = ["English", "Math"];
+const VOLUMES = flexibleVolumes.filter((v) => v.pages === 100 || v.pages === 200 || v.pages === 300); // MAP는 100/200/300P만 판매
+
+const chipCls =
+  "flex-1 border border-ivory-300 bg-white px-3 py-2 text-center text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-900";
+const chipActiveCls =
+  "flex-1 border border-navy-900 bg-navy-900 px-3 py-2 text-center text-[12.5px] font-medium text-ivory-100";
 
 const stageBtnCls =
   "flex-1 border border-ivory-300 bg-white px-3 py-2 text-center text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-900";
@@ -24,7 +31,11 @@ const TWO_STEP = [
 ];
 
 export default function MapSection() {
+  const [area, setArea] = useState<Area>("English");
+  const [pages, setPages] = useState<number>(100);
   const [stage, setStage] = useState<Stage>("STANDARD");
+
+  const priceOf = (p: number) => VOLUMES.find((v) => v.pages === p)!.priceKRW;
 
   return (
     <section id="map" className="scroll-mt-20 border-b border-ivory-300 bg-ivory-100 py-16 sm:py-20">
@@ -42,28 +53,37 @@ export default function MapSection() {
         <p className="mt-6 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
           STEP 1 · 영역 선택
         </p>
-        <div className="mt-2 divide-y divide-ivory-300 border-y border-ivory-300">
-          <div className={rowCls}>
-            <span className="text-charcoal-600">English — 100P + Explanation</span>
-            <span className="font-medium text-navy-950">{formatKRW(MAP_PRICES.english)}</span>
-          </div>
-          <div className={rowCls}>
-            <span className="text-charcoal-600">Math — 60P + Explanation</span>
-            <span className="font-medium text-navy-950">{formatKRW(MAP_PRICES.math)}</span>
-          </div>
-          <div className={rowCls}>
-            <span className="text-charcoal-600">English + Math</span>
-            <span className="font-medium text-navy-950">{formatKRW(MAP_PRICES.both)}</span>
-          </div>
-          <div className={rowCls}>
-            <span className="text-charcoal-600">Special</span>
-            <span className="font-medium text-navy-950">기본 구성 + {formatKRW(SPECIAL_ADD)}</span>
-          </div>
+        <div className="mt-2 flex gap-2">
+          {AREAS.map((a) => (
+            <button key={a} type="button" onClick={() => setArea(a)} className={area === a ? chipActiveCls : chipCls}>
+              {a}
+            </button>
+          ))}
+        </div>
+
+        <p className="mt-5 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
+          STEP 2 · 분량 선택
+        </p>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {VOLUMES.map((v) => (
+            <button
+              key={v.pages}
+              type="button"
+              onClick={() => setPages(v.pages)}
+              className={pages === v.pages ? chipActiveCls : chipCls}
+            >
+              {v.label}
+            </button>
+          ))}
+        </div>
+        <div className="mt-3 flex items-baseline justify-between gap-4 border-y border-ivory-300 py-2.5 text-[13.5px]">
+          <span className="text-charcoal-600">{area} — {pages}P + Explanation</span>
+          <span className="font-medium text-navy-950">{formatKRW(priceOf(pages))}</span>
         </div>
 
         {/* STANDARD / ADVANCED PRACTICE — 가격은 동일합니다 */}
         <p className="mt-6 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
-          STEP 2 · 준비 단계
+          STEP 3 · 준비 단계
         </p>
         <div className="mt-2 flex gap-2">
           <button
@@ -105,23 +125,15 @@ export default function MapSection() {
               <p className="mt-2 text-[13px] leading-relaxed text-charcoal-600">
                 현재 학년 수준보다 높은 문제 또는 상위 RIT 수준을 목표로 하는 학생을 위한 심화 연습입니다.
               </p>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                <div>
-                  <p className="text-[11.5px] font-medium text-navy-950">Reading / Language Usage</p>
-                  <ul className="mt-1.5 space-y-1 text-[12.5px] text-charcoal-600">
-                    {ADVANCED_ENGLISH_POINTS.map((p) => (
-                      <li key={p}>· {p}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-[11.5px] font-medium text-navy-950">Math</p>
-                  <ul className="mt-1.5 space-y-1 text-[12.5px] text-charcoal-600">
-                    {ADVANCED_MATH_POINTS.map((p) => (
-                      <li key={p}>· {p}</li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="mt-3">
+                <p className="text-[11.5px] font-medium text-navy-950">
+                  {area === "English" ? "Reading / Language Usage" : "Math"}
+                </p>
+                <ul className="mt-1.5 space-y-1 text-[12.5px] text-charcoal-600">
+                  {(area === "English" ? ADVANCED_ENGLISH_POINTS : ADVANCED_MATH_POINTS).map((p) => (
+                    <li key={p}>· {p}</li>
+                  ))}
+                </ul>
               </div>
               <p className="mt-3 text-[11.5px] leading-relaxed text-charcoal-600/70">
                 실제 MAP 문항을 복제하거나 공식 MAP 문제라고 표현하지 않습니다.
@@ -131,14 +143,11 @@ export default function MapSection() {
         </div>
 
         <p className="mt-6 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
-          STEP 3 · 한 단계 더 준비할 것인가?
+          STEP 4 · 한 단계 더 준비할 것인가?
         </p>
         <div className="mt-2 space-y-1.5">
           <p className="text-[12px] leading-relaxed text-charcoal-600/70">
-            MAP English 100P Standard + 100P Advanced Practice — 총 200P ({formatKRW(MAP_PRICES.english * 2)})
-          </p>
-          <p className="text-[12px] leading-relaxed text-charcoal-600/70">
-            MAP Math 60P Standard + 60P Advanced Practice — 총 120P ({formatKRW(MAP_PRICES.math * 2)})
+            MAP {area} {pages}P Standard + {pages}P Advanced Practice — 총 {pages * 2}P ({formatKRW(priceOf(pages) * 2)})
           </p>
           <p className="text-[12px] leading-relaxed text-charcoal-600/70">
             두 교재는 서로 다른 문제로 구성됩니다.
