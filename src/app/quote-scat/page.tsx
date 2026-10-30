@@ -12,12 +12,12 @@ export const metadata = {
   title: "사고력·영재 검사 · 경시대회 구성·가격 안내",
   description: "카카오톡 상담에서 안내하는 SCAT·CogAT·NNAT·OLSAT·AMC·MATHCOUNTS·MOEMS 구성표입니다.",
   robots: { index: false, follow: false },
-  alternates: { canonical: "https://www.blossombooks.org/quote-scat/" },
+  alternates: { canonical: "https://blossombooks.org/quote-scat/" },
   openGraph: {
     title: "Blossom Books 사고력·영재 검사 · 경시대회 구성 안내",
     description: "카카오톡 상담에서 안내하는 SCAT·CogAT·NNAT·OLSAT·AMC·MATHCOUNTS·MOEMS 구성표입니다.",
-    url: "https://www.blossombooks.org/quote-scat/",
-    images: ["https://www.blossombooks.org/quote-scat/opengraph-image"],
+    url: "https://blossombooks.org/quote-scat/",
+    images: ["https://blossombooks.org/quote-scat/opengraph-image"],
   },
 };
 

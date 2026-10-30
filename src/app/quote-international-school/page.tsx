@@ -30,13 +30,13 @@ export const metadata = {
   description:
     "카카오톡 상담에서 안내하는 국제학교·사립학교·영국계 학교 입학, 배치, 교내 진단·성취도 평가 구성표입니다.",
   robots: { index: false, follow: false },
-  alternates: { canonical: "https://www.blossombooks.org/quote-international-school/" },
+  alternates: { canonical: "https://blossombooks.org/quote-international-school/" },
   openGraph: {
     title: "Blossom Books 국제학교 입학·배치·교내 평가 준비",
     description:
       "카카오톡 상담에서 안내하는 국제학교·사립학교·영국계 학교 입학, 배치, 교내 진단·성취도 평가 구성표입니다.",
-    url: "https://www.blossombooks.org/quote-international-school/",
-    images: ["https://www.blossombooks.org/quote-international-school/opengraph-image"],
+    url: "https://blossombooks.org/quote-international-school/",
+    images: ["https://blossombooks.org/quote-international-school/opengraph-image"],
   },
 };
 

@@ -7,62 +7,62 @@ const links = [
   {
     title: "학원·학교 레벨테스트",
     who: "영어 · 국어 · 수학 레벨테스트/반 배정 문의 고객",
-    url: "https://www.blossombooks.org/quote/",
+    url: "https://blossombooks.org/quote/",
   },
   {
     title: "학원 레벨테스트 샘플",
     who: "영어 레벨테스트(G1–G6) 실제 샘플 문제를 바로 보여줄 때",
-    url: "https://www.blossombooks.org/quote-level-test-sample/",
+    url: "https://blossombooks.org/quote-level-test-sample/",
   },
   {
     title: "시험 대비 (공인시험·사내영어)",
     who: "OET · MET · CELBAN · PTE · 부산외대 FLAT · SPA · SAT · ESPT 등 문의 고객",
-    url: "https://www.blossombooks.org/quote-exam/",
+    url: "https://blossombooks.org/quote-exam/",
   },
   {
     title: "미국교과·AP",
     who: "G1–G12 영어·수학, Geometry·Algebra·Precalculus·Calculus·AP 문의 고객",
-    url: "https://www.blossombooks.org/quote-us/",
+    url: "https://blossombooks.org/quote-us/",
   },
   {
     title: "영국 교과·입학시험",
     who: "Year 1–11 · GCSE · A-level · 11+ · ISEB · UKiset 문의 고객",
-    url: "https://www.blossombooks.org/quote-uk/",
+    url: "https://blossombooks.org/quote-uk/",
   },
   {
     title: "캐나다 교과",
     who: "Grade 1–12 English·Math, 주(province)별 상급 수학 스트림 문의 고객",
-    url: "https://www.blossombooks.org/quote-ca/",
+    url: "https://blossombooks.org/quote-ca/",
   },
   {
     title: "호주 교과",
     who: "Foundation–Year 12 English·Maths, Methods/Specialist 문의 고객",
-    url: "https://www.blossombooks.org/quote-au/",
+    url: "https://blossombooks.org/quote-au/",
   },
   {
     title: "국제학교 입학시험",
     who: "MAP Growth · CAT4 · ISEE · Oxford Online Placement Test 문의 고객",
-    url: "https://www.blossombooks.org/quote-international-school/",
+    url: "https://blossombooks.org/quote-international-school/",
   },
   {
     title: "사고력·영재 검사 · 경시대회",
     who: "SCAT · CogAT · NNAT · OLSAT · AMC · MATHCOUNTS · MOEMS 문의 고객",
-    url: "https://www.blossombooks.org/quote-scat/",
+    url: "https://blossombooks.org/quote-scat/",
   },
   {
     title: "경시·영재·시험 대비 (수학·영어·국어·과학)",
     who: "성대 경시·교육청 수학경시·KMO·수학영재원, TOEFL Junior/Primary·리딩 레벨테스트, 초등 문해력·국어, 과학영재원·과학경시 대비 문의 고객",
-    url: "https://www.blossombooks.org/quote-contest/",
+    url: "https://blossombooks.org/quote-contest/",
   },
   {
     title: "IB(International Baccalaureate)",
     who: "Math AA·AI, Sciences, Economics, Business Management 토픽 문제집 · 모의고사 · IA/EE/TOK 가이드 문의 고객",
-    url: "https://www.blossombooks.org/quote-ib/",
+    url: "https://blossombooks.org/quote-ib/",
   },
   {
     title: "국제학교 Admission Full Package",
     who: "국제학교·해외 학교 입학 준비 전체 패키지(상담) 문의 고객",
-    url: "https://www.blossombooks.org/admission-full-package/",
+    url: "https://blossombooks.org/admission-full-package/",
   },
 ];
 

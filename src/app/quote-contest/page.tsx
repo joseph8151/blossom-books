@@ -11,11 +11,11 @@ export const metadata = {
   title: "경시·영재·시험 대비 구성·가격 안내",
   description: "카카오톡 상담에서 안내하는 경시대회·영재원·리딩/문해력 구성표입니다.",
   robots: { index: false, follow: false },
-  alternates: { canonical: "https://www.blossombooks.org/quote-contest/" },
+  alternates: { canonical: "https://blossombooks.org/quote-contest/" },
   openGraph: {
     title: "Blossom Books 경시·영재·시험 대비 구성 안내",
     description: "카카오톡 상담에서 안내하는 경시대회·영재원·리딩/문해력 구성표입니다.",
-    url: "https://www.blossombooks.org/quote-contest/",
+    url: "https://blossombooks.org/quote-contest/",
   },
 };
 

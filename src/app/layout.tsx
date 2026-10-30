@@ -13,8 +13,8 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "블러섬북스",
   alternateName: "Blossom Books",
-  url: "https://www.blossombooks.org",
-  logo: "https://www.blossombooks.org/opengraph-image.png",
+  url: "https://blossombooks.org",
+  logo: "https://blossombooks.org/opengraph-image.png",
   email: siteConfig.email,
   address: {
     "@type": "PostalAddress",
@@ -27,10 +27,10 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "블러섬북스 Blossom Books",
-  url: "https://www.blossombooks.org",
+  url: "https://blossombooks.org",
   potentialAction: {
     "@type": "SearchAction",
-    target: "https://www.blossombooks.org/books/?q={search_term_string}",
+    target: "https://blossombooks.org/books/?q={search_term_string}",
     "query-input": "required name=search_term_string",
   },
 };
