@@ -13,6 +13,7 @@ const baseUrl = "https://blossombooks.org";
 const staticPaths = [
   { path: "", priority: 1, changeFrequency: "daily" as const },
   { path: "/books", priority: 0.9, changeFrequency: "daily" as const },
+  { path: "/reviews", priority: 0.6, changeFrequency: "weekly" as const },
   { path: "/level-assessment", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/diagnosis", priority: 0.5, changeFrequency: "monthly" as const },
   { path: "/guide", priority: 0.6, changeFrequency: "monthly" as const },

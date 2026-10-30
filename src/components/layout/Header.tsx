@@ -11,6 +11,7 @@ import { useWishlistIds } from "@/components/books/WishlistButton";
 // 데스크톱 상단 바에 노출할 핵심 메뉴 (과밀 방지를 위해 엄선). 전체 메뉴는 모바일 패널에 유지됩니다.
 const koDesktopNav = [
   { label: "교재 찾기", href: "/books" },
+  { label: "후기 모음", href: "/reviews" },
   { label: "레벨 진단", href: "/level-assessment" },
   { label: "주문 제작", href: "/custom-order" },
   { label: "Admissions", href: "/admission-full-package" },
@@ -110,7 +111,7 @@ export default function Header() {
         </Link>
 
         {/* 데스크톱 내비게이션 */}
-        <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-6">
           {desktopNav.map((item) => {
             const active = isActive(item.href);
             return (

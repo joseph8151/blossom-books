@@ -24,12 +24,12 @@ function tokenize(s: string): Set<string> {
 }
 
 // 정확히 매칭되는 후기가 없을 때, 같은 트랙(카테고리) 안에서라도 관련 있는
-// 후기를 보여주기 위한 2차 폴백 키워드. 실제 후기가 없는 트랙(us-curriculum,
-// ap)은 비워둡니다 — 가짜로 끼워 맞추는 것보다 안 보여주는 편이 낫습니다.
+// 후기를 보여주기 위한 2차 폴백 키워드. "레벨테스트"처럼 특정 브랜드 시험이
+// 아닌 트랙만 폴백을 둡니다 — CAT4·MAP·ISEE나 OET·TOEFL처럼 서로 다른
+// 이름의 공인시험을 한데 묶으면 엉뚱한 시험 후기가 붙어 오해를 줄 수 있어
+// admissions·certified-exam은 폴백을 쓰지 않습니다.
 const TRACK_FALLBACK_TOKENS: Partial<Record<Product["track"], string[]>> = {
   "level-test": ["레벨테스트"],
-  admissions: ["국제학교", "입학시험"],
-  "certified-exam": ["공인영어시험"],
 };
 
 // 상품과 가장 관련 있는 실제 후기 1개를 골라줍니다. 겹치는 키워드가 없으면
