@@ -10,6 +10,7 @@ const DIRECT_PAGES = [60, 100, 200, 300];
 const GENERIC_TOKENS = new Set([
   "reading", "writing", "vocabulary", "grammar", "listening", "speaking",
   "english", "math", "mathematics", "science",
+  "test", "level", "practice", "prep",
 ]);
 
 function tokenize(s: string): Set<string> {
@@ -21,6 +22,15 @@ function tokenize(s: string): Set<string> {
       .filter((t) => t && !GENERIC_TOKENS.has(t))
   );
 }
+
+// 정확히 매칭되는 후기가 없을 때, 같은 트랙(카테고리) 안에서라도 관련 있는
+// 후기를 보여주기 위한 2차 폴백 키워드. 실제 후기가 없는 트랙(us-curriculum,
+// ap)은 비워둡니다 — 가짜로 끼워 맞추는 것보다 안 보여주는 편이 낫습니다.
+const TRACK_FALLBACK_TOKENS: Partial<Record<Product["track"], string[]>> = {
+  "level-test": ["레벨테스트"],
+  admissions: ["국제학교", "입학시험"],
+  "certified-exam": ["공인영어시험"],
+};
 
 // 상품과 가장 관련 있는 실제 후기 1개를 골라줍니다. 겹치는 키워드가 없으면
 // undefined — 엉뚱한 후기를 붙이는 것보다 아무것도 안 보여주는 편이 낫습니다.
@@ -39,7 +49,16 @@ export function matchedReview(product: Product): Review | undefined {
       best = r;
     }
   }
-  return bestScore > 0 ? best : undefined;
+  if (best) return best;
+
+  // 1차 매칭 실패 시, 같은 트랙의 일반적인 후기로 폴백합니다.
+  const fallbackTokens = TRACK_FALLBACK_TOKENS[product.track];
+  if (!fallbackTokens) return undefined;
+  for (const r of reviews) {
+    const reviewTokens = tokenize([r.context, (r.tags ?? []).join(" ")].join(" "));
+    if (fallbackTokens.some((t) => reviewTokens.has(t))) return r;
+  }
+  return undefined;
 }
 
 // 60·100·200·300P 분량 선택이 가능한 교재인지 판별합니다.
