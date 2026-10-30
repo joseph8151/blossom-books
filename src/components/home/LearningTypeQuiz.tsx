@@ -1,13 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { MessageCircle, RotateCcw } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { products } from "@/data/products";
+import { Product, CurriculumTrack } from "@/lib/types";
+import ProductCard from "@/components/books/ProductCard";
 
 // 홈페이지용 진단 퀴즈 — 가볍게 재미로 해보는 5문항 퀴즈입니다. 결과
-// "유형"은 바로 보여주되(재미 요소), 구체적인 추천 구성은 다른 카톡 유도
-// 도구들과 동일하게 카카오톡 상담을 받아야 공개됩니다.
+// "유형"은 바로 보여주고, 답변(학년·걱정 영역·목표)을 기준으로 실제
+// 카탈로그에서 교재를 추천해 보여줍니다(과거 /find의 매칭 아이디어를 이
+// 퀴즈 답변에 맞게 단순화한 버전). 가격은 카드에서 항상 숨겨지며(기본
+// hidePrice), 정확한 구성·가격은 다른 카톡 유도 도구들과 동일하게
+// 카카오톡 상담을 받아야 안내됩니다.
 
 interface QuizType {
   id: string;
@@ -70,6 +76,63 @@ const Q5_OPTIONS = [
 
 const TOTAL_QUESTIONS = 5;
 
+// Q1 라벨 → 대략적인 학년 범위(0=K 기준)
+const GRADE_RANGES: Record<string, [number, number]> = {
+  "초등 저학년 (K–2)": [0, 2],
+  "초등 고학년 (3–6)": [3, 6],
+  "중학생 (7–8)": [7, 8],
+  "고등학생 (9–12)": [9, 12],
+};
+
+// Q5(목표) 라벨 → 매칭에 쓸 상품 track
+const GOAL_TRACK: Record<string, CurriculumTrack> = {
+  "학원·학교 레벨테스트 통과": "level-test",
+  "국제학교 입시·편입 준비": "admissions",
+  "학년 수준 따라가기 / 보충": "us-curriculum",
+  "특정 시험 대비 (SAT·AP·IB 등)": "ap",
+};
+
+// Q3(걱정 영역) 라벨 → product.subject/units에서 찾을 키워드
+const AREA_KEYWORDS: Record<string, string[]> = {
+  "Reading (독해)": ["Reading"],
+  "Vocabulary·Grammar (어휘·문법)": ["Vocabulary", "Grammar"],
+  "Writing (작문)": ["Writing"],
+  "Math (수학)": ["Math", "Algebra", "Geometry", "Calculus"],
+};
+
+// product.gradeRange("Grade 8–9", "G4 – G11 (레벨별)" 등)에서 숫자만 뽑아 범위로.
+function productGradeRange(str: string): [number, number] {
+  const n = (str.match(/\d+/g) || []).map(Number);
+  if (!n.length) return [0, 12];
+  return [Math.min(...n), Math.max(...n)];
+}
+function overlaps(a: [number, number], b: [number, number]): boolean {
+  return Math.max(a[0], b[0]) <= Math.min(a[1], b[1]);
+}
+
+// 답변 3개(학년·걱정 영역·목표)로 실제 카탈로그에서 가장 잘 맞는 교재
+// 상위 3개를 고릅니다. "가장 비싼 교재"가 아니라 학년·목표에 맞는 교재를
+// 고르는 것이 목적입니다.
+function recommendProducts(grade: string, weakArea: string, goal: string): Product[] {
+  const gRange = GRADE_RANGES[grade];
+  const track = GOAL_TRACK[goal];
+  const keywords = AREA_KEYWORDS[weakArea] ?? [];
+  const pool = products.filter((p) => p.materialType === "existing" && p.sampleAvailable);
+
+  return pool
+    .map((p) => {
+      let score = 0;
+      if (track && p.track === track) score += 40;
+      if (gRange && overlaps(gRange, productGradeRange(p.gradeRange))) score += 15;
+      if (keywords.some((k) => p.subject.includes(k) || p.units.some((u) => u.includes(k)))) score += 20;
+      return { p, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((x) => x.p);
+}
+
 export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {}) {
   const [step, setStep] = useState(0); // 0~4 = questions, 5 = result
   const [grade, setGrade] = useState("");
@@ -81,6 +144,7 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
   const [revealed, setRevealed] = useState(false);
 
   const type = TYPES[typeId];
+  const recommended = useMemo(() => recommendProducts(grade, weakArea, goal), [grade, weakArea, goal]);
 
   function pickGrade(v: string) {
     setGrade(v);
@@ -242,6 +306,23 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
               <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-400">Your Type</p>
               <p className="mt-3 font-display text-[28px] font-semibold text-ivory-100">{type.name}</p>
               <p className="mt-2.5 text-[14px] leading-relaxed text-ivory-200/80">{type.tagline}</p>
+
+              {recommended.length > 0 && (
+                <div className="mt-7 border-t border-ivory-100/12 pt-6 text-left">
+                  <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-400">
+                    Recommended for you
+                  </p>
+                  <div className="mt-4 grid gap-4 text-charcoal-900 sm:grid-cols-2 lg:grid-cols-3">
+                    {recommended.map((p) => (
+                      <ProductCard key={p.id} product={p} />
+                    ))}
+                  </div>
+                  <p className="mt-3 text-[11.5px] leading-relaxed text-ivory-200/55">
+                    답변을 바탕으로 한 참고용 추천입니다. 정확한 구성·분량은 카카오톡 상담에서 확인하실 수
+                    있습니다.
+                  </p>
+                </div>
+              )}
 
               {!revealed ? (
                 <div className="mt-7 border-t border-ivory-100/12 pt-6">
