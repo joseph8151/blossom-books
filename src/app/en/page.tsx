@@ -434,7 +434,7 @@ export default function EnHomePage() {
             {[
               { q: "Are the questions similar to the actual test?", a: "We analyze each exam's skill areas, question types, and grade-level scope, and build practice around them. We do not provide real or leaked exam questions, and we avoid claims like “100% identical.”" },
               { q: "Does difficulty differ by grade?", a: "Yes. Difficulty is built around the student's grade and target level; some titles progress from Foundation up to Advanced or Challenge." },
-              { q: "How do I choose between 100 / 200 / 300 pages?", a: "It depends on how much time is left and current ability. 100P for a quick check, 200P for standard prep, 300P for intensive repetition. Our team can help you pick." },
+              { q: "How do I choose between 40 / 60 / 100 pages?", a: "It depends on how much time is left and current ability. 40P for a quick check, 60P for standard prep, 100P for intensive repetition. Our team can help you pick." },
               { q: "Is an answer key included? Is it in Korean?", a: "Yes — every title ships with a detailed answer key. International-school, level-test and US-curriculum titles include Korean explanations; SAT/AP and professional exams are explained in English with key points in Korean." },
               { q: "How is it delivered?", a: "As a digital PDF by email after payment is confirmed. You can print it and study on any device." },
               { q: "Can you make a title you don't list?", a: "Yes. We produce custom workbooks to a student's grade, level and target exam. Ask us through our official channel." },

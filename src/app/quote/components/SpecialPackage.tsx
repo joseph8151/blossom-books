@@ -24,7 +24,7 @@ const bestFor = [
 ];
 
 export default function SpecialPackage() {
-  const p200 = flexibleVolumes.find((v) => v.pages === 200) ?? flexibleVolumes[1];
+  const p200 = flexibleVolumes[flexibleVolumes.length - 1];
 
   return (
     <section className="border-b border-ivory-300 bg-navy-950 py-16 sm:py-24">
