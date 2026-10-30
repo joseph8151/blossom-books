@@ -1,8 +1,46 @@
 import { Product } from "@/lib/types";
 import { blossomLevel } from "@/lib/utils";
 import { starterOption, srVolumes, flexibleVolumes } from "@/data/pricing";
+import { reviews, Review } from "@/data/reviews";
 
 const DIRECT_PAGES = [60, 100, 200, 300];
+
+// 거의 모든 상품에 공통으로 등장하는 영역명 — 이 단어만 겹치는 건 진짜 관련성이
+// 아니므로 매칭 점수에서 제외합니다 (예: Algebra와 SR Reading이 "reading" 하나로 묶이는 것 방지).
+const GENERIC_TOKENS = new Set([
+  "reading", "writing", "vocabulary", "grammar", "listening", "speaking",
+  "english", "math", "mathematics", "science",
+]);
+
+function tokenize(s: string): Set<string> {
+  return new Set(
+    s
+      .toLowerCase()
+      .replace(/[·,()]/g, " ")
+      .split(/\s+/)
+      .filter((t) => t && !GENERIC_TOKENS.has(t))
+  );
+}
+
+// 상품과 가장 관련 있는 실제 후기 1개를 골라줍니다. 겹치는 키워드가 없으면
+// undefined — 엉뚱한 후기를 붙이는 것보다 아무것도 안 보여주는 편이 낫습니다.
+export function matchedReview(product: Product): Review | undefined {
+  const productTokens = tokenize([product.examOrCurriculum, product.subject, product.units.join(" ")].join(" "));
+  let best: Review | undefined;
+  let bestScore = 0;
+  for (const r of reviews) {
+    const reviewTokens = tokenize([r.context, (r.tags ?? []).join(" ")].join(" "));
+    let score = 0;
+    for (const t of reviewTokens) {
+      if (productTokens.has(t)) score++;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      best = r;
+    }
+  }
+  return bestScore > 0 ? best : undefined;
+}
 
 // 60·100·200·300P 분량 선택이 가능한 교재인지 판별합니다.
 // offeredVolumes가 지정된 상품(예: ISEE)은 전체 라인업이 아닌 지정된 일부만 판매합니다.
