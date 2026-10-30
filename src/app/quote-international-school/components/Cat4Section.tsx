@@ -99,12 +99,24 @@ export default function Cat4Section() {
 
           <div className="mt-4">
             <p className="font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
-              STEP 2 · 분량 선택
+              STEP 2 · 분량 선택 — 가격
             </p>
-            <div className="mt-2 flex gap-2">
+            <div className="mt-2 grid grid-cols-2 gap-2">
               {VOLUMES.map((v) => (
-                <button key={v.pages} type="button" onClick={() => setPages(v.pages)} className={pages === v.pages ? chipActiveCls : chipCls}>
-                  {v.label}
+                <button
+                  key={v.pages}
+                  type="button"
+                  onClick={() => setPages(v.pages)}
+                  className={`flex flex-col items-center gap-1 border px-3 py-2.5 text-center transition-colors ${
+                    pages === v.pages
+                      ? "border-navy-900 bg-navy-900 text-ivory-100"
+                      : "border-ivory-300 bg-white text-navy-900 hover:border-navy-900"
+                  }`}
+                >
+                  <span className="text-[12.5px] font-medium">{v.label}</span>
+                  <span className={`text-[11.5px] ${pages === v.pages ? "text-ivory-100/80" : "text-charcoal-600"}`}>
+                    {formatKRW(v.priceKRW)}
+                  </span>
                 </button>
               ))}
             </div>
