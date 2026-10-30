@@ -281,6 +281,24 @@ export const writingBank: SampleItem[] = [
     whyKo: "채점 기준: 분명한 의견(주장) + 뒷받침 이유 두 가지 이상 + 짜임새 있는 문장 구성.",
   },
   {
+    area: "Writing", type: "Creative Essay", skill: "Write a short creative/narrative essay (약 150 words)", difficulty: "Standard",
+    passage: "Prompt: Write a short story about a day when something surprising happened to you. Use your imagination, and show how you felt.",
+    question: "Plan and write your story. (약 150 words)",
+    answer: "모범답안: 아래 이야기를 참고하세요.",
+    essay: {
+      intro:
+        "Last Saturday started like any normal day, but it turned into one I will never forget. I looked out my window and saw a small, lost puppy shivering on our porch in the rain.",
+      body: [
+        "I ran outside without a coat and spoke softly so it would not be scared. Slowly, the puppy came closer and let me pick it up. I wrapped it in a warm towel while my mom called the local animal shelter.",
+        "The puppy fell asleep in my lap while we waited. I felt proud that I had helped a scared animal feel safe. An hour later, the shelter called back — someone was searching for him!",
+      ],
+      conclusion:
+        "When the owner arrived and hugged his puppy with tears in his eyes, I understood that even a small act of kindness can make someone's whole day special.",
+    },
+    why: "A strong creative essay uses vivid details, follows a clear story order (beginning–middle–end), and shows the writer's feelings or reflection at the end.",
+    whyKo: "좋은 창작 에세이는 생생한 디테일을 사용하고, 이야기 순서(처음–중간–끝)를 분명히 따르며, 글 끝에서 글쓴이의 느낌이나 깨달음을 보여줍니다. 150단어 정도의 짧은 글이라도 기승전결이 있으면 좋은 점수를 받습니다.",
+  },
+  {
     area: "Writing", type: "Opinion Essay", skill: "Write a structured essay (Introduction · Body · Conclusion, 약 250 words)", difficulty: "Advanced",
     passage: "Prompt: Do you think students should be allowed to use smartphones at school? Write about 250 words using an Introduction – Body – Conclusion structure.",
     question: "Plan and write your essay. (Introduction · Body · Conclusion)",
