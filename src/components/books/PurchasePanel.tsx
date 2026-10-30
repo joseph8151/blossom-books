@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { MessageCircle, Check, FileSearch, ShieldCheck, Copy } from "lucide-react";
+import { MessageCircle, Check, FileSearch, ShieldCheck, Copy, Quote } from "lucide-react";
 import { Product } from "@/lib/types";
 import { flexibleVolumes, srVolumes, starterOption, extendedOption, formatKRW, volumeByPages } from "@/data/pricing";
-import { offersVolumes, offersSrVolumes, hasStarter, volumesForProduct } from "@/lib/productMeta";
+import { offersVolumes, offersSrVolumes, hasStarter, volumesForProduct, matchedReview } from "@/lib/productMeta";
 import { siteConfig } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
 
@@ -19,6 +19,7 @@ const trustItems = [
 ];
 
 export default function PurchasePanel({ product, isDirect }: { product: Product; isDirect: boolean }) {
+  const review = matchedReview(product); // 이 상품과 관련된 실제 후기 (없으면 undefined)
   const srFlexible = offersSrVolumes(product); // SR Reading Prep 전용 150/200/300 분량 선택 가능 여부
   const flexible = offersVolumes(product); // 60/100/200/300(또는 상품별 지정 일부) 분량 선택 가능 여부
   const productVols = volumesForProduct(product);
@@ -227,6 +228,22 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
             </li>
           ))}
         </ul>
+
+        {/* 이 상품과 관련된 실제 후기 — 있을 때만 노출 */}
+        {review && (
+          <div className="mt-4 border-t border-navy-800/12 pt-4">
+            <p className="font-label text-[10px] uppercase tracking-[0.12em] text-navy-800/55">실제 후기</p>
+            <blockquote className="relative mt-2 border-l-2 border-brass-500/50 pl-3">
+              <Quote size={13} className="absolute -left-[7px] -top-1 bg-ivory-100 text-brass-500" />
+              <p className="text-[12.5px] leading-relaxed text-charcoal-700">
+                {review.quote.length > 140 ? `${review.quote.slice(0, 140)}…` : review.quote}
+              </p>
+              <footer className="mt-1.5 text-[11px] text-charcoal-600/70">
+                — {review.author} · {review.context}
+              </footer>
+            </blockquote>
+          </div>
+        )}
 
         {/* Digital Product Notice */}
         <div className="mt-4 border-t border-navy-800/12 pt-4">
