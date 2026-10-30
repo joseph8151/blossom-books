@@ -9,8 +9,9 @@ import {
   isDirectPurchase,
   insideTheWorkbook,
   productCode,
+  volumesForProduct,
 } from "@/lib/productMeta";
-import { volumeOptions, srVolumes, extendedOption } from "@/data/pricing";
+import { srVolumes, extendedOption } from "@/data/pricing";
 import { siteConfig } from "@/data/site";
 import { BookCoverMockup } from "@/components/home/BookCoverMockup";
 import SamplePreviewButton from "@/components/books/SamplePreviewButton";
@@ -47,6 +48,7 @@ export default async function EnProductDetail({ params }: { params: Promise<{ sl
   const title = product.title.split(" — ")[0];
   const offersVolumes = productOffersVolumes(product);
   const offersSrVolumes = productOffersSrVolumes(product);
+  const productVols = volumesForProduct(product);
   const direct = isDirectPurchase(product);
   const inside = insideTheWorkbook(product);
   const level = blossomLevel(product.difficulty);
@@ -198,7 +200,7 @@ export default async function EnProductDetail({ params }: { params: Promise<{ sl
                   <div className="mt-5">
                     <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">Choose your volume</p>
                     <div className="mt-3 space-y-2">
-                      {(offersSrVolumes ? srVolumes : volumeOptions).map((v) => (
+                      {(offersSrVolumes ? srVolumes : productVols).map((v) => (
                         <div key={v.pages} className="flex items-center justify-between border border-navy-800/15 px-3 py-2.5">
                           <span className="text-[13px] text-charcoal-900">{v.label} · {v.tier}</span>
                         </div>
