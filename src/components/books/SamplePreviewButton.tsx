@@ -133,12 +133,21 @@ function buildWorkbookItems(product: Product): SampleItem[] {
     // 학년별 긴 리딩 지문 + 학년대 난이도에 맞춘 Vocabulary·Grammar·Writing (교재별 차별화)
     const reading = placementReadingByProduct[product.id] ?? [readingBank[0], readingBank[2], readingBank[3]];
     const tier = LT_TIER[product.id] ?? blossomLevel(product.difficulty);
+    const vocabulary = pickTier(vocabularyBank, tier, 2);
+    const grammar = pickTier(grammarBank, tier, 2);
+    const writing = pickTier(writingBank, tier, 2);
+    // 무료 샘플은 앞 5문항만 노출되므로(FREE_WORKBOOK_CAP), Reading만 몰리지 않도록
+    // 4개 영역을 섞어 배치해 Vocabulary·Grammar·Writing도 반드시 무료 미리보기에 포함되게 합니다.
     return [
-      ...reading,
-      ...pickTier(vocabularyBank, tier, 2),
-      ...pickTier(grammarBank, tier, 2),
-      ...pickTier(writingBank, tier, 2),
-    ];
+      reading[0],
+      vocabulary[0],
+      grammar[0],
+      writing[0],
+      ...reading.slice(1),
+      ...vocabulary.slice(1),
+      ...grammar.slice(1),
+      ...writing.slice(1),
+    ].filter(Boolean);
   }
   // SR Reading 전용 제품 — 긴 지문 + 유형 확장
   if (srReadingByProduct[product.id]) return srReadingByProduct[product.id];
