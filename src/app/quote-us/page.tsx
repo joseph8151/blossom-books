@@ -20,8 +20,8 @@ export const metadata = {
   },
 };
 
-const p100 = volumeOptions[0]; // 100P
-const p200 = volumeOptions[1]; // 200P
+const p100 = volumeOptions.find((v) => v.pages === 100)!;
+const p200 = volumeOptions.find((v) => v.pages === 200)!;
 const p300 = { label: "300P", priceKRW: 390000 }; // 이 페이지 전용 분량 — 공용 volumeOptions에는 추가하지 않음
 const volumes = [p100, p200, p300];
 
@@ -50,7 +50,7 @@ export default function QuoteUsPage() {
       </h1>
       <p className="mt-3 text-[14.5px] leading-relaxed text-charcoal-600">
         미국 교과과정 G1–G12 English·Math, Pre-Algebra, Geometry·Algebra 1·Algebra 2·Precalculus·Calculus·
-        Statistics, AP 전 과목 문제집 구성입니다. 분량(100P/200P/300P)과 난이도(Standard/Advanced)는 각각
+        Statistics, AP 전 과목 문제집 구성입니다. 분량(60P/100P/200P/300P)과 난이도(Standard/Advanced)는 각각
         선택할 수 있습니다.
       </p>
 

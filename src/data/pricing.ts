@@ -1,6 +1,6 @@
 // ────────────────────────────────────────────────────────────
 // 분량(페이지 수) 기반 가격 정책
-// 100·200·300P는 바로 구매 가능, 300P 초과는 가격 문의(Price on Request).
+// 60·100·200·300P는 바로 구매 가능, 300P 초과는 가격 문의(Price on Request).
 // USD는 해외(PayPal) 결제용 근사값입니다.
 // ────────────────────────────────────────────────────────────
 
@@ -17,6 +17,20 @@ export interface VolumeOption {
 }
 
 export const volumeOptions: VolumeOption[] = [
+  {
+    pages: 60,
+    label: "60P",
+    priceKRW: 150000,
+    priceUSD: 110,
+    tier: "Quick Check",
+    tierKo: "빠른 핵심 점검",
+    duration: "시험 직전 · 초단기",
+    forWhom: [
+      "시험이 며칠 앞으로 다가온 학생",
+      "핵심 유형만 아주 짧게 확인하고 싶은 학생",
+      "본 교재 전 맛보기로 시작하고 싶은 경우",
+    ],
+  },
   {
     pages: 100,
     label: "100P",
@@ -62,10 +76,10 @@ export const volumeOptions: VolumeOption[] = [
   },
 ];
 
-// 분량 선택형 상품의 전체 옵션 (100 → 200 → 300)
+// 분량 선택형 상품의 전체 옵션 (60 → 100 → 200 → 300)
 export const flexibleVolumes: VolumeOption[] = [...volumeOptions];
 
-// SR Reading Prep(종합 문제집) 전용 분량 — 100/200/300P 기본 라인과는 별도로,
+// SR Reading Prep(종합 문제집) 전용 분량 — 60/100/200/300P 기본 라인과는 별도로,
 // SR 점수대별 종합 대비에 맞춘 150/200/300P 구성입니다.
 export const srVolumes: VolumeOption[] = [
   {
@@ -140,7 +154,7 @@ export const extendedOption = {
   ],
 };
 
-export const fromPriceKRW = volumeOptions[0].priceKRW; // 190,000 — "₩190,000부터"
+export const fromPriceKRW = volumeOptions[0].priceKRW; // 150,000 — "₩150,000부터"
 
 export const priceDisclaimer =
   "시험 유형, 과목 및 구성에 따라 일부 상품은 별도 안내될 수 있습니다.";

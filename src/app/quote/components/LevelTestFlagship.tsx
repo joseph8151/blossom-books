@@ -6,8 +6,9 @@ import { flexibleVolumes, formatKRW } from "../data";
 const trustPoints = ["학원별 유형 대응", "영어·국어·수학 선택", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
 
 // 페이지 수는 "문제량"입니다. 난이도(Standard/Advanced)와는 별개의 축이므로
-// 100/200/300P는 각각 Standard·Advanced를 선택할 수 있다는 점만 짧게 표시합니다.
+// 60/100/200/300P는 각각 Standard·Advanced를 선택할 수 있다는 점만 짧게 표시합니다.
 const volumeMeta: Record<number, { desc: string; hasLevels?: boolean }> = {
+  60: { desc: "초단기 핵심 점검", hasLevels: true },
   100: { desc: "빠른 핵심 점검", hasLevels: true },
   200: { desc: "가장 충분한 문제량", hasLevels: true },
   300: { desc: "같은 범위를 반복하는 구성", hasLevels: true },

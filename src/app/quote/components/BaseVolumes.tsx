@@ -6,11 +6,12 @@ interface VolumeTile {
   priceKRW: number;
 }
 
-// 100/200/300P 모두 공용 단가표(flexibleVolumes)를 그대로 씁니다.
+// 60/100/200/300P 모두 공용 단가표(flexibleVolumes)를 그대로 씁니다.
 const volumes: VolumeTile[] = flexibleVolumes.map((v) => ({ pages: v.pages, label: v.label, priceKRW: v.priceKRW }));
 
 const meta: Record<number, { eyebrow: string; badge?: string; desc: string; note?: string }> = {
-  100: { eyebrow: "Quick Check", desc: "시험까지 시간이 많지 않을 때 빠르게 점검하는 구성" },
+  60: { eyebrow: "Quick Check", desc: "시험이 며칠 앞으로 다가왔을 때 가장 짧게 핵심만 점검하는 구성" },
+  100: { eyebrow: "Standard Check", desc: "시험까지 시간이 많지 않을 때 빠르게 점검하는 구성" },
   200: {
     eyebrow: "Recommended",
     badge: "MOST SELECTED",

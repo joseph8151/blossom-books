@@ -18,7 +18,7 @@ export default function SmartPricing() {
         구성을 먼저 확인하세요.
       </h2>
       <p className="mt-3 text-[12.5px] text-charcoal-600">
-        가격은 분량(100·200·300P)에 따라 달라지며, 카카오톡 상담에서 안내해 드립니다.
+        가격은 분량(60·100·200·300P)에 따라 달라지며, 카카오톡 상담에서 안내해 드립니다.
       </p>
 
       {/* 포함 구성 */}
