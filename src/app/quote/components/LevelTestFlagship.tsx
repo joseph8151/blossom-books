@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { MessageCircle, Eye } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { flexibleVolumes, formatKRW, LEVEL_TEST_BUNDLES } from "../data";
+import { flexibleVolumes, formatKRW } from "../data";
 
 const trustPoints = ["학원별 유형 대응", "영어·국어·수학 선택", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
 
@@ -129,10 +129,6 @@ export default function LevelTestFlagship() {
           <p className="mx-auto mt-4 max-w-[560px] text-center text-[12px] leading-relaxed text-charcoal-600/70">
             페이지 수는 학습량의 차이입니다. 실제 난이도는 학생의 학년, 현재 수준, 시험 유형에 맞춰
             구성됩니다.
-          </p>
-          <p className="mt-2 text-center text-[12px] leading-relaxed text-charcoal-600/70">
-            입문 {formatKRW(LEVEL_TEST_BUNDLES.starter)}(40P+60P) · 풀세트{" "}
-            {formatKRW(LEVEL_TEST_BUNDLES.fullSet)}(60P+100P+200P)도 카카오톡으로 문의 가능합니다.
           </p>
           <p className="mt-2 text-center text-[12px] leading-relaxed text-charcoal-600/70">
             학원마다 시험 유형이 달라, 같은 분량이라도 학원에 맞춰 교재 구성이 달라집니다.
