@@ -46,7 +46,7 @@ export default function QuoteScatPage() {
       <div className="mt-14 max-w-[680px] border border-ivory-300 bg-ivory-100 p-6">
         <p className="text-[13px] font-medium text-navy-950">가격 안내</p>
         <p className="mt-2 text-[12.5px] leading-relaxed text-charcoal-600">
-          가격은 사이트 공통 분량별 단가(100P/200P/300P)를 그대로 적용합니다. 시험별로 확인된 별도
+          가격은 사이트 공통 분량별 단가(60P/100P/200P/300P)를 그대로 적용합니다. 시험별로 확인된 별도
           특가는 없으며, Standard + Advanced Practice 조합 가격은 각 분량 단가의 합으로 계산합니다(별도
           할인 없음).
         </p>

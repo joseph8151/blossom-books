@@ -370,7 +370,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </h2>
             <p className="mt-1.5 text-[13px] text-charcoal-600">어떤 구성이 맞는지 아래를 참고하세요.</p>
             <ul className="mt-3 space-y-1.5 text-[13px] text-charcoal-600">
-              <li>· 시험이 매우 가까운 경우 → <span className="font-medium text-navy-900">100P</span></li>
+              <li>· 시험이 매우 가까운 경우 → <span className="font-medium text-navy-900">60P</span></li>
+              <li>· 핵심 유형을 확인하고 싶은 경우 → <span className="font-medium text-navy-900">100P</span></li>
               <li>· 기본적인 Prep을 원하는 경우 → <span className="font-medium text-navy-900">200P</span></li>
               <li>· 충분한 반복이 필요한 경우 → <span className="font-medium text-navy-900">300P</span></li>
               <li>· 300P 이상 / 추가 영역이 필요한 경우 → <span className="font-medium text-navy-900">별도 문의</span></li>

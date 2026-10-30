@@ -37,8 +37,8 @@ const exams = [
   "ESPT",
 ];
 
-const p100 = volumeOptions[0]; // 100P
-const p200 = volumeOptions[1]; // 200P
+const p100 = volumeOptions.find((v) => v.pages === 100)!;
+const p200 = volumeOptions.find((v) => v.pages === 200)!;
 const SPECIAL_KRW = 390000;
 
 export default function QuoteExamPage() {

@@ -23,8 +23,8 @@ const cellCls = "border border-ivory-300 px-4 py-3 text-[13.5px]";
 const headCellCls =
   "border border-ivory-300 bg-ivory-200/70 px-4 py-3 text-left font-label text-[11px] uppercase tracking-[0.08em] text-navy-800/70";
 
-const p100 = volumeOptions[0]; // 100P
-const p200 = volumeOptions[1]; // 200P
+const p100 = volumeOptions.find((v) => v.pages === 100)!;
+const p200 = volumeOptions.find((v) => v.pages === 200)!;
 const SPECIAL_KRW = 390000;
 
 export default function QuoteCaPage() {

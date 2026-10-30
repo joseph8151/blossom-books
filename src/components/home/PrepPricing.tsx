@@ -25,7 +25,7 @@ export default function PrepPricing() {
             분량과 가격, 명확하게 안내합니다
           </h2>
           <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal-600">
-            100·200·300P는 바로 구매하실 수 있습니다. 페이지 수만 보지 말고, 각 구성이 어떤 학생에게 적합한지
+            60·100·200·300P는 바로 구매하실 수 있습니다. 페이지 수만 보지 말고, 각 구성이 어떤 학생에게 적합한지
             확인하고 선택하세요.
           </p>
         </div>
@@ -123,7 +123,7 @@ export default function PrepPricing() {
             </p>
             <p className="mt-2.5 text-[13px] leading-relaxed text-ivory-200/80">
               가장 많은 페이지를 권하는 것이 아니라, 학생에게 필요한 구성을 안내합니다. 예산과 준비 기간을
-              알려주시면 100P부터 필요한 범위만 안내해 드립니다.
+              알려주시면 60P부터 필요한 범위만 안내해 드립니다.
             </p>
           </div>
         </div>
