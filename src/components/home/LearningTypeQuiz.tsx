@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MessageCircle, RotateCcw } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
-// 홈페이지용 30초 진단 퀴즈 — 가볍게 재미로 해보는 3문항 퀴즈입니다. 결과
+// 홈페이지용 진단 퀴즈 — 가볍게 재미로 해보는 5문항 퀴즈입니다. 결과
 // "유형"은 바로 보여주되(재미 요소), 구체적인 추천 구성은 다른 카톡 유도
 // 도구들과 동일하게 카카오톡 상담을 받아야 공개됩니다.
 
@@ -57,18 +57,26 @@ const Q2_OPTIONS: { label: string; type: string }[] = [
   { label: "더 잘하고 싶어요 (심화·상위권)", type: "challenger" },
 ];
 
-const Q3_OPTIONS = [
+const Q3_OPTIONS = ["Reading (독해)", "Vocabulary·Grammar (어휘·문법)", "Writing (작문)", "Math (수학)"];
+
+const Q4_OPTIONS = ["1개월 이내", "1~3개월", "3~6개월", "아직 정하지 않았어요"];
+
+const Q5_OPTIONS = [
   "학원·학교 레벨테스트 통과",
   "국제학교 입시·편입 준비",
   "학년 수준 따라가기 / 보충",
   "특정 시험 대비 (SAT·AP·IB 등)",
 ];
 
+const TOTAL_QUESTIONS = 5;
+
 export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {}) {
-  const [step, setStep] = useState(0); // 0,1,2 = questions, 3 = result
+  const [step, setStep] = useState(0); // 0~4 = questions, 5 = result
   const [grade, setGrade] = useState("");
   const [concern, setConcern] = useState("");
   const [typeId, setTypeId] = useState("");
+  const [weakArea, setWeakArea] = useState("");
+  const [timeline, setTimeline] = useState("");
   const [goal, setGoal] = useState("");
   const [revealed, setRevealed] = useState(false);
 
@@ -83,15 +91,25 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
     setTypeId(t);
     setStep(2);
   }
+  function pickWeakArea(v: string) {
+    setWeakArea(v);
+    setStep(3);
+  }
+  function pickTimeline(v: string) {
+    setTimeline(v);
+    setStep(4);
+  }
   function pickGoal(v: string) {
     setGoal(v);
-    setStep(3);
+    setStep(5);
   }
   function restart() {
     setStep(0);
     setGrade("");
     setConcern("");
     setTypeId("");
+    setWeakArea("");
+    setTimeline("");
     setGoal("");
     setRevealed(false);
   }
@@ -101,6 +119,8 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
       "",
       `학년: ${grade}`,
       `고민: ${concern}`,
+      `걱정되는 영역: ${weakArea}`,
+      `시험까지 남은 기간: ${timeline}`,
       `목표: ${goal}`,
       `진단 유형: ${type?.name ?? "-"}`,
       "",
@@ -122,12 +142,12 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
     <section className="border-b border-navy-800/12 bg-navy-950 py-16 text-ivory-100 lg:py-24">
       <div className="mx-auto max-w-3xl px-5 lg:px-8">
         <div className="text-center">
-          <span className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-400">30-Second Check</span>
+          <span className="font-label text-[11px] uppercase tracking-[0.16em] text-brass-400">Quick Check</span>
           <h2 className="mt-4 font-display text-[26px] font-semibold leading-tight sm:text-[31px]">
             우리 아이는 어떤 학습 유형일까요?
           </h2>
           <p className="mt-3 text-[14px] leading-relaxed text-ivory-200/75">
-            질문 3개에 답하면 바로 결과가 나옵니다. 30초면 충분해요.
+            질문 {TOTAL_QUESTIONS}개에 답하면 바로 결과가 나옵니다. 1분이면 충분해요.
           </p>
           {pageHref && (
             <Link
@@ -140,9 +160,9 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
         </div>
 
         <div className="mx-auto mt-10 max-w-xl border border-ivory-100/12 bg-ivory-100/[0.04] p-6 sm:p-8">
-          {step < 3 && (
+          {step < TOTAL_QUESTIONS && (
             <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-400">
-              Question {step + 1} / 3
+              Question {step + 1} / {TOTAL_QUESTIONS}
             </p>
           )}
 
@@ -176,9 +196,39 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
 
           {step === 2 && (
             <>
-              <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">목표는?</p>
+              <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">
+                가장 걱정되는 영역은?
+              </p>
               <div className="mt-4 grid gap-2">
                 {Q3_OPTIONS.map((o) => (
+                  <button key={o} type="button" onClick={() => pickWeakArea(o)} className={chipCls}>
+                    {o}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          {step === 3 && (
+            <>
+              <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">
+                시험까지 남은 기간은?
+              </p>
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                {Q4_OPTIONS.map((o) => (
+                  <button key={o} type="button" onClick={() => pickTimeline(o)} className={chipCls}>
+                    {o}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          {step === 4 && (
+            <>
+              <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">목표는?</p>
+              <div className="mt-4 grid gap-2">
+                {Q5_OPTIONS.map((o) => (
                   <button key={o} type="button" onClick={() => pickGoal(o)} className={chipCls}>
                     {o}
                   </button>
@@ -187,7 +237,7 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
             </>
           )}
 
-          {step === 3 && type && (
+          {step === 5 && type && (
             <div className="text-center">
               <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-400">Your Type</p>
               <p className="mt-3 font-display text-[28px] font-semibold text-ivory-100">{type.name}</p>
