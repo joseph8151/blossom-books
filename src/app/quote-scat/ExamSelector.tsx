@@ -18,7 +18,7 @@ interface ExamSelectorProps {
   standardDesc: string;
   advancedDesc?: string;
   advancedNote?: string;
-  volumes?: number[]; // 기본 100/200/300
+  volumes?: number[]; // 기본 40/60/100/200
   ctaLabel: string;
 }
 
@@ -43,7 +43,7 @@ export default function ExamSelector({
   volumes,
   ctaLabel,
 }: ExamSelectorProps) {
-  const VOLUMES = (volumes ?? [100, 200, 300])
+  const VOLUMES = (volumes ?? [40, 60, 100, 200])
     .map((p) => flexibleVolumes.find((v) => v.pages === p)!)
     .filter(Boolean);
 

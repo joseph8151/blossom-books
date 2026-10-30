@@ -2,13 +2,13 @@ import { Product } from "@/lib/types";
 import { blossomLevel } from "@/lib/utils";
 import { starterOption, srVolumes, flexibleVolumes } from "@/data/pricing";
 
-const DIRECT_PAGES = [100, 200, 300];
+const DIRECT_PAGES = [40, 60, 100, 200];
 
-// 100·200·300P 분량 선택이 가능한 교재인지 판별합니다.
+// 40·60·100·200p 분량 선택이 가능한 교재인지 판별합니다.
 export function offersVolumes(p: Product): boolean {
   return (
-    (p.levelLabel?.includes("100·200·300P") ?? false) ||
-    p.components.some((c) => c.descriptionKo.includes("100·200·300P"))
+    (p.levelLabel?.includes("40") ?? false) ||
+    p.components.some((c) => c.descriptionKo.includes("40·60·100·200p"))
   );
 }
 
@@ -17,7 +17,7 @@ export function offersSrVolumes(p: Product): boolean {
   return p.examOrCurriculum === "SR Reading Level";
 }
 
-// 고정 분량(100/200/300P)으로 바로 구매 가능한 교재인지.
+// 고정 분량(40/60/100/200P)으로 바로 구매 가능한 교재인지.
 export function isFixedDirect(p: Product): boolean {
   return !offersVolumes(p) && !offersSrVolumes(p) && p.pageCount != null && DIRECT_PAGES.includes(p.pageCount);
 }

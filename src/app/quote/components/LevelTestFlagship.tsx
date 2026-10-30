@@ -6,18 +6,20 @@ import { flexibleVolumes, formatKRW, LEVEL_TEST_BUNDLES } from "../data";
 const trustPoints = ["학원별 유형 대응", "영어·국어·수학 선택", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
 
 // 페이지 수는 "문제량"입니다. 난이도(Standard/Advanced)와는 별개의 축이므로
-// 100/200/300P는 각각 Standard·Advanced를 선택할 수 있다는 점만 짧게 표시합니다.
+// 40/60/100/200/300P는 각각 Standard·Advanced를 선택할 수 있다는 점만 짧게 표시합니다.
 const volumeMeta: Record<number, { desc: string; hasLevels?: boolean }> = {
-  100: { desc: "빠른 핵심 점검", hasLevels: true },
+  40: { desc: "빠른 핵심 점검", hasLevels: true },
+  60: { desc: "기본 준비", hasLevels: true },
+  100: { desc: "충분한 실전 연습", hasLevels: true },
   200: { desc: "가장 충분한 문제량", hasLevels: true },
   300: { desc: "같은 범위를 반복하는 구성", hasLevels: true },
 };
 
-const volumeTiles: { pages: number; label: string; priceKRW: number }[] = flexibleVolumes.map((v) => ({
-  pages: v.pages,
-  label: v.label,
-  priceKRW: v.priceKRW,
-}));
+// 300P는 공용 단가표(flexibleVolumes)에 없는 이 페이지 전용 분량입니다.
+const volumeTiles: { pages: number; label: string; priceKRW: number }[] = [
+  ...flexibleVolumes.map((v) => ({ pages: v.pages, label: v.label, priceKRW: v.priceKRW })),
+  { pages: 300, label: "300P", priceKRW: 390000 },
+];
 
 const subjects = [
   {
