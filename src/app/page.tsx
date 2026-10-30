@@ -55,7 +55,7 @@ export default function HomePage() {
       <CompareLevels />
 
       {/* 문제 해결 — 어떤 교재가 맞는지 모를 때 (30초 진단 퀴즈) */}
-      <LearningTypeQuiz />
+      <LearningTypeQuiz pageHref="/diagnosis" />
 
       {/* Reviews / 신뢰 */}
       <Testimonials />
