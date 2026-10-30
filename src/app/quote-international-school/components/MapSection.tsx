@@ -62,24 +62,30 @@ export default function MapSection() {
         </div>
 
         <p className="mt-5 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
-          STEP 2 · 분량 선택
+          STEP 2 · 분량 선택 — 가격
         </p>
-        <div className="mt-2 flex flex-wrap gap-2">
+        <div className="mt-2 grid grid-cols-3 gap-2">
           {VOLUMES.map((v) => (
             <button
               key={v.pages}
               type="button"
               onClick={() => setPages(v.pages)}
-              className={pages === v.pages ? chipActiveCls : chipCls}
+              className={`flex flex-col items-center gap-1 border px-3 py-2.5 text-center transition-colors ${
+                pages === v.pages
+                  ? "border-navy-900 bg-navy-900 text-ivory-100"
+                  : "border-ivory-300 bg-white text-navy-900 hover:border-navy-900"
+              }`}
             >
-              {v.label}
+              <span className="text-[12.5px] font-medium">{v.label}</span>
+              <span className={`text-[11.5px] ${pages === v.pages ? "text-ivory-100/80" : "text-charcoal-600"}`}>
+                {formatKRW(v.priceKRW)}
+              </span>
             </button>
           ))}
         </div>
-        <div className="mt-3 flex items-baseline justify-between gap-4 border-y border-ivory-300 py-2.5 text-[13.5px]">
-          <span className="text-charcoal-600">{area} — {pages}P + Explanation</span>
-          <span className="font-medium text-navy-950">{formatKRW(priceOf(pages))}</span>
-        </div>
+        <p className="mt-2 text-[11.5px] leading-relaxed text-charcoal-600/70">
+          분량에 관계없이 Student Workbook + Answer &amp; Explanation 구성이 포함됩니다.
+        </p>
 
         {/* STANDARD / ADVANCED PRACTICE — 가격은 동일합니다 */}
         <p className="mt-6 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
