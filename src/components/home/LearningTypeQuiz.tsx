@@ -8,12 +8,12 @@ import { products } from "@/data/products";
 import { Product, CurriculumTrack } from "@/lib/types";
 import ProductCard from "@/components/books/ProductCard";
 
-// 홈페이지용 진단 퀴즈 — 가볍게 재미로 해보는 5문항 퀴즈입니다. 결과
-// "유형"은 바로 보여주고, 답변(학년·걱정 영역·목표)을 기준으로 실제
-// 카탈로그에서 교재를 추천해 보여줍니다(과거 /find의 매칭 아이디어를 이
-// 퀴즈 답변에 맞게 단순화한 버전). 가격은 카드에서 항상 숨겨지며(기본
-// hidePrice), 정확한 구성·가격은 다른 카톡 유도 도구들과 동일하게
-// 카카오톡 상담을 받아야 안내됩니다.
+// 홈페이지용 진단 퀴즈 — 가볍게 재미로 해보는 7문항 퀴즈입니다. 결과
+// "유형"은 바로 보여주고, 답변(학년·준비 시험·걱정 영역·현재 수준·목표)을
+// 기준으로 실제 카탈로그에서 교재를 추천해 보여줍니다(과거 /find의 매칭
+// 아이디어를 이 퀴즈 답변에 맞게 단순화한 버전). 가격은 카드에서 항상
+// 숨겨지며(기본 hidePrice), 정확한 구성·가격은 다른 카톡 유도 도구들과
+// 동일하게 카카오톡 상담을 받아야 안내됩니다.
 
 interface QuizType {
   id: string;
@@ -54,37 +54,78 @@ const TYPES: Record<string, QuizType> = {
   },
 };
 
-const Q1_OPTIONS = ["초등 저학년 (K–2)", "초등 고학년 (3–6)", "중학생 (7–8)", "고등학생 (9–12)"];
+const Q1_OPTIONS = [
+  "유치원·초1 (K–1)",
+  "초2–3",
+  "초4–5",
+  "초6–7 (중1)",
+  "중2–3 (8–9)",
+  "고1 (10)",
+  "고2–3 (11–12)",
+];
 
-const Q2_OPTIONS: { label: string; type: string }[] = [
+const Q2_OPTIONS = [
+  "MAP Growth",
+  "CAT4",
+  "SR Test (Reading Level)",
+  "ISEE",
+  "WIDA",
+  "SAT",
+  "AP",
+  "학원·학교 자체 레벨테스트",
+  "아직 정해지지 않았어요",
+];
+
+const Q3_OPTIONS: { label: string; type: string }[] = [
   { label: "기초가 부족해요", type: "foundation" },
   { label: "특정 영역만 약해요", type: "focused" },
   { label: "다음 레벨·시험이 걱정돼요", type: "leap" },
   { label: "더 잘하고 싶어요 (심화·상위권)", type: "challenger" },
 ];
 
-const Q3_OPTIONS = ["Reading (독해)", "Vocabulary·Grammar (어휘·문법)", "Writing (작문)", "Math (수학)"];
+const Q4_OPTIONS = ["Reading (독해)", "Vocabulary·Grammar (어휘·문법)", "Writing (작문)", "Math (수학)"];
 
-const Q4_OPTIONS = ["1개월 이내", "1~3개월", "3~6개월", "아직 정하지 않았어요"];
+const Q5_OPTIONS = ["기초가 부족해요", "보통이에요 (평균)", "상위권이에요", "정확히 모르겠어요"];
 
-const Q5_OPTIONS = [
+const Q6_OPTIONS = ["1개월 이내", "1~3개월", "3~6개월", "아직 정하지 않았어요"];
+
+const Q7_OPTIONS = [
   "학원·학교 레벨테스트 통과",
   "국제학교 입시·편입 준비",
   "학년 수준 따라가기 / 보충",
   "특정 시험 대비 (SAT·AP·IB 등)",
 ];
 
-const TOTAL_QUESTIONS = 5;
+const TOTAL_QUESTIONS = 7;
 
 // Q1 라벨 → 대략적인 학년 범위(0=K 기준)
 const GRADE_RANGES: Record<string, [number, number]> = {
-  "초등 저학년 (K–2)": [0, 2],
-  "초등 고학년 (3–6)": [3, 6],
-  "중학생 (7–8)": [7, 8],
-  "고등학생 (9–12)": [9, 12],
+  "유치원·초1 (K–1)": [0, 1],
+  "초2–3": [2, 3],
+  "초4–5": [4, 5],
+  "초6–7 (중1)": [6, 7],
+  "중2–3 (8–9)": [8, 9],
+  "고1 (10)": [10, 10],
+  "고2–3 (11–12)": [11, 12],
 };
 
-// Q5(목표) 라벨 → 매칭에 쓸 상품 track
+// Q2(준비 시험) 라벨 → 단일 상품으로 바로 고정(가능한 경우)
+const EXAM_PRODUCT_PIN: Record<string, string> = {
+  "MAP Growth": "map-growth-workbook",
+  CAT4: "cat4-level-e",
+  ISEE: "isee-workbook",
+  WIDA: "wida-workbook",
+};
+
+// Q2(준비 시험) 라벨 → 학년별 변형이 여러 개인 시험은 examOrCurriculum
+// 키워드로 매칭하고, 세부 변형(학년)은 학년 점수로 고릅니다.
+const EXAM_KEYWORDS: Record<string, string> = {
+  "SR Test (Reading Level)": "SR",
+  SAT: "SAT",
+  AP: "AP",
+};
+
+// Q7(목표) 라벨 → 매칭에 쓸 상품 track
 const GOAL_TRACK: Record<string, CurriculumTrack> = {
   "학원·학교 레벨테스트 통과": "level-test",
   "국제학교 입시·편입 준비": "admissions",
@@ -92,12 +133,19 @@ const GOAL_TRACK: Record<string, CurriculumTrack> = {
   "특정 시험 대비 (SAT·AP·IB 등)": "ap",
 };
 
-// Q3(걱정 영역) 라벨 → product.subject/units에서 찾을 키워드
+// Q4(걱정 영역) 라벨 → product.subject/units에서 찾을 키워드
 const AREA_KEYWORDS: Record<string, string[]> = {
   "Reading (독해)": ["Reading"],
   "Vocabulary·Grammar (어휘·문법)": ["Vocabulary", "Grammar"],
   "Writing (작문)": ["Writing"],
   "Math (수학)": ["Math", "Algebra", "Geometry", "Calculus"],
+};
+
+// Q5(현재 수준) 라벨 → 목표 난이도(1~5). product.difficulty와 비교해 가까울수록 가산점.
+const LEVEL_WANT: Record<string, number> = {
+  "기초가 부족해요": 2,
+  "보통이에요 (평균)": 3,
+  "상위권이에요": 4,
 };
 
 // product.gradeRange("Grade 8–9", "G4 – G11 (레벨별)" 등)에서 숫자만 뽑아 범위로.
@@ -110,21 +158,27 @@ function overlaps(a: [number, number], b: [number, number]): boolean {
   return Math.max(a[0], b[0]) <= Math.min(a[1], b[1]);
 }
 
-// 답변 3개(학년·걱정 영역·목표)로 실제 카탈로그에서 가장 잘 맞는 교재
-// 상위 3개를 고릅니다. "가장 비싼 교재"가 아니라 학년·목표에 맞는 교재를
-// 고르는 것이 목적입니다.
-function recommendProducts(grade: string, weakArea: string, goal: string): Product[] {
+// 답변(학년·준비 시험·걱정 영역·현재 수준·목표)으로 실제 카탈로그에서
+// 가장 잘 맞는 교재 상위 3개를 고릅니다. "가장 비싼 교재"가 아니라
+// 학년·시험·목표에 맞는 교재를 고르는 것이 목적입니다.
+function recommendProducts(grade: string, exam: string, weakArea: string, selfLevel: string, goal: string): Product[] {
   const gRange = GRADE_RANGES[grade];
+  const pinnedId = EXAM_PRODUCT_PIN[exam];
+  const examKeyword = EXAM_KEYWORDS[exam];
   const track = GOAL_TRACK[goal];
   const keywords = AREA_KEYWORDS[weakArea] ?? [];
+  const want = LEVEL_WANT[selfLevel];
   const pool = products.filter((p) => p.materialType === "existing" && p.sampleAvailable);
 
   return pool
     .map((p) => {
       let score = 0;
+      if (pinnedId && p.id === pinnedId) score += 100;
+      if (examKeyword && p.examOrCurriculum.includes(examKeyword)) score += 50;
       if (track && p.track === track) score += 40;
       if (gRange && overlaps(gRange, productGradeRange(p.gradeRange))) score += 15;
       if (keywords.some((k) => p.subject.includes(k) || p.units.some((u) => u.includes(k)))) score += 20;
+      if (want != null) score += 5 - Math.min(5, Math.abs(p.difficulty - want));
       return { p, score };
     })
     .filter((x) => x.score > 0)
@@ -134,45 +188,60 @@ function recommendProducts(grade: string, weakArea: string, goal: string): Produ
 }
 
 export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {}) {
-  const [step, setStep] = useState(0); // 0~4 = questions, 5 = result
+  const [step, setStep] = useState(0); // 0~6 = questions, 7 = result
   const [grade, setGrade] = useState("");
+  const [exam, setExam] = useState("");
   const [concern, setConcern] = useState("");
   const [typeId, setTypeId] = useState("");
   const [weakArea, setWeakArea] = useState("");
+  const [selfLevel, setSelfLevel] = useState("");
   const [timeline, setTimeline] = useState("");
   const [goal, setGoal] = useState("");
   const [revealed, setRevealed] = useState(false);
 
   const type = TYPES[typeId];
-  const recommended = useMemo(() => recommendProducts(grade, weakArea, goal), [grade, weakArea, goal]);
+  const recommended = useMemo(
+    () => recommendProducts(grade, exam, weakArea, selfLevel, goal),
+    [grade, exam, weakArea, selfLevel, goal]
+  );
 
   function pickGrade(v: string) {
     setGrade(v);
     setStep(1);
   }
+  function pickExam(v: string) {
+    setExam(v);
+    setStep(2);
+  }
   function pickConcern(v: string, t: string) {
     setConcern(v);
     setTypeId(t);
-    setStep(2);
+    setStep(3);
   }
   function pickWeakArea(v: string) {
     setWeakArea(v);
-    setStep(3);
+    setStep(4);
+  }
+  function pickSelfLevel(v: string) {
+    setSelfLevel(v);
+    setStep(5);
   }
   function pickTimeline(v: string) {
     setTimeline(v);
-    setStep(4);
+    setStep(6);
   }
   function pickGoal(v: string) {
     setGoal(v);
-    setStep(5);
+    setStep(7);
   }
   function restart() {
     setStep(0);
     setGrade("");
+    setExam("");
     setConcern("");
     setTypeId("");
     setWeakArea("");
+    setSelfLevel("");
     setTimeline("");
     setGoal("");
     setRevealed(false);
@@ -182,8 +251,10 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
       "안녕하세요. 홈페이지 학습 진단 퀴즈로 왔습니다.",
       "",
       `학년: ${grade}`,
+      `준비 중인 시험: ${exam}`,
       `고민: ${concern}`,
       `걱정되는 영역: ${weakArea}`,
+      `현재 수준: ${selfLevel}`,
       `시험까지 남은 기간: ${timeline}`,
       `목표: ${goal}`,
       `진단 유형: ${type?.name ?? "-"}`,
@@ -211,7 +282,7 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
             우리 아이는 어떤 학습 유형일까요?
           </h2>
           <p className="mt-3 text-[14px] leading-relaxed text-ivory-200/75">
-            질문 {TOTAL_QUESTIONS}개에 답하면 바로 결과가 나옵니다. 1분이면 충분해요.
+            질문 {TOTAL_QUESTIONS}개에 답하면 바로 결과가 나옵니다.
           </p>
           {pageHref && (
             <Link
@@ -246,12 +317,12 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
           {step === 1 && (
             <>
               <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">
-                요즘 가장 큰 고민은?
+                준비 중이거나 예정인 시험이 있나요?
               </p>
-              <div className="mt-4 grid gap-2">
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
                 {Q2_OPTIONS.map((o) => (
-                  <button key={o.label} type="button" onClick={() => pickConcern(o.label, o.type)} className={chipCls}>
-                    {o.label}
+                  <button key={o} type="button" onClick={() => pickExam(o)} className={chipCls}>
+                    {o}
                   </button>
                 ))}
               </div>
@@ -261,12 +332,12 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
           {step === 2 && (
             <>
               <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">
-                가장 걱정되는 영역은?
+                요즘 가장 큰 고민은?
               </p>
               <div className="mt-4 grid gap-2">
                 {Q3_OPTIONS.map((o) => (
-                  <button key={o} type="button" onClick={() => pickWeakArea(o)} className={chipCls}>
-                    {o}
+                  <button key={o.label} type="button" onClick={() => pickConcern(o.label, o.type)} className={chipCls}>
+                    {o.label}
                   </button>
                 ))}
               </div>
@@ -276,11 +347,11 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
           {step === 3 && (
             <>
               <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">
-                시험까지 남은 기간은?
+                가장 걱정되는 영역은?
               </p>
-              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              <div className="mt-4 grid gap-2">
                 {Q4_OPTIONS.map((o) => (
-                  <button key={o} type="button" onClick={() => pickTimeline(o)} className={chipCls}>
+                  <button key={o} type="button" onClick={() => pickWeakArea(o)} className={chipCls}>
                     {o}
                   </button>
                 ))}
@@ -290,9 +361,39 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
 
           {step === 4 && (
             <>
-              <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">목표는?</p>
+              <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">
+                현재 수준은 어느 정도라고 생각하시나요?
+              </p>
               <div className="mt-4 grid gap-2">
                 {Q5_OPTIONS.map((o) => (
+                  <button key={o} type="button" onClick={() => pickSelfLevel(o)} className={chipCls}>
+                    {o}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          {step === 5 && (
+            <>
+              <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">
+                시험까지 남은 기간은?
+              </p>
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                {Q6_OPTIONS.map((o) => (
+                  <button key={o} type="button" onClick={() => pickTimeline(o)} className={chipCls}>
+                    {o}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          {step === 6 && (
+            <>
+              <p className="mt-2 font-display text-[18px] font-semibold text-ivory-100">목표는?</p>
+              <div className="mt-4 grid gap-2">
+                {Q7_OPTIONS.map((o) => (
                   <button key={o} type="button" onClick={() => pickGoal(o)} className={chipCls}>
                     {o}
                   </button>
@@ -301,7 +402,7 @@ export default function LearningTypeQuiz({ pageHref }: { pageHref?: string } = {
             </>
           )}
 
-          {step === 5 && type && (
+          {step === 7 && type && (
             <div className="text-center">
               <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-400">Your Type</p>
               <p className="mt-3 font-display text-[28px] font-semibold text-ivory-100">{type.name}</p>
