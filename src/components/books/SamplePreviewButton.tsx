@@ -135,7 +135,14 @@ function buildWorkbookItems(product: Product): SampleItem[] {
     const tier = LT_TIER[product.id] ?? blossomLevel(product.difficulty);
     const vocabulary = pickTier(vocabularyBank, tier, 2);
     const grammar = pickTier(grammarBank, tier, 2);
-    const writing = pickTier(writingBank, tier, 2);
+    // Writing 대표 샘플은 단문 조합보다 설득력 있는 Creative Essay(약 150 words)를 항상 먼저 보여줍니다.
+    const creativeEssay = writingBank.find((w) => w.type === "Creative Essay")!;
+    const otherWriting = pickTier(
+      writingBank.filter((w) => w.type !== "Creative Essay"),
+      tier,
+      1
+    );
+    const writing = [creativeEssay, ...otherWriting];
     // 무료 샘플은 앞 5문항만 노출되므로(FREE_WORKBOOK_CAP), Reading만 몰리지 않도록
     // 4개 영역을 섞어 배치해 Vocabulary·Grammar·Writing도 반드시 무료 미리보기에 포함되게 합니다.
     return [
