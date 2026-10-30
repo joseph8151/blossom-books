@@ -12,11 +12,11 @@ export const metadata = {
   title: "입학 Full Package 가격 안내",
   description: "카카오톡 상담에서 안내하는 Admission Full Package 가격표입니다.",
   robots: { index: false, follow: false },
-  alternates: { canonical: "https://www.blossombooks.org/quote-admission/" },
+  alternates: { canonical: "https://blossombooks.org/quote-admission/" },
   openGraph: {
     title: "Blossom Books 입학 Full Package 가격 안내",
     description: "카카오톡 상담에서 안내하는 Admission Full Package 가격표입니다.",
-    url: "https://www.blossombooks.org/quote-admission/",
+    url: "https://blossombooks.org/quote-admission/",
   },
 };
 

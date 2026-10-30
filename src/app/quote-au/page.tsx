@@ -11,11 +11,11 @@ export const metadata = {
   title: "호주 교과 구성·가격 안내",
   description: "카카오톡 상담에서 안내하는 호주 교과 구성표입니다.",
   robots: { index: false, follow: false },
-  alternates: { canonical: "https://www.blossombooks.org/quote-au/" },
+  alternates: { canonical: "https://blossombooks.org/quote-au/" },
   openGraph: {
     title: "Blossom Books 호주 교과 구성 안내",
     description: "카카오톡 상담에서 안내하는 호주 교과 구성표입니다.",
-    url: "https://www.blossombooks.org/quote-au/",
+    url: "https://blossombooks.org/quote-au/",
   },
 };
 

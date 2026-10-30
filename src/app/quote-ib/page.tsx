@@ -21,11 +21,11 @@ export const metadata = {
   title: "IB 교재 구성·가격 안내",
   description: "카카오톡 상담에서 안내하는 IB(International Baccalaureate) 교재 구성·가격표입니다.",
   robots: { index: false, follow: false },
-  alternates: { canonical: "https://www.blossombooks.org/quote-ib/" },
+  alternates: { canonical: "https://blossombooks.org/quote-ib/" },
   openGraph: {
     title: "Blossom Books IB 교재 구성 안내",
     description: "카카오톡 상담에서 안내하는 IB 교재 구성·가격표입니다.",
-    url: "https://www.blossombooks.org/quote-ib/",
+    url: "https://blossombooks.org/quote-ib/",
   },
 };
 

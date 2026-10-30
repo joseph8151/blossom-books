@@ -23,12 +23,12 @@ export const metadata = {
   title: { absolute: "국제학교 입학 대비 Full Package | Blossom Books" },
   description:
     "국내외 국제학교와 외국인학교 지원 학생을 위한 학교별 맞춤 Admission Full Package. Reading, Writing, Math, Interview, MAP, CAT4, WIDA 등 지원 학교와 학년에 맞춰 구성합니다.",
-  alternates: { canonical: "https://www.blossombooks.org/admission-full-package/" },
+  alternates: { canonical: "https://blossombooks.org/admission-full-package/" },
   openGraph: {
     title: "국제학교 입학 대비 Full Package | Blossom Books",
     description:
       "국내외 국제학교와 외국인학교 지원 학생을 위한 학교별 맞춤 Admission Full Package. Reading, Writing, Math, Interview, MAP, CAT4, WIDA 등 지원 학교와 학년에 맞춰 구성합니다.",
-    url: "https://www.blossombooks.org/admission-full-package/",
+    url: "https://blossombooks.org/admission-full-package/",
   },
 };
 

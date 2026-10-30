@@ -11,11 +11,11 @@ export const metadata = {
   title: "캐나다 교과 구성·가격 안내",
   description: "카카오톡 상담에서 안내하는 캐나다 교과 구성표입니다.",
   robots: { index: false, follow: false },
-  alternates: { canonical: "https://www.blossombooks.org/quote-ca/" },
+  alternates: { canonical: "https://blossombooks.org/quote-ca/" },
   openGraph: {
     title: "Blossom Books 캐나다 교과 구성 안내",
     description: "카카오톡 상담에서 안내하는 캐나다 교과 구성표입니다.",
-    url: "https://www.blossombooks.org/quote-ca/",
+    url: "https://blossombooks.org/quote-ca/",
   },
 };
 

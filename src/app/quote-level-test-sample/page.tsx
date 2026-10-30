@@ -10,12 +10,12 @@ export const metadata = {
   title: "학원 레벨테스트 샘플",
   description: "카카오톡 상담에서 공유하는 학원·학교 레벨테스트(영어 G1–G6) 샘플 문제입니다.",
   robots: { index: false, follow: false },
-  alternates: { canonical: "https://www.blossombooks.org/quote-level-test-sample/" },
+  alternates: { canonical: "https://blossombooks.org/quote-level-test-sample/" },
   openGraph: {
     title: "Blossom Books 학원 레벨테스트 샘플",
     description: "카카오톡 상담에서 공유하는 학원·학교 레벨테스트(영어 G1–G6) 샘플 문제입니다.",
-    url: "https://www.blossombooks.org/quote-level-test-sample/",
-    images: ["https://www.blossombooks.org/quote-level-test-sample/opengraph-image"],
+    url: "https://blossombooks.org/quote-level-test-sample/",
+    images: ["https://blossombooks.org/quote-level-test-sample/opengraph-image"],
   },
 };
 
