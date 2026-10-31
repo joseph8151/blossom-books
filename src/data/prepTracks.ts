@@ -13,6 +13,7 @@ export interface PrepTrack {
   match: (p: Product) => boolean;
   booksTrack?: string; // /books?track= 필터
   srPricing?: boolean; // true면 분량/가격 섹션에 SR 전용(150/200/300P) 가격을 보여줍니다.
+  whyUs?: { heading: string; body: string }[]; // "왜 블러섬북스인가" 섹션 — 지정한 트랙에만 노출됩니다.
 }
 
 export const prepTracks: PrepTrack[] = [
@@ -47,6 +48,24 @@ export const prepTracks: PrepTrack[] = [
     match: (p) => /SR/i.test(p.examOrCurriculum) || (p.track === "level-test" && /Reading|English/i.test(p.subject)),
     booksTrack: "level-test",
     srPricing: true,
+    whyUs: [
+      {
+        heading: "문항 구조를 분석해 설계합니다",
+        body: "시험에서 자주 요구되는 질문 유형과 헷갈리기 쉬운 선택지 구성을 분석해 문제를 설계합니다. 문제를 많이 푸는 것보다, 같은 방식으로 정확히 푸는 연습에 초점을 둡니다.",
+      },
+      {
+        heading: "해설이 있어야 2점대를 넘어설 수 있습니다",
+        body: "2점대까지는 감으로 맞히는 경험도 어느 정도 가능하지만, 3점대부터는 해설 없는 학습이 한계를 드러냅니다. 정답 설명과 오답이 선택되는 이유, 자주 나오는 사고 실수를 함께 설명해 혼자 공부해도 ‘왜 이 답은 안 되는지’ 스스로 이해할 수 있도록 구성했습니다.",
+      },
+      {
+        heading: "외부 자료를 모은 교재가 아닙니다",
+        body: "해외 명문대 출신, 업계 경력이 풍부한 강사진이 점수 구간별 학습 특징을 반영해 직접 구성합니다. 모든 지문은 원어민 감수를 거쳐 자연스러운 문장 흐름을 점검하며, 시험용이라도 과도하게 인위적인 문장은 지양합니다.",
+      },
+      {
+        heading: "과외 없이도 가능하도록 설계했습니다",
+        body: "과외가 효과적인 이유는 문제를 푸는 과정의 사고 흐름을 설명해 주기 때문입니다. 그 설명 과정을 해설에 글로 정리해, 혼자서도 개념을 익히고 반복되는 실수를 줄이며 다음 점수 구간을 준비할 수 있도록 했습니다.",
+      },
+    ],
   },
   {
     slug: "map",

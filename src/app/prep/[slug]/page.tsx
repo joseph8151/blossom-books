@@ -89,6 +89,26 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
         </div>
       </section>
 
+      {/* 왜 블러섬북스인가 */}
+      {t.whyUs && t.whyUs.length > 0 && (
+        <section className="border-b border-navy-800/12 bg-ivory-100 py-16 lg:py-20">
+          <div className="mx-auto max-w-5xl px-5 lg:px-8">
+            <div className="max-w-2xl">
+              <span className="eyebrow">Why Blossom Books</span>
+              <h2 className="mt-4 font-display text-[24px] font-semibold text-navy-950 sm:text-[28px]">왜 블러섬북스인가요</h2>
+            </div>
+            <div className="mt-10 grid gap-5 sm:grid-cols-2">
+              {t.whyUs.map((w) => (
+                <div key={w.heading} className="border border-navy-800/12 bg-ivory-100 p-6 shadow-card">
+                  <h3 className="font-display text-[16px] font-semibold text-navy-950">{w.heading}</h3>
+                  <p className="mt-2.5 text-[13.5px] leading-relaxed text-charcoal-600">{w.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* 준비 순서 */}
       {t.steps.length > 0 && (
         <section className="border-b border-navy-800/12 bg-ivory-100 py-16 lg:py-20">
