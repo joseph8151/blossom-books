@@ -25,8 +25,22 @@ export default async function PrepLandingPage({ params }: { params: Promise<{ sl
 
   const related = products.filter(t.match).slice(0, 6);
 
+  // 검색엔진·AI 답변 엔진(ChatGPT 등)이 질문-답변을 그대로 인용할 수 있도록 제공하는 구조화 데이터.
+  const faqJsonLd = t.faq.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: t.faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  } : null;
+
   return (
     <div>
+      {faqJsonLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      )}
       {/* 히어로 */}
       <section className="paper-rule border-b border-navy-800/12 bg-ivory-100 py-16 lg:py-24">
         <div className="mx-auto max-w-4xl px-5 lg:px-8">

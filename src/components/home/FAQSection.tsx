@@ -66,11 +66,23 @@ const faqs = [
   },
 ];
 
+// 검색엔진·AI 답변 엔진(ChatGPT 등)이 질문-답변을 그대로 인용할 수 있도록 제공하는 구조화 데이터.
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section className="border-b border-navy-800/12 bg-ivory-200/50 py-20 lg:py-28">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <div className="mx-auto max-w-4xl px-5 lg:px-8">
         <p className="text-center font-label text-[11px] uppercase tracking-[0.18em] text-brass-500">FAQ</p>
         <h2 className="mt-3 text-center font-display text-[26px] font-semibold text-navy-950 sm:text-[30px]">
