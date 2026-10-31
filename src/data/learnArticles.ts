@@ -234,4 +234,123 @@ export const learnArticles: LearnArticle[] = [
     ctaHref: "/custom-order",
     ctaLabel: "맞춤 제작 문의하기",
   },
+  {
+    slug: "map-rit-score-guide",
+    title: "MAP RIT 점수, 어떻게 해석하면 될까요",
+    subtitle: "숫자 하나에 담긴 의미와 활용법",
+    readMin: 3,
+    sections: [
+      {
+        heading: "RIT 점수는 ‘학년 등수’가 아닙니다",
+        paragraphs: [
+          "MAP Growth 시험이 끝나면 과목마다 RIT(Rasch Unit) 점수가 나옵니다. 100점 만점 시험처럼 보이지만 사실은 학생의 현재 학업 성취 수준을 나타내는 척도 점수로, 학년이 올라가면서 꾸준히 올라가는 것이 자연스러운 구조입니다.",
+          "그래서 같은 학년이라도 학생마다 RIT 점수 범위가 꽤 넓게 퍼져 있는 것이 정상이며, 단순히 숫자가 높고 낮음만으로 줄을 세우는 지표가 아닙니다.",
+        ],
+      },
+      {
+        heading: "학년 평균과 비교하는 법",
+        paragraphs: [
+          "학교·학군에서 보통 학년별 평균 RIT 범위를 함께 안내합니다. 우리 아이 점수가 그 범위 안에 있는지, 위인지 아래인지를 보는 것이 첫 번째 확인 포인트입니다.",
+          "더 중요한 것은 같은 학생의 이전 회차 점수와 비교하는 것입니다. MAP은 보통 한 학년에 2~3회 치르기 때문에, 직전 점수 대비 얼마나 성장했는지(Growth)가 절대 점수보다 의미 있는 경우가 많습니다.",
+        ],
+      },
+      {
+        heading: "점수가 기대보다 낮게 나왔다면",
+        paragraphs: [
+          "MAP은 적응형(adaptive) 시험이라 문제를 맞히면 다음 문제가 더 어려워지는 방식입니다. 그래서 실제 실력보다 낮게 느껴지는 점수를 받아도, 어느 영역(Reading/Language Usage/Math)에서 유독 낮았는지 먼저 확인하는 것이 좋습니다.",
+          "한 회차 결과만으로 아이의 실력을 단정하기보다, 다음 회차까지 어떤 영역을 보완할지 계획을 세우는 참고 자료로 활용하시길 권합니다.",
+        ],
+      },
+    ],
+    relatedTrack: "admissions",
+  },
+  {
+    slug: "ssat-vs-isee-guide",
+    title: "SSAT와 ISEE, 무엇이 다른가요",
+    subtitle: "미국 사립학교 입학시험 두 가지 비교",
+    readMin: 3,
+    sections: [
+      {
+        heading: "같은 목적, 다른 시험",
+        paragraphs: [
+          "SSAT(Secondary School Admission Test)와 ISEE(Independent School Entrance Exam)는 둘 다 미국 사립학교 입학을 위해 치르는 표준화 시험입니다. 지원하는 학교가 둘 중 어떤 시험 성적을 받는지에 따라 선택이 갈립니다.",
+          "두 시험 모두 Verbal(어휘·독해), Quantitative(수리), Reading Comprehension 영역을 공통적으로 포함하지만, 문제 유형과 채점 방식에는 차이가 있습니다.",
+        ],
+      },
+      {
+        heading: "학년(레벨) 구분이 다릅니다",
+        paragraphs: [
+          "SSAT는 Elementary·Middle·Upper Level로, ISEE는 Primary·Lower·Middle·Upper Level로 나뉘어 있어 명칭과 학년 구간이 서로 다릅니다. 지원 학년을 기준으로 올바른 레벨을 확인하는 것이 준비의 첫걸음입니다.",
+          "같은 ‘Middle Level’이라는 이름이라도 두 시험이 가리키는 학년 범위가 다를 수 있으므로, 시험 공식 안내 자료로 한 번 더 확인하시길 권합니다.",
+        ],
+      },
+      {
+        heading: "어떤 시험을 준비해야 하나요",
+        paragraphs: [
+          "가장 확실한 방법은 지원하는 학교 입학 안내 페이지에서 요구하는 시험을 확인하는 것입니다. 여러 학교에 지원한다면 두 시험을 모두 받아주는 학교가 있는지도 함께 확인해보세요.",
+          "시험 자체의 난이도보다, 지원 학교가 어떤 시험 성적을 요구하는지가 선택의 기준이 되어야 실수 없이 준비할 수 있습니다.",
+        ],
+      },
+    ],
+    relatedTrack: "admissions",
+  },
+  {
+    slug: "uk-admission-tests-guide",
+    title: "영국 사립학교 입학시험, UKiset·11+·ISEB는 무엇이 다를까",
+    subtitle: "영국 교육 시스템 입학시험 한눈에 정리",
+    readMin: 3,
+    sections: [
+      {
+        heading: "UKiset — 해외 학생을 위한 입학 적성시험",
+        paragraphs: [
+          "UKiset(UK Independent Schools’ Test)은 영국 밖에 거주하는 해외 학생이 영국 사립학교에 지원할 때 주로 치르는 적성·영어 능력 시험입니다. Verbal·Non-Verbal·Abstract Reasoning과 영어 능력을 함께 평가합니다.",
+          "많은 영국 사립학교가 UKiset 점수를 1차 선발 자료로 활용하기 때문에, 해외에서 지원하는 경우 가장 먼저 확인해야 하는 시험입니다.",
+        ],
+      },
+      {
+        heading: "11+ — 영국 현지 그래머스쿨·사립학교 입학시험",
+        paragraphs: [
+          "11+는 만 11세(Year 6) 학생이 그래머스쿨이나 사립 중등학교에 입학할 때 치르는 시험으로, English·Maths·Verbal Reasoning·Non-Verbal Reasoning으로 구성되는 경우가 많습니다. 지역·학교마다 구성이 조금씩 다릅니다.",
+          "영국 현지 또는 비슷한 교육과정을 따르는 학생이 주로 준비하며, 학교별 기출 유형 차이가 큰 편이라 지원 학교의 시험 형식을 먼저 확인하는 것이 중요합니다.",
+        ],
+      },
+      {
+        heading: "ISEB Pre-Test — 상위권 사립학교 공통 입학시험",
+        paragraphs: [
+          "ISEB(Independent Schools Examinations Board) Pre-Test는 영국의 여러 상위권 사립학교가 공동으로 활용하는 온라인 입학시험으로, English·Maths·Verbal Reasoning·Non-Verbal Reasoning을 컴퓨터 기반으로 평가합니다.",
+          "한 번의 시험 점수를 여러 학교에 함께 제출할 수 있어, 여러 사립학교에 동시에 지원하는 경우 효율적으로 준비할 수 있는 시험입니다.",
+        ],
+      },
+    ],
+    relatedTrack: "admissions",
+  },
+  {
+    slug: "math-competition-guide",
+    title: "사고력수학·경시대회, 어떻게 시작하면 좋을까",
+    subtitle: "교과 수학과 무엇이 다르고, 무엇부터 준비할지",
+    readMin: 3,
+    sections: [
+      {
+        heading: "교과 수학과는 ‘요구하는 능력’이 다릅니다",
+        paragraphs: [
+          "학교 교과 수학이 정해진 공식과 절차를 정확히 적용하는 능력을 본다면, 사고력수학·경시대회는 낯선 문제를 스스로 분석하고 여러 방법을 시도해보는 능력을 더 많이 요구합니다. 그래서 교과 성적이 좋아도 처음에는 낯설어하는 경우가 많습니다.",
+          "AMC, Math Kangaroo, KMC(한국수학경시대회), 성대 경시처럼 대회마다 출제 범위와 유형이 다르므로, 목표 대회를 먼저 정하고 그에 맞는 유형을 연습하는 것이 효율적입니다.",
+        ],
+      },
+      {
+        heading: "무엇부터 시작하면 좋을까요",
+        paragraphs: [
+          "처음 시작한다면 정답률보다 ‘풀이 과정을 설명할 수 있는지’에 집중하는 것이 좋습니다. 같은 유형을 여러 각도에서 접근해보는 연습이 새로운 문제에 대한 적응력을 길러줍니다.",
+          "시간이 많이 걸리더라도 끝까지 스스로 풀어보게 하고, 막혔을 때는 답을 바로 알려주기보다 힌트만 주는 방식이 사고력 향상에 더 도움이 됩니다.",
+        ],
+      },
+      {
+        heading: "영재원 준비와는 어떻게 다른가요",
+        paragraphs: [
+          "수학경시대회가 ‘정해진 시간 안에 문제를 푸는 능력’을 본다면, 영재원 선발은 사고 과정·창의적 풀이 방식까지 함께 평가하는 경우가 많습니다. 그래서 경시 기출 문제와 함께 서술형으로 풀이 과정을 설명하는 연습을 병행하면 도움이 됩니다.",
+        ],
+      },
+    ],
+    relatedTrack: "admissions",
+  },
 ];

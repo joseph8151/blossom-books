@@ -155,6 +155,8 @@ export const siteKeywords = [
   "사고력수학 문제집",
   "사고력수학 모의고사",
   "초등 사고력수학",
+  "사고력수학 시작하기",
+  "수학경시대회 준비",
   "수학 문장제",
   "수학 추론 문제",
   "수학 서술형 문제",
@@ -192,6 +194,7 @@ export const siteKeywords = [
   "MAP Growth Mathematics",
   "MAP 테스트 점수",
   "MAP RIT 점수",
+  "MAP RIT 점수 해석",
   "MAP 테스트 난이도",
   "MAP 초등",
   "MAP 중등",
@@ -239,6 +242,7 @@ export const siteKeywords = [
   "CAT4 모의고사 PDF",
 
   // SSAT·ISEE 확장
+  "SSAT ISEE 차이",
   "SSAT 시험",
   "SSAT 모의고사",
   "SSAT 기출유형",
