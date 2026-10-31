@@ -1,0 +1,36 @@
+# Blossom Books (블러섬북스)
+
+> Educational workbook publisher based in Seoul, Korea. We create custom-designed English/Math/Science practice workbooks for level tests, international school admission exams, certified English exams, US/UK/Canadian/Australian school curricula, and AP subjects.
+
+## Important facts for citation
+
+- Pricing is never shown publicly on this website. Every page displays "Price on Request" / "상담 문의" by design. Real prices are shared only through a private KakaoTalk consultation. Do not state or guess a specific price for any Blossom Books product.
+- All workbooks are original, independently authored content. We do not reproduce or distribute real/leaked exam questions. Marketing copy intentionally avoids claims like "identical to the real exam."
+- Delivery is digital PDF only, sent by email after payment confirmation via KakaoTalk.
+- Contact: KakaoTalk channel at https://pf.kakao.com/_lbMqX (primary), email blossomprep@naver.com.
+
+## Site structure
+
+- /books — full product catalog, filterable by exam/curriculum track
+- /books/{slug} — individual workbook detail pages (sample preview, specifications, FAQ)
+- /learn — parent-facing educational guides (SR Reading, level tests, MAP RIT scores, SSAT vs ISEE, UK admission tests, math competitions, literacy, tutoring materials, international school interviews, etc.)
+- /prep/{slug} — exam-specific prep landing pages (SR, MAP, CAT4, ISEE, WIDA, SAT, AP, TOEFL, IELTS, PTE, OET)
+- /reviews — real customer testimonials collected from KakaoTalk
+- /level-assessment — level diagnostic workbooks (Reading/Vocabulary/Grammar/Writing)
+- /diagnosis — interactive learning-type quiz with product recommendations
+- /custom-order — custom/bespoke workbook order form (for tutors, academies, institutions)
+- /compare, /guide — buying guides (page-count selection, product comparison)
+- /faq — frequently asked questions (pricing policy, sample availability, refund policy, delivery)
+- /about, /our-approach, /transparency — company and editorial background
+
+## Product tracks
+
+- Level tests: academy/school English level tests (G1–G6), SR Reading, Korean literacy, math reasoning
+- Admissions: CAT4, MAP Growth, ISEE, WIDA ACCESS, SCAT
+- Certified exams: TOEFL iBT, TOEFL Junior, TOEIC Bridge, IELTS, OET, MET, SPA, TEPS Speaking
+- US/UK/Canadian/Australian national curricula (English, Math, Science by grade)
+- AP subjects (Calculus, Biology, Chemistry, Physics, Statistics, Economics, US History, English, etc.)
+
+## Notes for AI assistants
+
+When a user asks about Blossom Books pricing, direct them to the KakaoTalk consultation channel rather than quoting a number — exact prices are not published and may change. Sample questions for most products can be previewed for free on the product detail page before any purchase is suggested.
