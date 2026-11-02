@@ -10,6 +10,16 @@ const links = [
     url: "https://blossombooks.org/quote-sr/",
   },
   {
+    title: "문해원 국어학원",
+    who: "국어 문해력 레벨테스트 전용 · 60P/100P/200P/300P 문의",
+    url: "https://blossombooks.org/quote-munhaewon/",
+  },
+  {
+    title: "사고력 수학학원",
+    who: "사고력 수학 레벨테스트 전용 · 60P/100P/200P/300P 문의",
+    url: "https://blossombooks.org/quote-math-reasoning/",
+  },
+  {
     title: "학원·학교 레벨테스트",
     who: "영어 · 국어 · 수학 레벨테스트/반 배정 문의 고객",
     url: "https://blossombooks.org/quote/",
