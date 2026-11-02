@@ -20,6 +20,11 @@ const links = [
     url: "https://blossombooks.org/quote-math-reasoning/",
   },
   {
+    title: "누테 수학(중등) 학원",
+    who: "중등 수학 심화(닮음·원주각·복합도형·연립방정식) 전용 · 100P/200P/300P 문의",
+    url: "https://blossombooks.org/quote-nute/",
+  },
+  {
     title: "학원·학교 레벨테스트",
     who: "영어 · 국어 · 수학 레벨테스트/반 배정 문의 고객",
     url: "https://blossombooks.org/quote/",

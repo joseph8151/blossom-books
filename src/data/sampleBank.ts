@@ -937,6 +937,15 @@ const g5_6Reading: SampleItem[] = [
 // 정보글 지문입니다.
 const koreanLiteracyPassage1 = `도시의 빈 옥상이 바뀌고 있다. 몇몇 학교는 옥상에 흙을 얇게 깔고 상추와 방울토마토를 심었다. 흙은 여름 햇볕을 덜 받아들이게 해서 건물 안 온도가 조금 낮아진다. 학생들은 매주 물을 주고 수확한 채소를 급식실에 보낸다. 옥상 텃밭이 만능은 아니다. 바람이 세면 화분이 쓰러지고, 겨울에는 작물이 잘 자라지 않는다. 그래도 교실에서만 보던 '환경'이라는 말이 손과 흙으로 연결된다는 점에서, 학교는 이 수업을 계속하기로 했다.`;
 
+// 긴 분량의 비문학(정보글) 지문 — 배경·원리·평가 순으로 전개되는 구조를
+// 갖춰, 짧은 지문만으로는 연습하기 어려운 '구조 파악'과 '내용 파악' 유형까지
+// 다루도록 별도로 제작했습니다.
+const koreanLiteracyPassage2 = `세종대왕은 1443년에 한글을 만들었다. 그전까지 대부분의 백성은 한자를 배우기 어려워 글을 읽고 쓰지 못했다. 세종대왕은 백성이라면 누구나 며칠 안에 익힐 수 있는 문자가 필요하다고 생각했고, 그 결과로 한글이 탄생했다.
+
+한글의 자음은 발음 기관의 모양을 본떠 만들었다. 예를 들어 'ㄱ'은 혀뿌리가 목구멍을 막는 모양을, 'ㅁ'은 입을 다물었을 때 입술의 모양을 본떴다. 모음은 하늘, 땅, 사람을 뜻하는 세 가지 기본 모양(ㆍ, ㅡ, ㅣ)을 서로 조합해서 만들었다. 이처럼 한글은 소리가 나는 원리와 글자의 생김새가 서로 연결되어 있다는 점에서 다른 문자와 다르다.
+
+이런 특징 덕분에 한글은 적은 수의 자음·모음만으로 수많은 소리를 정확하게 표현할 수 있다. 세계 여러 언어학자는 한글을 '세계에서 가장 과학적인 문자 체계 중 하나'로 평가한다. 실제로 유네스코는 문맹 퇴치에 공헌한 개인이나 단체에 주는 상의 이름을 '세종대왕 문해상'이라고 지었다. 이는 누구나 쉽게 배우도록 만들어진 한글의 정신을 기리기 위해서다.`;
+
 const koreanLiteracyReading: SampleItem[] = [
   {
     area: "Reading",
@@ -990,6 +999,97 @@ const koreanLiteracyReading: SampleItem[] = [
     answer: "학교는 환경 수업을 손과 경험으로 연결하려 한다.",
     why: "마지막 문장의 '손과 흙으로 연결'이 근거입니다.",
     whyKo: "마지막 문장의 '손과 흙으로 연결'이 근거입니다. B·C·D는 지문에 없습니다.",
+  },
+  {
+    area: "Reading",
+    type: "내용 파악",
+    skill: "글에 나온 정보를 정확히 확인하기",
+    difficulty: "Standard",
+    passage: koreanLiteracyPassage2,
+    question: "이 글에서 설명한 한글 자음을 만든 원리로 가장 알맞은 것은?",
+    choices: [
+      "자음은 발음 기관의 모양을 본떠 만들었다.",
+      "자음은 한자의 획을 간단히 줄여 만들었다.",
+      "자음은 하늘·땅·사람의 모양을 본떠 만들었다.",
+      "자음은 중국 학자들이 만들어 전해 주었다.",
+    ],
+    answer: "자음은 발음 기관의 모양을 본떠 만들었다.",
+    why: "The second paragraph states consonants were modeled on the shape of speech organs.",
+    whyKo:
+      "두 번째 문단에서 자음은 발음 기관의 모양을 본떠 만들었다고 설명합니다. '하늘·땅·사람'은 모음을 만든 원리이므로 C는 함정입니다.",
+  },
+  {
+    area: "Reading",
+    type: "구조",
+    skill: "글의 전개 방식(구조) 파악하기",
+    difficulty: "Advanced",
+    passage: koreanLiteracyPassage2,
+    question: "이 글의 전개 방식으로 가장 알맞은 것은?",
+    choices: [
+      "한글이 만들어진 배경을 설명한 뒤, 만들어진 원리와 그에 대한 평가를 차례로 설명한다.",
+      "서로 다른 두 문자 체계를 비교하며 장단점을 나열한다.",
+      "시간 순서대로 한글과 관련된 역사적 사건을 나열한다.",
+      "하나의 주장을 내세운 뒤 반대 의견을 반박한다.",
+    ],
+    answer: "한글이 만들어진 배경을 설명한 뒤, 만들어진 원리와 그에 대한 평가를 차례로 설명한다.",
+    why: "The passage moves from background (why Hangul was created) to principle (how it was made) to evaluation (how it is regarded today).",
+    whyKo:
+      "1문단은 한글이 만들어진 배경(이유), 2문단은 만들어진 원리(자음·모음), 3문단은 그에 대한 평가(과학적 문자라는 평가)로 이어집니다. 비교·반박 구조가 아니라는 점에서 B·D는 오답입니다.",
+  },
+];
+
+// ── 중등 수학 심화 (누테 수학학원 전용 샘플 — 복합 도형·닮음·원주각·
+// 연립방정식을 SVG 도형과 함께 제시하는 고난도 문항) ─────────────
+export const nuteMathBank: SampleItem[] = [
+  {
+    area: "Geometry", type: "닮음의 활용", skill: "닮음비를 이용해 변의 길이 구하기", difficulty: "Advanced",
+    question: "삼각형 ABC와 삼각형 DEF는 서로 닮음이다(SAS 닮음). AB = 6, DE = 9, BC = 8일 때, EF의 길이를 구하시오.",
+    figure: "similar-triangles",
+    choices: ["9", "10", "12", "14"],
+    answer: "12",
+    why: "Similarity ratio = DE/AB = 9/6 = 3/2, so EF = BC × 3/2 = 8 × 3/2 = 12.",
+    whyKo: "닮음비 = DE/AB = 9/6 = 3/2. 대응변 EF = BC × 3/2 = 8 × 3/2 = 12.",
+    steps: ["닮음비 = 9 ÷ 6 = 3/2", "EF = 8 × 3/2", "= 12"],
+  },
+  {
+    area: "Geometry", type: "원주각과 중심각", skill: "원주각의 성질을 이용해 각의 크기 구하기", difficulty: "Advanced",
+    question: "원 O에서 호 AB에 대한 중심각이 100°일 때, 같은 호에 대한 원주각 x의 크기를 구하시오.",
+    figure: "inscribed-angle",
+    choices: ["40°", "50°", "60°", "80°"],
+    answer: "50°",
+    why: "An inscribed angle is half the central angle subtending the same arc: 100° ÷ 2 = 50°.",
+    whyKo: "한 호에 대한 원주각은 중심각의 절반입니다(원주각의 성질). 100° ÷ 2 = 50°.",
+    steps: ["원주각 = 중심각 ÷ 2", "= 100° ÷ 2", "= 50°"],
+  },
+  {
+    area: "Geometry", type: "복합 도형의 넓이", skill: "원과 사각형이 결합된 복합 도형의 넓이 구하기", difficulty: "Challenge",
+    question: "가로 10, 세로 6인 직사각형 위에 지름 10인 반원을 올린 복합 도형이다. 전체 넓이를 구하시오. (π = 3으로 계산)",
+    figure: "composite-circle-rect",
+    choices: ["60", "75", "97.5", "105"],
+    answer: "97.5",
+    why: "Rectangle area = 10 × 6 = 60. Semicircle area = ½ × π × 5² = ½ × 3 × 25 = 37.5. Total = 60 + 37.5 = 97.5.",
+    whyKo: "직사각형 넓이 = 10 × 6 = 60. 반원 넓이 = (1/2) × π × 5² = (1/2) × 3 × 25 = 37.5. 전체 넓이 = 60 + 37.5 = 97.5.",
+    steps: ["직사각형 = 10 × 6 = 60", "반원 = 1/2 × 3 × 5² = 37.5", "전체 = 60 + 37.5 = 97.5"],
+  },
+  {
+    area: "Algebra", type: "연립방정식의 활용", skill: "두 직선의 교점을 연립방정식으로 구하기", difficulty: "Advanced",
+    question: "연립방정식 y = 2x − 1, y = −x + 5의 해(교점의 좌표)를 구하시오.",
+    figure: "system-lines",
+    choices: ["(1, 1)", "(2, 3)", "(3, 2)", "(4, 7)"],
+    answer: "(2, 3)",
+    why: "Setting 2x − 1 = −x + 5 gives 3x = 6, so x = 2 and y = 2(2) − 1 = 3.",
+    whyKo: "2x − 1 = −x + 5 → 3x = 6 → x = 2. y = 2(2) − 1 = 3. 교점은 (2, 3).",
+    steps: ["2x − 1 = −x + 5", "3x = 6 → x = 2", "y = 2(2) − 1 = 3"],
+  },
+  {
+    area: "Geometry", type: "복합 도형의 넓이", skill: "도형을 나누어 복합 도형의 넓이 구하기", difficulty: "Challenge",
+    question: "전체 모양이 6 × 5 직사각형에서 오른쪽 위 4 × 3 직사각형이 잘려 나간 ㄴ자 도형이다. 색칠된 부분의 둘레와 넓이를 모두 구할 때, 넓이는 얼마인가?",
+    figure: "composite-L",
+    choices: ["12", "18", "24", "30"],
+    answer: "18",
+    why: "Whole rectangle = 6 × 5 = 30. Removed piece = 4 × 3 = 12. Shaded area = 30 − 12 = 18.",
+    whyKo: "전체 직사각형 = 6 × 5 = 30. 잘려 나간 부분 = 4 × 3 = 12. 색칠된 도형의 넓이 = 30 − 12 = 18.",
+    steps: ["전체 = 6 × 5 = 30", "잘린 부분 = 4 × 3 = 12", "넓이 = 30 − 12 = 18"],
   },
 ];
 

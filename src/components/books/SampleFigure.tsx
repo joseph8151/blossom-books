@@ -684,5 +684,82 @@ export default function SampleFigure({ name }: { name: string }) {
     );
   }
 
+  // ── 중등 심화 (닮음·원주각·복합도형·연립방정식) ─────────────
+  if (name === "similar-triangles") {
+    return (
+      <svg viewBox="0 0 260 120" className={`${svgCls} max-w-[360px]`} role="img" aria-label="Two similar right triangles">
+        <polygon points="20,100 84,100 84,40" fill={FILL} stroke={INK} strokeWidth="1.3" />
+        <rect x="74" y="90" width="10" height="10" fill="none" stroke={INK} strokeWidth="1" />
+        <text x="14" y="98" fontSize="10" fill={INK}>A</text>
+        <text x="88" y="98" fontSize="10" fill={INK}>B</text>
+        <text x="88" y="36" fontSize="10" fill={INK}>C</text>
+        <text x="50" y="114" textAnchor="middle" fontSize="10.5" fill={INK}>6</text>
+        <text x="96" y="70" fontSize="10.5" fill={INK}>8</text>
+        <polygon points="140,100 236,100 236,16" fill={FILL} stroke={INK} strokeWidth="1.3" />
+        <rect x="222" y="86" width="14" height="14" fill="none" stroke={INK} strokeWidth="1" />
+        <text x="134" y="98" fontSize="10" fill={INK}>D</text>
+        <text x="240" y="98" fontSize="10" fill={INK}>E</text>
+        <text x="240" y="12" fontSize="10" fill={INK}>F</text>
+        <text x="188" y="114" textAnchor="middle" fontSize="10.5" fill={INK}>9</text>
+        <text x="246" y="58" fontSize="12" fontWeight="600" fill={ACCENT}>?</text>
+      </svg>
+    );
+  }
+  if (name === "inscribed-angle") {
+    return (
+      <svg viewBox="0 0 200 190" className={`${svgCls} max-w-[260px]`} role="img" aria-label="Circle with central angle and inscribed angle on the same arc">
+        <circle cx="100" cy="100" r="70" fill="none" stroke={INK} strokeWidth="1.3" />
+        <line x1="100" y1="100" x2="46" y2="55" stroke={INK} strokeWidth="1.2" />
+        <line x1="100" y1="100" x2="154" y2="55" stroke={INK} strokeWidth="1.2" />
+        <line x1="100" y1="170" x2="46" y2="55" stroke={ACCENT} strokeWidth="1.4" />
+        <line x1="100" y1="170" x2="154" y2="55" stroke={ACCENT} strokeWidth="1.4" />
+        <circle cx="100" cy="100" r="2.4" fill={INK} />
+        <text x="106" y="104" fontSize="9" fill={INK}>O</text>
+        <circle cx="46" cy="55" r="2.6" fill={INK} />
+        <text x="28" y="50" fontSize="10" fill={INK}>A</text>
+        <circle cx="154" cy="55" r="2.6" fill={INK} />
+        <text x="160" y="50" fontSize="10" fill={INK}>B</text>
+        <circle cx="100" cy="170" r="2.6" fill={ACCENT} />
+        <text x="100" y="186" textAnchor="middle" fontSize="10" fill={ACCENT}>C</text>
+        <text x="100" y="84" textAnchor="middle" fontSize="10" fill={INK}>100°</text>
+        <text x="100" y="140" textAnchor="middle" fontSize="12" fontWeight="600" fill={ACCENT}>x</text>
+      </svg>
+    );
+  }
+  if (name === "composite-circle-rect") {
+    return (
+      <svg viewBox="0 0 200 130" className={`${svgCls} max-w-[260px]`} role="img" aria-label="Rectangle topped with a semicircle, composite area figure">
+        <path d="M60,108 L140,108 L140,60 A40,40 0 0 0 60,60 Z" fill={FILL} stroke={INK} strokeWidth="1.3" />
+        <line x1="60" y1="60" x2="140" y2="60" stroke={INK} strokeWidth="1" strokeDasharray="3 3" />
+        <text x="100" y="124" textAnchor="middle" fontSize="10.5" fill={INK}>10</text>
+        <text x="48" y="88" fontSize="10.5" fill={INK}>6</text>
+        <text x="100" y="24" textAnchor="middle" fontSize="9.5" fill={ACCENT}>반원 지름 10</text>
+      </svg>
+    );
+  }
+  if (name === "system-lines") {
+    const ox = 22, oy = 122, u = 16;
+    const px = (x: number) => ox + x * u;
+    const py = (y: number) => oy - y * u;
+    return (
+      <svg viewBox="0 0 150 140" className={`${svgCls} max-w-[220px]`} role="img" aria-label="Two intersecting lines on a coordinate plane">
+        {Array.from({ length: 7 }).map((_, i) => (
+          <g key={i}>
+            <line x1={px(i)} y1={py(0)} x2={px(i)} y2={py(6)} stroke={GRID} strokeWidth="0.8" />
+            <line x1={px(0)} y1={py(i)} x2={px(6)} y2={py(i)} stroke={GRID} strokeWidth="0.8" />
+          </g>
+        ))}
+        <line x1={px(0)} y1={py(0)} x2={px(6)} y2={py(0)} stroke={INK} strokeWidth="1.2" />
+        <line x1={px(0)} y1={py(0)} x2={px(0)} y2={py(6)} stroke={INK} strokeWidth="1.2" />
+        <line x1={px(0.5)} y1={py(0)} x2={px(3.5)} y2={py(6)} stroke={ACCENT} strokeWidth="1.8" />
+        <line x1={px(0)} y1={py(5)} x2={px(5)} y2={py(0)} stroke={INK} strokeWidth="1.8" />
+        <circle cx={px(2)} cy={py(3)} r="3.4" fill={INK} />
+        <text x={px(2) + 6} y={py(3) - 5} fontSize="9" fill={INK}>(2, 3)</text>
+        <text x={px(3.5) + 4} y={py(6)} fontSize="8.5" fill={ACCENT}>y = 2x − 1</text>
+        <text x={px(5) - 10} y={py(0) - 8} fontSize="8.5" fill={INK}>y = −x + 5</text>
+      </svg>
+    );
+  }
+
   return null;
 }
