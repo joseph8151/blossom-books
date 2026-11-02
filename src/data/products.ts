@@ -1718,7 +1718,7 @@ export const products: Product[] = [
   {
     id: "sr-reading-prep-g4-5",
     title: "SR Reading Prep — Grade 4–5",
-    titleKo: "SR 리딩 종합 문제집 (G4–5)",
+    titleKo: "SR 테스트 리딩 종합 문제집 (G4–5)",
     track: "level-test",
     subject: "Reading",
     examOrCurriculum: "SR Reading Level",
