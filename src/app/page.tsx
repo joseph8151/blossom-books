@@ -4,6 +4,7 @@ import MoreCategories from "@/components/home/MoreCategories";
 import CountryPrograms from "@/components/home/CountryPrograms";
 import AdmissionPackagePromo from "@/components/home/AdmissionPackagePromo";
 import Bestsellers from "@/components/home/Bestsellers";
+import SrTestShowcase from "@/components/home/SrTestShowcase";
 import WhyDifferent from "@/components/home/WhyDifferent";
 import QuestionToUnderstanding from "@/components/home/QuestionToUnderstanding";
 import CompareLevels from "@/components/home/CompareLevels";
@@ -48,6 +49,10 @@ export default function HomePage() {
       <CountryPrograms />
       <AdmissionPackagePromo />
       <Bestsellers />
+
+      {/* 주력 상품 — SR TEST 단독 쇼케이스 */}
+      <SrTestShowcase />
+
       <WhyDifferent />
 
       {/* Preview — 실제 문제 수준 확인 */}
