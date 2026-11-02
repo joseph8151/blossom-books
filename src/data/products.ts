@@ -87,7 +87,7 @@ export const products: Product[] = [
     ],
     summaryKo: "Algebra 2 전 범위를 다루는 개념서+문제집. 지수·로그부터 이차곡선까지 12개 단원.",
     descriptionKo:
-      "Algebra 1 이후 단계의 확장 개념을 체계적으로 정리하고, 실제 시험에서 자주 등장하는 문제 유형을 단원별로 배치했습니다.",
+      "Algebra 1에서 다룬 개념을 확장해 지수·로그, 삼각함수, 수열, 행렬·벡터, 이차곡선, 복소수까지 12개 단원으로 정리했습니다. 단원마다 개념 확인 문제부터 실제 시험에 자주 등장하는 응용 문제까지 난이도를 단계적으로 배치했고, 모의고사 2회분과 전 문항 풀이 과정이 담긴 해설집을 함께 제공합니다.",
     recommendedForKo: "Algebra 2 선행 또는 정규 과정을 병행하는 학생",
     priceKRW: 190000,
     priceUSD: 140,
@@ -116,7 +116,7 @@ export const products: Product[] = [
     units: ["분자와 세포", "유전", "진화", "생태계와 상호작용"],
     summaryKo: "AP Biology 전 범위, 도표·그래프 분석 문제를 포함한 심화 문제집.",
     descriptionKo:
-      "AP 시험에서 요구하는 자료 해석형 문제와 서술형 응답 방식을 반영하여 구성했습니다. 도표와 그래프는 실제 문항 형식에 맞춰 제작합니다.",
+      "분자와 세포, 유전, 진화, 생태계와 상호작용 4개 핵심 단원을 중심으로 AP Biology 전 범위를 다룹니다. 단답형 암기보다 자료를 해석하고 결론을 도출하는 AP 특유의 서술형·자료 분석형 문항 비중을 높여 구성했으며, 그림·그래프·도표 자료를 실제 문항 형식에 맞춰 제작합니다.",
     recommendedForKo: "AP Biology 시험을 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -143,7 +143,8 @@ export const products: Product[] = [
     ],
     units: ["자료 탐구", "표본조사와 실험", "확률", "추론"],
     summaryKo: "AP Statistics 전 범위 120페이지 문제집. 자료 해석과 통계적 추론 중심.",
-    descriptionKo: "실제 시험의 자유응답형(FRQ) 문항 구조를 반영해 통계적 사고 과정을 단계별로 훈련할 수 있도록 구성했습니다.",
+    descriptionKo:
+      "자료 탐구, 표본조사와 실험, 확률, 추론 4개 영역을 120페이지에 걸쳐 다루는 AP Statistics 심화 문제집입니다. 객관식뿐 아니라 실제 시험 배점의 상당 부분을 차지하는 자유응답형(FRQ) 문항 구조를 반영해, 통계적 결론을 논리적으로 서술하는 연습까지 포함했습니다.",
     recommendedForKo: "AP Statistics 시험 및 통계적 사고력을 다지려는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -171,7 +172,8 @@ export const products: Product[] = [
     ],
     units: ["Verbal Reasoning", "Non-verbal Reasoning", "Quantitative Reasoning", "Spatial Reasoning"],
     summaryKo: "국제학교 입학시험 CAT4 Level E 대비 60페이지 문제집. 4개 영역 균형 구성.",
-    descriptionKo: "실제 CAT4 문항 형식을 참고하여 영역별 균형을 맞춘 연습 문제로 구성했습니다. 원본 형식은 유지하고 안내 문구만 한글로 제공합니다.",
+    descriptionKo:
+      "만 9–10세 학생을 대상으로 CAT4가 평가하는 Verbal·Non-verbal·Quantitative·Spatial Reasoning 4개 영역을 60페이지에 고르게 배분했습니다. 실제 CAT4 문항 형식을 참고해 영역별 균형을 맞춰 제작했으며, 특정 영역에 치우치지 않도록 비슷한 비중으로 연습할 수 있습니다. 원본 문항 형식은 유지하고 안내 문구만 한글로 제공합니다.",
     recommendedForKo: "국제학교 입학을 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -199,7 +201,8 @@ export const products: Product[] = [
     ],
     units: ["Listening", "Reading", "Writing", "Speaking"],
     summaryKo: "간호 분야 OET 실전 유형 문제집. 모의고사 리스닝 음원 및 4개 영역 국문 해설 포함.",
-    descriptionKo: "임상 현장에서 사용하는 표현과 시험 채점 기준을 반영하여 실전 감각을 익힐 수 있도록 구성했습니다.",
+    descriptionKo:
+      "간호 분야 OET가 요구하는 Listening·Reading·Writing·Speaking 4개 영역을 임상 현장에서 실제로 쓰이는 표현과 상황을 바탕으로 구성했습니다. 특히 Writing은 OET 고유의 채점 기준(Purpose·Content·Conciseness and Clarity·Genre and Style)에 맞춰 연습하도록 했고, 모의고사 리스닝 음원을 함께 제공해 실전과 비슷한 환경에서 연습할 수 있습니다.",
     recommendedForKo: "해외 간호사 취업을 준비하는 응시자",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -226,7 +229,8 @@ export const products: Product[] = [
     ],
     units: ["Algebra", "Advanced Math", "Problem-Solving & Data Analysis", "Geometry & Trigonometry"],
     summaryKo: "Digital SAT Math 출제 비중을 반영한 100페이지 실전 문제집.",
-    descriptionKo: "Algebra 35%, Advanced Math 35%, Problem-Solving & Data Analysis 15%, Geometry & Trig 15% 비중을 반영하여 구성했습니다.",
+    descriptionKo:
+      "Algebra 35%, Advanced Math 35%, Problem-Solving & Data Analysis 15%, Geometry & Trig 15% — Digital SAT Math의 실제 출제 비중을 그대로 반영해 구성했습니다. Module 1에서 정답률에 따라 Module 2의 난이도가 조정되는 적응형(adaptive) 구조를 고려해, 기본기 확인 문항과 고난도 문항을 함께 배치했습니다.",
     recommendedForKo: "Digital SAT를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -253,7 +257,8 @@ export const products: Product[] = [
     ],
     units: ["품사와 문장 구조", "시제", "관계사", "가정법", "구와 절"],
     summaryKo: "Grade 5–7 수준 문법 200문항 종합 문제집.",
-    descriptionKo: "학년별 문법 출제 범위를 분석하여 개념 확인부터 응용까지 단계적으로 배치했습니다.",
+    descriptionKo:
+      "품사와 문장 구조부터 시제, 관계사, 가정법, 구와 절까지 중등 문법의 핵심 범위를 40페이지로 압축했습니다. 단순 암기가 아니라 학년별 출제 비중을 분석해 자주 틀리는 포인트 위주로 문항을 배치했으며, 문법 포인트별 해설로 왜 틀렸는지 바로 확인할 수 있습니다.",
     recommendedForKo: "학기 중 문법을 체계적으로 복습하려는 학생",
     priceKRW: 90000,
     priceUSD: 68,
@@ -314,7 +319,8 @@ export const products: Product[] = [
     // 실제 검색어("Pre Algebra", "Pre-Algebra")를 제목 앞부분에 반영.
     seoTitle: "Pre-Algebra 문제집 G6-8 | 미국 중등수학 기초 - 블러섬북스",
     seoDescription: "미국 교과 Pre-Algebra(G6-8) 개념+문제집. Algebra 진입 전 기초 개념 단계별 연습.",
-    descriptionKo: "Algebra 학습에 필요한 기초 개념을 단원별로 정리하고 단계적으로 연습하도록 구성했습니다. 자세한 분량·구성은 상담으로 안내해 드립니다.",
+    descriptionKo:
+      "정수와 유리수, 비와 비율, 일차식과 방정식, 기초 기하, 자료와 통계까지 Algebra 진입 전 반드시 다져야 할 기초 개념을 단원별로 정리했습니다. 개념 설명 후 바로 확인 문제로 이어지는 구성이라 처음 배우는 학생도 따라가기 쉽고, 전 문항 풀이 과정과 자주 틀리는 포인트를 짚어주는 해설집이 함께 제공됩니다.",
     recommendedForKo: "Algebra를 앞두고 기초를 다지려는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -340,7 +346,8 @@ export const products: Product[] = [
     ],
     units: ["도형의 기초", "합동과 닮음", "삼각형", "사각형과 다각형", "원", "넓이와 부피"],
     summaryKo: "미국 교과과정 Geometry 전 범위 개념서+문제집. 증명·응용 포함.",
-    descriptionKo: "정의·정리부터 증명과 응용까지 단원별로 구성했습니다. 자세한 분량·구성은 상담으로 안내해 드립니다.",
+    descriptionKo:
+      "도형의 기초부터 합동과 닮음, 삼각형, 사각형과 다각형, 원, 넓이와 부피까지 Geometry 전 범위를 단원별로 구성했습니다. 정의와 정리를 암기하는 데서 그치지 않고 증명 과정을 직접 서술해보는 문항과 실생활 응용 문제를 함께 배치해, 도형 감각과 논리적 증명 능력을 같이 기를 수 있습니다.",
     recommendedForKo: "미국 교과과정 Geometry를 학습하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -366,7 +373,8 @@ export const products: Product[] = [
     ],
     units: ["Main Idea", "Details & Inference", "Vocabulary in Context", "Author's Purpose"],
     summaryKo: "학년·레벨에 맞춘 리딩 독해 종합 문제집. 지문 해석·정답 근거 해설 포함.",
-    descriptionKo: "미국 교과과정 리딩 출제 유형을 분석하여 독해부터 추론·어휘까지 단계적으로 구성했습니다. 학년·레벨별 구성은 상담으로 안내해 드립니다.",
+    descriptionKo:
+      "Main Idea, Details & Inference, Vocabulary in Context, Author's Purpose 네 가지 핵심 독해 유형을 미국 교과과정 리딩 출제 경향에 맞춰 구성했습니다. 지문 길이와 난이도를 G3–G9(SR 3.0–9.0) 범위에서 학생 수준에 맞게 조정할 수 있으며, 정답 근거를 지문에서 직접 찾아 설명하는 해설로 추측이 아닌 근거 기반 독해 습관을 기르도록 돕습니다.",
     recommendedForKo: "미국 교과과정 리딩을 체계적으로 학습하려는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -392,7 +400,8 @@ export const products: Product[] = [
     ],
     units: ["Sentence & Paragraph", "Essay Structure", "Grammar in Writing", "Revising & Editing"],
     summaryKo: "문장부터 에세이까지 단계별 라이팅 종합 문제집. 예시 답안·첨삭 포인트 포함.",
-    descriptionKo: "문장·문단·에세이 쓰기를 단계적으로 훈련하도록 구성했습니다. 예시 답안과 첨삭 포인트로 스스로 점검할 수 있습니다.",
+    descriptionKo:
+      "문장과 문단 쓰기부터 에세이 구조, 글 속 문법, 퇴고·수정까지 라이팅 실력을 쌓는 4단계로 구성했습니다. 직접 써 본 글을 예시 답안과 비교하며 점검할 수 있도록 모범 답안과 첨삭 포인트를 함께 제공해, 스스로 글을 고쳐 쓰는 연습까지 이어집니다.",
     recommendedForKo: "미국 교과과정 라이팅을 훈련하려는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -418,7 +427,8 @@ export const products: Product[] = [
     ],
     units: ["Life Science", "Physical Science", "Earth & Space", "Scientific Inquiry"],
     summaryKo: "미국 교과과정 Science 개념+자료 해석 문제집. 학년별 구성.",
-    descriptionKo: "미국 교과과정 과학 영역을 학년 수준에 맞춰 개념과 자료 해석 문제로 구성했습니다. 자세한 구성은 상담으로 안내해 드립니다.",
+    descriptionKo:
+      "Life Science, Physical Science, Earth & Space, Scientific Inquiry 4개 영역을 미국 교과과정 출제 비중에 맞춰 구성했습니다. 단순 암기형 문제보다 실험 결과나 도표·그래프를 해석해 결론을 도출하는 자료 해석형 문제 비중을 높여, 학교 수업에서 다루는 탐구 활동과 자연스럽게 이어지도록 했습니다.",
     recommendedForKo: "미국 교과과정 과학을 학습하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -449,7 +459,8 @@ export const products: Product[] = [
     // 실제 검색어("AP Calculus 문제")를 제목 앞부분에 반영.
     seoTitle: "AP Calculus 문제집 | AB·BC FRQ 실전 대비 - 블러섬북스",
     seoDescription: "AP Calculus AB/BC(G11-12) 개념+문제집. FRQ 자유응답형 포함, 상세 해설 제공.",
-    descriptionKo: "AB/BC 출제 범위를 단원별로 구성하고 자유응답형(FRQ) 유형을 반영했습니다.",
+    descriptionKo:
+      "극한과 연속, 미분, 적분, 미적분의 응용, 그리고 BC 과정의 급수까지 AP Calculus AB·BC 전 범위를 단원별로 구성했습니다. 객관식과 함께 실제 시험 배점의 절반을 차지하는 자유응답형(FRQ) 문항을 반영했고, 계산기 사용·비사용 문항을 구분해 실전 감각을 함께 익힐 수 있습니다.",
     recommendedForKo: "AP Calculus를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -475,7 +486,8 @@ export const products: Product[] = [
     ],
     units: ["원자와 주기성", "화학 결합", "화학 반응", "화학 평형", "산-염기", "열역학"],
     summaryKo: "AP Chemistry 전 범위 개념+문제집. 자료 해석·계산 문제 포함.",
-    descriptionKo: "AP 화학 출제 범위를 단원별로 구성하고 실험·자료 해석형 문항을 반영했습니다.",
+    descriptionKo:
+      "원자와 주기성부터 화학 결합, 화학 반응, 화학 평형, 산-염기, 열역학까지 AP Chemistry 6개 핵심 단원을 다룹니다. 단순 계산 문제가 아니라 실험 데이터와 그래프를 해석해 결론을 서술하는 AP 특유의 문항 구조를 반영했으며, 채점 기준에 맞춘 풀이 과정을 상세 해설로 제공합니다.",
     recommendedForKo: "AP Chemistry를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -501,7 +513,8 @@ export const products: Product[] = [
     ],
     units: ["운동학", "힘과 운동", "에너지와 운동량", "전기와 회로", "파동"],
     summaryKo: "AP Physics 1/2 전 범위 개념+문제집. 실험·그래프 분석 포함.",
-    descriptionKo: "AP 물리 출제 범위를 단원별로 구성하고 실험·그래프 분석형 문항을 반영했습니다.",
+    descriptionKo:
+      "운동학, 힘과 운동, 에너지와 운동량, 전기와 회로, 파동까지 대수 기반의 AP Physics 1·2 전 범위를 다룹니다. 공식을 대입해 답만 구하는 문제가 아니라 실험 설계와 그래프 분석을 요구하는 AP 고유의 문항 유형을 반영했고, 채점 기준표에 맞춘 단계별 풀이로 부분 점수를 받는 방법까지 확인할 수 있습니다.",
     recommendedForKo: "AP Physics를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -527,7 +540,8 @@ export const products: Product[] = [
     ],
     units: ["Colonial America", "Revolution & Constitution", "Civil War", "Industrial Era", "Modern America"],
     summaryKo: "AP US History 사료 분석·DBQ·서술형 유형 문제집.",
-    descriptionKo: "시대별 핵심 주제와 사료 분석·DBQ·서술형(FRQ) 유형을 반영해 구성했습니다.",
+    descriptionKo:
+      "식민지 시대부터 독립혁명과 헌법 제정, 남북전쟁, 산업화 시대, 현대사까지 미국사 주요 시기를 다룹니다. 단순 연표 암기가 아니라 1차 사료를 읽고 해석하는 문항, 여러 사료를 종합해 논증하는 DBQ(Document-Based Question), 장문 서술형(LEQ)까지 실제 시험 문항 유형을 그대로 반영했습니다.",
     recommendedForKo: "AP US History를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -553,7 +567,8 @@ export const products: Product[] = [
     ],
     units: ["Rhetorical Analysis", "Argument Essay", "Synthesis Essay", "Multiple Choice"],
     summaryKo: "AP English Language 수사 분석·논증·합성 에세이 유형 문제집.",
-    descriptionKo: "수사 분석과 논증·합성 에세이 유형을 반영하고 예시 에세이와 첨삭 포인트를 제공합니다.",
+    descriptionKo:
+      "수사적 분석(Rhetorical Analysis), 논증 에세이(Argument Essay), 여러 자료를 종합하는 합성 에세이(Synthesis Essay), 그리고 객관식까지 AP English Language의 4개 평가 축을 모두 다룹니다. 각 에세이 유형마다 예시 답안과 첨삭 포인트를 함께 제공해, 글의 구조와 논증 전개 방식을 모델로 삼아 연습할 수 있습니다.",
     recommendedForKo: "AP English Language를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -579,7 +594,8 @@ export const products: Product[] = [
     ],
     units: ["기본 경제 개념", "수요와 공급", "시장 구조", "거시경제 지표", "재정·통화 정책"],
     summaryKo: "AP Macro/Micro 경제 그래프 분석·FRQ 유형 문제집.",
-    descriptionKo: "거시·미시 경제의 핵심 개념과 그래프 분석·자유응답형(FRQ) 유형을 반영했습니다.",
+    descriptionKo:
+      "기본 경제 개념부터 수요와 공급, 시장 구조(미시), 거시경제 지표, 재정·통화 정책(거시)까지 Macro·Micro 두 시험의 핵심 범위를 함께 다룹니다. 그래프를 직접 그리고 해석하는 문항과 자유응답형(FRQ) 문항 비중을 높여, 개념을 그래프로 설명하는 연습까지 포함했습니다.",
     recommendedForKo: "AP Economics를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -607,7 +623,8 @@ export const products: Product[] = [
     ],
     units: ["Ecosystems", "Biodiversity", "Populations", "Earth Systems", "Land and Water Use", "Energy Resources", "Atmospheric Pollution", "Aquatic and Terrestrial Pollution", "Global Change"],
     summaryKo: "AP Environmental Science 전 범위 개념+문제집. 자료 해석형 문항 포함.",
-    descriptionKo: "생태계부터 지구 시스템, 오염과 전 지구적 변화까지 AP 공식 단원 구성을 따라 자료 해석·계산형 문항을 반영했습니다.",
+    descriptionKo:
+      "생태계와 생물다양성, 개체군, 지구 시스템부터 토지·수자원 이용, 에너지 자원, 대기·수질·토양 오염, 전 지구적 변화까지 AP 공식 9개 단원을 모두 다룹니다. 계산 문제와 자료 해석형 문항 비중이 높은 시험 특성을 반영해, 실제 환경 데이터를 활용한 그래프·표 해석 연습을 포함했습니다.",
     recommendedForKo: "AP Environmental Science를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -633,7 +650,8 @@ export const products: Product[] = [
     ],
     units: ["Kinematics", "Newton's Laws", "Work, Energy, Power", "Systems of Particles", "Rotation", "Oscillations", "Gravitation"],
     summaryKo: "AP Physics C: Mechanics 전 범위 개념+문제집. 미적분 기반 심화 문제 포함.",
-    descriptionKo: "대수 기반인 AP Physics 1/2와 달리 미적분을 활용하는 AP Physics C: Mechanics의 공식 단원 구성을 따랐습니다.",
+    descriptionKo:
+      "운동학(Kinematics)부터 뉴턴의 법칙, 일·에너지·일률, 입자계, 회전운동, 진동, 중력까지 미적분 기반의 AP Physics C: Mechanics 전 범위를 다룹니다. 대수만으로 풀 수 있는 AP Physics 1과 달리 미분·적분을 직접 활용해 운동 방정식을 세우고 푸는 문제 비중이 높아, 미적분과 물리를 함께 훈련할 수 있도록 구성했습니다.",
     recommendedForKo: "AP Physics C: Mechanics를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -659,7 +677,8 @@ export const products: Product[] = [
     ],
     units: ["Electrostatics", "Conductors, Capacitors, Dielectrics", "Electric Circuits", "Magnetic Fields", "Electromagnetism"],
     summaryKo: "AP Physics C: Electricity and Magnetism 전 범위 개념+문제집.",
-    descriptionKo: "미적분을 활용한 전자기학 전 범위를 AP 공식 단원 구성에 맞춰 반영했습니다.",
+    descriptionKo:
+      "정전기학부터 도체·축전기·유전체, 전기 회로, 자기장, 전자기 유도까지 미적분을 활용하는 AP Physics C: Electricity and Magnetism 전 범위를 다룹니다. 적분 형태의 전자기 법칙을 활용해 전기장·자기장을 구하는 고난도 문항까지 포함되어 있어, Mechanics와 함께 준비하는 학생에게 특히 도움이 됩니다.",
     recommendedForKo: "AP Physics C: E&M을 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -685,7 +704,8 @@ export const products: Product[] = [
     ],
     units: ["Polynomial and Rational Functions", "Exponential and Logarithmic Functions", "Trigonometric and Polar Functions"],
     summaryKo: "AP Precalculus 전 범위 개념+문제집.",
-    descriptionKo: "함수의 변화율·다항·지수로그·삼각함수를 중심으로 AP 공식 단원 구성에 맞춰 구성했습니다.",
+    descriptionKo:
+      "다항·유리함수, 지수·로그함수, 삼각·극좌표 함수까지 AP Precalculus 3개 공식 단원을 다룹니다. College Board가 강조하는 '함수의 변화율'이라는 관점을 중심에 두고, 함수의 그래프와 변화 양상을 해석하는 문항을 반복 연습하도록 구성했습니다.",
     recommendedForKo: "AP Precalculus를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -711,7 +731,8 @@ export const products: Product[] = [
     ],
     units: ["Primitive Types", "Using Objects", "Boolean Expressions and if", "Iteration", "Writing Classes", "Array", "ArrayList", "2D Array", "Inheritance", "Recursion"],
     summaryKo: "AP Computer Science A(Java) 전 범위 개념+문제집.",
-    descriptionKo: "Java 기반 객체지향 프로그래밍 전 범위를 AP 공식 단원 구성에 맞춰 코드 작성·분석 문항으로 구성했습니다.",
+    descriptionKo:
+      "기본 자료형부터 객체 사용, 조건문, 반복문, 클래스 작성, 배열과 ArrayList, 2차원 배열, 상속, 재귀까지 Java 기반 AP Computer Science A의 10개 공식 단원을 다룹니다. 이론 설명보다 실제 코드를 읽고 결과를 예측하거나 직접 작성하는 문항 비중이 높은 시험 특성을 반영해, 코드 분석·작성 문제 중심으로 구성했습니다.",
     recommendedForKo: "AP Computer Science A를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -737,7 +758,8 @@ export const products: Product[] = [
     ],
     units: ["Creative Development", "Data", "Algorithms and Programming", "Computing Systems and Networks", "Impact of Computing"],
     summaryKo: "AP Computer Science Principles 전 범위 개념+문제집.",
-    descriptionKo: "프로그래밍 언어에 구애받지 않는 컴퓨팅 사고 전 범위를 AP 공식 단원 구성에 맞춰 구성했습니다.",
+    descriptionKo:
+      "창의적 개발부터 데이터, 알고리즘과 프로그래밍, 컴퓨팅 시스템과 네트워크, 컴퓨팅의 사회적 영향까지 5개 공식 단원을 다룹니다. 특정 프로그래밍 언어 문법보다 컴퓨팅 사고(Computational Thinking) 자체를 평가하는 시험 특성에 맞춰, 개념 이해와 실생활 적용 사례 중심으로 구성했습니다.",
     recommendedForKo: "AP Computer Science Principles를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -763,7 +785,8 @@ export const products: Product[] = [
     ],
     units: ["Short Fiction", "Poetry", "Longer Fiction or Drama", "Literary Argument"],
     summaryKo: "AP English Literature and Composition 문학 분석·논증 에세이 문제집.",
-    descriptionKo: "소설·시·희곡 분석과 문학 논증 에세이 유형을 AP 공식 단원 구성에 맞춰 반영했습니다.",
+    descriptionKo:
+      "단편소설, 시, 장편소설·희곡, 그리고 문학 논증까지 AP English Literature의 4개 평가 범주를 다룹니다. 작품을 읽고 줄거리를 파악하는 수준을 넘어 문체·상징·구조 등 문학적 장치를 분석하고 이를 근거로 논증을 전개하는 연습에 중점을 두었으며, 에세이 유형마다 예시 답안과 첨삭 포인트를 제공합니다.",
     recommendedForKo: "AP English Literature를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -789,7 +812,8 @@ export const products: Product[] = [
     ],
     units: ["Biological Bases", "Cognition", "Development", "Social Psychology and Personality", "Mental and Physical Health"],
     summaryKo: "AP Psychology 전 범위 개념+문제집.",
-    descriptionKo: "심리학 주요 영역 전 범위를 AP 공식 단원 구성에 맞춰 개념·사례 적용 문항으로 구성했습니다.",
+    descriptionKo:
+      "생물학적 기초부터 인지, 발달, 사회심리와 성격, 정신·신체 건강까지 심리학 주요 영역을 AP 공식 단원 구성에 맞춰 다룹니다. 용어 암기에 그치지 않고 실제 사례에 이론을 적용해 설명하는 문항 비중을 높여, 개념을 실생활 상황과 연결해 이해하도록 구성했습니다.",
     recommendedForKo: "AP Psychology를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -815,7 +839,8 @@ export const products: Product[] = [
     ],
     units: ["Thinking Geographically", "Population and Migration", "Culture", "Political Patterns", "Agriculture", "Cities", "Industrial and Economic Development"],
     summaryKo: "AP Human Geography 전 범위 개념+문제집.",
-    descriptionKo: "인구·문화·정치·도시·경제지리 전 범위를 AP 공식 단원 구성에 맞춰 자료 해석형 문항으로 구성했습니다.",
+    descriptionKo:
+      "지리적 사고방식부터 인구와 이주, 문화, 정치적 패턴, 농업, 도시, 산업·경제 발전까지 인문지리 전 범위를 다룹니다. 지도·통계·그래프 등 실제 자료를 해석해 지리적 패턴과 그 원인을 설명하는 문항 비중이 높은 시험 특성을 반영했습니다.",
     recommendedForKo: "AP Human Geography를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -841,7 +866,8 @@ export const products: Product[] = [
     ],
     units: ["The Global Tapestry", "Networks of Exchange", "Land-Based Empires", "Transoceanic Interconnections", "Revolutions", "Consequences of Industrialization", "Global Conflict", "Cold War and Decolonization", "Globalization"],
     summaryKo: "AP World History: Modern(1200년~현재) 사료 분석·DBQ·서술형 문제집.",
-    descriptionKo: "1200년 이후 전 세계사를 AP 공식 단원 구성에 맞춰 사료 분석·DBQ·서술형(LEQ) 유형으로 구성했습니다.",
+    descriptionKo:
+      "1200년경부터 현재까지 전 세계사를 교류망, 대륙 기반 제국, 대양 간 연결, 혁명, 산업화의 결과, 세계 분쟁, 냉전과 탈식민화, 세계화까지 9개 공식 단원으로 다룹니다. 여러 지역·시대를 비교하는 문항이 많은 시험 특성에 맞춰, 사료 분석·DBQ·장문 서술형(LEQ) 유형을 폭넓게 포함했습니다.",
     recommendedForKo: "AP World History: Modern을 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -867,7 +893,8 @@ export const products: Product[] = [
     ],
     units: ["Renaissance and Exploration", "Age of Reformation", "Absolutism and Constitutionalism", "Scientific Revolution and Enlightenment", "Conflict and State-Building", "Industrialization", "19th-Century Perspectives", "20th-Century Global Conflicts", "Cold War and Contemporary Europe"],
     summaryKo: "AP European History 사료 분석·DBQ·서술형 문제집.",
-    descriptionKo: "르네상스부터 현대까지 유럽사를 AP 공식 단원 구성에 맞춰 사료 분석·DBQ·서술형 유형으로 구성했습니다.",
+    descriptionKo:
+      "르네상스와 탐험 시대부터 종교개혁, 절대왕정과 입헌주의, 과학혁명과 계몽주의, 국가 건설과 갈등, 산업화, 19세기 사상, 20세기 세계 분쟁, 냉전 이후 현대 유럽까지 9개 공식 단원을 다룹니다. 사료를 비교·분석하고 역사적 논증을 전개하는 DBQ·서술형(LEQ) 문항을 중심으로 구성했습니다.",
     recommendedForKo: "AP European History를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -893,7 +920,8 @@ export const products: Product[] = [
     ],
     units: ["Foundations of Democracy", "Interactions Among Branches", "Civil Liberties and Rights", "American Political Ideologies and Beliefs", "Political Participation"],
     summaryKo: "AP U.S. Government and Politics 전 범위 개념+문제집.",
-    descriptionKo: "미국 헌법과 정치 제도 전 범위를 AP 공식 단원 구성에 맞춰 자료 해석·서술형 유형으로 구성했습니다.",
+    descriptionKo:
+      "민주주의의 기초부터 삼권 간 상호작용, 시민의 자유와 권리, 미국의 정치 이념, 정치 참여까지 5개 공식 단원을 다룹니다. 헌법 조항과 대법원 판례를 실제 자료로 제시해 해석하는 문항, 그리고 정치 현상을 논증하는 서술형 문항을 중심으로 구성했습니다.",
     recommendedForKo: "AP U.S. Government and Politics를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -919,7 +947,8 @@ export const products: Product[] = [
     ],
     units: ["Political Systems, Regimes, and Governments", "Political Institutions", "Political Culture and Participation", "Party and Electoral Systems", "Political and Economic Change"],
     summaryKo: "AP Comparative Government and Politics 전 범위 개념+문제집.",
-    descriptionKo: "영국·중국·이란·멕시코·나이지리아·러시아 6개국 비교정치 전 범위를 AP 공식 단원 구성에 맞춰 구성했습니다.",
+    descriptionKo:
+      "영국·중국·이란·멕시코·나이지리아·러시아 6개국의 정치 체제, 정치 기구, 정치 문화와 참여, 정당·선거 제도, 정치·경제적 변화를 비교하는 비교정치학 전 범위를 다룹니다. 한 국가만 깊이 아는 것이 아니라 여러 국가를 가로질러 비교·분석하는 AP 고유의 문항 구조에 맞춰 자료 해석·서술형 문항을 구성했습니다.",
     recommendedForKo: "AP Comparative Government and Politics를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -945,7 +974,8 @@ export const products: Product[] = [
     ],
     units: ["Origins of the African Diaspora", "Freedom, Enslavement, and Resistance", "The Practice of Freedom", "Movements and Debates"],
     summaryKo: "AP African American Studies 전 범위 개념+문제집.",
-    descriptionKo: "아프리카 디아스포라의 기원부터 현대 운동과 담론까지 AP 공식 단원 구성에 맞춰 자료 해석·서술형 유형으로 구성했습니다.",
+    descriptionKo:
+      "아프리카 디아스포라의 기원부터 자유·노예제·저항, 자유의 실천, 현대의 운동과 담론까지 4개 공식 단원을 다룹니다. 2024년 College Board가 정식 개설한 비교적 신규 과목인 만큼, 1차 사료와 다양한 관점의 자료를 해석해 논증을 전개하는 문항 중심으로 구성했습니다.",
     recommendedForKo: "AP African American Studies를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1023,7 +1053,8 @@ export const products: Product[] = [
     ],
     units: ["Global Prehistory", "Ancient Mediterranean", "Early Europe and Colonial Americas", "Later Europe and Americas", "Global Contemporary"],
     summaryKo: "AP Art History 전 범위 작품 분석 문제집.",
-    descriptionKo: "250개 필수 작품 중 주요 작품의 형식·맥락 분석을 AP 공식 단원 구성에 맞춰 구성했습니다.",
+    descriptionKo:
+      "선사시대 미술부터 고대 지중해, 초기 유럽·식민지 아메리카, 후기 유럽·아메리카, 현대 세계 미술까지 AP가 지정한 250개 필수 작품을 5개 지역·시대로 나눠 다룹니다. 작품명을 암기하는 데 그치지 않고 양식적 특징과 제작 맥락(목적·후원자·역사적 배경)을 함께 묻는 AP 고유의 문항 구조를 반영했습니다.",
     recommendedForKo: "AP Art History를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1049,7 +1080,8 @@ export const products: Product[] = [
     ],
     units: ["Music Fundamentals", "Beginning Harmony", "Harmony and Voice Leading", "Form and Analysis"],
     summaryKo: "AP Music Theory 전 범위 이론·화성 분석 문제집.",
-    descriptionKo: "음악 기초 이론부터 화성·선율 진행 분석까지 AP 공식 단원 구성에 맞춰 구성했습니다. 청음(Aural) 영역은 별도 음원 자료로 안내합니다.",
+    descriptionKo:
+      "음악의 기초 이론부터 초급 화성, 화성과 성부 진행, 형식과 분석까지 AP Music Theory의 필기 영역을 다룹니다. 실제 시험에서 큰 비중을 차지하는 청음(Aural) 영역은 악보만으로 대체할 수 없어 별도 음원 자료로 안내하며, 이 교재는 화성 분석과 이론 문항에 집중했습니다.",
     recommendedForKo: "AP Music Theory를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1168,7 +1200,8 @@ export const products: Product[] = [
     // 실제 검색어("MAP Test 문제집")를 제목 앞부분에 반영.
     seoTitle: "MAP Test 문제집 | 학년별 Math·Reading 대비 - 블러섬북스",
     seoDescription: "MAP Growth 학년별 대비 문제집. Math·Reading·Language Usage 실전 연습, 상세 해설 포함.",
-    descriptionKo: "MAP Growth 출제 영역(Math·Reading·Language Usage)을 학년 수준에 맞춰 구성합니다. 학년·영역 선택은 상담을 통해 편하게 안내해 드립니다.",
+    descriptionKo:
+      "Mathematics, Reading, Language Usage 3개 영역을 G2–G9 학년별로 나눠 구성한 MAP Growth 대비 문제집입니다. MAP은 문제를 맞히면 다음 문제가 더 어려워지는 적응형(adaptive) 시험이므로, 난이도가 점진적으로 올라가는 문항 배치로 실제 시험의 체감 난이도 변화를 미리 경험할 수 있도록 했습니다. 학년과 목표 RIT 구간에 맞는 세부 구성은 상담으로 안내해 드립니다.",
     recommendedForKo: "국제학교 입학·편입을 위한 MAP 테스트를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1197,7 +1230,8 @@ export const products: Product[] = [
     ],
     units: ["Verbal Reasoning", "Reading Comprehension", "Quantitative Reasoning", "Mathematics Achievement", "Essay"],
     summaryKo: "ISEE Lower/Middle/Upper 레벨별 대비 문제집. 4개 영역+에세이. 100P/200P/300P 중 선택.",
-    descriptionKo: "ISEE 출제 형식에 맞춰 레벨별로 구성했습니다. 100P/200P/300P 중 선택할 수 있으며, 레벨 선택과 세부 구성은 상담으로 안내해 드립니다.",
+    descriptionKo:
+      "Verbal Reasoning, Reading Comprehension, Quantitative Reasoning, Mathematics Achievement 4개 채점 영역과 Essay까지 ISEE 출제 형식 그대로 구성했습니다. 미국 사립학교 입학시험인 ISEE는 Lower·Middle·Upper 레벨마다 난이도와 문항 수가 다른데, 교재도 레벨에 맞춰 구성하며 100P/200P/300P 중 선택할 수 있습니다. Essay는 채점에 반영되지 않지만 지원 학교가 참고하므로 답안 구조를 연습하는 샘플도 함께 제공합니다.",
     recommendedForKo: "미국 사립학교 입학 ISEE를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1229,7 +1263,8 @@ export const products: Product[] = [
     // 실제 검색어("WIDA Test")를 제목 앞부분에 반영.
     seoTitle: "WIDA Test 문제집 (학년별) | 4개 영역 실전 대비 - 블러섬북스",
     seoDescription: "WIDA ACCESS 학년별 대비 문제집. Listening·Reading·Writing·Speaking, 음원 포함.",
-    descriptionKo: "WIDA ACCESS 4개 영역을 학년 수준에 맞춰 구성하고 모의고사 리스닝 음원을 제공합니다. 학년 선택은 상담으로 안내해 드립니다.",
+    descriptionKo:
+      "Listening, Reading, Writing, Speaking 4개 영역을 K–G12 학년별로 구성한 WIDA ACCESS 대비 문제집입니다. 영어 숙련도(English Language Proficiency)를 평가하는 시험 특성에 맞춰 학년별 언어 발달 단계에 따라 문항 난이도를 조정했으며, 모의고사 리스닝 음원을 함께 제공합니다.",
     recommendedForKo: "WIDA ACCESS(영어 숙련도 평가)를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1259,7 +1294,8 @@ export const products: Product[] = [
     ],
     units: ["Reading", "Listening", "Speaking", "Writing"],
     summaryKo: "TOEFL iBT 4개 영역 실전 문제집. 모의고사 리스닝 음원 제공.",
-    descriptionKo: "TOEFL iBT 출제 유형을 반영한 4개 영역 실전 문제집입니다. 모의고사 리스닝 음원을 함께 제공합니다.",
+    descriptionKo:
+      "Reading, Listening, Speaking, Writing 4개 영역을 TOEFL iBT 실제 출제 유형에 맞춰 구성했습니다. 특히 채점 기준이 명확한 Speaking·Writing은 답안 구조를 모델로 삼아 연습할 수 있도록 설명을 더했고, 모의고사 리스닝 음원을 함께 제공해 실전과 비슷한 환경에서 연습할 수 있습니다.",
     recommendedForKo: "TOEFL iBT를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1287,7 +1323,8 @@ export const products: Product[] = [
     ],
     units: ["Listening", "Reading", "Writing", "Speaking"],
     summaryKo: "IELTS 4개 영역 실전 문제집. 모의고사 리스닝 음원 제공.",
-    descriptionKo: "IELTS 출제 유형을 반영한 4개 영역 실전 문제집입니다. 모의고사 리스닝 음원을 함께 제공합니다.",
+    descriptionKo:
+      "Listening, Reading, Writing, Speaking 4개 영역을 IELTS 실제 출제 유형에 맞춰 구성했습니다. Writing Task 1·2와 Speaking Part 1–3처럼 IELTS 고유의 파트 구성을 그대로 반영했으며, 모의고사 리스닝 음원을 함께 제공해 실전 감각을 익힐 수 있습니다.",
     recommendedForKo: "IELTS를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1315,7 +1352,8 @@ export const products: Product[] = [
     ],
     units: ["Listening", "Reading", "Writing", "Speaking"],
     summaryKo: "MET(미시간 영어시험) 실전 문제집. 모의고사 리스닝 음원 제공.",
-    descriptionKo: "MET 출제 유형을 반영한 실전 문제집입니다. 모의고사 리스닝 음원을 함께 제공합니다.",
+    descriptionKo:
+      "Listening, Reading, Writing, Speaking 4개 영역을 MET(Michigan English Test) 실제 출제 유형에 맞춰 구성했습니다. 미시간대학교 영어평가원(CaMLA)이 설계한 MET 특유의 문항 형식을 반영했으며, 모의고사 리스닝 음원을 함께 제공합니다.",
     recommendedForKo: "MET를 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1343,7 +1381,8 @@ export const products: Product[] = [
     ],
     units: ["Listening", "Reading", "Writing", "Speaking"],
     summaryKo: "SPA 영어시험 실전 문제집. 모의고사 리스닝 음원 제공.",
-    descriptionKo: "SPA 영어시험 유형을 반영한 실전 문제집입니다. 모의고사 리스닝 음원을 제공하며, 시험 세부 구성은 상담으로 안내해 드립니다.",
+    descriptionKo:
+      "Listening, Reading, Writing, Speaking 영역별 실전 유형으로 SPA 영어시험을 준비할 수 있도록 구성했습니다. 응시 목적(취업·자격 등)에 따라 요구되는 영역 비중이 다를 수 있어 세부 구성은 상담으로 확인하며, 모의고사 리스닝 음원을 함께 제공합니다.",
     recommendedForKo: "SPA 영어시험을 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1402,7 +1441,8 @@ export const products: Product[] = [
     ],
     units: ["Listening", "Reading"],
     summaryKo: "TOEIC Bridge Listening·Reading 실전 문제집. 모의고사 리스닝 음원 제공.",
-    descriptionKo: "TOEIC Bridge 출제 유형을 반영한 Listening·Reading 실전 문제집입니다. 모의고사 리스닝 음원을 함께 제공합니다.",
+    descriptionKo:
+      "Listening, Reading 2개 영역으로 구성된 TOEIC Bridge는 TOEIC의 입문 버전으로, 비즈니스 영어보다 일상 상황 중심의 비교적 쉬운 어휘와 문장으로 출제됩니다. 이 교재는 그 출제 수준에 맞춰 난이도를 조정했으며, 모의고사 리스닝 음원을 함께 제공해 처음 공인시험을 접하는 학생도 부담 없이 시작할 수 있습니다.",
     recommendedForKo: "TOEIC Bridge를 준비하는 학생 및 입문 응시자",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1430,7 +1470,8 @@ export const products: Product[] = [
     ],
     units: ["Listening", "Reading", "Language Form and Meaning"],
     summaryKo: "TOEFL Junior 3개 영역 실전 문제집. 모의고사 리스닝 음원 제공.",
-    descriptionKo: "TOEFL Junior 출제 유형을 반영한 Listening·Reading·Language Form and Meaning 실전 문제집입니다. 모의고사 리스닝 음원을 함께 제공합니다.",
+    descriptionKo:
+      "Listening, Reading, Language Form and Meaning 3개 영역으로 구성된 TOEFL Junior 출제 유형에 맞춰 제작했습니다. 성인 대상 TOEFL iBT와 달리 Writing·Speaking이 없는 대신 문법·어휘 정확성을 평가하는 Language Form and Meaning 영역 비중이 높아, 이 영역에 특히 충분한 문항을 배치했습니다. 모의고사 리스닝 음원도 함께 제공합니다.",
     recommendedForKo: "TOEFL Junior를 준비하는 초·중등 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1854,7 +1895,7 @@ export const products: Product[] = [
     units: ["Main Idea", "Supporting Details", "Inference"],
     summaryKo: "SR TEST 리딩 대비 100페이지 문제집. Main Idea·Supporting Details·Inference 유형을 연습합니다.",
     descriptionKo:
-      "Main Idea, Supporting Details, Inference 유형을 중심으로 SR TEST 리딩 대비 문제를 구성했습니다. 문제집과 정답·한국어 해설이 Digital PDF로 제공됩니다.",
+      "Main Idea, Supporting Details, Inference 3개 핵심 유형을 중심으로 SR TEST 리딩 대비 문제를 구성했습니다. Grade 2–8 전 범위에서 자주 출제되는 질문 패턴에 맞춰 지문과 문항을 제작했으며, 문제집과 정답·한국어 해설이 Digital PDF로 제공됩니다.",
     recommendedForKo: "SR TEST 리딩 유형을 처음 준비하는 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
@@ -1882,7 +1923,7 @@ export const products: Product[] = [
     units: ["Main Idea", "Supporting Details", "Inference"],
     summaryKo: "SR TEST 리딩 대비 200페이지 문제집. 100P와 같은 유형이며 문항 수만 더 많습니다.",
     descriptionKo:
-      "Main Idea, Supporting Details, Inference 유형을 100P와 동일하게 다루며, 반복 연습을 위해 문항 수를 늘린 구성입니다. 문제집과 정답·한국어 해설이 Digital PDF로 제공됩니다.",
+      "Main Idea, Supporting Details, Inference 유형을 100P와 동일하게 다루며, 반복 연습을 위해 문항 수를 늘린 구성입니다. 한 번에 유형을 익히는 것을 넘어 같은 유형을 여러 지문에서 반복 적용해 보며 정답 근거를 찾는 속도와 정확도를 함께 끌어올릴 수 있도록 했습니다. 문제집과 정답·한국어 해설이 Digital PDF로 제공됩니다.",
     recommendedForKo: "반복 연습이 더 필요한 학생",
     domesticPayment: "bank-transfer",
     internationalPayment: "paypal",
