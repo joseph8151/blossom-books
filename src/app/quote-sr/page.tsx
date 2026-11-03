@@ -26,8 +26,8 @@ export const metadata = {
 // 이 페이지 전용 분량·가격 — 공용 srVolumes(150/200/300P)와 별도로,
 // 상담 전용 100P 진입 구성을 포함한 3단계.
 const srQuoteVolumes = [
-  { label: "100P", priceKRW: 190000, tier: "Starter", tierKo: "유형 처음 익히기" },
-  { label: "200P", priceKRW: 270000, tier: "Complete", tierKo: "균형 있는 표준 대비", badge: "RECOMMENDED" },
+  { label: "100P", priceKRW: 150000, tier: "Starter", tierKo: "유형 처음 익히기" },
+  { label: "200P", priceKRW: 250000, tier: "Complete", tierKo: "균형 있는 표준 대비", badge: "RECOMMENDED" },
   { label: "300P", priceKRW: 350000, tier: "Intensive", tierKo: "반복·심화까지 충분" },
 ];
 
