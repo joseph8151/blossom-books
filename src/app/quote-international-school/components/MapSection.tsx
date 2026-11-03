@@ -9,7 +9,7 @@ type Area = "English" | "Math";
 type Stage = "STANDARD" | "ADVANCED";
 
 const AREAS: Area[] = ["English", "Math"];
-const VOLUMES = flexibleVolumes.filter((v) => v.pages === 100 || v.pages === 200 || v.pages === 300); // MAP는 100/200/300P만 판매
+const VOLUMES = flexibleVolumes.filter((v) => v.pages === 60 || v.pages === 100 || v.pages === 200 || v.pages === 300); // MAP는 60/100/200/300P 판매
 
 const chipCls =
   "flex-1 border border-ivory-300 bg-white px-3 py-2 text-center text-[12.5px] font-medium text-navy-900 transition-colors hover:border-navy-900";
@@ -64,7 +64,7 @@ export default function MapSection() {
         <p className="mt-5 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/60">
           STEP 2 · 분량 선택 — 가격
         </p>
-        <div className="mt-2 grid grid-cols-3 gap-2">
+        <div className="mt-2 grid grid-cols-4 gap-2">
           {VOLUMES.map((v) => (
             <button
               key={v.pages}
