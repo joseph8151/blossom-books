@@ -37,6 +37,7 @@ import {
   apExtraByProduct,
   placementReadingByProduct,
   srReadingByProduct,
+  levelTestSkillsByProduct,
 } from "@/data/sampleBank";
 
 // 제품 id 기반 전용 샘플 세트 (복합 문제 + 도형/그래프)
@@ -146,15 +147,13 @@ function buildWorkbookItems(product: Product): SampleItem[] {
   };
 
   if (isFourSkill(product)) {
-    // 학년별 긴 리딩 지문 + 학년대 난이도에 맞춘 Vocabulary·Grammar·Writing (교재별 차별화)
-    const baseReading = placementReadingByProduct[product.id] ?? [readingBank[0], readingBank[2], readingBank[3]];
+    // 학년별 전용 리딩 지문 + Vocabulary·Grammar (교재별 완전 차별화, 겹치는 문항 없음)
+    const reading = placementReadingByProduct[product.id] ?? [readingBank[0], readingBank[2], readingBank[3]];
     const tier = LT_TIER[product.id] ?? blossomLevel(product.difficulty);
     const offset = LT_OFFSET[product.id] ?? 0;
-    // 같은 지문 풀을 공유하는 짝(G1·G2 등)의 두 번째 학년은 지문 순서를 돌려,
-    // 미리보기 첫 문항(headline)이 같은 지문이라도 다른 문항으로 보이게 합니다.
-    const reading = offset > 0 ? [...baseReading.slice(1), baseReading[0]] : baseReading;
-    const vocabulary = pickTier(vocabularyBank, tier, 2, offset);
-    const grammar = pickTier(grammarBank, tier, 2, offset);
+    const skills = levelTestSkillsByProduct[product.id];
+    const vocabulary = skills?.vocabulary ?? pickTier(vocabularyBank, tier, 2, offset);
+    const grammar = skills?.grammar ?? pickTier(grammarBank, tier, 2, offset);
     // Writing 대표 샘플은 단문 조합보다 설득력 있는 Creative Essay(약 150 words)를 항상 먼저 보여줍니다.
     const creativeEssay = writingBank.find((w) => w.type === "Creative Essay")!;
     const otherWriting = pickTier(

@@ -172,6 +172,54 @@ export const vocabularyBank: SampleItem[] = [
     why: "A noun is needed after 'a careful,' and 'summary' is the noun form.",
     whyKo: "‘a careful ___’ 자리에는 명사가 필요하므로 명사형 summary가 알맞습니다. (동사·부사형은 부적절)",
   },
+  {
+    area: "Vocabulary", type: "Synonyms", skill: "Recognize synonyms", difficulty: "Foundation",
+    question: "Choose the word closest in meaning to “happy.”",
+    choices: ["glad", "sad", "angry", "tired"],
+    answer: "glad",
+    why: "'happy' and 'glad' both describe feeling pleased.",
+    whyKo: "happy와 glad는 둘 다 ‘기쁜/즐거운’이라는 뜻의 유의어입니다.",
+  },
+  {
+    area: "Vocabulary", type: "Context Clues", skill: "Use context clues", difficulty: "Foundation",
+    question: "The weather was so frigid that everyone wore thick coats. “Frigid” means ___.",
+    choices: ["hot", "very cold", "windy", "rainy"],
+    answer: "very cold",
+    why: "Wearing thick coats is a clue that 'frigid' means very cold.",
+    whyKo: "두꺼운 코트를 입었다는 단서로 frigid = ‘매우 추운(very cold)’임을 알 수 있습니다.",
+  },
+  {
+    area: "Vocabulary", type: "Antonyms", skill: "Recognize antonyms", difficulty: "Standard",
+    question: "Choose the word that means the OPPOSITE of “ancient.”",
+    choices: ["historic", "modern", "old", "ruined"],
+    answer: "modern",
+    why: "'ancient' means very old, so its opposite is 'modern.'",
+    whyKo: "ancient(아주 오래된)의 반대말은 modern(현대의)입니다.",
+  },
+  {
+    area: "Vocabulary", type: "Word Meaning", skill: "Choose the precise word form", difficulty: "Standard",
+    question: "Choose the word that best completes the sentence: Her ___ to study hard helped her pass the exam.",
+    choices: ["decide", "decision", "decisive", "decided"],
+    answer: "decision",
+    why: "A noun is needed after 'Her,' and 'decision' is the noun form.",
+    whyKo: "‘Her ___’ 자리에는 명사가 필요하므로 명사형 decision이 알맞습니다. (동사·형용사형은 부적절)",
+  },
+  {
+    area: "Vocabulary", type: "Prefixes & Roots", skill: "Analyze prefixes and roots", difficulty: "Advanced",
+    question: "The suffix “-less” in “fearless” means ___.",
+    choices: ["full of", "without", "before", "again"],
+    answer: "without",
+    why: "'-less' means 'without,' so fearless means without fear.",
+    whyKo: "접미사 -less는 ‘~이 없는’을 뜻하므로 fearless는 ‘두려움이 없는’입니다. (예: endless 끝이 없는, harmless 해가 없는)",
+  },
+  {
+    area: "Vocabulary", type: "Academic Vocabulary", skill: "Apply academic vocabulary", difficulty: "Advanced",
+    question: "Which sentence uses “significant” correctly?",
+    choices: ["The discovery had a significant impact on science.", "She significant to the store yesterday.", "The cake tasted significant.", "He is significant happy today."],
+    answer: "The discovery had a significant impact on science.",
+    why: "'significant' is an adjective meaning important; it must describe a noun such as 'impact.'",
+    whyKo: "significant는 ‘중요한’이라는 뜻의 형용사로 명사(impact)를 꾸며야 합니다. 나머지 문장은 품사 자리가 맞지 않습니다.",
+  },
 ];
 
 // ── Grammar ──────────────────────────────────────────────
@@ -232,6 +280,54 @@ export const grammarBank: SampleItem[] = [
     whyKo: "도입 분사구 ‘Walking to school’은 걷는 주체(Mia)를 수식해야 합니다. 나머지는 비(rain)가 걷는 꼴이 되는 수식어 오류입니다.",
     wrong: "The other options attach the phrase to 'the rain,' which cannot walk.",
     wrongKo: "나머지 보기는 분사구가 ‘비(rain)’를 수식하게 되어 비가 걷는 어색한 문장이 됩니다.",
+  },
+  {
+    area: "Grammar", type: "Capitalization", skill: "Apply capitalization rules", difficulty: "Foundation",
+    question: "Which sentence is capitalized correctly?",
+    choices: ["We visited paris last summer.", "We visited Paris last summer.", "we visited Paris Last summer.", "We Visited paris last Summer."],
+    answer: "We visited Paris last summer.",
+    why: "Only the first word of the sentence and the proper noun 'Paris' are capitalized.",
+    whyKo: "문장의 첫 글자와 고유명사(Paris)만 대문자로 씁니다. 나머지는 불필요하게 대문자를 쓰거나 꼭 필요한 곳에 쓰지 않았습니다.",
+  },
+  {
+    area: "Grammar", type: "Verb Tense", skill: "Choose the correct tense", difficulty: "Foundation",
+    question: "Choose the correct verb: Yesterday, she ___ to the store.",
+    choices: ["go", "goes", "went", "going"],
+    answer: "went",
+    why: "'Yesterday' signals the simple past tense, so 'went' is correct.",
+    whyKo: "‘Yesterday(어제)’는 과거 시제를 나타내므로 went가 알맞습니다.",
+  },
+  {
+    area: "Grammar", type: "Subject–Verb Agreement", skill: "Match subject and verb", difficulty: "Standard",
+    question: "Choose the correct verb: Neither of the boys ___ finished his homework.",
+    choices: ["have", "has", "having", "had"],
+    answer: "has",
+    why: "'Neither' is singular, so it takes the singular verb 'has.'",
+    whyKo: "‘Neither’는 단수 취급하므로 단수 동사 has를 씁니다.",
+  },
+  {
+    area: "Grammar", type: "Comparatives", skill: "Form comparative adjectives", difficulty: "Standard",
+    question: "Choose the correct form: This book is ___ than the one I read last week.",
+    choices: ["interesting", "more interesting", "most interesting", "interestinger"],
+    answer: "more interesting",
+    why: "Longer adjectives like 'interesting' form the comparative with 'more,' not '-er.'",
+    whyKo: "interesting처럼 음절이 긴 형용사는 -er이 아니라 more를 붙여 비교급을 만듭니다.",
+  },
+  {
+    area: "Grammar", type: "Parallel Structure", skill: "Apply parallel structure", difficulty: "Advanced",
+    question: "Which sentence demonstrates correct parallel structure?",
+    choices: ["She likes running, swimming, and to bike.", "She likes running, swimming, and biking.", "She likes to run, swimming, and biking.", "She likes running, to swim, and biking."],
+    answer: "She likes running, swimming, and biking.",
+    why: "All three items in the list must use the same grammatical form (-ing), which only this choice does.",
+    whyKo: "나열된 세 항목은 같은 문법 형태(동명사 -ing)로 맞춰야 합니다. 이 보기만 running·swimming·biking으로 통일되어 있습니다.",
+  },
+  {
+    area: "Grammar", type: "Conditionals", skill: "Form the third conditional", difficulty: "Advanced",
+    question: "Choose the correct form: If she ___ earlier, she would not have missed the bus.",
+    choices: ["leaves", "left", "had left", "leave"],
+    answer: "had left",
+    why: "This is a third conditional (unreal past), which requires 'had + past participle' in the if-clause.",
+    whyKo: "과거의 일을 반대로 가정하는 가정법 과거완료 문장이므로 if절에는 ‘had + 과거분사(had left)’를 씁니다.",
   },
 ];
 
@@ -1032,10 +1128,52 @@ The discovery of the waggle dance changed the way scientists think about animals
 
 Understanding the language of bees is more than a fascinating puzzle. Honeybees pollinate a large share of the crops that people depend on, from apples to almonds. When bees guide one another efficiently to flowers, they pollinate more plants and strengthen the food supply for humans and wildlife alike. By studying a dance performed in complete darkness, scientists have uncovered lessons about cooperation, survival, and the surprising intelligence hidden within the natural world.`;
 
-// 영어 레벨테스트는 학년마다 따로 나온 단행본입니다(G1–2처럼 묶은 시리즈가
-// 아닙니다). 다만 실제 샘플 지문·문항은 인접한 두 학년(G1·G2 / G3·G4 / G5·G6)이
-// 같은 출제 분석을 바탕으로 만들어져 지문 풀을 공유합니다 — 가상의 샘플을
-// 새로 만들어내지 않고, 실제 존재하는 지문·문항을 그대로 재사용합니다.
+// G2 · 약 300 단어 · SR 2.0 수준
+const passageG2 = `Ants: Tiny but Mighty Workers
+
+Ants are small insects, but they can lift things much heavier than their own body. A single ant can carry something twenty times its own weight. Scientists say this is like a person lifting a car!
+
+Ants live together in large groups called colonies. Each colony has a queen ant who lays eggs, worker ants who gather food, and soldier ants who protect the nest. Every ant has its own job to do, and they all work together to help the colony survive.
+
+Worker ants leave the nest to search for food. When a worker ant finds food, it leaves a trail of scent called a pheromone on its way back to the nest. Other ants can smell this trail and follow it straight to the food. This is why ants often walk in long, straight lines.
+
+Ants build their nests in many different places. Some ants dig tunnels under the ground. Others build large mounds out of dirt and leaves. A few kinds of ants even build nests inside trees. No matter where they live, ants always build their nests with many rooms and tunnels connected together.
+
+Even though ants are tiny, they are some of the strongest and most organized insects on Earth. By working together, a whole colony of ants can build amazing homes and find enough food to survive.`;
+
+// G4 · 약 330 단어 · SR 4.0 수준
+const passageG4 = `The Incredible Journey of the Monarch Butterfly
+
+Each autumn, millions of monarch butterflies begin one of the most remarkable journeys in the animal kingdom. These butterflies, weighing less than a paperclip, travel as far as three thousand miles from Canada and the northern United States all the way to the mountains of central Mexico.
+
+What makes this journey especially astonishing is that no single butterfly completes the entire round trip. A monarch that starts the journey south will not be the one that flies north again the following spring. Instead, it takes three or four generations of butterflies to complete the full migration cycle. Scientists still do not fully understand how monarchs that have never been to Mexico know exactly where to go.
+
+Researchers believe monarchs use a combination of cues to navigate. The position of the sun appears to act like a compass, helping the butterflies maintain a consistent direction as they fly. Some scientists also believe monarchs may sense Earth's magnetic field, giving them an internal map even on cloudy days when the sun is hidden.
+
+The destination of this long journey is just as remarkable as the trip itself. In the mountain forests of central Mexico, monarchs gather by the millions, clustering together on fir trees in numbers so large that the branches bend under their weight. The cool mountain temperature keeps the butterflies in a low-energy state, allowing them to conserve energy throughout the winter months.
+
+Unfortunately, monarch populations have declined sharply in recent decades. Loss of habitat, pesticide use, and changes in climate have all made the journey more dangerous. Conservationists are now planting milkweed, the only plant monarch caterpillars can eat, in hopes of helping the species recover.
+
+The monarch's migration reminds us that even the smallest creatures can accomplish extraordinary feats — and that protecting their habitat is essential to keeping this ancient journey alive.`;
+
+// G6 · 약 420 단어 · SR 6.0 수준
+const passageG6 = `The Accidental Discovery That Changed Medicine
+
+In 1928, a Scottish scientist named Alexander Fleming returned from a vacation to find his laboratory in its usual state of mild disorder. Among the many petri dishes he had left scattered across his workbench, one caught his attention. A dish containing colonies of bacteria had somehow become contaminated with a blue-green mold. What Fleming noticed next would eventually save hundreds of millions of lives: the bacteria surrounding the mold had died, while bacteria farther away continued to grow normally.
+
+Most scientists might have simply discarded the contaminated dish, but Fleming recognized that something significant was happening. He identified the mold as a species of Penicillium and hypothesized that it was releasing a substance capable of killing bacteria. He named this substance "penicillin." Despite the promise of his discovery, Fleming struggled for years to produce a stable, concentrated version of the compound, and his initial findings attracted little attention from the broader scientific community.
+
+It was not until the early 1940s, more than a decade after Fleming's initial observation, that a team of researchers at Oxford University successfully purified penicillin and demonstrated its remarkable effectiveness in treating bacterial infections. Their timing proved critical: World War II had created an urgent need for a reliable treatment for infected wounds, and penicillin arrived just as military and civilian doctors desperately needed it.
+
+By the time the war ended, pharmaceutical companies had scaled up production dramatically, transforming penicillin from a laboratory curiosity into a mass-produced medicine. Diseases and infections that had once been nearly always fatal, such as pneumonia and blood poisoning, suddenly became treatable. Historians often cite penicillin as one of the most important medical breakthroughs of the twentieth century, fundamentally changing how doctors approached infection and surgery.
+
+Fleming's discovery is frequently cited as an example of the role that chance, combined with careful observation, can play in scientific progress. He himself acknowledged this when he said, "One sometimes finds what one is not looking for." Yet it is worth noting that luck alone was not responsible for the breakthrough — it was Fleming's trained scientific curiosity that allowed him to recognize the significance of an unexpected result that a less attentive researcher might have simply thrown away.`;
+
+// 영어 레벨테스트는 학년마다 따로 나온 단행본입니다. 과거에는 인접한 두 학년
+// (G1·G2 / G3·G4 / G5·G6)이 지문 풀을 공유했지만, 학년이 다르면 실제로
+// 서로 다른 교재를 구매하므로 샘플도 학년마다 완전히 다른 지문·문항을
+// 사용하도록 분리했습니다. SR 레벨도 학년이 하나 올라갈 때마다 1점씩
+// 올라가는 체계(G1=SR1.0 … G6=SR6.0)로 안내합니다.
 const g1_2Reading: SampleItem[] = [
     {
       area: "Reading", type: "Main Idea", skill: "Identify the central idea", difficulty: "Foundation",
@@ -1148,6 +1286,112 @@ const g5_6Reading: SampleItem[] = [
       answer: "detailed and complex",
       why: "The dance is described as a precise, multi-part series of movements that carries specific meaning, so 'elaborate' means detailed and complex.",
       whyKo: "‘elaborate series of movements’는 방향·거리 같은 구체적 정보를 담은 정교하고 복잡한 동작을 뜻합니다. 문맥상 ‘정교한/복잡한’이 알맞습니다.",
+    },
+];
+
+const g2Reading: SampleItem[] = [
+    {
+      area: "Reading", type: "Main Idea", skill: "Identify the central idea", difficulty: "Foundation",
+      passage: passageG2,
+      question: "What is this passage MAINLY about?",
+      choices: ["How ants build roads", "How ants work together to survive", "Why ants are heavier than people", "Where queen ants come from"],
+      answer: "How ants work together to survive",
+      why: "The passage explains how each ant has a job and the colony works together to find food and build nests.",
+      whyKo: "지문은 개미마다 맡은 역할이 있고, 개미집 전체가 함께 일해 먹이를 찾고 보금자리를 만든다고 설명합니다. 즉 ‘함께 협력해 살아가는 방법’이 중심 내용입니다.",
+      wrong: "The other choices are small details, not the overall topic.",
+      wrongKo: "나머지 보기는 지문의 작은 세부일 뿐, 글 전체의 주제가 아닙니다.",
+    },
+    {
+      area: "Reading", type: "Supporting Details", skill: "Locate key details", difficulty: "Foundation",
+      passage: passageG2,
+      question: "How do other ants know where to find food?",
+      choices: ["They follow a scent trail left by another ant", "They watch the queen ant", "They dig new tunnels", "They wait for soldier ants"],
+      answer: "They follow a scent trail left by another ant",
+      why: "The passage states a worker ant leaves a scent trail (pheromone) that other ants follow to the food.",
+      whyKo: "지문에 근거가 나옵니다: 먹이를 찾은 일개미가 냄새 흔적(pheromone)을 남기면, 다른 개미들이 그 냄새를 따라 먹이를 찾습니다.",
+    },
+    {
+      area: "Reading", type: "Vocabulary in Context", skill: "Determine word meaning in context", difficulty: "Standard",
+      passage: passageG2,
+      question: "In this passage, the word colony means —",
+      choices: ["a single ant", "a group of ants living together", "a type of food", "a kind of tunnel"],
+      answer: "a group of ants living together",
+      why: "The text says, 'Ants live together in large groups called colonies.'",
+      whyKo: "지문에 정의가 나옵니다: ‘Ants live together in large groups called colonies(개미는 콜로니라 불리는 큰 무리를 지어 함께 산다).’",
+    },
+];
+
+const g4Reading: SampleItem[] = [
+    {
+      area: "Reading", type: "Main Idea", skill: "Identify the central idea", difficulty: "Standard",
+      passage: passageG4,
+      question: "Which sentence BEST states the main idea of the passage?",
+      choices: [
+        "Monarch butterflies are the fastest insects in the world.",
+        "Monarch butterflies complete an extraordinary multi-generation migration to Mexico.",
+        "Monarch butterflies only live in Canada.",
+        "Monarch butterflies cannot survive cold weather.",
+      ],
+      answer: "Monarch butterflies complete an extraordinary multi-generation migration to Mexico.",
+      why: "The whole passage describes the multi-generation migration and why it is remarkable.",
+      whyKo: "글 전체가 여러 세대에 걸쳐 멕시코까지 이어지는 놀라운 이동을 설명합니다. 이것이 중심 내용입니다.",
+      wrong: "The other choices are either unsupported or only a small detail.",
+      wrongKo: "나머지 보기는 지문에 없거나 작은 세부일 뿐, 글 전체의 주제가 아닙니다.",
+    },
+    {
+      area: "Reading", type: "Inference", skill: "Draw a conclusion from evidence", difficulty: "Advanced",
+      passage: passageG4,
+      question: "Based on the passage, why might cloudy days make navigation more difficult for monarchs?",
+      choices: ["Because the butterflies cannot fly in cold air", "Because the sun may be one of the cues monarchs use to navigate", "Because clouds block the scent trail", "Because rain damages their wings"],
+      answer: "Because the sun may be one of the cues monarchs use to navigate",
+      why: "The passage says the position of the sun acts like a compass, so hiding the sun could remove that cue.",
+      whyKo: "지문에 따르면 태양의 위치가 나침반처럼 방향을 알려주는 역할을 합니다. 구름이 태양을 가리면 이 단서를 사용하기 어려워질 수 있다고 추론할 수 있습니다.",
+    },
+    {
+      area: "Reading", type: "Vocabulary in Context", skill: "Determine word meaning in context", difficulty: "Standard",
+      passage: passageG4,
+      question: "In this passage, the word conserve most nearly means —",
+      choices: ["to use up quickly", "to save or use carefully", "to destroy", "to multiply"],
+      answer: "to save or use carefully",
+      why: "The passage says the cool temperature lets monarchs 'conserve energy' through winter, meaning save/use carefully.",
+      whyKo: "지문에서 서늘한 기온이 나비들이 겨울 내내 에너지를 ‘conserve(아껴 쓰다)’하도록 돕는다고 설명합니다.",
+    },
+];
+
+const g6Reading: SampleItem[] = [
+    {
+      area: "Reading", type: "Main Idea", skill: "Identify the central idea", difficulty: "Advanced",
+      passage: passageG6,
+      question: "Which statement BEST expresses the main idea of this passage?",
+      choices: [
+        "Alexander Fleming was the most famous scientist of the twentieth century.",
+        "Fleming's careful observation of an accidental discovery eventually led to one of medicine's most important breakthroughs.",
+        "Penicillin was immediately recognized as an important discovery in 1928.",
+        "World War II caused the discovery of penicillin.",
+      ],
+      answer: "Fleming's careful observation of an accidental discovery eventually led to one of medicine's most important breakthroughs.",
+      why: "The passage traces the discovery from Fleming's observation to its eventual mass production and impact.",
+      whyKo: "지문은 플레밍의 우연한 관찰에서 시작해, 그것이 어떻게 의학사 최고의 발견 중 하나로 이어졌는지를 설명합니다. 이것이 중심 내용입니다.",
+      wrong: "The other choices are either not stated or are only a small part of the story.",
+      wrongKo: "나머지 보기는 지문에 없거나 이야기의 일부일 뿐입니다.",
+    },
+    {
+      area: "Reading", type: "Inference", skill: "Draw a conclusion from evidence", difficulty: "Advanced",
+      passage: passageG6,
+      question: "What can be inferred about why penicillin was not widely used until the 1940s?",
+      choices: ["Fleming refused to share his discovery with other scientists.", "It took years of further research to purify and mass-produce the compound.", "Penicillin was not effective against bacteria.", "World War II prevented any scientific research."],
+      answer: "It took years of further research to purify and mass-produce the compound.",
+      why: "The passage states researchers spent over a decade purifying and scaling up production before penicillin was widely used.",
+      whyKo: "지문에 따르면 플레밍의 발견 이후 10여 년이 지나서야 연구진이 페니실린을 정제하고 대량 생산하는 데 성공했습니다.",
+    },
+    {
+      area: "Reading", type: "Vocabulary in Context", skill: "Determine word meaning in context", difficulty: "Challenge",
+      passage: passageG6,
+      question: "In this passage, the word contaminated most nearly means —",
+      choices: ["cleaned", "organized", "polluted or infected with something unwanted", "frozen"],
+      answer: "polluted or infected with something unwanted",
+      why: "The dish was unintentionally exposed to mold, which fits 'contaminated' meaning polluted/infected with something unwanted.",
+      whyKo: "접시가 의도치 않게 곰팡이에 노출되었다는 맥락이므로, contaminated는 ‘원치 않는 것에 오염된’을 뜻합니다.",
     },
 ];
 
@@ -1312,13 +1556,43 @@ export const nuteMathBank: SampleItem[] = [
   },
 ];
 
+// 영어 레벨테스트(G1–G6) 전용 Vocabulary·Grammar 2문항씩 — 학년마다 겹치지
+// 않도록 vocabularyBank·grammarBank에서 서로 다른 문항을 명시적으로
+// 지정합니다(같은 난이도 티어라도 학년별로 완전히 다른 문항이 나옵니다).
+export const levelTestSkillsByProduct: Record<string, { vocabulary: SampleItem[]; grammar: SampleItem[] }> = {
+  "english-level-test-g1": {
+    vocabulary: [vocabularyBank[6], vocabularyBank[7]], // Synonyms(happy/glad) · Context Clues(frigid)
+    grammar: [grammarBank[0], grammarBank[6]], // Subject–Verb Agreement(list) · Capitalization
+  },
+  "english-level-test-g2": {
+    vocabulary: [vocabularyBank[0], vocabularyBank[4]], // Context Clues(cluttered) · Context Clues(timid)
+    grammar: [grammarBank[4], grammarBank[7]], // Plural Nouns(geese) · Verb Tense(went)
+  },
+  "english-level-test-g3": {
+    vocabulary: [vocabularyBank[1], vocabularyBank[8]], // Synonyms(rapid/fast) · Antonyms(ancient/modern)
+    grammar: [grammarBank[2], grammarBank[8]], // Error Identification(Each) · Subject–Verb Agreement(Neither)
+  },
+  "english-level-test-g4": {
+    vocabulary: [vocabularyBank[5], vocabularyBank[9]], // Word Meaning(summary) · Word Meaning(decision)
+    grammar: [grammarBank[1], grammarBank[9]], // Verb Tense(will have worked) · Comparatives
+  },
+  "english-level-test-g5": {
+    vocabulary: [vocabularyBank[2], vocabularyBank[10]], // Prefixes & Roots(re-) · Prefixes & Roots(-less)
+    grammar: [grammarBank[3], grammarBank[10]], // Punctuation & Editing · Parallel Structure
+  },
+  "english-level-test-g6": {
+    vocabulary: [vocabularyBank[3], vocabularyBank[11]], // Academic Vocabulary(analyze) · Academic Vocabulary(significant)
+    grammar: [grammarBank[5], grammarBank[11]], // Misplaced Modifiers · Conditionals
+  },
+};
+
 export const placementReadingByProduct: Record<string, SampleItem[]> = {
   "english-level-test-g1": g1_2Reading,
-  "english-level-test-g2": g1_2Reading,
+  "english-level-test-g2": g2Reading,
   "english-level-test-g3": g3_4Reading,
-  "english-level-test-g4": g3_4Reading,
+  "english-level-test-g4": g4Reading,
   "english-level-test-g5": g5_6Reading,
-  "english-level-test-g6": g5_6Reading,
+  "english-level-test-g6": g6Reading,
   "korean-literacy-level-test": koreanLiteracyReading,
 };
 
