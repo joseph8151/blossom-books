@@ -33,6 +33,7 @@ import {
   apHistoryBank,
   mapBank,
   satMathBank,
+  toeicBridgeBank,
   apExtraByProduct,
   placementReadingByProduct,
   srReadingByProduct,
@@ -50,6 +51,7 @@ const BANK_BY_ID: Record<string, SampleItem[]> = {
   "ap-us-history-workbook": apHistoryBank,
   "map-growth-workbook": mapBank,
   "sat-math-workbook": satMathBank,
+  "toeic-bridge-workbook": toeicBridgeBank,
 };
 
 const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challenge"];
