@@ -66,12 +66,26 @@ const LT_TIER: Record<string, Difficulty> = {
   "english-level-test-g6": "Advanced",
 };
 
+// 같은 티어를 공유하는 두 학년(G1·G2 / G3·G4 / G5·G6)이 완전히 동일한 샘플을
+// 보여주지 않도록, 짝의 두 번째 학년은 뱅크에서 한 칸 밀어 다른 문항을 뽑습니다.
+const LT_OFFSET: Record<string, number> = {
+  "english-level-test-g1": 0,
+  "english-level-test-g2": 2,
+  "english-level-test-g3": 0,
+  "english-level-test-g4": 2,
+  "english-level-test-g5": 0,
+  "english-level-test-g6": 2,
+};
+
 // 목표 난이도에 가까운 순으로 정렬해 n개를 뽑습니다. (티어 문항이 먼저 오도록)
-function pickTier(bank: SampleItem[], tier: Difficulty, n: number): SampleItem[] {
+// offset을 주면 그만큼 뒤에서부터 뽑아, 같은 티어를 공유하는 상품끼리도 다른 문항이 나오게 합니다.
+function pickTier(bank: SampleItem[], tier: Difficulty, n: number, offset = 0): SampleItem[] {
   const target = DIFF_ORDER.indexOf(tier);
-  return [...bank]
-    .sort((a, b) => Math.abs(DIFF_ORDER.indexOf(a.difficulty) - target) - Math.abs(DIFF_ORDER.indexOf(b.difficulty) - target))
-    .slice(0, n);
+  const sorted = [...bank].sort(
+    (a, b) => Math.abs(DIFF_ORDER.indexOf(a.difficulty) - target) - Math.abs(DIFF_ORDER.indexOf(b.difficulty) - target)
+  );
+  const start = offset + n <= sorted.length ? offset : 0;
+  return sorted.slice(start, start + n);
 }
 
 // 첫 페이지에 가장 인상적인 문항(도형/그래프 또는 실전 지문)이 오도록 정렬합니다.
@@ -133,16 +147,21 @@ function buildWorkbookItems(product: Product): SampleItem[] {
 
   if (isFourSkill(product)) {
     // 학년별 긴 리딩 지문 + 학년대 난이도에 맞춘 Vocabulary·Grammar·Writing (교재별 차별화)
-    const reading = placementReadingByProduct[product.id] ?? [readingBank[0], readingBank[2], readingBank[3]];
+    const baseReading = placementReadingByProduct[product.id] ?? [readingBank[0], readingBank[2], readingBank[3]];
     const tier = LT_TIER[product.id] ?? blossomLevel(product.difficulty);
-    const vocabulary = pickTier(vocabularyBank, tier, 2);
-    const grammar = pickTier(grammarBank, tier, 2);
+    const offset = LT_OFFSET[product.id] ?? 0;
+    // 같은 지문 풀을 공유하는 짝(G1·G2 등)의 두 번째 학년은 지문 순서를 돌려,
+    // 미리보기 첫 문항(headline)이 같은 지문이라도 다른 문항으로 보이게 합니다.
+    const reading = offset > 0 ? [...baseReading.slice(1), baseReading[0]] : baseReading;
+    const vocabulary = pickTier(vocabularyBank, tier, 2, offset);
+    const grammar = pickTier(grammarBank, tier, 2, offset);
     // Writing 대표 샘플은 단문 조합보다 설득력 있는 Creative Essay(약 150 words)를 항상 먼저 보여줍니다.
     const creativeEssay = writingBank.find((w) => w.type === "Creative Essay")!;
     const otherWriting = pickTier(
       writingBank.filter((w) => w.type !== "Creative Essay"),
       tier,
-      1
+      1,
+      offset
     );
     const writing = [creativeEssay, ...otherWriting];
     // 무료 샘플은 앞 5문항만 노출되므로(FREE_WORKBOOK_CAP), Reading만 몰리지 않도록
