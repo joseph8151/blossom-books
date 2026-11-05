@@ -30,6 +30,11 @@ const links = [
     url: "https://blossombooks.org/quote-toeic-bridge/",
   },
   {
+    title: "SCAT (단일 시험 전용)",
+    who: "SCAT Elementary/Intermediate/Advanced 전용 · 40P/60P/100P/200P 문의",
+    url: "https://blossombooks.org/quote-scat-exam/",
+  },
+  {
     title: "학원·학교 레벨테스트",
     who: "영어 · 국어 · 수학 레벨테스트/반 배정 문의 고객",
     url: "https://blossombooks.org/quote/",
