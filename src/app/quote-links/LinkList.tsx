@@ -25,6 +25,11 @@ const links = [
     url: "https://blossombooks.org/quote-nute/",
   },
   {
+    title: "TOEIC Bridge",
+    who: "TOEIC Bridge(Listening·Reading) 전용 · 60P/100P/200P 문의",
+    url: "https://blossombooks.org/quote-toeic-bridge/",
+  },
+  {
     title: "학원·학교 레벨테스트",
     who: "영어 · 국어 · 수학 레벨테스트/반 배정 문의 고객",
     url: "https://blossombooks.org/quote/",

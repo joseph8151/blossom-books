@@ -767,6 +767,48 @@ export const certifiedEnglishBank: SampleItem[] = [
   },
 ];
 
+// ── TOEIC Bridge (Listening·Reading 2개 영역, 입문 난이도 — 일상 소재) ──
+// TOEIC Bridge는 TOEIC과 달리 Writing·Speaking이 없고, 비즈니스보다
+// 일상적인 소재·쉬운 문장으로 출제됩니다. Listening 2유형 + Reading 2유형,
+// 총 4문항으로 영역별 출제 유형을 고르게 보여줍니다.
+export const toeicBridgeBank: SampleItem[] = [
+  {
+    area: "Listening", type: "Short Conversation", skill: "Listening comprehension (audio provided)", difficulty: "Foundation",
+    passage: "[Audio transcript]\nA: Can you help me carry these boxes to the car?\nB: Sure, just give me a minute to finish this email.",
+    question: "What does the woman offer to do?",
+    choices: ["Carry the boxes right away", "Help after she finishes her email", "Ask someone else for help", "Buy more boxes"],
+    answer: "Help after she finishes her email",
+    why: "The woman says she will help after finishing her email ('just give me a minute'). The full workbook includes MP3 audio.",
+    whyKo: "여자는 이메일을 마친 뒤(‘just give me a minute’) 도와주겠다고 답합니다. 실제 교재는 MP3 음원을 제공합니다.",
+  },
+  {
+    area: "Listening", type: "Question-Response", skill: "Choose the best response to a spoken question", difficulty: "Foundation",
+    passage: "[Audio transcript]\nQ: Where did you put the keys?",
+    question: "Choose the best response to the question.",
+    choices: ["On the kitchen table.", "At three o'clock.", "Yes, I did.", "It's raining outside."],
+    answer: "On the kitchen table.",
+    why: "A 'Where' question needs a place in response; the other choices answer time, yes/no, or weather questions.",
+    whyKo: "‘Where(어디에)’로 묻는 질문에는 장소로 답해야 합니다. 나머지는 시간·예/아니오·날씨에 대한 응답이라 어울리지 않습니다.",
+  },
+  {
+    area: "Reading", type: "Incomplete Sentences", skill: "Choose the correct word to complete a sentence", difficulty: "Standard",
+    question: "Choose the word that best completes the sentence.\nThe museum ____ at 9 a.m. every day except Monday.",
+    choices: ["open", "opens", "opening", "to open"],
+    answer: "opens",
+    why: "The subject 'The museum' is third-person singular, so the present-tense verb must be 'opens.'",
+    whyKo: "주어 The museum은 3인칭 단수이므로 현재시제 동사는 opens가 되어야 합니다.",
+  },
+  {
+    area: "Reading", type: "Short Passage", skill: "Locate specific information in a notice", difficulty: "Standard",
+    passage: "Pool Hours\nMonday–Friday: 6 a.m.–9 p.m.\nSaturday–Sunday: 8 a.m.–6 p.m.\nThe pool will be closed on July 4th for maintenance.",
+    question: "On which day will the pool be closed?",
+    choices: ["Every Monday", "Every Saturday", "July 4th", "Every Sunday"],
+    answer: "July 4th",
+    why: "The notice states the pool will be closed on July 4th for maintenance.",
+    whyKo: "안내문에 ‘7월 4일에는 유지보수로 수영장이 문을 닫는다(closed on July 4th for maintenance)’고 명시되어 있습니다.",
+  },
+];
+
 // ── 영어 레벨테스트 학년별 리딩 지문 (긴 지문 + 다문항) ──────────────
 // 문제집 본문은 영어, 해설은 한글. 각 학년대의 목표 Reading Level에 맞춰 길이·어휘·문장 구조를 조정합니다.
 
