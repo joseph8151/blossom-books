@@ -738,6 +738,183 @@ export const scatBank: SampleItem[] = [
   },
 ];
 
+// ── SCAT 레벨별 심화 샘플 (Elementary/Intermediate/Advanced, 각 6문항 ·
+// SVG 도형 중심) — /quote-scat-exam 전용으로 제작한 레벨별 세트입니다.
+// Verbal Analogy는 그림이 필요 없는 어휘 유형이고, Quantitative 문항은
+// 기존 SampleFigure의 검증된 도형을 재사용해 시각적으로 풍부하게 구성했습니다.
+export const scatElementaryBank: SampleItem[] = [
+  {
+    area: "Verbal", type: "Analogy", skill: "Verbal analogy (young-to-adult)", difficulty: "Foundation",
+    question: "Puppy is to dog as kitten is to ___.",
+    choices: ["cat", "bird", "fish", "mouse"],
+    answer: "cat",
+    why: "A puppy is a young dog, so a kitten is a young cat (young-to-adult relationship).",
+    whyKo: "강아지(puppy)가 개(dog)의 새끼이듯, 새끼 고양이(kitten)는 고양이(cat)의 새끼입니다. (새끼–성체 관계)",
+  },
+  {
+    area: "Quantitative", type: "Figure Pattern", skill: "Find the next term in a visual pattern", difficulty: "Foundation",
+    question: "The groups of dots follow a rule (1, 3, 5, …). How many dots belong in the 4th group?",
+    figure: "dots-pattern",
+    choices: ["6", "7", "8", "9"],
+    answer: "7",
+    why: "The number of dots increases by 2 each time: 1, 3, 5, 7.",
+    whyKo: "점의 개수가 1, 3, 5로 2개씩 늘어나는 규칙입니다. 따라서 4번째 묶음은 7개입니다.",
+  },
+  {
+    area: "Quantitative", type: "Figure Comparison", skill: "Compare a figure's measure with a value", difficulty: "Standard",
+    question: "The triangle has base 8 and height 5.  Column A: the area of the triangle.  Column B: 18.  Which statement is true?",
+    figure: "triangle-bh",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "A is greater",
+    why: "Area = 1/2 × base × height = 1/2 × 8 × 5 = 20, which is greater than 18.",
+    whyKo: "삼각형의 넓이 = 1/2 × 밑변 × 높이 = 1/2 × 8 × 5 = 20. 20 > 18이므로 A가 더 큽니다.",
+    steps: ["Area = 1/2 × 8 × 5 = 20", "Compare 20 and 18", "20 > 18 → A is greater"],
+  },
+  {
+    area: "Quantitative", type: "Quantitative Comparison", skill: "Compare two quantities", difficulty: "Standard",
+    question: "Column A: 3 × 4    Column B: 5 + 6.  Which statement is true?",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "A is greater",
+    why: "A = 12 and B = 11, so A is greater.",
+    whyKo: "A = 3 × 4 = 12, B = 5 + 6 = 11. 따라서 A가 더 큽니다.",
+    steps: ["A = 3 × 4 = 12", "B = 5 + 6 = 11", "12 > 11 → A is greater"],
+  },
+  {
+    area: "Quantitative", type: "Figure Comparison", skill: "Compare a circle's area with a value", difficulty: "Standard",
+    question: "The circle has radius 6.  Column A: the area of the circle (in terms of π).  Column B: 30π.  Which statement is true?",
+    figure: "circle-r",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "A is greater",
+    why: "Area = π × 6² = 36π, which is greater than 30π.",
+    whyKo: "원의 넓이 = π × 6² = 36π. 36π > 30π이므로 A가 더 큽니다.",
+    steps: ["Area = π × 6² = 36π", "Compare 36π and 30π", "36π > 30π → A is greater"],
+  },
+  {
+    area: "Verbal", type: "Analogy", skill: "Verbal analogy (antonym pair)", difficulty: "Standard",
+    question: "Hot is to cold as day is to ___.",
+    choices: ["night", "sun", "week", "light"],
+    answer: "night",
+    why: "Hot and cold are opposites; day and night are opposites (antonym relationship).",
+    whyKo: "덥다(hot)와 춥다(cold)가 반대말이듯, 낮(day)의 반대말은 밤(night)입니다. (반의어 관계)",
+  },
+];
+
+export const scatIntermediateBank: SampleItem[] = [
+  {
+    area: "Verbal", type: "Analogy", skill: "Verbal analogy (creator–work)", difficulty: "Standard",
+    question: "Author is to book as composer is to ___.",
+    choices: ["song", "orchestra", "stage", "audience"],
+    answer: "song",
+    why: "An author creates a book; a composer creates a song/piece of music (creator-to-work).",
+    whyKo: "작가가 책을 쓰듯, 작곡가는 곡(song·음악)을 만듭니다. (창작자–창작물 관계)",
+  },
+  {
+    area: "Quantitative", type: "Figure Comparison", skill: "Apply the Pythagorean relationship to compare lengths", difficulty: "Standard",
+    question: "A right triangle has legs of length 3 and 4.  Column A: the length of the hypotenuse.  Column B: 5.  Which statement is true?",
+    figure: "right-triangle",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "The two are equal",
+    why: "By the Pythagorean theorem, 3² + 4² = 25, so the hypotenuse = √25 = 5, equal to Column B.",
+    whyKo: "피타고라스 정리: 3² + 4² = 25, 빗변 = √25 = 5. Column B와 같으므로 두 값이 같습니다.",
+    steps: ["3² + 4² = 9 + 16 = 25", "hypotenuse = √25 = 5", "5 = 5 → equal"],
+  },
+  {
+    area: "Quantitative", type: "Quantitative Comparison", skill: "Compare a fraction with a percent", difficulty: "Standard",
+    question: "Column A: 1/2 of 20    Column B: 25% of 40.  Which statement is true?",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "The two are equal",
+    why: "A = 10 and B = 10, so the two are equal.",
+    whyKo: "A = 20의 1/2 = 10, B = 40의 25% = 10. 두 값이 같습니다.",
+    steps: ["A = 20 × 1/2 = 10", "B = 40 × 0.25 = 10", "10 = 10 → equal"],
+  },
+  {
+    area: "Quantitative", type: "Figure Reasoning", skill: "Reason about weight relationships from a balance", difficulty: "Advanced",
+    question: "The balance scale is in equilibrium.  How many circles balance one triangle?",
+    figure: "balance-scale",
+    choices: ["2", "3", "4", "6"],
+    answer: "3",
+    why: "2 triangles balance 6 circles, so 1 triangle = 6 ÷ 2 = 3 circles.",
+    whyKo: "삼각형 2개가 원 6개와 균형을 이루므로, 삼각형 1개 = 6 ÷ 2 = 원 3개와 같습니다.",
+    steps: ["삼각형 2개 = 원 6개", "삼각형 1개 = 6 ÷ 2", "= 원 3개"],
+  },
+  {
+    area: "Quantitative", type: "Figure Pattern", skill: "Find the missing number in a magic square", difficulty: "Advanced",
+    question: "Every row, column, and diagonal must sum to the same total.  What number belongs where the '?' is?",
+    figure: "magic-square",
+    choices: ["5", "7", "8", "9"],
+    answer: "7",
+    why: "Each line must sum to 15. Middle row: 3 + 5 + ? = 15 → ? = 7.",
+    whyKo: "각 줄의 합이 15가 되어야 합니다. 가운데 가로줄 3 + 5 + ? = 15 → ? = 7.",
+    steps: ["한 줄의 합 = 15", "3 + 5 + ? = 15", "? = 7"],
+  },
+  {
+    area: "Verbal", type: "Analogy", skill: "Verbal analogy (worker–workplace)", difficulty: "Standard",
+    question: "Teacher is to classroom as doctor is to ___.",
+    choices: ["hospital", "patient", "medicine", "diploma"],
+    answer: "hospital",
+    why: "A teacher works in a classroom; a doctor works in a hospital (worker-to-workplace).",
+    whyKo: "선생님이 교실에서 일하듯, 의사는 병원(hospital)에서 일합니다. (직업–근무지 관계)",
+  },
+];
+
+export const scatAdvancedBank: SampleItem[] = [
+  {
+    area: "Verbal", type: "Analogy", skill: "Verbal analogy (abstract antonym)", difficulty: "Advanced",
+    question: "Scarce is to abundant as fragile is to ___.",
+    choices: ["durable", "delicate", "rare", "valuable"],
+    answer: "durable",
+    why: "Scarce and abundant are opposites; fragile and durable are opposites (antonym relationship).",
+    whyKo: "희귀한(scarce)과 풍부한(abundant)이 반대말이듯, 부서지기 쉬운(fragile)의 반대말은 튼튼한(durable)입니다.",
+  },
+  {
+    area: "Quantitative", type: "Quantitative Comparison", skill: "Reason about variables", difficulty: "Challenge",
+    question: "n is a positive integer greater than 1.  Column A: n²    Column B: 2n.  Which statement is true?",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "Cannot be determined",
+    why: "If n = 2, n² = 4 = 2n (equal); if n = 3, n² = 9 > 6 = 2n. The relationship changes with n.",
+    whyKo: "n = 2이면 n² = 4, 2n = 4로 같고, n = 3이면 9 > 6으로 A가 큽니다. n값에 따라 달라지므로 하나로 결정할 수 없습니다.",
+    steps: ["n = 2 → A = 4, B = 4 (equal)", "n = 3 → A = 9, B = 6 (A greater)", "값에 따라 달라짐 → Cannot be determined"],
+  },
+  {
+    area: "Quantitative", type: "Figure Comparison", skill: "Find the area of a composite figure and compare", difficulty: "Challenge",
+    question: "The shape is a 6 × 5 rectangle with a 4 × 3 piece removed from the top-right corner.  Column A: the area of the shaded shape.  Column B: 20.  Which statement is true?",
+    figure: "composite-L",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "B is greater",
+    why: "Whole rectangle = 6 × 5 = 30. Removed piece = 4 × 3 = 12. Shaded area = 30 − 12 = 18, which is less than 20.",
+    whyKo: "전체 직사각형 = 6 × 5 = 30. 잘려 나간 부분 = 4 × 3 = 12. 색칠된 도형의 넓이 = 30 − 12 = 18. 18 < 20이므로 B가 더 큽니다.",
+    steps: ["전체 = 6 × 5 = 30", "잘린 부분 = 4 × 3 = 12", "넓이 = 30 − 12 = 18", "18 < 20 → B is greater"],
+  },
+  {
+    area: "Quantitative", type: "Figure Comparison", skill: "Use angle relationships on a line to compare angles", difficulty: "Advanced",
+    question: "Two angles lie on a straight line. One angle is 120°.  Column A: x.  Column B: 70°.  Which statement is true?",
+    figure: "angles-line",
+    choices: ["A is greater", "B is greater", "The two are equal", "Cannot be determined"],
+    answer: "A is greater",
+    why: "Angles on a straight line add up to 180°, so x = 180 − 120 = 60°, which is less than 70°.",
+    whyKo: "직선 위의 각의 합은 180°이므로 x = 180 − 120 = 60°입니다. 60° < 70°이므로 B가 더 큽니다.",
+    steps: ["120 + x = 180", "x = 60°", "60° < 70° → B is greater"],
+  },
+  {
+    area: "Quantitative", type: "Figure Pattern", skill: "Find the missing number in a magic square", difficulty: "Challenge",
+    question: "Every row, column, and diagonal must sum to the same total.  What number belongs where the '?' is?",
+    figure: "magic-square",
+    choices: ["5", "7", "8", "9"],
+    answer: "7",
+    why: "Each line must sum to 15. Middle row: 3 + 5 + ? = 15 → ? = 7.",
+    whyKo: "각 줄의 합이 15가 되어야 합니다. 가운데 가로줄 3 + 5 + ? = 15 → ? = 7.",
+    steps: ["한 줄의 합 = 15", "3 + 5 + ? = 15", "? = 7"],
+  },
+  {
+    area: "Verbal", type: "Analogy", skill: "Verbal analogy (creator–work, abstract)", difficulty: "Advanced",
+    question: "Author is to manuscript as sculptor is to ___.",
+    choices: ["statue", "museum", "chisel", "marble"],
+    answer: "statue",
+    why: "An author creates a manuscript; a sculptor creates a statue (creator-to-work).",
+    whyKo: "작가가 원고(manuscript)를 쓰듯, 조각가는 조각상(statue)을 만듭니다. (창작자–창작물 관계) 도구(chisel)나 재료(marble)는 결과물이 아닙니다.",
+  },
+];
+
 // ── Certified English (TOEFL/IELTS/OET 등) ───────────────
 export const certifiedEnglishBank: SampleItem[] = [
   {
