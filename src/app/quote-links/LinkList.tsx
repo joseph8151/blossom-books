@@ -31,7 +31,7 @@ const links = [
   },
   {
     title: "SCAT (단일 시험 전용)",
-    who: "SCAT Elementary/Intermediate/Advanced 전용 · 40P/60P/100P/200P 문의",
+    who: "SCAT Elementary/Intermediate/Advanced 전용 · 40P/100P/200P 문의",
     url: "https://blossombooks.org/quote-scat-exam/",
   },
   {
