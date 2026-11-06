@@ -57,6 +57,13 @@ const BANK_BY_ID: Record<string, SampleItem[]> = {
   "wida-workbook": widaBank,
 };
 
+// 상품의 gradeRange가 넓은 범위(예: "K – G12")인데 샘플은 그중 한 레벨만
+// 대표로 보여줄 때, 어느 레벨 기준인지 명시합니다 — 학부모가 샘플을 보고
+// 본인 자녀 학년과 동일하다고 오해하지 않도록 합니다.
+const SAMPLE_GRADE_NOTE: Record<string, string> = {
+  "wida-workbook": "Grades 3–5",
+};
+
 const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challenge"];
 
 // 학년대별 난이도 티어 — 같은 4영역 레벨테스트라도 학년에 따라 다른 문항을 노출합니다.
@@ -271,6 +278,7 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
 
   const level = blossomLevel(product.difficulty);
   const code = productCode(product);
+  const gradeNote = SAMPLE_GRADE_NOTE[product.id];
   const total = workbook.length + answers.length;
   const hasFigure = workbook.some((i) => i.figure);
   const hasLongPassage = workbook.some((i) => (i.passage?.length ?? 0) > 200);
@@ -308,6 +316,12 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
             ))}
           </div>
         </div>
+        {gradeNote && (
+          <p className="mt-2 text-[11.5px] text-charcoal-600/80">
+            이 샘플은 <span className="font-medium text-navy-900">{gradeNote}</span> 기준입니다. 다른 학년은
+            상담 시 안내해 드립니다.
+          </p>
+        )}
 
         {/* 미리보기 스트립 — 클릭 전에도 내용을 살짝 보여줍니다 */}
         <div className="mt-3 grid gap-2 sm:grid-cols-3">
@@ -341,6 +355,9 @@ export default function SamplePreviewButton({ product }: { product: Product }) {
                   <p className="mt-0.5 font-label text-[10px] uppercase tracking-[0.1em] text-charcoal-600/70">
                     {code} · {level} · {product.gradeRange}
                   </p>
+                  {gradeNote && (
+                    <p className="mt-1 text-[11px] text-brass-600">샘플 기준: {gradeNote} (다른 학년은 상담 시 안내)</p>
+                  )}
                 </div>
                 <button onClick={() => setOpen(false)} aria-label="닫기" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-charcoal-600 transition-colors hover:bg-navy-900/5">
                   <X size={20} />
