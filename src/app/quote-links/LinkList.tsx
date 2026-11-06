@@ -30,6 +30,11 @@ const links = [
     url: "https://blossombooks.org/quote-toeic-bridge/",
   },
   {
+    title: "WIDA ACCESS",
+    who: "WIDA ACCESS(Listening·Reading·Writing·Speaking) 전용 · 100P/200P/300P 문의",
+    url: "https://blossombooks.org/quote-wida/",
+  },
+  {
     title: "SCAT (단일 시험 전용)",
     who: "SCAT Elementary/Intermediate/Advanced 전용 · 40P/100P/200P 문의",
     url: "https://blossombooks.org/quote-scat-exam/",

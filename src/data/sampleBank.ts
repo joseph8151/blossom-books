@@ -1082,6 +1082,43 @@ export const toeicBridgeBank: SampleItem[] = [
   },
 ];
 
+// ── WIDA ACCESS (Listening·Reading·Writing·Speaking 4개 영역, 영어 숙련도
+// 평가 — 교과 지식이 아닌 학업 영어(academic English) 사용 능력을 측정) ──
+export const widaBank: SampleItem[] = [
+  {
+    area: "Listening", type: "Classroom Conversation", skill: "Listening comprehension (audio provided)", difficulty: "Standard",
+    passage: "[Audio transcript]\nTeacher: Please take out your science book and open it to page 12.\nStudent: Which page, 12 or 20?",
+    question: "What does the student want to know?",
+    choices: ["The teacher's name", "Which page to open to", "What time class starts", "Where the book is"],
+    answer: "Which page to open to",
+    why: "The student directly asks to confirm the page number ('Which page, 12 or 20?'). The full workbook includes MP3 audio.",
+    whyKo: "학생이 ‘Which page, 12 or 20?’라고 직접 페이지 번호를 확인하고 있습니다. 실제 교재는 MP3 음원을 제공합니다.",
+  },
+  {
+    area: "Reading", type: "Academic Passage", skill: "Read and comprehend academic content-area text", difficulty: "Standard",
+    passage: "Plants need three things to grow well: sunlight, water, and soil. Without enough sunlight, a plant's leaves may turn yellow. Without enough water, the plant may become dry and wilt.",
+    question: "According to the passage, what happens if a plant does not get enough sunlight?",
+    choices: ["It grows faster", "Its leaves may turn yellow", "It needs less water", "It changes color to green"],
+    answer: "Its leaves may turn yellow",
+    why: "The passage directly states that without enough sunlight, a plant's leaves may turn yellow.",
+    whyKo: "지문에 ‘충분한 햇빛이 없으면 잎이 노랗게 변할 수 있다(leaves may turn yellow)’고 직접 명시되어 있습니다.",
+  },
+  {
+    area: "Writing", type: "Sentence Writing", skill: "Write a complete descriptive sentence", difficulty: "Standard",
+    question: "Write one complete sentence describing your classroom. Use at least one describing word (adjective).",
+    answer: "e.g., My classroom has colorful posters and a big whiteboard on the wall.",
+    why: "Scoring looks for a complete sentence, correct word order, and at least one descriptive adjective (e.g., 'colorful,' 'big').",
+    whyKo: "채점 기준: 완전한 문장, 올바른 어순, 그리고 최소 한 개의 묘사 형용사(예: colorful, big)가 포함되었는지를 봅니다.",
+  },
+  {
+    area: "Speaking", type: "Oral Response", skill: "Give a complete spoken response using past tense", difficulty: "Standard",
+    question: "Answer out loud in 1–2 complete sentences: What did you do after school yesterday?",
+    answer: "e.g., After school yesterday, I did my homework and then played outside with my friends.",
+    why: "Scoring looks for correct past-tense verbs and a specific, complete answer rather than a single word.",
+    whyKo: "채점 기준: 과거시제 동사를 올바르게 사용했는지, 그리고 한 단어가 아니라 구체적이고 완전한 문장으로 답했는지를 봅니다.",
+  },
+];
+
 // ── 영어 레벨테스트 학년별 리딩 지문 (긴 지문 + 다문항) ──────────────
 // 문제집 본문은 영어, 해설은 한글. 각 학년대의 목표 Reading Level에 맞춰 길이·어휘·문장 구조를 조정합니다.
 

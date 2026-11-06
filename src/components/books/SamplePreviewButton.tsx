@@ -34,6 +34,7 @@ import {
   mapBank,
   satMathBank,
   toeicBridgeBank,
+  widaBank,
   apExtraByProduct,
   placementReadingByProduct,
   srReadingByProduct,
@@ -53,6 +54,7 @@ const BANK_BY_ID: Record<string, SampleItem[]> = {
   "map-growth-workbook": mapBank,
   "sat-math-workbook": satMathBank,
   "toeic-bridge-workbook": toeicBridgeBank,
+  "wida-workbook": widaBank,
 };
 
 const DIFF_ORDER: Difficulty[] = ["Foundation", "Standard", "Advanced", "Challenge"];
