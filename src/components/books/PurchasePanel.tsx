@@ -252,7 +252,7 @@ export default function PurchasePanel({ product, isDirect }: { product: Product;
             {[
               "Digital PDF 상품",
               "구매 전 Sample 확인 가능",
-              "발송 완료 후 환불 불가",
+              "결제 확인 후 환불 불가",
               "Blossom Books 측 오류 확인 시 최대 2회 수정",
               "추가 제작·구성 변경은 별도 문의",
             ].map((t) => (

@@ -32,7 +32,7 @@ const confirmChecklist = [
   "Digital PDF 상품임을 확인했습니다.",
   "선택한 시험 및 교재를 확인했습니다.",
   "선택한 페이지 수와 가격을 확인했습니다.",
-  "PDF 파일 발송 완료 후 환불이 불가함을 확인했습니다.",
+  "결제(입금) 확인 후 주문이 접수되는 즉시 편집·제작이 시작되며, 그 시점부터 환불이 불가함을 확인했습니다.",
   "Blossom Books 측 오류 확인 시 교정·수정은 최대 2회까지 가능함을 확인했습니다.",
   "새로운 문제 추가·난이도 변경·구성 변경은 오류 수정에 포함되지 않음을 확인했습니다.",
 ];
@@ -65,12 +65,12 @@ export default function PolicyPage() {
           </div>
           <div className="mt-5 space-y-3 text-[14px] leading-[1.9] text-charcoal-600">
             <p>
-              교재 파일이 발송되기 전에는 주문 상태와 제작 진행 여부에 따라 취소 또는 변경 가능 여부를
-              상담원에게 확인하실 수 있습니다.
+              결제(입금)가 확인되기 전에는 주문 취소 또는 변경 가능 여부를 상담원에게 확인하실 수
+              있습니다.
             </p>
             <p>
-              단, PDF 교재가 이메일·카카오톡·다운로드 링크 또는 기타 방법으로 고객에게 발송된 이후에는
-              디지털 콘텐츠의 특성상 환불이 불가합니다.
+              단, 입금이 확인되어 주문이 접수되면 그 즉시 교재 편집·제작 작업이 시작되므로, 디지털
+              콘텐츠의 특성상 결제 확인과 동시에 환불이 불가합니다.
             </p>
           </div>
 
@@ -78,14 +78,14 @@ export default function PolicyPage() {
             <AlertTriangle size={20} className="mt-0.5 shrink-0 text-burgundy-700" />
             <div>
               <p className="font-label text-[11px] uppercase tracking-[0.14em] text-burgundy-700">
-                Important · PDF files are non-refundable after delivery
+                Important · Refunds are not available once payment is confirmed
               </p>
               <p className="mt-1.5 text-[14px] font-medium text-navy-950">
-                PDF 교재는 파일 발송 완료 이후 환불이 불가합니다.
+                결제(입금) 확인 후 주문이 접수되는 즉시 환불이 불가합니다.
               </p>
               <p className="mt-1.5 text-[13px] leading-relaxed text-charcoal-600">
-                따라서 구매 전 교재명·학생 학년·시험 유형·페이지 수·구성·무료 Sample을 충분히 확인한 후
-                구매해 주시기 바랍니다.
+                주문 접수와 동시에 편집·제작이 시작되기 때문입니다. 따라서 구매 전 교재명·학생 학년·시험
+                유형·페이지 수·구성·무료 Sample을 충분히 확인한 후 구매해 주시기 바랍니다.
               </p>
             </div>
           </div>
@@ -191,12 +191,12 @@ export default function PolicyPage() {
           <h2 className="font-display text-[22px] font-semibold sm:text-[26px]">정책 요약</h2>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {[
-              ["PDF 파일 발송 전", "상품과 구성 최종 확인 · 취소/변경 확인 가능"],
-              ["PDF 파일 발송 후", "환불 불가"],
+              ["결제(입금) 확인 전", "상품과 구성 최종 확인 · 취소/변경 가능"],
+              ["결제(입금) 확인 후 (주문 접수 즉시)", "환불 불가 · 편집·제작 시작"],
               ["Blossom Books 측 명확한 오류", "확인 후 최대 2회 교정·수정"],
               ["고객 취향·수준 차이", "오류 수정 대상 아님"],
               ["새로운 문제·페이지 추가", "추가 제작 / 별도 비용"],
-              ["다른 상품·시험으로 변경", "PDF 발송 후 변경 불가"],
+              ["다른 상품·시험으로 변경", "결제 확인 후 변경 불가"],
             ].map(([k, v]) => (
               <div key={k} className="border border-ivory-100/12 bg-ivory-100/[0.03] p-4">
                 <p className="font-label text-[10.5px] uppercase tracking-[0.1em] text-brass-400">{k}</p>

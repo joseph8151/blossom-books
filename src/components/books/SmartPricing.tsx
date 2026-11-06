@@ -65,7 +65,7 @@ export default function SmartPricing() {
 
       {/* 신뢰 문구 */}
       <p className="mt-4 text-[11.5px] leading-relaxed text-charcoal-600/80">
-        블러섬북스 자체 제작 · 한글 상세해설 포함 · 결제 확인 후 PDF 발송 · 발송 후 환불 불가
+        블러섬북스 자체 제작 · 한글 상세해설 포함 · 결제 확인 즉시 제작 시작 · 환불 불가
       </p>
     </section>
   );

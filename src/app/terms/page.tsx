@@ -45,8 +45,8 @@ export default function TermsPage() {
         <div>
           <h2 className="font-display text-[19px] font-semibold text-navy-950">제5조 (환불)</h2>
           <p className="mt-2 text-charcoal-600">
-            디지털 콘텐츠의 특성상 파일 발송 이후에는 환불이 제한될 수 있으며, 구체적인 기준은
-            상담을 통해 안내드립니다.
+            디지털 콘텐츠의 특성상 결제(입금) 확인 후 주문이 접수되는 즉시 편집·제작이 시작되며,
+            그 시점부터 환불이 제한될 수 있습니다. 구체적인 기준은 상담을 통해 안내드립니다.
           </p>
         </div>
       </div>
