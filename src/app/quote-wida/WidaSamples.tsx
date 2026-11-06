@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Check, ChevronDown, Headphones, BookOpen, PenLine, Mic } from "lucide-react";
-import { widaBank } from "@/data/sampleBank";
+import { SampleItem } from "@/data/sampleBank";
 
 const OPTION_LETTERS = ["A", "B", "C", "D"];
 const AREA_ICON: Record<string, typeof Headphones> = {
@@ -12,17 +12,17 @@ const AREA_ICON: Record<string, typeof Headphones> = {
   Speaking: Mic,
 };
 
-export default function WidaSamples() {
+export default function WidaSamples({ bank, idPrefix }: { bank: SampleItem[]; idPrefix: string }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <div className="mt-5 grid gap-5 sm:grid-cols-2">
-      {widaBank.map((item, i) => {
+      {bank.map((item, i) => {
         const open = openIndex === i;
         const isListening = item.area === "Listening";
         const Icon = AREA_ICON[item.area] ?? BookOpen;
         return (
-          <article key={i} className="border border-navy-800/12 bg-white">
+          <article key={`${idPrefix}-${i}`} className="border border-navy-800/12 bg-white">
             <div className="flex items-center justify-between gap-2 border-b border-navy-800/12 bg-ivory-200/40 px-5 py-3">
               <span className="flex items-center gap-2">
                 <Icon size={13} className="text-brass-500" />

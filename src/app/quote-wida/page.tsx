@@ -2,6 +2,7 @@ import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { volumeOptions, formatKRW } from "@/data/pricing";
 import { products } from "@/data/products";
+import { widaBankByCluster } from "@/data/sampleBank";
 import WidaSamples from "./WidaSamples";
 
 // WIDA ACCESS 문의에만 카카오톡으로 직접 전달하는 비공개 구성·가격표입니다.
@@ -27,6 +28,15 @@ const headCellCls =
 
 const product = products.find((p) => p.id === "wida-workbook")!;
 const widaVolumes = volumeOptions.filter((v) => v.pages === 100 || v.pages === 200 || v.pages === 300);
+
+// WIDA ACCESS 공식 Grade Level Cluster 5종
+const CLUSTERS: { key: string; label: string; desc: string }[] = [
+  { key: "K", label: "Kindergarten", desc: "유치원 수준 · 한 단계 지시사항, 짧은 문장" },
+  { key: "1-2", label: "Grades 1–2", desc: "초1–2 수준 · 짧은 지문, 2문장 쓰기" },
+  { key: "3-5", label: "Grades 3–5", desc: "초3–5 수준 · 교과 연계 지문, 문단 쓰기 시작" },
+  { key: "6-8", label: "Grades 6–8", desc: "중1–3 수준 · 심화 교과 지문, 문단 단위 서술" },
+  { key: "9-12", label: "Grades 9–12", desc: "고1–3 수준 · 추상적 주제, 논증형 글쓰기" },
+];
 
 export default function QuoteWidaPage() {
   return (
@@ -73,15 +83,25 @@ export default function QuoteWidaPage() {
         </p>
       </section>
 
-      {/* 3. 샘플 문항 — 4개 영역 1문항씩 */}
-      <section className="mt-12">
-        <h2 className="font-display text-[18px] font-semibold text-navy-950">WIDA ACCESS 샘플 문항</h2>
-        <p className="mt-1.5 max-w-[640px] text-[12.5px] leading-relaxed text-charcoal-600">
-          Listening·Reading·Writing·Speaking 4개 영역 각 1문항입니다. WIDA는 특정 교과 지식이 아니라
-          학업 상황에서 쓰이는 영어(academic English) 사용 능력을 평가하는 시험입니다.
-        </p>
-        <WidaSamples />
-      </section>
+      {/* 3. 레벨(Grade Level Cluster)별 샘플 문항 */}
+      <p className="mt-12 max-w-[720px] text-[12.5px] leading-relaxed text-charcoal-600">
+        WIDA ACCESS는 실제로 K / Grades 1–2 / Grades 3–5 / Grades 6–8 / Grades 9–12, 5개의 공식 Grade
+        Level Cluster로 시험이 나뉩니다. 학년대가 다르면 어휘·문장 길이·주제의 추상성이 크게 달라지므로,
+        샘플도 클러스터마다 완전히 다른 문항으로 준비했습니다.
+      </p>
+      {CLUSTERS.map(({ key, label, desc }) => (
+        <section key={key} className="mt-12 border-t border-ivory-300 pt-10">
+          <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">{desc}</p>
+          <h2 className="mt-1.5 font-display text-[20px] font-semibold text-navy-950">
+            WIDA ACCESS — {label}
+          </h2>
+          <p className="mt-1.5 max-w-[640px] text-[12.5px] leading-relaxed text-charcoal-600">
+            Listening·Reading·Writing·Speaking 4개 영역 각 1문항입니다. WIDA는 특정 교과 지식이 아니라
+            학업 상황에서 쓰이는 영어(academic English) 사용 능력을 평가하는 시험입니다.
+          </p>
+          <WidaSamples bank={widaBankByCluster[key]} idPrefix={key} />
+        </section>
+      ))}
 
       {/* 4. 안내 */}
       <p className="mt-10 max-w-[680px] text-[12.5px] leading-relaxed text-charcoal-600/80">
