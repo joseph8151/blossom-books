@@ -6,7 +6,7 @@ const trust = [
   { k: "Real Workbooks", v: "실제 Sample을 확인하세요." },
   { k: "Flexible Volume", v: "필요한 분량만 선택하세요." },
   { k: "Human Support", v: "구매 전 상담원이 확인합니다." },
-  { k: "Transparent Policy", v: "발송 후 환불 불가 · 오류 확인 시 최대 2회 수정" },
+  { k: "Transparent Policy", v: "결제 확인 후 환불 불가 · 오류 확인 시 최대 2회 수정" },
   { k: "Editorial Standard", v: "일관된 제작·검수 기준." },
 ];
 
