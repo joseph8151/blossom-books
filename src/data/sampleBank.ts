@@ -1084,40 +1084,185 @@ export const toeicBridgeBank: SampleItem[] = [
 
 // ── WIDA ACCESS (Listening·Reading·Writing·Speaking 4개 영역, 영어 숙련도
 // 평가 — 교과 지식이 아닌 학업 영어(academic English) 사용 능력을 측정) ──
-export const widaBank: SampleItem[] = [
-  {
-    area: "Listening", type: "Classroom Conversation", skill: "Listening comprehension (audio provided)", difficulty: "Standard",
-    passage: "[Audio transcript]\nTeacher: Please take out your science book and open it to page 12.\nStudent: Which page, 12 or 20?",
-    question: "What does the student want to know?",
-    choices: ["The teacher's name", "Which page to open to", "What time class starts", "Where the book is"],
-    answer: "Which page to open to",
-    why: "The student directly asks to confirm the page number ('Which page, 12 or 20?'). The full workbook includes MP3 audio.",
-    whyKo: "학생이 ‘Which page, 12 or 20?’라고 직접 페이지 번호를 확인하고 있습니다. 실제 교재는 MP3 음원을 제공합니다.",
-  },
-  {
-    area: "Reading", type: "Academic Passage", skill: "Read and comprehend academic content-area text", difficulty: "Standard",
-    passage: "Plants need three things to grow well: sunlight, water, and soil. Without enough sunlight, a plant's leaves may turn yellow. Without enough water, the plant may become dry and wilt.",
-    question: "According to the passage, what happens if a plant does not get enough sunlight?",
-    choices: ["It grows faster", "Its leaves may turn yellow", "It needs less water", "It changes color to green"],
-    answer: "Its leaves may turn yellow",
-    why: "The passage directly states that without enough sunlight, a plant's leaves may turn yellow.",
-    whyKo: "지문에 ‘충분한 햇빛이 없으면 잎이 노랗게 변할 수 있다(leaves may turn yellow)’고 직접 명시되어 있습니다.",
-  },
-  {
-    area: "Writing", type: "Sentence Writing", skill: "Write a complete descriptive sentence", difficulty: "Standard",
-    question: "Write one complete sentence describing your classroom. Use at least one describing word (adjective).",
-    answer: "e.g., My classroom has colorful posters and a big whiteboard on the wall.",
-    why: "Scoring looks for a complete sentence, correct word order, and at least one descriptive adjective (e.g., 'colorful,' 'big').",
-    whyKo: "채점 기준: 완전한 문장, 올바른 어순, 그리고 최소 한 개의 묘사 형용사(예: colorful, big)가 포함되었는지를 봅니다.",
-  },
-  {
-    area: "Speaking", type: "Oral Response", skill: "Give a complete spoken response using past tense", difficulty: "Standard",
-    question: "Answer out loud in 1–2 complete sentences: What did you do after school yesterday?",
-    answer: "e.g., After school yesterday, I did my homework and then played outside with my friends.",
-    why: "Scoring looks for correct past-tense verbs and a specific, complete answer rather than a single word.",
-    whyKo: "채점 기준: 과거시제 동사를 올바르게 사용했는지, 그리고 한 단어가 아니라 구체적이고 완전한 문장으로 답했는지를 봅니다.",
-  },
-];
+// WIDA는 실제로 K / Grades 1–2 / Grades 3–5 / Grades 6–8 / Grades 9–12,
+// 5개의 공식 Grade Level Cluster로 시험이 나뉩니다. 클러스터마다 어휘·문장
+// 길이·주제의 추상성이 달라지므로, 샘플도 각 클러스터에 맞춰 완전히
+// 다른 문항으로 제작했습니다.
+export const widaBankByCluster: Record<string, SampleItem[]> = {
+  "K": [
+    {
+      area: "Listening", type: "Classroom Instruction", skill: "Follow a simple one-step instruction (audio provided)", difficulty: "Foundation",
+      passage: "[Audio transcript]\nTeacher: Point to the red circle on your paper.",
+      question: "What should the student do?",
+      choices: ["Draw a circle", "Point to the red circle", "Color the paper blue", "Write their name"],
+      answer: "Point to the red circle",
+      why: "The teacher gives a single, direct instruction: point to the red circle. The full workbook includes MP3 audio.",
+      whyKo: "선생님이 ‘빨간 동그라미를 가리키라(point to the red circle)’는 한 가지 지시를 직접 내립니다. 실제 교재는 MP3 음원을 제공합니다.",
+    },
+    {
+      area: "Reading", type: "Simple Sentences", skill: "Read and understand simple sentences about a picture", difficulty: "Foundation",
+      passage: "I see a cat. The cat is black. The cat likes to play.",
+      question: "What color is the cat?",
+      choices: ["White", "Black", "Brown", "Orange"],
+      answer: "Black",
+      why: "The second sentence directly states, 'The cat is black.'",
+      whyKo: "두 번째 문장에 ‘The cat is black(고양이는 검은색이다)’라고 직접 나와 있습니다.",
+    },
+    {
+      area: "Writing", type: "Simple Sentence Writing", skill: "Write one simple complete sentence", difficulty: "Foundation",
+      question: "Write one complete sentence using the word \"happy.\"",
+      answer: "e.g., I am happy.",
+      why: "Scoring looks for a simple complete sentence (subject + verb) that correctly uses the target word.",
+      whyKo: "채점 기준: 주어+동사를 갖춘 완전한 문장에서 제시어(happy)를 올바르게 사용했는지를 봅니다.",
+    },
+    {
+      area: "Speaking", type: "Oral Response", skill: "Answer a simple personal question in a complete sentence", difficulty: "Foundation",
+      question: "Say one complete sentence to answer: What is your favorite color?",
+      answer: "e.g., My favorite color is blue.",
+      why: "Scoring looks for a complete sentence rather than a single word (e.g., just 'blue').",
+      whyKo: "채점 기준: 한 단어(예: blue)가 아니라 완전한 문장으로 답했는지를 봅니다.",
+    },
+  ],
+  "1-2": [
+    {
+      area: "Listening", type: "Classroom Conversation", skill: "Listening comprehension (audio provided)", difficulty: "Foundation",
+      passage: "[Audio transcript]\nTeacher: Please line up at the door after you finish your worksheet.",
+      question: "When should students line up at the door?",
+      choices: ["Before starting the worksheet", "After finishing the worksheet", "During lunch", "After recess"],
+      answer: "After finishing the worksheet",
+      why: "The teacher says to line up 'after you finish your worksheet.' The full workbook includes MP3 audio.",
+      whyKo: "선생님이 ‘학습지를 끝낸 뒤(after you finish your worksheet)’ 줄을 서라고 말합니다. 실제 교재는 MP3 음원을 제공합니다.",
+    },
+    {
+      area: "Reading", type: "Short Passage", skill: "Locate details in a short passage", difficulty: "Foundation",
+      passage: "Sam has a red backpack. Every morning, he puts his books, a pencil case, and a water bottle inside. He carries it to school and hangs it on a hook in his classroom.",
+      question: "What does Sam put in his backpack?",
+      choices: ["Toys and snacks", "Books, a pencil case, and a water bottle", "A red jacket", "His lunch box only"],
+      answer: "Books, a pencil case, and a water bottle",
+      why: "The passage directly lists what Sam puts inside his backpack.",
+      whyKo: "지문에 Sam이 가방에 넣는 물건(책, 필통, 물병)이 직접 나열되어 있습니다.",
+    },
+    {
+      area: "Writing", type: "Sentence Writing", skill: "Write two connected descriptive sentences", difficulty: "Standard",
+      question: "Write two complete sentences describing your favorite animal.",
+      answer: "e.g., My favorite animal is a dolphin. Dolphins are smart and they can jump very high out of the water.",
+      why: "Scoring looks for two complete, connected sentences with at least one descriptive detail.",
+      whyKo: "채점 기준: 서로 연결된 두 개의 완전한 문장과, 최소 한 가지 구체적인 묘사가 포함되었는지를 봅니다.",
+    },
+    {
+      area: "Speaking", type: "Oral Response", skill: "Give a short spoken response about a personal routine", difficulty: "Standard",
+      question: "Answer out loud in 1–2 complete sentences: What do you like to do at recess?",
+      answer: "e.g., At recess, I like to play tag with my friends.",
+      why: "Scoring looks for a specific, complete answer rather than a one-word response.",
+      whyKo: "채점 기준: 한 단어 응답이 아니라 구체적이고 완전한 문장으로 답했는지를 봅니다.",
+    },
+  ],
+  "3-5": [
+    {
+      area: "Listening", type: "Classroom Conversation", skill: "Listening comprehension (audio provided)", difficulty: "Standard",
+      passage: "[Audio transcript]\nTeacher: Please take out your science book and open it to page 12.\nStudent: Which page, 12 or 20?",
+      question: "What does the student want to know?",
+      choices: ["The teacher's name", "Which page to open to", "What time class starts", "Where the book is"],
+      answer: "Which page to open to",
+      why: "The student directly asks to confirm the page number ('Which page, 12 or 20?'). The full workbook includes MP3 audio.",
+      whyKo: "학생이 ‘Which page, 12 or 20?’라고 직접 페이지 번호를 확인하고 있습니다. 실제 교재는 MP3 음원을 제공합니다.",
+    },
+    {
+      area: "Reading", type: "Academic Passage", skill: "Read and comprehend academic content-area text", difficulty: "Standard",
+      passage: "Plants need three things to grow well: sunlight, water, and soil. Without enough sunlight, a plant's leaves may turn yellow. Without enough water, the plant may become dry and wilt.",
+      question: "According to the passage, what happens if a plant does not get enough sunlight?",
+      choices: ["It grows faster", "Its leaves may turn yellow", "It needs less water", "It changes color to green"],
+      answer: "Its leaves may turn yellow",
+      why: "The passage directly states that without enough sunlight, a plant's leaves may turn yellow.",
+      whyKo: "지문에 ‘충분한 햇빛이 없으면 잎이 노랗게 변할 수 있다(leaves may turn yellow)’고 직접 명시되어 있습니다.",
+    },
+    {
+      area: "Writing", type: "Sentence Writing", skill: "Write a complete descriptive sentence", difficulty: "Standard",
+      question: "Write one complete sentence describing your classroom. Use at least one describing word (adjective).",
+      answer: "e.g., My classroom has colorful posters and a big whiteboard on the wall.",
+      why: "Scoring looks for a complete sentence, correct word order, and at least one descriptive adjective (e.g., 'colorful,' 'big').",
+      whyKo: "채점 기준: 완전한 문장, 올바른 어순, 그리고 최소 한 개의 묘사 형용사(예: colorful, big)가 포함되었는지를 봅니다.",
+    },
+    {
+      area: "Speaking", type: "Oral Response", skill: "Give a complete spoken response using past tense", difficulty: "Standard",
+      question: "Answer out loud in 1–2 complete sentences: What did you do after school yesterday?",
+      answer: "e.g., After school yesterday, I did my homework and then played outside with my friends.",
+      why: "Scoring looks for correct past-tense verbs and a specific, complete answer rather than a single word.",
+      whyKo: "채점 기준: 과거시제 동사를 올바르게 사용했는지, 그리고 한 단어가 아니라 구체적이고 완전한 문장으로 답했는지를 봅니다.",
+    },
+  ],
+  "6-8": [
+    {
+      area: "Listening", type: "Classroom Conversation", skill: "Listening comprehension (audio provided)", difficulty: "Advanced",
+      passage: "[Audio transcript]\nTeacher: For tomorrow's group project, please research one renewable energy source and bring two facts to share with your group.",
+      question: "What does the teacher ask students to do for tomorrow?",
+      choices: ["Build a model of a solar panel", "Research a renewable energy source and bring two facts", "Write a five-page report", "Watch a video about energy"],
+      answer: "Research a renewable energy source and bring two facts",
+      why: "The teacher's instruction directly states the task: research a source and bring two facts. The full workbook includes MP3 audio.",
+      whyKo: "선생님의 지시에 과제가 직접 나와 있습니다: 재생에너지원을 조사하고 사실 두 가지를 준비하는 것. 실제 교재는 MP3 음원을 제공합니다.",
+    },
+    {
+      area: "Reading", type: "Academic Passage", skill: "Read and comprehend academic content-area text", difficulty: "Advanced",
+      passage: "Renewable energy comes from sources that are naturally replenished, such as sunlight, wind, and water. Unlike fossil fuels, renewable sources do not run out over time. However, building the technology to capture renewable energy, such as solar panels and wind turbines, can be expensive.",
+      question: "According to the passage, what is one challenge of renewable energy?",
+      choices: ["It runs out quickly", "The technology to capture it can be expensive", "It cannot be found in nature", "It only works at night"],
+      answer: "The technology to capture it can be expensive",
+      why: "The passage directly states that building the technology to capture renewable energy can be expensive.",
+      whyKo: "지문에 재생에너지를 포집하는 기술(태양광 패널, 풍력 터빈)을 만드는 데 비용이 많이 들 수 있다고 명시되어 있습니다.",
+    },
+    {
+      area: "Writing", type: "Paragraph Writing", skill: "Write a short explanatory paragraph", difficulty: "Advanced",
+      question: "Write a short paragraph (3–4 sentences) explaining one way students can help protect the environment at school.",
+      answer: "e.g., Students can help protect the environment at school by recycling paper and plastic instead of throwing them in the trash. They can also turn off lights and computers when they are not being used. Small actions like these can make a big difference over time.",
+      why: "Scoring looks for a clear topic sentence, at least one specific supporting detail, and logical connection between sentences.",
+      whyKo: "채점 기준: 명확한 주제 문장, 최소 한 가지 구체적인 뒷받침 세부 내용, 문장 간 논리적 연결이 있는지를 봅니다.",
+    },
+    {
+      area: "Speaking", type: "Extended Oral Response", skill: "Explain a reason with supporting detail (30 seconds)", difficulty: "Advanced",
+      question: "Speak for about 30 seconds: Explain why teamwork is important in a group project.",
+      answer: "e.g., Teamwork is important in a group project because each person can share different ideas and skills. When we work together, we finish tasks faster and learn from each other's strengths.",
+      why: "Scoring looks for a clear reason plus supporting detail, not just a one-sentence opinion.",
+      whyKo: "채점 기준: 단순한 한 문장 의견이 아니라, 이유와 함께 뒷받침하는 설명이 포함되었는지를 봅니다.",
+    },
+  ],
+  "9-12": [
+    {
+      area: "Listening", type: "Classroom Conversation", skill: "Listening comprehension (audio provided)", difficulty: "Challenge",
+      passage: "[Audio transcript]\nTeacher: Before the debate begins, each team will have three minutes to present their opening argument, followed by a two-minute rebuttal.",
+      question: "How much time does each team get for their opening argument?",
+      choices: ["Two minutes", "Three minutes", "Five minutes", "Ten minutes"],
+      answer: "Three minutes",
+      why: "The teacher states each team has three minutes for the opening argument, followed by a two-minute rebuttal. The full workbook includes MP3 audio.",
+      whyKo: "선생님이 각 팀의 오프닝 주장 시간이 3분이며, 이어서 2분의 반박 시간이 있다고 설명합니다. 실제 교재는 MP3 음원을 제공합니다.",
+    },
+    {
+      area: "Reading", type: "Academic Passage", skill: "Read and comprehend an abstract academic passage", difficulty: "Challenge",
+      passage: "Critical thinking involves evaluating evidence, identifying assumptions, and considering multiple perspectives before reaching a conclusion. Rather than accepting information at face value, a critical thinker asks questions such as 'What is the source of this claim?' and 'What evidence supports it?'",
+      question: "According to the passage, what does a critical thinker do before reaching a conclusion?",
+      choices: ["Accepts information without question", "Evaluates evidence and considers multiple perspectives", "Relies only on personal opinion", "Avoids asking questions"],
+      answer: "Evaluates evidence and considers multiple perspectives",
+      why: "The passage directly states that critical thinking involves evaluating evidence and considering multiple perspectives.",
+      whyKo: "지문에 비판적 사고는 증거를 평가하고 여러 관점을 고려하는 것을 포함한다고 직접 명시되어 있습니다.",
+    },
+    {
+      area: "Writing", type: "Argumentative Paragraph", skill: "Write a short argumentative paragraph with a supporting reason", difficulty: "Challenge",
+      question: "Write a short argumentative paragraph (4–5 sentences) stating your opinion on whether high school students should be required to complete community service hours, with at least one supporting reason.",
+      answer: "e.g., I believe high school students should be required to complete community service hours because it helps them develop empathy and a sense of civic responsibility. Volunteering exposes students to perspectives and challenges outside their own daily lives. In addition, community service often helps students discover career interests they may not have considered otherwise. For these reasons, I support making community service a graduation requirement.",
+      why: "Scoring looks for a clear position, supporting reasons, and an academic tone appropriate for persuasive writing.",
+      whyKo: "채점 기준: 명확한 입장, 뒷받침하는 이유, 그리고 설득하는 글에 맞는 학업적 어조가 드러나는지를 봅니다.",
+    },
+    {
+      area: "Speaking", type: "Extended Oral Response", skill: "Discuss a topic with reasoning (1 minute)", difficulty: "Challenge",
+      question: "Speak for about 1 minute: Discuss one way technology has changed how students learn.",
+      answer: "e.g., Technology has changed how students learn by making information instantly accessible through the internet, allowing students to research topics in depth rather than relying only on textbooks. It also lets students collaborate with classmates outside of school hours.",
+      why: "Scoring looks for an organized response with a clear main point and at least one developed example, sustained for close to the full time.",
+      whyKo: "채점 기준: 명확한 요지와 구체적으로 전개된 예시를 갖추고, 주어진 시간에 가깝게 발화를 유지했는지를 봅니다.",
+    },
+  ],
+};
+
+// 일반 상품 페이지(SamplePreviewButton)용 대표 샘플 — Grades 3–5 클러스터를 기본으로 사용합니다.
+export const widaBank: SampleItem[] = widaBankByCluster["3-5"];
 
 // ── 영어 레벨테스트 학년별 리딩 지문 (긴 지문 + 다문항) ──────────────
 // 문제집 본문은 영어, 해설은 한글. 각 학년대의 목표 Reading Level에 맞춰 길이·어휘·문장 구조를 조정합니다.
