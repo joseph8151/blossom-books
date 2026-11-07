@@ -761,5 +761,46 @@ export default function SampleFigure({ name }: { name: string }) {
     );
   }
 
+  // ── 유치원·유아 레벨테스트 (알파벳·수세기·도형) ─────────
+  if (name === "counting-row-6") {
+    const xs = [16, 52, 88, 124, 160, 196];
+    return (
+      <svg viewBox="0 0 220 60" className={`${svgCls} max-w-[300px]`} role="img" aria-label="Row of six dots to count">
+        {xs.map((x, i) => <circle key={i} cx={x} cy="30" r="12" fill={ACCENT} />)}
+      </svg>
+    );
+  }
+  if (name === "shape-triangle-basic") {
+    return (
+      <svg viewBox="0 0 140 120" className={`${svgCls} max-w-[160px]`} role="img" aria-label="Plain triangle shape">
+        <polygon points="70,15 15,105 125,105" fill={FILL} stroke={INK} strokeWidth="1.6" />
+      </svg>
+    );
+  }
+  if (name === "shape-pattern-row") {
+    const cell = (x: number, shape: "circle" | "square") => (
+      <g key={x} transform={`translate(${x},5)`}>
+        <rect x="0" y="0" width="40" height="40" fill="none" stroke={GRID} strokeWidth="0.8" />
+        {shape === "circle" ? (
+          <circle cx="20" cy="20" r="14" fill={ACCENT} />
+        ) : (
+          <rect x="6" y="6" width="28" height="28" fill={INK} />
+        )}
+      </g>
+    );
+    return (
+      <svg viewBox="0 0 230 50" className={`${svgCls} max-w-[320px]`} role="img" aria-label="Repeating circle and square pattern with a missing shape">
+        {cell(0, "circle")}
+        {cell(45, "square")}
+        {cell(90, "circle")}
+        {cell(135, "square")}
+        <g transform="translate(180,5)">
+          <rect x="0" y="0" width="40" height="40" fill="none" stroke={INK} strokeWidth="1.1" strokeDasharray="3 3" />
+          <text x="20" y="27" textAnchor="middle" fontSize="20" fontWeight="600" fill={ACCENT}>?</text>
+        </g>
+      </svg>
+    );
+  }
+
   return null;
 }

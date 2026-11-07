@@ -3128,3 +3128,83 @@ export const apMusicTheoryBank: SampleItem[] = [
     whyKo: "딸림음(dominant)은 음계의 5번째 음입니다. C장조에서는 G이며, 으뜸음(C)으로 해결되는 긴장감을 만드는 핵심 음입니다.",
   },
 ];
+
+// ── Kindergarten Level Test (킨더 5세/6세) ────────────────────
+// 아직 글을 익히는 중인 유아 대상이므로 문장은 짧고, 알파벳·수세기·
+// 도형은 SVG로 직접 제작해 정확하게 확인할 수 있도록 했습니다.
+// 5세(Beginner)와 6세(Advanced)는 같은 4개 영역(Alphabet/Phonics ·
+// Vocabulary/Sight Words · Numbers · Shapes)을 난이도만 올려 구성해
+// 학부모가 두 연령의 차이를 바로 비교할 수 있습니다.
+export const kinderLevelTestBankByAge: Record<string, SampleItem[]> = {
+  "5": [
+    {
+      area: "Alphabet", type: "Letter Recognition", skill: "Identify uppercase letters", difficulty: "Foundation",
+      question: "다음 중 대문자 B를 찾아보세요. / Find the uppercase letter B.",
+      choices: ["D", "P", "B", "R"],
+      answer: "B",
+      why: "Letter B has two stacked curves attached to a straight vertical line, which sets it apart from D, P, and R.",
+      whyKo: "B는 세로줄에 둥근 부분이 두 개 겹쳐진 모양입니다. D, P, R과 헷갈리지 않도록 둥근 부분의 개수를 함께 확인합니다.",
+    },
+    {
+      area: "Vocabulary", type: "Category Sort", skill: "Classify words by category", difficulty: "Foundation",
+      question: "다음 중 동물을 나타내는 낱말은 무엇일까요? / Which word names an animal?",
+      choices: ["apple", "car", "cat", "hat"],
+      answer: "cat",
+      why: "\"Cat\" names an animal, while the other words name a fruit, a vehicle, and an object.",
+      whyKo: "cat(고양이)은 동물을 나타내는 낱말입니다. apple(사과)은 음식, car(자동차)는 탈 것, hat(모자)은 물건을 나타냅니다.",
+    },
+    {
+      area: "Numbers", type: "Counting", skill: "Count objects up to 10", difficulty: "Foundation",
+      figure: "counting-row-6",
+      question: "그림 속 점이 몇 개인지 세어 보세요. / Count the dots in the picture.",
+      choices: ["5", "6", "7", "8"],
+      answer: "6",
+      why: "Counting each dot one by one gives a total of 6.",
+      whyKo: "점을 하나씩 손가락으로 짚으며 세면 모두 6개입니다.",
+    },
+    {
+      area: "Shapes", type: "Shape Recognition", skill: "Identify basic shapes", difficulty: "Foundation",
+      figure: "shape-triangle-basic",
+      question: "그림에 있는 도형의 이름은 무엇일까요? / What is the name of this shape?",
+      choices: ["circle", "square", "triangle", "star"],
+      answer: "triangle",
+      why: "A shape with 3 straight sides and 3 corners is called a triangle.",
+      whyKo: "곧은 변이 3개, 꼭짓점이 3개인 도형은 삼각형(triangle)입니다.",
+    },
+  ],
+  "6": [
+    {
+      area: "Phonics", type: "Beginning Sound", skill: "Identify initial consonant sounds", difficulty: "Standard",
+      question: '\'sun\'의 첫소리와 같은 소리로 시작하는 낱말은 무엇일까요? / Which word starts with the same sound as "sun"?',
+      choices: ["moon", "sock", "dog", "pig"],
+      answer: "sock",
+      why: 'Both "sun" and "sock" begin with the /s/ sound.',
+      whyKo: "sun과 sock은 모두 /s/ 소리로 시작합니다. moon, dog, pig는 다른 소리로 시작합니다.",
+    },
+    {
+      area: "Sight Words", type: "Word Recognition", skill: "Read common sight words", difficulty: "Standard",
+      question: '다음 중 \'look\'이라고 읽는 낱말을 고르세요. / Find the word that says "look."',
+      choices: ["lock", "book", "look", "took"],
+      answer: "look",
+      why: 'Checking each letter in order — l, o, o, k — confirms the word is "look," not "book," "lock," or "took."',
+      whyKo: "l-o-o-k 네 글자를 순서대로 확인하면 look입니다. book, lock, took과 철자를 하나씩 비교해 보세요.",
+    },
+    {
+      area: "Numbers", type: "Number Sequence", skill: "Count and sequence numbers up to 20", difficulty: "Standard",
+      question: "14 다음에 오는 수는 무엇일까요? / What number comes right after 14?",
+      choices: ["13", "15", "16", "20"],
+      answer: "15",
+      why: "Counting in order — 13, 14, 15 — shows that 15 comes right after 14.",
+      whyKo: "수를 순서대로 세면 ...13, 14, 15... 이므로 14 다음은 15입니다.",
+    },
+    {
+      area: "Shapes", type: "Pattern Completion", skill: "Complete a repeating shape pattern", difficulty: "Standard",
+      figure: "shape-pattern-row",
+      question: "다음에 올 도형은 무엇일까요? / Which shape comes next in the pattern?",
+      choices: ["circle", "square", "triangle", "star"],
+      answer: "circle",
+      why: "The pattern repeats circle, square, circle, square, so the next shape is a circle.",
+      whyKo: "circle, square, circle, square 순서로 반복되는 규칙이므로 다음에 올 도형은 circle입니다.",
+    },
+  ],
+};
