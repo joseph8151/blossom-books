@@ -45,6 +45,11 @@ const links = [
     url: "https://blossombooks.org/quote-kinder/",
   },
   {
+    title: "FCE (Cambridge English: First)",
+    who: "FCE(B2 First) 전용 · Use of English·Reading·Listening·Writing · 100P/200P 문의",
+    url: "https://blossombooks.org/quote-fce/",
+  },
+  {
     title: "학원·학교 레벨테스트",
     who: "영어 · 국어 · 수학 레벨테스트/반 배정 문의 고객",
     url: "https://blossombooks.org/quote/",
