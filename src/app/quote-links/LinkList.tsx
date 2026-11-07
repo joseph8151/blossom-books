@@ -40,6 +40,11 @@ const links = [
     url: "https://blossombooks.org/quote-scat-exam/",
   },
   {
+    title: "킨더(유치원) 5세·6세 레벨테스트",
+    who: "킨더 5세(Beginner)·6세(Advanced) 레벨테스트 전용 · 60P/100P/200P 문의",
+    url: "https://blossombooks.org/quote-kinder/",
+  },
+  {
     title: "학원·학교 레벨테스트",
     who: "영어 · 국어 · 수학 레벨테스트/반 배정 문의 고객",
     url: "https://blossombooks.org/quote/",
