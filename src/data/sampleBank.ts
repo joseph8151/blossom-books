@@ -3208,3 +3208,75 @@ export const kinderLevelTestBankByAge: Record<string, SampleItem[]> = {
     },
   ],
 };
+
+// ── FCE (Cambridge English: First / B2 First, Use of English·Reading·
+// Listening·Writing 4개 영역) ──────────────────────────────────
+// FCE는 B2(상급 중급) 수준 공인시험으로, 실제 4개 Paper(Reading and Use
+// of English · Writing · Listening · Speaking) 중 Speaking을 제외한
+// 3개 Paper의 대표 유형(Multiple Choice Cloze·Word Formation·Key Word
+// Transformation·Reading Multiple Choice·Listening Multiple Choice·
+// Writing Essay)을 각 1문항씩 보여줍니다. Writing은 서술형이라 선택지
+// 없이 모범 답안 채점 기준으로 제시합니다.
+export const fceBank: SampleItem[] = [
+  {
+    area: "Use of English", type: "Multiple Choice Cloze", skill: "Choose the word that best fits an academic text", difficulty: "Standard",
+    passage: "Many people believe that learning a new language becomes harder as you get older. However, recent research ____ that adults can still achieve high levels of fluency with consistent practice.",
+    question: "Choose the word that best fits the gap.",
+    choices: ["suggests", "says", "tells", "speaks"],
+    answer: "suggests",
+    why: '"Suggests" collocates naturally with "research" to introduce a finding, whereas "says," "tells," and "speaks" do not fit this academic register.',
+    whyKo: "research(연구)의 주어로는 suggests(~을 시사하다)가 자연스럽게 어울립니다. says/tells/speaks는 이 문맥의 격식 있는 표현과 맞지 않습니다.",
+  },
+  {
+    area: "Use of English", type: "Word Formation", skill: "Form the correct word class from a given root", difficulty: "Standard",
+    question: 'Form a word from HELP that fits the gap.\nThe hotel staff were extremely ____ throughout our stay.',
+    choices: ["help", "helpful", "helpless", "helpfully"],
+    answer: "helpful",
+    why: 'The gap needs an adjective describing the staff, so the root "help" becomes "helpful." "Helpless" reverses the meaning, and "helpfully" is an adverb, which cannot follow "were extremely."',
+    whyKo: "빈칸에는 직원을 묘사하는 형용사가 필요하므로 help는 helpful이 되어야 합니다. helpless는 반대 의미이고, helpfully는 부사라 were extremely 뒤에 올 수 없습니다.",
+  },
+  {
+    area: "Use of English", type: "Key Word Transformation", skill: "Rewrite a sentence using a given key word without changing its meaning", difficulty: "Advanced",
+    passage: 'Original: "I haven\'t visited Paris since I was a child."\nKEY WORD: TIME',
+    question: "Complete the second sentence so that it means the same as the first, using the key word (3–6 words).\nThe ____ I visited Paris was when I was a child.",
+    choices: ["last time", "first time", "only time that", "next time that"],
+    answer: "last time",
+    why: '"The last time I visited Paris was..." preserves the original meaning (haven\'t visited since) using the key word TIME.',
+    whyKo: "‘The last time I visited Paris was...’는 원문(어릴 때 이후로 파리를 방문하지 않았다)과 같은 의미를 TIME이라는 키워드를 사용해 표현합니다.",
+  },
+  {
+    area: "Reading", type: "Multiple Choice", skill: "Understand detail, opinion, and attitude in a text", difficulty: "Standard",
+    passage: "Urban beekeeping has become increasingly popular in cities around the world, with rooftop hives appearing on everything from office buildings to apartment blocks. Supporters argue that the hobby helps reverse the decline in bee populations and raises public awareness of pollinators' importance to food production. However, some ecologists warn that packing too many hives into a small urban area can actually harm wild bee species, which end up competing with honeybees for the same limited supply of flowers and nectar. Without careful planning, well-meaning city beekeepers might unintentionally make life harder for the very pollinators they hope to protect.",
+    question: "According to the passage, what is the writer's main concern about urban beekeeping?",
+    choices: [
+      "It is too expensive for most city residents to try.",
+      "Too many hives in one area can hurt wild bee populations.",
+      "City governments do not allow rooftop hives.",
+      "Honeybees cannot survive in urban environments.",
+    ],
+    answer: "Too many hives in one area can hurt wild bee populations.",
+    why: "The final two sentences explain that overcrowded hives compete with wild bees for a limited supply of flowers, which is the writer's central concern.",
+    whyKo: "마지막 두 문장에서 한 지역에 벌통이 너무 많으면 야생벌과 한정된 꽃·꿀 자원을 두고 경쟁하게 된다고 설명하며, 이것이 글쓴이가 가장 우려하는 지점입니다.",
+  },
+  {
+    area: "Listening", type: "Multiple Choice", skill: "Listening comprehension (audio provided)", difficulty: "Standard",
+    passage: "[Audio transcript]\nWoman: I was thinking of applying for that marketing internship, but the deadline's already passed, isn't it?\nMan: Actually, they extended it because they didn't get enough applicants the first time around. You've still got until Friday.\nWoman: Really? That's great news — I'd better finish my cover letter tonight, then.",
+    question: "Why does the woman decide to finish her cover letter tonight?",
+    choices: [
+      "She just found out the deadline has not passed yet.",
+      "She has a job interview tomorrow morning.",
+      "The man offered to help her write it.",
+      "She already missed the original deadline.",
+    ],
+    answer: "She just found out the deadline has not passed yet.",
+    why: "The man tells her the deadline was extended until Friday, which prompts her decision to finish the letter that night. The full workbook includes MP3 audio.",
+    whyKo: "남자가 마감이 금요일까지 연장되었다고 알려주자, 여자는 오늘 밤 자기소개서를 끝내기로 합니다. 실제 교재는 MP3 음원을 제공합니다.",
+  },
+  {
+    area: "Writing", type: "Essay", skill: "Write a balanced opinion essay with clear structure", difficulty: "Advanced",
+    question: 'Write an essay discussing the following statement, giving reasons for your opinion.\n"Schools should focus more on teaching practical life skills than academic subjects."\nWrite 140–190 words.',
+    answer: "모범 답안은 서론(입장 제시) · 본론(양쪽 근거 — 실용적 기술의 필요성 vs 학업 지식의 역할) · 결론(절충안 제시)의 구조로 작성됩니다.",
+    why: "Scoring criteria look for a clear position, balanced reasoning with examples, a logical conclusion, and an appropriate word count (140–190) using formal register and linking words.",
+    whyKo: "채점 기준: 명확한 입장(서론), 두 가지 이상의 뒷받침 근거를 갖춘 균형 잡힌 논의(본론), 논리적인 결론(결론) 구조를 갖추었는지를 봅니다. 140–190단어 분량과 격식 있는 어휘·연결어(however, in contrast, for example 등) 사용도 평가 기준에 포함됩니다.",
+  },
+];
