@@ -55,6 +55,21 @@ const links = [
     url: "https://blossombooks.org/quote/",
   },
   {
+    title: "영어 레벨테스트 (과목 분리)",
+    who: "영어 레벨테스트(G1–G6) 전용 · 가격표 + 학년별 샘플 + 단어 문제집(40P/60P/100P)",
+    url: "https://blossombooks.org/quote-level-test-english/",
+  },
+  {
+    title: "국어 레벨테스트 (과목 분리)",
+    who: "국어 문해력 레벨테스트 전용 · 가격표 + 샘플 · 60P/100P/200P/300P 문의",
+    url: "https://blossombooks.org/quote-level-test-korean/",
+  },
+  {
+    title: "수학 레벨테스트 (과목 분리)",
+    who: "사고력 수학 레벨테스트(6~7세) 전용 · 가격표 + 샘플 · 60P/100P/200P/300P 문의",
+    url: "https://blossombooks.org/quote-level-test-math/",
+  },
+  {
     title: "학원 레벨테스트 샘플",
     who: "영어 레벨테스트(G1–G6) 실제 샘플 문제를 바로 보여줄 때",
     url: "https://blossombooks.org/quote-level-test-sample/",
