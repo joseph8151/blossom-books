@@ -31,6 +31,16 @@ const srQuoteVolumes = [
   { label: "300P", priceKRW: 350000, tier: "Intensive", tierKo: "반복·심화까지 충분" },
 ];
 
+// SR 테스트 단어 문제집 — 리딩 문제집과 별도로 판매하는 어휘 전용 보조
+// 상품입니다. 리딩(100P 15만)보다 제작 공수가 적어 같은 100P 기준으로도
+// 낮게 책정했고(12만, 리딩의 80% 선), 분량이 늘수록 쪽당 단가가 내려가는
+// 구조는 리딩 상품과 동일하게 맞췄습니다(40P 1,500원/쪽 → 100P 1,200원/쪽).
+const srVocabVolumes = [
+  { label: "40P", priceKRW: 60000 },
+  { label: "60P", priceKRW: 80000 },
+  { label: "100P", priceKRW: 120000 },
+];
+
 const advantages = [
   {
     icon: Sparkles,
@@ -155,6 +165,41 @@ export default function QuoteSrPage() {
         </div>
         <p className="mt-3 text-[12px] leading-relaxed text-charcoal-600/70">
           레벨(1.0~12.0)에 따른 분량별 단가는 동일합니다. 해외 결제(PayPal)는 카카오톡 상담 시 안내해 드립니다.
+        </p>
+      </section>
+
+      {/* 4.5. SR 테스트 단어 문제집 — 리딩과 별도 구매 가능한 어휘 전용 보조 상품 */}
+      <section className="mt-10">
+        <h2 className="font-display text-[18px] font-semibold text-navy-950">SR 테스트 단어 문제집</h2>
+        <p className="mt-1.5 max-w-[640px] text-[12.5px] leading-relaxed text-charcoal-600">
+          리딩 문제집과 별도로 구매하실 수 있는 SR 어휘 전용 교재입니다. 문맥 어휘·동의어·빈칸 문제로
+          구성되며, 레벨(1.0~12.0)별로 별도 교재로 제작됩니다.
+        </p>
+        <div className="mt-4 max-w-[560px]">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="border border-ivory-300 bg-ivory-200/70 px-4 py-3 text-left font-label text-[11px] uppercase tracking-[0.08em] text-navy-800/70">
+                  구성
+                </th>
+                <th className="border border-ivory-300 bg-ivory-200/70 px-4 py-3 text-left font-label text-[11px] uppercase tracking-[0.08em] text-navy-800/70">
+                  가격
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {srVocabVolumes.map((v) => (
+                <tr key={v.label}>
+                  <td className="border border-ivory-300 px-4 py-3 text-[13.5px]">{v.label} 단어 문제집 + 해설집</td>
+                  <td className="border border-ivory-300 px-4 py-3 text-[13.5px]">{formatKRW(v.priceKRW)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          문맥 어휘·동의어·빈칸 문제와 한국어 상세 해설이 포함됩니다. 리딩 문제집과 함께 구매를 원하시면
+          카카오톡 상담 시 안내해 드립니다.
         </p>
       </section>
 
