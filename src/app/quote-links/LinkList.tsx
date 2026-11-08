@@ -51,22 +51,22 @@ const links = [
   },
   {
     title: "학원·학교 레벨테스트",
-    who: "영어 · 국어 · 수학 레벨테스트/반 배정 문의 고객",
+    who: "영어 · 국어 · 수학 레벨테스트/반 배정 문의 고객 · 과목별 학원 맞춤 단어장/드릴북도 별도 판매",
     url: "https://blossombooks.org/quote/",
   },
   {
     title: "영어 레벨테스트 (과목 분리)",
-    who: "영어 레벨테스트(G1–G6) 전용 · 가격표 + 학년별 샘플 + 단어 문제집(40P/60P/100P)",
+    who: "영어 레벨테스트(G1–G6) 전용 · 가격표 + 학년별 샘플 + 학원별 맞춤 레테 대비 단어장(40P/60P/100P)",
     url: "https://blossombooks.org/quote-level-test-english/",
   },
   {
     title: "국어 레벨테스트 (과목 분리)",
-    who: "국어 문해력 레벨테스트 전용 · 가격표 + 샘플 · 60P/100P/200P/300P 문의",
+    who: "국어 문해력 레벨테스트 전용 · 가격표 + 샘플 + 학원별 맞춤 맞춤법·받아쓰기 드릴(40P/60P/100P)",
     url: "https://blossombooks.org/quote-level-test-korean/",
   },
   {
     title: "수학 레벨테스트 (과목 분리)",
-    who: "사고력 수학 레벨테스트(6~7세) 전용 · 가격표 + 샘플 · 60P/100P/200P/300P 문의",
+    who: "사고력 수학 레벨테스트(6~7세) 전용 · 가격표 + 샘플 + 학원별 맞춤 연산 드릴북(40P/60P/100P)",
     url: "https://blossombooks.org/quote-level-test-math/",
   },
   {
