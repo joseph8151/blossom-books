@@ -119,8 +119,9 @@ export default function QuoteLevelTestEnglishPage() {
       <section className="mt-12">
         <h2 className="font-display text-[18px] font-semibold text-navy-950">영어 레벨테스트 단어 문제집</h2>
         <p className="mt-1.5 max-w-[640px] text-[12.5px] leading-relaxed text-charcoal-600">
-          본 교재(Reading·Vocabulary·Grammar·Writing 통합)와 별도로 구매하실 수 있는 어휘 전용 교재입니다.
-          동의어·반의어·접두사/접미사·문맥 어휘 문제로 구성됩니다.
+          본 교재(Reading·Vocabulary·Grammar·Writing 통합)와 별도로 구매하실 수 있는, 학원용 레벨테스트 대비
+          단어장입니다. 동의어·반의어·접두사/접미사·문맥 어휘 문제로 구성되며, 지원 학원의 단어 리스트가
+          있는 경우 해당 리스트에 맞춰 학원별로 맞춤 제작도 가능합니다.
         </p>
         <div className="mt-4 max-w-[560px]">
           <table className="w-full border-collapse">

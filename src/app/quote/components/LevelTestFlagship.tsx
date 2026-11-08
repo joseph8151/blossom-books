@@ -26,6 +26,7 @@ const subjects = [
     subtitle: "English Level Test",
     areas: ["Reading", "Vocabulary", "Grammar", "Writing", "Comprehension"],
     desc: "학생의 학년과 시험 유형에 맞춰 영어 레벨테스트 대비 문제를 구성합니다.",
+    note: "학원별 맞춤 레테 대비 단어장도 별도 판매합니다(40P/60P/100P).",
     cta: "영어 레벨테스트 상담",
   },
   {
@@ -33,6 +34,7 @@ const subjects = [
     subtitle: "Korean Level Test",
     areas: ["독해", "어휘", "문해력", "추론", "서술형"],
     desc: "학년과 시험 목적에 따라 국어 문해력 중심으로 구성합니다.",
+    note: "학원별 맞춤 맞춤법·받아쓰기 드릴(7세 후반~초5·6)도 별도 판매합니다(40P/60P/100P).",
     cta: "국어 레벨테스트 상담",
   },
   {
@@ -40,6 +42,7 @@ const subjects = [
     subtitle: "Math Level Test",
     areas: ["연산", "문제 해결", "사고력", "응용", "학년별 수학"],
     desc: "학원 및 학교 시험 수준에 맞춰 사고력과 학년별 수학을 구성합니다.",
+    note: "학원별 맞춤 연산 드릴북(7세~중1)도 별도 판매합니다(40P/60P/100P).",
     cta: "수학 레벨테스트 상담",
   },
 ];
@@ -92,7 +95,14 @@ export default function LevelTestFlagship() {
               <p className="font-display text-[22px] font-semibold text-navy-950">{s.title}</p>
               <p className="mt-1 text-[13px] text-charcoal-600/70">{s.subtitle}</p>
               <p className="mt-3 text-[12.5px] leading-relaxed text-charcoal-600">{s.areas.join(" · ")}</p>
-              <p className="mt-4 flex-1 text-[13.5px] leading-relaxed text-charcoal-700">{s.desc}</p>
+              <div className="mt-4 flex-1">
+                <p className="text-[13.5px] leading-relaxed text-charcoal-700">{s.desc}</p>
+                {s.note && (
+                  <p className="mt-2.5 border-t border-ivory-300 pt-2.5 text-[12px] leading-relaxed text-brass-600">
+                    {s.note}
+                  </p>
+                )}
+              </div>
 
               <a
                 href={siteConfig.kakaoChannelUrl}
