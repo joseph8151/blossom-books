@@ -6,7 +6,7 @@ import { Copy, Check, ArrowUpRight } from "lucide-react";
 const links = [
   {
     title: "SR 테스트 리딩 종합 문제집 (주력 상품)",
-    who: "SR 1.0–12.0 레벨 전 구간 · 100P/200P/300P 문의 고객",
+    who: "SR 1.0–12.0 레벨 전 구간 · 리딩 100P/200P/300P · 단어 문제집 40P/60P/100P 문의 고객",
     url: "https://blossombooks.org/quote-sr/",
   },
   {
