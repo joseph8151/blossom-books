@@ -1,5 +1,6 @@
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { volumeOptions, formatKRW } from "@/data/pricing";
 import { products } from "@/data/products";
 import SamplePreviewButton from "@/components/books/SamplePreviewButton";
 
@@ -30,6 +31,10 @@ const GRADE_IDS = [
 
 const gradeProducts = GRADE_IDS.map((id) => products.find((p) => p.id === id)!).filter(Boolean);
 
+const cellCls = "border border-ivory-300 px-4 py-3 text-[13.5px]";
+const headCellCls =
+  "border border-ivory-300 bg-ivory-200/70 px-4 py-3 text-left font-label text-[11px] uppercase tracking-[0.08em] text-navy-800/70";
+
 export default function QuoteLevelTestSamplePage() {
   return (
     <div className="mx-auto max-w-[880px] px-5 py-14 lg:px-8 lg:py-20">
@@ -47,26 +52,57 @@ export default function QuoteLevelTestSamplePage() {
         확인하실 수 있습니다. Reading·Vocabulary·Grammar·Writing 4개 영역, 정답 및 한글 상세해설 포함.
       </p>
 
-      {/* 2. 학년별 샘플 */}
-      <div className="mt-9 grid gap-4 sm:grid-cols-2">
-        {gradeProducts.map((p) => (
-          <div key={p.id} className="border border-ivory-300 bg-white p-5">
-            <p className="font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">{p.gradeRange}</p>
-            <p className="mt-1.5 font-display text-[16px] font-semibold text-navy-950">{p.titleKo}</p>
-            <div className="mt-4">
-              <SamplePreviewButton product={p} />
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* 2. 가격표 */}
+      <section className="mt-10">
+        <h2 className="font-display text-[18px] font-semibold text-navy-950">분량·가격</h2>
+        <p className="mt-1.5 text-[12.5px] text-charcoal-600">60P / 100P / 200P / 300P 중 선택하실 수 있습니다.</p>
+        <div className="mt-4 max-w-[560px]">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th className={headCellCls}>구성</th>
+                <th className={headCellCls}>가격</th>
+              </tr>
+            </thead>
+            <tbody>
+              {volumeOptions.map((v) => (
+                <tr key={v.pages}>
+                  <td className={cellCls}>{v.label} 문제집 + 해설집</td>
+                  <td className={cellCls}>{formatKRW(v.priceKRW)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">
+          학년(G1–G6)에 관계없이 분량별 단가는 동일합니다. 정답과 함께 한글 상세 해설이 포함됩니다.
+        </p>
+      </section>
 
-      {/* 3. 안내 */}
+      {/* 3. 학년별 샘플 */}
+      <section className="mt-12">
+        <h2 className="font-display text-[18px] font-semibold text-navy-950">학년별 상품 · 실제 샘플</h2>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          {gradeProducts.map((p) => (
+            <div key={p.id} className="border border-ivory-300 bg-white p-5">
+              <p className="font-label text-[10.5px] uppercase tracking-[0.12em] text-brass-500">{p.gradeRange}</p>
+              <p className="mt-1.5 font-display text-[16px] font-semibold text-navy-950">{p.titleKo}</p>
+              <p className="mt-1 text-[11.5px] text-charcoal-600/70">{p.title}</p>
+              <div className="mt-4">
+                <SamplePreviewButton product={p} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. 안내 */}
       <p className="mt-8 text-[12.5px] leading-relaxed text-charcoal-600/80">
         학년별 난이도는 학원 기준에 맞춰 조정 가능합니다. 지원 학원·학교명을 알려주시면 해당 학원 유형에
         맞춰 구성을 안내해 드립니다.
       </p>
 
-      {/* 4. CTA */}
+      {/* 5. CTA */}
       <div className="mt-10 border-t border-ivory-300 pt-10 text-center">
         <a
           href={siteConfig.kakaoChannelUrl}
