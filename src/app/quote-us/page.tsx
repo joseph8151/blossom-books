@@ -2,6 +2,7 @@ import { MessageCircle, ArrowRight, Check } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { volumeOptions, formatKRW } from "@/data/pricing";
 import SubjectChips from "./SubjectChips";
+import UsVocabSamples from "./UsVocabSamples";
 
 // 미국 교과과정(G1–G12 영어·수학) 및 Geometry·Algebra 1·Algebra 2·
 // Precalculus·Calculus·AP 문의에만 카카오톡으로 직접 전달하는 비공개
@@ -24,6 +25,15 @@ const p100 = volumeOptions.find((v) => v.pages === 100)!;
 const p200 = volumeOptions.find((v) => v.pages === 200)!;
 const p300 = { label: "300P", priceKRW: 390000 }; // 이 페이지 전용 분량 — 공용 volumeOptions에는 추가하지 않음
 const volumes = [p100, p200, p300];
+
+// 미국교과·AP 영단어장(보조 상품) — 본 교재와 별도로 구매 가능한 어휘
+// 전용 교재입니다. 다른 quote 페이지의 단어장/드릴북과 동일한 분량·가격
+// 구조(40P/60P/100P)를 사용합니다.
+const vocabVolumes = [
+  { label: "40P", priceKRW: 60000 },
+  { label: "60P", priceKRW: 80000 },
+  { label: "100P", priceKRW: 120000 },
+];
 
 const cases = [
   { need: "현재 학년 내용을 충분히 연습하고 싶어요.", result: "100P STANDARD" },
@@ -162,6 +172,29 @@ export default function QuoteUsPage() {
           실제 상품 예시이며, 개별 후기가 아닙니다. 필요하다면 100P Standard + 200P Advanced 같은 맞춤 조합도
           카카오톡 상담으로 안내해 드립니다.
         </p>
+      </section>
+
+      {/* 4. 미국교과·AP 영단어장 — 본 교재와 별도 판매하는 보조 상품 */}
+      <section className="mt-20">
+        <span className="eyebrow">Vocabulary Add-on</span>
+        <h2 className="mt-3 font-display text-[22px] font-semibold text-navy-950">미국교과·AP 영단어장</h2>
+        <p className="mt-3 max-w-[640px] text-[13px] leading-relaxed text-charcoal-600">
+          본 교재와 별도로 구매하실 수 있는 어휘 전용 교재입니다. 문맥 어휘·동의어·접두사/접미사·academic
+          vocabulary 문제로 구성되며, 학년·과목에 맞춰 맞춤 제작도 가능합니다.
+        </p>
+        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+          {vocabVolumes.map((v) => (
+            <div key={v.label} className="flex flex-col border border-navy-800/12 bg-ivory-100 p-5 shadow-card">
+              <p className="font-display text-[24px] font-semibold leading-none text-navy-950">{v.label}</p>
+              <p className="mt-2 text-[12px] text-charcoal-600">단어장 + 해설집</p>
+              <p className="mt-3 font-display text-[18px] font-semibold text-navy-950">{formatKRW(v.priceKRW)}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-4 text-[12px] leading-relaxed text-charcoal-600/80">
+          정답과 함께 한글 상세 해설이 포함됩니다. 아래는 샘플 문항입니다.
+        </p>
+        <UsVocabSamples />
       </section>
 
       {/* 5. 작은 글 */}

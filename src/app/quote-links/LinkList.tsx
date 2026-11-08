@@ -81,7 +81,7 @@ const links = [
   },
   {
     title: "미국교과·AP",
-    who: "G1–G12 영어·수학, Geometry·Algebra·Precalculus·Calculus·AP 문의 고객",
+    who: "G1–G12 영어·수학, Geometry·Algebra·Precalculus·Calculus·AP 문의 고객 · 영단어장도 별도 판매",
     url: "https://blossombooks.org/quote-us/",
   },
   {
@@ -101,7 +101,7 @@ const links = [
   },
   {
     title: "국제학교 입학시험",
-    who: "MAP Growth · CAT4 · ISEE · Oxford Online Placement Test 문의 고객",
+    who: "MAP Growth · CAT4 · ISEE · Oxford Online Placement Test 문의 고객 · MAP Reading 단어장도 별도 판매",
     url: "https://blossombooks.org/quote-international-school/",
   },
   {

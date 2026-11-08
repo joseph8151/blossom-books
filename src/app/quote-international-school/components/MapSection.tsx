@@ -4,6 +4,7 @@ import { useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { flexibleVolumes, formatKRW } from "@/app/quote/data";
+import MapVocabSamples from "./MapVocabSamples";
 
 type Area = "English" | "Math";
 type Stage = "STANDARD" | "ADVANCED";
@@ -28,6 +29,15 @@ const ADVANCED_MATH_POINTS = ["Multi-step Math", "Higher-level Reasoning"];
 const TWO_STEP = [
   { label: "STEP 01", title: "STANDARD", body: "현재 학년·수준의 주요 유형 대비" },
   { label: "STEP 02", title: "ADVANCED PRACTICE", body: "더 높은 난도의 Reading / Language / Math 연습" },
+];
+
+// MAP Reading 대비 단어장(보조 상품) — 본 교재와 별도로 구매 가능한
+// 어휘 전용 교재입니다. 다른 quote 페이지의 단어장/드릴북과 동일한
+// 분량·가격 구조(40P/60P/100P)를 사용합니다.
+const vocabVolumes = [
+  { label: "40P", priceKRW: 60000 },
+  { label: "60P", priceKRW: 80000 },
+  { label: "100P", priceKRW: 120000 },
 ];
 
 export default function MapSection() {
@@ -207,6 +217,44 @@ export default function MapSection() {
               Advanced Practice는 NWEA의 공식 시험 레벨명이 아니라 Blossom Books의 심화 연습 구성입니다.
             </p>
           </div>
+        </div>
+
+        {/* MAP Reading 대비 단어장 — 본 교재와 별도 판매하는 보조 상품 */}
+        <div className="mt-12 border-t border-ivory-300 pt-10">
+          <p className="font-label text-[10.5px] uppercase tracking-[0.14em] text-brass-500">Vocabulary Add-on</p>
+          <h3 className="mt-2.5 font-display text-[19px] font-semibold text-navy-950">
+            MAP Reading 대비 단어장
+          </h3>
+          <p className="mt-3 text-[13px] leading-relaxed text-charcoal-600">
+            본 교재와 별도로 구매하실 수 있는 어휘 전용 교재입니다. MAP Reading에서 자주 묻는 문맥 어휘·단어
+            의미·academic vocabulary 문제로 구성됩니다.
+          </p>
+          <div className="mt-4 max-w-[460px]">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr>
+                  <th className="border border-ivory-300 bg-ivory-200/70 px-4 py-2.5 text-left font-label text-[10.5px] uppercase tracking-[0.08em] text-navy-800/70">
+                    구성
+                  </th>
+                  <th className="border border-ivory-300 bg-ivory-200/70 px-4 py-2.5 text-left font-label text-[10.5px] uppercase tracking-[0.08em] text-navy-800/70">
+                    가격
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {vocabVolumes.map((v) => (
+                  <tr key={v.label}>
+                    <td className="border border-ivory-300 px-4 py-2.5 text-[13px]">{v.label} 단어장 + 해설집</td>
+                    <td className="border border-ivory-300 px-4 py-2.5 text-[13px]">{formatKRW(v.priceKRW)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-2.5 text-[12px] leading-relaxed text-charcoal-600/80">
+            정답과 함께 한글 상세 해설이 포함됩니다. 아래는 샘플 문항입니다.
+          </p>
+          <MapVocabSamples />
         </div>
       </div>
     </section>
