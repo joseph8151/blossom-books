@@ -3,6 +3,7 @@ import { siteConfig } from "@/data/site";
 import { volumeOptions, formatKRW } from "@/data/pricing";
 import SubjectChips from "./SubjectChips";
 import UsVocabSamples from "./UsVocabSamples";
+import UsSamplePreview from "./UsSamplePreview";
 
 // 미국 교과과정(G1–G12 영어·수학) 및 Geometry·Algebra 1·Algebra 2·
 // Precalculus·Calculus·AP 문의에만 카카오톡으로 직접 전달하는 비공개
@@ -75,6 +76,8 @@ export default function QuoteUsPage() {
           <p className="mt-1.5 font-display text-[16px] font-semibold text-navy-950">STANDARD / ADVANCED</p>
         </div>
       </div>
+
+      <UsSamplePreview />
 
       {/* 2. Grade-Based / Course-Based / AP 선택 + Standard/Advanced 토글 →
           해당 조합의 목차 패널이 바로 열립니다. */}

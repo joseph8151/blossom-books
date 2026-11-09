@@ -7,7 +7,7 @@ import SampleFigure from "@/components/books/SampleFigure";
 
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 
-function SampleCard({ item, index }: { item: SampleItem; index: number }) {
+export function SampleCard({ item, index }: { item: SampleItem; index: number }) {
   const [showAnswer, setShowAnswer] = useState(false);
 
   return (
