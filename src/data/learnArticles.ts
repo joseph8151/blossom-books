@@ -353,4 +353,34 @@ export const learnArticles: LearnArticle[] = [
     ],
     relatedTrack: "admissions",
   },
+  {
+    slug: "toeic-bridge-guide",
+    title: "TOEIC Bridge, TOEIC과 무엇이 다른가요?",
+    subtitle: "입문자를 위한 2영역 공인시험, 준비는 어떻게 다를까",
+    readMin: 3,
+    sections: [
+      {
+        heading: "TOEIC Bridge는 TOEIC의 ‘쉬운 버전’이 아니라 ‘입문용 시험’입니다",
+        paragraphs: [
+          "TOEIC Bridge는 TOEIC과 같은 기관(ETS)이 출제하지만, 평가 목적이 다릅니다. TOEIC이 업무 상황에서의 실전 영어 능력을 측정한다면, TOEIC Bridge는 Listening·Reading 2개 영역만으로 일상적인 상황에서의 기초 의사소통 능력을 측정합니다.",
+          "어휘와 문장도 비즈니스보다는 일상 대화·안내문 중심으로 출제되어, 처음 공인시험을 접하는 중·고등학생이나 영어 학습을 다시 시작하는 성인에게 부담이 적은 시험입니다.",
+        ],
+      },
+      {
+        heading: "우리 아이(또는 나)에게 필요한 시험일까요?",
+        paragraphs: [
+          "앞으로 TOEIC을 준비할 계획이지만 아직 기초가 부족하다고 느껴진다면, TOEIC Bridge로 먼저 공인시험 특유의 문제 형식(짧은 대화 듣기, 문장 완성, 짧은 지문 읽기)에 익숙해지는 것이 도움이 됩니다.",
+          "학교나 학원에서 입문 단계 공인시험 점수를 요구하는 경우, 또는 현재 실력을 객관적으로 확인하고 싶은 경우에도 TOEIC Bridge가 적절한 선택지가 됩니다.",
+        ],
+      },
+      {
+        heading: "준비할 때 무엇부터 봐야 할까요",
+        paragraphs: [
+          "Listening은 짧은 대화와 질문-응답 유형이 중심이므로, 일상 표현과 기본 의문사 질문에 빠르게 반응하는 연습이 필요합니다. Reading은 문장 완성(빈칸에 알맞은 단어·시제 고르기)과 짧은 지문에서 정보를 찾는 유형이 주를 이룹니다.",
+          "문제 자체는 어렵지 않지만, 시험 특유의 시간 배분과 문제 형식에 낯설어하는 경우가 많아, 실제 시험과 유사한 형식으로 미리 연습해보는 것이 체감 난이도를 낮추는 데 도움이 됩니다.",
+        ],
+      },
+    ],
+    relatedTrack: "certified-exam",
+  },
 ];
