@@ -7,7 +7,7 @@ export const contentType = "image/png";
 export default function Image() {
   return renderQuoteOgImage({
     eyebrow: "Pricing & Workbook Guide",
-    title: "학원·학교 레벨테스트 문제집",
-    subtitle: "영어 · 국어 · 수학 — 60P부터 시험별로 필요한 구성만 선택",
+    title: "학원·학교 영어 레벨테스트 문제집",
+    subtitle: "G1–G6 · 40P부터 시험별로 필요한 구성만 선택",
   });
 }
