@@ -6,10 +6,15 @@ interface VolumeTile {
   priceKRW: number;
 }
 
-// 60/100/200/300P 모두 공용 단가표(flexibleVolumes)를 그대로 씁니다.
-const volumes: VolumeTile[] = flexibleVolumes.map((v) => ({ pages: v.pages, label: v.label, priceKRW: v.priceKRW }));
+// 60/100/200/300P는 공용 단가표(flexibleVolumes)를 그대로 쓰고, 40P는 이
+// 페이지 전용 최소 분량(동일한 가격 공식: 90,000 + 1,000 × 페이지)을 앞에 둡니다.
+const volumes: VolumeTile[] = [
+  { pages: 40, label: "40P", priceKRW: 130000 },
+  ...flexibleVolumes.map((v) => ({ pages: v.pages, label: v.label, priceKRW: v.priceKRW })),
+];
 
 const meta: Record<number, { eyebrow: string; badge?: string; desc: string; note?: string }> = {
+  40: { eyebrow: "Mini Check", desc: "시험 바로 전, 가장 짧게 핵심 유형만 확인하는 최소 구성" },
   60: { eyebrow: "Quick Check", desc: "시험이 며칠 앞으로 다가왔을 때 가장 짧게 핵심만 점검하는 구성" },
   100: { eyebrow: "Standard Check", desc: "시험까지 시간이 많지 않을 때 빠르게 점검하는 구성" },
   200: {
