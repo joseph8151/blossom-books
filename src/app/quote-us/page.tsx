@@ -1,6 +1,6 @@
 import { MessageCircle, ArrowRight, Check } from "lucide-react";
 import { siteConfig } from "@/data/site";
-import { volumeOptions, formatKRW } from "@/data/pricing";
+import { formatKRW } from "@/data/pricing";
 import SubjectChips from "./SubjectChips";
 import UsVocabSamples from "./UsVocabSamples";
 import UsSamplePreview from "./UsSamplePreview";
@@ -23,9 +23,12 @@ export const metadata = {
   },
 };
 
-const p100 = volumeOptions.find((v) => v.pages === 100)!;
-const p200 = volumeOptions.find((v) => v.pages === 200)!;
-const p300 = { label: "300P", priceKRW: 390000 }; // 이 페이지 전용 분량 — 공용 volumeOptions에는 추가하지 않음
+// 이 페이지 전용 가격 — 공용 volumeOptions(100P 19만/200P 29만/300P 39만)보다
+// 낮춘 구성입니다. SR quote 페이지와 동일한 인하 폭(각 -4만원, 동일한
+// 쪽당 단가 구조: 50,000 + 1,000 × 페이지)을 따릅니다.
+const p100 = { label: "100P", priceKRW: 150000 };
+const p200 = { label: "200P", priceKRW: 250000 };
+const p300 = { label: "300P", priceKRW: 350000 };
 const volumes = [p100, p200, p300];
 
 // 미국교과·AP 영단어장(보조 상품) — 본 교재와 별도로 구매 가능한 어휘
