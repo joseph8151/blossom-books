@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { MessageCircle, Eye } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { products } from "@/data/products";
+import SamplePreviewButton from "@/components/books/SamplePreviewButton";
 import { flexibleVolumes, formatKRW } from "../data";
 
 const trustPoints = ["학원별 유형 대응", "영어·국어·수학 선택", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
@@ -42,6 +44,7 @@ const subjects = [
     desc: "학년과 시험 목적에 따라 국어 문해력 중심으로 구성합니다.",
     note: "학원별 맞춤 맞춤법·받아쓰기 드릴(7세 후반~초5·6)도 별도 판매합니다(40P/60P/100P).",
     cta: "국어 레벨테스트 상담",
+    productId: "korean-literacy-level-test",
   },
   {
     title: "수학 학원 레테",
@@ -50,6 +53,7 @@ const subjects = [
     desc: "학원 및 학교 시험 수준에 맞춰 사고력과 학년별 수학을 구성합니다.",
     note: "학원별 맞춤 연산 드릴북(7세~중1)도 별도 판매합니다(40P/60P/100P).",
     cta: "수학 레벨테스트 상담",
+    productId: "math-reasoning-level-test",
   },
 ];
 
@@ -109,6 +113,12 @@ export default function LevelTestFlagship() {
                   </p>
                 )}
               </div>
+
+              {s.productId && (
+                <div className="mt-4">
+                  <SamplePreviewButton product={products.find((p) => p.id === s.productId)!} />
+                </div>
+              )}
 
               <a
                 href={siteConfig.kakaoChannelUrl}
