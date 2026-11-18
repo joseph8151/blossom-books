@@ -3,7 +3,7 @@ import { MessageCircle, Eye } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { flexibleVolumes, formatKRW } from "../data";
 
-const trustPoints = ["학원별 유형 대응", "G1–G6 학년별 대응", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
+const trustPoints = ["학원별 유형 대응", "영어·국어·수학 선택", "구매 전 Sample 확인", "맞춤 유형 제작 가능"];
 
 // 페이지 수는 "문제량"입니다. 난이도(Standard/Advanced)와는 별개의 축이므로
 // 40/60/100/200/300P는 각각 Standard·Advanced를 선택할 수 있다는 점만 짧게 표시합니다.
@@ -26,8 +26,6 @@ const volumeTiles: { pages: number; label: string; priceKRW: number }[] = [
   })),
 ];
 
-// 국어·수학 레벨테스트는 별도 링크(/quote-level-test-korean, /quote-level-test-math)로
-// 분리되어 있어, 이 페이지는 영어 레벨테스트 1과목만 대표로 보여줍니다.
 const subjects = [
   {
     title: "어학원 레테",
@@ -36,6 +34,22 @@ const subjects = [
     desc: "학생의 학년과 시험 유형에 맞춰 영어 레벨테스트 대비 문제를 구성합니다.",
     note: "학원별 맞춤 레테 대비 단어장도 별도 판매합니다(40P/60P/100P).",
     cta: "영어 레벨테스트 상담",
+  },
+  {
+    title: "국어학원 레테",
+    subtitle: "Korean Level Test",
+    areas: ["독해", "어휘", "문해력", "추론", "서술형"],
+    desc: "학년과 시험 목적에 따라 국어 문해력 중심으로 구성합니다.",
+    note: "학원별 맞춤 맞춤법·받아쓰기 드릴(7세 후반~초5·6)도 별도 판매합니다(40P/60P/100P).",
+    cta: "국어 레벨테스트 상담",
+  },
+  {
+    title: "수학 학원 레테",
+    subtitle: "Math Level Test",
+    areas: ["연산", "문제 해결", "사고력", "응용", "학년별 수학"],
+    desc: "학원 및 학교 시험 수준에 맞춰 사고력과 학년별 수학을 구성합니다.",
+    note: "학원별 맞춤 연산 드릴북(7세~중1)도 별도 판매합니다(40P/60P/100P).",
+    cta: "수학 레벨테스트 상담",
   },
 ];
 
@@ -63,7 +77,7 @@ export default function LevelTestFlagship() {
         <div className="mx-auto max-w-[720px] text-center">
           <p className="font-label text-[11px] uppercase tracking-[0.2em] text-brass-500">Most Requested</p>
           <h2 className="mt-4 font-display text-[30px] font-semibold leading-tight text-navy-950 sm:text-[36px]">
-            영어학원 레벨테스트
+            학원 레벨테스트
           </h2>
           <p className="mt-5 text-[14.5px] leading-[1.9] text-charcoal-600">
             학원마다 유형이 다릅니다. 학원명에 맞춰 구매해도 되고, 일반 레벨테스트(레테 전용)로 문의하셔도
@@ -80,8 +94,8 @@ export default function LevelTestFlagship() {
           ))}
         </div>
 
-        {/* 4. 영어 레벨테스트 대표 카드 */}
-        <div className="mx-auto mt-14 max-w-sm sm:mt-16">
+        {/* 4~6. 영어/국어/수학 대표 카드 */}
+        <div className="mt-14 grid gap-6 sm:mt-16 lg:grid-cols-3">
           {subjects.map((s) => (
             <div key={s.title} className="flex flex-col border border-ivory-300 bg-white p-7 sm:p-8">
               <p className="font-display text-[22px] font-semibold text-navy-950">{s.title}</p>
@@ -166,14 +180,25 @@ export default function LevelTestFlagship() {
               전체 문제집이 필요하지 않으신가요?
             </h3>
             <p className="mt-4 text-[13.5px] leading-[1.9] text-charcoal-600">
-              Interview · Writing · Reading · Vocabulary · Grammar 중 특정 영역만 필요하거나 Reading + Writing,
-              Vocabulary + Grammar처럼 두 영역을 섞어서 구성할 수 있습니다. 이 경우 기본 페이지 가격이 아닌
-              맞춤 견적으로 안내합니다.
+              Interview · Writing · Reading · Vocabulary · Grammar · Math 중 특정 영역만 필요하거나 Reading +
+              Writing, Vocabulary + Grammar처럼 두 영역을 섞어서 구성할 수 있습니다. 이 경우 기본 페이지
+              가격이 아닌 맞춤 견적으로 안내합니다.
             </p>
             <div className="mt-6">
               <KakaoButton label="맞춤 구성 견적받기" />
             </div>
           </div>
+        </div>
+
+        {/* 9. 과목 조합 주문 */}
+        <div className="mx-auto mt-14 max-w-[640px] text-center sm:mt-16">
+          <h3 className="font-display text-[20px] font-semibold text-navy-950 sm:text-[22px]">
+            영어 + 국어 + 수학, 필요한 과목만 조합하세요.
+          </h3>
+          <p className="mt-4 text-[13.5px] leading-[1.9] text-charcoal-600">
+            세 과목을 모두 구매할 필요는 없습니다. 영어 + 수학 · 영어 + 국어 · 국어 + 수학 · 영어 + 국어 +
+            수학 등 필요한 과목만 선택할 수 있습니다. 최종 합계와 페이지 구성은 상담에서 맞춰 안내합니다.
+          </p>
         </div>
 
         {/* 10. Sample 강조 */}
