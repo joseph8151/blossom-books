@@ -3,9 +3,6 @@ import LevelTestFlagship from "./components/LevelTestFlagship";
 import GradeSamplePreview from "./components/GradeSamplePreview";
 import LevelTestTwoStepPackage from "./components/LevelTestTwoStepPackage";
 import ThreeSteps from "./components/ThreeSteps";
-import BaseVolumes from "./components/BaseVolumes";
-import VolumeGuide from "./components/VolumeGuide";
-import SpecialPackage from "./components/SpecialPackage";
 import InternationalSchoolConnector from "./components/InternationalSchoolConnector";
 import ComboPackages from "./components/ComboPackages";
 import IncludedSection from "./components/IncludedSection";
@@ -32,10 +29,13 @@ export const metadata = {
 
 // 레벨테스트 문제집이 실제 문의 비중이 가장 높은 대표 상품이므로 Hero 바로 다음에
 // 배치하고(다른 시험과 동일 선상에 두지 않음), 가격표 바로 아래에 STANDARD(100P)
-// → ADVANCED(200P) 2단계 구성을 강조하는 독립 섹션을 둡니다. 그 뒤로 공통 3-Step
-// 안내·기본 분량·일반 분량 가이드가 이어집니다. MAP·CAT4·ISEE·Oxford Online
-// Placement Test는 모두 /quote-international-school로 분리했고, 여기에는
-// 그리로 넘어가는 작은 연결 섹션(InternationalSchoolConnector)만 남깁니다.
+// → ADVANCED(200P) 2단계 구성을 강조하는 독립 섹션을 둡니다. MAP·CAT4·ISEE·
+// Oxford Online Placement Test는 모두 /quote-international-school로 분리했고,
+// 여기에는 그리로 넘어가는 작은 연결 섹션(InternationalSchoolConnector)만
+// 남깁니다. 페이지가 너무 길다는 피드백으로(2026-11) 가격표(BaseVolumes)·
+// 분량 가이드(VolumeGuide)·Special Package 섹션을 제거했습니다 — BaseVolumes·
+// VolumeGuide는 LevelTestFlagship 가격표와 내용이 중복되었고, Special Package는
+// 더 이상 운영하지 않는 구성입니다.
 export default function QuotePage() {
   return (
     <div>
@@ -44,9 +44,6 @@ export default function QuotePage() {
       <GradeSamplePreview />
       <LevelTestTwoStepPackage />
       <ThreeSteps />
-      <BaseVolumes />
-      <VolumeGuide />
-      <SpecialPackage />
       <InternationalSchoolConnector />
       <ComboPackages />
       <IncludedSection />
