@@ -88,7 +88,8 @@ export default function QuoteGrammarPrepPage() {
         <h2 className="font-display text-[18px] font-semibold text-navy-950">중등 준비 문법 샘플 문항</h2>
         <p className="mt-1.5 max-w-[640px] text-[12.5px] leading-relaxed text-charcoal-600">
           관계대명사·수동태·현재완료·to부정사/동명사 같은 기본 문법에 더해, 한국 학원에서 익숙한 방식대로
-          문장 성분(S-V)과 문장 형식을 직접 분석하는 구문 문항까지 포함했습니다.
+          문장 성분(S-V)과 문장 형식을 직접 분석하는 구문 문항, 그리고 내신형 문장 배열(어순 배열) 문항까지
+          포함했습니다.
         </p>
         <GrammarPrepSamples />
       </section>
