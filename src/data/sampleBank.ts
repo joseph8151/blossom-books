@@ -3280,3 +3280,126 @@ export const fceBank: SampleItem[] = [
     whyKo: "채점 기준: 명확한 입장(서론), 두 가지 이상의 뒷받침 근거를 갖춘 균형 잡힌 논의(본론), 논리적인 결론(결론) 구조를 갖추었는지를 봅니다. 140–190단어 분량과 격식 있는 어휘·연결어(however, in contrast, for example 등) 사용도 평가 기준에 포함됩니다.",
   },
 ];
+
+// ── 초등 고학년 문법 완성 · 중등 준비 (관계대명사·수동태·현재완료·
+// to부정사·동명사 등 중등 영문법 필수 단원) ────────────────────
+export const grammarPrepBank: SampleItem[] = [
+  {
+    area: "Grammar", type: "Relative Pronouns", skill: "Choose the correct relative pronoun for a thing", difficulty: "Standard",
+    question: "Choose the correct word: The book ___ I borrowed from the library was really interesting.",
+    choices: ["that", "who", "whom", "whose"],
+    answer: "that",
+    why: "The antecedent \"book\" is a thing, so the relative pronoun must be \"that\" (or \"which\"), not \"who/whom/whose,\" which refer to people.",
+    whyKo: "선행사가 사물(book)이므로 사람을 가리키는 who/whom/whose는 쓸 수 없고, 사물을 받는 관계대명사 that(또는 which)을 씁니다.",
+  },
+  {
+    area: "Grammar", type: "Passive Voice", skill: "Change an active sentence into the passive voice", difficulty: "Advanced",
+    question: "Choose the sentence that correctly changes the following into the passive voice.\nActive: \"Many people speak English around the world.\"",
+    choices: [
+      "English is spoken by many people around the world.",
+      "English speaks by many people around the world.",
+      "English was spoken many people around the world.",
+      "English is speaking by many people around the world.",
+    ],
+    answer: "English is spoken by many people around the world.",
+    why: "The passive voice is formed with \"be + past participle + by + agent.\" The past participle of \"speak\" is \"spoken,\" so \"is spoken by\" is correct.",
+    whyKo: "수동태는 'be동사 + 과거분사(p.p.) + by + 행위자' 형태입니다. speak의 과거분사는 spoken이므로 'is spoken by'가 올바른 형태입니다.",
+  },
+  {
+    area: "Grammar", type: "Present Perfect", skill: "Use present perfect to show a completed action", difficulty: "Standard",
+    question: "Choose the correct form: She ___ her homework already, so she can go outside now.",
+    choices: ["has finished", "finished", "finish", "is finishing"],
+    answer: "has finished",
+    why: "\"Already\" signals a present perfect context — an action completed before now. With the third-person singular subject \"she,\" the correct form is \"has finished.\"",
+    whyKo: "'already(이미)'와 함께 쓰여 과거에 시작된 일이 현재까지 완료된 상태를 나타낼 때는 현재완료(have/has + p.p.)를 씁니다. 주어가 3인칭 단수(she)이므로 has finished가 맞습니다.",
+  },
+  {
+    area: "Grammar", type: "Gerunds & Infinitives", skill: "Choose gerund or infinitive after a verb", difficulty: "Standard",
+    question: "Choose the correct form: I really enjoy ___ books on rainy days.",
+    choices: ["reading", "to read", "read", "reads"],
+    answer: "reading",
+    why: "\"Enjoy\" is a verb that takes a gerund (-ing form) as its object, not a to-infinitive, so \"reading\" is correct.",
+    whyKo: "동사 enjoy는 목적어로 동명사(-ing)를 취하는 대표적인 동사입니다. to부정사가 아니라 reading을 써야 합니다.",
+  },
+  {
+    area: "Grammar", type: "문장 성분 분석 (Sentence Analysis)", skill: "Identify the true subject and verb in a sentence with a relative clause", difficulty: "Advanced",
+    question: "다음 문장에서 진짜 주어(S)와 동사(V)를 고르세요.\n\"The experiment that scientists conducted last year surprised everyone.\"",
+    choices: ["S: The experiment / V: surprised", "S: scientists / V: conducted", "S: The experiment / V: conducted", "S: everyone / V: surprised"],
+    answer: "S: The experiment / V: surprised",
+    why: "\"That scientists conducted last year\" is a relative clause modifying \"The experiment.\" Removing this modifier reveals the true subject and verb: \"The experiment ... surprised.\"",
+    whyKo: "'that scientists conducted last year'는 The experiment를 꾸며주는 관계대명사절(수식어)입니다. 수식어를 걷어내고 나면 문장의 진짜 주어와 동사는 'The experiment ... surprised'입니다. 한국 학원에서 흔히 가르치는 '수식어를 괄호로 묶고 S-V 찾기' 방법으로 연습하면 긴 문장도 빠르게 구조를 파악할 수 있습니다.",
+  },
+  {
+    area: "Grammar", type: "문장 형식 (Sentence Patterns)", skill: "Distinguish the 5th sentence pattern from the 4th (dative) pattern", difficulty: "Advanced",
+    question: "다음 중 문장 형식이 나머지와 다른 하나는?",
+    choices: ["She made her son a doctor.", "She made her son a sandwich.", "She called him a genius.", "She found the movie boring."],
+    answer: "She made her son a sandwich.",
+    why: "The other three sentences follow the 5th sentence pattern (S+V+O+OC), where the object complement describes the object. \"Made her son a sandwich\" is a 4th-pattern (dative) sentence — \"her son\" is not \"a sandwich.\"",
+    whyKo: "나머지 세 문장은 모두 목적어 뒤에 목적격보어가 와서 '목적어 = 보어' 관계가 성립하는 5형식(S+V+O+OC) 문장입니다(her son = a doctor, him = a genius, the movie = boring). 반면 'made her son a sandwich'는 아들에게(간접목적어) 샌드위치를(직접목적어) 만들어주었다는 뜻의 4형식(수여동사) 문장으로, her son ≠ a sandwich이므로 구조 자체가 다릅니다.",
+  },
+];
+
+// ── 초등 고학년 문법 완성 · 중등 준비 — 독해(Reading) 샘플, 예비중
+// 수준의 다소 어려운 정보글 1개 + 유형 4문항(Main Idea·Supporting
+// Details·Inference·Vocabulary in Context) ─────────────────────
+const grammarPrepPassage = `Plastic pollution in the ocean has become one of the most pressing environmental issues of our time. Every year, millions of tons of plastic waste enter the ocean, carried by rivers, winds, and ocean currents from countries around the world. Much of this plastic does not disappear; instead, it breaks down into smaller and smaller pieces called microplastics, which can remain in the water for hundreds of years.
+
+These microplastics pose a serious threat to marine life. Fish, seabirds, and other sea creatures often mistake tiny plastic fragments for food, swallowing them without realizing the danger. Once ingested, plastic can block an animal's digestive system or release harmful chemicals into its body. Scientists have even found microplastics inside the stomachs of whales and turtles that washed up on shore, providing disturbing evidence of how widespread the problem has become.
+
+Perhaps most concerning is the fact that microplastics do not stay confined to the ocean. Through the food chain, they eventually make their way into the fish and shellfish that humans eat. Although researchers are still studying the long-term effects of consuming microplastics, early studies suggest that this growing problem could eventually affect human health as well, not just marine ecosystems.
+
+In response, several countries have begun banning single-use plastics such as straws, bags, and bottles, while environmental organizations continue pushing for stronger international agreements. Still, many experts argue that without dramatically reducing how much plastic humans produce in the first place, cleaning up what already exists in the ocean will only solve part of the problem.`;
+
+export const grammarPrepReadingBank: SampleItem[] = [
+  {
+    area: "Reading", type: "Main Idea", skill: "Identify the central idea of an informational passage", difficulty: "Advanced",
+    passage: grammarPrepPassage,
+    question: "What is this passage mainly about?",
+    choices: [
+      "How plastic pollution harms ocean life and may affect human health",
+      "How to recycle plastic bottles at home",
+      "The history of ocean exploration",
+      "Why sea turtles migrate long distances",
+    ],
+    answer: "How plastic pollution harms ocean life and may affect human health",
+    why: "The passage traces plastic waste from the ocean into marine animals and, through the food chain, potentially into humans — this progression is the passage's central idea.",
+    whyKo: "지문은 바다에 유입된 플라스틱이 해양 생물을 해치고, 먹이사슬을 통해 결국 사람에게까지 영향을 줄 수 있다는 흐름을 따라가고 있습니다. 이것이 글 전체를 관통하는 중심 내용입니다.",
+  },
+  {
+    area: "Reading", type: "Supporting Details", skill: "Locate a specific detail stated in the passage", difficulty: "Advanced",
+    passage: grammarPrepPassage,
+    question: "According to the passage, how do microplastics often enter the bodies of marine animals?",
+    choices: [
+      "Animals mistake plastic fragments for food and swallow them.",
+      "Animals absorb plastic directly through their skin.",
+      "Plastic is injected into animals by researchers.",
+      "Animals breathe in plastic particles from the air.",
+    ],
+    answer: "Animals mistake plastic fragments for food and swallow them.",
+    why: "The passage states that fish, seabirds, and other sea creatures \"often mistake tiny plastic fragments for food, swallowing them.\"",
+    whyKo: "지문에 '물고기, 바닷새 등은 작은 플라스틱 조각을 먹이로 착각해 삼킨다(mistake ... for food, swallowing them)'고 직접 설명되어 있습니다.",
+  },
+  {
+    area: "Reading", type: "Inference", skill: "Draw a conclusion not directly stated in the passage", difficulty: "Advanced",
+    passage: grammarPrepPassage,
+    question: "What can be inferred about why some countries are banning single-use plastics?",
+    choices: [
+      "They believe reducing plastic waste at the source is necessary to address the problem.",
+      "They want to increase the price of plastic products.",
+      "They have already solved the ocean pollution problem completely.",
+      "They are unaware of the effects of microplastics.",
+    ],
+    answer: "They believe reducing plastic waste at the source is necessary to address the problem.",
+    why: "The passage links these bans to the broader argument that reducing how much plastic is produced in the first place is necessary, implying governments act on that belief.",
+    whyKo: "지문 마지막 부분에서 '애초에 플라스틱 생산량 자체를 크게 줄이지 않으면 문제 해결이 어렵다'는 전문가 의견을 소개한 뒤, 여러 국가가 일회용 플라스틱을 금지하고 있다고 설명합니다. 이는 각국이 '생산 단계에서부터 줄여야 한다'는 문제의식을 갖고 있다는 뜻으로 추론할 수 있습니다.",
+  },
+  {
+    area: "Reading", type: "Vocabulary in Context", skill: "Determine word meaning from context in an academic passage", difficulty: "Advanced",
+    passage: grammarPrepPassage,
+    question: "In this passage, what does the word \"confined\" most nearly mean?",
+    choices: ["limited or restricted to one place", "expanded rapidly", "completely destroyed", "clearly visible"],
+    answer: "limited or restricted to one place",
+    why: "The sentence explains that microplastics \"do not stay confined to the ocean\" and instead travel through the food chain, showing \"confined\" means limited to one place.",
+    whyKo: "'microplastics do not stay confined to the ocean(미세플라스틱이 바다에만 갇혀 있지 않는다)'이라는 문맥과, 이어서 먹이사슬을 통해 다른 곳으로 퍼진다는 설명으로 보아 confined는 '한 곳에 제한된/갇힌'이라는 뜻임을 알 수 있습니다.",
+  },
+];

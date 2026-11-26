@@ -50,6 +50,11 @@ const links = [
     url: "https://blossombooks.org/quote-fce/",
   },
   {
+    title: "초등 고학년 문법 완성 (중등 준비)",
+    who: "초등 5~6학년 중등 대비 문법 전용 · 40P/60P/100P/200P/300P 문의",
+    url: "https://blossombooks.org/quote-grammar-prep/",
+  },
+  {
     title: "학원·학교 레벨테스트",
     who: "영어 · 국어 · 수학 레벨테스트/반 배정 문의 고객 · 과목별 학원 맞춤 단어장/드릴북도 별도 판매",
     url: "https://blossombooks.org/quote/",
