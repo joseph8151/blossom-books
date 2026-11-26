@@ -3337,6 +3337,22 @@ export const grammarPrepBank: SampleItem[] = [
     why: "The other three sentences follow the 5th sentence pattern (S+V+O+OC), where the object complement describes the object. \"Made her son a sandwich\" is a 4th-pattern (dative) sentence — \"her son\" is not \"a sandwich.\"",
     whyKo: "나머지 세 문장은 모두 목적어 뒤에 목적격보어가 와서 '목적어 = 보어' 관계가 성립하는 5형식(S+V+O+OC) 문장입니다(her son = a doctor, him = a genius, the movie = boring). 반면 'made her son a sandwich'는 아들에게(간접목적어) 샌드위치를(직접목적어) 만들어주었다는 뜻의 4형식(수여동사) 문장으로, her son ≠ a sandwich이므로 구조 자체가 다릅니다.",
   },
+  {
+    area: "Grammar", type: "문장 배열 (Sentence Order)", skill: "Arrange word groups into correct English word order (S+V+O, place, time)", difficulty: "Standard",
+    question: "다음 ①~④를 바르게 배열하여 우리말과 같은 뜻의 문장을 완성하세요.\n그녀는 방과 후에 가게에 가고 싶어한다.\n① to the store  ② she wants  ③ to go  ④ after school",
+    choices: ["② - ③ - ① - ④", "② - ① - ③ - ④", "④ - ② - ③ - ①", "③ - ② - ① - ④"],
+    answer: "② - ③ - ① - ④",
+    why: "English follows Subject + Verb + Object (infinitive phrase) + Place + Time order: \"she wants\" (S+V) is followed by the infinitive object \"to go,\" then the place phrase \"to the store,\" and finally the time phrase \"after school.\"",
+    whyKo: "영어 어순은 '주어+동사 → 목적어(to부정사) → 장소 → 시간' 순서를 따릅니다. 'she wants'(주어+동사) 뒤에 목적어 역할을 하는 to부정사 'to go'가 오고, 장소(to the store), 마지막에 시간 수식어(after school)가 옵니다. 한국어는 '방과 후에 - 가게에 - 가고 싶어한다'처럼 수식어가 앞에 오지만, 영어는 핵심 문장(S+V+O)을 먼저 말하고 수식어를 뒤에 붙입니다.",
+  },
+  {
+    area: "Grammar", type: "문장 배열 (Sentence Order)", skill: "Arrange word groups into a sentence containing a relative clause", difficulty: "Advanced",
+    question: "다음 ①~④를 바르게 배열하여 우리말과 같은 뜻의 문장을 완성하세요.\n그 소녀가 어제 그린 그림이 상을 받았다.\n① that the girl drew  ② yesterday  ③ won an award  ④ The picture",
+    choices: ["④ - ① - ② - ③", "④ - ② - ① - ③", "① - ④ - ② - ③", "④ - ① - ③ - ②"],
+    answer: "④ - ① - ② - ③",
+    why: "\"The picture\" is the subject, immediately followed by the relative clause \"that the girl drew\" modifying it, then the time adverb \"yesterday,\" and finally the main verb phrase \"won an award.\"",
+    whyKo: "주어 The picture 뒤에는 이를 꾸며주는 관계대명사절 'that the girl drew'가 바로 붙고, 그다음 시간 부사 yesterday, 마지막에 진짜 동사구 'won an award'가 옵니다. 관계대명사절(수식어)이 주어와 동사 사이에 끼어드는 구조이므로, 괄호로 묶어 걷어내면 'The picture ... won an award'라는 핵심 S-V가 바로 보입니다.",
+  },
 ];
 
 // ── 초등 고학년 문법 완성 · 중등 준비 — 독해(Reading) 샘플, 예비중
